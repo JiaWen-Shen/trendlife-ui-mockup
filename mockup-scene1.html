@@ -1521,6 +1521,120 @@
     color: var(--gray-700);
   }
   .member-chip.selected { background: var(--red-light); border-color: var(--red); color: var(--red); }
+
+  /* ── DINNER BOOKING SCREENS ── */
+  .dinner-intro {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    border-radius: 16px; padding: 18px 18px 16px; color: white;
+    margin-bottom: 20px; display: flex; align-items: center; gap: 14px;
+  }
+  .dinner-intro-icon { font-size: 32px; flex-shrink: 0; }
+  .dinner-intro-title { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+  .dinner-intro-sub { font-size: 12px; opacity: 0.7; }
+  .exec-steps-card {
+    background: var(--white); border: 1.5px solid var(--gray-200);
+    border-radius: 16px; overflow: hidden; margin-bottom: 20px;
+  }
+  .exec-steps-title {
+    padding: 12px 16px; font-size: 11px; font-weight: 700; color: var(--gray-500);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--gray-200); background: var(--gray-100);
+  }
+  .exec-step-row {
+    display: flex; align-items: center; gap: 12px; padding: 13px 16px;
+    border-bottom: 1px solid var(--gray-100); transition: background 0.3s;
+  }
+  .exec-step-row:last-child { border-bottom: none; }
+  .exec-step-row.active { background: #FFFBF0; }
+  .exec-step-row.done { background: var(--green-bg); }
+  .exec-step-indicator {
+    width: 28px; height: 28px; border-radius: 50%; display: flex;
+    align-items: center; justify-content: center; font-size: 12px; font-weight: 700;
+    flex-shrink: 0; background: var(--gray-200); color: var(--gray-500); transition: all 0.3s;
+  }
+  .exec-step-row.done .exec-step-indicator { background: var(--green-bg); color: var(--green); border: 1.5px solid var(--green); }
+  .exec-step-row.active .exec-step-indicator { background: var(--amber-bg); color: var(--amber); border: 1.5px solid var(--amber); }
+  .exec-step-text { font-size: 13px; color: var(--gray-700); flex: 1; line-height: 1.4; }
+  .exec-step-row.done .exec-step-text { color: var(--green); }
+  .exec-step-row.active .exec-step-text { color: var(--amber); font-weight: 600; }
+  .exec-step-status { font-size: 16px; flex-shrink: 0; width: 20px; text-align: center; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .step-spinner {
+    width: 18px; height: 18px; border: 2.5px solid var(--amber-bg);
+    border-top-color: var(--amber); border-radius: 50%; animation: spin 0.7s linear infinite;
+    display: inline-block; vertical-align: middle;
+  }
+  /* Restaurant cards */
+  .rest-section-label {
+    font-size: 11px; font-weight: 700; color: var(--gray-500);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px;
+  }
+  .rest-filter-pills { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 16px; }
+  .rest-filter-pill {
+    padding: 5px 11px; background: var(--teal-light); color: var(--teal);
+    border-radius: 100px; font-size: 11px; font-weight: 700;
+  }
+  .rest-card {
+    background: var(--white); border: 1.5px solid var(--gray-200);
+    border-radius: 16px; padding: 16px; margin-bottom: 12px; cursor: pointer; transition: all 0.15s;
+  }
+  .rest-card:active { border-color: var(--red); background: var(--red-light); transform: scale(0.99); }
+  .rest-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .rest-name { font-size: 16px; font-weight: 700; color: var(--gray-900); }
+  .rest-rating { font-size: 12px; color: var(--amber); font-weight: 700; }
+  .rest-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+  .rest-meta-tag { font-size: 11px; color: var(--gray-500); background: var(--gray-100); padding: 3px 9px; border-radius: 100px; }
+  .rest-avail {
+    font-size: 12px; font-weight: 700; color: var(--green); background: var(--green-bg);
+    padding: 4px 10px; border-radius: 8px; display: inline-block; margin-bottom: 10px;
+  }
+  .rest-select-btn {
+    width: 100%; padding: 10px; background: var(--navy); color: white; border: none;
+    border-radius: 10px; font-size: 13px; font-weight: 700;
+    font-family: 'Noto Sans TC', sans-serif; cursor: pointer; transition: background 0.15s;
+  }
+  .rest-select-btn:active { background: var(--navy-mid); }
+  /* Booking confirmation */
+  .booking-hero { text-align: center; padding: 20px 0 8px; }
+  .booking-hero-icon { font-size: 48px; margin-bottom: 8px; }
+  .booking-hero-title { font-size: 18px; font-weight: 900; color: var(--gray-900); margin-bottom: 4px; }
+  .booking-hero-sub { font-size: 12px; color: var(--gray-500); }
+  .booking-card {
+    background: var(--white); border: 1.5px solid var(--gray-200);
+    border-radius: 16px; overflow: hidden; margin: 16px 0;
+  }
+  .booking-card-title {
+    padding: 12px 16px; font-size: 11px; font-weight: 700; color: var(--gray-500);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    background: var(--gray-100); border-bottom: 1px solid var(--gray-200);
+  }
+  .booking-row {
+    display: flex; align-items: center; gap: 12px; padding: 11px 16px;
+    border-bottom: 1px solid var(--gray-100); font-size: 13px;
+  }
+  .booking-row:last-child { border-bottom: none; }
+  .booking-row-icon { font-size: 16px; flex-shrink: 0; width: 24px; text-align: center; }
+  .booking-row-label { color: var(--gray-500); width: 60px; flex-shrink: 0; }
+  .booking-row-value { color: var(--gray-900); font-weight: 600; flex: 1; }
+  .booking-confirm-badge {
+    display: inline-block; padding: 3px 10px; background: var(--green-bg); color: var(--green);
+    border-radius: 100px; font-size: 11px; font-weight: 700; border: 1px solid var(--green);
+    margin-right: 4px;
+  }
+  .booking-exec-steps { background: var(--gray-100); border-radius: 12px; padding: 12px 14px; margin-bottom: 4px; }
+  .booking-exec-step-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 0; font-size: 12.5px; color: var(--gray-700);
+  }
+  .booking-exec-step-row.done { color: var(--green); }
+  .booking-exec-step-row.active { color: var(--amber); font-weight: 600; }
+  .send-family-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 10px; }
+  .family-sent-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .family-chip {
+    display: flex; align-items: center; gap: 5px; padding: 6px 12px;
+    background: var(--green-bg); border-radius: 100px; font-size: 12px;
+    font-weight: 600; color: var(--green); border: 1px solid var(--green);
+  }
 </style>
 </head>
 <body>
@@ -2113,10 +2227,191 @@
         </div>
 
         <button id="detailExecBtn" class="btn btn-primary-red" style="width:100%; margin-bottom:10px;"
-          onclick="aiExecuteTodo(+this.dataset.todoId); goBack();">
+          onclick="execDetailTodo(+this.dataset.todoId)">
           ✨ 請 AI 立即執行
         </button>
         <button class="btn btn-secondary" style="width:100%;" onclick="goBack()">稍後提醒我</button>
+
+      </div>
+    </div>
+
+    <!-- ── SCREEN 10: DINNER AI EXECUTION ── -->
+    <div class="screen" id="screen-10">
+      <div class="nav-bar">
+        <button class="nav-back" onclick="goBack()">‹</button>
+        <div class="nav-title">AI 正在執行</div>
+        <div class="nav-right"></div>
+      </div>
+      <div class="scroll-content" style="padding: 16px 20px 32px;">
+
+        <div class="dinner-intro">
+          <div class="dinner-intro-icon">🍽️</div>
+          <div>
+            <div class="dinner-intro-title">訂今晚全家晚餐</div>
+            <div class="dinner-intro-sub">AI 正在為您搜尋最適合的餐廳...</div>
+          </div>
+        </div>
+
+        <div class="exec-steps-card">
+          <div class="exec-steps-title">執行步驟</div>
+          <div class="exec-step-row" id="dstep-0">
+            <div class="exec-step-indicator" id="dstep-ind-0">1</div>
+            <div class="exec-step-text">查詢家人口味偏好與飲食限制</div>
+            <div class="exec-step-status" id="dstep-stat-0"></div>
+          </div>
+          <div class="exec-step-row" id="dstep-1">
+            <div class="exec-step-indicator" id="dstep-ind-1">2</div>
+            <div class="exec-step-text">搜尋附近符合偏好的餐廳</div>
+            <div class="exec-step-status" id="dstep-stat-1"></div>
+          </div>
+          <div class="exec-step-row" id="dstep-2">
+            <div class="exec-step-indicator" id="dstep-ind-2">3</div>
+            <div class="exec-step-text">代為致電或線上預訂</div>
+            <div class="exec-step-status" id="dstep-stat-2"></div>
+          </div>
+          <div class="exec-step-row" id="dstep-3">
+            <div class="exec-step-indicator" id="dstep-ind-3">4</div>
+            <div class="exec-step-text">傳送訂位確認給全家成員</div>
+            <div class="exec-step-status" id="dstep-stat-3"></div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary-red" id="viewRestBtn" style="width:100%; display:none;" onclick="goTo(11)">
+          查看推薦餐廳 →
+        </button>
+
+      </div>
+    </div>
+
+    <!-- ── SCREEN 11: RESTAURANT RECOMMENDATIONS ── -->
+    <div class="screen" id="screen-11">
+      <div class="nav-bar">
+        <button class="nav-back" onclick="goBack()">‹</button>
+        <div class="nav-title">AI 推薦餐廳</div>
+        <div class="nav-right"></div>
+      </div>
+      <div class="scroll-content" style="padding: 16px 20px 32px;">
+
+        <div class="rest-section-label">AI 根據以下條件篩選</div>
+        <div class="rest-filter-pills">
+          <span class="rest-filter-pill">✓ 家人口味偏好</span>
+          <span class="rest-filter-pill">✓ 步行可達</span>
+          <span class="rest-filter-pill">✓ 適合兒童</span>
+          <span class="rest-filter-pill">✓ 今晚有空位</span>
+        </div>
+
+        <div class="rest-card">
+          <div class="rest-card-header">
+            <div class="rest-name">鼎泰豐（信義店）</div>
+            <div class="rest-rating">⭐ 4.8</div>
+          </div>
+          <div class="rest-meta">
+            <span class="rest-meta-tag">🥟 中式小籠包</span>
+            <span class="rest-meta-tag">步行 8 分鐘</span>
+            <span class="rest-meta-tag">$$ 中等</span>
+          </div>
+          <div class="rest-avail">今晚 7:00 有空位・可訂 5 人</div>
+          <button class="rest-select-btn" onclick="selectRestaurant('鼎泰豐（信義店）', '晚上 7:00')">選這家 →</button>
+        </div>
+
+        <div class="rest-card">
+          <div class="rest-card-header">
+            <div class="rest-name">添好運港式飲茶</div>
+            <div class="rest-rating">⭐ 4.6</div>
+          </div>
+          <div class="rest-meta">
+            <span class="rest-meta-tag">🍴 港式</span>
+            <span class="rest-meta-tag">步行 5 分鐘</span>
+            <span class="rest-meta-tag">$$ 中等</span>
+          </div>
+          <div class="rest-avail">今晚 6:30 有空位・可訂 5 人</div>
+          <button class="rest-select-btn" onclick="selectRestaurant('添好運港式飲茶', '晚上 6:30')">選這家 →</button>
+        </div>
+
+        <div class="rest-card">
+          <div class="rest-card-header">
+            <div class="rest-name">輝哥牛排</div>
+            <div class="rest-rating">⭐ 4.5</div>
+          </div>
+          <div class="rest-meta">
+            <span class="rest-meta-tag">🥩 西式牛排</span>
+            <span class="rest-meta-tag">步行 12 分鐘</span>
+            <span class="rest-meta-tag">$$$ 較貴</span>
+          </div>
+          <div class="rest-avail">今晚 7:30 有空位・可訂 5 人</div>
+          <button class="rest-select-btn" onclick="selectRestaurant('輝哥牛排', '晚上 7:30')">選這家 →</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── SCREEN 12: BOOKING CONFIRMATION ── -->
+    <div class="screen" id="screen-12">
+      <div class="nav-bar">
+        <button class="nav-back" onclick="goBack()">‹</button>
+        <div class="nav-title">訂位確認</div>
+        <div class="nav-right"></div>
+      </div>
+      <div class="scroll-content" style="padding: 16px 20px 32px;">
+
+        <div class="booking-hero">
+          <div class="booking-hero-icon" id="bookingHeroIcon">⏳</div>
+          <div class="booking-hero-title" id="bookingHeroTitle">AI 正在代您訂位...</div>
+          <div class="booking-hero-sub" id="bookingHeroSub">請稍候，正在確認座位</div>
+        </div>
+
+        <div class="booking-exec-steps" id="bookingExecSteps">
+          <div class="booking-exec-step-row" id="bstep-0">
+            <div class="step-spinner" style="width:14px;height:14px;border-width:2px;flex-shrink:0;" id="bspinner-0"></div>
+            <span id="bstep-text-0">正在致電餐廳確認座位...</span>
+          </div>
+          <div class="booking-exec-step-row" id="bstep-1" style="opacity:0.4;">
+            <div style="width:14px;height:14px;flex-shrink:0;" id="bspinner-1"></div>
+            <span id="bstep-text-1">傳送訂位確認給全家成員</span>
+          </div>
+        </div>
+
+        <div class="booking-card" id="bookingCard" style="display:none;">
+          <div class="booking-card-title">訂位詳情</div>
+          <div class="booking-row">
+            <div class="booking-row-icon">🍽️</div>
+            <div class="booking-row-label">餐廳</div>
+            <div class="booking-row-value" id="bookingRestName">—</div>
+          </div>
+          <div class="booking-row">
+            <div class="booking-row-icon">📅</div>
+            <div class="booking-row-label">日期</div>
+            <div class="booking-row-value">今天 3月7日（週五）</div>
+          </div>
+          <div class="booking-row">
+            <div class="booking-row-icon">⏰</div>
+            <div class="booking-row-label">時間</div>
+            <div class="booking-row-value" id="bookingTime">—</div>
+          </div>
+          <div class="booking-row">
+            <div class="booking-row-icon">👥</div>
+            <div class="booking-row-label">人數</div>
+            <div class="booking-row-value">5 人</div>
+          </div>
+          <div class="booking-row">
+            <div class="booking-row-icon">🔢</div>
+            <div class="booking-row-label">訂位碼</div>
+            <div class="booking-row-value"><span class="booking-confirm-badge">已確認</span> #TL-2847</div>
+          </div>
+        </div>
+
+        <div id="bookingSentBlock" style="display:none;">
+          <div class="send-family-title">✅ 已傳送給</div>
+          <div class="family-sent-row">
+            <span class="family-chip">👨 老公</span>
+            <span class="family-chip">👧 Yvonne</span>
+            <span class="family-chip">👦 Ethan</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary-red" id="bookingDoneBtn" style="width:100%; display:none; margin-top:4px;" onclick="goTo(0)">
+          🏠 回首頁
+        </button>
 
       </div>
     </div>
@@ -2304,12 +2599,109 @@
       found = todosData[day].find(t => t.id === id);
       if (found) break;
     }
-    if (!found) return;
-    if (!found.done) {
-      found.done = true;
-      renderTodos();
+    if (!found) return false;
+    if (id === 5) {
+      if (!found.done) { found.done = true; renderTodos(); }
+      goTo(10);
+      setTimeout(startDinnerFlow, 300);
+      return true; // handled — don't call goBack
     }
+    if (!found.done) { found.done = true; renderTodos(); }
     showToast('AI 正在處理：' + found.title);
+    return false;
+  }
+
+  function execDetailTodo(id) {
+    const handled = aiExecuteTodo(id);
+    if (!handled) goBack();
+  }
+
+  // ── DINNER BOOKING FLOW ──
+  let dinnerRestName = '';
+  let dinnerRestTime = '';
+
+  function startDinnerFlow() {
+    [0,1,2,3].forEach(i => {
+      document.getElementById('dstep-' + i).className = 'exec-step-row';
+      document.getElementById('dstep-ind-' + i).textContent = i + 1;
+      document.getElementById('dstep-stat-' + i).innerHTML = '';
+    });
+    document.getElementById('viewRestBtn').style.display = 'none';
+
+    setTimeout(function() {
+      document.getElementById('dstep-0').classList.add('done');
+      document.getElementById('dstep-stat-0').textContent = '✓';
+      document.getElementById('dstep-ind-0').textContent = '✓';
+      document.getElementById('dstep-1').classList.add('active');
+      document.getElementById('dstep-stat-1').innerHTML = '<div class="step-spinner"></div>';
+    }, 700);
+
+    setTimeout(function() {
+      document.getElementById('dstep-1').classList.remove('active');
+      document.getElementById('dstep-1').classList.add('done');
+      document.getElementById('dstep-stat-1').textContent = '✓';
+      document.getElementById('dstep-ind-1').textContent = '✓';
+      document.getElementById('viewRestBtn').style.display = 'block';
+    }, 2400);
+  }
+
+  function selectRestaurant(name, time) {
+    dinnerRestName = name;
+    dinnerRestTime = time;
+    goTo(12);
+    setTimeout(animateBooking, 300);
+  }
+
+  function animateBooking() {
+    document.getElementById('bookingHeroIcon').textContent = '⏳';
+    document.getElementById('bookingHeroTitle').textContent = 'AI 正在代您訂位...';
+    document.getElementById('bookingHeroSub').textContent = '請稍候，正在確認座位';
+    document.getElementById('bookingExecSteps').style.display = 'block';
+    document.getElementById('bookingCard').style.display = 'none';
+    document.getElementById('bookingSentBlock').style.display = 'none';
+    document.getElementById('bookingDoneBtn').style.display = 'none';
+
+    // Step 0: active + spinner visible (already in HTML)
+    var r0 = document.getElementById('bstep-0');
+    r0.className = 'booking-exec-step-row active';
+    r0.style.opacity = '1';
+    var r1 = document.getElementById('bstep-1');
+    r1.className = 'booking-exec-step-row';
+    r1.style.opacity = '0.4';
+    document.getElementById('bstep-text-0').textContent = '正在致電餐廳確認座位...';
+    document.getElementById('bstep-text-1').textContent = '傳送訂位確認給全家成員';
+    var sp0 = document.getElementById('bspinner-0');
+    sp0.className = 'step-spinner';
+    sp0.style.cssText = 'width:14px;height:14px;border-width:2px;flex-shrink:0;';
+    sp0.textContent = '';
+    var sp1 = document.getElementById('bspinner-1');
+    sp1.className = '';
+    sp1.style.cssText = 'width:14px;height:14px;flex-shrink:0;';
+    sp1.textContent = '';
+
+    setTimeout(function() {
+      r0.className = 'booking-exec-step-row done';
+      sp0.className = '';
+      sp0.textContent = '✓';
+      document.getElementById('bstep-text-0').textContent = '已取得訂位確認';
+      r1.className = 'booking-exec-step-row active';
+      r1.style.opacity = '1';
+      sp1.className = 'step-spinner';
+      sp1.style.cssText = 'width:14px;height:14px;border-width:2px;flex-shrink:0;';
+      document.getElementById('bstep-text-1').textContent = '正在傳送給家人...';
+    }, 1500);
+
+    setTimeout(function() {
+      document.getElementById('bookingExecSteps').style.display = 'none';
+      document.getElementById('bookingHeroIcon').textContent = '🎉';
+      document.getElementById('bookingHeroTitle').textContent = '訂位成功！';
+      document.getElementById('bookingHeroSub').textContent = 'AI 已代您完成訂位';
+      document.getElementById('bookingRestName').textContent = dinnerRestName;
+      document.getElementById('bookingTime').textContent = dinnerRestTime;
+      document.getElementById('bookingCard').style.display = 'block';
+      document.getElementById('bookingSentBlock').style.display = 'block';
+      document.getElementById('bookingDoneBtn').style.display = 'block';
+    }, 2800);
   }
 
   function showToast(msg) {
