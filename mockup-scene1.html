@@ -1635,6 +1635,18 @@
     background: var(--green-bg); border-radius: 100px; font-size: 12px;
     font-weight: 600; color: var(--green); border: 1px solid var(--green);
   }
+  /* Family order list */
+  .order-list {
+    display: flex; flex-direction: column; margin-bottom: 16px;
+    border: 1.5px solid var(--gray-200); border-radius: 14px; overflow: hidden;
+  }
+  .order-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 14px; border-bottom: 1px solid var(--gray-100);
+  }
+  .order-item:last-child { border-bottom: none; }
+  .order-member { font-size: 12px; font-weight: 700; color: var(--gray-900); width: 90px; flex-shrink: 0; }
+  .order-dishes { font-size: 12px; color: var(--gray-500); line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -1674,8 +1686,8 @@
 
         <div class="home-greeting">
           <div class="home-greeting-text">
-            <div>午安，<strong>Eva</strong> 👋</div>
-            <div class="home-date">週五 3月7日</div>
+            <div>Good afternoon, <strong>Eva</strong> 👋</div>
+            <div class="home-date">Fri, Mar 7</div>
           </div>
         </div>
 
@@ -1683,15 +1695,15 @@
           <div class="story-row" id="storyRow">
 
             <div class="story-item">
-              <div class="story-note" onclick="goTo(1)" style="cursor:pointer;">血壓偏高 💊</div>
+              <div class="story-note" onclick="goTo(1)" style="cursor:pointer;">High BP 💊</div>
               <div class="story-ring ring-alert" onclick="goTo(2)" style="cursor:pointer;">
                 <div class="story-avatar">👩‍🦳</div>
               </div>
-              <div class="story-name">奶奶</div>
+              <div class="story-name">Grandma</div>
             </div>
 
             <div class="story-item">
-              <div class="story-note">選配色中 🎨</div>
+              <div class="story-note">Picking colors 🎨</div>
               <div class="story-ring ring-active">
                 <div class="story-avatar">👧</div>
               </div>
@@ -1699,7 +1711,7 @@
             </div>
 
             <div class="story-item">
-              <div class="story-note">作業沒做完 📚</div>
+              <div class="story-note">Homework overdue 📚</div>
               <div class="story-ring ring-active">
                 <div class="story-avatar">👦</div>
               </div>
@@ -1707,11 +1719,11 @@
             </div>
 
             <div class="story-item">
-              <div class="story-note">7PM 到家 🏠</div>
+              <div class="story-note">Home by 7 PM 🏠</div>
               <div class="story-ring ring-muted">
                 <div class="story-avatar">🧑‍💼</div>
               </div>
-              <div class="story-name">老公</div>
+              <div class="story-name">Husband</div>
             </div>
 
           </div>
@@ -1725,7 +1737,7 @@
         <!-- ── TODO SECTION ── -->
         <div class="todo-section">
           <div class="todo-header">
-            <div class="todo-title">待辦事項</div>
+            <div class="todo-title">Tasks</div>
           </div>
 
           <!-- Sticky date navigation -->
@@ -1735,8 +1747,8 @@
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
               </button>
               <div class="date-nav-center">
-                <span class="date-nav-date" id="dateNavDate">3月7日</span>
-                <span class="date-nav-weekday" id="dateNavWeekday">週五</span>
+                <span class="date-nav-date" id="dateNavDate">Mar 7</span>
+                <span class="date-nav-weekday" id="dateNavWeekday">Friday</span>
               </div>
               <button class="date-arrow-btn" id="tab-next" onclick="shiftDate(1)">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -1751,7 +1763,7 @@
                 <button onclick="calNext()">›</button>
               </div>
               <div class="cal-grid" id="calGrid"></div>
-              <button class="cal-today-btn" onclick="goToToday()">今天</button>
+              <button class="cal-today-btn" onclick="goToToday()">Today</button>
             </div>
           </div>
 
@@ -1760,19 +1772,19 @@
 
           <!-- Add reminder -->
           <button class="add-reminder-btn" onclick="goTo(8)">
-            <span>＋</span> 新增提醒
+            <span>＋</span> Add Reminder
           </button>
         </div>
 
         <!-- ── NOTIFICATIONS ── -->
-        <div class="section-heading">最新通知</div>
+        <div class="section-heading">Latest Updates</div>
 
         <div class="notif-card health-card" onclick="goTo(2)">
           <div class="notif-icon-wrap icon-teal">📊</div>
           <div class="notif-body">
-            <div class="notif-source">健康管理</div>
-            <div class="notif-title">奶奶健康報告分析完成</div>
-            <div class="notif-desc">1 項需要關注 · 已自動預約心臟科門診</div>
+            <div class="notif-source">Health</div>
+            <div class="notif-title">Grandma's Health Report Analyzed</div>
+            <div class="notif-desc">1 item needs attention · Cardiology appt booked</div>
           </div>
           <div class="notif-time">3:13</div>
           <div class="notif-chevron">›</div>
@@ -1781,9 +1793,9 @@
         <div class="notif-card success-card" onclick="goTo(5)">
           <div class="notif-icon-wrap icon-green">🛡</div>
           <div class="notif-body">
-            <div class="notif-source">防詐守護</div>
-            <div class="notif-title">已攔截奶奶的詐騙來電</div>
-            <div class="notif-desc">奶奶安全無虞 · 無需擔心</div>
+            <div class="notif-source">Fraud Shield</div>
+            <div class="notif-title">Scam Call Blocked for Grandma</div>
+            <div class="notif-desc">Grandma is safe · No need to worry</div>
           </div>
           <div class="notif-time">3:48</div>
           <div class="notif-chevron">›</div>
@@ -1792,9 +1804,9 @@
         <div class="notif-card success-card" onclick="goToBookingResult()">
           <div class="notif-icon-wrap icon-green">🍽️</div>
           <div class="notif-body">
-            <div class="notif-source">晚餐管理</div>
-            <div class="notif-title">已訂購今晚全家晚餐</div>
-            <div class="notif-desc">鼎泰豐（信義店）・晚上 7:00・5 人已點餐</div>
+            <div class="notif-source">Dinner</div>
+            <div class="notif-title">Tonight's Family Dinner Ordered</div>
+            <div class="notif-desc">Din Tai Fung · 7:00 PM · 5 members ordered</div>
           </div>
           <div class="notif-time">5:30</div>
           <div class="notif-chevron">›</div>
@@ -1810,19 +1822,19 @@
     <div class="screen" id="screen-1">
       <div class="nav-bar">
         <button class="nav-back" onclick="goBack()">‹</button>
-        <div class="nav-title">👩‍🦳 奶奶的 TrendLife</div>
+        <div class="nav-title">👩‍🦳 Grandma's TrendLife</div>
         <div class="nav-right"></div>
       </div>
 
       <div class="chat-messages">
-        <div class="chat-date-label">週五 · 下午 3:12</div>
+        <div class="chat-date-label">Friday · 3:12 PM</div>
 
         <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-end;">
           <div class="photo-bubble">
             <div class="photo-thumb">📋</div>
             <div>
-              <div class="photo-name">健康檢查報告.jpg</div>
-              <div class="photo-meta">台灣大學醫院 · 2024 年度健檢</div>
+              <div class="photo-name">health-checkup-report.jpg</div>
+              <div class="photo-meta">NTU Hospital · 2024 Annual Checkup</div>
             </div>
           </div>
         </div>
@@ -1830,10 +1842,10 @@
         <div class="msg-row">
           <div class="msg-avatar" style="background: var(--red);">🛡</div>
           <div class="msg-bubble ai-bubble">
-            <div class="ai-label">AI 管家</div>
-            奶奶好，我已收到您的健康檢查報告 📋<br><br>
-            我現在幫您分析，<strong>結果會同步給 Eva</strong>，讓她了解您的狀況。<br><br>
-            分析約需 30 秒，請稍候...
+            <div class="ai-label">AI Butler</div>
+            Hi! I've received your health checkup report 📋<br><br>
+            I'm analyzing it now. <strong>Results will be shared with Eva</strong> so she's up to date.<br><br>
+            Analysis takes about 30 seconds, please wait...
           </div>
         </div>
 
@@ -1849,15 +1861,15 @@
         <div class="msg-row">
           <div class="msg-avatar" style="background: var(--red);">🛡</div>
           <div class="msg-bubble ai-bubble">
-            <div class="ai-label">AI 管家</div>
-            ✅ 分析完成！整體健康良好，有 <span style="color:#F9A825; font-weight:700;">1 項需要關注</span>。<br><br>
-            已通知 Eva，她會幫您安排後續追蹤。
+            <div class="ai-label">AI Butler</div>
+            ✅ Analysis complete! Overall health is good, with <span style="color:#F9A825; font-weight:700;">1 item that needs attention</span>.<br><br>
+            Eva has been notified and will help arrange any follow-up.
           </div>
         </div>
       </div>
 
       <div class="chat-input-bar">
-        <input class="chat-input" type="text" placeholder="輸入訊息...">
+        <input class="chat-input" type="text" placeholder="Type a message...">
         <button class="chat-send">↑</button>
       </div>
     </div>
@@ -1868,7 +1880,7 @@
     <div class="screen" id="screen-2">
       <div class="nav-bar">
         <button class="nav-back" onclick="goBack()">‹</button>
-        <div class="nav-title">奶奶的健康報告</div>
+        <div class="nav-title">Grandma's Health Report</div>
         <div class="nav-right"></div>
       </div>
 
@@ -1878,29 +1890,29 @@
           <div class="health-hero-header">
             <div class="health-hero-icon">📊</div>
             <div>
-              <div class="health-hero-title">健康分析摘要</div>
+              <div class="health-hero-title">Health Analysis Summary</div>
             </div>
           </div>
           <div class="health-metrics">
             <div class="metric-item">
-              <div class="metric-label">血壓</div>
+              <div class="metric-label">Blood Pressure</div>
               <div class="metric-value">145/92</div>
-              <div class="metric-tag tag-warn">⚠ 偏高</div>
+              <div class="metric-tag tag-warn">⚠ Elevated</div>
             </div>
             <div class="metric-item">
-              <div class="metric-label">血糖（空腹）</div>
+              <div class="metric-label">Blood Sugar (fasting)</div>
               <div class="metric-value">98 mg/dL</div>
-              <div class="metric-tag tag-ok">✓ 正常</div>
+              <div class="metric-tag tag-ok">✓ Normal</div>
             </div>
             <div class="metric-item">
-              <div class="metric-label">心電圖</div>
-              <div class="metric-value">正常</div>
-              <div class="metric-tag tag-ok">✓ 正常</div>
+              <div class="metric-label">ECG</div>
+              <div class="metric-value">Normal</div>
+              <div class="metric-tag tag-ok">✓ Normal</div>
             </div>
             <div class="metric-item">
-              <div class="metric-label">骨密度</div>
+              <div class="metric-label">Bone Density</div>
               <div class="metric-value">−1.2 T</div>
-              <div class="metric-tag tag-ok">✓ 正常</div>
+              <div class="metric-tag tag-ok">✓ Normal</div>
             </div>
           </div>
         </div>
@@ -1910,17 +1922,17 @@
         <div class="appt-card" onclick="goTo(3)">
           <div class="appt-icon-wrap">📅</div>
           <div>
-            <div class="appt-title">已預約心臟科門診（待確認）</div>
-            <div class="appt-detail">台大醫院 · 下週一 09:30 AM</div>
+            <div class="appt-title">Cardiology Appt Scheduled (Pending Confirm)</div>
+            <div class="appt-detail">NTU Hospital · Next Monday 9:30 AM</div>
           </div>
           <div class="appt-arrow">›</div>
         </div>
 
-        <div class="section-heading">處理選項</div>
+        <div class="section-heading">Actions</div>
         <div class="action-list">
-          <button class="btn btn-primary-red" onclick="goTo(3)">📅 確認預約門診</button>
-          <button class="btn btn-amber">💬 發送關心訊息給奶奶</button>
-          <button class="btn btn-secondary" onclick="goTo(1)">查看奶奶對話記錄</button>
+          <button class="btn btn-primary-red" onclick="goTo(3)">📅 Confirm Appointment</button>
+          <button class="btn btn-amber">💬 Send a Message to Grandma</button>
+          <button class="btn btn-secondary" onclick="goTo(1)">View Grandma's Chat History</button>
         </div>
         <div style="height: 20px;"></div>
       </div>
@@ -1932,42 +1944,42 @@
     <div class="screen" id="screen-3">
       <div class="nav-bar">
         <button class="nav-back" onclick="goBack()">‹</button>
-        <div class="nav-title">確認門診預約</div>
+        <div class="nav-title">Confirm Appointment</div>
         <div class="nav-right"></div>
       </div>
       <div class="scroll-content" style="padding: 0 16px;">
         <div style="padding-top: 20px; text-align: center;">
           <div style="font-size: 52px; margin-bottom: 12px;">🏥</div>
-          <div style="font-size: 18px; font-weight: 800; color: var(--gray-900); margin-bottom: 6px;">AI 已預約好了</div>
-          <div style="font-size: 13px; color: var(--gray-500); line-height: 1.6;">您只需要一鍵確認，<br>不需要自己打電話掛號</div>
+          <div style="font-size: 18px; font-weight: 800; color: var(--gray-900); margin-bottom: 6px;">AI Has It All Set</div>
+          <div style="font-size: 13px; color: var(--gray-500); line-height: 1.6;">Just one tap to confirm —<br>no phone calls needed</div>
         </div>
 
         <div style="background: var(--gray-100); border-radius: 16px; padding: 16px; margin: 20px 0;">
           <div class="fraud-row" style="font-size:13px;">
-            <span class="fraud-row-label">醫院</span>
-            <span class="fraud-row-val">臺大醫院 心臟科</span>
+            <span class="fraud-row-label">Hospital</span>
+            <span class="fraud-row-val">NTU Hospital · Cardiology</span>
           </div>
           <div class="fraud-row" style="font-size:13px;">
-            <span class="fraud-row-label">看診日期</span>
-            <span class="fraud-row-val">下週一（3/9）</span>
+            <span class="fraud-row-label">Date</span>
+            <span class="fraud-row-val">Next Monday (3/9)</span>
           </div>
           <div class="fraud-row" style="font-size:13px;">
-            <span class="fraud-row-label">看診時間</span>
-            <span class="fraud-row-val">上午 09:30</span>
+            <span class="fraud-row-label">Time</span>
+            <span class="fraud-row-val">9:30 AM</span>
           </div>
           <div class="fraud-row" style="font-size:13px;">
-            <span class="fraud-row-label">原因</span>
-            <span class="fraud-row-val" style="color: var(--amber);">血壓偏高追蹤</span>
+            <span class="fraud-row-label">Reason</span>
+            <span class="fraud-row-val" style="color: var(--amber);">Follow-up: High Blood Pressure</span>
           </div>
           <div class="fraud-row" style="font-size:13px;">
-            <span class="fraud-row-label">陪同提醒</span>
-            <span class="fraud-row-val">需要陪同</span>
+            <span class="fraud-row-label">Escort</span>
+            <span class="fraud-row-val">Escort needed</span>
           </div>
         </div>
 
         <div class="action-list">
-          <button class="btn btn-primary-red" onclick="goTo(4)">✓ 確認此預約</button>
-          <button class="btn btn-secondary" onclick="goBack()">修改時間</button>
+          <button class="btn btn-primary-red" onclick="goTo(4)">✓ Confirm Appointment</button>
+          <button class="btn btn-secondary" onclick="goBack()">Change Time</button>
         </div>
       </div>
     </div>
@@ -1978,26 +1990,26 @@
     <div class="screen" id="screen-4">
       <div class="nav-bar">
         <button class="nav-back" onclick="goTo(0)">‹</button>
-        <div class="nav-title">預約完成</div>
+        <div class="nav-title">Appointment Confirmed</div>
         <div class="nav-right"></div>
       </div>
       <div class="scroll-content" style="display:flex; flex-direction:column; align-items:center; padding:40px 24px 0; text-align:center; gap:12px;">
         <div style="width:80px; height:80px; background:var(--green-bg); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:40px;">✓</div>
-        <div style="font-size:20px; font-weight:900; color:var(--green);">預約已確認！</div>
-        <div style="font-size:13px; color:var(--gray-500); line-height:1.7;">已通知奶奶<br>日曆提醒已新增<br>3/8 (日) 前會再提醒一次</div>
+        <div style="font-size:20px; font-weight:900; color:var(--green);">Appointment Confirmed!</div>
+        <div style="font-size:13px; color:var(--gray-500); line-height:1.7;">Grandma has been notified<br>Calendar reminder added<br>Will remind again before 3/8 (Sun)</div>
 
         <div style="background:var(--green-bg); border:1px solid rgba(30,158,92,0.2); border-radius:16px; padding:16px; width:100%; margin-top:8px; text-align:left;">
-          <div style="font-size:12px; font-weight:700; color:var(--green); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.05em;">AI 管家備忘</div>
+          <div style="font-size:12px; font-weight:700; color:var(--green); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.05em;">AI Butler Notes</div>
           <div style="font-size:13px; color:var(--gray-700); line-height:1.6;">
-            ✓ 已提醒奶奶空腹 8 小時<br>
-            ✓ 已通知老公接送<br>
-            ✓ 已準備相關病史摘要
+            ✓ Reminded Grandma to fast 8 hours<br>
+            ✓ Husband notified for pickup<br>
+            ✓ Prepared relevant medical history summary
           </div>
         </div>
 
         <div class="action-list" style="width:100%; margin-top:8px;">
-          <button class="btn btn-primary-red" onclick="goTo(0)">回首頁</button>
-          <button class="btn btn-secondary" onclick="goTo(5)">查看防詐紀錄 →</button>
+          <button class="btn btn-primary-red" onclick="goTo(0)">Back to Home</button>
+          <button class="btn btn-secondary" onclick="goTo(5)">View Fraud Protection Log →</button>
         </div>
       </div>
     </div>
@@ -2008,7 +2020,7 @@
     <div class="screen" id="screen-5">
       <div class="nav-bar">
         <button class="nav-back" onclick="goBack()">‹</button>
-        <div class="nav-title">防詐守護紀錄</div>
+        <div class="nav-title">Fraud Protection Log</div>
         <div class="nav-right"></div>
       </div>
 
@@ -2017,58 +2029,58 @@
           <div class="success-hero-row">
             <div class="success-big-icon">🛡</div>
             <div>
-              <div class="success-title">奶奶安全無虞</div>
-              <div class="success-sub">詐騙來電已即時攔截</div>
+              <div class="success-title">Grandma Is Safe</div>
+              <div class="success-sub">Scam call was intercepted in real time</div>
             </div>
           </div>
           <div class="success-rows" style="margin-top: 14px;">
             <div class="s-row">
-              <span class="s-label">攔截時間</span>
-              <span class="s-val">今日 3:48 PM</span>
+              <span class="s-label">Blocked At</span>
+              <span class="s-val">Today 3:48 PM</span>
             </div>
             <div class="s-row">
-              <span class="s-label">來電號碼</span>
+              <span class="s-label">Caller</span>
               <span class="s-val blocked">+886-2-XXXX-XXXX</span>
             </div>
             <div class="s-row">
-              <span class="s-label">風險類型</span>
-              <span class="s-val blocked">假冒銀行客服</span>
+              <span class="s-label">Risk Type</span>
+              <span class="s-val blocked">Impersonating Bank Rep</span>
             </div>
             <div class="s-row">
-              <span class="s-label">舉報次數</span>
-              <span class="s-val blocked">847 次</span>
+              <span class="s-label">Reports</span>
+              <span class="s-val blocked">847 times</span>
             </div>
             <div class="s-row">
-              <span class="s-label">奶奶狀態</span>
-              <span class="s-val safe">✓ 安全</span>
+              <span class="s-label">Grandma's Status</span>
+              <span class="s-val safe">✓ Safe</span>
             </div>
             <div class="s-row">
-              <span class="s-label">已告知奶奶</span>
-              <span class="s-val safe">✓ 是</span>
+              <span class="s-label">Grandma Notified</span>
+              <span class="s-val safe">✓ Yes</span>
             </div>
           </div>
         </div>
 
         <div class="ai-chat-section" style="margin-top: 12px;">
-          <div style="font-size:11px; font-weight:700; color:var(--gray-500); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;">AI 管家說明</div>
+          <div style="font-size:11px; font-weight:700; color:var(--gray-500); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;">AI Butler Summary</div>
           <div class="ai-bubble-wrap">
             <div class="ai-avatar">AI</div>
             <div>
-              <div class="ai-sender"><div class="ai-sender-dot"></div>TrendLife AI 管家</div>
+              <div class="ai-sender"><div class="ai-sender-dot"></div>TrendLife AI Butler</div>
               <div class="ai-msg">
-                Eva，奶奶今天下午有一通<span class="highlight-red">疑似詐騙來電</span>，我已在她接起前攔截並顯示警告。<br><br>
-                奶奶<span class="highlight-green">安全，已按掛斷</span>。不需要擔心。<br><br>
-                此事件已記錄，如有類似來電我會持續攔截。
+                Eva, Grandma received a <span class="highlight-red">suspected scam call</span> this afternoon. I intercepted it and showed a warning before she answered.<br><br>
+                Grandma is <span class="highlight-green">safe and has hung up</span>. No need to worry.<br><br>
+                This incident has been recorded. I will continue blocking similar calls.
               </div>
             </div>
           </div>
         </div>
 
-        <div class="section-heading">查看奶奶當時畫面</div>
+        <div class="section-heading">View Grandma's Screen</div>
         <div class="action-list">
-          <button class="btn btn-primary-red" onclick="goTo(6)">📵 查看攔截畫面</button>
-          <button class="btn btn-amber">💬 傳訊關心奶奶</button>
-          <button class="btn btn-secondary" onclick="goTo(0)">回首頁</button>
+          <button class="btn btn-primary-red" onclick="goTo(6)">📵 View Blocked Call Screen</button>
+          <button class="btn btn-amber">💬 Send Grandma a Message</button>
+          <button class="btn btn-secondary" onclick="goTo(0)">Back to Home</button>
         </div>
         <div style="height: 20px;"></div>
       </div>
@@ -2080,14 +2092,14 @@
     <div class="screen" id="screen-6">
       <div class="nav-bar" style="background: var(--red); border-color: transparent;">
         <button class="nav-back" onclick="goBack()" style="background: rgba(255,255,255,0.2); color:white;">‹</button>
-        <div class="nav-title" style="color: white;">奶奶手機 · 攔截畫面</div>
+        <div class="nav-title" style="color: white;">Grandma's Phone · Blocked Call</div>
         <div class="nav-right"></div>
       </div>
 
       <div class="fraud-fullscreen">
         <div class="fraud-top-banner">
-          <div class="fraud-banner-title">⚠️ TrendLife 偵測到詐騙來電</div>
-          <div class="fraud-banner-sub">此通話已被標記為高風險</div>
+          <div class="fraud-banner-title">⚠️ TrendLife Detected a Scam Call</div>
+          <div class="fraud-banner-sub">This call has been flagged as high risk</div>
         </div>
 
         <div class="caller-block">
@@ -2095,33 +2107,33 @@
           <div class="caller-number">+886-2-2700-XXXX</div>
           <div class="caller-risk">
             <div class="risk-dot"></div>
-            高風險 · 疑似假冒銀行
+            High Risk · Suspected Bank Impersonation
           </div>
         </div>
 
         <div class="fraud-detail-card">
           <div class="fraud-row">
-            <span class="fraud-row-label">已被舉報</span>
-            <span class="fraud-row-val danger">847 次</span>
+            <span class="fraud-row-label">Times Reported</span>
+            <span class="fraud-row-val danger">847 times</span>
           </div>
           <div class="fraud-row">
-            <span class="fraud-row-label">風險類型</span>
-            <span class="fraud-row-val danger">假冒國泰世華銀行</span>
+            <span class="fraud-row-label">Risk Type</span>
+            <span class="fraud-row-val danger">Impersonating Cathay United Bank</span>
           </div>
           <div class="fraud-row">
-            <span class="fraud-row-label">Trend Micro 建議</span>
-            <span class="fraud-row-val" style="color:var(--navy);">立即掛斷</span>
+            <span class="fraud-row-label">Trend Micro Recommends</span>
+            <span class="fraud-row-val" style="color:var(--navy);">Hang Up Now</span>
           </div>
         </div>
 
         <div class="call-btns">
           <div class="call-circle" onclick="goTo(7)">
             <button class="call-circle-btn btn-decline">📵</button>
-            <div class="call-circle-label" style="color:var(--red);">立即掛斷</div>
+            <div class="call-circle-label" style="color:var(--red);">Hang Up</div>
           </div>
           <div class="call-circle">
             <button class="call-circle-btn btn-mute">🔇</button>
-            <div class="call-circle-label">靜音</div>
+            <div class="call-circle-label">Mute</div>
           </div>
         </div>
       </div>
@@ -2133,15 +2145,15 @@
     <div class="screen" id="screen-7">
       <div class="nav-bar">
         <button class="nav-back" onclick="goTo(0)">‹</button>
-        <div class="nav-title">奶奶已安全掛斷</div>
+        <div class="nav-title">Grandma Safely Hung Up</div>
         <div class="nav-right"></div>
       </div>
       <div class="scroll-content" style="display:flex; flex-direction:column; align-items:center; padding:40px 24px 0; text-align:center; gap:12px;">
         <div style="width:80px; height:80px; background:var(--green-bg); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:40px;">🛡</div>
-        <div style="font-size:20px; font-weight:900; color:var(--green);">已安全掛斷！</div>
-        <div style="font-size:13px; color:var(--gray-500); line-height:1.7;">奶奶安全<br>Eva 已收到通知<br>此號碼已加入封鎖清單</div>
+        <div style="font-size:20px; font-weight:900; color:var(--green);">Call Ended Safely!</div>
+        <div style="font-size:13px; color:var(--gray-500); line-height:1.7;">Grandma is safe<br>Eva has been notified<br>This number has been blocked</div>
         <div class="action-list" style="width:100%; margin-top:16px;">
-          <button class="btn btn-primary-red" onclick="goTo(0)">回 Eva 的首頁</button>
+          <button class="btn btn-primary-red" onclick="goTo(0)">Back to Eva's Home</button>
         </div>
       </div>
     </div>
@@ -2152,54 +2164,54 @@
     <div class="screen" id="screen-8">
       <div class="nav-bar">
         <button class="nav-back" onclick="goBack()">‹</button>
-        <div class="nav-title">新增提醒</div>
+        <div class="nav-title">Add Reminder</div>
         <div class="nav-right"></div>
       </div>
       <div class="reminder-form">
 
         <div class="form-group">
-          <div class="form-label">提醒內容</div>
-          <input class="form-input" type="text" placeholder="例：帶奶奶去心臟科門診">
+          <div class="form-label">Reminder</div>
+          <input class="form-input" type="text" placeholder="e.g., Take Grandma to cardiology">
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <div class="form-label">日期</div>
+            <div class="form-label">Date</div>
             <input class="form-input" type="date" value="2026-03-07">
           </div>
           <div class="form-group">
-            <div class="form-label">時間</div>
+            <div class="form-label">Time</div>
             <input class="form-input" type="time" value="09:00">
           </div>
         </div>
 
         <div class="form-group">
-          <div class="form-label">相關家人</div>
+          <div class="form-label">Family Member(s)</div>
           <div class="member-chips">
-            <div class="member-chip" onclick="this.classList.toggle('selected')">👩‍🦳 奶奶</div>
+            <div class="member-chip" onclick="this.classList.toggle('selected')">👩‍🦳 Grandma</div>
             <div class="member-chip" onclick="this.classList.toggle('selected')">👧 Yvonne</div>
             <div class="member-chip" onclick="this.classList.toggle('selected')">👦 Ethan</div>
-            <div class="member-chip" onclick="this.classList.toggle('selected')">🧑‍💼 老公</div>
+            <div class="member-chip" onclick="this.classList.toggle('selected')">🧑‍💼 Husband</div>
           </div>
         </div>
 
         <div class="form-group">
-          <div class="form-label">備注</div>
-          <textarea class="form-input" rows="3" placeholder="例：記得空腹 8 小時、帶健保卡" style="resize:none; line-height:1.5;"></textarea>
+          <div class="form-label">Notes</div>
+          <textarea class="form-input" rows="3" placeholder="e.g., Remember to fast 8 hours, bring insurance card" style="resize:none; line-height:1.5;"></textarea>
         </div>
 
         <div class="form-group">
-          <div class="form-label">提醒方式</div>
+          <div class="form-label">Notification Type</div>
           <div class="member-chips">
-            <div class="member-chip selected" onclick="this.classList.toggle('selected')">🔔 推播通知</div>
-            <div class="member-chip" onclick="this.classList.toggle('selected')">💬 AI 管家提醒</div>
-            <div class="member-chip" onclick="this.classList.toggle('selected')">📅 加入行事曆</div>
+            <div class="member-chip selected" onclick="this.classList.toggle('selected')">🔔 Push Notification</div>
+            <div class="member-chip" onclick="this.classList.toggle('selected')">💬 AI Butler Reminder</div>
+            <div class="member-chip" onclick="this.classList.toggle('selected')">📅 Add to Calendar</div>
           </div>
         </div>
 
         <div style="display:flex; gap:10px; margin-top:4px; padding-bottom:32px;">
-          <button class="btn btn-secondary" style="flex:1;" onclick="goBack()">取消</button>
-          <button class="btn btn-primary-red" style="flex:2;" onclick="saveReminder()">✓ 儲存提醒</button>
+          <button class="btn btn-secondary" style="flex:1;" onclick="goBack()">Cancel</button>
+          <button class="btn btn-primary-red" style="flex:2;" onclick="saveReminder()">✓ Save Reminder</button>
         </div>
       </div>
     </div>
@@ -2208,7 +2220,7 @@
     <div class="screen" id="screen-9">
       <div class="nav-bar">
         <button class="nav-back" onclick="goBack()">‹</button>
-        <div class="nav-title">待辦詳情</div>
+        <div class="nav-title">Task Detail</div>
         <div class="nav-right"></div>
       </div>
       <div style="padding: 16px 20px 32px;">
@@ -2222,15 +2234,15 @@
         </div>
 
         <div class="todo-ai-suggest-box">
-          <div class="todo-ai-suggest-label">✨ AI 執行步驟</div>
+          <div class="todo-ai-suggest-label">✨ AI Execution Steps</div>
           <div class="todo-ai-suggest-text" id="detailAiText"></div>
         </div>
 
         <button id="detailExecBtn" class="btn btn-primary-red" style="width:100%; margin-bottom:10px;"
           onclick="execDetailTodo(+this.dataset.todoId)">
-          ✨ 請 AI 立即執行
+          ✨ Ask AI to Execute Now
         </button>
-        <button class="btn btn-secondary" style="width:100%;" onclick="goBack()">稍後提醒我</button>
+        <button class="btn btn-secondary" style="width:100%;" onclick="goBack()">Remind Me Later</button>
 
       </div>
     </div>
@@ -2239,7 +2251,7 @@
     <div class="screen" id="screen-10">
       <div class="nav-bar">
         <button class="nav-back" onclick="goBack()">‹</button>
-        <div class="nav-title">AI 正在執行</div>
+        <div class="nav-title">AI Executing</div>
         <div class="nav-right"></div>
       </div>
       <div class="scroll-content" style="padding: 16px 20px 32px;">
@@ -2247,42 +2259,42 @@
         <div class="dinner-intro">
           <div class="dinner-intro-icon">🍽️</div>
           <div>
-            <div class="dinner-intro-title">訂今晚全家晚餐</div>
-            <div class="dinner-intro-sub">AI 正在為您搜尋最適合的餐廳...</div>
+            <div class="dinner-intro-title">Ordering Tonight's Family Dinner</div>
+            <div class="dinner-intro-sub">AI is searching for the best restaurant for your family...</div>
           </div>
         </div>
 
         <div class="exec-steps-card">
-          <div class="exec-steps-title">執行步驟</div>
+          <div class="exec-steps-title">Execution Steps</div>
           <div class="exec-step-row" id="dstep-0">
             <div class="exec-step-indicator" id="dstep-ind-0">1</div>
-            <div class="exec-step-text">分析家人飲食偏好與禁忌</div>
+            <div class="exec-step-text">Analyzing family dietary preferences &amp; restrictions</div>
             <div class="exec-step-status" id="dstep-stat-0"></div>
           </div>
           <div class="exec-step-row" id="dstep-1">
             <div class="exec-step-indicator" id="dstep-ind-1">2</div>
-            <div class="exec-step-text">選擇店家</div>
+            <div class="exec-step-text">Selecting restaurant</div>
             <div class="exec-step-status" id="dstep-stat-1"></div>
           </div>
           <div class="exec-step-row" id="dstep-2">
             <div class="exec-step-indicator" id="dstep-ind-2">3</div>
-            <div class="exec-step-text">開啟團購訂單</div>
+            <div class="exec-step-text">Opening group order</div>
             <div class="exec-step-status" id="dstep-stat-2"></div>
           </div>
           <div class="exec-step-row" id="dstep-3">
             <div class="exec-step-indicator" id="dstep-ind-3">4</div>
-            <div class="exec-step-text">讓家人點餐</div>
+            <div class="exec-step-text">Family members ordering</div>
             <div class="exec-step-status" id="dstep-stat-3"></div>
           </div>
           <div class="exec-step-row" id="dstep-4">
             <div class="exec-step-indicator" id="dstep-ind-4">5</div>
-            <div class="exec-step-text">AI送出餐點</div>
+            <div class="exec-step-text">AI submitting the order</div>
             <div class="exec-step-status" id="dstep-stat-4"></div>
           </div>
         </div>
 
         <button class="btn btn-primary-red" id="viewRestBtn" style="width:100%; display:none;" onclick="goTo(11)">
-          查看推薦餐廳 →
+          View Recommended Restaurants →
         </button>
 
       </div>
@@ -2292,59 +2304,59 @@
     <div class="screen" id="screen-11">
       <div class="nav-bar">
         <button class="nav-back" onclick="goBack()">‹</button>
-        <div class="nav-title">AI 推薦餐廳</div>
+        <div class="nav-title">AI Restaurant Picks</div>
         <div class="nav-right"></div>
       </div>
       <div class="scroll-content" style="padding: 16px 20px 32px;">
 
-        <div class="rest-section-label">AI 根據以下條件篩選</div>
+        <div class="rest-section-label">AI filtered based on:</div>
         <div class="rest-filter-pills">
-          <span class="rest-filter-pill">✓ 家人口味偏好</span>
-          <span class="rest-filter-pill">✓ 步行可達</span>
-          <span class="rest-filter-pill">✓ 適合兒童</span>
-          <span class="rest-filter-pill">✓ 今晚有空位</span>
+          <span class="rest-filter-pill">✓ Family preferences</span>
+          <span class="rest-filter-pill">✓ Walking distance</span>
+          <span class="rest-filter-pill">✓ Kid-friendly</span>
+          <span class="rest-filter-pill">✓ Available tonight</span>
         </div>
 
         <div class="rest-card">
           <div class="rest-card-header">
-            <div class="rest-name">鼎泰豐（信義店）</div>
+            <div class="rest-name">Din Tai Fung (Xinyi)</div>
             <div class="rest-rating">⭐ 4.8</div>
           </div>
           <div class="rest-meta">
-            <span class="rest-meta-tag">🥟 中式小籠包</span>
-            <span class="rest-meta-tag">步行 8 分鐘</span>
-            <span class="rest-meta-tag">$$ 中等</span>
+            <span class="rest-meta-tag">🥟 Soup Dumplings</span>
+            <span class="rest-meta-tag">8 min walk</span>
+            <span class="rest-meta-tag">$$ Mid-range</span>
           </div>
-          <div class="rest-avail">今晚 7:00 有空位・可訂 5 人</div>
-          <button class="rest-select-btn" onclick="selectRestaurant('鼎泰豐（信義店）', '晚上 7:00')">選這家 →</button>
+          <div class="rest-avail">Available tonight 7:00 PM · Up to 5 guests</div>
+          <button class="rest-select-btn" onclick="selectRestaurant('Din Tai Fung (Xinyi)', '7:00 PM')">Select →</button>
         </div>
 
         <div class="rest-card">
           <div class="rest-card-header">
-            <div class="rest-name">添好運港式飲茶</div>
+            <div class="rest-name">Tim Ho Wan (Dim Sum)</div>
             <div class="rest-rating">⭐ 4.6</div>
           </div>
           <div class="rest-meta">
-            <span class="rest-meta-tag">🍴 港式</span>
-            <span class="rest-meta-tag">步行 5 分鐘</span>
-            <span class="rest-meta-tag">$$ 中等</span>
+            <span class="rest-meta-tag">🍴 Hong Kong style</span>
+            <span class="rest-meta-tag">5 min walk</span>
+            <span class="rest-meta-tag">$$ Mid-range</span>
           </div>
-          <div class="rest-avail">今晚 6:30 有空位・可訂 5 人</div>
-          <button class="rest-select-btn" onclick="selectRestaurant('添好運港式飲茶', '晚上 6:30')">選這家 →</button>
+          <div class="rest-avail">Available tonight 6:30 PM · Up to 5 guests</div>
+          <button class="rest-select-btn" onclick="selectRestaurant('Tim Ho Wan (Dim Sum)', '6:30 PM')">Select →</button>
         </div>
 
         <div class="rest-card">
           <div class="rest-card-header">
-            <div class="rest-name">輝哥牛排</div>
+            <div class="rest-name">Huigo Steakhouse</div>
             <div class="rest-rating">⭐ 4.5</div>
           </div>
           <div class="rest-meta">
-            <span class="rest-meta-tag">🥩 西式牛排</span>
-            <span class="rest-meta-tag">步行 12 分鐘</span>
-            <span class="rest-meta-tag">$$$ 較貴</span>
+            <span class="rest-meta-tag">🥩 Western steak</span>
+            <span class="rest-meta-tag">12 min walk</span>
+            <span class="rest-meta-tag">$$$ Pricier</span>
           </div>
-          <div class="rest-avail">今晚 7:30 有空位・可訂 5 人</div>
-          <button class="rest-select-btn" onclick="selectRestaurant('輝哥牛排', '晚上 7:30')">選這家 →</button>
+          <div class="rest-avail">Available tonight 7:30 PM · Up to 5 guests</div>
+          <button class="rest-select-btn" onclick="selectRestaurant('Huigo Steakhouse', '7:30 PM')">Select →</button>
         </div>
 
       </div>
@@ -2354,74 +2366,89 @@
     <div class="screen" id="screen-12">
       <div class="nav-bar">
         <button class="nav-back" onclick="goBack()">‹</button>
-        <div class="nav-title">訂單確認</div>
+        <div class="nav-title">Order Confirmation</div>
         <div class="nav-right"></div>
       </div>
       <div class="scroll-content" style="padding: 16px 20px 32px;">
 
         <div class="booking-hero">
           <div class="booking-hero-icon" id="bookingHeroIcon">⏳</div>
-          <div class="booking-hero-title" id="bookingHeroTitle">AI 正在代您訂位...</div>
-          <div class="booking-hero-sub" id="bookingHeroSub">請稍候，正在確認座位</div>
+          <div class="booking-hero-title" id="bookingHeroTitle">AI is placing your order...</div>
+          <div class="booking-hero-sub" id="bookingHeroSub">Please wait, confirming your seats</div>
         </div>
 
         <div class="booking-exec-steps" id="bookingExecSteps">
           <div class="booking-exec-step-row" id="bstep-0">
             <div class="step-spinner" style="width:14px;height:14px;border-width:2px;flex-shrink:0;" id="bspinner-0"></div>
-            <span id="bstep-text-0">開啟團購訂單...</span>
+            <span id="bstep-text-0">Opening group order...</span>
           </div>
           <div class="booking-exec-step-row" id="bstep-1" style="opacity:0.4;">
             <div style="width:14px;height:14px;flex-shrink:0;" id="bspinner-1"></div>
-            <span id="bstep-text-1">等待家人點餐</span>
+            <span id="bstep-text-1">Waiting for family to order</span>
           </div>
           <div class="booking-exec-step-row" id="bstep-2" style="opacity:0.4;">
             <div style="width:14px;height:14px;flex-shrink:0;" id="bspinner-2"></div>
-            <span id="bstep-text-2">AI送出餐點</span>
+            <span id="bstep-text-2">AI submitting the order</span>
           </div>
         </div>
 
         <div class="booking-card" id="bookingCard" style="display:none;">
-          <div class="booking-card-title">訂單詳情</div>
+          <div class="booking-card-title">Order Details</div>
           <div class="booking-row">
             <div class="booking-row-icon">🍽️</div>
-            <div class="booking-row-label">餐廳</div>
+            <div class="booking-row-label">Restaurant</div>
             <div class="booking-row-value" id="bookingRestName">—</div>
           </div>
           <div class="booking-row">
             <div class="booking-row-icon">📅</div>
-            <div class="booking-row-label">日期</div>
-            <div class="booking-row-value">今天 3月7日（週五）</div>
+            <div class="booking-row-label">Date</div>
+            <div class="booking-row-value">Today, March 7 (Fri)</div>
           </div>
           <div class="booking-row">
             <div class="booking-row-icon">⏰</div>
-            <div class="booking-row-label">時間</div>
+            <div class="booking-row-label">Time</div>
             <div class="booking-row-value" id="bookingTime">—</div>
           </div>
           <div class="booking-row">
             <div class="booking-row-icon">👥</div>
-            <div class="booking-row-label">點餐</div>
-            <div class="booking-row-value">5 位成員已完成點餐</div>
+            <div class="booking-row-label">Orders</div>
+            <div class="booking-row-value">5 members ordered</div>
           </div>
           <div class="booking-row">
             <div class="booking-row-icon">🔢</div>
-            <div class="booking-row-label">訂單編號</div>
-            <div class="booking-row-value"><span class="booking-confirm-badge">已送出</span> #TL-2847</div>
+            <div class="booking-row-label">Order #</div>
+            <div class="booking-row-value"><span class="booking-confirm-badge">Submitted</span> #TL-2847</div>
           </div>
         </div>
 
         <div id="bookingSentBlock" style="display:none;">
-          <div class="send-family-title">✅ 家人點餐紀錄</div>
-          <div class="family-sent-row">
-            <span class="family-chip">👩 Eva</span>
-            <span class="family-chip">👨 老公</span>
-            <span class="family-chip">👧 Yvonne</span>
-            <span class="family-chip">👦 Ethan</span>
-            <span class="family-chip">👩‍🦳 奶奶</span>
+          <div class="send-family-title">✅ Family Orders</div>
+          <div class="order-list">
+            <div class="order-item">
+              <div class="order-member">👩 Eva</div>
+              <div class="order-dishes">Pork Soup Dumplings ×6<br>Sautéed Spinach</div>
+            </div>
+            <div class="order-item">
+              <div class="order-member">👨 Husband</div>
+              <div class="order-dishes">Beef Soup Dumplings ×8<br>Braised Beef Noodle Soup</div>
+            </div>
+            <div class="order-item">
+              <div class="order-member">👧 Yvonne</div>
+              <div class="order-dishes">Shrimp Fried Rice<br>Soup Dumplings ×3</div>
+            </div>
+            <div class="order-item">
+              <div class="order-member">👦 Ethan</div>
+              <div class="order-dishes">Kid's Set Meal<br>Chicken Fried Rice</div>
+            </div>
+            <div class="order-item">
+              <div class="order-member">👩‍🦳 Grandma</div>
+              <div class="order-dishes">Steamed Egg<br>Vegetable Dumplings ×3</div>
+            </div>
           </div>
         </div>
 
         <button class="btn btn-primary-red" id="bookingDoneBtn" style="width:100%; display:none; margin-top:4px;" onclick="goTo(0)">
-          🏠 回首頁
+          🏠 Back to Home
         </button>
 
       </div>
@@ -2442,25 +2469,25 @@
 
   // ── TODO DATA ──
   const todosData = {
-    0: [ // 昨天
-      { id: 1, title: '確認奶奶的血壓數值', time: '上午 10:00', member: '奶奶', memberColor: 'tag-red-sm', done: true,
-        aiSteps: ['讀取奶奶今日血壓量測數值（135/82）', '與上週均值比對，標記「略偏高」', '更新奶奶健康檔案並記錄趨勢', '推播建議通知：今日請減少鹽份攝取'] },
-      { id: 2, title: 'Yvonne 的美術課材料費', time: '下午 3:00', member: 'Yvonne', memberColor: 'tag-teal-sm', done: true,
-        aiSteps: ['查詢美術課繳費單金額（$450）', '透過綁定的行動支付完成付款', '截圖收據並存入 Yvonne 檔案夾', '傳送繳費完成通知給 Yvonne'] },
+    0: [ // Yesterday
+      { id: 1, title: "Check Grandma's Blood Pressure", time: '10:00 AM', member: 'Grandma', memberColor: 'tag-red-sm', done: true,
+        aiSteps: ["Read Grandma's BP reading today (135/82)", "Compare to last week's average — flagged slightly high", "Update Grandma's health record and log trend", 'Send alert: reduce salt intake today'] },
+      { id: 2, title: "Yvonne's Art Class Supply Fee", time: '3:00 PM', member: 'Yvonne', memberColor: 'tag-teal-sm', done: true,
+        aiSteps: ['Look up art class fee amount ($450)', 'Pay via linked mobile wallet', "Screenshot receipt and save to Yvonne's folder", 'Send payment confirmation to Yvonne'] },
     ],
-    1: [ // 今天
-      { id: 3, title: '確認奶奶心臟科門診預約', time: '下午 3:13', member: '奶奶', memberColor: 'tag-red-sm', done: false,
-        aiSteps: ['致電台大醫院心臟科確認預約狀態', '確認就診時間並取得診號', '傳送提醒給奶奶，附上交通路線', '提示注意事項：空腹 8 小時、攜帶健保卡'] },
-      { id: 4, title: 'Ethan 足球練習接送', time: '下午 5:30', member: 'Ethan', memberColor: 'tag-teal-sm', done: true,
-        aiSteps: ['在 5:15 PM 推播提醒 Eva 出發接送', '確認球場位置與今日練習結束時間', '傳送到家通知給 Eva', '提醒 Ethan 今晚作業截止時間'] },
-      { id: 5, title: '訂今晚全家晚餐', time: '下午 5:30', member: '全家', memberColor: 'tag-gray-sm', done: false,
-        aiSteps: ['分析家人飲食偏好與禁忌', '選擇店家', '開啟團購訂單', '讓家人點餐', 'AI送出餐點'] },
+    1: [ // Today
+      { id: 3, title: "Confirm Grandma's Cardiology Appointment", time: '3:13 PM', member: 'Grandma', memberColor: 'tag-red-sm', done: false,
+        aiSteps: ['Call NTU Hospital Cardiology to confirm appointment', 'Confirm visit time and get queue number', 'Send reminder to Grandma with directions', 'Note: fast 8 hrs beforehand, bring insurance card'] },
+      { id: 4, title: 'Pick Up Ethan from Soccer Practice', time: '5:30 PM', member: 'Ethan', memberColor: 'tag-teal-sm', done: true,
+        aiSteps: ['Send Eva a pickup reminder at 5:15 PM', "Confirm field location and today's end time", 'Send arrival notification to Eva', "Remind Ethan of tonight's homework deadline"] },
+      { id: 5, title: "Order Tonight's Family Dinner", time: '5:30 PM', member: 'Everyone', memberColor: 'tag-gray-sm', done: false,
+        aiSteps: ['Analyze family dietary preferences & restrictions', 'Select restaurant', 'Open group order', 'Family members order', 'AI submits the order'] },
     ],
-    2: [ // 明天
-      { id: 7, title: 'Yvonne 線上討論 8:30 PM', time: '晚上 8:00', member: 'Yvonne', memberColor: 'tag-teal-sm', done: false,
-        aiSteps: ['在 8:00 PM 推播提醒 Yvonne 準備上線', '確認 Yvonne 的視訊裝置與網路連線狀態', '傳送會議連結至 Yvonne 的裝置', '8:25 PM 再次提醒，確保準時進入會議'] },
-      { id: 8, title: '準備週末家庭活動', time: '上午 10:00', member: '全家', memberColor: 'tag-gray-sm', done: false,
-        aiSteps: ['查詢週末天氣預報與交通狀況', '根據家人喜好推薦 3 個戶外景點選項', '確認景點開放時間並查詢停車資訊', '規劃午餐餐廳並代為預訂，傳送行程給全家'] },
+    2: [ // Tomorrow
+      { id: 7, title: "Yvonne's Online Call at 8:30 PM", time: '8:00 PM', member: 'Yvonne', memberColor: 'tag-teal-sm', done: false,
+        aiSteps: ['Send Yvonne a prep reminder at 8:00 PM', "Check Yvonne's device and internet connection", "Send meeting link to Yvonne's device", 'Send another reminder at 8:25 PM to be on time'] },
+      { id: 8, title: 'Plan Weekend Family Activity', time: '10:00 AM', member: 'Everyone', memberColor: 'tag-gray-sm', done: false,
+        aiSteps: ['Check weekend weather and traffic conditions', 'Recommend 3 outdoor options based on family preferences', 'Confirm venue hours and parking availability', 'Reserve lunch restaurant and send itinerary to family'] },
     ],
   };
   let activeTab = 1;
@@ -2470,7 +2497,7 @@
     const list = document.getElementById('todoList');
     const items = todosData[activeTab] || [];
     if (items.length === 0) {
-      list.innerHTML = '<div style="text-align:center; padding:20px 0; font-size:13px; color:var(--gray-500);">這天沒有待辦事項</div>';
+      list.innerHTML = '<div style="text-align:center; padding:20px 0; font-size:13px; color:var(--gray-500);">No tasks for this day</div>';
       return;
     }
     list.innerHTML = items.map(t => `
@@ -2487,9 +2514,9 @@
         </div>
         <div class="todo-actions">
           <button class="todo-ai-btn${t.done ? ' ai-done' : ''}" onclick="aiExecuteTodo(${t.id})">
-            ${t.done ? '✓ AI 已執行' : '✨ 請 AI 執行'}
+            ${t.done ? '✓ AI Done' : '✨ Ask AI'}
           </button>
-          <button class="todo-delete-btn" onclick="deleteTodo(${t.id})" aria-label="刪除">
+          <button class="todo-delete-btn" onclick="deleteTodo(${t.id})" aria-label="Delete">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
           </button>
         </div>
@@ -2525,13 +2552,13 @@
             <span class="ai-step-num">${i + 1}</span>
             <span class="ai-step-text">${s}</span>
             <div class="ai-step-actions">
-              <button class="ai-step-edit-btn" onclick="editStep(${i})" title="編輯">✏</button>
-              <button class="ai-step-del-btn" onclick="deleteStep(${i})" title="刪除">🗑</button>
+              <button class="ai-step-edit-btn" onclick="editStep(${i})" title="Edit">✏</button>
+              <button class="ai-step-del-btn" onclick="deleteStep(${i})" title="Delete">🗑</button>
             </div>
           </div>`).join('')
-      : '<div style="color:var(--gray-500);font-size:13px;margin-bottom:4px;">尚無步驟</div>';
+      : '<div style="color:var(--gray-500);font-size:13px;margin-bottom:4px;">No steps yet</div>';
     document.getElementById('detailAiText').innerHTML =
-      stepsHtml + '<button class="add-step-btn" onclick="addStep()">＋ 新增步驟</button>';
+      stepsHtml + '<button class="add-step-btn" onclick="addStep()">+ Add Step</button>';
   }
 
   function viewTodoDetail(id) {
@@ -2618,7 +2645,7 @@
       return true; // handled — don't call goBack
     }
     if (!found.done) { found.done = true; renderTodos(); }
-    showToast('AI 正在處理：' + found.title);
+    showToast('AI processing: ' + found.title);
     return false;
   }
 
@@ -2666,16 +2693,16 @@
   }
 
   function goToBookingResult() {
-    dinnerRestName = '鼎泰豐（信義店）';
-    dinnerRestTime = '晚上 7:00';
+    dinnerRestName = 'Din Tai Fung (Xinyi)';
+    dinnerRestTime = '7:00 PM';
     goTo(12);
     setTimeout(showBookingSuccess, 200);
   }
 
   function showBookingSuccess() {
     document.getElementById('bookingHeroIcon').textContent = '🎉';
-    document.getElementById('bookingHeroTitle').textContent = '訂單已送出！';
-    document.getElementById('bookingHeroSub').textContent = 'AI 已完成所有步驟';
+    document.getElementById('bookingHeroTitle').textContent = 'Order Placed!';
+    document.getElementById('bookingHeroSub').textContent = 'All steps completed by AI';
     document.getElementById('bookingExecSteps').style.display = 'none';
     document.getElementById('bookingRestName').textContent = dinnerRestName;
     document.getElementById('bookingTime').textContent = dinnerRestTime;
@@ -2693,8 +2720,8 @@
 
   function animateBooking() {
     document.getElementById('bookingHeroIcon').textContent = '⏳';
-    document.getElementById('bookingHeroTitle').textContent = 'AI 正在處理訂單...';
-    document.getElementById('bookingHeroSub').textContent = '請稍候';
+    document.getElementById('bookingHeroTitle').textContent = 'AI is placing your order...';
+    document.getElementById('bookingHeroSub').textContent = 'Please wait';
     document.getElementById('bookingExecSteps').style.display = 'block';
     document.getElementById('bookingCard').style.display = 'none';
     document.getElementById('bookingSentBlock').style.display = 'none';
@@ -2710,7 +2737,7 @@
       spinners[i].style.cssText = 'width:14px;height:14px;flex-shrink:0;';
       spinners[i].textContent = '';
     });
-    var texts = ['開啟團購訂單...', '等待家人點餐', 'AI送出餐點'];
+    var texts = ['Opening group order...', 'Waiting for family to order', 'AI submitting the order'];
     texts.forEach(function(t, i) { document.getElementById('bstep-text-' + i).textContent = t; });
 
     // Step 0 active
@@ -2722,22 +2749,22 @@
     setTimeout(function() {
       rows[0].className = 'booking-exec-step-row done';
       spinners[0].className = ''; spinners[0].textContent = '✓';
-      document.getElementById('bstep-text-0').textContent = '團購訂單已開啟';
+      document.getElementById('bstep-text-0').textContent = 'Group order opened';
       rows[1].className = 'booking-exec-step-row active'; rows[1].style.opacity = '1';
       spinners[1].className = 'step-spinner';
       spinners[1].style.cssText = 'width:14px;height:14px;border-width:2px;flex-shrink:0;';
-      document.getElementById('bstep-text-1').textContent = '家人正在點餐...';
+      document.getElementById('bstep-text-1').textContent = 'Family members are ordering...';
     }, 1000);
 
     // Step 1 done → step 2 active
     setTimeout(function() {
       rows[1].className = 'booking-exec-step-row done';
       spinners[1].className = ''; spinners[1].textContent = '✓';
-      document.getElementById('bstep-text-1').textContent = '5 位成員已完成點餐';
+      document.getElementById('bstep-text-1').textContent = '5 members have ordered';
       rows[2].className = 'booking-exec-step-row active'; rows[2].style.opacity = '1';
       spinners[2].className = 'step-spinner';
       spinners[2].style.cssText = 'width:14px;height:14px;border-width:2px;flex-shrink:0;';
-      document.getElementById('bstep-text-2').textContent = 'AI正在送出餐點...';
+      document.getElementById('bstep-text-2').textContent = 'AI is submitting the order...';
     }, 2200);
 
     // All done
@@ -2768,10 +2795,10 @@
   function updateDateNav() {
     const base = new Date(2026, 2, 7); // March 7 = index 1
     base.setDate(base.getDate() + (activeTab - 1));
-    const MONTHS = ['1','2','3','4','5','6','7','8','9','10','11','12'];
-    const DAYS   = ['週日','週一','週二','週三','週四','週五','週六'];
+    const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     document.getElementById('dateNavDate').textContent =
-      MONTHS[base.getMonth()] + '月' + base.getDate() + '日';
+      MONTHS[base.getMonth()] + ' ' + base.getDate();
     document.getElementById('dateNavWeekday').textContent = DAYS[base.getDay()];
     document.getElementById('tab-prev').disabled = activeTab === 0;
     document.getElementById('tab-next').disabled = activeTab === 2;
@@ -2781,8 +2808,8 @@
   let calYear = 2026, calMonth = 2; // March (0-indexed)
   let selectedDay = 7;
 
-  const MONTH_NAMES = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
-  const DAY_LABELS = ['日','一','二','三','四','五','六'];
+  const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const DAY_LABELS = ['Su','Mo','Tu','We','Th','Fr','Sa'];
   const todoDays = new Set([6, 7, 8, 14, 21]); // days with todos in March
 
   function toggleCalendar(e) {
@@ -2801,7 +2828,7 @@
   }
 
   function renderCalendar() {
-    document.getElementById('calMonthLabel').textContent = `${calYear} 年 ${MONTH_NAMES[calMonth]}`;
+    document.getElementById('calMonthLabel').textContent = `${MONTH_NAMES[calMonth]} ${calYear}`;
     const grid = document.getElementById('calGrid');
     const firstDay = new Date(calYear, calMonth, 1).getDay();
     const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
@@ -2842,14 +2869,14 @@
     else if (d === 8) { activeTab = 2; updateDateNav(); renderTodos(); }
     else {
       // Arbitrary date — update display only
-      const DAYS = ['週日','週一','週二','週三','週四','週五','週六'];
+      const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
       const dt = new Date(2026, 2, d);
-      document.getElementById('dateNavDate').textContent = `3月${d}日`;
+      document.getElementById('dateNavDate').textContent = `Mar ${d}`;
       document.getElementById('dateNavWeekday').textContent = DAYS[dt.getDay()];
       document.getElementById('tab-prev').disabled = true;
       document.getElementById('tab-next').disabled = true;
       document.getElementById('todoList').innerHTML =
-        '<div style="text-align:center;padding:20px 0;font-size:13px;color:var(--gray-500);">這天沒有待辦事項</div>';
+        '<div style="text-align:center;padding:20px 0;font-size:13px;color:var(--gray-500);">No tasks for this day</div>';
     }
     toggleCalendar();
     renderCalendar();
@@ -2861,12 +2888,12 @@
   // ── ADD REMINDER ──
   function saveReminder() {
     const input = document.querySelector('#screen-8 .form-input');
-    const title = input ? input.value.trim() : '新提醒';
+    const title = input ? input.value.trim() : 'New Reminder';
     const newItem = {
       id: Date.now(),
-      title: title || '新提醒',
-      time: '待設定',
-      member: '全家',
+      title: title || 'New Reminder',
+      time: 'TBD',
+      member: 'Everyone',
       memberColor: 'tag-gray-sm',
       done: false,
     };
