@@ -1111,15 +1111,12 @@
   .todo-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
   .todo-item {
     display: flex;
-    align-items: flex-start;
-    gap: 10px;
+    flex-direction: column;
     background: var(--gray-100);
     border-radius: 12px;
     padding: 11px 13px;
-    cursor: pointer;
     transition: background 0.12s;
   }
-  .todo-item:active { background: var(--gray-200); }
   .todo-item.done { opacity: 0.55; }
   .todo-check {
     width: 20px; height: 20px;
@@ -1153,6 +1150,129 @@
     font-weight: 700;
     padding: 1px 7px;
     border-radius: 5px;
+  }
+
+  /* Todo item – main row (tappable for detail) */
+  .todo-main {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+  }
+  .todo-main:active { opacity: 0.75; }
+
+  /* Todo action row */
+  .todo-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 9px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  .todo-ai-btn {
+    flex: 1;
+    background: var(--navy);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Noto Sans TC', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: opacity 0.15s;
+  }
+  .todo-ai-btn:active { opacity: 0.75; }
+  .todo-ai-btn.ai-done {
+    background: var(--green);
+  }
+  .todo-delete-btn {
+    background: none;
+    border: 1.5px solid var(--gray-300);
+    border-radius: 8px;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--gray-500);
+    transition: all 0.15s;
+  }
+  .todo-delete-btn:active { background: var(--red-light); border-color: var(--red); color: var(--red); }
+
+  /* Todo detail screen */
+  .todo-detail-hero {
+    background: var(--gray-100);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 14px;
+  }
+  .todo-detail-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--gray-900);
+    line-height: 1.45;
+    margin-bottom: 12px;
+  }
+  .todo-detail-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .todo-detail-time {
+    font-size: 13px;
+    color: var(--gray-500);
+  }
+  .todo-ai-suggest-box {
+    background: linear-gradient(135deg, #EEF2FF 0%, #E6F6F8 100%);
+    border: 1px solid rgba(27,42,74,0.12);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+  .todo-ai-suggest-label {
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .todo-ai-suggest-text {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--gray-700);
+  }
+
+  /* App toast */
+  .app-toast {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--navy);
+    color: white;
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-size: 12.5px;
+    font-weight: 600;
+    z-index: 999;
+    white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
   }
 
   /* Add reminder button */
@@ -1267,7 +1387,7 @@
           <div class="story-row" id="storyRow">
 
             <div class="story-item" onclick="goTo(2)">
-              <div class="story-note">血壓偏高，AI 已幫我預約了心臟科門診 💊</div>
+              <div class="story-note">血壓偏高 💊</div>
               <div class="story-ring ring-alert">
                 <div class="story-avatar">👩‍🦳</div>
               </div>
@@ -1275,7 +1395,7 @@
             </div>
 
             <div class="story-item">
-              <div class="story-note">在準備 IG 貼文，AI 幫我選好配色了 🎨</div>
+              <div class="story-note">選配色中 🎨</div>
               <div class="story-ring ring-active">
                 <div class="story-avatar">👧</div>
               </div>
@@ -1283,7 +1403,7 @@
             </div>
 
             <div class="story-item">
-              <div class="story-note">足球練習結束了，作業還沒開始做 📚</div>
+              <div class="story-note">作業沒做完 📚</div>
               <div class="story-ring ring-active">
                 <div class="story-avatar">👦</div>
               </div>
@@ -1291,7 +1411,7 @@
             </div>
 
             <div class="story-item">
-              <div class="story-note">會議中，預計 7:00 PM 到家 🏠</div>
+              <div class="story-note">7PM 到家 🏠</div>
               <div class="story-ring ring-muted">
                 <div class="story-avatar">🧑‍💼</div>
               </div>
@@ -1808,6 +1928,37 @@
       </div>
     </div>
 
+    <!-- ── SCREEN 9: TODO DETAIL ── -->
+    <div class="screen" id="screen-9">
+      <div class="nav-bar">
+        <button class="nav-back" onclick="goBack()">‹</button>
+        <div class="nav-title">待辦詳情</div>
+        <div class="nav-right"></div>
+      </div>
+      <div style="padding: 16px 20px 32px;">
+
+        <div class="todo-detail-hero">
+          <div class="todo-detail-title" id="detailTitle"></div>
+          <div class="todo-detail-meta">
+            <span class="todo-detail-time" id="detailTime"></span>
+            <span id="detailMember" class="todo-member-tag"></span>
+          </div>
+        </div>
+
+        <div class="todo-ai-suggest-box">
+          <div class="todo-ai-suggest-label">✨ AI 建議</div>
+          <p class="todo-ai-suggest-text" id="detailAiText"></p>
+        </div>
+
+        <button id="detailExecBtn" class="btn btn-primary-red" style="width:100%; margin-bottom:10px;"
+          onclick="aiExecuteTodo(+this.dataset.todoId); goBack();">
+          ✨ 請 AI 立即執行
+        </button>
+        <button class="btn btn-secondary" style="width:100%;" onclick="goBack()">稍後提醒我</button>
+
+      </div>
+    </div>
+
   </div><!-- /screens-wrap -->
 
   <!-- PROGRESS DOTS -->
@@ -1824,18 +1975,26 @@
   // ── TODO DATA ──
   const todosData = {
     0: [ // 昨天
-      { id: 1, title: '確認奶奶的血壓數值', time: '上午 10:00', member: '奶奶', memberColor: 'tag-red-sm', done: true },
-      { id: 2, title: 'Yvonne 的美術課材料費', time: '下午 3:00', member: 'Yvonne', memberColor: 'tag-teal-sm', done: true },
+      { id: 1, title: '確認奶奶的血壓數值', time: '上午 10:00', member: '奶奶', memberColor: 'tag-red-sm', done: true,
+        aiSuggest: '已完成！AI 記錄今日血壓 135/82，略偏高，已同步至奶奶健康檔案，並提醒減少鹽份攝取。' },
+      { id: 2, title: 'Yvonne 的美術課材料費', time: '下午 3:00', member: 'Yvonne', memberColor: 'tag-teal-sm', done: true,
+        aiSuggest: '已完成！已透過行動支付繳費 $450，Yvonne 已收到確認通知，學校系統已更新狀態。' },
     ],
     1: [ // 今天
-      { id: 3, title: '確認奶奶心臟科門診預約', time: '下午 3:13', member: '奶奶', memberColor: 'tag-red-sm', done: false },
-      { id: 4, title: 'Ethan 足球練習接送', time: '下午 5:30', member: 'Ethan', memberColor: 'tag-teal-sm', done: true },
-      { id: 5, title: '訂今晚全家晚餐', time: '下午 5:30', member: '全家', memberColor: 'tag-gray-sm', done: false },
-      { id: 6, title: '提醒老公 7 點到家', time: '下午 6:30', member: '老公', memberColor: 'tag-gray-sm', done: false },
+      { id: 3, title: '確認奶奶心臟科門診預約', time: '下午 3:13', member: '奶奶', memberColor: 'tag-red-sm', done: false,
+        aiSuggest: 'AI 可代為致電台大醫院確認預約，並傳送提醒給奶奶。建議附上交通路線與注意事項（空腹 8 小時、帶健保卡）。' },
+      { id: 4, title: 'Ethan 足球練習接送', time: '下午 5:30', member: 'Ethan', memberColor: 'tag-teal-sm', done: true,
+        aiSuggest: '已完成！Ethan 已於 5:45 PM 安全到家，AI 已通知接送完成，並提醒作業截止時間。' },
+      { id: 5, title: '訂今晚全家晚餐', time: '下午 5:30', member: '全家', memberColor: 'tag-gray-sm', done: false,
+        aiSuggest: 'AI 可根據家人喜好推薦附近餐廳並代為訂位。上次全家喜歡義式料理——要幫你預訂老地方嗎？' },
+      { id: 6, title: '提醒老公 7 點到家', time: '下午 6:30', member: '老公', memberColor: 'tag-gray-sm', done: false,
+        aiSuggest: 'AI 可在 6:15 PM 傳送訊息給老公：「今晚 7 點要到家喔，晚餐已安排好！」要現在設定嗎？' },
     ],
     2: [ // 明天
-      { id: 7, title: 'Yvonne 線上討論 8:30 PM', time: '晚上 8:00', member: 'Yvonne', memberColor: 'tag-teal-sm', done: false },
-      { id: 8, title: '準備週末家庭活動', time: '上午 10:00', member: '全家', memberColor: 'tag-gray-sm', done: false },
+      { id: 7, title: 'Yvonne 線上討論 8:30 PM', time: '晚上 8:00', member: 'Yvonne', memberColor: 'tag-teal-sm', done: false,
+        aiSuggest: 'AI 可提前 30 分鐘提醒 Yvonne，並確認她的網路連線與視訊裝置是否正常。' },
+      { id: 8, title: '準備週末家庭活動', time: '上午 10:00', member: '全家', memberColor: 'tag-gray-sm', done: false,
+        aiSuggest: '天氣預報週末晴朗，AI 建議戶外活動。可協助查詢附近景點、規劃交通，並安排午餐訂位。' },
     ],
   };
   let activeTab = 1;
@@ -1849,14 +2008,24 @@
       return;
     }
     list.innerHTML = items.map(t => `
-      <div class="todo-item ${t.done ? 'done' : ''}" onclick="toggleTodo(${t.id})">
-        <div class="todo-check ${t.done ? 'checked' : ''}">${t.done ? '✓' : ''}</div>
-        <div class="todo-item-body">
-          <div class="todo-item-title">${t.title}</div>
-          <div class="todo-item-meta">
-            <span class="todo-time">⏰ ${t.time}</span>
-            <span class="todo-member-tag ${t.memberColor}">${t.member}</span>
+      <div class="todo-item ${t.done ? 'done' : ''}">
+        <div class="todo-main" onclick="viewTodoDetail(${t.id})">
+          <div class="todo-check ${t.done ? 'checked' : ''}" onclick="event.stopPropagation(); toggleTodo(${t.id})">${t.done ? '✓' : ''}</div>
+          <div class="todo-item-body">
+            <div class="todo-item-title">${t.title}</div>
+            <div class="todo-item-meta">
+              <span class="todo-time">⏰ ${t.time}</span>
+              <span class="todo-member-tag ${t.memberColor}">${t.member}</span>
+            </div>
           </div>
+        </div>
+        <div class="todo-actions">
+          <button class="todo-ai-btn${t.done ? ' ai-done' : ''}" onclick="aiExecuteTodo(${t.id})">
+            ${t.done ? '✓ AI 已執行' : '✨ 請 AI 執行'}
+          </button>
+          <button class="todo-delete-btn" onclick="deleteTodo(${t.id})" aria-label="刪除">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+          </button>
         </div>
       </div>
     `).join('');
@@ -1868,6 +2037,55 @@
       if (item) { item.done = !item.done; break; }
     }
     renderTodos();
+  }
+
+  function viewTodoDetail(id) {
+    let found;
+    for (const day in todosData) {
+      found = todosData[day].find(t => t.id === id);
+      if (found) break;
+    }
+    if (!found) return;
+    document.getElementById('detailTitle').textContent = found.title;
+    document.getElementById('detailTime').textContent = '⏰ ' + found.time;
+    const memberEl = document.getElementById('detailMember');
+    memberEl.textContent = found.member;
+    memberEl.className = 'todo-member-tag ' + found.memberColor;
+    document.getElementById('detailAiText').textContent = found.aiSuggest || '正在分析任務內容，準備建議執行方式…';
+    document.getElementById('detailExecBtn').dataset.todoId = id;
+    goTo(9);
+  }
+
+  function deleteTodo(id) {
+    for (const day in todosData) {
+      const idx = todosData[day].findIndex(t => t.id === id);
+      if (idx > -1) { todosData[day].splice(idx, 1); break; }
+    }
+    renderTodos();
+  }
+
+  function aiExecuteTodo(id) {
+    let found;
+    for (const day in todosData) {
+      found = todosData[day].find(t => t.id === id);
+      if (found) break;
+    }
+    if (!found) return;
+    if (!found.done) {
+      found.done = true;
+      renderTodos();
+    }
+    showToast('AI 正在處理：' + found.title);
+  }
+
+  function showToast(msg) {
+    const shell = document.querySelector('.device-shell');
+    const t = document.createElement('div');
+    t.className = 'app-toast';
+    t.textContent = '✨ ' + msg;
+    shell.appendChild(t);
+    requestAnimationFrame(() => { t.style.opacity = '1'; });
+    setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 2500);
   }
 
   function selectDateTab(idx) {
