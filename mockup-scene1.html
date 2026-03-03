@@ -200,32 +200,101 @@
     flex: 1;
   }
 
-  /* ── SCREEN 0: fixed stories + scroll-over ── */
+  /* ── SCREEN 0: collapsible stories + full-screen drawer ── */
   #screen-0 { overflow: hidden; }
-  .home-fixed-top {
+
+  /* App header: always visible */
+  #screen-0 > .app-header-bar { flex-shrink: 0; }
+
+  /* Collapsible greeting + stories */
+  .home-collapsible {
     flex-shrink: 0;
     background: var(--white);
-    position: relative;
-    z-index: 1;
+    overflow: hidden;
+    max-height: 320px;
+    transition: max-height 0.38s cubic-bezier(0.4, 0, 0.2, 1);
   }
+  #screen-0.stories-collapsed .home-collapsible {
+    max-height: 0;
+  }
+
+  /* Toggle button in greeting row */
+  .home-greeting {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px 10px;
+    font-size: 15px;
+    color: var(--gray-700);
+  }
+  .home-greeting-text { flex: 1; }
+  .stories-toggle-btn {
+    width: 30px; height: 30px;
+    background: var(--gray-100);
+    border: none;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    color: var(--gray-600, #4B5563);
+    flex-shrink: 0;
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), background 0.15s;
+  }
+  .stories-toggle-btn:active { background: var(--gray-200); }
+  #screen-0.stories-collapsed .stories-toggle-btn {
+    transform: rotate(180deg);
+  }
+
+  /* Scrollable todo area: clean, no card look */
   #homeScroll {
     overflow-y: auto;
     overflow-x: hidden;
     flex: 1;
     -webkit-overflow-scrolling: touch;
-    border-radius: 20px 20px 0 0;
-    margin-top: -20px;
-    position: relative;
-    z-index: 2;
     background: var(--white);
-    box-shadow: 0 -6px 18px rgba(0,0,0,0.07);
-    padding-top: 6px;
+    border-top: 1px solid var(--gray-200);
   }
-  .scroll-handle {
-    width: 36px; height: 4px;
-    background: var(--gray-300);
-    border-radius: 2px;
-    margin: 0 auto 10px;
+
+  /* Step edit controls */
+  .ai-step-edit-btn {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--gray-400);
+    padding: 2px 3px;
+    margin-left: auto;
+    margin-top: 2px;
+    transition: color 0.15s;
+    line-height: 1;
+  }
+  .ai-step-edit-btn:active { color: var(--navy); }
+  .ai-step-input {
+    flex: 1;
+    border: 1.5px solid var(--teal);
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-size: 13px;
+    font-family: 'Noto Sans TC', sans-serif;
+    line-height: 1.5;
+    color: var(--gray-900);
+    resize: none;
+    outline: none;
+    background: white;
+  }
+  .ai-step-save-btn {
+    flex-shrink: 0;
+    width: 30px; height: 30px;
+    background: var(--teal);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+    font-family: 'Noto Sans TC', sans-serif;
   }
 
   /* ── SECTION HEADING ── */
@@ -897,23 +966,12 @@
     color: white;
   }
 
-  /* ── HOME GREETING (compact) ── */
-  .home-greeting {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 18px 10px;
-    font-size: 15px;
-    color: var(--gray-700);
-  }
   .home-greeting strong { color: var(--gray-900); font-weight: 800; }
   .home-date { font-size: 12px; color: var(--gray-500); }
 
   /* ── STORY ROW (IG Notes style) ── */
   .story-section {
-    border-bottom: 1px solid var(--gray-200);
-    padding: 12px 0 14px;
-    margin-bottom: 4px;
+    padding: 4px 0 14px;
   }
   .story-row {
     display: flex;
@@ -1411,22 +1469,29 @@
     ══════════════════════ -->
     <div class="screen active" id="screen-0">
 
-      <!-- FIXED: header + greeting + family stories -->
-      <div class="home-fixed-top">
-        <div class="app-header-bar">
-          <div class="trendlife-logo">
-            <div class="logo-mark">🛡</div>
-            <div class="logo-name">Trend<span>Life</span></div>
-          </div>
-          <div class="header-notif has-notif">
-            <button class="header-notif-btn" onclick="goTo(1)">🔔</button>
-            <div class="notif-badge"></div>
-          </div>
+      <!-- ALWAYS VISIBLE: app header bar -->
+      <div class="app-header-bar">
+        <div class="trendlife-logo">
+          <div class="logo-mark">🛡</div>
+          <div class="logo-name">Trend<span>Life</span></div>
         </div>
+        <div class="header-notif has-notif">
+          <button class="header-notif-btn" onclick="goTo(1)">🔔</button>
+          <div class="notif-badge"></div>
+        </div>
+      </div>
+
+      <!-- COLLAPSIBLE: greeting + family stories -->
+      <div class="home-collapsible" id="homeCollapsible">
 
         <div class="home-greeting">
-          <div>午安，<strong>Eva</strong> 👋</div>
-          <div class="home-date">週五 3月7日</div>
+          <div class="home-greeting-text">
+            <div>午安，<strong>Eva</strong> 👋</div>
+            <div class="home-date">週五 3月7日</div>
+          </div>
+          <button class="stories-toggle-btn" onclick="toggleStories()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+          </button>
         </div>
 
         <div class="story-section">
@@ -1466,11 +1531,11 @@
 
           </div>
         </div>
-      </div><!-- /home-fixed-top -->
 
-      <!-- SCROLLABLE: todo + notifications (slides up over stories) -->
+      </div><!-- /home-collapsible -->
+
+      <!-- SCROLLABLE: todo + notifications -->
       <div class="scroll-content" id="homeScroll">
-        <div class="scroll-handle"></div>
 
         <!-- ── TODO SECTION ── -->
         <div class="todo-section">
@@ -1998,7 +2063,7 @@
 
         <div class="todo-ai-suggest-box">
           <div class="todo-ai-suggest-label">✨ AI 執行步驟</div>
-          <p class="todo-ai-suggest-text" id="detailAiText"></p>
+          <div class="todo-ai-suggest-text" id="detailAiText"></div>
         </div>
 
         <button id="detailExecBtn" class="btn btn-primary-red" style="width:100%; margin-bottom:10px;"
@@ -2088,24 +2153,70 @@
     renderTodos();
   }
 
-  function viewTodoDetail(id) {
-    let found;
+  let currentDetailId = null;
+
+  function findTodo(id) {
     for (const day in todosData) {
-      found = todosData[day].find(t => t.id === id);
-      if (found) break;
+      const t = todosData[day].find(t => t.id === id);
+      if (t) return t;
     }
+    return null;
+  }
+
+  function renderDetailSteps() {
+    const found = findTodo(currentDetailId);
+    if (!found) return;
+    const steps = found.aiSteps || [];
+    document.getElementById('detailAiText').innerHTML = steps.length
+      ? steps.map((s, i) => `
+          <div class="ai-step" id="ai-step-${i}">
+            <span class="ai-step-num">${i + 1}</span>
+            <span class="ai-step-text">${s}</span>
+            <button class="ai-step-edit-btn" onclick="editStep(${i})" title="編輯">✏</button>
+          </div>`).join('')
+      : '<div style="color:var(--gray-500);font-size:13px;">正在分析任務內容…</div>';
+  }
+
+  function viewTodoDetail(id) {
+    currentDetailId = id;
+    const found = findTodo(id);
     if (!found) return;
     document.getElementById('detailTitle').textContent = found.title;
     document.getElementById('detailTime').textContent = '⏰ ' + found.time;
     const memberEl = document.getElementById('detailMember');
     memberEl.textContent = found.member;
     memberEl.className = 'todo-member-tag ' + found.memberColor;
-    const steps = found.aiSteps || [];
-    document.getElementById('detailAiText').innerHTML = steps.length
-      ? steps.map((s, i) => `<div class="ai-step"><span class="ai-step-num">${i + 1}</span><span>${s}</span></div>`).join('')
-      : '<div style="color:var(--gray-500);font-size:13px;">正在分析任務內容…</div>';
     document.getElementById('detailExecBtn').dataset.todoId = id;
+    renderDetailSteps();
     goTo(9);
+  }
+
+  function editStep(idx) {
+    const found = findTodo(currentDetailId);
+    if (!found) return;
+    const stepEl = document.getElementById('ai-step-' + idx);
+    const current = found.aiSteps[idx];
+    stepEl.innerHTML = `
+      <span class="ai-step-num">${idx + 1}</span>
+      <textarea class="ai-step-input" id="step-input-${idx}" rows="2">${current}</textarea>
+      <button class="ai-step-save-btn" onclick="saveStep(${idx})">✓</button>`;
+    const ta = document.getElementById('step-input-' + idx);
+    ta.focus();
+    ta.setSelectionRange(ta.value.length, ta.value.length);
+  }
+
+  function saveStep(idx) {
+    const input = document.getElementById('step-input-' + idx);
+    if (!input) return;
+    const newText = input.value.trim();
+    if (!newText) return;
+    const found = findTodo(currentDetailId);
+    if (found) found.aiSteps[idx] = newText;
+    renderDetailSteps();
+  }
+
+  function toggleStories() {
+    document.getElementById('screen-0').classList.toggle('stories-collapsed');
   }
 
   function deleteTodo(id) {
