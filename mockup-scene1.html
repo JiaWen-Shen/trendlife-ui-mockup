@@ -881,18 +881,19 @@
   .home-greeting strong { color: var(--gray-900); font-weight: 800; }
   .home-date { font-size: 12px; color: var(--gray-500); }
 
-  /* ── STORY ROW (IG style) ── */
+  /* ── STORY ROW (IG Notes style) ── */
   .story-section {
     border-bottom: 1px solid var(--gray-200);
-    padding-bottom: 14px;
+    padding: 12px 0 14px;
     margin-bottom: 4px;
   }
   .story-row {
     display: flex;
-    gap: 4px;
-    padding: 6px 12px 4px;
+    gap: 6px;
+    padding: 0 14px;
     overflow-x: auto;
     scrollbar-width: none;
+    align-items: flex-end;
   }
   .story-row::-webkit-scrollbar { display: none; }
 
@@ -900,26 +901,60 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: 0;
     flex-shrink: 0;
-    width: 78px;
-    position: relative;
+    width: 76px;
     cursor: pointer;
+  }
+  .story-item:active { opacity: 0.75; }
+
+  /* IG Notes bubble — always visible, above avatar */
+  .story-note {
+    width: 76px;
+    background: var(--white);
+    border: 1.5px solid var(--gray-200);
+    border-radius: 14px;
+    border-bottom-left-radius: 4px;
+    padding: 7px 8px;
+    font-size: 10.5px;
+    line-height: 1.4;
+    color: var(--gray-900);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+    margin-bottom: 7px;
+    position: relative;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-all;
+  }
+  /* Tail pointing down-left toward avatar */
+  .story-note::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 13px;
+    width: 9px; height: 9px;
+    background: var(--white);
+    border-right: 1.5px solid var(--gray-200);
+    border-bottom: 1.5px solid var(--gray-200);
+    transform: rotate(45deg);
+    border-radius: 1px;
   }
 
   /* Colored story ring */
   .story-ring {
-    width: 60px; height: 60px;
+    width: 58px; height: 58px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    position: relative;
+    flex-shrink: 0;
   }
   .ring-alert {
-    background: conic-gradient(var(--red) 0%, var(--red) 100%);
+    background: var(--red);
     padding: 2.5px;
   }
   .ring-active {
-    background: conic-gradient(var(--teal) 0%, #00C6CF 100%);
+    background: linear-gradient(135deg, var(--teal), #00C6CF);
     padding: 2.5px;
   }
   .ring-muted {
@@ -929,10 +964,10 @@
   .story-avatar {
     width: 100%; height: 100%;
     border-radius: 50%;
-    background: var(--white);
+    background: var(--gray-100);
     display: flex; align-items: center; justify-content: center;
     font-size: 26px;
-    border: 1.5px solid white;
+    border: 2px solid white;
   }
   .story-name {
     font-size: 11px;
@@ -940,59 +975,11 @@
     color: var(--gray-700);
     text-align: center;
     white-space: nowrap;
-  }
-
-  /* Speech bubble popup */
-  .story-bubble {
-    position: absolute;
-    top: 70px;
-    left: 50%;
-    transform: translateX(-50%) scale(0.85);
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: 12px;
-    border-top-left-radius: 3px;
-    padding: 8px 10px;
-    font-size: 11px;
-    line-height: 1.45;
-    color: var(--gray-900);
-    width: 150px;
-    box-shadow: var(--shadow-md);
-    z-index: 20;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.18s, transform 0.18s;
-    text-align: left;
-  }
-  .story-bubble.visible {
-    opacity: 1;
-    transform: translateX(-50%) scale(1);
-    pointer-events: auto;
-  }
-  .bubble-tail {
-    position: absolute;
-    top: -6px;
-    left: 16px;
-    width: 10px; height: 10px;
-    background: white;
-    border-left: 1px solid var(--gray-200);
-    border-top: 1px solid var(--gray-200);
-    transform: rotate(45deg);
-    border-radius: 2px;
-  }
-  .bubble-member-tag {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 1px 6px;
-    border-radius: 4px;
-    margin-bottom: 4px;
+    margin-top: 5px;
   }
   .tag-red-sm { background: var(--red-light); color: var(--red); }
   .tag-teal-sm { background: var(--teal-light); color: var(--teal); }
   .tag-gray-sm { background: var(--gray-200); color: var(--gray-700); }
-  /* Spacer to prevent story bubble clipping */
-  .story-spacer { height: 80px; }
 
   /* ── TODO SECTION ── */
   .todo-section {
@@ -1277,58 +1264,41 @@
 
         <!-- ── FAMILY STORY ROW (IG style) ── -->
         <div class="story-section">
-          <div class="story-row" id="storyRow" onclick="closeAllBubbles(event)">
+          <div class="story-row" id="storyRow">
 
-            <div class="story-item" id="story-0" onclick="storyTap(0, event)">
+            <div class="story-item" onclick="goTo(2)">
+              <div class="story-note">血壓偏高，AI 已幫我預約了心臟科門診 💊</div>
               <div class="story-ring ring-alert">
                 <div class="story-avatar">👩‍🦳</div>
               </div>
               <div class="story-name">奶奶</div>
-              <div class="story-bubble" id="bubble-0">
-                <div class="bubble-tail"></div>
-                <div class="bubble-member-tag tag-red-sm">需要關注</div><br>
-                血壓偏高，AI 已幫我預約了心臟科門診 💊
-              </div>
             </div>
 
-            <div class="story-item" id="story-1" onclick="storyTap(1, event)">
+            <div class="story-item">
+              <div class="story-note">在準備 IG 貼文，AI 幫我選好配色了 🎨</div>
               <div class="story-ring ring-active">
                 <div class="story-avatar">👧</div>
               </div>
               <div class="story-name">Yvonne</div>
-              <div class="story-bubble" id="bubble-1">
-                <div class="bubble-tail"></div>
-                <div class="bubble-member-tag tag-teal-sm">一切正常</div><br>
-                在準備 IG 貼文，AI 幫我選好配色了 🎨
-              </div>
             </div>
 
-            <div class="story-item" id="story-2" onclick="storyTap(2, event)">
+            <div class="story-item">
+              <div class="story-note">足球練習結束了，作業還沒開始做 📚</div>
               <div class="story-ring ring-active">
                 <div class="story-avatar">👦</div>
               </div>
               <div class="story-name">Ethan</div>
-              <div class="story-bubble" id="bubble-2">
-                <div class="bubble-tail"></div>
-                <div class="bubble-member-tag tag-teal-sm">一切正常</div><br>
-                足球練習結束了，作業還沒開始做 📚
-              </div>
             </div>
 
-            <div class="story-item" id="story-3" onclick="storyTap(3, event)">
+            <div class="story-item">
+              <div class="story-note">會議中，預計 7:00 PM 到家 🏠</div>
               <div class="story-ring ring-muted">
                 <div class="story-avatar">🧑‍💼</div>
               </div>
               <div class="story-name">老公</div>
-              <div class="story-bubble" id="bubble-3">
-                <div class="bubble-tail"></div>
-                <div class="bubble-member-tag tag-gray-sm">無更新</div><br>
-                會議中，預計 7:00 PM 到家 🏠
-              </div>
             </div>
 
           </div>
-          <div class="story-spacer" id="storySpacer" style="display:none;"></div>
         </div>
 
         <!-- ── TODO SECTION ── -->
@@ -1983,25 +1953,6 @@
 
   function calPrev() { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCalendar(); }
   function calNext() { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCalendar(); }
-
-  // ── STORY BUBBLES ──
-  let activeBubble = null;
-  function storyTap(idx, e) {
-    e.stopPropagation();
-    const bubble = document.getElementById('bubble-' + idx);
-    const spacer = document.getElementById('storySpacer');
-    if (activeBubble && activeBubble !== bubble) {
-      activeBubble.classList.remove('visible');
-    }
-    const isVisible = bubble.classList.toggle('visible');
-    activeBubble = isVisible ? bubble : null;
-    spacer.style.display = isVisible ? 'block' : 'none';
-  }
-  function closeAllBubbles(e) {
-    document.querySelectorAll('.story-bubble').forEach(b => b.classList.remove('visible'));
-    document.getElementById('storySpacer').style.display = 'none';
-    activeBubble = null;
-  }
 
   // ── ADD REMINDER ──
   function saveReminder() {
