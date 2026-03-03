@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>TrendLife · Scene 1 Mockup</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
     --red:       #D71920;
     --red-dark:  #A8131A;
     --red-light: #FFF0F0;
     --red-mid:   #FFD6D6;
-    --navy:      #1B2A4A;
-    --navy-mid:  #2E3F60;
+    --navy:      #1C2B35;
+    --navy-mid:  #2E4455;
+    --cream:     #F5EFE8;
     --teal:      #0093A7;
     --teal-light:#E6F6F8;
     --green:     #1E9E5C;
@@ -36,8 +37,8 @@
   html, body {
     width: 100%;
     height: 100%;
-    background: #E8EAED;
-    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #0F1C24;
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -55,12 +56,32 @@
   }
 
   @media (min-width: 480px) {
-    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    body {
+      display: flex; align-items: center; justify-content: center; min-height: 100vh;
+      position: relative; overflow: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; top: -160px; left: -160px;
+      width: 520px; height: 520px;
+      border-radius: 50%;
+      border: 60px solid rgba(215,25,32,0.13);
+      pointer-events: none; z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed; bottom: -120px; right: -120px;
+      width: 380px; height: 380px;
+      border-radius: 50%;
+      border: 50px solid rgba(215,25,32,0.08);
+      pointer-events: none; z-index: 0;
+    }
     .device-shell {
       height: 844px;
       border-radius: 44px;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.1);
+      box-shadow: 0 40px 100px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06);
       overflow: hidden;
+      position: relative; z-index: 1;
     }
   }
 
@@ -70,7 +91,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 14px 22px 8px;
-    background: var(--white);
+    background: var(--cream);
     position: relative;
     z-index: 10;
     flex-shrink: 0;
@@ -130,6 +151,7 @@
     text-align: center;
     font-size: 16px;
     font-weight: 700;
+    letter-spacing: -0.02em;
     color: var(--gray-900);
     margin: 0 8px;
     white-space: nowrap;
@@ -157,20 +179,17 @@
     gap: 8px;
   }
   .logo-mark {
-    width: 32px; height: 32px;
-    background: var(--red);
-    border-radius: 9px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 17px;
-    color: white;
+    flex-shrink: 0;
   }
   .logo-name {
     font-size: 18px;
     font-weight: 900;
-    letter-spacing: -0.5px;
-    color: var(--navy);
+    letter-spacing: -0.03em;
+    color: var(--gray-900);
   }
-  .logo-name span { color: var(--red); }
+  /* AI avatar: small white logo mark on red circle */
+  .msg-avatar { display: flex; align-items: center; justify-content: center; }
   .header-notif {
     position: relative;
   }
@@ -204,13 +223,29 @@
   #screen-0 { overflow: hidden; }
 
   /* App header: always visible */
-  #screen-0 > .app-header-bar { flex-shrink: 0; }
+  #screen-0 > .app-header-bar {
+    flex-shrink: 0;
+    background: var(--cream);
+    border-bottom-color: rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+  /* Brand arc motif in home header */
+  #screen-0 > .app-header-bar::after {
+    content: '';
+    position: absolute;
+    right: -28px; top: -28px;
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    border: 14px solid rgba(215,25,32,0.12);
+    pointer-events: none;
+  }
   .header-right { display: flex; align-items: center; gap: 8px; }
 
   /* Collapsible greeting + stories */
   .home-collapsible {
     flex-shrink: 0;
-    background: var(--white);
+    background: var(--cream);
     overflow: hidden;
     max-height: 320px;
     transition: max-height 0.38s cubic-bezier(0.4, 0, 0.2, 1);
@@ -231,7 +266,7 @@
   .home-greeting-text { flex: 1; }
   .stories-toggle-btn {
     width: 30px; height: 30px;
-    background: var(--gray-100);
+    background: rgba(0,0,0,0.07);
     border: none;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
@@ -276,7 +311,7 @@
     border-radius: 8px;
     padding: 7px 10px;
     font-size: 13px;
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: 'Geist', sans-serif;
     line-height: 1.5;
     color: var(--gray-900);
     resize: none;
@@ -295,7 +330,7 @@
     cursor: pointer;
     display: flex; align-items: center; justify-content: center;
     margin-top: 1px;
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: 'Geist', sans-serif;
   }
   .ai-step-actions { display: flex; align-items: center; gap: 2px; margin-left: auto; flex-shrink: 0; }
   .ai-step-del-btn {
@@ -310,7 +345,7 @@
     background: none; border: 1.5px dashed var(--gray-300);
     border-radius: 10px; font-size: 13px; font-weight: 600;
     color: var(--gray-500); cursor: pointer;
-    font-family: 'Noto Sans TC', sans-serif; transition: all 0.15s;
+    font-family: 'Geist', sans-serif; transition: all 0.15s;
   }
   .add-step-btn:active { background: var(--gray-100); border-color: var(--navy); color: var(--navy); }
 
@@ -340,17 +375,26 @@
     position: relative;
     overflow: hidden;
   }
-  .greeting-card::after {
-    content: '🛡';
+  .greeting-card::before {
+    content: '';
     position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 52px;
-    opacity: 0.15;
+    right: -30px; top: -30px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    border: 18px solid rgba(255,255,255,0.12);
+    pointer-events: none;
+  }
+  .greeting-card::after {
+    content: '';
+    position: absolute;
+    right: 20px; bottom: -40px;
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    border: 14px solid rgba(255,255,255,0.08);
+    pointer-events: none;
   }
   .greeting-hi { font-size: 14px; opacity: 0.85; margin-bottom: 2px; }
-  .greeting-name { font-size: 22px; font-weight: 900; letter-spacing: -0.5px; }
+  .greeting-name { font-size: 22px; font-weight: 900; letter-spacing: -0.025em; }
   .greeting-status {
     margin-top: 10px;
     display: inline-flex;
@@ -584,7 +628,7 @@
     border: none;
     font-size: 15px;
     font-weight: 700;
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: 'Geist', sans-serif;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -639,7 +683,7 @@
     color: white;
     text-align: center;
   }
-  .fraud-banner-title { font-size: 17px; font-weight: 900; letter-spacing: -0.3px; margin-bottom: 2px; }
+  .fraud-banner-title { font-size: 17px; font-weight: 900; letter-spacing: -0.025em; margin-bottom: 2px; }
   .fraud-banner-sub { font-size: 12px; opacity: 0.85; }
 
   .caller-block {
@@ -811,7 +855,7 @@
     background: transparent;
     transition: all 0.15s;
     flex-shrink: 0;
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: 'Geist', sans-serif;
   }
   .scenario-tab.active {
     background: var(--red);
@@ -975,7 +1019,7 @@
     padding: 10px 16px;
     font-size: 14px;
     color: var(--gray-900);
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: 'Geist', sans-serif;
     outline: none;
   }
   .chat-send {
@@ -1188,7 +1232,7 @@
     background: var(--red-light); color: var(--red);
     border: 1.5px solid var(--red-mid); border-radius: 10px;
     font-size: 13px; font-weight: 700; cursor: pointer;
-    font-family: 'Noto Sans TC', sans-serif; transition: all 0.15s;
+    font-family: 'Geist', sans-serif; transition: all 0.15s;
   }
   .cal-today-btn:active { background: var(--red-mid); color: white; }
 
@@ -1207,7 +1251,7 @@
     border: 1.5px solid var(--gray-200);
     background: transparent;
     cursor: pointer;
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: 'Geist', sans-serif;
     transition: all 0.15s;
     flex: 1;
     text-align: center;
@@ -1340,7 +1384,7 @@
     font-size: 12px;
     font-weight: 700;
     cursor: pointer;
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: 'Geist', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1464,7 +1508,7 @@
     font-size: 13px;
     font-weight: 700;
     color: var(--gray-500);
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: 'Geist', sans-serif;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -1498,7 +1542,7 @@
     padding: 12px 14px;
     font-size: 14px;
     color: var(--gray-900);
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: 'Geist', sans-serif;
     outline: none;
     transition: border-color 0.15s;
     width: 100%;
@@ -1515,7 +1559,7 @@
     font-weight: 600;
     cursor: pointer;
     background: var(--white);
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: 'Geist', sans-serif;
     transition: all 0.15s;
     display: flex; align-items: center; gap: 5px;
     color: var(--gray-700);
@@ -1591,7 +1635,7 @@
   .rest-select-btn {
     width: 100%; padding: 10px; background: var(--navy); color: white; border: none;
     border-radius: 10px; font-size: 13px; font-weight: 700;
-    font-family: 'Noto Sans TC', sans-serif; cursor: pointer; transition: background 0.15s;
+    font-family: 'Geist', sans-serif; cursor: pointer; transition: background 0.15s;
   }
   .rest-select-btn:active { background: var(--navy-mid); }
   /* Booking confirmation */
@@ -1672,8 +1716,11 @@
       <!-- ALWAYS VISIBLE: app header bar -->
       <div class="app-header-bar">
         <div class="trendlife-logo">
-          <div class="logo-mark">🛡</div>
-          <div class="logo-name">Trend<span>Life</span></div>
+          <svg class="logo-mark" viewBox="0 0 44 30" fill="none" xmlns="http://www.w3.org/2000/svg" height="26" aria-hidden="true">
+            <ellipse cx="15" cy="15" rx="11.5" ry="13" stroke="#D71920" stroke-width="4"/>
+            <ellipse cx="29" cy="15" rx="11.5" ry="13" stroke="#D71920" stroke-width="4"/>
+          </svg>
+          <div class="logo-name">TrendLife</div>
         </div>
         <div class="header-notif has-notif">
           <button class="header-notif-btn" onclick="goTo(1)">🔔</button>
@@ -1791,7 +1838,7 @@
         </div>
 
         <div class="notif-card success-card" onclick="goTo(5)">
-          <div class="notif-icon-wrap icon-green">🛡</div>
+          <div class="notif-icon-wrap icon-green"><svg viewBox="0 0 44 30" fill="none" width="20" height="14" aria-hidden="true"><ellipse cx="15" cy="15" rx="11.5" ry="13" stroke="white" stroke-width="5"/><ellipse cx="29" cy="15" rx="11.5" ry="13" stroke="white" stroke-width="5"/></svg></div>
           <div class="notif-body">
             <div class="notif-source">Fraud Shield</div>
             <div class="notif-title">Scam Call Blocked for Grandma</div>
@@ -1840,7 +1887,7 @@
         </div>
 
         <div class="msg-row">
-          <div class="msg-avatar" style="background: var(--red);">🛡</div>
+          <div class="msg-avatar" style="background: var(--red);"><svg viewBox="0 0 44 30" fill="none" width="20" height="14" aria-hidden="true"><ellipse cx="15" cy="15" rx="11.5" ry="13" stroke="white" stroke-width="5"/><ellipse cx="29" cy="15" rx="11.5" ry="13" stroke="white" stroke-width="5"/></svg></div>
           <div class="msg-bubble ai-bubble">
             <div class="ai-label">AI Butler</div>
             Hi! I've received your health checkup report 📋<br><br>
@@ -1850,7 +1897,7 @@
         </div>
 
         <div class="typing-row">
-          <div class="msg-avatar" style="background: var(--red);">🛡</div>
+          <div class="msg-avatar" style="background: var(--red);"><svg viewBox="0 0 44 30" fill="none" width="20" height="14" aria-hidden="true"><ellipse cx="15" cy="15" rx="11.5" ry="13" stroke="white" stroke-width="5"/><ellipse cx="29" cy="15" rx="11.5" ry="13" stroke="white" stroke-width="5"/></svg></div>
           <div class="typing-dots">
             <div class="t-dot"></div>
             <div class="t-dot"></div>
@@ -1859,7 +1906,7 @@
         </div>
 
         <div class="msg-row">
-          <div class="msg-avatar" style="background: var(--red);">🛡</div>
+          <div class="msg-avatar" style="background: var(--red);"><svg viewBox="0 0 44 30" fill="none" width="20" height="14" aria-hidden="true"><ellipse cx="15" cy="15" rx="11.5" ry="13" stroke="white" stroke-width="5"/><ellipse cx="29" cy="15" rx="11.5" ry="13" stroke="white" stroke-width="5"/></svg></div>
           <div class="msg-bubble ai-bubble">
             <div class="ai-label">AI Butler</div>
             ✅ Analysis complete! Overall health is good, with <span style="color:#F9A825; font-weight:700;">1 item that needs attention</span>.<br><br>
@@ -2064,7 +2111,7 @@
         <div class="ai-chat-section" style="margin-top: 12px;">
           <div style="font-size:11px; font-weight:700; color:var(--gray-500); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;">AI Butler Summary</div>
           <div class="ai-bubble-wrap">
-            <div class="ai-avatar">AI</div>
+            <div class="ai-avatar"><svg viewBox="0 0 44 30" fill="none" width="20" height="14" aria-hidden="true"><ellipse cx="15" cy="15" rx="11.5" ry="13" stroke="white" stroke-width="5"/><ellipse cx="29" cy="15" rx="11.5" ry="13" stroke="white" stroke-width="5"/></svg></div>
             <div>
               <div class="ai-sender"><div class="ai-sender-dot"></div>TrendLife AI Butler</div>
               <div class="ai-msg">
