@@ -1789,12 +1789,12 @@
           <div class="notif-chevron">›</div>
         </div>
 
-        <div class="notif-card" style="opacity:0.5; pointer-events:none;">
-          <div class="notif-icon-wrap icon-amber">🍱</div>
+        <div class="notif-card success-card" onclick="goToBookingResult()">
+          <div class="notif-icon-wrap icon-green">🍽️</div>
           <div class="notif-body">
             <div class="notif-source">晚餐管理</div>
-            <div class="notif-title">今晚晚餐提醒</div>
-            <div class="notif-desc">已為 4 人規劃不同飲食需求</div>
+            <div class="notif-title">已訂購今晚全家晚餐</div>
+            <div class="notif-desc">鼎泰豐（信義店）・晚上 7:00・5 人已點餐</div>
           </div>
           <div class="notif-time">5:30</div>
           <div class="notif-chevron">›</div>
@@ -2256,23 +2256,28 @@
           <div class="exec-steps-title">執行步驟</div>
           <div class="exec-step-row" id="dstep-0">
             <div class="exec-step-indicator" id="dstep-ind-0">1</div>
-            <div class="exec-step-text">查詢家人口味偏好與飲食限制</div>
+            <div class="exec-step-text">分析家人飲食偏好與禁忌</div>
             <div class="exec-step-status" id="dstep-stat-0"></div>
           </div>
           <div class="exec-step-row" id="dstep-1">
             <div class="exec-step-indicator" id="dstep-ind-1">2</div>
-            <div class="exec-step-text">搜尋附近符合偏好的餐廳</div>
+            <div class="exec-step-text">選擇店家</div>
             <div class="exec-step-status" id="dstep-stat-1"></div>
           </div>
           <div class="exec-step-row" id="dstep-2">
             <div class="exec-step-indicator" id="dstep-ind-2">3</div>
-            <div class="exec-step-text">代為致電或線上預訂</div>
+            <div class="exec-step-text">開啟團購訂單</div>
             <div class="exec-step-status" id="dstep-stat-2"></div>
           </div>
           <div class="exec-step-row" id="dstep-3">
             <div class="exec-step-indicator" id="dstep-ind-3">4</div>
-            <div class="exec-step-text">傳送訂位確認給全家成員</div>
+            <div class="exec-step-text">讓家人點餐</div>
             <div class="exec-step-status" id="dstep-stat-3"></div>
+          </div>
+          <div class="exec-step-row" id="dstep-4">
+            <div class="exec-step-indicator" id="dstep-ind-4">5</div>
+            <div class="exec-step-text">AI送出餐點</div>
+            <div class="exec-step-status" id="dstep-stat-4"></div>
           </div>
         </div>
 
@@ -2349,7 +2354,7 @@
     <div class="screen" id="screen-12">
       <div class="nav-bar">
         <button class="nav-back" onclick="goBack()">‹</button>
-        <div class="nav-title">訂位確認</div>
+        <div class="nav-title">訂單確認</div>
         <div class="nav-right"></div>
       </div>
       <div class="scroll-content" style="padding: 16px 20px 32px;">
@@ -2363,16 +2368,20 @@
         <div class="booking-exec-steps" id="bookingExecSteps">
           <div class="booking-exec-step-row" id="bstep-0">
             <div class="step-spinner" style="width:14px;height:14px;border-width:2px;flex-shrink:0;" id="bspinner-0"></div>
-            <span id="bstep-text-0">正在致電餐廳確認座位...</span>
+            <span id="bstep-text-0">開啟團購訂單...</span>
           </div>
           <div class="booking-exec-step-row" id="bstep-1" style="opacity:0.4;">
             <div style="width:14px;height:14px;flex-shrink:0;" id="bspinner-1"></div>
-            <span id="bstep-text-1">傳送訂位確認給全家成員</span>
+            <span id="bstep-text-1">等待家人點餐</span>
+          </div>
+          <div class="booking-exec-step-row" id="bstep-2" style="opacity:0.4;">
+            <div style="width:14px;height:14px;flex-shrink:0;" id="bspinner-2"></div>
+            <span id="bstep-text-2">AI送出餐點</span>
           </div>
         </div>
 
         <div class="booking-card" id="bookingCard" style="display:none;">
-          <div class="booking-card-title">訂位詳情</div>
+          <div class="booking-card-title">訂單詳情</div>
           <div class="booking-row">
             <div class="booking-row-icon">🍽️</div>
             <div class="booking-row-label">餐廳</div>
@@ -2390,22 +2399,24 @@
           </div>
           <div class="booking-row">
             <div class="booking-row-icon">👥</div>
-            <div class="booking-row-label">人數</div>
-            <div class="booking-row-value">5 人</div>
+            <div class="booking-row-label">點餐</div>
+            <div class="booking-row-value">5 位成員已完成點餐</div>
           </div>
           <div class="booking-row">
             <div class="booking-row-icon">🔢</div>
-            <div class="booking-row-label">訂位碼</div>
-            <div class="booking-row-value"><span class="booking-confirm-badge">已確認</span> #TL-2847</div>
+            <div class="booking-row-label">訂單編號</div>
+            <div class="booking-row-value"><span class="booking-confirm-badge">已送出</span> #TL-2847</div>
           </div>
         </div>
 
         <div id="bookingSentBlock" style="display:none;">
-          <div class="send-family-title">✅ 已傳送給</div>
+          <div class="send-family-title">✅ 家人點餐紀錄</div>
           <div class="family-sent-row">
+            <span class="family-chip">👩 Eva</span>
             <span class="family-chip">👨 老公</span>
             <span class="family-chip">👧 Yvonne</span>
             <span class="family-chip">👦 Ethan</span>
+            <span class="family-chip">👩‍🦳 奶奶</span>
           </div>
         </div>
 
@@ -2443,7 +2454,7 @@
       { id: 4, title: 'Ethan 足球練習接送', time: '下午 5:30', member: 'Ethan', memberColor: 'tag-teal-sm', done: true,
         aiSteps: ['在 5:15 PM 推播提醒 Eva 出發接送', '確認球場位置與今日練習結束時間', '傳送到家通知給 Eva', '提醒 Ethan 今晚作業截止時間'] },
       { id: 5, title: '訂今晚全家晚餐', time: '下午 5:30', member: '全家', memberColor: 'tag-gray-sm', done: false,
-        aiSteps: ['查詢家人口味偏好與飲食限制', '推薦 3 間附近符合偏好的餐廳', '代為致電或線上預訂，選定人數與時間', '傳送餐廳地址與訂位確認給全家成員'] },
+        aiSteps: ['分析家人飲食偏好與禁忌', '選擇店家', '開啟團購訂單', '讓家人點餐', 'AI送出餐點'] },
     ],
     2: [ // 明天
       { id: 7, title: 'Yvonne 線上討論 8:30 PM', time: '晚上 8:00', member: 'Yvonne', memberColor: 'tag-teal-sm', done: false,
@@ -2621,21 +2632,30 @@
   let dinnerRestTime = '';
 
   function startDinnerFlow() {
-    [0,1,2,3].forEach(i => {
+    [0,1,2,3,4].forEach(i => {
       document.getElementById('dstep-' + i).className = 'exec-step-row';
       document.getElementById('dstep-ind-' + i).textContent = i + 1;
       document.getElementById('dstep-stat-' + i).innerHTML = '';
     });
     document.getElementById('viewRestBtn').style.display = 'none';
 
+    // Step 0: active
     setTimeout(function() {
+      document.getElementById('dstep-0').classList.add('active');
+      document.getElementById('dstep-stat-0').innerHTML = '<div class="step-spinner"></div>';
+    }, 200);
+
+    // Step 0 done → step 1 active
+    setTimeout(function() {
+      document.getElementById('dstep-0').classList.remove('active');
       document.getElementById('dstep-0').classList.add('done');
       document.getElementById('dstep-stat-0').textContent = '✓';
       document.getElementById('dstep-ind-0').textContent = '✓';
       document.getElementById('dstep-1').classList.add('active');
       document.getElementById('dstep-stat-1').innerHTML = '<div class="step-spinner"></div>';
-    }, 700);
+    }, 1100);
 
+    // Step 1 done → show restaurant button
     setTimeout(function() {
       document.getElementById('dstep-1').classList.remove('active');
       document.getElementById('dstep-1').classList.add('done');
@@ -2643,6 +2663,25 @@
       document.getElementById('dstep-ind-1').textContent = '✓';
       document.getElementById('viewRestBtn').style.display = 'block';
     }, 2400);
+  }
+
+  function goToBookingResult() {
+    dinnerRestName = '鼎泰豐（信義店）';
+    dinnerRestTime = '晚上 7:00';
+    goTo(12);
+    setTimeout(showBookingSuccess, 200);
+  }
+
+  function showBookingSuccess() {
+    document.getElementById('bookingHeroIcon').textContent = '🎉';
+    document.getElementById('bookingHeroTitle').textContent = '訂單已送出！';
+    document.getElementById('bookingHeroSub').textContent = 'AI 已完成所有步驟';
+    document.getElementById('bookingExecSteps').style.display = 'none';
+    document.getElementById('bookingRestName').textContent = dinnerRestName;
+    document.getElementById('bookingTime').textContent = dinnerRestTime;
+    document.getElementById('bookingCard').style.display = 'block';
+    document.getElementById('bookingSentBlock').style.display = 'block';
+    document.getElementById('bookingDoneBtn').style.display = 'block';
   }
 
   function selectRestaurant(name, time) {
@@ -2654,54 +2693,58 @@
 
   function animateBooking() {
     document.getElementById('bookingHeroIcon').textContent = '⏳';
-    document.getElementById('bookingHeroTitle').textContent = 'AI 正在代您訂位...';
-    document.getElementById('bookingHeroSub').textContent = '請稍候，正在確認座位';
+    document.getElementById('bookingHeroTitle').textContent = 'AI 正在處理訂單...';
+    document.getElementById('bookingHeroSub').textContent = '請稍候';
     document.getElementById('bookingExecSteps').style.display = 'block';
     document.getElementById('bookingCard').style.display = 'none';
     document.getElementById('bookingSentBlock').style.display = 'none';
     document.getElementById('bookingDoneBtn').style.display = 'none';
 
-    // Step 0: active + spinner visible (already in HTML)
-    var r0 = document.getElementById('bstep-0');
-    r0.className = 'booking-exec-step-row active';
-    r0.style.opacity = '1';
-    var r1 = document.getElementById('bstep-1');
-    r1.className = 'booking-exec-step-row';
-    r1.style.opacity = '0.4';
-    document.getElementById('bstep-text-0').textContent = '正在致電餐廳確認座位...';
-    document.getElementById('bstep-text-1').textContent = '傳送訂位確認給全家成員';
-    var sp0 = document.getElementById('bspinner-0');
-    sp0.className = 'step-spinner';
-    sp0.style.cssText = 'width:14px;height:14px;border-width:2px;flex-shrink:0;';
-    sp0.textContent = '';
-    var sp1 = document.getElementById('bspinner-1');
-    sp1.className = '';
-    sp1.style.cssText = 'width:14px;height:14px;flex-shrink:0;';
-    sp1.textContent = '';
+    // Reset all 3 step rows
+    var rows = [0,1,2].map(i => document.getElementById('bstep-' + i));
+    var spinners = [0,1,2].map(i => document.getElementById('bspinner-' + i));
+    rows.forEach(function(r, i) {
+      r.className = 'booking-exec-step-row';
+      r.style.opacity = i === 0 ? '1' : '0.4';
+      spinners[i].className = '';
+      spinners[i].style.cssText = 'width:14px;height:14px;flex-shrink:0;';
+      spinners[i].textContent = '';
+    });
+    var texts = ['開啟團購訂單...', '等待家人點餐', 'AI送出餐點'];
+    texts.forEach(function(t, i) { document.getElementById('bstep-text-' + i).textContent = t; });
 
+    // Step 0 active
+    rows[0].className = 'booking-exec-step-row active';
+    spinners[0].className = 'step-spinner';
+    spinners[0].style.cssText = 'width:14px;height:14px;border-width:2px;flex-shrink:0;';
+
+    // Step 0 done → step 1 active
     setTimeout(function() {
-      r0.className = 'booking-exec-step-row done';
-      sp0.className = '';
-      sp0.textContent = '✓';
-      document.getElementById('bstep-text-0').textContent = '已取得訂位確認';
-      r1.className = 'booking-exec-step-row active';
-      r1.style.opacity = '1';
-      sp1.className = 'step-spinner';
-      sp1.style.cssText = 'width:14px;height:14px;border-width:2px;flex-shrink:0;';
-      document.getElementById('bstep-text-1').textContent = '正在傳送給家人...';
-    }, 1500);
+      rows[0].className = 'booking-exec-step-row done';
+      spinners[0].className = ''; spinners[0].textContent = '✓';
+      document.getElementById('bstep-text-0').textContent = '團購訂單已開啟';
+      rows[1].className = 'booking-exec-step-row active'; rows[1].style.opacity = '1';
+      spinners[1].className = 'step-spinner';
+      spinners[1].style.cssText = 'width:14px;height:14px;border-width:2px;flex-shrink:0;';
+      document.getElementById('bstep-text-1').textContent = '家人正在點餐...';
+    }, 1000);
 
+    // Step 1 done → step 2 active
+    setTimeout(function() {
+      rows[1].className = 'booking-exec-step-row done';
+      spinners[1].className = ''; spinners[1].textContent = '✓';
+      document.getElementById('bstep-text-1').textContent = '5 位成員已完成點餐';
+      rows[2].className = 'booking-exec-step-row active'; rows[2].style.opacity = '1';
+      spinners[2].className = 'step-spinner';
+      spinners[2].style.cssText = 'width:14px;height:14px;border-width:2px;flex-shrink:0;';
+      document.getElementById('bstep-text-2').textContent = 'AI正在送出餐點...';
+    }, 2200);
+
+    // All done
     setTimeout(function() {
       document.getElementById('bookingExecSteps').style.display = 'none';
-      document.getElementById('bookingHeroIcon').textContent = '🎉';
-      document.getElementById('bookingHeroTitle').textContent = '訂位成功！';
-      document.getElementById('bookingHeroSub').textContent = 'AI 已代您完成訂位';
-      document.getElementById('bookingRestName').textContent = dinnerRestName;
-      document.getElementById('bookingTime').textContent = dinnerRestTime;
-      document.getElementById('bookingCard').style.display = 'block';
-      document.getElementById('bookingSentBlock').style.display = 'block';
-      document.getElementById('bookingDoneBtn').style.display = 'block';
-    }, 2800);
+      showBookingSuccess();
+    }, 3400);
   }
 
   function showToast(msg) {
