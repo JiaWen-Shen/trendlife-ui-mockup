@@ -205,6 +205,7 @@
 
   /* App header: always visible */
   #screen-0 > .app-header-bar { flex-shrink: 0; }
+  .header-right { display: flex; align-items: center; gap: 8px; }
 
   /* Collapsible greeting + stories */
   .home-collapsible {
@@ -296,6 +297,28 @@
     margin-top: 1px;
     font-family: 'Noto Sans TC', sans-serif;
   }
+  .ai-step-actions { display: flex; align-items: center; gap: 2px; margin-left: auto; flex-shrink: 0; }
+  .ai-step-del-btn {
+    background: none; border: none; cursor: pointer;
+    font-size: 13px; color: var(--gray-400); padding: 2px 3px;
+    transition: color 0.15s; line-height: 1;
+  }
+  .ai-step-del-btn:active { color: var(--red); }
+  .add-step-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; padding: 10px; margin-top: 10px;
+    background: none; border: 1.5px dashed var(--gray-300);
+    border-radius: 10px; font-size: 13px; font-weight: 600;
+    color: var(--gray-500); cursor: pointer;
+    font-family: 'Noto Sans TC', sans-serif; transition: all 0.15s;
+  }
+  .add-step-btn:active { background: var(--gray-100); border-color: var(--navy); color: var(--navy); }
+
+  /* Date tabs + calendar button row */
+  .date-tabs-row {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
+  }
+  .date-tabs-row .date-tabs { flex: 1; margin-bottom: 0; }
 
   /* ── SECTION HEADING ── */
   .section-heading {
@@ -1469,15 +1492,20 @@
     ══════════════════════ -->
     <div class="screen active" id="screen-0">
 
-      <!-- ALWAYS VISIBLE: app header bar -->
+      <!-- ALWAYS VISIBLE: app header bar (toggle button lives here) -->
       <div class="app-header-bar">
         <div class="trendlife-logo">
           <div class="logo-mark">🛡</div>
           <div class="logo-name">Trend<span>Life</span></div>
         </div>
-        <div class="header-notif has-notif">
-          <button class="header-notif-btn" onclick="goTo(1)">🔔</button>
-          <div class="notif-badge"></div>
+        <div class="header-right">
+          <button class="stories-toggle-btn" onclick="toggleStories()" title="展開／收合家人狀態">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+          </button>
+          <div class="header-notif has-notif">
+            <button class="header-notif-btn" onclick="goTo(1)">🔔</button>
+            <div class="notif-badge"></div>
+          </div>
         </div>
       </div>
 
@@ -1489,9 +1517,6 @@
             <div>午安，<strong>Eva</strong> 👋</div>
             <div class="home-date">週五 3月7日</div>
           </div>
-          <button class="stories-toggle-btn" onclick="toggleStories()">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-          </button>
         </div>
 
         <div class="story-section">
@@ -1541,7 +1566,6 @@
         <div class="todo-section">
           <div class="todo-header">
             <div class="todo-title">待辦事項</div>
-            <button class="cal-btn" onclick="toggleCalendar(event)" id="calBtn">📅</button>
           </div>
 
           <!-- Calendar dropdown -->
@@ -1554,11 +1578,14 @@
             <div class="cal-grid" id="calGrid"></div>
           </div>
 
-          <!-- Date tabs -->
-          <div class="date-tabs">
-            <button class="date-tab" id="tab-0" onclick="selectDateTab(0)">昨天</button>
-            <button class="date-tab active" id="tab-1" onclick="selectDateTab(1)">今天</button>
-            <button class="date-tab" id="tab-2" onclick="selectDateTab(2)">明天</button>
+          <!-- Date tabs + calendar button -->
+          <div class="date-tabs-row">
+            <div class="date-tabs">
+              <button class="date-tab" id="tab-0" onclick="selectDateTab(0)">昨天</button>
+              <button class="date-tab active" id="tab-1" onclick="selectDateTab(1)">今天</button>
+              <button class="date-tab" id="tab-2" onclick="selectDateTab(2)">明天</button>
+            </div>
+            <button class="cal-btn" onclick="toggleCalendar(event)" id="calBtn">📅</button>
           </div>
 
           <div class="date-tab-label" id="todoDateLabel">週五 3月7日</div>
@@ -2167,14 +2194,19 @@
     const found = findTodo(currentDetailId);
     if (!found) return;
     const steps = found.aiSteps || [];
-    document.getElementById('detailAiText').innerHTML = steps.length
+    const stepsHtml = steps.length
       ? steps.map((s, i) => `
           <div class="ai-step" id="ai-step-${i}">
             <span class="ai-step-num">${i + 1}</span>
             <span class="ai-step-text">${s}</span>
-            <button class="ai-step-edit-btn" onclick="editStep(${i})" title="編輯">✏</button>
+            <div class="ai-step-actions">
+              <button class="ai-step-edit-btn" onclick="editStep(${i})" title="編輯">✏</button>
+              <button class="ai-step-del-btn" onclick="deleteStep(${i})" title="刪除">🗑</button>
+            </div>
           </div>`).join('')
-      : '<div style="color:var(--gray-500);font-size:13px;">正在分析任務內容…</div>';
+      : '<div style="color:var(--gray-500);font-size:13px;margin-bottom:4px;">尚無步驟</div>';
+    document.getElementById('detailAiText').innerHTML =
+      stepsHtml + '<button class="add-step-btn" onclick="addStep()">＋ 新增步驟</button>';
   }
 
   function viewTodoDetail(id) {
@@ -2209,10 +2241,30 @@
     const input = document.getElementById('step-input-' + idx);
     if (!input) return;
     const newText = input.value.trim();
-    if (!newText) return;
     const found = findTodo(currentDetailId);
-    if (found) found.aiSteps[idx] = newText;
+    if (found) {
+      if (newText) {
+        found.aiSteps[idx] = newText;
+      } else {
+        found.aiSteps.splice(idx, 1); // remove if saved empty
+      }
+    }
     renderDetailSteps();
+  }
+
+  function deleteStep(idx) {
+    const found = findTodo(currentDetailId);
+    if (!found) return;
+    found.aiSteps.splice(idx, 1);
+    renderDetailSteps();
+  }
+
+  function addStep() {
+    const found = findTodo(currentDetailId);
+    if (!found) return;
+    found.aiSteps.push('');
+    renderDetailSteps();
+    editStep(found.aiSteps.length - 1);
   }
 
   function toggleStories() {
