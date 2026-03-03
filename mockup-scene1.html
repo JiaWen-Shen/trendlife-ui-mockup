@@ -1216,6 +1216,49 @@
     font-weight: 500;
   }
 
+  /* ── DATE NAV (arrow style) ── */
+  .todo-sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--white);
+    margin: 0 -16px;
+    padding: 6px 16px 8px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .date-nav-bar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .date-arrow-btn {
+    width: 34px; height: 34px;
+    background: none; border: none;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gray-700);
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: background 0.15s;
+  }
+  .date-arrow-btn:disabled { color: var(--gray-300); cursor: default; }
+  .date-arrow-btn:not(:disabled):active { background: var(--gray-100); }
+  .date-nav-center {
+    flex: 1;
+    text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 1px;
+  }
+  .date-nav-date {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--gray-900);
+    letter-spacing: -0.3px;
+  }
+  .date-nav-weekday {
+    font-size: 10.5px;
+    color: var(--gray-500);
+  }
+
   /* Todo list */
   .todo-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
   .todo-item {
@@ -1492,20 +1535,15 @@
     ══════════════════════ -->
     <div class="screen active" id="screen-0">
 
-      <!-- ALWAYS VISIBLE: app header bar (toggle button lives here) -->
+      <!-- ALWAYS VISIBLE: app header bar -->
       <div class="app-header-bar">
         <div class="trendlife-logo">
           <div class="logo-mark">🛡</div>
           <div class="logo-name">Trend<span>Life</span></div>
         </div>
-        <div class="header-right">
-          <button class="stories-toggle-btn" onclick="toggleStories()" title="展開／收合家人狀態">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-          </button>
-          <div class="header-notif has-notif">
-            <button class="header-notif-btn" onclick="goTo(1)">🔔</button>
-            <div class="notif-badge"></div>
-          </div>
+        <div class="header-notif has-notif">
+          <button class="header-notif-btn" onclick="goTo(1)">🔔</button>
+          <div class="notif-badge"></div>
         </div>
       </div>
 
@@ -1568,27 +1606,31 @@
             <div class="todo-title">待辦事項</div>
           </div>
 
-          <!-- Calendar dropdown -->
-          <div class="calendar-modal" id="calModal">
-            <div class="cal-nav">
-              <button onclick="calPrev()">‹</button>
-              <span id="calMonthLabel"></span>
-              <button onclick="calNext()">›</button>
+          <!-- Sticky date navigation -->
+          <div class="todo-sticky-header">
+            <div class="date-nav-bar">
+              <button class="date-arrow-btn" id="tab-prev" onclick="shiftDate(-1)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <div class="date-nav-center">
+                <span class="date-nav-date" id="dateNavDate">3月7日</span>
+                <span class="date-nav-weekday" id="dateNavWeekday">週五</span>
+              </div>
+              <button class="date-arrow-btn" id="tab-next" onclick="shiftDate(1)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+              <button class="cal-btn" onclick="toggleCalendar(event)" id="calBtn">📅</button>
             </div>
-            <div class="cal-grid" id="calGrid"></div>
-          </div>
-
-          <!-- Date tabs + calendar button -->
-          <div class="date-tabs-row">
-            <div class="date-tabs">
-              <button class="date-tab" id="tab-0" onclick="selectDateTab(0)">昨天</button>
-              <button class="date-tab active" id="tab-1" onclick="selectDateTab(1)">今天</button>
-              <button class="date-tab" id="tab-2" onclick="selectDateTab(2)">明天</button>
+            <!-- Calendar dropdown -->
+            <div class="calendar-modal" id="calModal">
+              <div class="cal-nav">
+                <button onclick="calPrev()">‹</button>
+                <span id="calMonthLabel"></span>
+                <button onclick="calNext()">›</button>
+              </div>
+              <div class="cal-grid" id="calGrid"></div>
             </div>
-            <button class="cal-btn" onclick="toggleCalendar(event)" id="calBtn">📅</button>
           </div>
-
-          <div class="date-tab-label" id="todoDateLabel">週五 3月7日</div>
 
           <!-- Todo list -->
           <div class="todo-list" id="todoList"></div>
@@ -2303,16 +2345,24 @@
     setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 2500);
   }
 
-  function selectDateTab(idx) {
-    activeTab = idx;
-    document.querySelectorAll('.date-tab').forEach((t, i) => {
-      t.classList.toggle('active', i === idx);
-    });
-    const base = new Date(2026, 2, 7); // March 7
-    base.setDate(base.getDate() + (idx - 1));
-    const labels = ['週四 3月6日','週五 3月7日','週六 3月8日'];
-    document.getElementById('todoDateLabel').textContent = labels[idx];
+  function shiftDate(delta) {
+    const next = activeTab + delta;
+    if (next < 0 || next > 2) return;
+    activeTab = next;
+    updateDateNav();
     renderTodos();
+  }
+
+  function updateDateNav() {
+    const base = new Date(2026, 2, 7); // March 7 = index 1
+    base.setDate(base.getDate() + (activeTab - 1));
+    const MONTHS = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+    const DAYS   = ['週日','週一','週二','週三','週四','週五','週六'];
+    document.getElementById('dateNavDate').textContent =
+      MONTHS[base.getMonth()] + '月' + base.getDate() + '日';
+    document.getElementById('dateNavWeekday').textContent = DAYS[base.getDay()];
+    document.getElementById('tab-prev').disabled = activeTab === 0;
+    document.getElementById('tab-next').disabled = activeTab === 2;
   }
 
   // ── CALENDAR ──
@@ -2368,15 +2418,18 @@
 
   function selectCalDay(d) {
     selectedDay = d;
-    // Map day to tab: 6=昨天, 7=今天, 8=明天
-    if (d === 6) selectDateTab(0);
-    else if (d === 7) selectDateTab(1);
-    else if (d === 8) selectDateTab(2);
+    // Map day to known tabs: 6=昨天, 7=今天, 8=明天
+    if (d === 6)      { activeTab = 0; updateDateNav(); renderTodos(); }
+    else if (d === 7) { activeTab = 1; updateDateNav(); renderTodos(); }
+    else if (d === 8) { activeTab = 2; updateDateNav(); renderTodos(); }
     else {
-      // Other dates - show empty
-      activeTab = 1;
-      document.querySelectorAll('.date-tab').forEach(t => t.classList.remove('active'));
-      document.getElementById('todoDateLabel').textContent = `3月${d}日`;
+      // Arbitrary date — update display only
+      const DAYS = ['週日','週一','週二','週三','週四','週五','週六'];
+      const dt = new Date(2026, 2, d);
+      document.getElementById('dateNavDate').textContent = `3月${d}日`;
+      document.getElementById('dateNavWeekday').textContent = DAYS[dt.getDay()];
+      document.getElementById('tab-prev').disabled = true;
+      document.getElementById('tab-next').disabled = true;
       document.getElementById('todoList').innerHTML =
         '<div style="text-align:center;padding:20px 0;font-size:13px;color:var(--gray-500);">這天沒有待辦事項</div>';
     }
@@ -2486,6 +2539,17 @@
   // ── INIT ──
   renderDots();
   renderTodos();
+  updateDateNav();
+
+  // Scroll-driven story collapse: scrolling down hides stories, back to top reveals them
+  document.getElementById('homeScroll').addEventListener('scroll', function () {
+    const screen = document.getElementById('screen-0');
+    if (this.scrollTop > 50) {
+      screen.classList.add('stories-collapsed');
+    } else if (this.scrollTop < 12) {
+      screen.classList.remove('stories-collapsed');
+    }
+  }, { passive: true });
 </script>
 </body>
 </html>
