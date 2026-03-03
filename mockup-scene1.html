@@ -200,6 +200,34 @@
     flex: 1;
   }
 
+  /* ── SCREEN 0: fixed stories + scroll-over ── */
+  #screen-0 { overflow: hidden; }
+  .home-fixed-top {
+    flex-shrink: 0;
+    background: var(--white);
+    position: relative;
+    z-index: 1;
+  }
+  #homeScroll {
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 20px 20px 0 0;
+    margin-top: -20px;
+    position: relative;
+    z-index: 2;
+    background: var(--white);
+    box-shadow: 0 -6px 18px rgba(0,0,0,0.07);
+    padding-top: 6px;
+  }
+  .scroll-handle {
+    width: 36px; height: 4px;
+    background: var(--gray-300);
+    border-radius: 2px;
+    margin: 0 auto 10px;
+  }
+
   /* ── SECTION HEADING ── */
   .section-heading {
     padding: 20px 18px 10px;
@@ -1244,15 +1272,34 @@
     color: var(--navy);
     letter-spacing: 0.8px;
     text-transform: uppercase;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     gap: 5px;
   }
   .todo-ai-suggest-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .ai-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
     font-size: 13.5px;
-    line-height: 1.65;
+    line-height: 1.55;
     color: var(--gray-700);
+  }
+  .ai-step-num {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    background: var(--navy);
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
   }
 
   /* App toast */
@@ -1363,26 +1410,25 @@
          SCREEN 0: EVA HOME
     ══════════════════════ -->
     <div class="screen active" id="screen-0">
-      <div class="app-header-bar">
-        <div class="trendlife-logo">
-          <div class="logo-mark">🛡</div>
-          <div class="logo-name">Trend<span>Life</span></div>
-        </div>
-        <div class="header-notif has-notif">
-          <button class="header-notif-btn" onclick="goTo(1)">🔔</button>
-          <div class="notif-badge"></div>
-        </div>
-      </div>
 
-      <div class="scroll-content" id="homeScroll">
+      <!-- FIXED: header + greeting + family stories -->
+      <div class="home-fixed-top">
+        <div class="app-header-bar">
+          <div class="trendlife-logo">
+            <div class="logo-mark">🛡</div>
+            <div class="logo-name">Trend<span>Life</span></div>
+          </div>
+          <div class="header-notif has-notif">
+            <button class="header-notif-btn" onclick="goTo(1)">🔔</button>
+            <div class="notif-badge"></div>
+          </div>
+        </div>
 
-        <!-- Compact greeting -->
         <div class="home-greeting">
           <div>午安，<strong>Eva</strong> 👋</div>
           <div class="home-date">週五 3月7日</div>
         </div>
 
-        <!-- ── FAMILY STORY ROW (IG style) ── -->
         <div class="story-section">
           <div class="story-row" id="storyRow">
 
@@ -1420,6 +1466,11 @@
 
           </div>
         </div>
+      </div><!-- /home-fixed-top -->
+
+      <!-- SCROLLABLE: todo + notifications (slides up over stories) -->
+      <div class="scroll-content" id="homeScroll">
+        <div class="scroll-handle"></div>
 
         <!-- ── TODO SECTION ── -->
         <div class="todo-section">
@@ -1946,7 +1997,7 @@
         </div>
 
         <div class="todo-ai-suggest-box">
-          <div class="todo-ai-suggest-label">✨ AI 建議</div>
+          <div class="todo-ai-suggest-label">✨ AI 執行步驟</div>
           <p class="todo-ai-suggest-text" id="detailAiText"></p>
         </div>
 
@@ -1976,25 +2027,23 @@
   const todosData = {
     0: [ // 昨天
       { id: 1, title: '確認奶奶的血壓數值', time: '上午 10:00', member: '奶奶', memberColor: 'tag-red-sm', done: true,
-        aiSuggest: '已完成！AI 記錄今日血壓 135/82，略偏高，已同步至奶奶健康檔案，並提醒減少鹽份攝取。' },
+        aiSteps: ['讀取奶奶今日血壓量測數值（135/82）', '與上週均值比對，標記「略偏高」', '更新奶奶健康檔案並記錄趨勢', '推播建議通知：今日請減少鹽份攝取'] },
       { id: 2, title: 'Yvonne 的美術課材料費', time: '下午 3:00', member: 'Yvonne', memberColor: 'tag-teal-sm', done: true,
-        aiSuggest: '已完成！已透過行動支付繳費 $450，Yvonne 已收到確認通知，學校系統已更新狀態。' },
+        aiSteps: ['查詢美術課繳費單金額（$450）', '透過綁定的行動支付完成付款', '截圖收據並存入 Yvonne 檔案夾', '傳送繳費完成通知給 Yvonne'] },
     ],
     1: [ // 今天
       { id: 3, title: '確認奶奶心臟科門診預約', time: '下午 3:13', member: '奶奶', memberColor: 'tag-red-sm', done: false,
-        aiSuggest: 'AI 可代為致電台大醫院確認預約，並傳送提醒給奶奶。建議附上交通路線與注意事項（空腹 8 小時、帶健保卡）。' },
+        aiSteps: ['致電台大醫院心臟科確認預約狀態', '確認就診時間並取得診號', '傳送提醒給奶奶，附上交通路線', '提示注意事項：空腹 8 小時、攜帶健保卡'] },
       { id: 4, title: 'Ethan 足球練習接送', time: '下午 5:30', member: 'Ethan', memberColor: 'tag-teal-sm', done: true,
-        aiSuggest: '已完成！Ethan 已於 5:45 PM 安全到家，AI 已通知接送完成，並提醒作業截止時間。' },
+        aiSteps: ['在 5:15 PM 推播提醒 Eva 出發接送', '確認球場位置與今日練習結束時間', '傳送到家通知給 Eva', '提醒 Ethan 今晚作業截止時間'] },
       { id: 5, title: '訂今晚全家晚餐', time: '下午 5:30', member: '全家', memberColor: 'tag-gray-sm', done: false,
-        aiSuggest: 'AI 可根據家人喜好推薦附近餐廳並代為訂位。上次全家喜歡義式料理——要幫你預訂老地方嗎？' },
-      { id: 6, title: '提醒老公 7 點到家', time: '下午 6:30', member: '老公', memberColor: 'tag-gray-sm', done: false,
-        aiSuggest: 'AI 可在 6:15 PM 傳送訊息給老公：「今晚 7 點要到家喔，晚餐已安排好！」要現在設定嗎？' },
+        aiSteps: ['查詢家人口味偏好與飲食限制', '推薦 3 間附近符合偏好的餐廳', '代為致電或線上預訂，選定人數與時間', '傳送餐廳地址與訂位確認給全家成員'] },
     ],
     2: [ // 明天
       { id: 7, title: 'Yvonne 線上討論 8:30 PM', time: '晚上 8:00', member: 'Yvonne', memberColor: 'tag-teal-sm', done: false,
-        aiSuggest: 'AI 可提前 30 分鐘提醒 Yvonne，並確認她的網路連線與視訊裝置是否正常。' },
+        aiSteps: ['在 8:00 PM 推播提醒 Yvonne 準備上線', '確認 Yvonne 的視訊裝置與網路連線狀態', '傳送會議連結至 Yvonne 的裝置', '8:25 PM 再次提醒，確保準時進入會議'] },
       { id: 8, title: '準備週末家庭活動', time: '上午 10:00', member: '全家', memberColor: 'tag-gray-sm', done: false,
-        aiSuggest: '天氣預報週末晴朗，AI 建議戶外活動。可協助查詢附近景點、規劃交通，並安排午餐訂位。' },
+        aiSteps: ['查詢週末天氣預報與交通狀況', '根據家人喜好推薦 3 個戶外景點選項', '確認景點開放時間並查詢停車資訊', '規劃午餐餐廳並代為預訂，傳送行程給全家'] },
     ],
   };
   let activeTab = 1;
@@ -2051,7 +2100,10 @@
     const memberEl = document.getElementById('detailMember');
     memberEl.textContent = found.member;
     memberEl.className = 'todo-member-tag ' + found.memberColor;
-    document.getElementById('detailAiText').textContent = found.aiSuggest || '正在分析任務內容，準備建議執行方式…';
+    const steps = found.aiSteps || [];
+    document.getElementById('detailAiText').innerHTML = steps.length
+      ? steps.map((s, i) => `<div class="ai-step"><span class="ai-step-num">${i + 1}</span><span>${s}</span></div>`).join('')
+      : '<div style="color:var(--gray-500);font-size:13px;">正在分析任務內容…</div>';
     document.getElementById('detailExecBtn').dataset.todoId = id;
     goTo(9);
   }
