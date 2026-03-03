@@ -1183,6 +1183,14 @@
     margin: 2px auto 0;
   }
   .cal-day.selected.has-todo::after { background: white; }
+  .cal-today-btn {
+    width: 100%; padding: 8px; margin-top: 8px;
+    background: var(--red-light); color: var(--red);
+    border: 1.5px solid var(--red-mid); border-radius: 10px;
+    font-size: 13px; font-weight: 700; cursor: pointer;
+    font-family: 'Noto Sans TC', sans-serif; transition: all 0.15s;
+  }
+  .cal-today-btn:active { background: var(--red-mid); color: white; }
 
   /* Date tabs */
   .date-tabs {
@@ -1560,9 +1568,9 @@
         <div class="story-section">
           <div class="story-row" id="storyRow">
 
-            <div class="story-item" onclick="goTo(2)">
-              <div class="story-note">血壓偏高 💊</div>
-              <div class="story-ring ring-alert">
+            <div class="story-item">
+              <div class="story-note" onclick="goTo(1)" style="cursor:pointer;">血壓偏高 💊</div>
+              <div class="story-ring ring-alert" onclick="goTo(2)" style="cursor:pointer;">
                 <div class="story-avatar">👩‍🦳</div>
               </div>
               <div class="story-name">奶奶</div>
@@ -1629,6 +1637,7 @@
                 <button onclick="calNext()">›</button>
               </div>
               <div class="cal-grid" id="calGrid"></div>
+              <button class="cal-today-btn" onclick="goToToday()">今天</button>
             </div>
           </div>
 
@@ -1728,8 +1737,7 @@
           <div class="msg-bubble ai-bubble">
             <div class="ai-label">AI 管家</div>
             ✅ 分析完成！整體健康良好，有 <span style="color:#F9A825; font-weight:700;">1 項需要關注</span>。<br><br>
-            已通知 Eva，她會幫您安排後續追蹤。<br><br>
-            <span style="font-size:11px; color:rgba(255,255,255,0.5);">您的完整報告已安全存入 Security Vault 🔒</span>
+            已通知 Eva，她會幫您安排後續追蹤。
           </div>
         </div>
       </div>
@@ -1756,8 +1764,7 @@
           <div class="health-hero-header">
             <div class="health-hero-icon">📊</div>
             <div>
-              <div class="health-hero-title">健康分析摘要（脫敏版）</div>
-              <div class="health-hero-sub">完整資料保存在 Security Vault</div>
+              <div class="health-hero-title">健康分析摘要</div>
             </div>
           </div>
           <div class="health-metrics">
@@ -1795,39 +1802,9 @@
           <div class="appt-arrow">›</div>
         </div>
 
-        <div class="vault-card" style="margin-top: 12px;">
-          <div class="vault-header">
-            <div class="vault-icon-small">🔐</div>
-            <div class="vault-label">Security Vault 資料保護</div>
-            <div class="vault-sub">Trend Micro</div>
-          </div>
-          <div class="vault-flow-row">
-            <div class="vault-step">奶奶上傳<span>完整報告</span></div>
-            <div class="vault-arrow-small">→</div>
-            <div class="vault-step highlight">Security Vault<span>加密保存</span></div>
-            <div class="vault-arrow-small">→</div>
-            <div class="vault-step">Eva 收到<span>脫敏摘要</span></div>
-          </div>
-          <div style="margin-top: 10px;">
-            <div style="font-size:11px; font-weight:700; color:var(--gray-500); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.05em;">Eva 可以看到</div>
-            <div class="privacy-pills">
-              <span class="pill pill-share">✓ 健康數值摘要</span>
-              <span class="pill pill-share">✓ 異常項目提醒</span>
-              <span class="pill pill-share">✓ 預約建議</span>
-            </div>
-            <div style="font-size:11px; font-weight:700; color:var(--gray-500); margin:8px 0 6px; text-transform:uppercase; letter-spacing:0.05em;">永遠在 Vault（Eva 看不到）</div>
-            <div class="privacy-pills">
-              <span class="pill pill-block">✗ 身分證字號</span>
-              <span class="pill pill-block">✗ 完整血液數值</span>
-              <span class="pill pill-block">✗ 就診記錄</span>
-            </div>
-          </div>
-        </div>
-
         <div class="section-heading">處理選項</div>
         <div class="action-list">
           <button class="btn btn-primary-red" onclick="goTo(3)">📅 確認預約門診</button>
-          <button class="btn btn-primary-teal">🔒 查看完整報告（Vault）</button>
           <button class="btn btn-amber">💬 發送關心訊息給奶奶</button>
           <button class="btn btn-secondary" onclick="goTo(1)">查看奶奶對話記錄</button>
         </div>
@@ -2380,6 +2357,12 @@
     const isOpen = modal.classList.toggle('open');
     btn.classList.toggle('open', isOpen);
     if (isOpen) renderCalendar();
+  }
+
+  function goToToday() {
+    calYear = 2026; calMonth = 2; selectedDay = 7; activeTab = 1;
+    updateDateNav(); renderTodos(); renderCalendar();
+    toggleCalendar();
   }
 
   function renderCalendar() {
