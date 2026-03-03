@@ -1,0 +1,2107 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>TrendLife · Scene 1 Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red:       #D71920;
+    --red-dark:  #A8131A;
+    --red-light: #FFF0F0;
+    --red-mid:   #FFD6D6;
+    --navy:      #1B2A4A;
+    --navy-mid:  #2E3F60;
+    --teal:      #0093A7;
+    --teal-light:#E6F6F8;
+    --green:     #1E9E5C;
+    --green-bg:  #E8F7EF;
+    --amber:     #D97706;
+    --amber-bg:  #FEF3C7;
+    --gray-100:  #F5F6F8;
+    --gray-200:  #EAECF0;
+    --gray-300:  #D1D5DB;
+    --gray-500:  #6B7280;
+    --gray-700:  #374151;
+    --gray-900:  #111827;
+    --white:     #FFFFFF;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    background: #E8EAED;
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── DEVICE SHELL (desktop only) ── */
+  .device-shell {
+    width: 100%;
+    max-width: 390px;
+    height: 100dvh;
+    margin: 0 auto;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (min-width: 480px) {
+    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .device-shell {
+      height: 844px;
+      border-radius: 44px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+  }
+
+  /* ── STATUS BAR ── */
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 22px 8px;
+    background: var(--white);
+    position: relative;
+    z-index: 10;
+    flex-shrink: 0;
+  }
+  .status-time { font-size: 15px; font-weight: 700; color: var(--gray-900); letter-spacing: -0.3px; }
+  .status-icons { display: flex; align-items: center; gap: 5px; }
+  .status-icons svg { width: 16px; height: 12px; fill: var(--gray-900); }
+
+  /* ── SCREEN CONTAINER ── */
+  .screens-wrap {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .screen {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    -webkit-overflow-scrolling: touch;
+  }
+  .screen.active { transform: translateX(0); }
+  .screen.prev   { transform: translateX(-30%); }
+
+  /* ── APP NAV BAR ── */
+  .nav-bar {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px 10px;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    flex-shrink: 0;
+  }
+  .nav-back {
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    background: var(--gray-100);
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--gray-700);
+    flex-shrink: 0;
+  }
+  .nav-title {
+    flex: 1;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin: 0 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .nav-right { width: 36px; flex-shrink: 0; }
+
+  /* TrendLife logo bar */
+  .app-header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px 12px;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    flex-shrink: 0;
+  }
+  .trendlife-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .logo-mark {
+    width: 32px; height: 32px;
+    background: var(--red);
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px;
+    color: white;
+  }
+  .logo-name {
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--navy);
+  }
+  .logo-name span { color: var(--red); }
+  .header-notif {
+    position: relative;
+  }
+  .header-notif-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--gray-100);
+    border: none;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .notif-badge {
+    position: absolute;
+    top: 1px; right: 1px;
+    width: 10px; height: 10px;
+    background: var(--red);
+    border-radius: 50%;
+    border: 2px solid var(--white);
+    display: none;
+  }
+  .has-notif .notif-badge { display: block; }
+
+  /* ── SCROLL CONTENT ── */
+  .scroll-content {
+    padding-bottom: 32px;
+    flex: 1;
+  }
+
+  /* ── SECTION HEADING ── */
+  .section-heading {
+    padding: 20px 18px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray-500);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ── GREETING CARD ── */
+  .greeting-card {
+    margin: 16px 16px 4px;
+    background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+    border-radius: 18px;
+    padding: 20px 18px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .greeting-card::after {
+    content: '🛡';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 52px;
+    opacity: 0.15;
+  }
+  .greeting-hi { font-size: 14px; opacity: 0.85; margin-bottom: 2px; }
+  .greeting-name { font-size: 22px; font-weight: 900; letter-spacing: -0.5px; }
+  .greeting-status {
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.2);
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .status-dot { width: 7px; height: 7px; background: #4DF0A0; border-radius: 50%; }
+
+  /* ── FAMILY STATUS CHIPS ── */
+  .family-row {
+    display: flex;
+    gap: 10px;
+    padding: 8px 16px 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .family-row::-webkit-scrollbar { display: none; }
+  .family-chip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .family-avatar {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    border: 2.5px solid var(--gray-200);
+    background: var(--gray-100);
+    position: relative;
+  }
+  .avatar-badge {
+    position: absolute;
+    bottom: -1px; right: -1px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 2px solid white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px;
+  }
+  .badge-alert { background: var(--red); }
+  .badge-ok { background: var(--green); }
+  .family-label { font-size: 11px; font-weight: 600; color: var(--gray-700); }
+
+  /* ── NOTIFICATION CARD ── */
+  .notif-card {
+    margin: 6px 16px;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 16px;
+    padding: 14px 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .notif-card:active { background: var(--gray-100); transform: scale(0.99); }
+  .notif-card.alert-card {
+    border-color: rgba(215,25,32,0.2);
+    background: var(--red-light);
+  }
+  .notif-card.health-card {
+    border-color: rgba(0,147,167,0.2);
+    background: var(--teal-light);
+  }
+  .notif-card.success-card {
+    border-color: rgba(30,158,92,0.2);
+    background: var(--green-bg);
+  }
+
+  .notif-icon-wrap {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .icon-red   { background: rgba(215,25,32,0.12); }
+  .icon-teal  { background: rgba(0,147,167,0.12); }
+  .icon-green { background: rgba(30,158,92,0.12); }
+  .icon-amber { background: rgba(217,119,6,0.12); }
+
+  .notif-body { flex: 1; min-width: 0; }
+  .notif-source {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--gray-500);
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .notif-title { font-size: 14px; font-weight: 700; color: var(--gray-900); line-height: 1.3; margin-bottom: 3px; }
+  .notif-desc { font-size: 12px; color: var(--gray-500); line-height: 1.45; }
+  .notif-time { font-size: 11px; color: var(--gray-500); flex-shrink: 0; }
+  .notif-chevron { font-size: 14px; color: var(--gray-300); flex-shrink: 0; align-self: center; }
+
+  /* ── HEALTH REPORT SCREEN ── */
+  .health-hero {
+    margin: 16px 16px 0;
+    background: linear-gradient(135deg, #E6F6F8, #F0FBFC);
+    border: 1px solid rgba(0,147,167,0.2);
+    border-radius: 18px;
+    padding: 18px;
+  }
+  .health-hero-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .health-hero-icon {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    background: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    box-shadow: var(--shadow-sm);
+  }
+  .health-hero-title { font-size: 16px; font-weight: 800; color: var(--navy); }
+  .health-hero-sub { font-size: 12px; color: var(--teal); margin-top: 2px; }
+
+  .health-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .metric-item {
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .metric-label { font-size: 11px; color: var(--gray-500); margin-bottom: 4px; font-weight: 500; }
+  .metric-value { font-size: 15px; font-weight: 800; color: var(--gray-900); }
+  .metric-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    margin-top: 4px;
+    padding: 2px 7px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .tag-warn { background: var(--amber-bg); color: var(--amber); }
+  .tag-ok   { background: var(--green-bg); color: var(--green); }
+
+  /* ── VAULT VIZ ── */
+  .vault-card {
+    margin: 10px 16px;
+    background: var(--gray-100);
+    border-radius: 16px;
+    padding: 16px;
+  }
+  .vault-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .vault-icon-small {
+    width: 32px; height: 32px;
+    background: var(--navy);
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .vault-label { font-size: 13px; font-weight: 700; color: var(--navy); }
+  .vault-sub { font-size: 11px; color: var(--gray-500); margin-left: auto; }
+
+  .vault-flow-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  .vault-step {
+    flex: 1;
+    background: white;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray-700);
+    text-align: center;
+  }
+  .vault-step span { display: block; font-size: 10px; font-weight: 400; color: var(--gray-500); margin-top: 2px; }
+  .vault-step.highlight { background: var(--navy); color: white; }
+  .vault-step.highlight span { color: rgba(255,255,255,0.6); }
+  .vault-arrow-small { color: var(--gray-300); font-size: 12px; flex-shrink: 0; }
+
+  .privacy-pills {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .pill {
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .pill-share { background: var(--green-bg); color: var(--green); }
+  .pill-block { background: var(--red-light); color: var(--red); }
+
+  /* ── ACTION BUTTONS ── */
+  .action-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 16px;
+  }
+  .btn {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 14px;
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Noto Sans TC', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.15s;
+    letter-spacing: -0.2px;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary-red {
+    background: var(--red);
+    color: white;
+    box-shadow: 0 4px 14px rgba(215,25,32,0.3);
+  }
+  .btn-primary-teal {
+    background: var(--teal);
+    color: white;
+    box-shadow: 0 4px 14px rgba(0,147,167,0.25);
+  }
+  .btn-secondary {
+    background: var(--gray-100);
+    color: var(--gray-900);
+  }
+  .btn-outline {
+    background: white;
+    color: var(--navy);
+    border: 1.5px solid var(--gray-200);
+  }
+  .btn-amber {
+    background: var(--amber-bg);
+    color: var(--amber);
+    border: 1.5px solid rgba(217,119,6,0.2);
+  }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: var(--gray-200); margin: 4px 0; }
+  .section-gap { height: 16px; background: var(--gray-100); }
+
+  /* ── FRAUD SCREEN ── */
+  .fraud-fullscreen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--white);
+    overflow-y: auto;
+  }
+  .fraud-top-banner {
+    width: 100%;
+    background: var(--red);
+    padding: 20px 18px 18px;
+    color: white;
+    text-align: center;
+  }
+  .fraud-banner-title { font-size: 17px; font-weight: 900; letter-spacing: -0.3px; margin-bottom: 2px; }
+  .fraud-banner-sub { font-size: 12px; opacity: 0.85; }
+
+  .caller-block {
+    width: 100%;
+    padding: 28px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .caller-avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: var(--red-light);
+    border: 3px solid var(--red-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px;
+    margin-bottom: 4px;
+  }
+  .caller-number { font-size: 20px; font-weight: 300; letter-spacing: 0.05em; color: var(--gray-900); }
+  .caller-risk {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    background: var(--red-light);
+    border: 1px solid var(--red-mid);
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--red);
+  }
+  .risk-dot { width: 7px; height: 7px; background: var(--red); border-radius: 50%; animation: pulseRed 1.2s infinite; }
+  @keyframes pulseRed { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+  .fraud-detail-card {
+    width: 100%;
+    padding: 16px 18px;
+    background: var(--gray-100);
+    margin: 12px 16px;
+    border-radius: 14px;
+    width: calc(100% - 32px);
+  }
+  .fraud-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--gray-200); font-size: 13px; }
+  .fraud-row:last-child { border-bottom: none; }
+  .fraud-row-label { color: var(--gray-500); }
+  .fraud-row-val { font-weight: 700; color: var(--gray-900); }
+  .fraud-row-val.danger { color: var(--red); }
+
+  .call-btns {
+    display: flex;
+    gap: 24px;
+    padding: 16px 0 8px;
+    justify-content: center;
+  }
+  .call-circle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  .call-circle-btn {
+    width: 68px; height: 68px;
+    border-radius: 50%;
+    border: none;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    transition: transform 0.1s;
+  }
+  .call-circle-btn:active { transform: scale(0.94); }
+  .btn-decline { background: var(--red); box-shadow: 0 4px 20px rgba(215,25,32,0.35); }
+  .btn-mute    { background: var(--gray-200); }
+  .call-circle-label { font-size: 12px; font-weight: 600; color: var(--gray-700); }
+
+  /* ── AI CHAT BUBBLE ── */
+  .ai-chat-section { padding: 12px 16px 0; }
+  .ai-bubble-wrap {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .ai-avatar {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--red);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .ai-msg {
+    background: var(--gray-100);
+    border-radius: 18px;
+    border-top-left-radius: 4px;
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--gray-900);
+    max-width: 90%;
+  }
+  .ai-msg strong { color: var(--navy); }
+  .ai-msg .highlight-red { color: var(--red); font-weight: 700; }
+  .ai-msg .highlight-green { color: var(--green); font-weight: 700; }
+  .ai-sender { font-size: 11px; color: var(--gray-500); margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
+  .ai-sender-dot { width: 6px; height: 6px; background: var(--teal); border-radius: 50%; }
+
+  /* ── SUCCESS NOTIF ── */
+  .success-hero {
+    margin: 16px 16px 0;
+    background: var(--green-bg);
+    border: 1px solid rgba(30,158,92,0.2);
+    border-radius: 18px;
+    padding: 18px;
+  }
+  .success-hero-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .success-big-icon { font-size: 40px; }
+  .success-title { font-size: 16px; font-weight: 800; color: var(--green); margin-bottom: 2px; }
+  .success-sub { font-size: 13px; color: var(--gray-700); }
+
+  .success-rows {
+    margin-top: 14px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .s-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--gray-200);
+    font-size: 13px;
+  }
+  .s-row:last-child { border-bottom: none; }
+  .s-label { color: var(--gray-500); }
+  .s-val { font-weight: 700; color: var(--gray-900); }
+  .s-val.safe { color: var(--green); }
+  .s-val.blocked { color: var(--red); }
+
+  /* ── SCENE PICKER (top chrome) ── */
+  .scenario-bar {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 10px 16px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex-shrink: 0;
+  }
+  .scenario-bar::-webkit-scrollbar { display: none; }
+  .scenario-tab {
+    padding: 7px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray-500);
+    white-space: nowrap;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    transition: all 0.15s;
+    flex-shrink: 0;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .scenario-tab.active {
+    background: var(--red);
+    color: white;
+  }
+
+  /* ── PROGRESS DOTS ── */
+  .progress-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 0 6px;
+    flex-shrink: 0;
+  }
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gray-200);
+    transition: all 0.2s;
+  }
+  .dot.active { background: var(--red); width: 18px; border-radius: 3px; }
+
+  /* ── APPOINTMENT CARD ── */
+  .appt-card {
+    margin: 0 16px;
+    background: var(--amber-bg);
+    border: 1px solid rgba(217,119,6,0.2);
+    border-radius: 14px;
+    padding: 14px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .appt-icon-wrap {
+    width: 40px; height: 40px;
+    background: white;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .appt-title { font-size: 13px; font-weight: 700; color: var(--gray-900); margin-bottom: 2px; }
+  .appt-detail { font-size: 11px; color: var(--gray-500); }
+  .appt-arrow { font-size: 14px; color: var(--amber); margin-left: auto; flex-shrink: 0; }
+
+  /* ── GRANDMA CHAT SCREEN ── */
+  .chat-messages {
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+  .chat-date-label {
+    text-align: center;
+    font-size: 11px;
+    color: var(--gray-500);
+    background: var(--gray-100);
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 100px;
+    align-self: center;
+  }
+
+  .msg-row { display: flex; gap: 8px; align-items: flex-end; }
+  .msg-row.sent { flex-direction: row-reverse; }
+
+  .msg-bubble {
+    max-width: 78%;
+    padding: 10px 13px;
+    border-radius: 18px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .msg-bubble.recv {
+    background: var(--gray-100);
+    border-bottom-left-radius: 4px;
+    color: var(--gray-900);
+  }
+  .msg-bubble.sent-bubble {
+    background: var(--red);
+    border-bottom-right-radius: 4px;
+    color: white;
+  }
+  .msg-bubble.ai-bubble {
+    background: var(--navy);
+    border-bottom-left-radius: 4px;
+    color: white;
+  }
+  .msg-bubble.ai-bubble .ai-label {
+    font-size: 10px;
+    color: var(--teal);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+
+  .msg-avatar {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    background: var(--gray-200);
+  }
+  .msg-time { font-size: 10px; color: var(--gray-300); }
+
+  .photo-bubble {
+    background: var(--amber-bg);
+    border: 1px solid rgba(217,119,6,0.2);
+    border-radius: 12px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 78%;
+    align-self: flex-end;
+  }
+  .photo-thumb { font-size: 28px; }
+  .photo-name { font-size: 12px; font-weight: 700; color: var(--gray-900); }
+  .photo-meta { font-size: 10px; color: var(--gray-500); margin-top: 2px; }
+
+  .typing-row { display: flex; gap: 8px; align-items: center; }
+  .typing-dots {
+    display: flex;
+    gap: 4px;
+    padding: 10px 14px;
+    background: var(--gray-100);
+    border-radius: 18px;
+    border-bottom-left-radius: 4px;
+  }
+  .t-dot {
+    width: 7px; height: 7px;
+    background: var(--gray-400, #9CA3AF);
+    border-radius: 50%;
+    animation: typeBounce 1.2s ease-in-out infinite;
+  }
+  .t-dot:nth-child(2) { animation-delay: 0.15s; }
+  .t-dot:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes typeBounce {
+    0%,60%,100% { transform: translateY(0); opacity: 0.5; }
+    30% { transform: translateY(-5px); opacity: 1; }
+  }
+
+  /* ── CHAT INPUT BAR ── */
+  .chat-input-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px 14px;
+    background: white;
+    border-top: 1px solid var(--gray-200);
+    flex-shrink: 0;
+  }
+  .chat-input {
+    flex: 1;
+    background: var(--gray-100);
+    border: none;
+    border-radius: 22px;
+    padding: 10px 16px;
+    font-size: 14px;
+    color: var(--gray-900);
+    font-family: 'Noto Sans TC', sans-serif;
+    outline: none;
+  }
+  .chat-send {
+    width: 40px; height: 40px;
+    background: var(--red);
+    border-radius: 50%;
+    border: none;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;
+  }
+
+  /* ── HOME GREETING (compact) ── */
+  .home-greeting {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px 10px;
+    font-size: 15px;
+    color: var(--gray-700);
+  }
+  .home-greeting strong { color: var(--gray-900); font-weight: 800; }
+  .home-date { font-size: 12px; color: var(--gray-500); }
+
+  /* ── STORY ROW (IG style) ── */
+  .story-section {
+    border-bottom: 1px solid var(--gray-200);
+    padding-bottom: 14px;
+    margin-bottom: 4px;
+  }
+  .story-row {
+    display: flex;
+    gap: 4px;
+    padding: 6px 12px 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .story-row::-webkit-scrollbar { display: none; }
+
+  .story-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+    width: 78px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  /* Colored story ring */
+  .story-ring {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .ring-alert {
+    background: conic-gradient(var(--red) 0%, var(--red) 100%);
+    padding: 2.5px;
+  }
+  .ring-active {
+    background: conic-gradient(var(--teal) 0%, #00C6CF 100%);
+    padding: 2.5px;
+  }
+  .ring-muted {
+    background: var(--gray-300);
+    padding: 2.5px;
+  }
+  .story-avatar {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    border: 1.5px solid white;
+  }
+  .story-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray-700);
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  /* Speech bubble popup */
+  .story-bubble {
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.85);
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    border-top-left-radius: 3px;
+    padding: 8px 10px;
+    font-size: 11px;
+    line-height: 1.45;
+    color: var(--gray-900);
+    width: 150px;
+    box-shadow: var(--shadow-md);
+    z-index: 20;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s, transform 0.18s;
+    text-align: left;
+  }
+  .story-bubble.visible {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+    pointer-events: auto;
+  }
+  .bubble-tail {
+    position: absolute;
+    top: -6px;
+    left: 16px;
+    width: 10px; height: 10px;
+    background: white;
+    border-left: 1px solid var(--gray-200);
+    border-top: 1px solid var(--gray-200);
+    transform: rotate(45deg);
+    border-radius: 2px;
+  }
+  .bubble-member-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+  }
+  .tag-red-sm { background: var(--red-light); color: var(--red); }
+  .tag-teal-sm { background: var(--teal-light); color: var(--teal); }
+  .tag-gray-sm { background: var(--gray-200); color: var(--gray-700); }
+  /* Spacer to prevent story bubble clipping */
+  .story-spacer { height: 80px; }
+
+  /* ── TODO SECTION ── */
+  .todo-section {
+    padding: 0 16px;
+    margin-bottom: 4px;
+  }
+  .todo-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0 8px;
+  }
+  .todo-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--gray-900);
+    letter-spacing: -0.3px;
+  }
+  .cal-btn {
+    width: 34px; height: 34px;
+    border-radius: 10px;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    font-size: 17px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s;
+  }
+  .cal-btn.open { background: var(--red-light); border-color: var(--red-mid); }
+
+  /* Calendar modal */
+  .calendar-modal {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 16px;
+    padding: 14px;
+    margin-bottom: 10px;
+    box-shadow: var(--shadow-md);
+    display: none;
+  }
+  .calendar-modal.open { display: block; }
+  .cal-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .cal-nav button {
+    background: var(--gray-100);
+    border: none;
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--gray-700);
+    font-family: inherit;
+  }
+  .cal-nav span { font-size: 13px; font-weight: 700; color: var(--gray-900); }
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+    text-align: center;
+  }
+  .cal-day-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--gray-500);
+    padding: 3px 0;
+  }
+  .cal-day {
+    font-size: 12px;
+    padding: 6px 3px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--gray-700);
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    transition: background 0.1s;
+  }
+  .cal-day:hover { background: var(--gray-100); }
+  .cal-day.today { font-weight: 800; color: var(--red); }
+  .cal-day.selected { background: var(--red); color: white; font-weight: 700; }
+  .cal-day.other-month { color: var(--gray-300); }
+  .cal-day.has-todo::after {
+    content: '';
+    display: block;
+    width: 4px; height: 4px;
+    background: var(--red);
+    border-radius: 50%;
+    margin: 2px auto 0;
+  }
+  .cal-day.selected.has-todo::after { background: white; }
+
+  /* Date tabs */
+  .date-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .date-tab {
+    padding: 7px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-500);
+    border: 1.5px solid var(--gray-200);
+    background: transparent;
+    cursor: pointer;
+    font-family: 'Noto Sans TC', sans-serif;
+    transition: all 0.15s;
+    flex: 1;
+    text-align: center;
+  }
+  .date-tab.active {
+    background: var(--red);
+    color: white;
+    border-color: var(--red);
+  }
+  .date-tab-label {
+    font-size: 10px;
+    color: var(--gray-500);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  /* Todo list */
+  .todo-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+  .todo-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--gray-100);
+    border-radius: 12px;
+    padding: 11px 13px;
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .todo-item:active { background: var(--gray-200); }
+  .todo-item.done { opacity: 0.55; }
+  .todo-check {
+    width: 20px; height: 20px;
+    border-radius: 6px;
+    border: 2px solid var(--gray-300);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    margin-top: 1px;
+    transition: all 0.15s;
+  }
+  .todo-check.checked { background: var(--green); border-color: var(--green); color: white; }
+  .todo-item-body { flex: 1; min-width: 0; }
+  .todo-item-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-900);
+    line-height: 1.3;
+    margin-bottom: 2px;
+  }
+  .todo-item.done .todo-item-title { text-decoration: line-through; color: var(--gray-500); }
+  .todo-item-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .todo-time { font-size: 11px; color: var(--gray-500); }
+  .todo-member-tag {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 5px;
+  }
+
+  /* Add reminder button */
+  .add-reminder-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1.5px dashed var(--gray-300);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gray-500);
+    font-family: 'Noto Sans TC', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.15s;
+    margin-bottom: 4px;
+  }
+  .add-reminder-btn:hover, .add-reminder-btn:active {
+    background: var(--red-light);
+    border-color: var(--red);
+    color: var(--red);
+  }
+  .add-reminder-btn span { font-size: 18px; line-height: 1; }
+
+  /* ── ADD REMINDER SCREEN ── */
+  .reminder-form {
+    padding: 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1;
+    overflow-y: auto;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label { font-size: 12px; font-weight: 700; color: var(--gray-700); text-transform: uppercase; letter-spacing: 0.05em; }
+  .form-input {
+    background: var(--gray-100);
+    border: 1.5px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: var(--gray-900);
+    font-family: 'Noto Sans TC', sans-serif;
+    outline: none;
+    transition: border-color 0.15s;
+    width: 100%;
+  }
+  .form-input:focus { border-color: var(--red); background: var(--white); }
+  .form-row { display: flex; gap: 10px; }
+  .form-row .form-group { flex: 1; }
+  .member-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .member-chip {
+    padding: 7px 14px;
+    border-radius: 100px;
+    border: 1.5px solid var(--gray-200);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--white);
+    font-family: 'Noto Sans TC', sans-serif;
+    transition: all 0.15s;
+    display: flex; align-items: center; gap: 5px;
+    color: var(--gray-700);
+  }
+  .member-chip.selected { background: var(--red-light); border-color: var(--red); color: var(--red); }
+</style>
+</head>
+<body>
+<div class="device-shell">
+
+  <!-- STATUS BAR -->
+  <div class="status-bar" id="statusBar">
+    <span class="status-time" id="statusTime">9:41</span>
+    <div class="status-icons">
+      <svg viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="0.5"/><rect x="4.5" y="3" width="3" height="9" rx="0.5"/><rect x="9" y="1.5" width="3" height="10.5" rx="0.5"/><rect x="13.5" y="0" width="2.5" height="12" rx="0.5" opacity="0.3"/></svg>
+      <svg viewBox="0 0 15 11"><rect x="0" y="4" width="13" height="7" rx="1.5" stroke="currentColor" stroke-width="1.2" fill="none"/><rect x="13.5" y="5.5" width="1.5" height="4" rx="0.75" fill="currentColor"/><rect x="1" y="5" width="9" height="5" rx="0.8" fill="currentColor"/></svg>
+    </div>
+  </div>
+
+  <!-- SCREENS WRAP -->
+  <div class="screens-wrap" id="screensWrap">
+
+    <!-- ══════════════════════
+         SCREEN 0: EVA HOME
+    ══════════════════════ -->
+    <div class="screen active" id="screen-0">
+      <div class="app-header-bar">
+        <div class="trendlife-logo">
+          <div class="logo-mark">🛡</div>
+          <div class="logo-name">Trend<span>Life</span></div>
+        </div>
+        <div class="header-notif has-notif">
+          <button class="header-notif-btn" onclick="goTo(1)">🔔</button>
+          <div class="notif-badge"></div>
+        </div>
+      </div>
+
+      <div class="scroll-content" id="homeScroll">
+
+        <!-- Compact greeting -->
+        <div class="home-greeting">
+          <div>午安，<strong>Eva</strong> 👋</div>
+          <div class="home-date">週五 3月7日</div>
+        </div>
+
+        <!-- ── FAMILY STORY ROW (IG style) ── -->
+        <div class="story-section">
+          <div class="story-row" id="storyRow" onclick="closeAllBubbles(event)">
+
+            <div class="story-item" id="story-0" onclick="storyTap(0, event)">
+              <div class="story-ring ring-alert">
+                <div class="story-avatar">👩‍🦳</div>
+              </div>
+              <div class="story-name">奶奶</div>
+              <div class="story-bubble" id="bubble-0">
+                <div class="bubble-tail"></div>
+                <div class="bubble-member-tag tag-red-sm">需要關注</div><br>
+                血壓偏高，AI 已幫我預約了心臟科門診 💊
+              </div>
+            </div>
+
+            <div class="story-item" id="story-1" onclick="storyTap(1, event)">
+              <div class="story-ring ring-active">
+                <div class="story-avatar">👧</div>
+              </div>
+              <div class="story-name">Yvonne</div>
+              <div class="story-bubble" id="bubble-1">
+                <div class="bubble-tail"></div>
+                <div class="bubble-member-tag tag-teal-sm">一切正常</div><br>
+                在準備 IG 貼文，AI 幫我選好配色了 🎨
+              </div>
+            </div>
+
+            <div class="story-item" id="story-2" onclick="storyTap(2, event)">
+              <div class="story-ring ring-active">
+                <div class="story-avatar">👦</div>
+              </div>
+              <div class="story-name">Ethan</div>
+              <div class="story-bubble" id="bubble-2">
+                <div class="bubble-tail"></div>
+                <div class="bubble-member-tag tag-teal-sm">一切正常</div><br>
+                足球練習結束了，作業還沒開始做 📚
+              </div>
+            </div>
+
+            <div class="story-item" id="story-3" onclick="storyTap(3, event)">
+              <div class="story-ring ring-muted">
+                <div class="story-avatar">🧑‍💼</div>
+              </div>
+              <div class="story-name">老公</div>
+              <div class="story-bubble" id="bubble-3">
+                <div class="bubble-tail"></div>
+                <div class="bubble-member-tag tag-gray-sm">無更新</div><br>
+                會議中，預計 7:00 PM 到家 🏠
+              </div>
+            </div>
+
+          </div>
+          <div class="story-spacer" id="storySpacer" style="display:none;"></div>
+        </div>
+
+        <!-- ── TODO SECTION ── -->
+        <div class="todo-section">
+          <div class="todo-header">
+            <div class="todo-title">待辦事項</div>
+            <button class="cal-btn" onclick="toggleCalendar(event)" id="calBtn">📅</button>
+          </div>
+
+          <!-- Calendar dropdown -->
+          <div class="calendar-modal" id="calModal">
+            <div class="cal-nav">
+              <button onclick="calPrev()">‹</button>
+              <span id="calMonthLabel"></span>
+              <button onclick="calNext()">›</button>
+            </div>
+            <div class="cal-grid" id="calGrid"></div>
+          </div>
+
+          <!-- Date tabs -->
+          <div class="date-tabs">
+            <button class="date-tab" id="tab-0" onclick="selectDateTab(0)">昨天</button>
+            <button class="date-tab active" id="tab-1" onclick="selectDateTab(1)">今天</button>
+            <button class="date-tab" id="tab-2" onclick="selectDateTab(2)">明天</button>
+          </div>
+
+          <div class="date-tab-label" id="todoDateLabel">週五 3月7日</div>
+
+          <!-- Todo list -->
+          <div class="todo-list" id="todoList"></div>
+
+          <!-- Add reminder -->
+          <button class="add-reminder-btn" onclick="goTo(8)">
+            <span>＋</span> 新增提醒
+          </button>
+        </div>
+
+        <!-- ── NOTIFICATIONS ── -->
+        <div class="section-heading">最新通知</div>
+
+        <div class="notif-card health-card" onclick="goTo(2)">
+          <div class="notif-icon-wrap icon-teal">📊</div>
+          <div class="notif-body">
+            <div class="notif-source">健康管理</div>
+            <div class="notif-title">奶奶健康報告分析完成</div>
+            <div class="notif-desc">1 項需要關注 · 已自動預約心臟科門診</div>
+          </div>
+          <div class="notif-time">3:13</div>
+          <div class="notif-chevron">›</div>
+        </div>
+
+        <div class="notif-card success-card" onclick="goTo(5)">
+          <div class="notif-icon-wrap icon-green">🛡</div>
+          <div class="notif-body">
+            <div class="notif-source">防詐守護</div>
+            <div class="notif-title">已攔截奶奶的詐騙來電</div>
+            <div class="notif-desc">奶奶安全無虞 · 無需擔心</div>
+          </div>
+          <div class="notif-time">3:48</div>
+          <div class="notif-chevron">›</div>
+        </div>
+
+        <div class="notif-card" style="opacity:0.5; pointer-events:none;">
+          <div class="notif-icon-wrap icon-amber">🍱</div>
+          <div class="notif-body">
+            <div class="notif-source">晚餐管理</div>
+            <div class="notif-title">今晚晚餐提醒</div>
+            <div class="notif-desc">已為 4 人規劃不同飲食需求</div>
+          </div>
+          <div class="notif-time">5:30</div>
+          <div class="notif-chevron">›</div>
+        </div>
+
+        <div style="height: 24px;"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════
+         SCREEN 1: GRANDMA CHAT
+    ══════════════════════ -->
+    <div class="screen" id="screen-1">
+      <div class="nav-bar">
+        <button class="nav-back" onclick="goBack()">‹</button>
+        <div class="nav-title">👩‍🦳 奶奶的 TrendLife</div>
+        <div class="nav-right"></div>
+      </div>
+
+      <div class="chat-messages">
+        <div class="chat-date-label">週五 · 下午 3:12</div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-end;">
+          <div class="photo-bubble">
+            <div class="photo-thumb">📋</div>
+            <div>
+              <div class="photo-name">健康檢查報告.jpg</div>
+              <div class="photo-meta">台灣大學醫院 · 2024 年度健檢</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="msg-row">
+          <div class="msg-avatar" style="background: var(--red);">🛡</div>
+          <div class="msg-bubble ai-bubble">
+            <div class="ai-label">AI 管家</div>
+            奶奶好，我已收到您的健康檢查報告 📋<br><br>
+            我現在幫您分析，<strong>結果會同步給 Eva</strong>，讓她了解您的狀況。<br><br>
+            分析約需 30 秒，請稍候...
+          </div>
+        </div>
+
+        <div class="typing-row">
+          <div class="msg-avatar" style="background: var(--red);">🛡</div>
+          <div class="typing-dots">
+            <div class="t-dot"></div>
+            <div class="t-dot"></div>
+            <div class="t-dot"></div>
+          </div>
+        </div>
+
+        <div class="msg-row">
+          <div class="msg-avatar" style="background: var(--red);">🛡</div>
+          <div class="msg-bubble ai-bubble">
+            <div class="ai-label">AI 管家</div>
+            ✅ 分析完成！整體健康良好，有 <span style="color:#F9A825; font-weight:700;">1 項需要關注</span>。<br><br>
+            已通知 Eva，她會幫您安排後續追蹤。<br><br>
+            <span style="font-size:11px; color:rgba(255,255,255,0.5);">您的完整報告已安全存入 Security Vault 🔒</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-input-bar">
+        <input class="chat-input" type="text" placeholder="輸入訊息...">
+        <button class="chat-send">↑</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════
+         SCREEN 2: EVA HEALTH DETAIL
+    ══════════════════════ -->
+    <div class="screen" id="screen-2">
+      <div class="nav-bar">
+        <button class="nav-back" onclick="goBack()">‹</button>
+        <div class="nav-title">奶奶的健康報告</div>
+        <div class="nav-right"></div>
+      </div>
+
+      <div class="scroll-content">
+
+        <div class="health-hero">
+          <div class="health-hero-header">
+            <div class="health-hero-icon">📊</div>
+            <div>
+              <div class="health-hero-title">健康分析摘要（脫敏版）</div>
+              <div class="health-hero-sub">完整資料保存在 Security Vault</div>
+            </div>
+          </div>
+          <div class="health-metrics">
+            <div class="metric-item">
+              <div class="metric-label">血壓</div>
+              <div class="metric-value">145/92</div>
+              <div class="metric-tag tag-warn">⚠ 偏高</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">血糖（空腹）</div>
+              <div class="metric-value">98 mg/dL</div>
+              <div class="metric-tag tag-ok">✓ 正常</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">心電圖</div>
+              <div class="metric-value">正常</div>
+              <div class="metric-tag tag-ok">✓ 正常</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">骨密度</div>
+              <div class="metric-value">−1.2 T</div>
+              <div class="metric-tag tag-ok">✓ 正常</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="height: 12px;"></div>
+
+        <div class="appt-card" onclick="goTo(3)">
+          <div class="appt-icon-wrap">📅</div>
+          <div>
+            <div class="appt-title">已預約心臟科門診（待確認）</div>
+            <div class="appt-detail">台大醫院 · 下週一 09:30 AM</div>
+          </div>
+          <div class="appt-arrow">›</div>
+        </div>
+
+        <div class="vault-card" style="margin-top: 12px;">
+          <div class="vault-header">
+            <div class="vault-icon-small">🔐</div>
+            <div class="vault-label">Security Vault 資料保護</div>
+            <div class="vault-sub">Trend Micro</div>
+          </div>
+          <div class="vault-flow-row">
+            <div class="vault-step">奶奶上傳<span>完整報告</span></div>
+            <div class="vault-arrow-small">→</div>
+            <div class="vault-step highlight">Security Vault<span>加密保存</span></div>
+            <div class="vault-arrow-small">→</div>
+            <div class="vault-step">Eva 收到<span>脫敏摘要</span></div>
+          </div>
+          <div style="margin-top: 10px;">
+            <div style="font-size:11px; font-weight:700; color:var(--gray-500); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.05em;">Eva 可以看到</div>
+            <div class="privacy-pills">
+              <span class="pill pill-share">✓ 健康數值摘要</span>
+              <span class="pill pill-share">✓ 異常項目提醒</span>
+              <span class="pill pill-share">✓ 預約建議</span>
+            </div>
+            <div style="font-size:11px; font-weight:700; color:var(--gray-500); margin:8px 0 6px; text-transform:uppercase; letter-spacing:0.05em;">永遠在 Vault（Eva 看不到）</div>
+            <div class="privacy-pills">
+              <span class="pill pill-block">✗ 身分證字號</span>
+              <span class="pill pill-block">✗ 完整血液數值</span>
+              <span class="pill pill-block">✗ 就診記錄</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-heading">處理選項</div>
+        <div class="action-list">
+          <button class="btn btn-primary-red" onclick="goTo(3)">📅 確認預約門診</button>
+          <button class="btn btn-primary-teal">🔒 查看完整報告（Vault）</button>
+          <button class="btn btn-amber">💬 發送關心訊息給奶奶</button>
+          <button class="btn btn-secondary" onclick="goTo(1)">查看奶奶對話記錄</button>
+        </div>
+        <div style="height: 20px;"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════
+         SCREEN 3: CONFIRM APPOINTMENT
+    ══════════════════════ -->
+    <div class="screen" id="screen-3">
+      <div class="nav-bar">
+        <button class="nav-back" onclick="goBack()">‹</button>
+        <div class="nav-title">確認門診預約</div>
+        <div class="nav-right"></div>
+      </div>
+      <div class="scroll-content" style="padding: 0 16px;">
+        <div style="padding-top: 20px; text-align: center;">
+          <div style="font-size: 52px; margin-bottom: 12px;">🏥</div>
+          <div style="font-size: 18px; font-weight: 800; color: var(--gray-900); margin-bottom: 6px;">AI 已預約好了</div>
+          <div style="font-size: 13px; color: var(--gray-500); line-height: 1.6;">您只需要一鍵確認，<br>不需要自己打電話掛號</div>
+        </div>
+
+        <div style="background: var(--gray-100); border-radius: 16px; padding: 16px; margin: 20px 0;">
+          <div class="fraud-row" style="font-size:13px;">
+            <span class="fraud-row-label">醫院</span>
+            <span class="fraud-row-val">臺大醫院 心臟科</span>
+          </div>
+          <div class="fraud-row" style="font-size:13px;">
+            <span class="fraud-row-label">看診日期</span>
+            <span class="fraud-row-val">下週一（3/9）</span>
+          </div>
+          <div class="fraud-row" style="font-size:13px;">
+            <span class="fraud-row-label">看診時間</span>
+            <span class="fraud-row-val">上午 09:30</span>
+          </div>
+          <div class="fraud-row" style="font-size:13px;">
+            <span class="fraud-row-label">原因</span>
+            <span class="fraud-row-val" style="color: var(--amber);">血壓偏高追蹤</span>
+          </div>
+          <div class="fraud-row" style="font-size:13px;">
+            <span class="fraud-row-label">陪同提醒</span>
+            <span class="fraud-row-val">需要陪同</span>
+          </div>
+        </div>
+
+        <div class="action-list">
+          <button class="btn btn-primary-red" onclick="goTo(4)">✓ 確認此預約</button>
+          <button class="btn btn-secondary" onclick="goBack()">修改時間</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════
+         SCREEN 4: APPOINTMENT CONFIRMED
+    ══════════════════════ -->
+    <div class="screen" id="screen-4">
+      <div class="nav-bar">
+        <button class="nav-back" onclick="goTo(0)">‹</button>
+        <div class="nav-title">預約完成</div>
+        <div class="nav-right"></div>
+      </div>
+      <div class="scroll-content" style="display:flex; flex-direction:column; align-items:center; padding:40px 24px 0; text-align:center; gap:12px;">
+        <div style="width:80px; height:80px; background:var(--green-bg); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:40px;">✓</div>
+        <div style="font-size:20px; font-weight:900; color:var(--green);">預約已確認！</div>
+        <div style="font-size:13px; color:var(--gray-500); line-height:1.7;">已通知奶奶<br>日曆提醒已新增<br>3/8 (日) 前會再提醒一次</div>
+
+        <div style="background:var(--green-bg); border:1px solid rgba(30,158,92,0.2); border-radius:16px; padding:16px; width:100%; margin-top:8px; text-align:left;">
+          <div style="font-size:12px; font-weight:700; color:var(--green); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.05em;">AI 管家備忘</div>
+          <div style="font-size:13px; color:var(--gray-700); line-height:1.6;">
+            ✓ 已提醒奶奶空腹 8 小時<br>
+            ✓ 已通知老公接送<br>
+            ✓ 已準備相關病史摘要
+          </div>
+        </div>
+
+        <div class="action-list" style="width:100%; margin-top:8px;">
+          <button class="btn btn-primary-red" onclick="goTo(0)">回首頁</button>
+          <button class="btn btn-secondary" onclick="goTo(5)">查看防詐紀錄 →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════
+         SCREEN 5: FRAUD BLOCKED (EVA VIEW)
+    ══════════════════════ -->
+    <div class="screen" id="screen-5">
+      <div class="nav-bar">
+        <button class="nav-back" onclick="goBack()">‹</button>
+        <div class="nav-title">防詐守護紀錄</div>
+        <div class="nav-right"></div>
+      </div>
+
+      <div class="scroll-content">
+        <div class="success-hero">
+          <div class="success-hero-row">
+            <div class="success-big-icon">🛡</div>
+            <div>
+              <div class="success-title">奶奶安全無虞</div>
+              <div class="success-sub">詐騙來電已即時攔截</div>
+            </div>
+          </div>
+          <div class="success-rows" style="margin-top: 14px;">
+            <div class="s-row">
+              <span class="s-label">攔截時間</span>
+              <span class="s-val">今日 3:48 PM</span>
+            </div>
+            <div class="s-row">
+              <span class="s-label">來電號碼</span>
+              <span class="s-val blocked">+886-2-XXXX-XXXX</span>
+            </div>
+            <div class="s-row">
+              <span class="s-label">風險類型</span>
+              <span class="s-val blocked">假冒銀行客服</span>
+            </div>
+            <div class="s-row">
+              <span class="s-label">舉報次數</span>
+              <span class="s-val blocked">847 次</span>
+            </div>
+            <div class="s-row">
+              <span class="s-label">奶奶狀態</span>
+              <span class="s-val safe">✓ 安全</span>
+            </div>
+            <div class="s-row">
+              <span class="s-label">已告知奶奶</span>
+              <span class="s-val safe">✓ 是</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ai-chat-section" style="margin-top: 12px;">
+          <div style="font-size:11px; font-weight:700; color:var(--gray-500); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;">AI 管家說明</div>
+          <div class="ai-bubble-wrap">
+            <div class="ai-avatar">AI</div>
+            <div>
+              <div class="ai-sender"><div class="ai-sender-dot"></div>TrendLife AI 管家</div>
+              <div class="ai-msg">
+                Eva，奶奶今天下午有一通<span class="highlight-red">疑似詐騙來電</span>，我已在她接起前攔截並顯示警告。<br><br>
+                奶奶<span class="highlight-green">安全，已按掛斷</span>。不需要擔心。<br><br>
+                此事件已記錄，如有類似來電我會持續攔截。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-heading">查看奶奶當時畫面</div>
+        <div class="action-list">
+          <button class="btn btn-primary-red" onclick="goTo(6)">📵 查看攔截畫面</button>
+          <button class="btn btn-amber">💬 傳訊關心奶奶</button>
+          <button class="btn btn-secondary" onclick="goTo(0)">回首頁</button>
+        </div>
+        <div style="height: 20px;"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════
+         SCREEN 6: GRANDMA FRAUD CALL
+    ══════════════════════ -->
+    <div class="screen" id="screen-6">
+      <div class="nav-bar" style="background: var(--red); border-color: transparent;">
+        <button class="nav-back" onclick="goBack()" style="background: rgba(255,255,255,0.2); color:white;">‹</button>
+        <div class="nav-title" style="color: white;">奶奶手機 · 攔截畫面</div>
+        <div class="nav-right"></div>
+      </div>
+
+      <div class="fraud-fullscreen">
+        <div class="fraud-top-banner">
+          <div class="fraud-banner-title">⚠️ TrendLife 偵測到詐騙來電</div>
+          <div class="fraud-banner-sub">此通話已被標記為高風險</div>
+        </div>
+
+        <div class="caller-block">
+          <div class="caller-avatar">📵</div>
+          <div class="caller-number">+886-2-2700-XXXX</div>
+          <div class="caller-risk">
+            <div class="risk-dot"></div>
+            高風險 · 疑似假冒銀行
+          </div>
+        </div>
+
+        <div class="fraud-detail-card">
+          <div class="fraud-row">
+            <span class="fraud-row-label">已被舉報</span>
+            <span class="fraud-row-val danger">847 次</span>
+          </div>
+          <div class="fraud-row">
+            <span class="fraud-row-label">風險類型</span>
+            <span class="fraud-row-val danger">假冒國泰世華銀行</span>
+          </div>
+          <div class="fraud-row">
+            <span class="fraud-row-label">Trend Micro 建議</span>
+            <span class="fraud-row-val" style="color:var(--navy);">立即掛斷</span>
+          </div>
+        </div>
+
+        <div class="call-btns">
+          <div class="call-circle" onclick="goTo(7)">
+            <button class="call-circle-btn btn-decline">📵</button>
+            <div class="call-circle-label" style="color:var(--red);">立即掛斷</div>
+          </div>
+          <div class="call-circle">
+            <button class="call-circle-btn btn-mute">🔇</button>
+            <div class="call-circle-label">靜音</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════
+         SCREEN 7: AFTER DECLINE
+    ══════════════════════ -->
+    <div class="screen" id="screen-7">
+      <div class="nav-bar">
+        <button class="nav-back" onclick="goTo(0)">‹</button>
+        <div class="nav-title">奶奶已安全掛斷</div>
+        <div class="nav-right"></div>
+      </div>
+      <div class="scroll-content" style="display:flex; flex-direction:column; align-items:center; padding:40px 24px 0; text-align:center; gap:12px;">
+        <div style="width:80px; height:80px; background:var(--green-bg); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:40px;">🛡</div>
+        <div style="font-size:20px; font-weight:900; color:var(--green);">已安全掛斷！</div>
+        <div style="font-size:13px; color:var(--gray-500); line-height:1.7;">奶奶安全<br>Eva 已收到通知<br>此號碼已加入封鎖清單</div>
+        <div class="action-list" style="width:100%; margin-top:16px;">
+          <button class="btn btn-primary-red" onclick="goTo(0)">回 Eva 的首頁</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════
+         SCREEN 8: ADD REMINDER
+    ══════════════════════ -->
+    <div class="screen" id="screen-8">
+      <div class="nav-bar">
+        <button class="nav-back" onclick="goBack()">‹</button>
+        <div class="nav-title">新增提醒</div>
+        <div class="nav-right"></div>
+      </div>
+      <div class="reminder-form">
+
+        <div class="form-group">
+          <div class="form-label">提醒內容</div>
+          <input class="form-input" type="text" placeholder="例：帶奶奶去心臟科門診">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <div class="form-label">日期</div>
+            <input class="form-input" type="date" value="2026-03-07">
+          </div>
+          <div class="form-group">
+            <div class="form-label">時間</div>
+            <input class="form-input" type="time" value="09:00">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-label">相關家人</div>
+          <div class="member-chips">
+            <div class="member-chip" onclick="this.classList.toggle('selected')">👩‍🦳 奶奶</div>
+            <div class="member-chip" onclick="this.classList.toggle('selected')">👧 Yvonne</div>
+            <div class="member-chip" onclick="this.classList.toggle('selected')">👦 Ethan</div>
+            <div class="member-chip" onclick="this.classList.toggle('selected')">🧑‍💼 老公</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-label">備注</div>
+          <textarea class="form-input" rows="3" placeholder="例：記得空腹 8 小時、帶健保卡" style="resize:none; line-height:1.5;"></textarea>
+        </div>
+
+        <div class="form-group">
+          <div class="form-label">提醒方式</div>
+          <div class="member-chips">
+            <div class="member-chip selected" onclick="this.classList.toggle('selected')">🔔 推播通知</div>
+            <div class="member-chip" onclick="this.classList.toggle('selected')">💬 AI 管家提醒</div>
+            <div class="member-chip" onclick="this.classList.toggle('selected')">📅 加入行事曆</div>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:4px; padding-bottom:32px;">
+          <button class="btn btn-secondary" style="flex:1;" onclick="goBack()">取消</button>
+          <button class="btn btn-primary-red" style="flex:2;" onclick="saveReminder()">✓ 儲存提醒</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /screens-wrap -->
+
+  <!-- PROGRESS DOTS -->
+  <div class="progress-dots" id="progressDots"></div>
+
+</div><!-- /device-shell -->
+
+<script>
+  // ── STATE ──
+  const history = [0];
+  let current = 0;
+  const DOT_SCREENS = [0, 1, 2, 5, 6];
+
+  // ── TODO DATA ──
+  const todosData = {
+    0: [ // 昨天
+      { id: 1, title: '確認奶奶的血壓數值', time: '上午 10:00', member: '奶奶', memberColor: 'tag-red-sm', done: true },
+      { id: 2, title: 'Yvonne 的美術課材料費', time: '下午 3:00', member: 'Yvonne', memberColor: 'tag-teal-sm', done: true },
+    ],
+    1: [ // 今天
+      { id: 3, title: '確認奶奶心臟科門診預約', time: '下午 3:13', member: '奶奶', memberColor: 'tag-red-sm', done: false },
+      { id: 4, title: 'Ethan 足球練習接送', time: '下午 5:30', member: 'Ethan', memberColor: 'tag-teal-sm', done: true },
+      { id: 5, title: '訂今晚全家晚餐', time: '下午 5:30', member: '全家', memberColor: 'tag-gray-sm', done: false },
+      { id: 6, title: '提醒老公 7 點到家', time: '下午 6:30', member: '老公', memberColor: 'tag-gray-sm', done: false },
+    ],
+    2: [ // 明天
+      { id: 7, title: 'Yvonne 線上討論 8:30 PM', time: '晚上 8:00', member: 'Yvonne', memberColor: 'tag-teal-sm', done: false },
+      { id: 8, title: '準備週末家庭活動', time: '上午 10:00', member: '全家', memberColor: 'tag-gray-sm', done: false },
+    ],
+  };
+  let activeTab = 1;
+
+  // ── RENDER TODOS ──
+  function renderTodos() {
+    const list = document.getElementById('todoList');
+    const items = todosData[activeTab] || [];
+    if (items.length === 0) {
+      list.innerHTML = '<div style="text-align:center; padding:20px 0; font-size:13px; color:var(--gray-500);">這天沒有待辦事項</div>';
+      return;
+    }
+    list.innerHTML = items.map(t => `
+      <div class="todo-item ${t.done ? 'done' : ''}" onclick="toggleTodo(${t.id})">
+        <div class="todo-check ${t.done ? 'checked' : ''}">${t.done ? '✓' : ''}</div>
+        <div class="todo-item-body">
+          <div class="todo-item-title">${t.title}</div>
+          <div class="todo-item-meta">
+            <span class="todo-time">⏰ ${t.time}</span>
+            <span class="todo-member-tag ${t.memberColor}">${t.member}</span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function toggleTodo(id) {
+    for (const day in todosData) {
+      const item = todosData[day].find(t => t.id === id);
+      if (item) { item.done = !item.done; break; }
+    }
+    renderTodos();
+  }
+
+  function selectDateTab(idx) {
+    activeTab = idx;
+    document.querySelectorAll('.date-tab').forEach((t, i) => {
+      t.classList.toggle('active', i === idx);
+    });
+    const base = new Date(2026, 2, 7); // March 7
+    base.setDate(base.getDate() + (idx - 1));
+    const labels = ['週四 3月6日','週五 3月7日','週六 3月8日'];
+    document.getElementById('todoDateLabel').textContent = labels[idx];
+    renderTodos();
+  }
+
+  // ── CALENDAR ──
+  let calYear = 2026, calMonth = 2; // March (0-indexed)
+  let selectedDay = 7;
+
+  const MONTH_NAMES = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  const DAY_LABELS = ['日','一','二','三','四','五','六'];
+  const todoDays = new Set([6, 7, 8, 14, 21]); // days with todos in March
+
+  function toggleCalendar(e) {
+    if (e) e.stopPropagation();
+    const modal = document.getElementById('calModal');
+    const btn = document.getElementById('calBtn');
+    const isOpen = modal.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    if (isOpen) renderCalendar();
+  }
+
+  function renderCalendar() {
+    document.getElementById('calMonthLabel').textContent = `${calYear} 年 ${MONTH_NAMES[calMonth]}`;
+    const grid = document.getElementById('calGrid');
+    const firstDay = new Date(calYear, calMonth, 1).getDay();
+    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+    const daysInPrev = new Date(calYear, calMonth, 0).getDate();
+    const today = new Date();
+    const isCurrentMonth = today.getFullYear() === calYear && today.getMonth() === calMonth;
+
+    let html = DAY_LABELS.map(d => `<div class="cal-day-label">${d}</div>`).join('');
+
+    for (let i = 0; i < firstDay; i++) {
+      const d = daysInPrev - firstDay + 1 + i;
+      html += `<button class="cal-day other-month">${d}</button>`;
+    }
+    for (let d = 1; d <= daysInMonth; d++) {
+      const isToday = isCurrentMonth && d === today.getDate();
+      const isSel = d === selectedDay && calYear === 2026 && calMonth === 2;
+      const hasTodo = todoDays.has(d);
+      const cls = [
+        'cal-day',
+        isToday ? 'today' : '',
+        isSel ? 'selected' : '',
+        hasTodo ? 'has-todo' : '',
+      ].filter(Boolean).join(' ');
+      html += `<button class="${cls}" onclick="selectCalDay(${d})">${d}</button>`;
+    }
+    const remaining = (7 - (firstDay + daysInMonth) % 7) % 7;
+    for (let i = 1; i <= remaining; i++) {
+      html += `<button class="cal-day other-month">${i}</button>`;
+    }
+    grid.innerHTML = html;
+  }
+
+  function selectCalDay(d) {
+    selectedDay = d;
+    // Map day to tab: 6=昨天, 7=今天, 8=明天
+    if (d === 6) selectDateTab(0);
+    else if (d === 7) selectDateTab(1);
+    else if (d === 8) selectDateTab(2);
+    else {
+      // Other dates - show empty
+      activeTab = 1;
+      document.querySelectorAll('.date-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('todoDateLabel').textContent = `3月${d}日`;
+      document.getElementById('todoList').innerHTML =
+        '<div style="text-align:center;padding:20px 0;font-size:13px;color:var(--gray-500);">這天沒有待辦事項</div>';
+    }
+    toggleCalendar();
+    renderCalendar();
+  }
+
+  function calPrev() { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCalendar(); }
+  function calNext() { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCalendar(); }
+
+  // ── STORY BUBBLES ──
+  let activeBubble = null;
+  function storyTap(idx, e) {
+    e.stopPropagation();
+    const bubble = document.getElementById('bubble-' + idx);
+    const spacer = document.getElementById('storySpacer');
+    if (activeBubble && activeBubble !== bubble) {
+      activeBubble.classList.remove('visible');
+    }
+    const isVisible = bubble.classList.toggle('visible');
+    activeBubble = isVisible ? bubble : null;
+    spacer.style.display = isVisible ? 'block' : 'none';
+  }
+  function closeAllBubbles(e) {
+    document.querySelectorAll('.story-bubble').forEach(b => b.classList.remove('visible'));
+    document.getElementById('storySpacer').style.display = 'none';
+    activeBubble = null;
+  }
+
+  // ── ADD REMINDER ──
+  function saveReminder() {
+    const input = document.querySelector('#screen-8 .form-input');
+    const title = input ? input.value.trim() : '新提醒';
+    const newItem = {
+      id: Date.now(),
+      title: title || '新提醒',
+      time: '待設定',
+      member: '全家',
+      memberColor: 'tag-gray-sm',
+      done: false,
+    };
+    todosData[1].push(newItem);
+    goBack();
+    renderTodos();
+  }
+
+  // ── DOTS ──
+  function renderDots() {
+    const wrap = document.getElementById('progressDots');
+    const idx = DOT_SCREENS.indexOf(current);
+    if (idx === -1) { wrap.innerHTML = ''; return; }
+    wrap.innerHTML = DOT_SCREENS.map((s, i) =>
+      `<div class="dot${i === idx ? ' active' : ''}"></div>`
+    ).join('');
+  }
+
+  // ── NAVIGATE ──
+  function goTo(targetId) {
+    if (targetId === current) return;
+
+    const prev = document.getElementById('screen-' + current);
+    const next = document.getElementById('screen-' + targetId);
+
+    prev.classList.remove('active');
+    prev.classList.add('prev');
+
+    next.style.transform = 'translateX(100%)';
+    next.classList.add('active');
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        next.style.transform = '';
+        setTimeout(() => {
+          prev.classList.remove('prev');
+          prev.scrollTop = 0;
+        }, 340);
+      });
+    });
+
+    history.push(targetId);
+    current = targetId;
+    renderDots();
+  }
+
+  function goBack() {
+    if (history.length <= 1) return;
+    history.pop();
+    const target = history[history.length - 1];
+
+    const prev = document.getElementById('screen-' + current);
+    const next = document.getElementById('screen-' + target);
+
+    next.classList.add('active');
+    next.style.transform = 'translateX(-30%)';
+
+    prev.style.transition = 'transform 0.32s cubic-bezier(0.4,0,0.2,1)';
+    prev.style.transform = 'translateX(100%)';
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        next.style.transition = 'transform 0.32s cubic-bezier(0.4,0,0.2,1)';
+        next.style.transform = '';
+        setTimeout(() => {
+          prev.classList.remove('active');
+          prev.style.transform = '';
+          prev.style.transition = '';
+          next.style.transition = '';
+        }, 340);
+      });
+    });
+
+    current = target;
+    renderDots();
+  }
+
+  // ── CLOCK ──
+  function updateTime() {
+    const now = new Date();
+    const h = now.getHours().toString().padStart(2,'0');
+    const m = now.getMinutes().toString().padStart(2,'0');
+    document.getElementById('statusTime').textContent = h + ':' + m;
+  }
+  updateTime();
+  setInterval(updateTime, 10000);
+
+  // ── INIT ──
+  renderDots();
+  renderTodos();
+</script>
+</body>
+</html>
