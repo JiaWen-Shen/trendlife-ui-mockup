@@ -351,6 +351,56 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
+  .section-heading-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 18px 10px;
+  }
+  .section-heading-text {
+    font-size: 12px; font-weight: 700; color: var(--gray-500);
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .section-history-btn {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 12px; font-weight: 600; color: var(--gray-500);
+    background: var(--gray-100); border: none; border-radius: 20px;
+    padding: 5px 11px; cursor: pointer; font-family: 'Geist', sans-serif;
+    transition: background 0.15s, color 0.15s;
+  }
+  .section-history-btn:active { background: var(--gray-200); color: var(--gray-700); }
+
+  /* ── COMPLETED TASKS HISTORY (Screen 13) ── */
+  .history-date-group { padding: 18px 0 6px; }
+  .history-date-label {
+    font-size: 11px; font-weight: 700; color: var(--gray-500);
+    letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 0 2px 8px;
+  }
+  .completed-task-row {
+    display: flex; align-items: flex-start; gap: 11px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .completed-task-row:last-child { border-bottom: none; }
+  .completed-check {
+    width: 20px; height: 20px; border-radius: 6px;
+    background: var(--green); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 11px; margin-top: 1px;
+  }
+  .completed-task-body { flex: 1; min-width: 0; }
+  .completed-task-title {
+    font-size: 13px; font-weight: 600; color: var(--gray-700);
+    line-height: 1.35; text-decoration: line-through;
+    text-decoration-color: var(--gray-300);
+  }
+  .completed-task-meta {
+    display: flex; align-items: center; gap: 6px; margin-top: 3px; flex-wrap: wrap;
+  }
+  .completed-task-time { font-size: 11px; color: var(--gray-500); }
+  .completed-task-by {
+    font-size: 10px; font-weight: 700; padding: 1px 7px;
+    border-radius: 5px; background: var(--green-bg); color: var(--green);
+  }
 
   /* ── GREETING CARD ── */
   .greeting-card {
@@ -1294,6 +1344,9 @@
     transition: background 0.12s;
   }
   .todo-item.done { opacity: 0.55; }
+  /* Inside swipe-host, keep background opaque so the red reveal doesn't bleed through */
+  .todo-swipe-host .todo-item.done { opacity: 1; }
+  .todo-swipe-host .todo-item.done .todo-main { opacity: 0.55; }
   .todo-check {
     width: 20px; height: 20px;
     border-radius: 6px;
@@ -1367,21 +1420,34 @@
   .todo-ai-btn.ai-done {
     background: var(--green);
   }
-  .todo-delete-btn {
-    background: none;
-    border: 1.5px solid var(--gray-300);
-    border-radius: 8px;
-    width: 34px;
-    height: 34px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: var(--gray-500);
-    transition: all 0.15s;
+  /* Swipe-to-delete */
+  .todo-swipe-host {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
   }
-  .todo-delete-btn:active { background: var(--red-light); border-color: var(--red); color: var(--red); }
+  .todo-delete-reveal {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 80px;
+    background: var(--red);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 3px;
+    cursor: pointer;
+    color: white;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.02em;
+  }
+  .todo-delete-reveal:active { background: var(--red-dark); }
+  .todo-swipe-host .todo-item {
+    position: relative;
+    z-index: 1;
+    will-change: transform;
+    touch-action: pan-y;
+    transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+    border-radius: 0;   /* host overflow:hidden+border-radius handles the shape */
+    background: var(--gray-100);
+  }
 
   /* Todo detail screen */
   .todo-detail-hero {
@@ -1679,7 +1745,7 @@
     transition: transform 0.18s, opacity 0.2s;
   }
   .fab-butler:active { transform: scale(0.92); }
-  .fab-butler img { height: 18px; width: auto; filter: brightness(0) invert(1); }
+  .fab-butler svg { display: block; }
   .fab-badge {
     position: absolute; top: 1px; right: 1px;
     width: 17px; height: 17px;
@@ -1746,6 +1812,58 @@
     display: flex; align-items: center; justify-content: center;
     line-height: 1; padding-bottom: 1px;
   }
+  .panel-history-btn {
+    width: 30px; height: 30px;
+    background: var(--gray-100); border-radius: 50%; border: none;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--gray-500);
+    transition: background 0.15s;
+  }
+  .panel-history-btn:active { background: var(--gray-200); }
+  /* ── History overlay ── */
+  .butler-history {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: white;
+    border-radius: 24px 24px 0 0;
+    z-index: 10;
+    display: flex; flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  .butler-history.open { transform: translateX(0); }
+  .history-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 18px 14px;
+    border-bottom: 1px solid var(--gray-200);
+    flex-shrink: 0;
+  }
+  .history-header-title { font-size: 15px; font-weight: 700; color: var(--gray-900); }
+  .history-back-btn {
+    width: 30px; height: 30px;
+    background: var(--gray-100); border-radius: 50%; border: none;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--gray-700); font-size: 18px;
+  }
+  .history-list { flex: 1; overflow-y: auto; padding: 10px 14px 20px; }
+  .history-list::-webkit-scrollbar { display: none; }
+  .history-entry {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--gray-100);
+    cursor: pointer;
+  }
+  .history-entry:last-child { border-bottom: none; }
+  .history-entry:active { opacity: 0.7; }
+  .history-icon {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--red-light); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--red); font-size: 14px;
+  }
+  .history-entry-body { flex: 1; min-width: 0; }
+  .history-entry-cmd { font-size: 13px; font-weight: 600; color: var(--gray-900); line-height: 1.3; }
+  .history-entry-time { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
   .panel-msgs {
     flex: 1; overflow-y: auto;
     padding: 16px 16px 8px;
@@ -1774,6 +1892,7 @@
     background: white; border-top: 1px solid var(--gray-200);
     flex-shrink: 0;
   }
+
 </style>
 </head>
 <body>
@@ -1903,7 +2022,13 @@
         </div>
 
         <!-- ── NOTIFICATIONS ── -->
-        <div class="section-heading">Latest Updates</div>
+        <div class="section-heading-row">
+          <span class="section-heading-text">Latest Updates</span>
+          <button class="section-history-btn" onclick="goTo(13)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            History
+          </button>
+        </div>
 
         <div class="notif-card health-card" onclick="goTo(2)">
           <div class="notif-icon-wrap icon-teal">📊</div>
@@ -2580,11 +2705,154 @@
       </div>
     </div>
 
+    <!-- ══════════════════════
+         SCREEN 13: COMPLETED TASKS HISTORY
+    ══════════════════════ -->
+    <div class="screen" id="screen-13">
+      <div class="nav-bar">
+        <button class="nav-back" onclick="goBack()">‹</button>
+        <div class="nav-title">Completed Tasks</div>
+        <div class="nav-right"></div>
+      </div>
+
+      <div class="scroll-content" style="padding: 0 18px 32px;">
+
+        <!-- TODAY -->
+        <div class="history-date-group">
+          <div class="history-date-label">Today</div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Check Grandma's Blood Pressure</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 10:00 AM</span>
+                <span class="completed-task-by">✨ AI Done</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Book Cardiology Follow-up Appointment</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 11:30 AM</span>
+                <span class="completed-task-by">✨ AI Done</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Order Family Dinner — Din Tai Fung</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 5:30 PM</span>
+                <span class="completed-task-by">✨ AI Done</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Remind Grandma Evening Medication at 7pm</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 7:00 PM</span>
+                <span class="completed-task-by" style="background:var(--teal-light);color:var(--teal);">Eva</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- YESTERDAY -->
+        <div class="history-date-group" style="border-top: 1px solid var(--gray-200); padding-top: 20px;">
+          <div class="history-date-label">Yesterday</div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Notify Husband for Hospital Pickup 3pm</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 2:00 PM</span>
+                <span class="completed-task-by">✨ AI Done</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Prepare Medical History Summary</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 9:00 AM</span>
+                <span class="completed-task-by">✨ AI Done</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Block Scam Call &amp; Alert Grandma</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 3:48 PM</span>
+                <span class="completed-task-by">✨ AI Done</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 DAYS AGO -->
+        <div class="history-date-group" style="border-top: 1px solid var(--gray-200); padding-top: 20px;">
+          <div class="history-date-label">2 Days Ago</div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Schedule Weekly Family Video Call</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 8:00 AM</span>
+                <span class="completed-task-by" style="background:var(--teal-light);color:var(--teal);">Eva</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Refill Grandma's Hypertension Medication</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 10:30 AM</span>
+                <span class="completed-task-by">✨ AI Done</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Book Taxi to NTU Hospital</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 1:00 PM</span>
+                <span class="completed-task-by">✨ AI Done</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div><!-- /screens-wrap -->
 
   <!-- ── AI BUTLER FLOATING BUTTON ── -->
   <button class="fab-butler" id="fabButler" onclick="toggleButler()">
-    <img src="reference/logo-mark-only.png" alt="AI Butler">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2c-.55 5.2-3.8 8.45-9 9 5.2.55 8.45 3.8 9 9 .55-5.2 3.8-8.45 9-9-5.2-.55-8.45-3.8-9-9z"/>
+      <path d="M5 3.5c-.22 1.78-1.22 2.78-3 3 1.78.22 2.78 1.22 3 3 .22-1.78 1.22-2.78 3-3-1.78-.22-2.78-1.22-3-3z" opacity=".65"/>
+    </svg>
     <span class="fab-badge">2</span>
   </button>
 
@@ -2600,7 +2868,27 @@
         <div class="panel-title-name">AI Butler</div>
         <div class="panel-title-sub"><span></span>Active · 12 tasks running</div>
       </div>
+      <button class="panel-history-btn" onclick="toggleHistory()" title="History">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </button>
       <button class="panel-close" onclick="toggleButler()">×</button>
+    </div>
+
+    <!-- ── History overlay ── -->
+    <div class="butler-history" id="butlerHistory">
+      <div class="history-header">
+        <button class="history-back-btn" onclick="toggleHistory()">‹</button>
+        <span class="history-header-title">Command History</span>
+        <div style="width:30px"></div>
+      </div>
+      <div class="history-list">
+        <div class="history-entry"><div class="history-icon">✨</div><div class="history-entry-body"><div class="history-entry-cmd">Remind Grandma to take evening medication at 7pm</div><div class="history-entry-time">Today · 2:14 PM</div></div></div>
+        <div class="history-entry"><div class="history-icon">📋</div><div class="history-entry-body"><div class="history-entry-cmd">Show me today's task list</div><div class="history-entry-time">Today · 11:32 AM</div></div></div>
+        <div class="history-entry"><div class="history-icon">🍽</div><div class="history-entry-body"><div class="history-entry-cmd">Order dinner from Grandma's favourite restaurant</div><div class="history-entry-time">Today · 9:05 AM</div></div></div>
+        <div class="history-entry"><div class="history-icon">📅</div><div class="history-entry-body"><div class="history-entry-cmd">Schedule Grandma's follow-up appointment for next Tuesday</div><div class="history-entry-time">Yesterday · 4:48 PM</div></div></div>
+        <div class="history-entry"><div class="history-icon">✨</div><div class="history-entry-body"><div class="history-entry-cmd">Notify husband about hospital pickup at 3pm</div><div class="history-entry-time">Yesterday · 1:20 PM</div></div></div>
+        <div class="history-entry"><div class="history-icon">📋</div><div class="history-entry-body"><div class="history-entry-cmd">Prepare medical history summary before appointment</div><div class="history-entry-time">2 days ago · 8:00 AM</div></div></div>
+      </div>
     </div>
 
     <div class="panel-msgs" id="panelMsgs">
@@ -2651,6 +2939,12 @@
     fab.style.opacity = butlerOpen ? '0' : '1';
     fab.style.pointerEvents = butlerOpen ? 'none' : 'all';
     if (butlerOpen) setTimeout(() => document.getElementById('butlerInput').focus(), 350);
+  }
+
+  let historyOpen = false;
+  function toggleHistory() {
+    historyOpen = !historyOpen;
+    document.getElementById('butlerHistory').classList.toggle('open', historyOpen);
   }
 
   function sendMsg() {
@@ -2727,27 +3021,31 @@
       return;
     }
     list.innerHTML = items.map(t => `
-      <div class="todo-item ${t.done ? 'done' : ''}">
-        <div class="todo-main" onclick="viewTodoDetail(${t.id})">
-          <div class="todo-check ${t.done ? 'checked' : ''}" onclick="event.stopPropagation(); toggleTodo(${t.id})">${t.done ? '✓' : ''}</div>
-          <div class="todo-item-body">
-            <div class="todo-item-title">${t.title}</div>
-            <div class="todo-item-meta">
-              <span class="todo-time">⏰ ${t.time}</span>
-              <span class="todo-member-tag ${t.memberColor}">${t.member}</span>
+      <div class="todo-swipe-host" id="swipe-${t.id}">
+        <div class="todo-delete-reveal" onclick="deleteTodo(${t.id})">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+          Delete
+        </div>
+        <div class="todo-item ${t.done ? 'done' : ''}">
+          <div class="todo-main" onclick="viewTodoDetail(${t.id})">
+            <div class="todo-check ${t.done ? 'checked' : ''}" onclick="event.stopPropagation(); toggleTodo(${t.id})">${t.done ? '✓' : ''}</div>
+            <div class="todo-item-body">
+              <div class="todo-item-title">${t.title}</div>
+              <div class="todo-item-meta">
+                <span class="todo-time">⏰ ${t.time}</span>
+                <span class="todo-member-tag ${t.memberColor}">${t.member}</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="todo-actions">
-          <button class="todo-ai-btn${t.done ? ' ai-done' : ''}" onclick="aiExecuteTodo(${t.id})">
-            ${t.done ? '✓ AI Done' : '✨ Ask AI'}
-          </button>
-          <button class="todo-delete-btn" onclick="deleteTodo(${t.id})" aria-label="Delete">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-          </button>
+          <div class="todo-actions">
+            <button class="todo-ai-btn${t.done ? ' ai-done' : ''}" onclick="aiExecuteTodo(${t.id})">
+              ${t.done ? '✓ AI Done' : '✨ Ask AI'}
+            </button>
+          </div>
         </div>
       </div>
     `).join('');
+    document.querySelectorAll('.todo-swipe-host').forEach((host, i) => initSwipe(host, i === 0));
   }
 
   function toggleTodo(id) {
@@ -2855,6 +3153,64 @@
       if (idx > -1) { todosData[day].splice(idx, 1); break; }
     }
     renderTodos();
+  }
+
+  function initSwipe(host, initialSwiped = false) {
+    const item = host.querySelector('.todo-item');
+    const SNAP = 80;
+    let startX = 0, startY = 0, dx = initialSwiped ? -SNAP : 0, active = false, swiped = initialSwiped, isHoriz = null;
+    if (initialSwiped) item.style.transform = `translateX(-${SNAP}px)`;
+
+    function onStart(clientX, clientY) {
+      startX = clientX; startY = clientY;
+      dx = swiped ? -SNAP : 0;
+      active = true; isHoriz = null;
+      item.style.transition = 'none';
+    }
+    function onMove(clientX, clientY) {
+      if (!active) return;
+      const dxRaw = clientX - startX;
+      const dyRaw = clientY - startY;
+      if (isHoriz === null) {
+        if (Math.abs(dxRaw) < 5 && Math.abs(dyRaw) < 5) return;
+        isHoriz = Math.abs(dxRaw) >= Math.abs(dyRaw);
+        if (!isHoriz) { active = false; return; }
+      }
+      const base = swiped ? -SNAP : 0;
+      dx = Math.min(0, Math.max(dxRaw + base, -SNAP - 8));
+      item.style.transform = `translateX(${dx}px)`;
+    }
+    function onEnd() {
+      if (!active) return;
+      active = false;
+      item.style.transition = 'transform 0.25s cubic-bezier(0.25, 1, 0.5, 1)';
+      if (dx < -(SNAP * (swiped ? 0.25 : 0.45))) {
+        item.style.transform = `translateX(-${SNAP}px)`;
+        swiped = true;
+      } else {
+        item.style.transform = 'translateX(0)';
+        dx = 0; swiped = false;
+      }
+    }
+
+    /* Touch */
+    host.addEventListener('touchstart',  e => onStart(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+    host.addEventListener('touchmove',   e => { onMove(e.touches[0].clientX, e.touches[0].clientY); if (isHoriz) e.preventDefault(); }, { passive: false });
+    host.addEventListener('touchend',    () => onEnd());
+    host.addEventListener('touchcancel', () => onEnd());
+
+    /* Pointer (mouse / stylus – for desktop preview) */
+    host.addEventListener('pointerdown', e => {
+      if (!e.isPrimary || e.pointerType === 'touch') return;
+      host.setPointerCapture(e.pointerId);
+      onStart(e.clientX, e.clientY);
+    });
+    host.addEventListener('pointermove', e => {
+      if (!e.isPrimary || e.pointerType === 'touch') return;
+      onMove(e.clientX, e.clientY);
+    });
+    host.addEventListener('pointerup',     e => { if (!e.isPrimary || e.pointerType === 'touch') return; onEnd(); });
+    host.addEventListener('pointercancel', e => { if (!e.isPrimary || e.pointerType === 'touch') return; onEnd(); });
   }
 
   function aiExecuteTodo(id) {
@@ -3154,6 +3510,7 @@
 
     history.push(targetId);
     current = targetId;
+
   }
 
   function goBack() {
