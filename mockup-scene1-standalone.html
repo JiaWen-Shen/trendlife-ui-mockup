@@ -351,6 +351,56 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
+  .section-heading-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 18px 10px;
+  }
+  .section-heading-text {
+    font-size: 12px; font-weight: 700; color: var(--gray-500);
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .section-history-btn {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 12px; font-weight: 600; color: var(--gray-500);
+    background: var(--gray-100); border: none; border-radius: 20px;
+    padding: 5px 11px; cursor: pointer; font-family: 'Geist', sans-serif;
+    transition: background 0.15s, color 0.15s;
+  }
+  .section-history-btn:active { background: var(--gray-200); color: var(--gray-700); }
+
+  /* ── COMPLETED TASKS HISTORY (Screen 13) ── */
+  .history-date-group { padding: 18px 0 6px; }
+  .history-date-label {
+    font-size: 11px; font-weight: 700; color: var(--gray-500);
+    letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 0 2px 8px;
+  }
+  .completed-task-row {
+    display: flex; align-items: flex-start; gap: 11px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .completed-task-row:last-child { border-bottom: none; }
+  .completed-check {
+    width: 20px; height: 20px; border-radius: 6px;
+    background: var(--green); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 11px; margin-top: 1px;
+  }
+  .completed-task-body { flex: 1; min-width: 0; }
+  .completed-task-title {
+    font-size: 13px; font-weight: 600; color: var(--gray-700);
+    line-height: 1.35; text-decoration: line-through;
+    text-decoration-color: var(--gray-300);
+  }
+  .completed-task-meta {
+    display: flex; align-items: center; gap: 6px; margin-top: 3px; flex-wrap: wrap;
+  }
+  .completed-task-time { font-size: 11px; color: var(--gray-500); }
+  .completed-task-by {
+    font-size: 10px; font-weight: 700; padding: 1px 7px;
+    border-radius: 5px; background: var(--green-bg); color: var(--green);
+  }
 
   /* ── GREETING CARD ── */
   .greeting-card {
@@ -1294,6 +1344,9 @@
     transition: background 0.12s;
   }
   .todo-item.done { opacity: 0.55; }
+  /* Inside swipe-host, keep background opaque so the red reveal doesn't bleed through */
+  .todo-swipe-host .todo-item.done { opacity: 1; }
+  .todo-swipe-host .todo-item.done .todo-main { opacity: 0.55; }
   .todo-check {
     width: 20px; height: 20px;
     border-radius: 6px;
@@ -1367,21 +1420,34 @@
   .todo-ai-btn.ai-done {
     background: var(--green);
   }
-  .todo-delete-btn {
-    background: none;
-    border: 1.5px solid var(--gray-300);
-    border-radius: 8px;
-    width: 34px;
-    height: 34px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: var(--gray-500);
-    transition: all 0.15s;
+  /* Swipe-to-delete */
+  .todo-swipe-host {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
   }
-  .todo-delete-btn:active { background: var(--red-light); border-color: var(--red); color: var(--red); }
+  .todo-delete-reveal {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 80px;
+    background: var(--red);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 3px;
+    cursor: pointer;
+    color: white;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.02em;
+  }
+  .todo-delete-reveal:active { background: var(--red-dark); }
+  .todo-swipe-host .todo-item {
+    position: relative;
+    z-index: 1;
+    will-change: transform;
+    touch-action: pan-y;
+    transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+    border-radius: 0;   /* host overflow:hidden+border-radius handles the shape */
+    background: var(--gray-100);
+  }
 
   /* Todo detail screen */
   .todo-detail-hero {
@@ -1679,7 +1745,7 @@
     transition: transform 0.18s, opacity 0.2s;
   }
   .fab-butler:active { transform: scale(0.92); }
-  .fab-butler img { height: 18px; width: auto; filter: brightness(0) invert(1); }
+  .fab-butler svg { display: block; }
   .fab-badge {
     position: absolute; top: 1px; right: 1px;
     width: 17px; height: 17px;
@@ -1746,6 +1812,58 @@
     display: flex; align-items: center; justify-content: center;
     line-height: 1; padding-bottom: 1px;
   }
+  .panel-history-btn {
+    width: 30px; height: 30px;
+    background: var(--gray-100); border-radius: 50%; border: none;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--gray-500);
+    transition: background 0.15s;
+  }
+  .panel-history-btn:active { background: var(--gray-200); }
+  /* ── History overlay ── */
+  .butler-history {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: white;
+    border-radius: 24px 24px 0 0;
+    z-index: 10;
+    display: flex; flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  .butler-history.open { transform: translateX(0); }
+  .history-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 18px 14px;
+    border-bottom: 1px solid var(--gray-200);
+    flex-shrink: 0;
+  }
+  .history-header-title { font-size: 15px; font-weight: 700; color: var(--gray-900); }
+  .history-back-btn {
+    width: 30px; height: 30px;
+    background: var(--gray-100); border-radius: 50%; border: none;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--gray-700); font-size: 18px;
+  }
+  .history-list { flex: 1; overflow-y: auto; padding: 10px 14px 20px; }
+  .history-list::-webkit-scrollbar { display: none; }
+  .history-entry {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--gray-100);
+    cursor: pointer;
+  }
+  .history-entry:last-child { border-bottom: none; }
+  .history-entry:active { opacity: 0.7; }
+  .history-icon {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--red-light); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--red); font-size: 14px;
+  }
+  .history-entry-body { flex: 1; min-width: 0; }
+  .history-entry-cmd { font-size: 13px; font-weight: 600; color: var(--gray-900); line-height: 1.3; }
+  .history-entry-time { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
   .panel-msgs {
     flex: 1; overflow-y: auto;
     padding: 16px 16px 8px;
@@ -1774,6 +1892,7 @@
     background: white; border-top: 1px solid var(--gray-200);
     flex-shrink: 0;
   }
+
 </style>
 </head>
 <body>
@@ -1903,7 +2022,13 @@
         </div>
 
         <!-- ── NOTIFICATIONS ── -->
-        <div class="section-heading">Latest Updates</div>
+        <div class="section-heading-row">
+          <span class="section-heading-text">Latest Updates</span>
+          <button class="section-history-btn" onclick="goTo(13)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            History
+          </button>
+        </div>
 
         <div class="notif-card health-card" onclick="goTo(2)">
           <div class="notif-icon-wrap icon-teal">📊</div>
@@ -2580,11 +2705,154 @@
       </div>
     </div>
 
+    <!-- ══════════════════════
+         SCREEN 13: COMPLETED TASKS HISTORY
+    ══════════════════════ -->
+    <div class="screen" id="screen-13">
+      <div class="nav-bar">
+        <button class="nav-back" onclick="goBack()">‹</button>
+        <div class="nav-title">Completed Tasks</div>
+        <div class="nav-right"></div>
+      </div>
+
+      <div class="scroll-content" style="padding: 0 18px 32px;">
+
+        <!-- TODAY -->
+        <div class="history-date-group">
+          <div class="history-date-label">Today</div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Check Grandma's Blood Pressure</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 10:00 AM</span>
+                <span class="completed-task-by">✨ AI Done</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Book Cardiology Follow-up Appointment</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 11:30 AM</span>
+                <span class="completed-task-by">✨ AI Done</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Order Family Dinner — Din Tai Fung</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 5:30 PM</span>
+                <span class="completed-task-by">✨ AI Done</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Remind Grandma Evening Medication at 7pm</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 7:00 PM</span>
+                <span class="completed-task-by" style="background:var(--teal-light);color:var(--teal);">Eva</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- YESTERDAY -->
+        <div class="history-date-group" style="border-top: 1px solid var(--gray-200); padding-top: 20px;">
+          <div class="history-date-label">Yesterday</div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Notify Husband for Hospital Pickup 3pm</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 2:00 PM</span>
+                <span class="completed-task-by">✨ AI Done</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Prepare Medical History Summary</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 9:00 AM</span>
+                <span class="completed-task-by">✨ AI Done</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Block Scam Call &amp; Alert Grandma</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 3:48 PM</span>
+                <span class="completed-task-by">✨ AI Done</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 DAYS AGO -->
+        <div class="history-date-group" style="border-top: 1px solid var(--gray-200); padding-top: 20px;">
+          <div class="history-date-label">2 Days Ago</div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Schedule Weekly Family Video Call</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 8:00 AM</span>
+                <span class="completed-task-by" style="background:var(--teal-light);color:var(--teal);">Eva</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Refill Grandma's Hypertension Medication</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 10:30 AM</span>
+                <span class="completed-task-by">✨ AI Done</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="completed-task-row">
+            <div class="completed-check">✓</div>
+            <div class="completed-task-body">
+              <div class="completed-task-title">Book Taxi to NTU Hospital</div>
+              <div class="completed-task-meta">
+                <span class="completed-task-time">⏰ 1:00 PM</span>
+                <span class="completed-task-by">✨ AI Done</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div><!-- /screens-wrap -->
 
   <!-- ── AI BUTLER FLOATING BUTTON ── -->
   <button class="fab-butler" id="fabButler" onclick="toggleButler()">
-    <img src="data:image/png;base64,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" alt="AI Butler">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2c-.55 5.2-3.8 8.45-9 9 5.2.55 8.45 3.8 9 9 .55-5.2 3.8-8.45 9-9-5.2-.55-8.45-3.8-9-9z"/>
+      <path d="M5 3.5c-.22 1.78-1.22 2.78-3 3 1.78.22 2.78 1.22 3 3 .22-1.78 1.22-2.78 3-3-1.78-.22-2.78-1.22-3-3z" opacity=".65"/>
+    </svg>
     <span class="fab-badge">2</span>
   </button>
 
@@ -2600,7 +2868,27 @@
         <div class="panel-title-name">AI Butler</div>
         <div class="panel-title-sub"><span></span>Active · 12 tasks running</div>
       </div>
+      <button class="panel-history-btn" onclick="toggleHistory()" title="History">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </button>
       <button class="panel-close" onclick="toggleButler()">×</button>
+    </div>
+
+    <!-- ── History overlay ── -->
+    <div class="butler-history" id="butlerHistory">
+      <div class="history-header">
+        <button class="history-back-btn" onclick="toggleHistory()">‹</button>
+        <span class="history-header-title">Command History</span>
+        <div style="width:30px"></div>
+      </div>
+      <div class="history-list">
+        <div class="history-entry"><div class="history-icon">✨</div><div class="history-entry-body"><div class="history-entry-cmd">Remind Grandma to take evening medication at 7pm</div><div class="history-entry-time">Today · 2:14 PM</div></div></div>
+        <div class="history-entry"><div class="history-icon">📋</div><div class="history-entry-body"><div class="history-entry-cmd">Show me today's task list</div><div class="history-entry-time">Today · 11:32 AM</div></div></div>
+        <div class="history-entry"><div class="history-icon">🍽</div><div class="history-entry-body"><div class="history-entry-cmd">Order dinner from Grandma's favourite restaurant</div><div class="history-entry-time">Today · 9:05 AM</div></div></div>
+        <div class="history-entry"><div class="history-icon">📅</div><div class="history-entry-body"><div class="history-entry-cmd">Schedule Grandma's follow-up appointment for next Tuesday</div><div class="history-entry-time">Yesterday · 4:48 PM</div></div></div>
+        <div class="history-entry"><div class="history-icon">✨</div><div class="history-entry-body"><div class="history-entry-cmd">Notify husband about hospital pickup at 3pm</div><div class="history-entry-time">Yesterday · 1:20 PM</div></div></div>
+        <div class="history-entry"><div class="history-icon">📋</div><div class="history-entry-body"><div class="history-entry-cmd">Prepare medical history summary before appointment</div><div class="history-entry-time">2 days ago · 8:00 AM</div></div></div>
+      </div>
     </div>
 
     <div class="panel-msgs" id="panelMsgs">
@@ -2651,6 +2939,12 @@
     fab.style.opacity = butlerOpen ? '0' : '1';
     fab.style.pointerEvents = butlerOpen ? 'none' : 'all';
     if (butlerOpen) setTimeout(() => document.getElementById('butlerInput').focus(), 350);
+  }
+
+  let historyOpen = false;
+  function toggleHistory() {
+    historyOpen = !historyOpen;
+    document.getElementById('butlerHistory').classList.toggle('open', historyOpen);
   }
 
   function sendMsg() {
@@ -2727,27 +3021,31 @@
       return;
     }
     list.innerHTML = items.map(t => `
-      <div class="todo-item ${t.done ? 'done' : ''}">
-        <div class="todo-main" onclick="viewTodoDetail(${t.id})">
-          <div class="todo-check ${t.done ? 'checked' : ''}" onclick="event.stopPropagation(); toggleTodo(${t.id})">${t.done ? '✓' : ''}</div>
-          <div class="todo-item-body">
-            <div class="todo-item-title">${t.title}</div>
-            <div class="todo-item-meta">
-              <span class="todo-time">⏰ ${t.time}</span>
-              <span class="todo-member-tag ${t.memberColor}">${t.member}</span>
+      <div class="todo-swipe-host" id="swipe-${t.id}">
+        <div class="todo-delete-reveal" onclick="deleteTodo(${t.id})">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+          Delete
+        </div>
+        <div class="todo-item ${t.done ? 'done' : ''}">
+          <div class="todo-main" onclick="viewTodoDetail(${t.id})">
+            <div class="todo-check ${t.done ? 'checked' : ''}" onclick="event.stopPropagation(); toggleTodo(${t.id})">${t.done ? '✓' : ''}</div>
+            <div class="todo-item-body">
+              <div class="todo-item-title">${t.title}</div>
+              <div class="todo-item-meta">
+                <span class="todo-time">⏰ ${t.time}</span>
+                <span class="todo-member-tag ${t.memberColor}">${t.member}</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="todo-actions">
-          <button class="todo-ai-btn${t.done ? ' ai-done' : ''}" onclick="aiExecuteTodo(${t.id})">
-            ${t.done ? '✓ AI Done' : '✨ Ask AI'}
-          </button>
-          <button class="todo-delete-btn" onclick="deleteTodo(${t.id})" aria-label="Delete">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-          </button>
+          <div class="todo-actions">
+            <button class="todo-ai-btn${t.done ? ' ai-done' : ''}" onclick="aiExecuteTodo(${t.id})">
+              ${t.done ? '✓ AI Done' : '✨ Ask AI'}
+            </button>
+          </div>
         </div>
       </div>
     `).join('');
+    document.querySelectorAll('.todo-swipe-host').forEach((host, i) => initSwipe(host, i === 0));
   }
 
   function toggleTodo(id) {
@@ -2855,6 +3153,64 @@
       if (idx > -1) { todosData[day].splice(idx, 1); break; }
     }
     renderTodos();
+  }
+
+  function initSwipe(host, initialSwiped = false) {
+    const item = host.querySelector('.todo-item');
+    const SNAP = 80;
+    let startX = 0, startY = 0, dx = initialSwiped ? -SNAP : 0, active = false, swiped = initialSwiped, isHoriz = null;
+    if (initialSwiped) item.style.transform = `translateX(-${SNAP}px)`;
+
+    function onStart(clientX, clientY) {
+      startX = clientX; startY = clientY;
+      dx = swiped ? -SNAP : 0;
+      active = true; isHoriz = null;
+      item.style.transition = 'none';
+    }
+    function onMove(clientX, clientY) {
+      if (!active) return;
+      const dxRaw = clientX - startX;
+      const dyRaw = clientY - startY;
+      if (isHoriz === null) {
+        if (Math.abs(dxRaw) < 5 && Math.abs(dyRaw) < 5) return;
+        isHoriz = Math.abs(dxRaw) >= Math.abs(dyRaw);
+        if (!isHoriz) { active = false; return; }
+      }
+      const base = swiped ? -SNAP : 0;
+      dx = Math.min(0, Math.max(dxRaw + base, -SNAP - 8));
+      item.style.transform = `translateX(${dx}px)`;
+    }
+    function onEnd() {
+      if (!active) return;
+      active = false;
+      item.style.transition = 'transform 0.25s cubic-bezier(0.25, 1, 0.5, 1)';
+      if (dx < -(SNAP * (swiped ? 0.25 : 0.45))) {
+        item.style.transform = `translateX(-${SNAP}px)`;
+        swiped = true;
+      } else {
+        item.style.transform = 'translateX(0)';
+        dx = 0; swiped = false;
+      }
+    }
+
+    /* Touch */
+    host.addEventListener('touchstart',  e => onStart(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+    host.addEventListener('touchmove',   e => { onMove(e.touches[0].clientX, e.touches[0].clientY); if (isHoriz) e.preventDefault(); }, { passive: false });
+    host.addEventListener('touchend',    () => onEnd());
+    host.addEventListener('touchcancel', () => onEnd());
+
+    /* Pointer (mouse / stylus – for desktop preview) */
+    host.addEventListener('pointerdown', e => {
+      if (!e.isPrimary || e.pointerType === 'touch') return;
+      host.setPointerCapture(e.pointerId);
+      onStart(e.clientX, e.clientY);
+    });
+    host.addEventListener('pointermove', e => {
+      if (!e.isPrimary || e.pointerType === 'touch') return;
+      onMove(e.clientX, e.clientY);
+    });
+    host.addEventListener('pointerup',     e => { if (!e.isPrimary || e.pointerType === 'touch') return; onEnd(); });
+    host.addEventListener('pointercancel', e => { if (!e.isPrimary || e.pointerType === 'touch') return; onEnd(); });
   }
 
   function aiExecuteTodo(id) {
@@ -3154,6 +3510,7 @@
 
     history.push(targetId);
     current = targetId;
+
   }
 
   function goBack() {
