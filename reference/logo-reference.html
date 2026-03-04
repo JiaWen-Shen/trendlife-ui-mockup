@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TrendLife Logo Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Geist', sans-serif; background: #EBEBEB; padding: 48px 40px; color: #111; }
+
+  h1 { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #888; margin-bottom: 8px; }
+  .section-title { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #888; margin-bottom: 16px; margin-top: 48px; }
+
+  /* ─── GRID ─── */
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+  /* ─── TILES ─── */
+  .tile {
+    border-radius: 14px;
+    padding: 36px 28px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    min-height: 160px;
+  }
+  .tile-white  { background: #FFFFFF; }
+  .tile-light  { background: #F5F5F5; }
+  .tile-dark   { background: #1A1A1A; }
+  .tile-red    { background: #D71920; }
+
+  .label {
+    font-size: 10px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #999;
+  }
+  .tile-dark .label, .tile-red .label { color: rgba(255,255,255,0.4); }
+
+  /* ─── LOGO IMAGE USAGE ─── */
+  .logo-img         { max-height: 44px; width: auto; display: block; }
+  .logo-img-lg      { max-height: 60px; width: auto; display: block; }
+
+  /* White version: remove white bg and recolor to white via multiply trick */
+  .logo-white {
+    max-height: 44px;
+    width: auto;
+    display: block;
+    filter: brightness(0) invert(1);
+  }
+  /* On red: white version */
+  .logo-white-sm {
+    max-height: 34px;
+    width: auto;
+    display: block;
+    filter: brightness(0) invert(1);
+  }
+
+  /* ─── MARK ONLY (crop to left portion of image) ─── */
+  .mark-wrap {
+    overflow: hidden;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+  }
+  .mark-wrap img {
+    height: 48px;
+    width: auto;
+    max-width: none;
+    display: block;
+  }
+
+  /* ─── DO / DON'T ─── */
+  .usage-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .usage-tile {
+    border-radius: 14px;
+    padding: 28px;
+    position: relative;
+  }
+  .usage-tile .badge {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .badge-do   { color: #16A34A; }
+  .badge-dont { color: #D71920; }
+  .usage-tile .note { font-size: 11px; color: #888; margin-top: 16px; line-height: 1.5; }
+
+  /* ─── COLOUR SWATCHES ─── */
+  .swatch-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .swatch {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .swatch-block { width: 80px; height: 56px; border-radius: 10px; }
+  .swatch-name  { font-size: 11px; color: #555; }
+  .swatch-hex   { font-size: 10px; color: #999; }
+
+  /* ─── DIVIDER ─── */
+  .divider { height: 1px; background: #D9D9D9; margin-top: 48px; }
+
+</style>
+</head>
+<body>
+
+<h1>TrendLife — Logo Reference</h1>
+<p style="font-size:12px;color:#aaa;margin-bottom:32px;">Source file: <code>reference/logo-mark-red.jpg</code></p>
+
+<!-- ── SECTION 1: FULL LOGO on backgrounds ── -->
+<p class="section-title">Full Logo — Background Variations</p>
+<div class="grid">
+
+  <div class="tile tile-white">
+    <img class="logo-img-lg" src="logo-mark-red.jpg" alt="TrendLife">
+    <span class="label">White bg — Primary</span>
+  </div>
+
+  <div class="tile tile-light">
+    <img class="logo-img-lg" src="logo-mark-red.jpg" alt="TrendLife">
+    <span class="label">Light bg</span>
+  </div>
+
+  <div class="tile tile-dark">
+    <img class="logo-white" src="logo-mark-red.jpg" alt="TrendLife">
+    <span class="label">Dark bg — Mono White</span>
+  </div>
+
+  <div class="tile tile-red">
+    <img class="logo-white-sm" src="logo-mark-red.jpg" alt="TrendLife">
+    <span class="label">Red bg — Mono White</span>
+  </div>
+
+  <div class="tile tile-white" style="background: linear-gradient(135deg,#fff5f5,#ffe4e4);">
+    <img class="logo-img-lg" src="logo-mark-red.jpg" alt="TrendLife">
+    <span class="label">Warm tint bg</span>
+  </div>
+
+</div>
+
+<!-- ── SECTION 2: SIZE SCALE ── -->
+<p class="section-title">Size Scale</p>
+<div class="tile tile-white" style="flex-direction:row;justify-content:flex-start;gap:32px;align-items:flex-end;padding:28px 32px;border-radius:14px;min-height:auto;">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+    <img src="logo-mark-red.jpg" alt="TrendLife" style="height:72px;width:auto;">
+    <span class="label">72px — Hero</span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+    <img src="logo-mark-red.jpg" alt="TrendLife" style="height:44px;width:auto;">
+    <span class="label">44px — Header</span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+    <img src="logo-mark-red.jpg" alt="TrendLife" style="height:28px;width:auto;">
+    <span class="label">28px — Compact</span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+    <img src="logo-mark-red.jpg" alt="TrendLife" style="height:18px;width:auto;">
+    <span class="label">18px — Min</span>
+  </div>
+</div>
+
+<!-- ── SECTION 3: COLOURS ── -->
+<p class="section-title">Brand Colours</p>
+<div class="tile tile-white" style="align-items:flex-start;padding:28px 32px;border-radius:14px;min-height:auto;">
+  <div class="swatch-row">
+    <div class="swatch">
+      <div class="swatch-block" style="background:#D71920;"></div>
+      <span class="swatch-name">Brand Red</span>
+      <span class="swatch-hex">#D71920</span>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background:#A80F15;"></div>
+      <span class="swatch-name">Red Dark</span>
+      <span class="swatch-hex">#A80F15</span>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background:#111111;border:1px solid #e0e0e0;"></div>
+      <span class="swatch-name">Black</span>
+      <span class="swatch-hex">#111111</span>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background:#FFFFFF;border:1px solid #e0e0e0;"></div>
+      <span class="swatch-name">White</span>
+      <span class="swatch-hex">#FFFFFF</span>
+    </div>
+    <div class="swatch">
+      <div class="swatch-block" style="background:#F5F5F5;border:1px solid #e0e0e0;"></div>
+      <span class="swatch-name">Light Gray</span>
+      <span class="swatch-hex">#F5F5F5</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 4: DO / DON'T ── -->
+<p class="section-title">Usage — Do & Don't</p>
+<div class="usage-row">
+
+  <div class="usage-tile tile-white">
+    <span class="badge badge-do">✓ Do</span>
+    <img src="logo-mark-red.jpg" alt="TrendLife" style="height:40px;width:auto;">
+    <p class="note">Use on white or very light backgrounds for maximum legibility.</p>
+  </div>
+
+  <div class="usage-tile tile-white">
+    <span class="badge badge-do">✓ Do</span>
+    <div style="background:#1A1A1A;padding:20px 24px;border-radius:10px;display:inline-block;">
+      <img src="logo-mark-red.jpg" alt="TrendLife" style="height:40px;width:auto;filter:brightness(0) invert(1);">
+    </div>
+    <p class="note">Use mono-white on dark or coloured backgrounds.</p>
+  </div>
+
+  <div class="usage-tile tile-white" style="background:#f0fff4;">
+    <span class="badge badge-dont">✗ Don't</span>
+    <img src="logo-mark-red.jpg" alt="TrendLife" style="height:40px;width:auto;filter:hue-rotate(130deg);">
+    <p class="note">Do not recolour the logo mark.</p>
+  </div>
+
+  <div class="usage-tile tile-white" style="background:#f0fff4;">
+    <span class="badge badge-dont">✗ Don't</span>
+    <img src="logo-mark-red.jpg" alt="TrendLife" style="height:40px;width:auto;transform:scaleX(-1);">
+    <p class="note">Do not flip or rotate the logo.</p>
+  </div>
+
+</div>
+
+<div class="divider"></div>
+<p style="font-size:10px;color:#bbb;margin-top:16px;">TrendLife Brand Assets — Internal Reference</p>
+
+</body>
+</html>
