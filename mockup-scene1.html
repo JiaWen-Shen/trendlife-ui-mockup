@@ -1663,6 +1663,117 @@
   .order-item:last-child { border-bottom: none; }
   .order-member { font-size: 12px; font-weight: 700; color: var(--gray-900); width: 90px; flex-shrink: 0; }
   .order-dishes { font-size: 12px; color: var(--gray-500); line-height: 1.6; }
+
+  /* ── AI BUTLER FLOATING BUTTON ── */
+  .fab-butler {
+    position: absolute;
+    bottom: 28px; right: 18px;
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    background: var(--red);
+    border: none;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 18px rgba(215,25,32,0.45), 0 1px 4px rgba(0,0,0,0.15);
+    z-index: 30;
+    transition: transform 0.18s, opacity 0.2s;
+  }
+  .fab-butler:active { transform: scale(0.92); }
+  .fab-butler img { height: 18px; width: auto; filter: brightness(0) invert(1); }
+  .fab-badge {
+    position: absolute; top: 1px; right: 1px;
+    width: 17px; height: 17px;
+    background: white; border-radius: 50%;
+    font-size: 9px; font-weight: 800;
+    color: var(--red);
+    display: flex; align-items: center; justify-content: center;
+    border: 1.5px solid var(--red);
+    line-height: 1;
+  }
+
+  /* ── BUTLER CHAT PANEL ── */
+  .chat-backdrop {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.38);
+    z-index: 35;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.28s;
+  }
+  .chat-backdrop.open { opacity: 1; pointer-events: all; }
+
+  .butler-panel {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 78%;
+    background: white;
+    border-radius: 24px 24px 0 0;
+    z-index: 40;
+    display: flex; flex-direction: column;
+    transform: translateY(100%);
+    transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+    box-shadow: 0 -6px 32px rgba(0,0,0,0.16);
+  }
+  .butler-panel.open { transform: translateY(0); }
+
+  .panel-handle {
+    width: 36px; height: 4px;
+    background: var(--gray-300); border-radius: 2px;
+    margin: 12px auto 0; flex-shrink: 0;
+  }
+  .panel-header {
+    display: flex; align-items: center;
+    padding: 14px 18px 12px; gap: 10px;
+    border-bottom: 1px solid var(--gray-200);
+    flex-shrink: 0;
+  }
+  .panel-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--red);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .panel-title { flex: 1; }
+  .panel-title-name { font-size: 15px; font-weight: 700; color: var(--gray-900); }
+  .panel-title-sub {
+    font-size: 11px; color: var(--green); font-weight: 600;
+    display: flex; align-items: center; gap: 4px; margin-top: 1px;
+  }
+  .panel-title-sub span { width: 6px; height: 6px; background: var(--green); border-radius: 50%; display: inline-block; }
+  .panel-close {
+    width: 30px; height: 30px;
+    background: var(--gray-100); border-radius: 50%; border: none;
+    font-size: 20px; color: var(--gray-500); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    line-height: 1; padding-bottom: 1px;
+  }
+  .panel-msgs {
+    flex: 1; overflow-y: auto;
+    padding: 16px 16px 8px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .panel-msgs::-webkit-scrollbar { display: none; }
+  .quick-replies {
+    display: flex; gap: 8px;
+    padding: 8px 14px 10px;
+    overflow-x: auto; flex-shrink: 0;
+  }
+  .quick-replies::-webkit-scrollbar { display: none; }
+  .quick-chip {
+    background: var(--red-light);
+    border: 1px solid var(--red-mid);
+    color: var(--red); border-radius: 20px;
+    padding: 7px 13px; font-size: 12px; font-weight: 600;
+    white-space: nowrap; cursor: pointer;
+    font-family: 'Geist', sans-serif;
+    transition: background 0.15s;
+  }
+  .quick-chip:active { background: var(--red-mid); }
+  .panel-input-bar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px 22px;
+    background: white; border-top: 1px solid var(--gray-200);
+    flex-shrink: 0;
+  }
 </style>
 </head>
 <body>
@@ -2471,10 +2582,114 @@
 
   </div><!-- /screens-wrap -->
 
+  <!-- ── AI BUTLER FLOATING BUTTON ── -->
+  <button class="fab-butler" id="fabButler" onclick="toggleButler()">
+    <img src="reference/logo-mark-only.png" alt="AI Butler">
+    <span class="fab-badge">2</span>
+  </button>
+
+  <!-- ── AI BUTLER CHAT PANEL ── -->
+  <div class="chat-backdrop" id="chatBackdrop" onclick="toggleButler()"></div>
+  <div class="butler-panel" id="butlerPanel">
+    <div class="panel-handle"></div>
+    <div class="panel-header">
+      <div class="panel-avatar">
+        <img src="reference/logo-mark-only.png" class="logo-mark-avatar" alt="">
+      </div>
+      <div class="panel-title">
+        <div class="panel-title-name">AI Butler</div>
+        <div class="panel-title-sub"><span></span>Active · 12 tasks running</div>
+      </div>
+      <button class="panel-close" onclick="toggleButler()">×</button>
+    </div>
+
+    <div class="panel-msgs" id="panelMsgs">
+      <div class="ai-bubble-wrap">
+        <div class="ai-avatar"><img src="reference/logo-mark-only.png" class="logo-mark-avatar" alt=""></div>
+        <div>
+          <div class="ai-sender"><span class="ai-sender-dot"></span>TrendLife AI Butler</div>
+          <div class="ai-msg">Good afternoon, Eva 👋 I've handled <strong>4 tasks</strong> for you today. What would you like me to do?</div>
+        </div>
+      </div>
+      <div class="msg-row sent">
+        <div class="msg-bubble sent-bubble">Remind Grandma to take her evening medication at 7pm.</div>
+      </div>
+      <div class="ai-bubble-wrap">
+        <div class="ai-avatar"><img src="reference/logo-mark-only.png" class="logo-mark-avatar" alt=""></div>
+        <div>
+          <div class="ai-sender"><span class="ai-sender-dot"></span>TrendLife AI Butler</div>
+          <div class="ai-msg">Done ✓ Reminder set for Grandma at <strong>7:00 PM</strong> — evening medication. I'll confirm once she acknowledges it.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quick-replies">
+      <button class="quick-chip" onclick="sendQuick(this)">📋 Today's tasks</button>
+      <button class="quick-chip" onclick="sendQuick(this)">👵 Grandma's health</button>
+      <button class="quick-chip" onclick="sendQuick(this)">🍽 Order dinner</button>
+      <button class="quick-chip" onclick="sendQuick(this)">📅 Schedule</button>
+    </div>
+
+    <div class="panel-input-bar">
+      <input class="chat-input" id="butlerInput" type="text" placeholder="Give AI a command…" onkeydown="if(event.key==='Enter')sendMsg()">
+      <button class="chat-send" onclick="sendMsg()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+      </button>
+    </div>
+  </div>
 
 </div><!-- /device-shell -->
 
 <script>
+  // ── AI BUTLER PANEL ──
+  let butlerOpen = false;
+  function toggleButler() {
+    butlerOpen = !butlerOpen;
+    document.getElementById('butlerPanel').classList.toggle('open', butlerOpen);
+    document.getElementById('chatBackdrop').classList.toggle('open', butlerOpen);
+    const fab = document.getElementById('fabButler');
+    fab.style.opacity = butlerOpen ? '0' : '1';
+    fab.style.pointerEvents = butlerOpen ? 'none' : 'all';
+    if (butlerOpen) setTimeout(() => document.getElementById('butlerInput').focus(), 350);
+  }
+
+  function sendMsg() {
+    const input = document.getElementById('butlerInput');
+    const text = input.value.trim();
+    if (!text) return;
+    addUserMsg(text);
+    input.value = '';
+    setTimeout(() => addAIReply('Got it — I\'ll take care of that right away.'), 700);
+  }
+
+  function sendQuick(btn) {
+    addUserMsg(btn.textContent.trim());
+    setTimeout(() => addAIReply('On it! I\'ll update you shortly.'), 700);
+  }
+
+  function addUserMsg(text) {
+    const msgs = document.getElementById('panelMsgs');
+    const div = document.createElement('div');
+    div.className = 'msg-row sent';
+    div.innerHTML = `<div class="msg-bubble sent-bubble">${text}</div>`;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function addAIReply(text) {
+    const msgs = document.getElementById('panelMsgs');
+    const div = document.createElement('div');
+    div.className = 'ai-bubble-wrap';
+    div.innerHTML = `
+      <div class="ai-avatar"><img src="reference/logo-mark-only.png" class="logo-mark-avatar" alt=""></div>
+      <div>
+        <div class="ai-sender"><span class="ai-sender-dot"></span>TrendLife AI Butler</div>
+        <div class="ai-msg">${text}</div>
+      </div>`;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
   // ── STATE ──
   const history = [0];
   let current = 0;
