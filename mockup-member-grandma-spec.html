@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrendLife AI Butler · Grandma Member View · Design Spec</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #080E12;
+    --surface:  #111A20;
+    --surface2: #1C2B35;
+    --border:   rgba(255,255,255,0.07);
+    --border2:  rgba(255,255,255,0.12);
+    --red:      #D71920;
+    --red-dim:  rgba(215,25,32,0.14);
+    --navy:     #1C2B35;
+    --teal:     #0093A7;
+    --teal-dim: rgba(0,147,167,0.14);
+    --amber:    #D97706;
+    --green:    #1E9E5C;
+    --purple:   #7B3F9E;
+    --text:     #ECF1F6;
+    --muted:    #6B8090;
+    --muted2:   #9BAFC0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+    min-height: 100vh;
+    transition: opacity 0.18s ease;
+  }
+  body.lang-switching { opacity: 0; }
+
+  /* ── DECORATIVE BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed; top: -200px; right: -200px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(215,25,32,0.06) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed; bottom: -150px; left: -150px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,147,167,0.05) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── STICKY NAV ── */
+  .site-nav {
+    position: sticky; top: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 13px 40px;
+    background: rgba(8,14,18,0.85);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-brand { display: flex; align-items: center; gap: 11px; }
+  .nav-logo {
+    width: 30px; height: 30px; border-radius: 7px; background: var(--red);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .nav-logo img { height: 13px; filter: brightness(0) invert(1); }
+  .nav-product { font-size: 14px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+  .nav-pipe { width: 1px; height: 14px; background: var(--border2); }
+  .nav-subtitle { font-size: 13px; color: var(--muted); }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .nav-badges { display: flex; align-items: center; gap: 7px; }
+  .badge {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 100px;
+  }
+  .badge-red    { background: rgba(215,25,32,0.13); color: #FF7A7E; border: 1px solid rgba(215,25,32,0.28); }
+  .badge-teal   { background: rgba(0,147,167,0.13);  color: #4DD5E4; border: 1px solid rgba(0,147,167,0.28); }
+  .badge-muted  { background: rgba(255,255,255,0.05); color: var(--muted2); border: 1px solid var(--border); }
+
+  /* Language toggle */
+  .lang-toggle {
+    display: flex; align-items: center;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border2);
+    border-radius: 100px; padding: 3px; gap: 2px;
+    flex-shrink: 0;
+  }
+  .lang-btn {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+    padding: 4px 11px; border-radius: 100px; border: none;
+    cursor: pointer; transition: background 0.2s, color 0.2s;
+    background: transparent; color: var(--muted);
+    font-family: inherit;
+  }
+  .lang-btn.active { background: var(--red); color: white; }
+  .lang-btn:hover:not(.active) { color: var(--text); }
+
+  /* View tabs */
+  .nav-view-tabs { display: flex; align-items: center; gap: 2px; }
+  .nav-vtab {
+    font-size: 11.5px; font-weight: 600; padding: 5px 11px; border-radius: 8px;
+    color: var(--muted); text-decoration: none; transition: all 0.15s;
+    border: 1px solid transparent; white-space: nowrap; cursor: pointer;
+  }
+  .nav-vtab:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+  .nav-vtab-active {
+    color: var(--text); background: var(--surface2); border-color: var(--border2);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 72px;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 72px 40px 64px;
+    position: relative; z-index: 1;
+    align-items: start;
+  }
+
+  .hero-left { display: flex; flex-direction: column; gap: 40px; }
+
+  .hero-kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--red-dim); border: 1px solid rgba(215,25,32,0.25);
+    border-radius: 100px; padding: 5px 14px 5px 10px;
+    font-size: 12px; font-weight: 700; color: #FF8A8E;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    width: fit-content;
+  }
+  .hero-kicker-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #FF6B72;
+    box-shadow: 0 0 6px rgba(255,107,114,0.7);
+    animation: pulse-red 2s ease-in-out infinite;
+  }
+  @keyframes pulse-red {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  .hero-title {
+    font-size: 52px; font-weight: 900; letter-spacing: -0.04em; line-height: 1.0;
+    margin-top: 8px;
+  }
+  .hero-title .accent { color: var(--red); }
+  .hero-title .accent2 { color: #4DD5E4; }
+
+  .hero-sub {
+    font-size: 16px; color: var(--muted2); line-height: 1.7; margin-top: 14px;
+    max-width: 480px;
+  }
+
+  /* Persona card */
+  .persona-card {
+    background: var(--surface); border: 1px solid var(--border2);
+    border-radius: 20px; padding: 20px 22px;
+  }
+  .persona-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .persona-av {
+    width: 50px; height: 50px; border-radius: 50%; flex-shrink: 0;
+    background: linear-gradient(135deg, #B45309, #78350F);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 900; color: white;
+  }
+  .persona-name { font-size: 15px; font-weight: 800; line-height: 1.2; }
+  .persona-meta { font-size: 12px; color: var(--muted); margin-top: 3px; }
+  .persona-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .ptag {
+    font-size: 11px; font-weight: 600; padding: 4px 11px; border-radius: 100px;
+    background: rgba(255,255,255,0.05); color: var(--muted2); border: 1px solid var(--border);
+  }
+
+  /* Principles */
+  .section-eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 14px;
+  }
+  .principles { display: flex; flex-direction: column; gap: 10px; }
+  .principle { display: flex; gap: 12px; }
+  .p-num {
+    width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0; margin-top: 1px;
+    background: var(--surface2); display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 900; color: var(--red);
+  }
+  .p-text { font-size: 13px; color: var(--muted2); line-height: 1.55; padding-top: 2px; }
+  .p-text strong { color: var(--text); font-weight: 700; }
+
+  /* ── STICKY PHONE ── */
+  .hero-right {
+    position: sticky; top: 80px;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+  }
+  .phone-shell {
+    border-radius: 52px; overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.08),
+      0 40px 100px rgba(0,0,0,0.65),
+      0 16px 40px rgba(0,0,0,0.4);
+    background: #0F1C24;
+    position: relative;
+    transform: scale(0.80);
+    transform-origin: top center;
+    margin-bottom: -169px;
+  }
+  .phone-shell::before {
+    content: '';
+    position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+    width: 110px; height: 34px; background: #0F1C24;
+    border-radius: 0 0 22px 22px; z-index: 10;
+  }
+  .phone-shell::after {
+    content: '';
+    position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+    width: 98px; height: 28px; background: #111D25;
+    border-radius: 0 0 18px 18px; z-index: 11;
+  }
+  .phone-shell iframe {
+    display: block;
+    width: 390px; height: 844px;
+    border: none;
+  }
+  .screen-nav {
+    width: 100%; margin-top: 10px;
+    border: 1px solid var(--border2); border-radius: 12px;
+    overflow: hidden; background: var(--surface);
+  }
+  .snav-instruction {
+    font-size: 10.5px; color: var(--muted); padding: 9px 12px;
+    border-bottom: 1px solid var(--border); line-height: 1.45;
+  }
+  .snav-item {
+    display: flex; align-items: center; gap: 9px;
+    padding: 8px 12px; width: 100%; text-align: left;
+    border: none; background: transparent; cursor: pointer;
+    font-family: inherit; color: var(--muted2);
+    transition: background 0.12s, color 0.12s;
+  }
+  .snav-item + .snav-item { border-top: 1px solid var(--border); }
+  .snav-item:hover { background: var(--surface2); color: var(--text); }
+  .snav-item .snav-icon { font-size: 14px; flex-shrink: 0; }
+  .snav-item .snav-name { flex: 1; font-size: 12px; font-weight: 600; }
+  .snav-item .snav-num {
+    font-size: 9px; font-weight: 700; color: var(--muted);
+    background: rgba(255,255,255,0.06); border-radius: 4px; padding: 2px 5px;
+    flex-shrink: 0;
+  }
+  .snav-item.snav-active { background: rgba(215,25,32,0.09); color: var(--text); }
+  .snav-item.snav-active .snav-name { color: #FF7A7E; font-weight: 700; }
+  .snav-item.snav-active .snav-num { background: var(--red); color: white; }
+
+  /* ── SCREENS GRID ── */
+  .screens-section {
+    position: relative; z-index: 1;
+    max-width: 1300px; margin: 0 auto; padding: 0 40px 80px;
+  }
+  .section-header { margin-bottom: 28px; }
+  .section-title { font-size: 28px; font-weight: 900; letter-spacing: -0.02em; }
+  .section-sub { font-size: 14px; color: var(--muted); margin-top: 5px; }
+
+  .screen-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .sc {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .sc:hover { border-color: var(--border2); transform: translateY(-2px); }
+  .sc-head {
+    padding: 14px 16px 10px;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sc-num {
+    width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 900; color: white;
+  }
+  .sc-name { font-size: 13px; font-weight: 800; }
+  .sc-body { padding: 12px 16px 16px; }
+  .sc-desc { font-size: 12px; color: var(--muted2); line-height: 1.6; }
+  .sc-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+  .sc-tag {
+    font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 100px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    max-width: 1300px; margin: 0 auto 64px;
+    height: 1px; background: var(--border);
+  }
+
+  /* ── DESIGN SYSTEM ── */
+  .ds-section {
+    position: relative; z-index: 1;
+    max-width: 1300px; margin: 0 auto; padding: 0 40px 80px;
+  }
+  .ds-cols {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px;
+    margin-top: 32px;
+  }
+  .ds-col-title {
+    font-size: 13px; font-weight: 700; color: var(--muted2);
+    text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 18px;
+  }
+
+  /* Color swatches */
+  .swatches { display: flex; flex-direction: column; gap: 9px; }
+  .swatch { display: flex; align-items: center; gap: 12px; }
+  .sw-dot { width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0; }
+  .sw-name { font-size: 13px; font-weight: 700; line-height: 1.2; }
+  .sw-use  { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+  /* Type samples */
+  .type-samples { display: flex; flex-direction: column; gap: 20px; }
+  .ts-label { font-size: 10px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+
+  /* Pattern notes */
+  .patterns { display: flex; flex-direction: column; gap: 10px; }
+  .pn {
+    padding: 12px 14px; background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border); border-radius: 12px;
+  }
+  .pn-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .pn-desc  { font-size: 12px; color: var(--muted); line-height: 1.55; }
+
+  /* ── FOOTER ── */
+  .footer {
+    position: relative; z-index: 1;
+    border-top: 1px solid var(--border);
+    max-width: 1300px; margin: 0 auto; padding: 22px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-left { font-size: 12px; color: var(--muted); }
+  .footer-right { display: flex; align-items: center; gap: 8px; }
+  .footer-logo {
+    width: 20px; height: 20px; border-radius: 5px; background: var(--red);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .footer-logo img { height: 9px; filter: brightness(0) invert(1); }
+  .footer-brand { font-size: 12px; font-weight: 700; color: var(--muted2); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1140px) {
+    .hero { grid-template-columns: 1fr; gap: 48px; padding: 48px 28px; }
+    .hero-right { position: static; }
+    .hero-title { font-size: 42px; }
+    .screen-cards { grid-template-columns: repeat(2, 1fr); }
+    .ds-cols { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 700px) {
+    .site-nav { padding: 12px 20px; }
+    .nav-view-tabs { display: none; }
+    .hero { padding: 32px 20px; }
+    .hero-title { font-size: 34px; }
+    .screen-cards { grid-template-columns: 1fr; }
+    .screens-section, .ds-section { padding: 0 20px 60px; }
+    .ds-cols { grid-template-columns: 1fr; }
+    .phone-shell iframe { width: 390px; height: 844px; }
+    .phone-shell { border-radius: 44px; transform: none; margin-bottom: 0; }
+    .footer { padding: 20px; flex-direction: column; gap: 10px; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── STICKY NAV ── -->
+<nav class="site-nav">
+  <div class="nav-brand">
+    <div class="nav-logo">
+      <img src="reference/logo-mark-only.png" alt="TrendLife">
+    </div>
+    <span class="nav-product" data-i18n="nav-product">TrendLife AI Butler</span>
+    <div class="nav-pipe"></div>
+    <span class="nav-subtitle" data-i18n="nav-subtitle">Design Spec</span>
+  </div>
+  <div class="nav-right">
+    <nav class="nav-view-tabs">
+      <a class="nav-vtab" href="#" data-i18n="tab-manager">Manager's View</a>
+      <a class="nav-vtab nav-vtab-active" href="#" data-i18n="tab-grandma">Member's View (Grandma)</a>
+      <a class="nav-vtab" href="#" data-i18n="tab-teens">Member's View (Teens)</a>
+    </nav>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btn-zh" onclick="setLang('zh')">中</button>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ── HERO ── -->
+<section class="hero">
+
+  <!-- Left: context + principles -->
+  <div class="hero-left">
+
+    <div>
+      <div class="hero-kicker">
+        <span class="hero-kicker-dot"></span>
+        <span data-i18n="hero-kicker">Interactive Prototype</span>
+      </div>
+      <div class="hero-title" data-i18n-html="hero-title">
+        Grandma's<br><span class="accent">AI Butler</span><br><span class="accent2" style="font-size:38px;">Member View</span>
+      </div>
+      <p class="hero-sub" data-i18n="hero-sub">
+        A senior-first mobile experience where AI proactively manages health monitoring, family communication, daily scheduling, and medical bookings — built for clarity, warmth, and trust.
+      </p>
+    </div>
+
+    <!-- Persona -->
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-av">R</div>
+        <div>
+          <div class="persona-name" data-i18n="persona-name">Rose Chen · 68 years old</div>
+          <div class="persona-meta" data-i18n="persona-meta">Retired teacher · Taipei · Eva's mother</div>
+        </div>
+      </div>
+      <div class="persona-tags">
+        <span class="ptag" data-i18n="ptag-1">Smartphone user</span>
+        <span class="ptag" data-i18n="ptag-2">Blood pressure monitoring</span>
+        <span class="ptag" data-i18n="ptag-3">Regular cardiology visits</span>
+        <span class="ptag" data-i18n="ptag-4">Communicates via LINE</span>
+        <span class="ptag" data-i18n="ptag-5">Prefers large text &amp; clear actions</span>
+      </div>
+    </div>
+
+    <!-- Design principles -->
+    <div>
+      <div class="section-eyebrow" data-i18n="principles-eyebrow">Design Principles</div>
+      <div class="principles">
+        <div class="principle">
+          <div class="p-num">1</div>
+          <div class="p-text" data-i18n-html="p-1"><strong>Proactive AI</strong> — The butler speaks first. Health reports, schedule nudges, and medication reminders surface before the user has to ask.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">2</div>
+          <div class="p-text" data-i18n-html="p-2"><strong>Persistent quick-actions</strong> — The bottom dock is always visible on the home screen, making My Health and Contact Family available in one tap.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">3</div>
+          <div class="p-text" data-i18n-html="p-3"><strong>Senior-adaptive layouts</strong> — Font sizes and layouts are adapted based on the senior member's profile and accessibility preferences.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">4</div>
+          <div class="p-text" data-i18n-html="p-4"><strong>Guided interactions</strong> — Input and navigation are designed to lead seniors step by step, reducing the technology gap.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">5</div>
+          <div class="p-text" data-i18n-html="p-5"><strong>Family as context</strong> — Every health action has a family dimension: share with Eva, notify on appointments, family album curated by AI.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Right: sticky phone iframe -->
+  <div class="hero-right">
+    <div class="phone-shell">
+      <iframe
+        src="mockup-member-grandma.html"
+        title="Grandma AI Butler Mockup"
+        scrolling="no">
+      </iframe>
+    </div>
+    <div class="screen-nav" id="screenNav">
+      <div class="snav-instruction" data-i18n="snav-hint">點擊畫面互動，或點擊選單查看個別畫面</div>
+      <button class="snav-item snav-active" onclick="specGoTo(0)"><span class="snav-icon">💬</span><span class="snav-name" data-i18n="sc0-name">AI Chat Home</span><span class="snav-num">0</span></button>
+      <button class="snav-item" onclick="specGoTo(1)"><span class="snav-icon">🩺</span><span class="snav-name" data-i18n="sc1-name">My Health</span><span class="snav-num">1</span></button>
+      <button class="snav-item" onclick="specGoTo(2)"><span class="snav-icon">📊</span><span class="snav-name" data-i18n="sc2-name">Health Detail</span><span class="snav-num">2</span></button>
+      <button class="snav-item" onclick="specGoTo(3)"><span class="snav-icon">💌</span><span class="snav-name" data-i18n="sc3-name">Contact Family</span><span class="snav-num">3</span></button>
+      <button class="snav-item" onclick="specGoTo(4)"><span class="snav-icon">💬</span><span class="snav-name" data-i18n="sc4-name">Message Eva</span><span class="snav-num">4</span></button>
+      <button class="snav-item" onclick="specGoTo(5)"><span class="snav-icon">📅</span><span class="snav-name" data-i18n="sc5-name">Today's Schedule</span><span class="snav-num">5</span></button>
+      <button class="snav-item" onclick="specGoTo(6)"><span class="snav-icon">📸</span><span class="snav-name" data-i18n="sc6-name">Family Photos</span><span class="snav-num">6</span></button>
+      <button class="snav-item" onclick="specGoTo(7)"><span class="snav-icon">🏥</span><span class="snav-name" data-i18n="sc7-name">Book Appointment</span><span class="snav-num">7</span></button>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ── SCREENS GRID ── -->
+<section class="screens-section">
+  <div class="section-divider" style="margin-bottom:48px;"></div>
+
+  <div class="section-header">
+    <div class="section-title" data-i18n="screens-title">Screens &amp; Flows</div>
+    <div class="section-sub" data-i18n="screens-sub">8 screens covering health, communication, scheduling, and appointment booking</div>
+  </div>
+
+  <div class="screen-cards">
+
+    <!-- 0 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(28,43,53,0.5);">
+        <div class="sc-num" style="background:#2E4455;">0</div>
+        <span class="sc-name" data-i18n="sc0-name">AI Chat Home</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc0-desc">Entry point. AI greets proactively, surfaces health report readiness and upcoming schedule. Persistent bottom dock shows My Health (with badge) and Contact Family chips. Expand chevron reveals textile drawer with 4 action cards.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(0,147,167,0.15);color:#4DD5E4;" data-i18n="tag-bottom-dock">Bottom Dock</span>
+          <span class="sc-tag" style="background:rgba(0,147,167,0.15);color:#4DD5E4;" data-i18n="tag-textile-drawer">Textile Drawer</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(215,25,32,0.10);">
+        <div class="sc-num" style="background:var(--red);">1</div>
+        <span class="sc-name" data-i18n="sc1-name">My Health</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc1-desc">AI-driven health hub for everyday wellness. Handles daily questions through chat and proactively surfaces smart reminders — annual checkup nudges, medication follow-ups, and flag alerts based on prior reports.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(215,25,32,0.12);color:#FF8A8E;" data-i18n="tag-daily-wellness">Daily Wellness</span>
+          <span class="sc-tag" style="background:rgba(215,25,32,0.12);color:#FF8A8E;" data-i18n="tag-smart-remind">Smart Reminders</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(28,43,53,0.6);">
+        <div class="sc-num" style="background:#1C2B35;">2</div>
+        <span class="sc-name" data-i18n="sc2-name">Health Detail</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc2-desc">Full 2024 annual checkup breakdown. Navy gradient header, three score cards, AI recommendation bubble, and a 6-row item table with Normal / High / Elevated tags. Exits to booking or sends results to family.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(28,43,53,0.6);color:#7FD9E8;" data-i18n="tag-data-display">Data Display</span>
+          <span class="sc-tag" style="background:rgba(28,43,53,0.6);color:#7FD9E8;" data-i18n="tag-ai-rec">AI Rec</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(123,63,158,0.14);">
+        <div class="sc-num" style="background:#7B3F9E;">3</div>
+        <span class="sc-name" data-i18n="sc3-name">Contact Family</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc3-desc">2×2 textile card grid. Each member has a unique gradient: Eva (purple), Wei (deep navy), Yvonne (emerald), Ethan (warm red). Frosted initials circle avatars replace all person emoji. Live status dot per member.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(123,63,158,0.15);color:#C084FC;" data-i18n="tag-textile-cards">Textile Cards</span>
+          <span class="sc-tag" style="background:rgba(123,63,158,0.15);color:#C084FC;" data-i18n="tag-presence">Presence</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(123,63,158,0.12);">
+        <div class="sc-num" style="background:#6D28D9;">4</div>
+        <span class="sc-name" data-i18n="sc4-name">Message Eva</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc4-desc">Chat thread with Eva. Nav bar includes green voice-call and teal video-call SVG icon buttons. AI Butler injects a contextual suggestion offering to include the health summary in the outgoing message.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(30,158,92,0.14);color:#4ADE80;" data-i18n="tag-call-buttons">Call Buttons</span>
+          <span class="sc-tag" style="background:rgba(0,147,167,0.14);color:#4DD5E4;" data-i18n="tag-ai-suggest">AI Suggest</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(0,147,167,0.12);">
+        <div class="sc-num" style="background:var(--teal);">5</div>
+        <span class="sc-name" data-i18n="sc5-name">Today's Schedule</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc5-desc">Teal gradient header with date and summary count. AI tip card with Book Taxi / Notify Eva actions. Six-event timeline: ✓ done (green), pulsing now (red), upcoming (gray), key hospital event highlighted in amber card.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(0,147,167,0.13);color:#4DD5E4;" data-i18n="tag-timeline">Timeline</span>
+          <span class="sc-tag" style="background:rgba(0,147,167,0.13);color:#4DD5E4;" data-i18n="tag-ai-actions">AI Actions</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(255,255,255,0.04);">
+        <div class="sc-num" style="background:#4B5563;">6</div>
+        <span class="sc-name" data-i18n="sc6-name">Family Photos</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc6-desc">3×3 photo grid using CSS gradient scene backgrounds — no emoji. Each cell simulates a photo with a color-graded landscape. Albums row uses gradient tiles with bold initials. AI Butler curates Year in Review and birthday collections.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(255,255,255,0.05);color:#9CA3AF;" data-i18n="tag-css-photos">CSS Photos</span>
+          <span class="sc-tag" style="background:rgba(255,255,255,0.05);color:#9CA3AF;" data-i18n="tag-ai-curation">AI Curation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(180,83,9,0.13);">
+        <div class="sc-num" style="background:var(--amber);">7</div>
+        <span class="sc-name" data-i18n="sc7-name">Book Appointment</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc7-desc">Amber gradient header with cardiology context. AI recommendation card pre-selects nearest slot. Doctor card (Dr. Chen Wei · ★ 4.9 · AI Recommended). Horizontal 5-day date chips + 2-col time grid with taken/available/selected states.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(180,83,9,0.15);color:#FCD34D;" data-i18n="tag-date-picker">Date Picker</span>
+          <span class="sc-tag" style="background:rgba(180,83,9,0.15);color:#FCD34D;" data-i18n="tag-time-slots">Time Slots</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ── DESIGN SYSTEM ── -->
+<section class="ds-section">
+  <div class="section-divider" style="margin-bottom:56px;"></div>
+
+  <div class="section-title" data-i18n="ds-title">Design System</div>
+
+  <div class="ds-cols">
+
+    <!-- Colors -->
+    <div>
+      <div class="ds-col-title" data-i18n="ds-colors-title">Brand Colors</div>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="sw-dot" style="background:#D71920;"></div>
+          <div><div class="sw-name" data-i18n="sw1-name">TrendLife Red</div><div class="sw-use" data-i18n="sw1-use">#D71920 · Primary actions, alerts, selected states</div></div>
+        </div>
+        <div class="swatch">
+          <div class="sw-dot" style="background:#1C2B35;"></div>
+          <div><div class="sw-name" data-i18n="sw2-name">Navy</div><div class="sw-use" data-i18n="sw2-use">#1C2B35 · AI bubbles, health analysis header</div></div>
+        </div>
+        <div class="swatch">
+          <div class="sw-dot" style="background:#0093A7;"></div>
+          <div><div class="sw-name" data-i18n="sw3-name">Teal</div><div class="sw-use" data-i18n="sw3-use">#0093A7 · Quick-reply chips, schedule screen</div></div>
+        </div>
+        <div class="swatch">
+          <div class="sw-dot" style="background:#F5EFE8; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);"></div>
+          <div><div class="sw-name" data-i18n="sw4-name">Cream</div><div class="sw-use" data-i18n="sw4-use">#F5EFE8 · Chat header, status bar background</div></div>
+        </div>
+        <div class="swatch">
+          <div class="sw-dot" style="background:#D97706;"></div>
+          <div><div class="sw-name" data-i18n="sw5-name">Amber</div><div class="sw-use" data-i18n="sw5-use">#D97706 · Schedule &amp; appointment screens</div></div>
+        </div>
+        <div class="swatch">
+          <div class="sw-dot" style="background:#1E9E5C;"></div>
+          <div><div class="sw-name" data-i18n="sw6-name">Green</div><div class="sw-use" data-i18n="sw6-use">#1E9E5C · Normal values, completed states</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div>
+      <div class="ds-col-title" data-i18n="ds-type-title">Typography — Geist</div>
+      <div class="type-samples">
+        <div>
+          <div class="ts-label" data-i18n="ts1-label">Display · 44px / 900</div>
+          <div style="font-size:34px;font-weight:900;letter-spacing:-0.03em;line-height:1;" data-i18n="ts1-sample">AI Butler</div>
+        </div>
+        <div>
+          <div class="ts-label" data-i18n="ts2-label">Screen title · 20px / 900</div>
+          <div style="font-size:20px;font-weight:900;letter-spacing:-0.02em;" data-i18n="ts2-sample">Health Analysis</div>
+        </div>
+        <div>
+          <div class="ts-label" data-i18n="ts3-label">Card label · 15px / 800</div>
+          <div style="font-size:15px;font-weight:800;" data-i18n="ts3-sample">My Health · Contact Family</div>
+        </div>
+        <div>
+          <div class="ts-label" data-i18n="ts4-label">Body · 15px / 400 — senior readability</div>
+          <div style="font-size:14px;color:var(--muted2);line-height:1.55;" data-i18n="ts4-sample">Chat messages and descriptions use 15px line height 1.55 for comfortable reading at all ages.</div>
+        </div>
+        <div>
+          <div class="ts-label" data-i18n="ts5-label">Label / tag · 11px / 700 · uppercase</div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#4DD5E4;" data-i18n="ts5-sample">AI BUTLER · TEAL LABEL</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Patterns -->
+    <div>
+      <div class="ds-col-title" data-i18n="ds-patterns-title">Interaction Patterns</div>
+      <div class="patterns">
+        <div class="pn">
+          <div class="pn-title" data-i18n="pn1-title">Textile Cards</div>
+          <div class="pn-desc" data-i18n="pn1-desc">Bold gradient + repeating-linear-gradient woven texture overlay (::before) + decorative ring motif (::after). Used for Contact Family grid and Quick Actions drawer.</div>
+        </div>
+        <div class="pn">
+          <div class="pn-title" data-i18n="pn2-title">Initials Avatars</div>
+          <div class="pn-desc" data-i18n="pn2-desc">All person representations use CSS gradient circles with letter initials. Each family member's color is consistent across all screens (Eva = purple, Wei = navy, Yvonne = emerald, Ethan = red).</div>
+        </div>
+        <div class="pn">
+          <div class="pn-title" data-i18n="pn3-title">Visibility Drawer</div>
+          <div class="pn-desc" data-i18n="pn3-desc">Full-screen slide-up overlay using visibility: hidden → visible with transition-delay for animation sequencing. Panel uses transform: translateY(100% → 0).</div>
+        </div>
+        <div class="pn">
+          <div class="pn-title" data-i18n="pn4-title">Persistent Dock</div>
+          <div class="pn-desc" data-i18n="pn4-desc">Always visible on Screen 0. Contains expand chevron, two pre-prompt chips, and the chat input bar. Hidden via display: none in goTo() when navigating to sub-screens.</div>
+        </div>
+        <div class="pn">
+          <div class="pn-title" data-i18n="pn5-title">CSS Photo Simulation</div>
+          <div class="pn-desc" data-i18n="pn5-desc">Photo grid cells use multi-stop linear-gradient backgrounds to suggest warm, cool, or outdoor scene tones — replacing all emoji for a more realistic photo feel.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-left" data-i18n="footer-text">TrendLife AI Butler · Grandma Member View · v1 Mockup · March 2025</div>
+  <div class="footer-right">
+    <div class="footer-logo">
+      <img src="reference/logo-mark-only.png" alt="TrendLife">
+    </div>
+    <span class="footer-brand" data-i18n="footer-brand">TrendLife</span>
+  </div>
+</footer>
+
+<script>
+const dict = {
+  /* Nav */
+  'nav-product':   { en: 'TrendLife AI Butler',   zh: 'TrendLife AI 管家' },
+  'nav-subtitle':  { en: 'Design Spec',            zh: '設計規格' },
+  'badge-member':  { en: 'Member View',            zh: '會員視角' },
+  'badge-persona': { en: 'Grandma Persona',        zh: '奶奶人物誌' },
+  'badge-version': { en: 'v1 · March 2025',        zh: 'v1 · 2025 年 3 月' },
+
+  /* View tabs */
+  'tab-manager': { en: "Manager's View",            zh: '管理者視角' },
+  'tab-grandma': { en: "Member's View (Grandma)",   zh: '會員視角（奶奶）' },
+  'tab-teens':   { en: "Member's View (Teens)",     zh: '會員視角（年輕族群）' },
+
+  /* Hero */
+  'hero-kicker': { en: 'Interactive Prototype', zh: '互動原型' },
+  'hero-title':  {
+    en: "Grandma's<br><span class=\"accent\">AI Butler</span><br><span class=\"accent2\" style=\"font-size:38px;\">Member View</span>",
+    zh: "奶奶的<br><span class=\"accent\">AI 管家</span><br><span class=\"accent2\" style=\"font-size:38px;\">會員視角</span>"
+  },
+  'hero-sub': {
+    en: "A senior-first mobile experience where AI proactively manages health monitoring, family communication, daily scheduling, and medical bookings — built for clarity, warmth, and trust.",
+    zh: "以長者為優先的行動體驗，AI 主動管理健康監測、家人溝通、日程安排與醫療預約——設計以清晰、溫暖與信任為核心。"
+  },
+
+  /* Persona */
+  'persona-name': { en: 'Rose Chen · 68 years old',       zh: '陳玫瑰 · 68 歲' },
+  'persona-meta': { en: "Retired teacher · Taipei · Eva's mother", zh: '退休教師 · 台北 · Eva 的媽媽' },
+  'ptag-1': { en: 'Smartphone user',                   zh: '智慧型手機使用者' },
+  'ptag-2': { en: 'Blood pressure monitoring',         zh: '血壓監測' },
+  'ptag-3': { en: 'Regular cardiology visits',         zh: '定期心臟科回診' },
+  'ptag-4': { en: 'Communicates via LINE',             zh: '使用 LINE 聯絡' },
+  'ptag-5': { en: 'Prefers large text & clear actions',zh: '偏好大字體與清晰操作' },
+
+  /* Principles */
+  'principles-eyebrow': { en: 'Design Principles', zh: '設計原則' },
+  'p-1': {
+    en: '<strong>Proactive AI</strong> — The butler speaks first. Health reports, schedule nudges, and medication reminders surface before the user has to ask.',
+    zh: '<strong>主動型 AI</strong> — 管家主動發言。健康報告、行程提醒與用藥通知在使用者開口前就自動浮現。'
+  },
+  'p-2': {
+    en: '<strong>Persistent quick-actions</strong> — The bottom dock is always visible on the home screen, making My Health and Contact Family available in one tap.',
+    zh: '<strong>常駐快速操作</strong> — 主畫面底部功能列永遠可見，「我的健康」和「聯繫家人」隨時一鍵即達。'
+  },
+  'p-3': {
+    en: '<strong>Senior-adaptive layouts</strong> — Font sizes and layouts are adapted based on the senior member\'s profile and accessibility preferences.',
+    zh: '<strong>依長輩資料調整版面</strong> — 根據長輩基本資料調整合適的字體大小及版面配置。'
+  },
+  'p-4': {
+    en: '<strong>Guided interactions</strong> — Input and navigation are designed to lead seniors step by step, reducing the technology gap.',
+    zh: '<strong>引導式操作設計</strong> — 針對長輩屬性引導輸入及操作，避免科技隔閡。'
+  },
+  'p-5': {
+    en: '<strong>Family as context</strong> — Every health action has a family dimension: share with Eva, notify on appointments, family album curated by AI.',
+    zh: '<strong>家人作為情境脈絡</strong> — 每個健康行動都有家庭面向：分享給 Eva、預約通知、AI 精選的家庭相簿。'
+  },
+
+  /* Screen nav instruction */
+  'snav-hint': {
+    en: 'Tap the screen to interact, or select a screen below',
+    zh: '點擊畫面互動，或點擊選單查看個別畫面'
+  },
+
+  /* Screens section */
+  'screens-title': { en: 'Screens & Flows', zh: '畫面與流程' },
+  'screens-sub':   { en: '8 screens covering health, communication, scheduling, and appointment booking', zh: '8 個畫面，涵蓋健康、溝通、行程與預約掛號' },
+
+  /* Screen cards */
+  'sc0-name': { en: 'AI Chat Home',      zh: 'AI 對話首頁' },
+  'sc0-desc': {
+    en: 'Entry point. AI greets proactively, surfaces health report readiness and upcoming schedule. Persistent bottom dock shows My Health (with badge) and Contact Family chips. Expand chevron reveals textile drawer with 4 action cards.',
+    zh: '入口畫面。AI 主動問候，提示健康報告狀態與即將到來的行程。底部常駐列顯示「我的健康」（含徽章）和「聯繫家人」。展開箭頭可開啟含 4 張動作卡片的織品抽屜。'
+  },
+  'sc1-name': { en: 'My Health',         zh: '我的健康' },
+  'sc1-desc': {
+    en: 'AI-driven health hub for everyday wellness. Handles daily questions through chat and proactively surfaces smart reminders — annual checkup nudges, medication follow-ups, and flag alerts based on prior reports.',
+    zh: 'AI 日常健康中心。透過對話回應每日健康問題，並主動推送智慧提醒——年度健檢提示、用藥追蹤，以及根據過往報告偵測異常數值的警示。'
+  },
+  'sc2-name': { en: 'Health Detail',     zh: '健康詳情' },
+  'sc2-desc': {
+    en: 'Full 2024 annual checkup breakdown. Navy gradient header, three score cards, AI recommendation bubble, and a 6-row item table with Normal / High / Elevated tags. Exits to booking or sends results to family.',
+    zh: '完整的 2024 年度健檢報告分析。深藍漸層標題、三張評分卡、AI 建議氣泡，以及含「正常／偏高／高」標籤的 6 列檢驗表格。可跳轉至預約或傳送結果給家人。'
+  },
+  'sc3-name': { en: 'Contact Family',    zh: '聯繫家人' },
+  'sc3-desc': {
+    en: '2×2 textile card grid. Each member has a unique gradient: Eva (purple), Wei (deep navy), Yvonne (emerald), Ethan (warm red). Frosted initials circle avatars replace all person emoji. Live status dot per member.',
+    zh: '2×2 織品卡片格狀排列。每位成員有專屬漸層：Eva（紫）、Wei（深藍）、Yvonne（翠綠）、Ethan（暖紅）。以毛玻璃感縮寫圓形頭像取代所有人物圖示。每位成員顯示即時狀態點。'
+  },
+  'sc4-name': { en: 'Message Eva',       zh: '傳訊給 Eva' },
+  'sc4-desc': {
+    en: 'Chat thread with Eva. Nav bar includes green voice-call and teal video-call SVG icon buttons. AI Butler injects a contextual suggestion offering to include the health summary in the outgoing message.',
+    zh: '與 Eva 的對話紀錄。導覽列含綠色語音通話和青色視訊通話 SVG 圖示按鈕。AI 管家插入情境建議，詢問是否在外發訊息中附上健康摘要。'
+  },
+  'sc5-name': { en: "Today's Schedule",  zh: '今日行程' },
+  'sc5-desc': {
+    en: 'Teal gradient header with date and summary count. AI tip card with Book Taxi / Notify Eva actions. Six-event timeline: ✓ done (green), pulsing now (red), upcoming (gray), key hospital event highlighted in amber card.',
+    zh: '青色漸層標題顯示日期與事項數量。AI 提示卡含「叫計程車」與「通知 Eva」操作。六事項時間軸：✓ 完成（綠）、脈動中（紅）、即將到來（灰），醫院關鍵事項以琥珀色卡片標示。'
+  },
+  'sc6-name': { en: 'Family Photos',     zh: '家庭相簿' },
+  'sc6-desc': {
+    en: '3×3 photo grid using CSS gradient scene backgrounds — no emoji. Each cell simulates a photo with a color-graded landscape. Albums row uses gradient tiles with bold initials. AI Butler curates Year in Review and birthday collections.',
+    zh: '使用 CSS 漸層場景背景的 3×3 相片格，無圖示。每格以色彩漸層模擬風景照片效果。相簿列採用漸層色塊搭配粗體縮寫。AI 管家精選「年度回顧」和生日紀念集。'
+  },
+  'sc7-name': { en: 'Book Appointment',  zh: '預約掛號' },
+  'sc7-desc': {
+    en: 'Amber gradient header with cardiology context. AI recommendation card pre-selects nearest slot. Doctor card (Dr. Chen Wei · ★ 4.9 · AI Recommended). Horizontal 5-day date chips + 2-col time grid with taken/available/selected states.',
+    zh: '琥珀漸層標題含心臟科情境說明。AI 建議卡預先選取最近時段。醫師卡（陳偉醫師 · ★ 4.9 · AI 推薦）。橫向 5 日日期選項 + 2 欄時段格，含已佔用／可選／已選狀態。'
+  },
+
+  /* Screen tags */
+  'tag-bottom-dock':    { en: 'Bottom Dock',    zh: '底部常駐列' },
+  'tag-textile-drawer': { en: 'Textile Drawer', zh: '織品抽屜' },
+  'tag-daily-wellness': { en: 'Daily Wellness',  zh: '日常健康' },
+  'tag-smart-remind':   { en: 'Smart Reminders', zh: '智慧提醒' },
+  'tag-camera-input':   { en: 'Camera Input',    zh: '相機輸入' },
+  'tag-ai-analysis':    { en: 'AI Analysis',     zh: 'AI 分析' },
+  'tag-data-display':   { en: 'Data Display',   zh: '資料展示' },
+  'tag-ai-rec':         { en: 'AI Rec',         zh: 'AI 建議' },
+  'tag-textile-cards':  { en: 'Textile Cards',  zh: '織品卡片' },
+  'tag-presence':       { en: 'Presence',       zh: '即時狀態' },
+  'tag-call-buttons':   { en: 'Call Buttons',   zh: '通話按鈕' },
+  'tag-ai-suggest':     { en: 'AI Suggest',     zh: 'AI 建議' },
+  'tag-timeline':       { en: 'Timeline',       zh: '時間軸' },
+  'tag-ai-actions':     { en: 'AI Actions',     zh: 'AI 操作' },
+  'tag-css-photos':     { en: 'CSS Photos',     zh: 'CSS 照片' },
+  'tag-ai-curation':    { en: 'AI Curation',    zh: 'AI 精選' },
+  'tag-date-picker':    { en: 'Date Picker',    zh: '日期選擇' },
+  'tag-time-slots':     { en: 'Time Slots',     zh: '時段選擇' },
+
+  /* Design system */
+  'ds-title':         { en: 'Design System',       zh: '設計系統' },
+  'ds-colors-title':  { en: 'Brand Colors',        zh: '品牌色彩' },
+  'sw1-name': { en: 'TrendLife Red', zh: 'TrendLife 紅' },
+  'sw1-use':  { en: '#D71920 · Primary actions, alerts, selected states', zh: '#D71920 · 主要操作、提示、選中狀態' },
+  'sw2-name': { en: 'Navy',          zh: '深藍' },
+  'sw2-use':  { en: '#1C2B35 · AI bubbles, health analysis header',       zh: '#1C2B35 · AI 氣泡、健康分析標題' },
+  'sw3-name': { en: 'Teal',          zh: '青色' },
+  'sw3-use':  { en: '#0093A7 · Quick-reply chips, schedule screen',       zh: '#0093A7 · 快速回覆選項、行程畫面' },
+  'sw4-name': { en: 'Cream',         zh: '奶油白' },
+  'sw4-use':  { en: '#F5EFE8 · Chat header, status bar background',       zh: '#F5EFE8 · 對話標題、狀態列背景' },
+  'sw5-name': { en: 'Amber',         zh: '琥珀' },
+  'sw5-use':  { en: '#D97706 · Schedule & appointment screens',           zh: '#D97706 · 行程與預約畫面' },
+  'sw6-name': { en: 'Green',         zh: '綠色' },
+  'sw6-use':  { en: '#1E9E5C · Normal values, completed states',          zh: '#1E9E5C · 正常數值、完成狀態' },
+
+  'ds-type-title':    { en: 'Typography — Geist',  zh: '字型系統 — Geist' },
+  'ts1-label':  { en: 'Display · 44px / 900',                   zh: '展示標題 · 44px / 900' },
+  'ts1-sample': { en: 'AI Butler',                               zh: 'AI 管家' },
+  'ts2-label':  { en: 'Screen title · 20px / 900',              zh: '畫面標題 · 20px / 900' },
+  'ts2-sample': { en: 'Health Analysis',                         zh: '健康分析' },
+  'ts3-label':  { en: 'Card label · 15px / 800',                zh: '卡片標籤 · 15px / 800' },
+  'ts3-sample': { en: 'My Health · Contact Family',             zh: '我的健康 · 聯繫家人' },
+  'ts4-label':  { en: 'Body · 15px / 400 — senior readability', zh: '內文 · 15px / 400 — 長者可讀性' },
+  'ts4-sample': { en: 'Chat messages and descriptions use 15px line height 1.55 for comfortable reading at all ages.', zh: '對話訊息和說明文字採用 15px 字級、1.55 行高，確保各年齡層都能舒適閱讀。' },
+  'ts5-label':  { en: 'Label / tag · 11px / 700 · uppercase',   zh: '標籤 · 11px / 700 · 大寫' },
+  'ts5-sample': { en: 'AI BUTLER · TEAL LABEL',                  zh: 'AI 管家 · 青色標籤' },
+
+  'ds-patterns-title': { en: 'Interaction Patterns', zh: '互動模式' },
+  'pn1-title': { en: 'Textile Cards',          zh: '織品卡片' },
+  'pn1-desc':  { en: 'Bold gradient + repeating-linear-gradient woven texture overlay (::before) + decorative ring motif (::after). Used for Contact Family grid and Quick Actions drawer.', zh: '深色漸層 + 重複線性漸層編織紋理疊層（::before）+ 裝飾環形圖案（::after）。用於家人聯絡格與快速動作抽屜。' },
+  'pn2-title': { en: 'Initials Avatars',        zh: '縮寫頭像' },
+  'pn2-desc':  { en: "All person representations use CSS gradient circles with letter initials. Each family member's color is consistent across all screens (Eva = purple, Wei = navy, Yvonne = emerald, Ethan = red).", zh: '所有人物表示均使用 CSS 漸層圓圈搭配姓名縮寫。每位家庭成員的色彩在所有畫面保持一致（Eva = 紫、Wei = 深藍、Yvonne = 翠綠、Ethan = 紅）。' },
+  'pn3-title': { en: 'Visibility Drawer',       zh: '可見性抽屜' },
+  'pn3-desc':  { en: 'Full-screen slide-up overlay using visibility: hidden → visible with transition-delay for animation sequencing. Panel uses transform: translateY(100% → 0).', zh: '全螢幕上滑覆蓋層，使用 visibility: hidden → visible 搭配 transition-delay 進行動畫序列控制。面板使用 transform: translateY(100% → 0)。' },
+  'pn4-title': { en: 'Persistent Dock',         zh: '常駐底部列' },
+  'pn4-desc':  { en: 'Always visible on Screen 0. Contains expand chevron, two pre-prompt chips, and the chat input bar. Hidden via display: none in goTo() when navigating to sub-screens.', zh: '在畫面 0 上永遠可見。包含展開箭頭、兩個預設提示選項和對話輸入列。在 goTo() 導航至子畫面時透過 display: none 隱藏。' },
+  'pn5-title': { en: 'CSS Photo Simulation',    zh: 'CSS 模擬照片' },
+  'pn5-desc':  { en: 'Photo grid cells use multi-stop linear-gradient backgrounds to suggest warm, cool, or outdoor scene tones — replacing all emoji for a more realistic photo feel.', zh: '相片格使用多色段線性漸層背景呈現暖色、冷色或戶外場景色調——以此取代所有圖示，呈現更真實的照片感受。' },
+
+  /* Footer */
+  'footer-text':  { en: 'TrendLife AI Butler · Grandma Member View · v1 Mockup · March 2025', zh: 'TrendLife AI 管家 · 奶奶會員視角 · v1 原型 · 2025 年 3 月' },
+  'footer-brand': { en: 'TrendLife', zh: 'TrendLife' },
+};
+
+let currentLang = localStorage.getItem('tl-spec-lang') || 'en';
+
+function setLang(lang) {
+  // Fade out
+  document.body.classList.add('lang-switching');
+
+  setTimeout(() => {
+    currentLang = lang;
+    localStorage.setItem('tl-spec-lang', lang);
+
+    // Toggle button states
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+
+    // Update html lang attribute
+    document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+
+    // Plain text elements
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (dict[key] && dict[key][lang] !== undefined) {
+        el.textContent = dict[key][lang];
+      }
+    });
+
+    // HTML elements (contain tags like <strong>, <span>, <br>)
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.dataset.i18nHtml;
+      if (dict[key] && dict[key][lang] !== undefined) {
+        el.innerHTML = dict[key][lang];
+      }
+    });
+
+    // Fade back in
+    document.body.classList.remove('lang-switching');
+  }, 160);
+}
+
+// Init on load: restore saved language
+document.addEventListener('DOMContentLoaded', () => {
+  if (currentLang !== 'en') setLang(currentLang);
+});
+
+// ── SCREEN NAVIGATOR ──
+let specScreen = 0;
+function specGoTo(n) {
+  specScreen = n;
+  const iframe = document.querySelector('.phone-shell iframe');
+  if (iframe && iframe.contentWindow) {
+    iframe.contentWindow.postMessage({ goTo: n }, '*');
+  }
+  document.querySelectorAll('.snav-item').forEach((b, i) => {
+    b.classList.toggle('snav-active', i === n);
+  });
+}
+// Keep nav in sync when user navigates inside the mockup
+window.addEventListener('message', function(e) {
+  if (e.data && typeof e.data.screenChanged === 'number') {
+    document.querySelectorAll('.snav-item').forEach((b, i) => {
+      b.classList.toggle('snav-active', i === e.data.screenChanged);
+    });
+  }
+});
+</script>
+
+</body>
+</html>
