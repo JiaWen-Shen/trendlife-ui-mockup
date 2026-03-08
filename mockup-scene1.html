@@ -2110,7 +2110,7 @@
             </div>
 
             <div class="story-item">
-              <div class="story-note">Call tonight 8:30 PM</div>
+              <div class="story-note">Making IG content</div>
               <div class="story-ring ring-active">
                 <div class="story-avatar">👧</div>
               </div>
@@ -2126,7 +2126,7 @@
             </div>
 
             <div class="story-item">
-              <div class="story-note">Home tonight</div>
+              <div class="story-note">Home by 7 PM tonight</div>
               <div class="story-ring ring-muted">
                 <div class="story-avatar">🧑‍💼</div>
               </div>
@@ -3278,7 +3278,7 @@
             </div>
           </div>
           <div class="todo-actions">
-            ${t.linkTo ? `<button class="todo-link-btn" onclick="event.stopPropagation();goTo(${t.linkTo})">View →</button>` : ''}
+            ${t.linkTo ? '<button class="todo-link-btn" onclick="event.stopPropagation();goTo(' + t.linkTo + ')">View \u2192</button>' : ''}
             <button class="todo-ai-btn${t.done ? ' ai-done' : ''}" onclick="aiExecuteTodo(${t.id})">
               ${t.done ? '✓ AI Done' : '✨ Ask AI'}
             </button>
