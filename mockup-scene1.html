@@ -3278,7 +3278,7 @@
             </div>
           </div>
           <div class="todo-actions">
-            ${t.linkTo ? '<button class="todo-link-btn" onclick="event.stopPropagation();goTo(' + t.linkTo + ')">View \u2192</button>' : ''}
+            ${t.linkTo ? '<button class="todo-link-btn" onclick="event.stopPropagation();viewTodoDetail(' + t.id + ')">View \u2192</button>' : ''}
             <button class="todo-ai-btn${t.done ? ' ai-done' : ''}" onclick="aiExecuteTodo(${t.id})">
               ${t.done ? '✓ AI Done' : '✨ Ask AI'}
             </button>
@@ -3474,7 +3474,15 @@
 
   function execDetailTodo(id) {
     const handled = aiExecuteTodo(id);
-    if (!handled) goBack();
+    if (!handled) {
+      const found = findTodo(id);
+      if (found && found.linkTo) {
+        if (!found.done) { found.done = true; renderTodos(); }
+        goTo(found.linkTo);
+      } else {
+        goBack();
+      }
+    }
   }
 
   // ── DINNER BOOKING FLOW ──
