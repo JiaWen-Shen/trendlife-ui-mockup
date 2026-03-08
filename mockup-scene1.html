@@ -3286,7 +3286,7 @@
         </div>
       </div>
     `).join('');
-    document.querySelectorAll('.todo-swipe-host').forEach((host, i) => initSwipe(host, i === 0));
+    document.querySelectorAll('.todo-swipe-host').forEach(host => initSwipe(host, false));
   }
 
   function toggleTodo(id) {
