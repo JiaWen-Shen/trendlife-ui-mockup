@@ -1134,9 +1134,11 @@
     gap: 0;
     flex-shrink: 0;
     width: 76px;
-    cursor: pointer;
   }
-  .story-item:active { opacity: 0.75; }
+  .story-note { cursor: pointer; }
+  .story-note:active { opacity: 0.7; }
+  .story-ring { cursor: pointer; }
+  .story-ring:active { opacity: 0.75; }
 
   /* IG Notes bubble — always visible, above avatar */
   .story-note {
@@ -2101,16 +2103,16 @@
         <div class="story-section">
           <div class="story-row" id="storyRow">
 
-            <div class="story-item" onclick="goTo(2)">
-              <div class="story-note">BP ⚠️ Cardiology Mon.</div>
-              <div class="story-ring ring-alert">
+            <div class="story-item">
+              <div class="story-note" onclick="goTo(1)">BP ⚠️ Cardiology Mon.</div>
+              <div class="story-ring ring-alert" onclick="goTo(2)">
                 <div class="story-avatar">👩‍🦳</div>
               </div>
               <div class="story-name">Grandma</div>
             </div>
 
             <div class="story-item">
-              <div class="story-note">Making IG content</div>
+              <div class="story-note" onclick="goTo(1)">Making IG content</div>
               <div class="story-ring ring-active">
                 <div class="story-avatar">👧</div>
               </div>
@@ -2118,7 +2120,7 @@
             </div>
 
             <div class="story-item">
-              <div class="story-note">Soccer ✓ pickup 5:30</div>
+              <div class="story-note" onclick="goTo(1)">Soccer ✓ pickup 5:30</div>
               <div class="story-ring ring-active">
                 <div class="story-avatar">👦</div>
               </div>
@@ -2126,7 +2128,7 @@
             </div>
 
             <div class="story-item">
-              <div class="story-note">Home by 7 PM tonight</div>
+              <div class="story-note" onclick="goTo(1)">Home by 7 PM tonight</div>
               <div class="story-ring ring-muted">
                 <div class="story-avatar">🧑‍💼</div>
               </div>
@@ -3435,7 +3437,10 @@
     }
 
     /* Touch */
-    host.addEventListener('touchstart',  e => onStart(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+    host.addEventListener('touchstart',  e => {
+      if (e.target.closest('button')) return;
+      onStart(e.touches[0].clientX, e.touches[0].clientY);
+    }, { passive: true });
     host.addEventListener('touchmove',   e => { onMove(e.touches[0].clientX, e.touches[0].clientY); if (isHoriz) e.preventDefault(); }, { passive: false });
     host.addEventListener('touchend',    () => onEnd());
     host.addEventListener('touchcancel', () => onEnd());
@@ -3443,6 +3448,7 @@
     /* Pointer (mouse / stylus – for desktop preview) */
     host.addEventListener('pointerdown', e => {
       if (!e.isPrimary || e.pointerType === 'touch') return;
+      if (e.target.closest('button')) return;
       host.setPointerCapture(e.pointerId);
       onStart(e.clientX, e.clientY);
     });
