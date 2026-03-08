@@ -302,40 +302,6 @@
     height: 1px; background: var(--border);
   }
 
-  /* ── DESIGN SYSTEM ── */
-  .ds-section {
-    position: relative; z-index: 1;
-    max-width: 1300px; margin: 0 auto; padding: 0 40px 80px;
-  }
-  .ds-cols {
-    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px;
-    margin-top: 32px;
-  }
-  .ds-col-title {
-    font-size: 13px; font-weight: 700; color: var(--muted2);
-    text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 18px;
-  }
-
-  /* Color swatches */
-  .swatches { display: flex; flex-direction: column; gap: 9px; }
-  .swatch { display: flex; align-items: center; gap: 12px; }
-  .sw-dot { width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0; }
-  .sw-name { font-size: 13px; font-weight: 700; line-height: 1.2; }
-  .sw-use  { font-size: 11px; color: var(--muted); margin-top: 1px; }
-
-  /* Type samples */
-  .type-samples { display: flex; flex-direction: column; gap: 20px; }
-  .ts-label { font-size: 10px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
-
-  /* Pattern notes */
-  .patterns { display: flex; flex-direction: column; gap: 10px; }
-  .pn {
-    padding: 12px 14px; background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border); border-radius: 12px;
-  }
-  .pn-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-  .pn-desc  { font-size: 12px; color: var(--muted); line-height: 1.55; }
-
   /* ── FOOTER ── */
   .footer {
     position: relative; z-index: 1;
@@ -358,7 +324,6 @@
     .hero-right { position: static; }
     .hero-title { font-size: 42px; }
     .screen-cards { grid-template-columns: repeat(2, 1fr); }
-    .ds-cols { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 700px) {
     .site-nav { padding: 12px 20px; }
@@ -366,8 +331,7 @@
     .hero { padding: 32px 20px; }
     .hero-title { font-size: 34px; }
     .screen-cards { grid-template-columns: 1fr; }
-    .screens-section, .ds-section { padding: 0 20px 60px; }
-    .ds-cols { grid-template-columns: 1fr; }
+    .screens-section { padding: 0 20px 60px; }
     .phone-shell iframe { width: 390px; height: 844px; }
     .phone-shell { border-radius: 44px; transform: none; margin-bottom: 0; }
     .footer { padding: 20px; flex-direction: column; gap: 10px; align-items: flex-start; }
@@ -626,103 +590,6 @@
 </section>
 
 
-<!-- ── DESIGN SYSTEM ── -->
-<section class="ds-section">
-  <div class="section-divider" style="margin-bottom:56px;"></div>
-
-  <div class="section-title" data-i18n="ds-title">Design System</div>
-
-  <div class="ds-cols">
-
-    <!-- Colors -->
-    <div>
-      <div class="ds-col-title" data-i18n="ds-colors-title">Brand Colors</div>
-      <div class="swatches">
-        <div class="swatch">
-          <div class="sw-dot" style="background:#D71920;"></div>
-          <div><div class="sw-name" data-i18n="sw1-name">TrendLife Red</div><div class="sw-use" data-i18n="sw1-use">#D71920 · Primary actions, alerts, selected states</div></div>
-        </div>
-        <div class="swatch">
-          <div class="sw-dot" style="background:#1C2B35;"></div>
-          <div><div class="sw-name" data-i18n="sw2-name">Navy</div><div class="sw-use" data-i18n="sw2-use">#1C2B35 · AI bubbles, health analysis header</div></div>
-        </div>
-        <div class="swatch">
-          <div class="sw-dot" style="background:#0093A7;"></div>
-          <div><div class="sw-name" data-i18n="sw3-name">Teal</div><div class="sw-use" data-i18n="sw3-use">#0093A7 · Quick-reply chips, schedule screen</div></div>
-        </div>
-        <div class="swatch">
-          <div class="sw-dot" style="background:#F5EFE8; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);"></div>
-          <div><div class="sw-name" data-i18n="sw4-name">Cream</div><div class="sw-use" data-i18n="sw4-use">#F5EFE8 · Chat header, status bar background</div></div>
-        </div>
-        <div class="swatch">
-          <div class="sw-dot" style="background:#D97706;"></div>
-          <div><div class="sw-name" data-i18n="sw5-name">Amber</div><div class="sw-use" data-i18n="sw5-use">#D97706 · Schedule &amp; appointment screens</div></div>
-        </div>
-        <div class="swatch">
-          <div class="sw-dot" style="background:#1E9E5C;"></div>
-          <div><div class="sw-name" data-i18n="sw6-name">Green</div><div class="sw-use" data-i18n="sw6-use">#1E9E5C · Normal values, completed states</div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Typography -->
-    <div>
-      <div class="ds-col-title" data-i18n="ds-type-title">Typography — Geist</div>
-      <div class="type-samples">
-        <div>
-          <div class="ts-label" data-i18n="ts1-label">Display · 44px / 900</div>
-          <div style="font-size:34px;font-weight:900;letter-spacing:-0.03em;line-height:1;" data-i18n="ts1-sample">AI Butler</div>
-        </div>
-        <div>
-          <div class="ts-label" data-i18n="ts2-label">Screen title · 20px / 900</div>
-          <div style="font-size:20px;font-weight:900;letter-spacing:-0.02em;" data-i18n="ts2-sample">Health Analysis</div>
-        </div>
-        <div>
-          <div class="ts-label" data-i18n="ts3-label">Card label · 15px / 800</div>
-          <div style="font-size:15px;font-weight:800;" data-i18n="ts3-sample">My Health · Contact Family</div>
-        </div>
-        <div>
-          <div class="ts-label" data-i18n="ts4-label">Body · 15px / 400 — senior readability</div>
-          <div style="font-size:14px;color:var(--muted2);line-height:1.55;" data-i18n="ts4-sample">Chat messages and descriptions use 15px line height 1.55 for comfortable reading at all ages.</div>
-        </div>
-        <div>
-          <div class="ts-label" data-i18n="ts5-label">Label / tag · 11px / 700 · uppercase</div>
-          <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#4DD5E4;" data-i18n="ts5-sample">AI BUTLER · TEAL LABEL</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Patterns -->
-    <div>
-      <div class="ds-col-title" data-i18n="ds-patterns-title">Interaction Patterns</div>
-      <div class="patterns">
-        <div class="pn">
-          <div class="pn-title" data-i18n="pn1-title">Textile Cards</div>
-          <div class="pn-desc" data-i18n="pn1-desc">Bold gradient + repeating-linear-gradient woven texture overlay (::before) + decorative ring motif (::after). Used for Contact Family grid and Quick Actions drawer.</div>
-        </div>
-        <div class="pn">
-          <div class="pn-title" data-i18n="pn2-title">Initials Avatars</div>
-          <div class="pn-desc" data-i18n="pn2-desc">All person representations use CSS gradient circles with letter initials. Each family member's color is consistent across all screens (Eva = purple, Wei = navy, Yvonne = emerald, Ethan = red).</div>
-        </div>
-        <div class="pn">
-          <div class="pn-title" data-i18n="pn3-title">Visibility Drawer</div>
-          <div class="pn-desc" data-i18n="pn3-desc">Full-screen slide-up overlay using visibility: hidden → visible with transition-delay for animation sequencing. Panel uses transform: translateY(100% → 0).</div>
-        </div>
-        <div class="pn">
-          <div class="pn-title" data-i18n="pn4-title">Persistent Dock</div>
-          <div class="pn-desc" data-i18n="pn4-desc">Always visible on Screen 0. Contains expand chevron, two pre-prompt chips, and the chat input bar. Hidden via display: none in goTo() when navigating to sub-screens.</div>
-        </div>
-        <div class="pn">
-          <div class="pn-title" data-i18n="pn5-title">CSS Photo Simulation</div>
-          <div class="pn-desc" data-i18n="pn5-desc">Photo grid cells use multi-stop linear-gradient backgrounds to suggest warm, cool, or outdoor scene tones — replacing all emoji for a more realistic photo feel.</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
 <!-- ── FOOTER ── -->
 <footer class="footer">
   <div class="footer-left" data-i18n="footer-text">TrendLife AI Butler · Grandma Member View · v1 Mockup · March 2025</div>
@@ -862,46 +729,6 @@ const dict = {
   'tag-ai-curation':    { en: 'AI Curation',    zh: 'AI 精選' },
   'tag-date-picker':    { en: 'Date Picker',    zh: '日期選擇' },
   'tag-time-slots':     { en: 'Time Slots',     zh: '時段選擇' },
-
-  /* Design system */
-  'ds-title':         { en: 'Design System',       zh: '設計系統' },
-  'ds-colors-title':  { en: 'Brand Colors',        zh: '品牌色彩' },
-  'sw1-name': { en: 'TrendLife Red', zh: 'TrendLife 紅' },
-  'sw1-use':  { en: '#D71920 · Primary actions, alerts, selected states', zh: '#D71920 · 主要操作、提示、選中狀態' },
-  'sw2-name': { en: 'Navy',          zh: '深藍' },
-  'sw2-use':  { en: '#1C2B35 · AI bubbles, health analysis header',       zh: '#1C2B35 · AI 氣泡、健康分析標題' },
-  'sw3-name': { en: 'Teal',          zh: '青色' },
-  'sw3-use':  { en: '#0093A7 · Quick-reply chips, schedule screen',       zh: '#0093A7 · 快速回覆選項、行程畫面' },
-  'sw4-name': { en: 'Cream',         zh: '奶油白' },
-  'sw4-use':  { en: '#F5EFE8 · Chat header, status bar background',       zh: '#F5EFE8 · 對話標題、狀態列背景' },
-  'sw5-name': { en: 'Amber',         zh: '琥珀' },
-  'sw5-use':  { en: '#D97706 · Schedule & appointment screens',           zh: '#D97706 · 行程與預約畫面' },
-  'sw6-name': { en: 'Green',         zh: '綠色' },
-  'sw6-use':  { en: '#1E9E5C · Normal values, completed states',          zh: '#1E9E5C · 正常數值、完成狀態' },
-
-  'ds-type-title':    { en: 'Typography — Geist',  zh: '字型系統 — Geist' },
-  'ts1-label':  { en: 'Display · 44px / 900',                   zh: '展示標題 · 44px / 900' },
-  'ts1-sample': { en: 'AI Butler',                               zh: 'AI 管家' },
-  'ts2-label':  { en: 'Screen title · 20px / 900',              zh: '畫面標題 · 20px / 900' },
-  'ts2-sample': { en: 'Health Analysis',                         zh: '健康分析' },
-  'ts3-label':  { en: 'Card label · 15px / 800',                zh: '卡片標籤 · 15px / 800' },
-  'ts3-sample': { en: 'My Health · Contact Family',             zh: '我的健康 · 聯繫家人' },
-  'ts4-label':  { en: 'Body · 15px / 400 — senior readability', zh: '內文 · 15px / 400 — 長者可讀性' },
-  'ts4-sample': { en: 'Chat messages and descriptions use 15px line height 1.55 for comfortable reading at all ages.', zh: '對話訊息和說明文字採用 15px 字級、1.55 行高，確保各年齡層都能舒適閱讀。' },
-  'ts5-label':  { en: 'Label / tag · 11px / 700 · uppercase',   zh: '標籤 · 11px / 700 · 大寫' },
-  'ts5-sample': { en: 'AI BUTLER · TEAL LABEL',                  zh: 'AI 管家 · 青色標籤' },
-
-  'ds-patterns-title': { en: 'Interaction Patterns', zh: '互動模式' },
-  'pn1-title': { en: 'Textile Cards',          zh: '織品卡片' },
-  'pn1-desc':  { en: 'Bold gradient + repeating-linear-gradient woven texture overlay (::before) + decorative ring motif (::after). Used for Contact Family grid and Quick Actions drawer.', zh: '深色漸層 + 重複線性漸層編織紋理疊層（::before）+ 裝飾環形圖案（::after）。用於家人聯絡格與快速動作抽屜。' },
-  'pn2-title': { en: 'Initials Avatars',        zh: '縮寫頭像' },
-  'pn2-desc':  { en: "All person representations use CSS gradient circles with letter initials. Each family member's color is consistent across all screens (Eva = purple, Wei = navy, Yvonne = emerald, Ethan = red).", zh: '所有人物表示均使用 CSS 漸層圓圈搭配姓名縮寫。每位家庭成員的色彩在所有畫面保持一致（Eva = 紫、Wei = 深藍、Yvonne = 翠綠、Ethan = 紅）。' },
-  'pn3-title': { en: 'Visibility Drawer',       zh: '可見性抽屜' },
-  'pn3-desc':  { en: 'Full-screen slide-up overlay using visibility: hidden → visible with transition-delay for animation sequencing. Panel uses transform: translateY(100% → 0).', zh: '全螢幕上滑覆蓋層，使用 visibility: hidden → visible 搭配 transition-delay 進行動畫序列控制。面板使用 transform: translateY(100% → 0)。' },
-  'pn4-title': { en: 'Persistent Dock',         zh: '常駐底部列' },
-  'pn4-desc':  { en: 'Always visible on Screen 0. Contains expand chevron, two pre-prompt chips, and the chat input bar. Hidden via display: none in goTo() when navigating to sub-screens.', zh: '在畫面 0 上永遠可見。包含展開箭頭、兩個預設提示選項和對話輸入列。在 goTo() 導航至子畫面時透過 display: none 隱藏。' },
-  'pn5-title': { en: 'CSS Photo Simulation',    zh: 'CSS 模擬照片' },
-  'pn5-desc':  { en: 'Photo grid cells use multi-stop linear-gradient backgrounds to suggest warm, cool, or outdoor scene tones — replacing all emoji for a more realistic photo feel.', zh: '相片格使用多色段線性漸層背景呈現暖色、冷色或戶外場景色調——以此取代所有圖示，呈現更真實的照片感受。' },
 
   /* Footer */
   'footer-text':  { en: 'TrendLife AI Butler · Grandma Member View · v1 Mockup · March 2025', zh: 'TrendLife AI 管家 · 奶奶會員視角 · v1 原型 · 2025 年 3 月' },
