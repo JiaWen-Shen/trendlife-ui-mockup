@@ -1952,17 +1952,18 @@
   .main-tab-bar {
     display: flex; flex-shrink: 0;
     background: var(--white);
-    border-bottom: 1px solid var(--gray-200);
+    border-top: 1px solid var(--gray-200);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
   .main-tab {
     flex: 1; display: flex; align-items: center; justify-content: center; gap: 5px;
     padding: 10px 8px; border: none;
-    border-bottom: 2.5px solid transparent;
+    border-top: 2.5px solid transparent;
     background: transparent; font-family: 'Geist', sans-serif;
     font-size: 13px; font-weight: 600; color: var(--gray-500);
     cursor: pointer; transition: all 0.15s;
   }
-  .main-tab.active { color: var(--red); border-bottom-color: var(--red); }
+  .main-tab.active { color: var(--red); border-top-color: var(--red); }
   .main-views { flex: 1; overflow: hidden; display: flex; flex-direction: column; }
   .main-view { display: none; flex: 1; flex-direction: column; overflow: hidden; }
   .main-view.active { display: flex; }
@@ -1997,18 +1998,6 @@
       <svg viewBox="0 0 16 12"><rect x="0" y="4" width="3" height="8" rx="0.5"/><rect x="4.5" y="3" width="3" height="9" rx="0.5"/><rect x="9" y="1.5" width="3" height="10.5" rx="0.5"/><rect x="13.5" y="0" width="2.5" height="12" rx="0.5" opacity="0.3"/></svg>
       <svg viewBox="0 0 15 11"><rect x="0" y="4" width="13" height="7" rx="1.5" stroke="currentColor" stroke-width="1.2" fill="none"/><rect x="13.5" y="5.5" width="1.5" height="4" rx="0.75" fill="currentColor"/><rect x="1" y="5" width="9" height="5" rx="0.8" fill="currentColor"/></svg>
     </div>
-  </div>
-
-  <!-- MAIN TAB BAR -->
-  <div class="main-tab-bar">
-    <button class="main-tab" id="tab-butler" onclick="switchMainTab('butler')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      AI Butler
-    </button>
-    <button class="main-tab active" id="tab-home" onclick="switchMainTab('home')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      Home
-    </button>
   </div>
 
   <!-- MAIN VIEWS -->
@@ -2105,14 +2094,6 @@
           <button class="header-notif-btn" onclick="goTo(16)">🔔</button>
           <div class="notif-badge"></div>
         </div>
-      </div>
-
-      <!-- AI TOPBAR -->
-      <div class="ai-topbar" onclick="toggleButler()">
-        <div class="ai-topbar-icon">
-          <img src="reference/logo-mark-only.png" class="logo-mark-avatar" alt="">
-        </div>
-        <div class="ai-topbar-text">Ask AI Butler anything...</div>
       </div>
 
       <!-- FAMILY (IG DM style — avatar + name only) -->
@@ -3167,6 +3148,18 @@
 
     </div><!-- /view-home -->
   </div><!-- /main-views -->
+
+  <!-- MAIN TAB BAR (bottom) -->
+  <div class="main-tab-bar">
+    <button class="main-tab active" id="tab-home" onclick="switchMainTab('home')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home
+    </button>
+    <button class="main-tab" id="tab-butler" onclick="switchMainTab('butler')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      AI Butler
+    </button>
+  </div>
 
 </div><!-- /device-shell -->
 
