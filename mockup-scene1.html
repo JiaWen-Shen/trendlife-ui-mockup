@@ -3445,19 +3445,25 @@
     host.addEventListener('touchend',    () => onEnd());
     host.addEventListener('touchcancel', () => onEnd());
 
-    /* Pointer (mouse / stylus – for desktop preview) */
+    /* Pointer (mouse / stylus – for desktop preview)
+       Defer setPointerCapture until horizontal drag is confirmed,
+       so simple clicks on any child element still fire normally. */
+    let pendingPointerId = null;
     host.addEventListener('pointerdown', e => {
       if (!e.isPrimary || e.pointerType === 'touch') return;
-      if (e.target.closest('button')) return;
-      host.setPointerCapture(e.pointerId);
+      pendingPointerId = e.pointerId;
       onStart(e.clientX, e.clientY);
     });
     host.addEventListener('pointermove', e => {
       if (!e.isPrimary || e.pointerType === 'touch') return;
       onMove(e.clientX, e.clientY);
+      if (pendingPointerId !== null && isHoriz === true) {
+        host.setPointerCapture(pendingPointerId);
+        pendingPointerId = null;
+      }
     });
-    host.addEventListener('pointerup',     e => { if (!e.isPrimary || e.pointerType === 'touch') return; onEnd(); });
-    host.addEventListener('pointercancel', e => { if (!e.isPrimary || e.pointerType === 'touch') return; onEnd(); });
+    host.addEventListener('pointerup',     e => { if (!e.isPrimary || e.pointerType === 'touch') return; pendingPointerId = null; onEnd(); });
+    host.addEventListener('pointercancel', e => { if (!e.isPrimary || e.pointerType === 'touch') return; pendingPointerId = null; onEnd(); });
   }
 
   function aiExecuteTodo(id) {
