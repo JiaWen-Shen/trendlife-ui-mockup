@@ -389,7 +389,7 @@
       <div class="persona-header">
         <div class="persona-av" style="background: linear-gradient(135deg, #7B3F9E, #4C1D95);">E</div>
         <div>
-          <div class="persona-name" data-i18n="persona-manager-name">Eva Chen · 38 years old</div>
+          <div class="persona-name" data-i18n="persona-manager-name">Eva Chen · 45 years old</div>
           <div class="persona-meta" data-i18n="persona-manager-meta">Brand Manager · Taipei · Family coordinator for Wei, Yvonne, Ethan &amp; Grandma</div>
         </div>
       </div>
@@ -451,6 +451,12 @@
       <button class="snav-item" onclick="managerGoTo(10)"><span class="snav-icon">🍜</span><span class="snav-name" data-i18n="sc-mgr-10-name">Dinner Order</span><span class="snav-num">10</span></button>
       <button class="snav-item" onclick="managerGoTo(13)"><span class="snav-icon">✅</span><span class="snav-name" data-i18n="sc-mgr-13-name">Task History</span><span class="snav-num">13</span></button>
       <button class="snav-item" onclick="managerGoTo(17)"><span class="snav-icon">👧</span><span class="snav-name" data-i18n="sc-mgr-17-name">Yvonne's Report</span><span class="snav-num">17</span></button>
+      <button class="snav-item" onclick="managerGoTo(6)"><span class="snav-icon">📵</span><span class="snav-name" data-i18n="sc-mgr-6-name">Blocked Call</span><span class="snav-num">6</span></button>
+      <button class="snav-item" onclick="managerGoTo(8)"><span class="snav-icon">➕</span><span class="snav-name" data-i18n="sc-mgr-8-name">Add Reminder</span><span class="snav-num">8</span></button>
+      <button class="snav-item" onclick="managerGoTo(11)"><span class="snav-icon">🍽️</span><span class="snav-name" data-i18n="sc-mgr-11-name">Restaurant Picks</span><span class="snav-num">11</span></button>
+      <button class="snav-item" onclick="managerGoTo(12)"><span class="snav-icon">✅</span><span class="snav-name" data-i18n="sc-mgr-12-name">Order Confirmed</span><span class="snav-num">12</span></button>
+      <button class="snav-item" onclick="managerGoTo(15)"><span class="snav-icon">🛡️</span><span class="snav-name" data-i18n="sc-mgr-15-name">Fraud Popup</span><span class="snav-num">15</span></button>
+      <button class="snav-item" onclick="managerGoTo(16)"><span class="snav-icon">🔔</span><span class="snav-name" data-i18n="sc-mgr-16-name">Notifications</span><span class="snav-num">16</span></button>
     </div>
   </div>
 
@@ -615,6 +621,126 @@
         <div class="sc-tags">
           <span class="sc-tag" style="background:rgba(0,147,167,0.14);color:#4DD5E4;" data-i18n="tag-mgr-member-report">Member Report</span>
           <span class="sc-tag" style="background:rgba(0,147,167,0.14);color:#4DD5E4;" data-i18n="tag-mgr-risk-shield">Risk Shield</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(215,25,32,0.14);">
+        <div class="sc-num" style="background:var(--red);">6</div>
+        <span class="sc-name" data-i18n="sc-mgr-6-name">Blocked Call</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-mgr-6-desc">Grandma's phone view during a scam call interception. Full-screen red-themed overlay showing caller ID (+886-2-2700-XXXX), risk data (847 community reports, Cathay United Bank impersonation), and Trend Micro's recommendation to hang up. Hang Up and Mute action buttons. Accessed via "View Blocked Call Screen" from the Fraud Blocked screen.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(215,25,32,0.14);color:#FF8A8E;" data-i18n="tag-mgr-fraud">Fraud Alert</span>
+          <span class="sc-tag" style="background:rgba(215,25,32,0.14);color:#FF8A8E;" data-i18n="tag-mgr-grandma-phone">Grandma's Phone</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(30,158,92,0.12);">
+        <div class="sc-num" style="background:var(--green);">7</div>
+        <span class="sc-name" data-i18n="sc-mgr-7-name">Call Declined</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-mgr-7-desc">Success state after Grandma declines the scam call. Shield icon with "Call Ended Safely!" headline. Three confirmation lines: Grandma is safe, Eva has been notified, number has been blocked. Single CTA to return to Eva's Home dashboard.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(30,158,92,0.14);color:#4ADE80;" data-i18n="tag-mgr-success">Success State</span>
+          <span class="sc-tag" style="background:rgba(30,158,92,0.14);color:#4ADE80;" data-i18n="tag-mgr-safe-confirm">Safe Confirmed</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(28,43,53,0.5);">
+        <div class="sc-num" style="background:#2E4455;">8</div>
+        <span class="sc-name" data-i18n="sc-mgr-8-name">Add Reminder</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-mgr-8-desc">Reminder creation form accessible from the "＋ Add Reminder" button on Eva's home screen. Fields include: reminder text, date/time pickers, family member chips (Grandma, Yvonne, Ethan, Husband), notes textarea, and notification type chips (Push Notification, AI Butler Reminder, Add to Calendar). Cancel and Save Reminder CTAs.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(28,43,53,0.5);color:#7FD9E8;" data-i18n="tag-mgr-form-input">Form Input</span>
+          <span class="sc-tag" style="background:rgba(28,43,53,0.5);color:#7FD9E8;" data-i18n="tag-mgr-member-chips">Member Chips</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(180,83,9,0.12);">
+        <div class="sc-num" style="background:var(--amber);">11</div>
+        <span class="sc-name" data-i18n="sc-mgr-11-name">Restaurant Picks</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-mgr-11-desc">AI-curated restaurant recommendations surfaced after analyzing family preferences. Filter pills confirm AI reasoning: family preferences, walking distance, kid-friendly, available tonight. Three restaurant cards — Din Tai Fung (⭐4.8), Tim Ho Wan (⭐4.6), Huigo Steakhouse (⭐4.5) — each showing cuisine, distance, price range, availability, and a Select button that triggers the booking flow.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(180,83,9,0.14);color:#FCD34D;" data-i18n="tag-mgr-ai-curation">AI Curation</span>
+          <span class="sc-tag" style="background:rgba(180,83,9,0.14);color:#FCD34D;" data-i18n="tag-mgr-rest-cards">Restaurant Cards</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(180,83,9,0.12);">
+        <div class="sc-num" style="background:var(--amber);">12</div>
+        <span class="sc-name" data-i18n="sc-mgr-12-name">Order Confirmed</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-mgr-12-desc">Post-selection booking confirmation with live AI execution. Three animated steps: opening group order, waiting for family to order, AI submitting the order. On completion: full order card (restaurant, date, time, 5-member count, order #TL-2847) and a per-member dish breakdown listing every family member's specific choices. CTA returns to Home.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(180,83,9,0.14);color:#FCD34D;" data-i18n="tag-mgr-booking">Booking Confirm</span>
+          <span class="sc-tag" style="background:rgba(180,83,9,0.14);color:#FCD34D;" data-i18n="tag-mgr-family-orders">Family Orders</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(215,25,32,0.10);">
+        <div class="sc-num" style="background:var(--red);">14</div>
+        <span class="sc-name" data-i18n="sc-mgr-14-name">Health Notification</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-mgr-14-desc">In-app notification detail for Grandma's health analysis. AI Butler chat thread to Eva — announcement message followed by an inline health summary card showing all four metrics (BP ⚠ 145/92, blood sugar/ECG/bone density all normal) and a follow-up message with the pre-booked cardiology appointment details. CTA to view full report or go back. Accessed from the Notifications panel.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(215,25,32,0.12);color:#FF8A8E;" data-i18n="tag-mgr-notif-detail">Notif Detail</span>
+          <span class="sc-tag" style="background:rgba(215,25,32,0.12);color:#FF8A8E;" data-i18n="tag-mgr-inline-card">Inline Card</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(215,25,32,0.14);">
+        <div class="sc-num" style="background:var(--red);">15</div>
+        <span class="sc-name" data-i18n="sc-mgr-15-name">Fraud Alert Popup</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-mgr-15-desc">Bottom-sheet modal overlay triggered from the Notifications panel for the scam call event. Dark backdrop over faded app content. Red gradient header with shield emoji and "Scam Call Blocked!" headline. "Grandma Is Safe" confirmation chip, call detail table (caller, risk type, blocked time), two CTAs: View Full Fraud Protection Log or Dismiss.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(215,25,32,0.14);color:#FF8A8E;" data-i18n="tag-mgr-bottom-sheet">Bottom Sheet</span>
+          <span class="sc-tag" style="background:rgba(215,25,32,0.14);color:#FF8A8E;" data-i18n="tag-mgr-auto-block">Auto-blocked</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 16 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(0,147,167,0.12);">
+        <div class="sc-num" style="background:var(--teal);">16</div>
+        <span class="sc-name" data-i18n="sc-mgr-16-name">Notifications</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-mgr-16-desc">Unified notifications panel accessed via the 🔔 bell in Eva's header. Four today's items in chronological order: Grandma's Health Report Analyzed (3:13 PM), Cardiology Appointment Confirmed (3:21 PM), Scam Call Blocked for Grandma (3:48 PM, red dot), Family Dinner Order Completed (5:30 PM). Each item taps through to its respective detail screen.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(0,147,167,0.14);color:#4DD5E4;" data-i18n="tag-mgr-notif-feed">Notif Feed</span>
+          <span class="sc-tag" style="background:rgba(0,147,167,0.14);color:#4DD5E4;" data-i18n="tag-mgr-deep-links">Deep Links</span>
         </div>
       </div>
     </div>
@@ -1221,7 +1347,7 @@ const dict = {
     en: "A family command-center experience where the household manager gets an AI-powered dashboard across all family members — surfacing health alerts, blocking risks, executing tasks, and coordinating everyone's day from a single screen.",
     zh: "以家庭指揮中心為核心的體驗，家庭管理者透過 AI 驅動的全成員儀表板，主動浮現健康警示、攔截風險、執行任務並從單一畫面協調所有人的日程。"
   },
-  'persona-manager-name': { en: 'Eva Chen · 38 years old', zh: '陳雅涵 · 38 歲' },
+  'persona-manager-name': { en: 'Eva Chen · 45 years old', zh: '陳雅涵 · 45 歲' },
   'persona-manager-meta': { en: "Brand Manager · Taipei · Family coordinator for Wei, Yvonne, Ethan & Grandma", zh: '品牌經理 · 台北 · 統籌 Wei、Yvonne、Ethan 與奶奶' },
   'ptag-mgr-1': { en: 'Working mom · 4-person household', zh: '職業媽媽 · 四口之家' },
   'ptag-mgr-2': { en: "Manages Grandma's health", zh: '管理奶奶健康' },
@@ -1287,7 +1413,7 @@ const dict = {
     zh: "AI 攔截針對奶奶詐騙電話時 Eva 收到的通知畫面。顯示來電號碼、偽冒機構與偵測到的詐騙話術。AI 已封鎖來電並自動通知奶奶。Eva 可檢視事件並確認奶奶安全。"
   },
   'sc-mgr-9-desc': {
-    en: "Detail view for any to-do item. AI breaks the task into numbered execution steps — each editable or deletable by Eva. "Ask AI to Execute Now" button triggers AI to handle the full workflow autonomously. Accessed by tapping View → on any task with a linked action.",
+    en: "Detail view for any to-do item. AI breaks the task into numbered execution steps — each editable or deletable by Eva. \u201cAsk AI to Execute Now\u201d button triggers AI to handle the full workflow autonomously. Accessed by tapping View \u2192 on any task with a linked action.",
     zh: "任何待辦事項的詳細視圖。AI 將任務拆解為編號執行步驟——Eva 可逐一編輯或刪除。「請 AI 立即執行」按鈕讓 AI 自主處理完整工作流程。透過點擊有連結動作的任務上的「View →」進入。"
   },
   'sc-mgr-10-desc': {
@@ -1323,6 +1449,61 @@ const dict = {
   'tag-mgr-audit':      { en: 'Audit Trail',      zh: '稽核軌跡' },
   'tag-mgr-member-report':{ en: 'Member Report',  zh: '成員報告' },
   'tag-mgr-risk-shield':{ en: 'Risk Shield',      zh: '風險防護' },
+
+  /* Manager view — new screens (6, 7, 8, 11, 12, 14, 15, 16) */
+  'sc-mgr-6-name':  { en: 'Blocked Call',          zh: '攔截來電' },
+  'sc-mgr-7-name':  { en: 'Call Declined',          zh: '通話已拒' },
+  'sc-mgr-8-name':  { en: 'Add Reminder',           zh: '新增提醒' },
+  'sc-mgr-11-name': { en: 'Restaurant Picks',       zh: 'AI 選餐廳' },
+  'sc-mgr-12-name': { en: 'Order Confirmed',        zh: '訂單確認' },
+  'sc-mgr-14-name': { en: 'Health Notification',   zh: '健康通知詳情' },
+  'sc-mgr-15-name': { en: 'Fraud Alert Popup',      zh: '詐騙警示彈窗' },
+  'sc-mgr-16-name': { en: 'Notifications',          zh: '通知中心' },
+  'sc-mgr-6-desc': {
+    en: "Grandma's phone view during a scam call interception. Full-screen red-themed overlay showing caller ID (+886-2-2700-XXXX), risk data (847 community reports, Cathay United Bank impersonation), and Trend Micro's recommendation to hang up. Hang Up and Mute action buttons. Accessed via \"View Blocked Call Screen\" from the Fraud Blocked screen.",
+    zh: "奶奶手機在詐騙電話攔截期間的畫面。全螢幕紅色主題顯示來電號碼（+886-2-2700-XXXX）、風險資料（847 筆社群回報、冒充國泰世華銀行）及趨勢科技建議掛斷。提供「掛斷」與「靜音」操作按鈕。從詐騙攔截畫面點擊「查看被攔截的來電畫面」進入。"
+  },
+  'sc-mgr-7-desc': {
+    en: "Success state after Grandma declines the scam call. Shield icon with \"Call Ended Safely!\" headline. Three confirmation lines: Grandma is safe, Eva has been notified, number has been blocked. Single CTA to return to Eva's Home dashboard.",
+    zh: "奶奶拒絕詐騙電話後的成功狀態。盾牌圖示搭配「通話已安全結束！」標題。三行確認訊息：奶奶安全、Eva 已收到通知、號碼已封鎖。單一 CTA 返回 Eva 首頁儀表板。"
+  },
+  'sc-mgr-8-desc': {
+    en: "Reminder creation form accessible from the \"＋ Add Reminder\" button on Eva's home screen. Fields include: reminder text, date/time pickers, family member chips (Grandma, Yvonne, Ethan, Husband), notes textarea, and notification type chips (Push Notification, AI Butler Reminder, Add to Calendar). Cancel and Save Reminder CTAs.",
+    zh: "從 Eva 首頁「＋ 新增提醒」按鈕進入的提醒建立表單。欄位包含：提醒文字、日期/時間選擇器、家庭成員選項（奶奶、Yvonne、Ethan、先生）、備註文字框，以及通知類型選項（推播通知、AI 管家提醒、加入行事曆）。取消與儲存提醒 CTA。"
+  },
+  'sc-mgr-11-desc': {
+    en: "AI-curated restaurant recommendations surfaced after analyzing family preferences. Filter pills confirm AI reasoning: family preferences, walking distance, kid-friendly, available tonight. Three restaurant cards — Din Tai Fung (⭐4.8), Tim Ho Wan (⭐4.6), Huigo Steakhouse (⭐4.5) — each showing cuisine, distance, price range, availability, and a Select button that triggers the booking flow.",
+    zh: "AI 分析家庭偏好後推薦的餐廳清單。篩選標籤說明 AI 邏輯：家庭偏好、步行距離、適合兒童、今晚可訂。三張餐廳卡片——鼎泰豐（⭐4.8）、添好運（⭐4.6）、匯谷牛排（⭐4.5）——每張顯示料理類型、距離、價位、可訂時段，以及觸發訂位流程的「選擇」按鈕。"
+  },
+  'sc-mgr-12-desc': {
+    en: "Post-selection booking confirmation with live AI execution. Three animated steps: opening group order, waiting for family to order, AI submitting the order. On completion: full order card (restaurant, date, time, 5-member count, order #TL-2847) and a per-member dish breakdown listing every family member's specific choices. CTA returns to Home.",
+    zh: "選擇餐廳後的訂單確認畫面，含 AI 即時執行動畫。三個步驟：開啟群組訂單、等待家人點餐、AI 送出訂單。完成後顯示完整訂單卡（餐廳、日期、時間、5 人、訂單編號 #TL-2847）及每位成員的個別餐點明細。CTA 返回首頁。"
+  },
+  'sc-mgr-14-desc': {
+    en: "In-app notification detail for Grandma's health analysis. AI Butler chat thread to Eva — announcement message followed by an inline health summary card showing all four metrics (BP ⚠ 145/92, blood sugar/ECG/bone density all normal) and a follow-up message with the pre-booked cardiology appointment details. CTA to view full report or go back. Accessed from the Notifications panel.",
+    zh: "奶奶健康分析的 APP 內通知詳情。AI 管家發給 Eva 的對話串——公告訊息後接內嵌健康摘要卡（血壓 ⚠ 145/92，血糖／心電圖／骨密度均正常），以及附有預訂心臟科門診詳情的後續訊息。查看完整報告或返回 CTA。從通知中心進入。"
+  },
+  'sc-mgr-15-desc': {
+    en: "Bottom-sheet modal overlay triggered from the Notifications panel for the scam call event. Dark backdrop over faded app content. Red gradient header with shield emoji and \"Scam Call Blocked!\" headline. \"Grandma Is Safe\" confirmation chip, call detail table (caller, risk type, blocked time), two CTAs: View Full Fraud Protection Log or Dismiss.",
+    zh: "從通知中心詐騙電話事件觸發的底部彈出視窗。模糊的 APP 內容上方疊加深色背景。紅色漸層標題搭配盾牌圖示和「詐騙電話已攔截！」標語。「奶奶安全」確認標籤、來電詳情表格（來電號碼、風險類型、攔截時間），兩個 CTA：查看完整詐騙防護紀錄或關閉。"
+  },
+  'sc-mgr-16-desc': {
+    en: "Unified notifications panel accessed via the 🔔 bell in Eva's header. Four today's items in chronological order: Grandma's Health Report Analyzed (3:13 PM), Cardiology Appointment Confirmed (3:21 PM), Scam Call Blocked for Grandma (3:48 PM, red dot), Family Dinner Order Completed (5:30 PM). Each item taps through to its respective detail screen.",
+    zh: "透過 Eva 標題列 🔔 鈴鐺進入的統一通知面板。今日四則通知依時間排列：奶奶健康報告已分析（下午 3:13）、心臟科預約已確認（下午 3:21）、奶奶詐騙電話已攔截（下午 3:48，紅點）、家庭晚餐訂單完成（下午 5:30）。每則通知點擊後進入各自的詳情畫面。"
+  },
+  'tag-mgr-grandma-phone':{ en: "Grandma's Phone",  zh: '奶奶手機視角' },
+  'tag-mgr-safe-confirm': { en: 'Safe Confirmed',   zh: '安全確認' },
+  'tag-mgr-form-input':   { en: 'Form Input',       zh: '表單輸入' },
+  'tag-mgr-member-chips': { en: 'Member Chips',     zh: '成員選項' },
+  'tag-mgr-ai-curation':  { en: 'AI Curation',      zh: 'AI 精選' },
+  'tag-mgr-rest-cards':   { en: 'Restaurant Cards', zh: '餐廳卡片' },
+  'tag-mgr-booking':      { en: 'Booking Confirm',  zh: '訂單確認' },
+  'tag-mgr-family-orders':{ en: 'Family Orders',    zh: '家庭點餐' },
+  'tag-mgr-notif-detail': { en: 'Notif Detail',     zh: '通知詳情' },
+  'tag-mgr-inline-card':  { en: 'Inline Card',      zh: '內嵌卡片' },
+  'tag-mgr-bottom-sheet': { en: 'Bottom Sheet',     zh: '底部彈窗' },
+  'tag-mgr-notif-feed':   { en: 'Notif Feed',       zh: '通知列表' },
+  'tag-mgr-deep-links':   { en: 'Deep Links',       zh: '深層連結' },
 
   /* Footer */
   'footer-text':  { en: 'TrendLife AI Butler · Grandma Member View · v1 Mockup · March 2025', zh: 'TrendLife AI 管家 · 奶奶會員視角 · v1 原型 · 2025 年 3 月' },
