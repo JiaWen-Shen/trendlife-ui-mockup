@@ -828,6 +828,9 @@
     next.classList.add('active');
     current = id;
 
+    // Notify parent spec page (0-based)
+    try { parent.postMessage({ screenChanged: id - 1 }, '*'); } catch(e) {}
+
     // Screen 3 (completion card): scroll to top; others: scroll to bottom
     setTimeout(() => {
       const area = next.querySelector('.line-chat-area');
@@ -835,6 +838,11 @@
       area.scrollTop = (id === 3) ? 0 : area.scrollHeight;
     }, 60);
   }
+
+  // Listen for navigation from spec page (0-based index → 1-based goTo)
+  window.addEventListener('message', function(e) {
+    if (e.data && typeof e.data.goTo === 'number') goTo(e.data.goTo + 1);
+  });
 
   // Scroll screen 1 to bottom on load
   window.addEventListener('DOMContentLoaded', () => {

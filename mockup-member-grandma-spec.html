@@ -353,8 +353,8 @@
   <div class="nav-right">
     <nav class="nav-view-tabs">
       <a class="nav-vtab" href="#" data-i18n="tab-manager">Manager's View</a>
-      <a class="nav-vtab nav-vtab-active" href="#" data-i18n="tab-grandma">Member's View (Grandma)</a>
-      <a class="nav-vtab" href="#" data-i18n="tab-teens">Member's View (Teens)</a>
+      <a class="nav-vtab nav-vtab-active" id="tab-btn-grandma" onclick="switchView('grandma');return false;" href="#" data-i18n="tab-grandma">Member's View (Grandma)</a>
+      <a class="nav-vtab" id="tab-btn-teens" onclick="switchView('teens');return false;" href="#" data-i18n="tab-teens">Member's View (Teens)</a>
     </nav>
     <div class="lang-toggle">
       <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
@@ -363,6 +363,8 @@
   </div>
 </nav>
 
+
+<div id="view-grandma">
 
 <!-- ── HERO ── -->
 <section class="hero">
@@ -589,6 +591,160 @@
   </div>
 </section>
 
+</div><!-- end view-grandma -->
+
+
+<!-- ── TEENS VIEW ── -->
+<div id="view-teens" style="display:none">
+
+<!-- Hero -->
+<section class="hero">
+
+  <div class="hero-left">
+
+    <div>
+      <div class="hero-kicker">
+        <span class="hero-kicker-dot"></span>
+        <span data-i18n="hero-teens-kicker">Interactive Prototype</span>
+      </div>
+      <div class="hero-title" data-i18n-html="hero-teens-title">
+        Yvonne's<br><span class="accent">AI Butler</span><br><span class="accent2" style="font-size:38px;">Teens View</span>
+      </div>
+      <p class="hero-sub" data-i18n="hero-teens-sub">
+        A social-native experience where AI Butler joins LINE group chats to assist with content creation, intercept security threats, and auto-exit — built for young creators who move fast and value privacy.
+      </p>
+    </div>
+
+    <!-- Persona -->
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-av" style="background: linear-gradient(135deg, #059669, #065F46);">Y</div>
+        <div>
+          <div class="persona-name" data-i18n="persona-teens-name">Yvonne Chen · 28 years old</div>
+          <div class="persona-meta" data-i18n="persona-teens-meta">Content Creator · Taipei · IG Fashion &amp; Travel</div>
+        </div>
+      </div>
+      <div class="persona-tags">
+        <span class="ptag" data-i18n="ptag-teens-1">IG Creator · 12K Followers</span>
+        <span class="ptag" data-i18n="ptag-teens-2">LINE Power User</span>
+        <span class="ptag" data-i18n="ptag-teens-3">Trend-chaser</span>
+        <span class="ptag" data-i18n="ptag-teens-4">Group Admin</span>
+        <span class="ptag" data-i18n="ptag-teens-5">Privacy-conscious</span>
+      </div>
+    </div>
+
+    <!-- Design Principles -->
+    <div>
+      <div class="section-eyebrow" data-i18n="principles-teens-eyebrow">Design Principles</div>
+      <div class="principles">
+        <div class="principle">
+          <div class="p-num">1</div>
+          <div class="p-text" data-i18n-html="p-teens-1"><strong>Social-native AI</strong> — The butler joins Yvonne's existing LINE group as a temporary collaborator. No new app, no onboarding — AI meets users where they already are.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">2</div>
+          <div class="p-text" data-i18n-html="p-teens-2"><strong>Privacy by default</strong> — AI announces its full data policy the moment it joins. It only responds when @-mentioned, never stores group chat history, and exits automatically.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">3</div>
+          <div class="p-text" data-i18n-html="p-teens-3"><strong>Auto-exit mechanism</strong> — AI proactively asks if there are remaining questions before leaving, then exits after 5 minutes of inactivity. Users can always re-invite it at any time.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">4</div>
+          <div class="p-text" data-i18n-html="p-teens-4"><strong>Actionable creative outputs</strong> — Every task generates a shareable, production-ready deliverable: IG design files, curated image links — all saved to Yvonne's TrendLife library for 7 days.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">5</div>
+          <div class="p-text" data-i18n-html="p-teens-5"><strong>Passive security layer</strong> — AI silently intercepts and flags suspicious links in real time, protecting all group members without interrupting the conversation flow.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Right: sticky phone iframe -->
+  <div class="hero-right">
+    <div class="phone-shell">
+      <iframe
+        src="mockup-scene2-2.html"
+        id="teensIframe"
+        title="Yvonne LINE Group Collaboration Mockup"
+        scrolling="no">
+      </iframe>
+    </div>
+    <div class="screen-nav" id="screenNavTeens">
+      <div class="snav-instruction" data-i18n="snav-teens-hint">點擊畫面互動，或點擊選單查看個別畫面</div>
+      <button class="snav-item snav-active" onclick="teensGoTo(0)"><span class="snav-icon">💬</span><span class="snav-name" data-i18n="sc-teens-0-name">LINE Group Chat</span><span class="snav-num">1</span></button>
+      <button class="snav-item" onclick="teensGoTo(1)"><span class="snav-icon">🔒</span><span class="snav-name" data-i18n="sc-teens-1-name">Privacy Shield</span><span class="snav-num">2</span></button>
+      <button class="snav-item" onclick="teensGoTo(2)"><span class="snav-icon">✅</span><span class="snav-name" data-i18n="sc-teens-2-name">Task Completion</span><span class="snav-num">3</span></button>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- Screens Grid -->
+<section class="screens-section">
+  <div class="section-divider" style="margin-bottom:48px;"></div>
+
+  <div class="section-header">
+    <div class="section-title" data-i18n="screens-teens-title">Screens &amp; Flows</div>
+    <div class="section-sub" data-i18n="screens-teens-sub">3 screens covering LINE group AI collaboration, privacy, and task delivery</div>
+  </div>
+
+  <div class="screen-cards" style="grid-template-columns: repeat(3, 1fr);">
+
+    <!-- Screen 1 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(6,199,85,0.10);">
+        <div class="sc-num" style="background:#06C755;">1</div>
+        <span class="sc-name" data-i18n="sc-teens-0-name">LINE Group Chat</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-teens-0-desc">Entry point. AI Butler joins the group and sends a greeting with an attached privacy disclaimer card. Friends ask for IG design help — AI generates two on-brand options. A suspicious link is silently intercepted in real time. AI says farewell and auto-exits after 5 minutes of inactivity.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(6,199,85,0.14);color:#4ADE80;" data-i18n="tag-teens-group-ai">Group AI</span>
+          <span class="sc-tag" style="background:rgba(6,199,85,0.14);color:#4ADE80;" data-i18n="tag-teens-security">Security</span>
+          <span class="sc-tag" style="background:rgba(6,199,85,0.14);color:#4ADE80;" data-i18n="tag-teens-auto-exit">Auto-exit</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen 2 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(0,147,167,0.10);">
+        <div class="sc-num" style="background:var(--teal);">2</div>
+        <span class="sc-name" data-i18n="sc-teens-1-name">Privacy Shield</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-teens-1-desc">Group members react positively to the AI intercept. A TrendLife privacy feature card is anchored in the chat: AI only responds when @-mentioned, 72-hour auto-exit if idle, zero chat history stored after leaving, and real-time malicious link detection — with a link to the full privacy policy.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(0,147,167,0.14);color:#4DD5E4;" data-i18n="tag-teens-privacy">Privacy</span>
+          <span class="sc-tag" style="background:rgba(0,147,167,0.14);color:#4DD5E4;" data-i18n="tag-teens-reactions">Reactions</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen 3 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(180,83,9,0.12);">
+        <div class="sc-num" style="background:var(--amber);">3</div>
+        <span class="sc-name" data-i18n="sc-teens-2-name">Task Completion</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-teens-2-desc">Summary card of everything AI accomplished in the session. Two IG design thumbnails (柔和日系 / 素材精選 5 張) with Canva and Unsplash links ready to share. Plus a security report confirming the intercepted phishing domain. All assets saved for 7 days in Yvonne's TrendLife library.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(180,83,9,0.14);color:#FCD34D;" data-i18n="tag-teens-creative">Creative Output</span>
+          <span class="sc-tag" style="background:rgba(180,83,9,0.14);color:#FCD34D;" data-i18n="tag-teens-report">Security Report</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</div><!-- end view-teens -->
+
 
 <!-- ── FOOTER ── -->
 <footer class="footer">
@@ -730,6 +886,70 @@ const dict = {
   'tag-date-picker':    { en: 'Date Picker',    zh: '日期選擇' },
   'tag-time-slots':     { en: 'Time Slots',     zh: '時段選擇' },
 
+  /* Teens view */
+  'hero-teens-kicker': { en: 'Interactive Prototype', zh: '互動原型' },
+  'hero-teens-title': {
+    en: "Yvonne's<br><span class=\"accent\">AI Butler</span><br><span class=\"accent2\" style=\"font-size:38px;\">Teens View</span>",
+    zh: "Yvonne 的<br><span class=\"accent\">AI 管家</span><br><span class=\"accent2\" style=\"font-size:38px;\">年輕族群視角</span>"
+  },
+  'hero-teens-sub': {
+    en: "A social-native experience where AI Butler joins LINE group chats to assist with content creation, intercept security threats, and auto-exit — built for young creators who move fast and value privacy.",
+    zh: "以社群為核心的體驗，AI 管家加入 LINE 群組協助內容創作、即時攔截安全威脅並自動退出——為快速行動、重視隱私的年輕創作者而設計。"
+  },
+  'persona-teens-name': { en: 'Yvonne Chen · 28 years old', zh: '陳依云 · 28 歲' },
+  'persona-teens-meta': { en: 'Content Creator · Taipei · IG Fashion & Travel', zh: '內容創作者 · 台北 · IG 時尚與旅遊' },
+  'ptag-teens-1': { en: 'IG Creator · 12K Followers', zh: 'IG 創作者 · 12K 粉絲' },
+  'ptag-teens-2': { en: 'LINE Power User',            zh: 'LINE 重度使用者' },
+  'ptag-teens-3': { en: 'Trend-chaser',               zh: '潮流追隨者' },
+  'ptag-teens-4': { en: 'Group Admin',                zh: '群組管理員' },
+  'ptag-teens-5': { en: 'Privacy-conscious',          zh: '重視隱私' },
+  'principles-teens-eyebrow': { en: 'Design Principles', zh: '設計原則' },
+  'p-teens-1': {
+    en: "<strong>Social-native AI</strong> — The butler joins Yvonne's existing LINE group as a temporary collaborator. No new app, no onboarding — AI meets users where they already are.",
+    zh: "<strong>社群原生 AI</strong> — 管家直接加入 Yvonne 現有的 LINE 群組，成為臨時協作夥伴。無需新 APP、零教學——AI 在使用者已在的地方出現。"
+  },
+  'p-teens-2': {
+    en: "<strong>Privacy by default</strong> — AI announces its full data policy the moment it joins. It only responds when @-mentioned, never stores group chat history, and exits automatically.",
+    zh: "<strong>隱私即預設</strong> — AI 加入的瞬間即聲明完整資料政策。只在被 @ 提及時回應，不儲存任何群組對話記錄，並自動退出。"
+  },
+  'p-teens-3': {
+    en: "<strong>Auto-exit mechanism</strong> — AI proactively asks if there are remaining questions before leaving, then exits after 5 minutes of inactivity. Users can always re-invite it at any time.",
+    zh: "<strong>自動退出機制</strong> — AI 主動詢問是否還有問題後，在閒置 5 分鐘後退出群組。使用者可隨時把它加回來。"
+  },
+  'p-teens-4': {
+    en: "<strong>Actionable creative outputs</strong> — Every task generates a shareable, production-ready deliverable: IG design files, curated image links — all saved to Yvonne's TrendLife library for 7 days.",
+    zh: "<strong>可行動的創意成果</strong> — 每項任務生成可立即分享的成品：IG 設計檔、精選圖片連結——全部儲存於 Yvonne 的 TrendLife 媒體庫 7 天。"
+  },
+  'p-teens-5': {
+    en: "<strong>Passive security layer</strong> — AI silently intercepts and flags suspicious links in real time, protecting all group members without interrupting the conversation flow.",
+    zh: "<strong>被動安全防護層</strong> — AI 即時靜默攔截並標記可疑連結，在不中斷對話的前提下保護所有群組成員。"
+  },
+  'snav-teens-hint': { en: 'Tap the screen to interact, or select a screen below', zh: '點擊畫面互動，或點擊選單查看個別畫面' },
+  'screens-teens-title': { en: 'Screens & Flows',      zh: '畫面與流程' },
+  'screens-teens-sub':   { en: '3 screens covering LINE group AI collaboration, privacy, and task delivery', zh: '3 個畫面，涵蓋 LINE 群組 AI 協作、隱私保護與任務交付' },
+  'sc-teens-0-name': { en: 'LINE Group Chat',  zh: 'LINE 群組對話' },
+  'sc-teens-0-desc': {
+    en: 'Entry point. AI Butler joins the group and sends a greeting with an attached privacy disclaimer card. Friends ask for IG design help — AI generates two on-brand options. A suspicious link is silently intercepted in real time. AI says farewell and auto-exits after 5 minutes of inactivity.',
+    zh: '入口畫面。AI 管家加入群組並發送附帶隱私聲明卡片的問候訊息。朋友請求 IG 設計協助——AI 即時生成兩款符合品牌風格的設計。可疑連結遭即時靜默攔截。AI 告別後在閒置 5 分鐘後自動退出。'
+  },
+  'sc-teens-1-name': { en: 'Privacy Shield', zh: '隱私防護' },
+  'sc-teens-1-desc': {
+    en: 'Group members react positively to the AI intercept. A TrendLife privacy feature card is anchored in the chat: AI only responds when @-mentioned, 72-hour auto-exit if idle, zero chat history stored after leaving, and real-time malicious link detection — with a link to the full privacy policy.',
+    zh: '群組成員對 AI 攔截反應熱烈。TrendLife 隱私功能卡片固定在對話中：僅在被 @ 時回應、閒置 72 小時自動退出、離開後零對話記錄保留、即時惡意連結偵測——並附上完整隱私政策連結。'
+  },
+  'sc-teens-2-name': { en: 'Task Completion', zh: '完成項目' },
+  'sc-teens-2-desc': {
+    en: 'Summary card of everything AI accomplished in the session. Two IG design thumbnails (柔和日系 / 素材精選 5 張) with Canva and Unsplash links ready to share. Plus a security report confirming the intercepted phishing domain. All assets saved for 7 days in Yvonne\'s TrendLife library.',
+    zh: '本次工作階段 AI 完成事項的摘要卡片。兩款 IG 設計縮圖（柔和日系 / 素材精選 5 張）附上 Canva 和 Unsplash 連結可立即分享，加上一份確認攔截釣魚網域的安全報告。所有素材在 Yvonne 的 TrendLife 媒體庫儲存 7 天。'
+  },
+  'tag-teens-group-ai':  { en: 'Group AI',        zh: '群組 AI' },
+  'tag-teens-security':  { en: 'Security',         zh: '安全防護' },
+  'tag-teens-auto-exit': { en: 'Auto-exit',        zh: '自動退出' },
+  'tag-teens-privacy':   { en: 'Privacy',          zh: '隱私保護' },
+  'tag-teens-reactions': { en: 'Reactions',        zh: '成員反應' },
+  'tag-teens-creative':  { en: 'Creative Output',  zh: '創意成果' },
+  'tag-teens-report':    { en: 'Security Report',  zh: '安全報告' },
+
   /* Footer */
   'footer-text':  { en: 'TrendLife AI Butler · Grandma Member View · v1 Mockup · March 2025', zh: 'TrendLife AI 管家 · 奶奶會員視角 · v1 原型 · 2025 年 3 月' },
   'footer-brand': { en: 'TrendLife', zh: 'TrendLife' },
@@ -778,24 +998,56 @@ document.addEventListener('DOMContentLoaded', () => {
   if (currentLang !== 'en') setLang(currentLang);
 });
 
-// ── SCREEN NAVIGATOR ──
+// ── VIEW SWITCHER ──
+function switchView(view) {
+  const isTeens = (view === 'teens');
+  document.getElementById('view-grandma').style.display = isTeens ? 'none' : '';
+  document.getElementById('view-teens').style.display   = isTeens ? '' : 'none';
+  document.getElementById('tab-btn-grandma').classList.toggle('nav-vtab-active', !isTeens);
+  document.getElementById('tab-btn-teens').classList.toggle('nav-vtab-active',  isTeens);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── GRANDMA SCREEN NAVIGATOR ──
 let specScreen = 0;
 function specGoTo(n) {
   specScreen = n;
-  const iframe = document.querySelector('.phone-shell iframe');
+  const iframe = document.querySelector('#view-grandma .phone-shell iframe');
   if (iframe && iframe.contentWindow) {
     iframe.contentWindow.postMessage({ goTo: n }, '*');
   }
-  document.querySelectorAll('.snav-item').forEach((b, i) => {
+  document.querySelectorAll('#screenNav .snav-item').forEach((b, i) => {
     b.classList.toggle('snav-active', i === n);
   });
 }
-// Keep nav in sync when user navigates inside the mockup
+
+// ── TEENS SCREEN NAVIGATOR ──
+let teensScreen = 0;
+function teensGoTo(n) {
+  teensScreen = n;
+  const iframe = document.getElementById('teensIframe');
+  if (iframe && iframe.contentWindow) {
+    iframe.contentWindow.postMessage({ goTo: n }, '*');
+  }
+  document.querySelectorAll('#screenNavTeens .snav-item').forEach((b, i) => {
+    b.classList.toggle('snav-active', i === n);
+  });
+}
+
+// Keep nav in sync when user navigates inside either mockup
 window.addEventListener('message', function(e) {
   if (e.data && typeof e.data.screenChanged === 'number') {
-    document.querySelectorAll('.snav-item').forEach((b, i) => {
-      b.classList.toggle('snav-active', i === e.data.screenChanged);
-    });
+    const n = e.data.screenChanged;
+    const teensVisible = document.getElementById('view-teens').style.display !== 'none';
+    if (teensVisible) {
+      document.querySelectorAll('#screenNavTeens .snav-item').forEach((b, i) => {
+        b.classList.toggle('snav-active', i === n);
+      });
+    } else {
+      document.querySelectorAll('#screenNav .snav-item').forEach((b, i) => {
+        b.classList.toggle('snav-active', i === n);
+      });
+    }
   }
 });
 </script>
