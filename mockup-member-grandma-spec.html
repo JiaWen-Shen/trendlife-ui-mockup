@@ -352,8 +352,8 @@
   </div>
   <div class="nav-right">
     <nav class="nav-view-tabs">
-      <a class="nav-vtab" id="tab-btn-manager" onclick="switchView('manager');return false;" href="#" data-i18n="tab-manager">Manager's View</a>
-      <a class="nav-vtab nav-vtab-active" id="tab-btn-grandma" onclick="switchView('grandma');return false;" href="#" data-i18n="tab-grandma">Member's View (Grandma)</a>
+      <a class="nav-vtab nav-vtab-active" id="tab-btn-manager" onclick="switchView('manager');return false;" href="#" data-i18n="tab-manager">Manager's View</a>
+      <a class="nav-vtab" id="tab-btn-grandma" onclick="switchView('grandma');return false;" href="#" data-i18n="tab-grandma">Member's View (Grandma)</a>
       <a class="nav-vtab" id="tab-btn-teens" onclick="switchView('teens');return false;" href="#" data-i18n="tab-teens">Member's View (Teens)</a>
     </nav>
     <div class="lang-toggle">
@@ -365,7 +365,7 @@
 
 
 <!-- ── MANAGER VIEW ── -->
-<div id="view-manager" style="display:none">
+<div id="view-manager">
 
 <section class="hero">
 
@@ -751,7 +751,7 @@
 </div><!-- end view-manager -->
 
 
-<div id="view-grandma">
+<div id="view-grandma" style="display:none">
 
 <!-- ── HERO ── -->
 <section class="hero">
