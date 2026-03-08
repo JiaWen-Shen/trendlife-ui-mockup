@@ -308,7 +308,7 @@
     border: none;
     cursor: pointer;
     font-size: 13px;
-    color: var(--gray-400);
+    color: var(--gray-300);
     padding: 2px 3px;
     margin-left: auto;
     margin-top: 2px;
@@ -346,7 +346,7 @@
   .ai-step-actions { display: flex; align-items: center; gap: 2px; margin-left: auto; flex-shrink: 0; }
   .ai-step-del-btn {
     background: none; border: none; cursor: pointer;
-    font-size: 13px; color: var(--gray-400); padding: 2px 3px;
+    font-size: 13px; color: var(--gray-300); padding: 2px 3px;
     transition: color 0.15s; line-height: 1;
   }
   .ai-step-del-btn:active { color: var(--red); }
@@ -640,8 +640,10 @@
     font-size: 10px;
     font-weight: 700;
   }
-  .tag-warn { background: var(--red-light); color: var(--red); }
-  .tag-ok   { background: rgba(28,43,53,0.08); color: var(--navy); }
+  .tag-warn  { background: var(--red-light); color: var(--red); }
+  .tag-ok    { background: rgba(28,43,53,0.08); color: var(--navy); }
+  .tag-green { background: rgba(22,163,74,0.10); color: #15803d; }
+  .tag-teal  { background: rgba(0,147,167,0.10); color: #0093A7; }
 
   /* ── VAULT VIZ ── */
   .vault-card {
@@ -2113,7 +2115,7 @@
             </div>
 
             <div class="story-item">
-              <div class="story-note" onclick="goTo(1)">Making IG content</div>
+              <div class="story-note" onclick="goTo(17)">Making IG content</div>
               <div class="story-ring ring-active">
                 <div class="story-avatar">👧</div>
               </div>
@@ -3146,6 +3148,135 @@
         </div>
       </div>
     </div>
+
+    <!-- ══════════════════════
+         SCREEN 17: YVONNE AI DAILY SUMMARY
+    ══════════════════════ -->
+    <div class="screen" id="screen-17">
+      <div class="nav-bar">
+        <button class="nav-back" onclick="goBack()">‹</button>
+        <div class="nav-title">Yvonne's AI Report</div>
+        <div class="nav-right"></div>
+      </div>
+
+      <div class="scroll-content">
+
+        <!-- Profile strip -->
+        <div style="display:flex; align-items:center; gap:13px; margin:16px 16px 0; background:var(--gray-100); border:1px solid var(--gray-200); border-radius:16px; padding:14px 16px;">
+          <div style="width:46px; height:46px; border-radius:50%; background:var(--navy); display:flex; align-items:center; justify-content:center; font-size:24px; flex-shrink:0;">👧</div>
+          <div>
+            <div style="font-size:15px; font-weight:800; color:var(--gray-900);">Yvonne</div>
+            <div style="font-size:12px; color:var(--gray-500); margin-top:2px;">16 y/o · IG Creator · Art Class</div>
+          </div>
+          <div style="margin-left:auto; text-align:right;">
+            <div style="font-size:10px; color:var(--gray-300); font-weight:600; text-transform:uppercase; letter-spacing:0.05em;">Today</div>
+            <div style="font-size:12px; font-weight:700; color:var(--navy); margin-top:2px;">Sat, Mar 8</div>
+          </div>
+        </div>
+
+        <!-- Stats grid -->
+        <div class="health-hero" style="margin-top:10px;">
+          <div class="health-hero-header">
+            <div class="health-hero-icon">🤖</div>
+            <div>
+              <div class="health-hero-title">AI Activity Summary</div>
+              <div class="health-hero-sub">Updated just now</div>
+            </div>
+          </div>
+          <div class="health-metrics">
+            <div class="metric-item">
+              <div class="metric-label">Tasks Done</div>
+              <div class="metric-value">2</div>
+              <div class="metric-tag tag-green">✓ All clear</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Risks Blocked</div>
+              <div class="metric-value">2</div>
+              <div class="metric-tag tag-warn">⚠ Blocked</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Active Reminders</div>
+              <div class="metric-value">1</div>
+              <div class="metric-tag tag-teal">⏰ Tonight</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">IG Posting Window</div>
+              <div class="metric-value">7:30 PM</div>
+              <div class="metric-tag tag-ok">Peak reach</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Risks blocked section -->
+        <div class="section-heading" style="margin-top:18px;">🛡️ Risks Blocked Today</div>
+
+        <div style="margin:0 16px 8px; background:#FFF5F5; border:1.5px solid rgba(215,25,32,0.18); border-radius:14px; padding:14px;">
+          <div style="display:flex; align-items:flex-start; gap:10px;">
+            <div style="width:36px; height:36px; border-radius:10px; background:var(--red-light); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;">🚫</div>
+            <div style="flex:1;">
+              <div style="font-size:13px; font-weight:700; color:var(--gray-900); margin-bottom:3px;">Fake Brand Sponsorship DM</div>
+              <div style="font-size:11.5px; color:var(--gray-500); line-height:1.55;">@luxecollab.offers sent Yvonne an IG DM offering a "$500 brand deal" — with a link to collect bank details. AI detected phishing pattern, blocked the account & reported to Instagram.</div>
+              <div style="margin-top:7px; display:flex; gap:6px;">
+                <span style="font-size:10px; font-weight:700; background:rgba(215,25,32,0.10); color:var(--red); padding:2px 8px; border-radius:6px;">Phishing</span>
+                <span style="font-size:10px; font-weight:700; background:var(--gray-200); color:var(--gray-500); padding:2px 8px; border-radius:6px;">IG DM · 11:24 AM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin:0 16px 8px; background:#FFF5F5; border:1.5px solid rgba(215,25,32,0.18); border-radius:14px; padding:14px;">
+          <div style="display:flex; align-items:flex-start; gap:10px;">
+            <div style="width:36px; height:36px; border-radius:10px; background:var(--red-light); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;">💳</div>
+            <div style="flex:1;">
+              <div style="font-size:13px; font-weight:700; color:var(--gray-900); margin-bottom:3px;">Unauthorized Purchase Blocked</div>
+              <div style="font-size:11.5px; color:var(--gray-500); line-height:1.55;">A $299 gaming credit charge was attempted on Yvonne's linked payment from an unrecognized device. AI flagged it as outside her normal spending pattern and blocked the transaction.</div>
+              <div style="margin-top:7px; display:flex; gap:6px;">
+                <span style="font-size:10px; font-weight:700; background:rgba(215,25,32,0.10); color:var(--red); padding:2px 8px; border-radius:6px;">Fraud Attempt</span>
+                <span style="font-size:10px; font-weight:700; background:var(--gray-200); color:var(--gray-500); padding:2px 8px; border-radius:6px;">Payment · 2:47 PM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI tasks done -->
+        <div class="section-heading" style="margin-top:10px;">✅ AI Tasks Today</div>
+
+        <div class="appt-card" style="margin-bottom:8px;">
+          <div class="appt-icon-wrap">💰</div>
+          <div style="flex:1;">
+            <div class="appt-title">Art Class Supply Fee Paid</div>
+            <div class="appt-detail">$450 · Mobile wallet · 3:00 PM · Receipt saved</div>
+          </div>
+          <span style="font-size:10px; font-weight:700; background:rgba(22,163,74,0.10); color:#15803d; padding:3px 8px; border-radius:6px; flex-shrink:0;">Done</span>
+        </div>
+
+        <div class="appt-card" style="margin-bottom:8px;">
+          <div class="appt-icon-wrap">📱</div>
+          <div style="flex:1;">
+            <div class="appt-title">IG Post Timing Optimized</div>
+            <div class="appt-detail">Analyzed follower activity · Best window: 7:30 PM</div>
+          </div>
+          <span style="font-size:10px; font-weight:700; background:rgba(22,163,74,0.10); color:#15803d; padding:3px 8px; border-radius:6px; flex-shrink:0;">Done</span>
+        </div>
+
+        <div class="appt-card" style="margin-bottom:8px;">
+          <div class="appt-icon-wrap">📞</div>
+          <div style="flex:1;">
+            <div class="appt-title">Online Call Reminder Set</div>
+            <div class="appt-detail">Will notify Yvonne at 8:25 PM tonight</div>
+          </div>
+          <span style="font-size:10px; font-weight:700; background:rgba(0,147,167,0.10); color:#0093A7; padding:3px 8px; border-radius:6px; flex-shrink:0;">Pending</span>
+        </div>
+
+        <div class="section-heading" style="margin-top:10px;">Actions</div>
+        <div class="action-list">
+          <button class="btn btn-primary-red" onclick="goTo(1)">View Yvonne's Chat History</button>
+          <button class="btn btn-secondary" onclick="goBack()">Back to Home</button>
+        </div>
+        <div style="height:20px;"></div>
+
+      </div>
+    </div><!-- /screen-17 -->
 
   </div><!-- /screens-wrap -->
 
