@@ -352,7 +352,7 @@
   </div>
   <div class="nav-right">
     <nav class="nav-view-tabs">
-      <a class="nav-vtab" href="#" data-i18n="tab-manager">Manager's View</a>
+      <a class="nav-vtab" id="tab-btn-manager" onclick="switchView('manager');return false;" href="#" data-i18n="tab-manager">Manager's View</a>
       <a class="nav-vtab nav-vtab-active" id="tab-btn-grandma" onclick="switchView('grandma');return false;" href="#" data-i18n="tab-grandma">Member's View (Grandma)</a>
       <a class="nav-vtab" id="tab-btn-teens" onclick="switchView('teens');return false;" href="#" data-i18n="tab-teens">Member's View (Teens)</a>
     </nav>
@@ -362,6 +362,267 @@
     </div>
   </div>
 </nav>
+
+
+<!-- ── MANAGER VIEW ── -->
+<div id="view-manager" style="display:none">
+
+<section class="hero">
+
+  <div class="hero-left">
+
+    <div>
+      <div class="hero-kicker">
+        <span class="hero-kicker-dot"></span>
+        <span data-i18n="hero-manager-kicker">Interactive Prototype</span>
+      </div>
+      <div class="hero-title" data-i18n-html="hero-manager-title">
+        Eva's<br><span class="accent">AI Butler</span><br><span class="accent2" style="font-size:38px;">Manager's View</span>
+      </div>
+      <p class="hero-sub" data-i18n="hero-manager-sub">
+        A family command-center experience where the household manager gets an AI-powered dashboard across all family members — surfacing health alerts, blocking risks, executing tasks, and coordinating everyone's day from a single screen.
+      </p>
+    </div>
+
+    <!-- Persona -->
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-av" style="background: linear-gradient(135deg, #7B3F9E, #4C1D95);">E</div>
+        <div>
+          <div class="persona-name" data-i18n="persona-manager-name">Eva Chen · 38 years old</div>
+          <div class="persona-meta" data-i18n="persona-manager-meta">Brand Manager · Taipei · Family coordinator for Wei, Yvonne, Ethan &amp; Grandma</div>
+        </div>
+      </div>
+      <div class="persona-tags">
+        <span class="ptag" data-i18n="ptag-mgr-1">Working mom · 4-person household</span>
+        <span class="ptag" data-i18n="ptag-mgr-2">Manages Grandma's health</span>
+        <span class="ptag" data-i18n="ptag-mgr-3">Oversees children's schedule</span>
+        <span class="ptag" data-i18n="ptag-mgr-4">Delegates to AI</span>
+        <span class="ptag" data-i18n="ptag-mgr-5">Risk-aware decision maker</span>
+      </div>
+    </div>
+
+    <!-- Design Principles -->
+    <div>
+      <div class="section-eyebrow" data-i18n="principles-mgr-eyebrow">Design Principles</div>
+      <div class="principles">
+        <div class="principle">
+          <div class="p-num">1</div>
+          <div class="p-text" data-i18n-html="p-mgr-1"><strong>Family as dashboard</strong> — The home screen shows all four members' live status via IG-style story bubbles. Each bubble is an AI-authored micro-summary of what's happening right now.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">2</div>
+          <div class="p-text" data-i18n-html="p-mgr-2"><strong>Two-tab command center</strong> — Home tab holds the task list and family status grid; AI Butler tab gives a direct conversation channel without leaving the app.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">3</div>
+          <div class="p-text" data-i18n-html="p-mgr-3"><strong>AI-planned execution</strong> — Every to-do item arrives with AI-drafted execution steps. Eva reviews and confirms; AI handles the follow-through — calls, payments, bookings, reminders.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">4</div>
+          <div class="p-text" data-i18n-html="p-mgr-4"><strong>Risk-first surfacing</strong> — Health flags, blocked fraud attempts, and anomalous payments are elevated above routine tasks. Risks always appear before Eva needs to look for them.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">5</div>
+          <div class="p-text" data-i18n-html="p-mgr-5"><strong>One-tap depth per member</strong> — Tapping a story bubble opens a message history; tapping the avatar opens that member's AI work summary — two distinct entry points per person.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Right: sticky phone iframe -->
+  <div class="hero-right">
+    <div class="phone-shell">
+      <iframe
+        src="mockup-scene1.html"
+        id="managerIframe"
+        title="Eva Manager View Mockup"
+        scrolling="no">
+      </iframe>
+    </div>
+    <div class="screen-nav" id="screenNavManager">
+      <div class="snav-instruction" data-i18n="snav-mgr-hint">點擊畫面互動，或點擊選單查看個別畫面</div>
+      <button class="snav-item snav-active" onclick="managerGoTo(0)"><span class="snav-icon">🏠</span><span class="snav-name" data-i18n="sc-mgr-0-name">Eva Home</span><span class="snav-num">0</span></button>
+      <button class="snav-item" onclick="managerGoTo(2)"><span class="snav-icon">📊</span><span class="snav-name" data-i18n="sc-mgr-2-name">Grandma Health</span><span class="snav-num">2</span></button>
+      <button class="snav-item" onclick="managerGoTo(3)"><span class="snav-icon">📅</span><span class="snav-name" data-i18n="sc-mgr-3-name">Confirm Appointment</span><span class="snav-num">3</span></button>
+      <button class="snav-item" onclick="managerGoTo(5)"><span class="snav-icon">🛡️</span><span class="snav-name" data-i18n="sc-mgr-5-name">Fraud Blocked</span><span class="snav-num">5</span></button>
+      <button class="snav-item" onclick="managerGoTo(9)"><span class="snav-icon">✨</span><span class="snav-name" data-i18n="sc-mgr-9-name">AI Task Steps</span><span class="snav-num">9</span></button>
+      <button class="snav-item" onclick="managerGoTo(10)"><span class="snav-icon">🍜</span><span class="snav-name" data-i18n="sc-mgr-10-name">Dinner Order</span><span class="snav-num">10</span></button>
+      <button class="snav-item" onclick="managerGoTo(13)"><span class="snav-icon">✅</span><span class="snav-name" data-i18n="sc-mgr-13-name">Task History</span><span class="snav-num">13</span></button>
+      <button class="snav-item" onclick="managerGoTo(17)"><span class="snav-icon">👧</span><span class="snav-name" data-i18n="sc-mgr-17-name">Yvonne's Report</span><span class="snav-num">17</span></button>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- Screens Grid -->
+<section class="screens-section">
+  <div class="section-divider" style="margin-bottom:48px;"></div>
+
+  <div class="section-header">
+    <div class="section-title" data-i18n="screens-mgr-title">Screens &amp; Flows</div>
+    <div class="section-sub" data-i18n="screens-mgr-sub">18 screens covering family dashboard, health management, fraud protection, AI task execution, and member reports</div>
+  </div>
+
+  <div class="screen-cards">
+
+    <!-- 0 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(123,63,158,0.12);">
+        <div class="sc-num" style="background:#7B3F9E;">0</div>
+        <span class="sc-name" data-i18n="sc-mgr-0-name">Eva Home</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-mgr-0-desc">Family command center. Four member story bubbles show AI-authored live summaries above each avatar ring. Tapping a bubble opens message history; tapping an avatar opens the member's AI work summary. Date-navigable task list with swipe-to-delete, AI-planned step previews, and done/pending status. Bottom tab bar switches between Home and AI Butler conversation.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(123,63,158,0.15);color:#C084FC;" data-i18n="tag-mgr-story">Story Bubbles</span>
+          <span class="sc-tag" style="background:rgba(123,63,158,0.15);color:#C084FC;" data-i18n="tag-mgr-tasks">Task List</span>
+          <span class="sc-tag" style="background:rgba(123,63,158,0.15);color:#C084FC;" data-i18n="tag-mgr-tabs">Two-tab Layout</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(28,43,53,0.5);">
+        <div class="sc-num" style="background:#2E4455;">1</div>
+        <span class="sc-name" data-i18n="sc-mgr-1-name">Grandma Chat</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-mgr-1-desc">Message history between AI Butler and Grandma. Shows the moment Grandma shared her health checkup PDF — AI acknowledged receipt, began analysis, and sent a completion notice to Eva. Surfaces the handoff from Grandma's device to Eva's manager dashboard.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(28,43,53,0.5);color:#7FD9E8;" data-i18n="tag-mgr-chat">Chat History</span>
+          <span class="sc-tag" style="background:rgba(28,43,53,0.5);color:#7FD9E8;" data-i18n="tag-mgr-handoff">AI Handoff</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(215,25,32,0.10);">
+        <div class="sc-num" style="background:var(--red);">2</div>
+        <span class="sc-name" data-i18n="sc-mgr-2-name">Grandma Health</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-mgr-2-desc">Eva's view of Grandma's health AI work summary. Shows parsed checkup metrics (BP elevated at 145/92, blood sugar normal, ECG normal, bone density normal), pending cardiology appointment card, and quick actions: Confirm Appointment, Send Message to Grandma, View Chat History.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(215,25,32,0.12);color:#FF8A8E;" data-i18n="tag-mgr-metrics">Health Metrics</span>
+          <span class="sc-tag" style="background:rgba(215,25,32,0.12);color:#FF8A8E;" data-i18n="tag-mgr-ai-summary">AI Summary</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(180,83,9,0.12);">
+        <div class="sc-num" style="background:var(--amber);">3</div>
+        <span class="sc-name" data-i18n="sc-mgr-3-name">Confirm Appointment</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-mgr-3-desc">One-tap confirmation screen for Grandma's NTU Hospital Cardiology appointment. AI pre-fills hospital, date (3/9), time (9:30 AM), reason (high BP follow-up), escort needed flag. Eva confirms without any phone calls. Also accessible from the Todo AI Steps view.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(180,83,9,0.14);color:#FCD34D;" data-i18n="tag-mgr-one-tap">One-tap Confirm</span>
+          <span class="sc-tag" style="background:rgba(180,83,9,0.14);color:#FCD34D;" data-i18n="tag-mgr-ai-prefill">AI Pre-fill</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(30,158,92,0.12);">
+        <div class="sc-num" style="background:var(--green);">4</div>
+        <span class="sc-name" data-i18n="sc-mgr-4-name">Appointment Confirmed</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-mgr-4-desc">Success screen after Eva confirms the cardiology booking. AI confirms it has notified Grandma with full details. Offers to set a day-before reminder and add the appointment to the family calendar.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(30,158,92,0.14);color:#4ADE80;" data-i18n="tag-mgr-success">Success State</span>
+          <span class="sc-tag" style="background:rgba(30,158,92,0.14);color:#4ADE80;" data-i18n="tag-mgr-follow-up">AI Follow-up</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(215,25,32,0.14);">
+        <div class="sc-num" style="background:var(--red);">5</div>
+        <span class="sc-name" data-i18n="sc-mgr-5-name">Fraud Blocked</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-mgr-5-desc">Eva's notification view when AI intercepts a fraud call targeting Grandma. Shows caller ID, spoofed institution, and the specific scam script detected. AI has already blocked the call and auto-notified Grandma. Eva can review the incident and confirm Grandma is safe.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(215,25,32,0.14);color:#FF8A8E;" data-i18n="tag-mgr-fraud">Fraud Alert</span>
+          <span class="sc-tag" style="background:rgba(215,25,32,0.14);color:#FF8A8E;" data-i18n="tag-mgr-auto-block">Auto-blocked</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(0,147,167,0.12);">
+        <div class="sc-num" style="background:var(--teal);">9</div>
+        <span class="sc-name" data-i18n="sc-mgr-9-name">AI Task Steps</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-mgr-9-desc">Detail view for any to-do item. AI breaks the task into numbered execution steps — each editable or deletable by Eva. "Ask AI to Execute Now" button triggers AI to handle the full workflow autonomously. Accessed by tapping View → on any task with a linked action.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(0,147,167,0.14);color:#4DD5E4;" data-i18n="tag-mgr-steps">Step Editor</span>
+          <span class="sc-tag" style="background:rgba(0,147,167,0.14);color:#4DD5E4;" data-i18n="tag-mgr-execute">AI Execute</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(180,83,9,0.12);">
+        <div class="sc-num" style="background:var(--amber);">10</div>
+        <span class="sc-name" data-i18n="sc-mgr-10-name">Dinner Order</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-mgr-10-desc">AI-orchestrated group dinner order flow. Shows live progress as AI analyzes family dietary preferences, selects restaurant, opens group order link, and collects each member's choice. Progress bar with per-member order status. Eva monitors without intervening.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(180,83,9,0.14);color:#FCD34D;" data-i18n="tag-mgr-group-order">Group Order</span>
+          <span class="sc-tag" style="background:rgba(180,83,9,0.14);color:#FCD34D;" data-i18n="tag-mgr-ai-progress">AI Progress</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(30,158,92,0.10);">
+        <div class="sc-num" style="background:var(--green);">13</div>
+        <span class="sc-name" data-i18n="sc-mgr-13-name">Task History</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-mgr-13-desc">Completed tasks log showing everything AI and Eva accomplished. Grouped by date with member tags and timestamps. Provides accountability and audit trail for family decisions — health bookings, payments, fraud blocks, and dinner orders all recorded.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(30,158,92,0.14);color:#4ADE80;" data-i18n="tag-mgr-log">Activity Log</span>
+          <span class="sc-tag" style="background:rgba(30,158,92,0.14);color:#4ADE80;" data-i18n="tag-mgr-audit">Audit Trail</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 17 -->
+    <div class="sc">
+      <div class="sc-head" style="background:rgba(0,147,167,0.12);">
+        <div class="sc-num" style="background:var(--teal);">17</div>
+        <span class="sc-name" data-i18n="sc-mgr-17-name">Yvonne's Report</span>
+      </div>
+      <div class="sc-body">
+        <p class="sc-desc" data-i18n="sc-mgr-17-desc">AI daily summary for Yvonne accessed via her story bubble. Profile card, 4-metric grid (tasks done, risks blocked, active reminders, IG posting window). Two risk cards: fake brand sponsorship DM intercepted and $299 unauthorized purchase blocked. AI tasks completed: art class fee paid, IG timing optimized, online call reminder set.</p>
+        <div class="sc-tags">
+          <span class="sc-tag" style="background:rgba(0,147,167,0.14);color:#4DD5E4;" data-i18n="tag-mgr-member-report">Member Report</span>
+          <span class="sc-tag" style="background:rgba(0,147,167,0.14);color:#4DD5E4;" data-i18n="tag-mgr-risk-shield">Risk Shield</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</div><!-- end view-manager -->
 
 
 <div id="view-grandma">
@@ -950,6 +1211,119 @@ const dict = {
   'tag-teens-creative':  { en: 'Creative Output',  zh: '創意成果' },
   'tag-teens-report':    { en: 'Security Report',  zh: '安全報告' },
 
+  /* Manager view */
+  'hero-manager-kicker': { en: 'Interactive Prototype', zh: '互動原型' },
+  'hero-manager-title': {
+    en: "Eva's<br><span class=\"accent\">AI Butler</span><br><span class=\"accent2\" style=\"font-size:38px;\">Manager's View</span>",
+    zh: "Eva 的<br><span class=\"accent\">AI 管家</span><br><span class=\"accent2\" style=\"font-size:38px;\">管理者視角</span>"
+  },
+  'hero-manager-sub': {
+    en: "A family command-center experience where the household manager gets an AI-powered dashboard across all family members — surfacing health alerts, blocking risks, executing tasks, and coordinating everyone's day from a single screen.",
+    zh: "以家庭指揮中心為核心的體驗，家庭管理者透過 AI 驅動的全成員儀表板，主動浮現健康警示、攔截風險、執行任務並從單一畫面協調所有人的日程。"
+  },
+  'persona-manager-name': { en: 'Eva Chen · 38 years old', zh: '陳雅涵 · 38 歲' },
+  'persona-manager-meta': { en: "Brand Manager · Taipei · Family coordinator for Wei, Yvonne, Ethan & Grandma", zh: '品牌經理 · 台北 · 統籌 Wei、Yvonne、Ethan 與奶奶' },
+  'ptag-mgr-1': { en: 'Working mom · 4-person household', zh: '職業媽媽 · 四口之家' },
+  'ptag-mgr-2': { en: "Manages Grandma's health", zh: '管理奶奶健康' },
+  'ptag-mgr-3': { en: "Oversees children's schedule", zh: '統籌子女行程' },
+  'ptag-mgr-4': { en: 'Delegates to AI', zh: '授權 AI 執行' },
+  'ptag-mgr-5': { en: 'Risk-aware decision maker', zh: '風險意識決策者' },
+  'principles-mgr-eyebrow': { en: 'Design Principles', zh: '設計原則' },
+  'p-mgr-1': {
+    en: "<strong>Family as dashboard</strong> — The home screen shows all four members' live status via IG-style story bubbles. Each bubble is an AI-authored micro-summary of what's happening right now.",
+    zh: "<strong>家庭即儀表板</strong> — 主畫面以 IG 故事泡泡顯示四位成員的即時狀態。每個泡泡都是 AI 自動撰寫的當下微摘要。"
+  },
+  'p-mgr-2': {
+    en: "<strong>Two-tab command center</strong> — Home tab holds the task list and family status grid; AI Butler tab gives a direct conversation channel without leaving the app.",
+    zh: "<strong>雙分頁指揮中心</strong> — 首頁分頁包含任務清單與家庭狀態；AI 管家分頁提供直接對話頻道，無需離開 APP。"
+  },
+  'p-mgr-3': {
+    en: "<strong>AI-planned execution</strong> — Every to-do item arrives with AI-drafted execution steps. Eva reviews and confirms; AI handles the follow-through — calls, payments, bookings, reminders.",
+    zh: "<strong>AI 規劃執行</strong> — 每個待辦事項都附有 AI 草擬的執行步驟。Eva 審核確認，AI 負責後續全部流程——電話、付款、預約、提醒。"
+  },
+  'p-mgr-4': {
+    en: "<strong>Risk-first surfacing</strong> — Health flags, blocked fraud attempts, and anomalous payments are elevated above routine tasks. Risks always appear before Eva needs to look for them.",
+    zh: "<strong>風險優先浮現</strong> — 健康警示、詐騙攔截與異常消費皆優先於日常任務顯示。風險在 Eva 主動尋找前就已出現。"
+  },
+  'p-mgr-5': {
+    en: "<strong>One-tap depth per member</strong> — Tapping a story bubble opens a message history; tapping the avatar opens that member's AI work summary — two distinct entry points per person.",
+    zh: "<strong>每位成員一鍵深入</strong> — 點擊故事泡泡開啟訊息紀錄；點擊頭像開啟該成員的 AI 工作摘要——每人有兩種獨立入口。"
+  },
+  'snav-mgr-hint': { en: 'Tap the screen to interact, or select a screen below', zh: '點擊畫面互動，或點擊選單查看個別畫面' },
+  'screens-mgr-title': { en: 'Screens & Flows', zh: '畫面與流程' },
+  'screens-mgr-sub': { en: '18 screens covering family dashboard, health management, fraud protection, AI task execution, and member reports', zh: '18 個畫面，涵蓋家庭儀表板、健康管理、詐騙防護、AI 任務執行與成員報告' },
+  'sc-mgr-0-name':  { en: 'Eva Home',              zh: 'Eva 首頁' },
+  'sc-mgr-1-name':  { en: 'Grandma Chat',          zh: '奶奶訊息紀錄' },
+  'sc-mgr-2-name':  { en: 'Grandma Health',        zh: '奶奶健康摘要' },
+  'sc-mgr-3-name':  { en: 'Confirm Appointment',   zh: '確認預約' },
+  'sc-mgr-4-name':  { en: 'Appointment Confirmed', zh: '預約完成' },
+  'sc-mgr-5-name':  { en: 'Fraud Blocked',         zh: '詐騙攔截' },
+  'sc-mgr-9-name':  { en: 'AI Task Steps',         zh: 'AI 任務步驟' },
+  'sc-mgr-10-name': { en: 'Dinner Order',          zh: '晚餐訂餐' },
+  'sc-mgr-13-name': { en: 'Task History',          zh: '任務紀錄' },
+  'sc-mgr-17-name': { en: "Yvonne's Report",       zh: 'Yvonne 報告' },
+  'sc-mgr-0-desc': {
+    en: "Family command center. Four member story bubbles show AI-authored live summaries above each avatar ring. Tapping a bubble opens message history; tapping an avatar opens the member's AI work summary. Date-navigable task list with swipe-to-delete, AI-planned step previews, and done/pending status. Bottom tab bar switches between Home and AI Butler conversation.",
+    zh: "家庭指揮中心。四位成員的故事泡泡在頭像環上方顯示 AI 自動撰寫的即時摘要。點擊泡泡開啟訊息紀錄；點擊頭像開啟成員 AI 工作摘要。可按日期切換的任務清單，支援左滑刪除、AI 步驟預覽與完成/待辦狀態。底部分頁列在首頁與 AI 管家對話之間切換。"
+  },
+  'sc-mgr-1-desc': {
+    en: "Message history between AI Butler and Grandma. Shows the moment Grandma shared her health checkup PDF — AI acknowledged receipt, began analysis, and sent a completion notice to Eva. Surfaces the handoff from Grandma's device to Eva's manager dashboard.",
+    zh: "AI 管家與奶奶的訊息紀錄。顯示奶奶分享健檢 PDF 的時刻——AI 確認收到後開始分析，並向 Eva 發送完成通知。呈現從奶奶裝置到 Eva 管理儀表板的交接過程。"
+  },
+  'sc-mgr-2-desc': {
+    en: "Eva's view of Grandma's health AI work summary. Shows parsed checkup metrics (BP elevated at 145/92, blood sugar normal, ECG normal, bone density normal), pending cardiology appointment card, and quick actions: Confirm Appointment, Send Message to Grandma, View Chat History.",
+    zh: "Eva 查看奶奶健康 AI 工作摘要。顯示解析後的健檢指標（血壓偏高 145/92、血糖正常、心電圖正常、骨密度正常）、待確認心臟科預約卡，以及快速操作：確認預約、傳訊給奶奶、查看對話紀錄。"
+  },
+  'sc-mgr-3-desc': {
+    en: "One-tap confirmation screen for Grandma's NTU Hospital Cardiology appointment. AI pre-fills hospital, date (3/9), time (9:30 AM), reason (high BP follow-up), escort needed flag. Eva confirms without any phone calls. Also accessible from the Todo AI Steps view.",
+    zh: "奶奶台大醫院心臟科預約的一鍵確認畫面。AI 預填醫院、日期（3/9）、時間（9:30 AM）、原因（血壓偏高回診）與需陪同標示。Eva 無需打任何電話即可確認。也可從待辦 AI 步驟頁面進入。"
+  },
+  'sc-mgr-4-desc': {
+    en: "Success screen after Eva confirms the cardiology booking. AI confirms it has notified Grandma with full details. Offers to set a day-before reminder and add the appointment to the family calendar.",
+    zh: "Eva 確認心臟科預約後的成功畫面。AI 確認已將完整細節通知奶奶。提供設定前一日提醒與加入家庭行事曆的選項。"
+  },
+  'sc-mgr-5-desc': {
+    en: "Eva's notification view when AI intercepts a fraud call targeting Grandma. Shows caller ID, spoofed institution, and the specific scam script detected. AI has already blocked the call and auto-notified Grandma. Eva can review the incident and confirm Grandma is safe.",
+    zh: "AI 攔截針對奶奶詐騙電話時 Eva 收到的通知畫面。顯示來電號碼、偽冒機構與偵測到的詐騙話術。AI 已封鎖來電並自動通知奶奶。Eva 可檢視事件並確認奶奶安全。"
+  },
+  'sc-mgr-9-desc': {
+    en: "Detail view for any to-do item. AI breaks the task into numbered execution steps — each editable or deletable by Eva. "Ask AI to Execute Now" button triggers AI to handle the full workflow autonomously. Accessed by tapping View → on any task with a linked action.",
+    zh: "任何待辦事項的詳細視圖。AI 將任務拆解為編號執行步驟——Eva 可逐一編輯或刪除。「請 AI 立即執行」按鈕讓 AI 自主處理完整工作流程。透過點擊有連結動作的任務上的「View →」進入。"
+  },
+  'sc-mgr-10-desc': {
+    en: "AI-orchestrated group dinner order flow. Shows live progress as AI analyzes family dietary preferences, selects restaurant, opens group order link, and collects each member's choice. Progress bar with per-member order status. Eva monitors without intervening.",
+    zh: "AI 統籌的家庭晚餐群組訂餐流程。即時顯示 AI 分析飲食偏好、選擇餐廳、開啟群組訂單連結並收集每位成員選擇的進度。附帶每位成員訂餐狀態的進度條。Eva 監控而無需介入。"
+  },
+  'sc-mgr-13-desc': {
+    en: "Completed tasks log showing everything AI and Eva accomplished. Grouped by date with member tags and timestamps. Provides accountability and audit trail for family decisions — health bookings, payments, fraud blocks, and dinner orders all recorded.",
+    zh: "已完成任務紀錄，顯示 AI 與 Eva 完成的所有事項。依日期分組並附成員標籤與時間戳記。為家庭決策提供責任歸屬與稽核軌跡——健康預約、付款、詐騙攔截與訂餐均有記錄。"
+  },
+  'sc-mgr-17-desc': {
+    en: "AI daily summary for Yvonne accessed via her story bubble. Profile card, 4-metric grid (tasks done, risks blocked, active reminders, IG posting window). Two risk cards: fake brand sponsorship DM intercepted and $299 unauthorized purchase blocked. AI tasks completed: art class fee paid, IG timing optimized, online call reminder set.",
+    zh: "透過 Yvonne 故事泡泡進入的 AI 每日摘要。個人資料卡、四格指標（完成任務、攔截風險、有效提醒、IG 發文時機）。兩張風險卡：攔截假品牌贊助 DM 與封鎖 $299 未授權消費。AI 已完成任務：美術課材料費已付、IG 時機優化、線上通話提醒已設。"
+  },
+  'tag-mgr-story':      { en: 'Story Bubbles',   zh: '故事泡泡' },
+  'tag-mgr-tasks':      { en: 'Task List',        zh: '任務清單' },
+  'tag-mgr-tabs':       { en: 'Two-tab Layout',   zh: '雙分頁版型' },
+  'tag-mgr-chat':       { en: 'Chat History',     zh: '對話紀錄' },
+  'tag-mgr-handoff':    { en: 'AI Handoff',       zh: 'AI 交接' },
+  'tag-mgr-metrics':    { en: 'Health Metrics',   zh: '健康指標' },
+  'tag-mgr-ai-summary': { en: 'AI Summary',       zh: 'AI 摘要' },
+  'tag-mgr-one-tap':    { en: 'One-tap Confirm',  zh: '一鍵確認' },
+  'tag-mgr-ai-prefill': { en: 'AI Pre-fill',      zh: 'AI 預填' },
+  'tag-mgr-success':    { en: 'Success State',    zh: '成功狀態' },
+  'tag-mgr-follow-up':  { en: 'AI Follow-up',     zh: 'AI 後續' },
+  'tag-mgr-fraud':      { en: 'Fraud Alert',      zh: '詐騙警示' },
+  'tag-mgr-auto-block': { en: 'Auto-blocked',     zh: '自動攔截' },
+  'tag-mgr-steps':      { en: 'Step Editor',      zh: '步驟編輯' },
+  'tag-mgr-execute':    { en: 'AI Execute',       zh: 'AI 執行' },
+  'tag-mgr-group-order':{ en: 'Group Order',      zh: '群組訂單' },
+  'tag-mgr-ai-progress':{ en: 'AI Progress',      zh: 'AI 進度' },
+  'tag-mgr-log':        { en: 'Activity Log',     zh: '活動紀錄' },
+  'tag-mgr-audit':      { en: 'Audit Trail',      zh: '稽核軌跡' },
+  'tag-mgr-member-report':{ en: 'Member Report',  zh: '成員報告' },
+  'tag-mgr-risk-shield':{ en: 'Risk Shield',      zh: '風險防護' },
+
   /* Footer */
   'footer-text':  { en: 'TrendLife AI Butler · Grandma Member View · v1 Mockup · March 2025', zh: 'TrendLife AI 管家 · 奶奶會員視角 · v1 原型 · 2025 年 3 月' },
   'footer-brand': { en: 'TrendLife', zh: 'TrendLife' },
@@ -1000,11 +1374,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ── VIEW SWITCHER ──
 function switchView(view) {
-  const isTeens = (view === 'teens');
-  document.getElementById('view-grandma').style.display = isTeens ? 'none' : '';
-  document.getElementById('view-teens').style.display   = isTeens ? '' : 'none';
-  document.getElementById('tab-btn-grandma').classList.toggle('nav-vtab-active', !isTeens);
-  document.getElementById('tab-btn-teens').classList.toggle('nav-vtab-active',  isTeens);
+  document.getElementById('view-manager').style.display = view === 'manager' ? '' : 'none';
+  document.getElementById('view-grandma').style.display = view === 'grandma' ? '' : 'none';
+  document.getElementById('view-teens').style.display   = view === 'teens'   ? '' : 'none';
+  document.getElementById('tab-btn-manager').classList.toggle('nav-vtab-active', view === 'manager');
+  document.getElementById('tab-btn-grandma').classList.toggle('nav-vtab-active', view === 'grandma');
+  document.getElementById('tab-btn-teens').classList.toggle('nav-vtab-active',   view === 'teens');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -1018,6 +1393,20 @@ function specGoTo(n) {
   }
   document.querySelectorAll('#screenNav .snav-item').forEach((b, i) => {
     b.classList.toggle('snav-active', i === n);
+  });
+}
+
+// ── MANAGER SCREEN NAVIGATOR ──
+const managerScreenIds = [0, 2, 3, 5, 9, 10, 13, 17];
+let managerScreenIdx = 0;
+function managerGoTo(screenId) {
+  const iframe = document.getElementById('managerIframe');
+  if (iframe && iframe.contentWindow) {
+    try { iframe.contentWindow.goTo(screenId); } catch(e) {}
+  }
+  managerScreenIdx = managerScreenIds.indexOf(screenId);
+  document.querySelectorAll('#screenNavManager .snav-item').forEach((b, i) => {
+    b.classList.toggle('snav-active', managerScreenIds[i] === screenId);
   });
 }
 
