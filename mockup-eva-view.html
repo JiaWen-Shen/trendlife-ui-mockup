@@ -175,6 +175,44 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
   background:rgba(192,132,252,0.18);border:1px solid rgba(192,132,252,0.3);
   color:#C084FC;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
 .chat-send.ai-send{background:rgba(100,181,246,0.18);border-color:rgba(100,181,246,0.3);color:#64B5F6}
+
+/* ── LIGHT THEME ── */
+body.light{background:#E8E9EF}
+body.light .phone{background:#FFFFFF;border-color:rgba(0,0,0,0.09);box-shadow:0 24px 64px rgba(0,0,0,0.13)}
+body.light .status-time{color:rgba(10,10,20,0.65)}
+body.light .status-icons{color:rgba(10,10,20,0.35)}
+body.light .back-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.03);color:rgba(10,10,20,0.45)}
+body.light .screen-title{color:rgba(10,10,20,0.8)}
+body.light .greeting{color:rgba(10,10,20,0.35)}
+body.light .greeting-name{color:rgba(10,10,20,0.85)}
+body.light .alert-pill{background:rgba(200,40,40,0.1);border-color:rgba(200,40,40,0.25);color:rgba(180,30,30,0.9)}
+body.light .alert-x{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.12);color:rgba(10,10,20,0.4)}
+body.light .tab-bar{border-top-color:rgba(10,10,20,0.06)}
+body.light .tab-label{color:rgba(10,10,20,0.45)}
+body.light .tab-item.active .tab-label{color:#9333EA}
+body.light .eva-eyebrow{color:rgba(10,10,20,0.25)}
+body.light .data-tbl th{color:rgba(10,10,20,0.28);border-bottom-color:rgba(10,10,20,0.06)}
+body.light .data-tbl td{color:rgba(10,10,20,0.6);border-bottom-color:rgba(10,10,20,0.04)}
+body.light .abtn{border-color:rgba(10,10,20,0.08);background:rgba(10,10,20,0.03);color:rgba(10,10,20,0.6)}
+body.light .event-item:not(:last-child)::after{background:rgba(10,10,20,0.06)}
+body.light .ev-dot{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.03)}
+body.light .ev-who{color:rgba(10,10,20,0.3)}
+body.light .ev-text{color:rgba(10,10,20,0.65)}
+body.light .ev-time{color:rgba(10,10,20,0.2)}
+body.light .protect-av{background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.12)}
+body.light .protect-name{color:rgba(10,10,20,0.85)}
+body.light .protect-role{color:rgba(10,10,20,0.3)}
+body.light .pstat{background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.07)}
+body.light .pstat-lbl{color:rgba(10,10,20,0.25)}
+body.light .pc-text{color:rgba(10,10,20,0.6)}
+body.light .pc-detail{color:rgba(10,10,20,0.3)}
+body.light .chat-header-name{color:rgba(10,10,20,0.85)}
+body.light .bubble.them{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.07);color:rgba(10,10,20,0.72)}
+body.light .bubble-time{color:rgba(10,10,20,0.18)}
+body.light .chat-input-bar{border-top-color:rgba(10,10,20,0.06)}
+body.light .chat-input{background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.08);color:rgba(10,10,20,0.35)}
+body.light .chat-mic{background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.08);color:rgba(10,10,20,0.38)}
+
 </style>
 </head>
 <body>
@@ -795,7 +833,7 @@ function buildConstellation(){
     const line=document.createElementNS('http://www.w3.org/2000/svg','line');
     line.setAttribute('x1',a.x);line.setAttribute('y1',a.y);
     line.setAttribute('x2',b.x);line.setAttribute('y2',b.y);
-    line.setAttribute('stroke',`rgba(255,255,255,${e.w*0.09})`);
+    line.setAttribute('stroke', currentTheme==='light'?`rgba(10,10,20,${e.w*0.1})`:`rgba(255,255,255,${e.w*0.09})`);
     line.setAttribute('stroke-width',e.w*2.5);
     svg.appendChild(line);
   });
@@ -813,7 +851,7 @@ function buildConstellation(){
 
     const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
     c.setAttribute('cx',n.x);c.setAttribute('cy',n.y);c.setAttribute('r',n.r);
-    c.setAttribute('fill',n.center?n.color+'1a':'rgba(255,255,255,0.04)');
+    c.setAttribute('fill',n.center?n.color+'1a': currentTheme==='light'?'rgba(10,10,20,0.04)':'rgba(255,255,255,0.04)');
     c.setAttribute('stroke',n.color);
     c.setAttribute('stroke-width',n.center?'2':'1');
     c.setAttribute('stroke-opacity',n.center?'0.55':'0.28');
@@ -831,7 +869,7 @@ function buildConstellation(){
     const lbl=document.createElementNS('http://www.w3.org/2000/svg','text');
     lbl.setAttribute('x',n.x);lbl.setAttribute('y',n.y+n.r+14);
     lbl.setAttribute('text-anchor','middle');
-    lbl.setAttribute('fill','rgba(255,255,255,0.48)');
+    lbl.setAttribute('fill', currentTheme==='light'?'rgba(10,10,20,0.5)':'rgba(255,255,255,0.48)');
     lbl.setAttribute('font-size','10.5');lbl.setAttribute('font-family','Inter,sans-serif');
     lbl.setAttribute('font-weight','500');
     lbl.textContent=n.label;
@@ -840,7 +878,7 @@ function buildConstellation(){
     const note=document.createElementNS('http://www.w3.org/2000/svg','text');
     note.setAttribute('x',n.x);note.setAttribute('y',n.y+n.r+26);
     note.setAttribute('text-anchor','middle');
-    note.setAttribute('fill','rgba(255,255,255,0.2)');
+    note.setAttribute('fill', currentTheme==='light'?'rgba(10,10,20,0.22)':'rgba(255,255,255,0.2)');
     note.setAttribute('font-size','8.5');note.setAttribute('font-family','Inter,sans-serif');
     note.textContent=n.note;
     g.appendChild(note);
@@ -864,7 +902,7 @@ function buildConstellation(){
       const bdot=document.createElementNS('http://www.w3.org/2000/svg','circle');
       bdot.setAttribute('cx',bx);bdot.setAttribute('cy',by);
       bdot.setAttribute('r','9');bdot.setAttribute('fill','#FF4D4D');
-      bdot.setAttribute('stroke','#0E0E14');bdot.setAttribute('stroke-width','2');
+      bdot.setAttribute('stroke', currentTheme==='light'?'#FFFFFF':'#0E0E14');bdot.setAttribute('stroke-width','2');
       g.appendChild(bdot);
       const btxt=document.createElementNS('http://www.w3.org/2000/svg','text');
       btxt.setAttribute('x',bx);btxt.setAttribute('y',by+1);
@@ -898,7 +936,7 @@ function buildConstellation(){
       const bdot=document.createElementNS('http://www.w3.org/2000/svg','circle');
       bdot.setAttribute('cx',bx);bdot.setAttribute('cy',by);
       bdot.setAttribute('r','7');bdot.setAttribute('fill','rgba(192,132,252,0.85)');
-      bdot.setAttribute('stroke','#0E0E14');bdot.setAttribute('stroke-width','1.5');
+      bdot.setAttribute('stroke', currentTheme==='light'?'#FFFFFF':'#0E0E14');bdot.setAttribute('stroke-width','1.5');
       g.appendChild(bdot);
       const btxt=document.createElementNS('http://www.w3.org/2000/svg','text');
       btxt.setAttribute('x',bx);btxt.setAttribute('y',by+1);
@@ -939,6 +977,16 @@ const EVA_HTML=`
     <button class="abtn">📤  Export to family health record</button>
   </div>
 </div>`;
+
+// ── Theme ──
+let currentTheme='dark';
+function setTheme(t){
+  currentTheme=t;
+  document.body.classList.toggle('light',t==='light');
+  const svg=document.getElementById('const-svg');
+  svg.innerHTML='';
+  buildConstellation();
+}
 
 buildConstellation();
 document.getElementById('health-body').innerHTML = EVA_HTML;

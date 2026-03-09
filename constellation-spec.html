@@ -93,6 +93,24 @@
   .lang-btn.active { background: var(--red); color: white; }
   .lang-btn:hover:not(.active) { color: var(--text); }
 
+  /* Theme toggle */
+  .theme-toggle {
+    display: flex; align-items: center;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border2);
+    border-radius: 100px; padding: 3px; gap: 2px;
+    flex-shrink: 0;
+  }
+  .theme-btn {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+    padding: 4px 11px; border-radius: 100px; border: none;
+    cursor: pointer; transition: background 0.2s, color 0.2s;
+    background: transparent; color: var(--muted);
+    font-family: inherit;
+  }
+  .theme-btn.active { background: var(--surface2); color: var(--text); border: 1px solid var(--border2); }
+  .theme-btn:hover:not(.active) { color: var(--text); }
+
   /* View tabs */
   .nav-view-tabs { display: flex; align-items: center; gap: 2px; }
   .nav-vtab {
@@ -348,6 +366,10 @@
          onclick="switchView('eva');return false;" href="#"
          data-i18n="tab-eva">Eva's View</a>
     </nav>
+    <div class="theme-toggle">
+      <button class="theme-btn active" id="btn-dark"  onclick="setTheme('dark')">Dark</button>
+      <button class="theme-btn"        id="btn-light" onclick="setTheme('light')">Light</button>
+    </div>
     <div class="lang-toggle">
       <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
       <button class="lang-btn"        id="btn-zh" onclick="setLang('zh')">中</button>
@@ -1072,6 +1094,16 @@ function evaGoTo(n) {
 /* ── SCROLL TO PHONE ── */
 function scrollToPhone(iframeId) {
   document.getElementById(iframeId)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+/* ── THEME SWITCHER ── */
+function setTheme(t) {
+  ['graceIframe','evaIframe'].forEach(id => {
+    const f = document.getElementById(id);
+    if (f?.contentWindow) try { f.contentWindow.setTheme(t); } catch(e) {}
+  });
+  document.getElementById('btn-dark').classList.toggle('active', t === 'dark');
+  document.getElementById('btn-light').classList.toggle('active', t === 'light');
 }
 </script>
 </body>
