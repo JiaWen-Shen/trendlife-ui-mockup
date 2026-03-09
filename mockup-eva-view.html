@@ -282,6 +282,20 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
       </div>
 
     </div>
+    <div class="tab-bar">
+      <div class="tab-item" onclick="goTo(0)">
+        <span class="tab-icon">✦</span>
+        <span class="tab-label">Family</span>
+      </div>
+      <div class="tab-item active" onclick="goTo(2)">
+        <span class="tab-icon">📋</span>
+        <span class="tab-label">Events</span>
+      </div>
+      <div class="tab-item" onclick="goTo(7)">
+        <span class="tab-icon">◈</span>
+        <span class="tab-label">AI Butler</span>
+      </div>
+    </div>
   </div>
 
   <!-- ══════════════════════════════
@@ -573,8 +587,10 @@ function goTo(n){
   document.getElementById('s'+n).classList.add('active');
   // tab sync: tab 0→S0, tab 1→S2, tab 2→S7
   const map=[0,2,7];
-  document.querySelectorAll('#s0 .tab-item').forEach((t,i)=>{
-    t.classList.toggle('active', map[i]===n);
+  ['#s0','#s2'].forEach(id=>{
+    document.querySelectorAll(id+' .tab-item').forEach((t,i)=>{
+      t.classList.toggle('active', map[i]===n);
+    });
   });
 }
 
@@ -766,7 +782,7 @@ function buildConstellation(){
     }
 
     // Navigation
-    if(n.id==='grandma') g.onclick=()=>goTo(3);
+    if(n.id==='grandma') g.onclick=()=>goTo(1);
     if(n.id==='wei')     g.onclick=()=>goTo(5);
     if(n.id==='yuki')    g.onclick=()=>goTo(4);
     if(n.id==='ethan')   g.onclick=()=>goTo(6);
