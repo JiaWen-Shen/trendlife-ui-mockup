@@ -35,10 +35,16 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 .const-area{flex:1;position:relative;overflow:hidden}
 .const-svg{position:absolute;inset:0;width:100%;height:100%}
 
-.alert-pill{position:absolute;top:12px;right:16px;z-index:10;
-  background:rgba(255,120,120,0.12);border:1px solid rgba(255,120,120,0.3);
-  color:rgba(255,120,120,0.9);font-size:11px;font-weight:600;
-  padding:5px 12px;border-radius:20px;cursor:pointer;letter-spacing:0.2px}
+.alerts-stack{position:absolute;top:12px;right:16px;z-index:10;
+  display:flex;flex-direction:column;gap:5px;align-items:flex-end}
+.alert-row{display:flex;align-items:center;gap:5px}
+.alert-pill{background:rgba(255,120,120,0.12);border:1px solid rgba(255,120,120,0.3);
+  color:rgba(255,120,120,0.9);font-size:10.5px;font-weight:600;
+  padding:4px 10px;border-radius:20px;cursor:pointer;letter-spacing:0.2px;white-space:nowrap}
+.alert-x{width:17px;height:17px;border-radius:50%;
+  background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);
+  color:rgba(255,255,255,0.45);font-size:8px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700}
 
 .tab-bar{height:82px;display:flex;align-items:flex-start;justify-content:space-around;
   padding:10px 0 0;border-top:1px solid rgba(255,255,255,0.05);flex-shrink:0}
@@ -186,7 +192,20 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
     </div>
     <div class="const-area">
       <svg class="const-svg" id="const-svg" viewBox="0 0 390 480" xmlns="http://www.w3.org/2000/svg"></svg>
-      <div class="alert-pill" onclick="goTo(1)">⚠ Grandma's health report ›</div>
+      <div class="alerts-stack">
+        <div class="alert-row" id="alert-health">
+          <div class="alert-pill" onclick="goTo(1)">⚠ Grandma's health report</div>
+          <div class="alert-x" onclick="dismissAlert('alert-health')">✕</div>
+        </div>
+        <div class="alert-row" id="alert-scam">
+          <div class="alert-pill" onclick="goTo(8)">📵 Scam call — Grandma</div>
+          <div class="alert-x" onclick="dismissAlert('alert-scam')">✕</div>
+        </div>
+        <div class="alert-row" id="alert-phish">
+          <div class="alert-pill" onclick="goTo(9)">🛡 Phishing link — Yuki</div>
+          <div class="alert-x" onclick="dismissAlert('alert-phish')">✕</div>
+        </div>
+      </div>
     </div>
     <div class="tab-bar">
       <div class="tab-item active" onclick="goTo(0)">
@@ -579,6 +598,105 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
     </div>
   </div>
 
+
+  <!-- ══════════════════════════════
+       SCREEN 8 · Scam Call Detail
+       ══════════════════════════════ -->
+  <div class="screen" id="s8">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="screen-header">
+      <div class="back-btn" onclick="goTo(0)">←</div>
+      <div class="screen-title">Scam Call Blocked</div>
+    </div>
+    <div class="protect-body">
+      <div class="protect-hero">
+        <div style="font-size:40px;margin-bottom:8px">📵</div>
+        <div class="protect-name">Incoming Call Intercepted</div>
+        <div class="protect-role">Grandma's device · Today 9:15 AM</div>
+        <div class="protect-status-row">
+          <div class="pstat">
+            <div class="pstat-val" style="color:#FF7875">Blocked</div>
+            <div class="pstat-lbl">Status</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-val" style="color:#C084FC">847</div>
+            <div class="pstat-lbl">Reports</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-val" style="color:#4ADE80">0s</div>
+            <div class="pstat-lbl">Ring time</div>
+          </div>
+        </div>
+      </div>
+      <div class="protect-card warn">
+        <div class="pc-eyebrow" style="color:#FF7875">⚠ Caller Info</div>
+        <div class="pc-text">+886-900-123-456 — unregistered number.</div>
+        <div class="pc-detail">Community database: 847 scam reports · Category: impersonating bank representative</div>
+      </div>
+      <div class="protect-card blue-card">
+        <div class="pc-eyebrow" style="color:#64B5F6">◈ AI Butler Action</div>
+        <div class="pc-text">Call automatically blocked before reaching Grandma. Incident logged and alert sent to you.</div>
+      </div>
+      <div class="actions" style="margin-top:4px">
+        <button class="abtn hi">🔔 Notify Grandma about this call</button>
+        <button class="abtn">📋 View call log</button>
+        <button class="abtn">🚫 Block number permanently</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SCREEN 9 · Phishing Link Detail
+       ══════════════════════════════ -->
+  <div class="screen" id="s9">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="screen-header">
+      <div class="back-btn" onclick="goTo(0)">←</div>
+      <div class="screen-title">Phishing Link Blocked</div>
+    </div>
+    <div class="protect-body">
+      <div class="protect-hero">
+        <div style="font-size:40px;margin-bottom:8px">🛡</div>
+        <div class="protect-name">Link Blocked Before Loading</div>
+        <div class="protect-role">Yuki's device · Yesterday 4:23 PM</div>
+        <div class="protect-status-row">
+          <div class="pstat">
+            <div class="pstat-val" style="color:#C084FC">Blocked</div>
+            <div class="pstat-lbl">Status</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-val" style="color:#FF7875">High</div>
+            <div class="pstat-lbl">Risk level</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-val" style="color:#4ADE80">0</div>
+            <div class="pstat-lbl">Data exposed</div>
+          </div>
+        </div>
+      </div>
+      <div class="protect-card warn">
+        <div class="pc-eyebrow" style="color:#C084FC">⚠ Phishing Site Details</div>
+        <div class="pc-text">secure-bank-login.xyz — impersonates Cathay Bank login page.</div>
+        <div class="pc-detail">SSL certificate mismatch · domain registered 3 days ago · added to global block list</div>
+      </div>
+      <div class="protect-card blue-card">
+        <div class="pc-eyebrow" style="color:#64B5F6">◈ AI Butler Action</div>
+        <div class="pc-text">Page blocked before loading — Yuki's credentials and data remain safe. Site reported to safe-browsing network.</div>
+      </div>
+      <div class="actions" style="margin-top:4px">
+        <button class="abtn hi">💬 Message Yuki about this</button>
+        <button class="abtn">🔗 Report phishing site</button>
+        <button class="abtn">🔒 Tighten Yuki's browsing filter</button>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -592,6 +710,10 @@ function goTo(n){
       t.classList.toggle('active', map[i]===n);
     });
   });
+}
+function dismissAlert(id){
+  const el=document.getElementById(id);
+  if(el) el.style.display='none';
 }
 
 const NODES=[
