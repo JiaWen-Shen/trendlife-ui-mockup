@@ -7,19 +7,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --red:        #D71920;
-    --red-dark:   #A8131A;
+    --red:        #9E5252;
+    --red-dark:   #7A3B3B;
     --red-light:  #FFF0F0;
     --red-mid:    #FFD6D6;
-    --navy:       #1C2B35;
-    --navy-mid:   #2E4455;
+    --navy:       #394855;
+    --navy-mid:   #4A5E6E;
     --cream:      #F5EFE8;
     --cream-dark: #EDE5DB;
-    --teal:       #0093A7;
+    --teal:       #4A8A96;
     --teal-light: #E6F6F8;
-    --green:      #1E9E5C;
+    --green:      #3D8A62;
     --green-bg:   #E8F7EF;
-    --amber:      #D97706;
+    --amber:      #B07B38;
     --amber-bg:   #FEF3C7;
     --gray-50:    #F9FAFB;
     --gray-100:   #F5F6F8;
@@ -132,7 +132,7 @@
   .butler-blink { width: 5px; height: 5px; background: var(--teal); border-radius: 50%; animation: blink 1.4s ease-in-out infinite; }
   @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
   .butler-text { font-size: 15px; line-height: 1.55; color: white; }
-  .butler-text strong { color: #7FD9E8; }
+  .butler-text strong { color: #9BBFC6; }
 
   /* Pre-prompt chips */
   .home-chips { display: flex; gap: 10px; padding: 4px 16px 12px; flex-shrink: 0; }
@@ -232,7 +232,7 @@
      HEALTH SCREEN
   ════════════════════════ */
   .health-hero {
-    background: linear-gradient(135deg, var(--red) 0%, #9B1117 100%);
+    background: linear-gradient(135deg, var(--red) 0%, #7A3B3B 100%);
     padding: 20px 20px 22px; color: white; flex-shrink: 0; position: relative; overflow: hidden;
   }
   .health-hero::after {
@@ -273,7 +273,7 @@
   }
   .ai-card-label { font-size: 10px; font-weight: 700; color: var(--teal); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
   .ai-card-text { font-size: 15px; line-height: 1.55; }
-  .ai-card-text strong { color: #7FD9E8; }
+  .ai-card-text strong { color: #9BBFC6; }
   .ai-card-btn {
     display: inline-flex; align-items: center; gap: 6px; margin-top: 12px;
     padding: 9px 16px; background: var(--red); border-radius: 100px; border: none;
@@ -285,7 +285,7 @@
      SCHEDULE SCREEN
   ════════════════════════ */
   .schedule-hero {
-    background: linear-gradient(135deg, var(--teal) 0%, #005C6E 100%);
+    background: linear-gradient(135deg, var(--teal) 0%, #2E6070 100%);
     padding: 20px 20px 22px; color: white; flex-shrink: 0; position: relative; overflow: hidden;
   }
   .schedule-hero::after {
@@ -305,7 +305,7 @@
 
   .schedule-ai-tip { margin: 14px 16px 4px; background: var(--navy); border-radius: 14px; padding: 13px 15px; color: white; flex-shrink: 0; }
   .schedule-ai-tip-text { font-size: 14px; line-height: 1.5; }
-  .schedule-ai-tip-text strong { color: #7FD9E8; }
+  .schedule-ai-tip-text strong { color: #9BBFC6; }
 
   .timeline { padding: 14px 18px 24px; display: flex; flex-direction: column; }
   .tl-item { display: flex; gap: 14px; position: relative; padding-bottom: 24px; }
@@ -743,7 +743,7 @@
       <div class="family-grid">
         <!-- Eva -->
         <div class="family-card" style="background:linear-gradient(140deg,#F3EEFA 0%,#EBE4F5 100%);">
-          <div class="family-card-photo" style="background:rgba(0,0,0,0.07);">E</div>
+          <div class="family-card-photo" style="background:rgba(0,0,0,0.18);">E</div>
           <div class="family-card-name">Eva</div>
           <div class="family-card-role">Daughter · New York</div>
           <div class="family-card-status">
@@ -766,7 +766,7 @@
 
         <!-- Wei -->
         <div class="family-card" style="background:linear-gradient(140deg,#EAF1F5 0%,#DDE8EF 100%);">
-          <div class="family-card-photo" style="background:rgba(0,0,0,0.07);">W</div>
+          <div class="family-card-photo" style="background:rgba(0,0,0,0.18);">W</div>
           <div class="family-card-name">Wei</div>
           <div class="family-card-role">Son-in-law · New York</div>
           <div class="family-card-status">
@@ -783,7 +783,7 @@
 
         <!-- Yvonne -->
         <div class="family-card" style="background:linear-gradient(140deg,#EAF4F4 0%,#DAE9E8 100%);">
-          <div class="family-card-photo" style="background:rgba(0,0,0,0.07);">Y</div>
+          <div class="family-card-photo" style="background:rgba(0,0,0,0.18);">Y</div>
           <div class="family-card-name">Yvonne</div>
           <div class="family-card-role">Granddaughter · Boston</div>
           <div class="family-card-status">
@@ -800,7 +800,7 @@
 
         <!-- Ethan -->
         <div class="family-card" style="background:linear-gradient(140deg,#F5EDEC 0%,#EDE1E0 100%);">
-          <div class="family-card-photo" style="background:rgba(0,0,0,0.07);">Et</div>
+          <div class="family-card-photo" style="background:rgba(0,0,0,0.18);">Et</div>
           <div class="family-card-name">Ethan</div>
           <div class="family-card-role">Grandson · Chicago</div>
           <div class="family-card-status">
