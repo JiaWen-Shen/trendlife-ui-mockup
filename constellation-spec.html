@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrendLife · Constellation — Design Spec</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #080E12;
+    --surface:  #111A20;
+    --surface2: #1C2B35;
+    --border:   rgba(255,255,255,0.07);
+    --border2:  rgba(255,255,255,0.12);
+    --red:      #D71920;
+    --red-dim:  rgba(215,25,32,0.14);
+    --navy:     #1C2B35;
+    --blue:     #64B5F6;
+    --blue-dim: rgba(100,181,246,0.13);
+    --purple:   #C084FC;
+    --amber:    #FFC364;
+    --green:    #4ADE80;
+    --text:     #ECF1F6;
+    --muted:    #6B8090;
+    --muted2:   #9BAFC0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+    min-height: 100vh;
+    transition: opacity 0.18s ease;
+  }
+  body.lang-switching { opacity: 0; }
+
+  body::before {
+    content: '';
+    position: fixed; top: -200px; right: -200px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(100,181,246,0.05) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed; bottom: -150px; left: -150px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(192,132,252,0.04) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── STICKY NAV ── */
+  .site-nav {
+    position: sticky; top: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 13px 40px;
+    background: rgba(8,14,18,0.88);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-brand { display: flex; align-items: center; gap: 11px; }
+  .nav-logo {
+    width: 30px; height: 30px; border-radius: 7px; background: var(--red);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .nav-logo img { height: 13px; filter: brightness(0) invert(1); }
+  .nav-product { font-size: 14px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+  .nav-pipe { width: 1px; height: 14px; background: var(--border2); }
+  .nav-subtitle { font-size: 13px; color: var(--muted); }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+
+  /* Language toggle */
+  .lang-toggle {
+    display: flex; align-items: center;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border2);
+    border-radius: 100px; padding: 3px; gap: 2px;
+    flex-shrink: 0;
+  }
+  .lang-btn {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+    padding: 4px 11px; border-radius: 100px; border: none;
+    cursor: pointer; transition: background 0.2s, color 0.2s;
+    background: transparent; color: var(--muted);
+    font-family: inherit;
+  }
+  .lang-btn.active { background: var(--red); color: white; }
+  .lang-btn:hover:not(.active) { color: var(--text); }
+
+  /* View tabs */
+  .nav-view-tabs { display: flex; align-items: center; gap: 2px; }
+  .nav-vtab {
+    font-size: 11.5px; font-weight: 600; padding: 5px 11px; border-radius: 8px;
+    color: var(--muted); text-decoration: none; transition: all 0.15s;
+    border: 1px solid transparent; white-space: nowrap; cursor: pointer;
+  }
+  .nav-vtab:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+  .nav-vtab-active { color: var(--text); background: var(--surface2); border-color: var(--border2); }
+
+  /* ── HERO ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 72px;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 72px 40px 64px;
+    position: relative; z-index: 1;
+    align-items: start;
+  }
+  .hero-left { display: flex; flex-direction: column; gap: 40px; }
+
+  .hero-kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--blue-dim); border: 1px solid rgba(100,181,246,0.22);
+    border-radius: 100px; padding: 5px 14px 5px 10px;
+    font-size: 12px; font-weight: 700; color: #90CAF9;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    width: fit-content;
+  }
+  .hero-kicker-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--blue);
+    box-shadow: 0 0 6px rgba(100,181,246,0.7);
+    animation: pulse-blue 2s ease-in-out infinite;
+  }
+  @keyframes pulse-blue {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  .hero-title {
+    font-size: 52px; font-weight: 900; letter-spacing: -0.04em; line-height: 1.0;
+    margin-top: 8px;
+  }
+  .hero-title .accent  { color: var(--blue); }
+  .hero-title .accent2 { color: var(--purple); }
+
+  .hero-sub {
+    font-size: 16px; color: var(--muted2); line-height: 1.7; margin-top: 14px;
+    max-width: 480px;
+  }
+
+  /* Persona card */
+  .persona-card {
+    background: var(--surface); border: 1px solid var(--border2);
+    border-radius: 20px; padding: 20px 22px;
+  }
+  .persona-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .persona-av {
+    width: 50px; height: 50px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 900; color: white;
+  }
+  .persona-name { font-size: 15px; font-weight: 800; line-height: 1.2; }
+  .persona-meta { font-size: 12px; color: var(--muted); margin-top: 3px; }
+  .persona-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .ptag {
+    font-size: 11px; font-weight: 600; padding: 4px 11px; border-radius: 100px;
+    background: rgba(255,255,255,0.05); color: var(--muted2); border: 1px solid var(--border);
+  }
+
+  /* Principles */
+  .section-eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 14px;
+  }
+  .principles { display: flex; flex-direction: column; gap: 10px; }
+  .principle { display: flex; gap: 12px; }
+  .p-num {
+    width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0; margin-top: 1px;
+    background: var(--surface2); display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 900; color: var(--blue);
+  }
+  .p-text { font-size: 13px; color: var(--muted2); line-height: 1.55; padding-top: 2px; }
+  .p-text strong { color: var(--text); font-weight: 700; }
+
+  /* ── STICKY PHONE ── */
+  .hero-right {
+    position: sticky; top: 80px;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+  }
+  .phone-shell {
+    border-radius: 52px; overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.08),
+      0 40px 100px rgba(0,0,0,0.65),
+      0 16px 40px rgba(0,0,0,0.4);
+    background: #0F1C24;
+    position: relative;
+    transform: scale(0.80);
+    transform-origin: top center;
+    margin-bottom: -169px;
+  }
+  .phone-shell::before {
+    content: '';
+    position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+    width: 110px; height: 34px; background: #0F1C24;
+    border-radius: 0 0 22px 22px; z-index: 10;
+  }
+  .phone-shell::after {
+    content: '';
+    position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+    width: 98px; height: 28px; background: #111D25;
+    border-radius: 0 0 18px 18px; z-index: 11;
+  }
+  .phone-shell iframe {
+    display: block; width: 390px; height: 844px; border: none;
+  }
+
+  /* Screen nav */
+  .screen-nav {
+    width: 100%; margin-top: 10px;
+    border: 1px solid var(--border2); border-radius: 12px;
+    overflow: hidden; background: var(--surface);
+  }
+  .snav-instruction {
+    font-size: 10.5px; color: var(--muted); padding: 9px 12px;
+    border-bottom: 1px solid var(--border); line-height: 1.45;
+  }
+  .snav-item {
+    display: flex; align-items: center; gap: 9px;
+    padding: 8px 12px; width: 100%; text-align: left;
+    border: none; background: transparent; cursor: pointer;
+    font-family: inherit; color: var(--muted2);
+    transition: background 0.12s, color 0.12s;
+  }
+  .snav-item + .snav-item { border-top: 1px solid var(--border); }
+  .snav-item:hover { background: var(--surface2); color: var(--text); }
+  .snav-item .snav-icon { font-size: 14px; flex-shrink: 0; }
+  .snav-item .snav-name { flex: 1; font-size: 12px; font-weight: 600; }
+  .snav-item .snav-num {
+    font-size: 9px; font-weight: 700; color: var(--muted);
+    background: rgba(255,255,255,0.06); border-radius: 4px; padding: 2px 5px;
+    flex-shrink: 0;
+  }
+  .snav-item.snav-active { background: var(--blue-dim); color: var(--text); }
+  .snav-item.snav-active .snav-name { color: var(--blue); font-weight: 700; }
+  .snav-item.snav-active .snav-num { background: var(--blue); color: #080E12; }
+
+  /* ── SCREENS GRID ── */
+  .screens-section {
+    position: relative; z-index: 1;
+    max-width: 1300px; margin: 0 auto; padding: 0 40px 80px;
+  }
+  .section-header { margin-bottom: 28px; }
+  .section-title { font-size: 28px; font-weight: 900; letter-spacing: -0.02em; }
+  .section-sub { font-size: 14px; color: var(--muted); margin-top: 5px; }
+
+  .screen-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .sc {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .sc:hover { border-color: var(--border2); transform: translateY(-2px); }
+  .sc-head {
+    padding: 14px 16px 10px;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sc-num {
+    width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 900; color: white;
+  }
+  .sc-name { font-size: 13px; font-weight: 800; }
+  .sc-body { padding: 12px 16px 16px; }
+  .sc-desc { font-size: 12px; color: var(--muted2); line-height: 1.6; }
+  .sc-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+  .sc-tag {
+    font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 100px;
+    letter-spacing: 0.02em;
+  }
+  .tag-blue   { background: rgba(100,181,246,0.1); color: #90CAF9; border: 1px solid rgba(100,181,246,0.2); }
+  .tag-purple { background: rgba(192,132,252,0.1); color: #D8B4FE; border: 1px solid rgba(192,132,252,0.2); }
+  .tag-amber  { background: rgba(255,195,100,0.1); color: #FDE68A; border: 1px solid rgba(255,195,100,0.2); }
+  .tag-red    { background: rgba(255,120,120,0.1); color: #FCA5A5; border: 1px solid rgba(255,120,120,0.2); }
+  .tag-green  { background: rgba(74,222,128,0.1);  color: #86EFAC; border: 1px solid rgba(74,222,128,0.2); }
+  .tag-muted  { background: rgba(255,255,255,0.05); color: var(--muted2); border: 1px solid var(--border); }
+
+  /* ── DIVIDER / FOOTER ── */
+  .section-divider {
+    max-width: 1300px; margin: 0 auto 64px;
+    height: 1px; background: var(--border);
+  }
+  .footer {
+    position: relative; z-index: 1;
+    border-top: 1px solid var(--border);
+    max-width: 1300px; margin: 0 auto; padding: 22px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-left { font-size: 12px; color: var(--muted); }
+  .footer-right { display: flex; align-items: center; gap: 8px; }
+  .footer-logo {
+    width: 20px; height: 20px; border-radius: 5px; background: var(--red);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .footer-logo img { height: 9px; filter: brightness(0) invert(1); }
+  .footer-brand { font-size: 12px; font-weight: 700; color: var(--muted2); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1140px) {
+    .hero { grid-template-columns: 1fr; gap: 48px; padding: 48px 28px; }
+    .hero-right { position: static; }
+    .hero-title { font-size: 42px; }
+    .screen-cards { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 700px) {
+    .site-nav { padding: 12px 20px; }
+    .nav-view-tabs { display: none; }
+    .hero { padding: 32px 20px; }
+    .hero-title { font-size: 34px; }
+    .screen-cards { grid-template-columns: 1fr; }
+    .screens-section { padding: 0 20px 60px; }
+    .footer { padding: 20px; flex-direction: column; gap: 10px; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── STICKY NAV ── -->
+<nav class="site-nav">
+  <div class="nav-brand">
+    <div class="nav-logo">
+      <img src="reference/logo-mark-only.png" alt="TrendLife">
+    </div>
+    <span class="nav-product" data-i18n="nav-product">TrendLife AI Butler</span>
+    <div class="nav-pipe"></div>
+    <span class="nav-subtitle" data-i18n="nav-subtitle">Constellation Spec</span>
+  </div>
+  <div class="nav-right">
+    <nav class="nav-view-tabs">
+      <a class="nav-vtab nav-vtab-active" id="tab-btn-grace"
+         onclick="switchView('grace');return false;" href="#"
+         data-i18n="tab-grace">Grace's View</a>
+      <a class="nav-vtab" id="tab-btn-eva"
+         onclick="switchView('eva');return false;" href="#"
+         data-i18n="tab-eva">Eva's View</a>
+    </nav>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn"        id="btn-zh" onclick="setLang('zh')">中</button>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════════
+     GRACE'S VIEW
+     ══════════════════════════════════════════════════ -->
+<div id="view-grace">
+
+<section class="hero">
+  <div class="hero-left">
+
+    <div>
+      <div class="hero-kicker">
+        <span class="hero-kicker-dot"></span>
+        <span data-i18n="hero-grace-kicker">Interactive Prototype</span>
+      </div>
+      <div class="hero-title" data-i18n-html="hero-grace-title">
+        Grace's<br><span class="accent">Constellation</span><br><span class="accent2" style="font-size:38px;">Member's View</span>
+      </div>
+      <p class="hero-sub" data-i18n="hero-grace-sub">
+        A personal digital space where the individual member sees herself at the center of her family network. The AI Guardian Arc monitors silently above; family nodes reflect connection and care. Tapping navigates to health data, voice, and relationship depth.
+      </p>
+    </div>
+
+    <!-- Persona -->
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-av" style="background: linear-gradient(135deg, #B45309, #78350F);">✦</div>
+        <div>
+          <div class="persona-name" data-i18n="persona-grace-name">Grace Chen · 68 years old</div>
+          <div class="persona-meta" data-i18n="persona-grace-meta">Retired homemaker · Taipei · Grandma in the Chen family</div>
+        </div>
+      </div>
+      <div class="persona-tags">
+        <span class="ptag" data-i18n="ptag-grace-1">Senior member</span>
+        <span class="ptag" data-i18n="ptag-grace-2">Tech-light</span>
+        <span class="ptag" data-i18n="ptag-grace-3">Health-conscious</span>
+        <span class="ptag" data-i18n="ptag-grace-4">Fraud-vulnerable</span>
+        <span class="ptag" data-i18n="ptag-grace-5">Family-connected</span>
+      </div>
+    </div>
+
+    <!-- Design Principles -->
+    <div>
+      <div class="section-eyebrow" data-i18n="principles-grace-eyebrow">Design Principles</div>
+      <div class="principles">
+        <div class="principle">
+          <div class="p-num">1</div>
+          <div class="p-text" data-i18n-html="p-grace-1"><strong>Self at center</strong> — Grace sees herself surrounded by her loved ones, not managed by them. The design reinforces her agency and presence within the family network.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">2</div>
+          <div class="p-text" data-i18n-html="p-grace-2"><strong>Guardian Arc as ambient shield</strong> — The AI Butler arc at the top conveys protection without intruding. It's always present, quietly watching — tapping reveals the AI's actions for the day.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">3</div>
+          <div class="p-text" data-i18n-html="p-grace-3"><strong>Relational depth on tap</strong> — Each family node is a doorway: voice messages, shared memories, or live health updates. Navigating is exploratory, not task-driven.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">4</div>
+          <div class="p-text" data-i18n-html="p-grace-4"><strong>Health as context, not alarm</strong> — The health report is accessible but presented calmly. Data is shown with context and AI recommendations, never as raw numbers without meaning.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">5</div>
+          <div class="p-text" data-i18n-html="p-grace-5"><strong>Voice as primary input</strong> — For seniors, voice is more natural than tapping. The Your Voice screen allows hands-free navigation and messaging.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /hero-left -->
+
+  <!-- Right: sticky phone iframe -->
+  <div class="hero-right">
+    <div class="phone-shell">
+      <iframe
+        src="mockup-constellation-draft.html"
+        id="graceIframe"
+        title="Grace Constellation View"
+        scrolling="no">
+      </iframe>
+    </div>
+    <div class="screen-nav" id="screenNavGrace">
+      <div class="snav-instruction" data-i18n="snav-hint">Click screens to interact, or use the list to jump to a specific screen.</div>
+      <button class="snav-item snav-active" onclick="graceGoTo(0)"><span class="snav-icon">✦</span><span class="snav-name" data-i18n="sc-grace-0-name">Constellation Home</span><span class="snav-num">0</span></button>
+      <button class="snav-item" onclick="graceGoTo(1)"><span class="snav-icon">◈</span><span class="snav-name" data-i18n="sc-grace-1-name">AI Ripple</span><span class="snav-num">1</span></button>
+      <button class="snav-item" onclick="graceGoTo(2)"><span class="snav-icon">🏥</span><span class="snav-name" data-i18n="sc-grace-2-name">Health Report</span><span class="snav-num">2</span></button>
+      <button class="snav-item" onclick="graceGoTo(3)"><span class="snav-icon">🎙</span><span class="snav-name" data-i18n="sc-grace-3-name">Your Voice</span><span class="snav-num">3</span></button>
+      <button class="snav-item" onclick="graceGoTo(4)"><span class="snav-icon">🌍</span><span class="snav-name" data-i18n="sc-grace-4-name">Your World</span><span class="snav-num">4</span></button>
+      <button class="snav-item" onclick="graceGoTo(5)"><span class="snav-icon">💬</span><span class="snav-name" data-i18n="sc-grace-5-name">Chat with Eva</span><span class="snav-num">5</span></button>
+    </div>
+  </div>
+
+</section>
+
+<!-- Screens Grid -->
+<section class="screens-section">
+  <div class="section-divider" style="margin-bottom:48px;"></div>
+  <div class="section-header">
+    <div class="section-title" data-i18n="screens-grace-title">Screens &amp; Flows</div>
+    <div class="section-sub" data-i18n="screens-grace-sub">6 screens · Grace's personal constellation view</div>
+  </div>
+  <div class="screen-cards">
+
+    <div class="sc" onclick="graceGoTo(0);scrollToPhone('graceIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--blue)">0</div>
+        <div class="sc-name" data-i18n="sc-grace-0-name">Constellation Home</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-grace-0-desc">Grace at center, family nodes orbit around her. Guardian Arc spans the top as AI shield. Each node pulses with live status. Tapping a node navigates to that relationship's depth screen.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-blue">Entry point</span>
+          <span class="sc-tag tag-amber">Family network</span>
+          <span class="sc-tag tag-muted">SVG animation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="graceGoTo(1);scrollToPhone('graceIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--blue)">1</div>
+        <div class="sc-name" data-i18n="sc-grace-1-name">AI Ripple</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-grace-1-desc">Triggered by tapping the Guardian Arc. Shows the AI Butler's recent activity across the family network as an animated ripple event chain — health checks, blocked calls, and family updates.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-blue">AI Butler</span>
+          <span class="sc-tag tag-muted">Event chain</span>
+          <span class="sc-tag tag-muted">Animation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="graceGoTo(2);scrollToPhone('graceIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--amber)" style="color:#080E12">2</div>
+        <div class="sc-name" data-i18n="sc-grace-2-name">Health Report</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-grace-2-desc">Annual checkup results for Grace. AI summary at top; marker table below (Blood Pressure ⚠ Elevated, HbA1c Watch, ECG/Bone Density Normal). Three AI-recommended action buttons including cardiology follow-up.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-amber">Health data</span>
+          <span class="sc-tag tag-red">Alert marker</span>
+          <span class="sc-tag tag-blue">AI actions</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="graceGoTo(3);scrollToPhone('graceIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--purple)">3</div>
+        <div class="sc-name" data-i18n="sc-grace-3-name">Your Voice</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-grace-3-desc">Voice-first navigation screen for seniors. Large microphone interface with AI listening state. Grace can speak naturally to navigate the app, send messages, or ask the AI Butler for help.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-purple">Voice input</span>
+          <span class="sc-tag tag-muted">Senior UX</span>
+          <span class="sc-tag tag-blue">AI Butler</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="graceGoTo(4);scrollToPhone('graceIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--green)" style="color:#080E12">4</div>
+        <div class="sc-name" data-i18n="sc-grace-4-name">Your World</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-grace-4-desc">A curated life snapshot for Grace — upcoming appointments, family-shared memories, today's weather, and a gentle AI suggestion for the day. Designed to feel warm and personal, not utilitarian.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-green">Life context</span>
+          <span class="sc-tag tag-amber">Appointments</span>
+          <span class="sc-tag tag-muted">Memories</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="graceGoTo(5);scrollToPhone('graceIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--purple)">5</div>
+        <div class="sc-name" data-i18n="sc-grace-5-name">Chat with Eva</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-grace-5-desc">Messaging thread between Grace and Eva. Grace sees messages on the left; Eva on the right. A conversation about the recent health report — Grace asking about her results, Eva responding with care and next steps.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-amber">Family chat</span>
+          <span class="sc-tag tag-purple">Eva</span>
+          <span class="sc-tag tag-muted">Health context</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</div><!-- /view-grace -->
+
+
+<!-- ══════════════════════════════════════════════════
+     EVA'S VIEW
+     ══════════════════════════════════════════════════ -->
+<div id="view-eva" style="display:none">
+
+<section class="hero">
+  <div class="hero-left">
+
+    <div>
+      <div class="hero-kicker">
+        <span class="hero-kicker-dot"></span>
+        <span data-i18n="hero-eva-kicker">Interactive Prototype</span>
+      </div>
+      <div class="hero-title" data-i18n-html="hero-eva-title">
+        Eva's<br><span class="accent">Family Network</span><br><span class="accent2" style="font-size:38px;">Manager's View</span>
+      </div>
+      <p class="hero-sub" data-i18n="hero-eva-sub">
+        A caregiver command center where Eva monitors all family members from the center of the network. Alerts surface proactively at the top right; each member node leads to their protection or health report; the AI Butler coordinates complex tasks through a dedicated chat.
+      </p>
+    </div>
+
+    <!-- Persona -->
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-av" style="background: linear-gradient(135deg, #7B3F9E, #4C1D95);">E</div>
+        <div>
+          <div class="persona-name" data-i18n="persona-eva-name">Eva Chen · 45 years old</div>
+          <div class="persona-meta" data-i18n="persona-eva-meta">Brand Manager · Taipei · Family coordinator for Wei, Yuki, Ethan &amp; Grandma</div>
+        </div>
+      </div>
+      <div class="persona-tags">
+        <span class="ptag" data-i18n="ptag-eva-1">Working mom</span>
+        <span class="ptag" data-i18n="ptag-eva-2">Primary caregiver</span>
+        <span class="ptag" data-i18n="ptag-eva-3">Health manager</span>
+        <span class="ptag" data-i18n="ptag-eva-4">Risk-aware</span>
+        <span class="ptag" data-i18n="ptag-eva-5">Delegates to AI</span>
+      </div>
+    </div>
+
+    <!-- Design Principles -->
+    <div>
+      <div class="section-eyebrow" data-i18n="principles-eva-eyebrow">Design Principles</div>
+      <div class="principles">
+        <div class="principle">
+          <div class="p-num">1</div>
+          <div class="p-text" data-i18n-html="p-eva-1"><strong>Eva at the center</strong> — As the primary caregiver, Eva sees herself surrounded by her family. Each node represents a relationship she actively monitors, not just a contact list.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">2</div>
+          <div class="p-text" data-i18n-html="p-eva-2"><strong>Proactive alerts</strong> — Three stacked alert pills appear at the top right, surfacing urgent issues before Eva looks for them. Each is independently dismissible once reviewed.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">3</div>
+          <div class="p-text" data-i18n-html="p-eva-3"><strong>Per-member depth</strong> — Tapping any family node navigates to that person's dedicated protection or health report. No member's status is more than one tap away.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">4</div>
+          <div class="p-text" data-i18n-html="p-eva-4"><strong>Guardian Arc as action gateway</strong> — The arc navigates directly to AI Butler chat — the highest-frequency action for Eva as a coordinator. The arc is both a reassurance symbol and a shortcut.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">5</div>
+          <div class="p-text" data-i18n-html="p-eva-5"><strong>Events as cross-member audit trail</strong> — The middle tab shows a chronological family-wide activity log, giving Eva a single view of what happened across everyone without opening each profile.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /hero-left -->
+
+  <!-- Right: sticky phone iframe -->
+  <div class="hero-right">
+    <div class="phone-shell">
+      <iframe
+        src="mockup-eva-view.html"
+        id="evaIframe"
+        title="Eva Manager View"
+        scrolling="no">
+      </iframe>
+    </div>
+    <div class="screen-nav" id="screenNavEva">
+      <div class="snav-instruction" data-i18n="snav-hint">Click screens to interact, or use the list to jump to a specific screen.</div>
+      <button class="snav-item snav-active" onclick="evaGoTo(0)"><span class="snav-icon">✦</span><span class="snav-name" data-i18n="sc-eva-0-name">Constellation Home</span><span class="snav-num">0</span></button>
+      <button class="snav-item" onclick="evaGoTo(1)"><span class="snav-icon">🏥</span><span class="snav-name" data-i18n="sc-eva-1-name">Grandma's Health Report</span><span class="snav-num">1</span></button>
+      <button class="snav-item" onclick="evaGoTo(2)"><span class="snav-icon">📋</span><span class="snav-name" data-i18n="sc-eva-2-name">Family Events</span><span class="snav-num">2</span></button>
+      <button class="snav-item" onclick="evaGoTo(3)"><span class="snav-icon">💬</span><span class="snav-name" data-i18n="sc-eva-3-name">Chat with Grandma</span><span class="snav-num">3</span></button>
+      <button class="snav-item" onclick="evaGoTo(4)"><span class="snav-icon">🛡</span><span class="snav-name" data-i18n="sc-eva-4-name">Yuki — Protection</span><span class="snav-num">4</span></button>
+      <button class="snav-item" onclick="evaGoTo(5)"><span class="snav-icon">🔒</span><span class="snav-name" data-i18n="sc-eva-5-name">Wei — Protection</span><span class="snav-num">5</span></button>
+      <button class="snav-item" onclick="evaGoTo(6)"><span class="snav-icon">📱</span><span class="snav-name" data-i18n="sc-eva-6-name">Ethan — Protection</span><span class="snav-num">6</span></button>
+      <button class="snav-item" onclick="evaGoTo(7)"><span class="snav-icon">◈</span><span class="snav-name" data-i18n="sc-eva-7-name">AI Butler Chat</span><span class="snav-num">7</span></button>
+      <button class="snav-item" onclick="evaGoTo(8)"><span class="snav-icon">📵</span><span class="snav-name" data-i18n="sc-eva-8-name">Scam Call — Grandma</span><span class="snav-num">8</span></button>
+      <button class="snav-item" onclick="evaGoTo(9)"><span class="snav-icon">🚫</span><span class="snav-name" data-i18n="sc-eva-9-name">Phishing Link — Yuki</span><span class="snav-num">9</span></button>
+    </div>
+  </div>
+
+</section>
+
+<!-- Screens Grid -->
+<section class="screens-section">
+  <div class="section-divider" style="margin-bottom:48px;"></div>
+  <div class="section-header">
+    <div class="section-title" data-i18n="screens-eva-title">Screens &amp; Flows</div>
+    <div class="section-sub" data-i18n="screens-eva-sub">10 screens · Eva's caregiver constellation view</div>
+  </div>
+  <div class="screen-cards">
+
+    <div class="sc" onclick="evaGoTo(0);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--purple)">0</div>
+        <div class="sc-name" data-i18n="sc-eva-0-name">Constellation Home</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-0-desc">Eva at center, Grandma above with ⚠ pulse ring, Wei / Yuki / Ethan as orbiting nodes. Three stacked alert pills (health report, scam call, phishing link) in the top right — each dismissible. Guardian Arc above navigates to AI Butler chat.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-purple">Entry point</span>
+          <span class="sc-tag tag-red">Alert pills</span>
+          <span class="sc-tag tag-blue">Guardian Arc</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(1);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--amber)" style="color:#080E12">1</div>
+        <div class="sc-name" data-i18n="sc-eva-1-name">Grandma's Health Report</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-1-desc">Annual checkup results viewed from Eva's perspective. AI summary with cardiology follow-up recommendation; marker table (BP ⚠ 145/92, HbA1c Watch, others Normal). Three action buttons: book follow-up, review medication, export to family record.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-amber">Health data</span>
+          <span class="sc-tag tag-red">Alert marker</span>
+          <span class="sc-tag tag-blue">AI actions</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(2);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--blue)">2</div>
+        <div class="sc-name" data-i18n="sc-eva-2-name">Family Events</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-2-desc">Cross-member chronological activity feed. Four events: Grandma blood pressure alert, Yuki phishing link blocked, Ethan social media overuse, Wei device login verified. Tab bar at bottom (Events tab active).</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-purple">Activity feed</span>
+          <span class="sc-tag tag-red">Health alert</span>
+          <span class="sc-tag tag-muted">Tab bar</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(3);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--amber)" style="color:#080E12">3</div>
+        <div class="sc-name" data-i18n="sc-eva-3-name">Chat with Grandma</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-3-desc">Direct messaging thread between Eva and Grandma. Five messages covering the health report results — Grandma asks about checkup, Eva confirms 145/92 concern, Eva recommends cardiologist, Grandma agrees to go.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-amber">Grandma</span>
+          <span class="sc-tag tag-purple">Eva</span>
+          <span class="sc-tag tag-muted">Health context</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(4);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--green)" style="color:#080E12">4</div>
+        <div class="sc-name" data-i18n="sc-eva-4-name">Yuki — Protection</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-4-desc">Yuki's protection report: 3 threats blocked, 0 incidents, 14 days protected. Latest block card shows the phishing link intercept (bit.ly/secure-bank-verify → fake bank page). This week's status: browsing safe, usage normal.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-green">Protection</span>
+          <span class="sc-tag tag-purple">Phishing blocked</span>
+          <span class="sc-tag tag-muted">Usage normal</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(5);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:#60A5FA">5</div>
+        <div class="sc-name" data-i18n="sc-eva-5-name">Wei — Protection</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-5-desc">Wei's device security report. Recent new device login verified via two-factor authentication; work device confirmed secure. No anomalies detected this week.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-blue">Device security</span>
+          <span class="sc-tag tag-green">Verified</span>
+          <span class="sc-tag tag-muted">2FA</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(6);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:#FB923C">6</div>
+        <div class="sc-name" data-i18n="sc-eva-6-name">Ethan — Protection</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-6-desc">Ethan's screen time and safety report. Usage alert: 3.5 hours of social media after midnight, exceeding family limit. AI Butler action taken: social media restricted after 10 PM starting tonight.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-red">Usage alert</span>
+          <span class="sc-tag tag-blue">AI restriction</span>
+          <span class="sc-tag tag-muted">Screen time</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(7);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--blue)">7</div>
+        <div class="sc-name" data-i18n="sc-eva-7-name">AI Butler Chat</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-7-desc">Direct conversation with the AI Butler. Eva asks to book the earliest cardiology appointment for Grandma — AI confirms and notifies. Eva also sets a late-night screen time limit for Ethan — AI applies the restriction and will send a heads-up message.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-blue">AI Butler</span>
+          <span class="sc-tag tag-amber">Booking</span>
+          <span class="sc-tag tag-red">Screen limit</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(8);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:#FF7875" style="color:#080E12">8</div>
+        <div class="sc-name" data-i18n="sc-eva-8-name">Scam Call — Grandma</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-8-desc">Incident detail for the blocked scam call on Grandma's device. Caller: +886-900-123-456, 847 community scam reports, impersonating a bank representative. AI blocked with 0-second ring time. Three action buttons: notify Grandma, view call log, block permanently.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-red">Scam blocked</span>
+          <span class="sc-tag tag-amber">Grandma</span>
+          <span class="sc-tag tag-blue">AI Butler</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(9);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--purple)">9</div>
+        <div class="sc-name" data-i18n="sc-eva-9-name">Phishing Link — Yuki</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-9-desc">Incident detail for the phishing link blocked on Yuki's device. Site: secure-bank-login.xyz, impersonates Cathay Bank, SSL mismatch, domain 3 days old. Page blocked before loading — no data exposed. Reported to safe-browsing network. Three action buttons: message Yuki, report site, tighten filter.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-purple">Phishing blocked</span>
+          <span class="sc-tag tag-green">No data exposed</span>
+          <span class="sc-tag tag-blue">AI Butler</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</div><!-- /view-eva -->
+
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-left" data-i18n="footer-text">TrendLife AI Butler · Constellation Design Spec · March 2026</div>
+  <div class="footer-right">
+    <div class="footer-logo">
+      <img src="reference/logo-mark-only.png" alt="">
+    </div>
+    <span class="footer-brand" data-i18n="footer-brand">TrendLife</span>
+  </div>
+</footer>
+
+
+<script>
+/* ── i18n DICTIONARY ── */
+const dict = {
+  'nav-product':  { en: 'TrendLife AI Butler', zh: 'TrendLife AI 管家' },
+  'nav-subtitle': { en: 'Constellation Spec',  zh: '星座圖規格' },
+  'tab-grace':    { en: "Grace's View",        zh: 'Grace 個人視角' },
+  'tab-eva':      { en: "Eva's View",          zh: 'Eva 管理者視角' },
+  'snav-hint':    { en: 'Click screens to interact, or use the list to jump to a specific screen.', zh: '點擊畫面互動，或點擊選單查看個別畫面' },
+
+  /* Grace hero */
+  'hero-grace-kicker':   { en: 'Interactive Prototype',      zh: '互動原型' },
+  'hero-grace-title':    {
+    en: "Grace's<br><span class='accent'>Constellation</span><br><span class='accent2' style='font-size:38px;'>Member's View</span>",
+    zh: "Grace 的<br><span class='accent'>星座圖</span><br><span class='accent2' style='font-size:38px;'>會員視角</span>"
+  },
+  'hero-grace-sub': {
+    en: "A personal digital space where the individual member sees herself at the center of her family network. The AI Guardian Arc monitors silently above; family nodes reflect connection and care. Tapping navigates to health data, voice, and relationship depth.",
+    zh: "一個以自我為中心的數位空間，讓成員看到自己處於家庭網絡的核心。AI 守護穹頂在上方靜默守護；家庭節點反映關係與關愛。點擊可深入健康資料、語音功能與家人互動。"
+  },
+  'persona-grace-name': { en: 'Grace Chen · 68 years old',             zh: '陳奶奶 · 68 歲' },
+  'persona-grace-meta': { en: 'Retired homemaker · Taipei · Grandma in the Chen family', zh: '退休家庭主婦 · 台北 · 陳家奶奶' },
+  'ptag-grace-1': { en: 'Senior member',     zh: '年長用戶' },
+  'ptag-grace-2': { en: 'Tech-light',        zh: '輕度數位' },
+  'ptag-grace-3': { en: 'Health-conscious',  zh: '重視健康' },
+  'ptag-grace-4': { en: 'Fraud-vulnerable',  zh: '詐騙高風險' },
+  'ptag-grace-5': { en: 'Family-connected',  zh: '家庭核心' },
+  'principles-grace-eyebrow': { en: 'Design Principles', zh: '設計原則' },
+  'p-grace-1': {
+    en: "<strong>Self at center</strong> — Grace sees herself surrounded by her loved ones, not managed by them. The design reinforces her agency and presence within the family network.",
+    zh: "<strong>自我為中心</strong> — Grace 看到自己被家人圍繞，而非被管理。設計強化她在家庭網絡中的主體感與存在感。"
+  },
+  'p-grace-2': {
+    en: "<strong>Guardian Arc as ambient shield</strong> — The AI Butler arc at the top conveys protection without intruding. It's always present, quietly watching — tapping reveals the AI's actions for the day.",
+    zh: "<strong>守護穹頂作為環境屏障</strong> — 頂部的 AI 管家穹頂傳遞保護感而不打擾。始終存在，靜默守護——點擊可查看 AI 今日行動。"
+  },
+  'p-grace-3': {
+    en: "<strong>Relational depth on tap</strong> — Each family node is a doorway: voice messages, shared memories, or live health updates. Navigating is exploratory, not task-driven.",
+    zh: "<strong>一鍵深入關係</strong> — 每個家庭節點都是入口：語音訊息、共同回憶或即時健康更新。導航是探索性的，而非任務驅動的。"
+  },
+  'p-grace-4': {
+    en: "<strong>Health as context, not alarm</strong> — The health report is accessible but presented calmly. Data is shown with context and AI recommendations, never as raw numbers without meaning.",
+    zh: "<strong>健康作為脈絡而非警報</strong> — 健康報告易於取得，但呈現方式平靜。資料附有背景說明和 AI 建議，而非毫無意義的原始數字。"
+  },
+  'p-grace-5': {
+    en: "<strong>Voice as primary input</strong> — For seniors, voice is more natural than tapping. The Your Voice screen allows hands-free navigation and messaging.",
+    zh: "<strong>語音為主要輸入</strong> — 對年長用戶而言，語音比點擊更自然。「你的聲音」頁面支援免持手機的導航與傳訊。"
+  },
+
+  /* Grace screen names */
+  'sc-grace-0-name': { en: 'Constellation Home',  zh: '星座圖首頁' },
+  'sc-grace-1-name': { en: 'AI Ripple',           zh: 'AI 漣漪' },
+  'sc-grace-2-name': { en: 'Health Report',       zh: '健康報告' },
+  'sc-grace-3-name': { en: 'Your Voice',          zh: '你的聲音' },
+  'sc-grace-4-name': { en: 'Your World',          zh: '你的世界' },
+  'sc-grace-5-name': { en: 'Chat with Eva',       zh: '與 Eva 的對話' },
+
+  /* Grace screen descs */
+  'sc-grace-0-desc': {
+    en: "Grace at center, family nodes orbit around her. Guardian Arc spans the top as AI shield. Each node pulses with live status. Tapping a node navigates to that relationship's depth screen.",
+    zh: "Grace 居中，家庭節點在其周圍運行。守護穹頂橫跨頂部作為 AI 屏障。每個節點隨即時狀態跳動。點擊節點進入該關係的深度頁面。"
+  },
+  'sc-grace-1-desc': {
+    en: "Triggered by tapping the Guardian Arc. Shows the AI Butler's recent activity across the family network as an animated ripple event chain — health checks, blocked calls, and family updates.",
+    zh: "點擊守護穹頂觸發。以動態漣漪事件鏈呈現 AI 管家近期的家庭網絡活動——健康檢查、攔截電話和家庭更新。"
+  },
+  'sc-grace-2-desc': {
+    en: "Annual checkup results for Grace. AI summary at top; marker table below (Blood Pressure ⚠ Elevated, HbA1c Watch, ECG/Bone Density Normal). Three AI-recommended action buttons including cardiology follow-up.",
+    zh: "Grace 的年度健康檢查結果。頂部 AI 摘要；下方指標表格（血壓 ⚠ 偏高、HbA1c 注意、心電圖/骨密度正常）。三個 AI 建議操作按鈕，包含心臟科追蹤。"
+  },
+  'sc-grace-3-desc': {
+    en: "Voice-first navigation screen for seniors. Large microphone interface with AI listening state. Grace can speak naturally to navigate the app, send messages, or ask the AI Butler for help.",
+    zh: "為年長用戶設計的語音優先導航頁面。大型麥克風介面顯示 AI 聆聽狀態。Grace 可自然說話來導航 APP、傳送訊息或請求 AI 管家協助。"
+  },
+  'sc-grace-4-desc': {
+    en: "A curated life snapshot for Grace — upcoming appointments, family-shared memories, today's weather, and a gentle AI suggestion for the day. Designed to feel warm and personal, not utilitarian.",
+    zh: "Grace 的精選生活快照——即將到來的預約、家庭共享回憶、今日天氣，以及 AI 的溫和日常建議。設計感覺溫暖而個人化，而非功能性的。"
+  },
+  'sc-grace-5-desc': {
+    en: "Messaging thread between Grace and Eva. Grace sees messages on the left; Eva on the right. A conversation about the recent health report — Grace asking about her results, Eva responding with care and next steps.",
+    zh: "Grace 與 Eva 之間的訊息串。Grace 的訊息在左，Eva 在右。關於近期健康報告的對話——Grace 詢問結果，Eva 帶著關心回應並提供後續步驟。"
+  },
+
+  /* Grace screens section */
+  'screens-grace-title': { en: 'Screens & Flows',                      zh: '畫面與流程' },
+  'screens-grace-sub':   { en: '6 screens · Grace\'s personal constellation view', zh: '6 個畫面 · Grace 個人星座圖視角' },
+
+  /* Eva hero */
+  'hero-eva-kicker':   { en: 'Interactive Prototype',      zh: '互動原型' },
+  'hero-eva-title':    {
+    en: "Eva's<br><span class='accent'>Family Network</span><br><span class='accent2' style='font-size:38px;'>Manager's View</span>",
+    zh: "Eva 的<br><span class='accent'>家庭網絡</span><br><span class='accent2' style='font-size:38px;'>管理者視角</span>"
+  },
+  'hero-eva-sub': {
+    en: "A caregiver command center where Eva monitors all family members from the center of the network. Alerts surface proactively at the top right; each member node leads to their protection or health report; the AI Butler coordinates complex tasks through a dedicated chat.",
+    zh: "以照顧者為中心的指揮中樞，Eva 從網絡中心監控所有家庭成員。右上角主動顯示警報；每個成員節點通往其保護或健康報告；AI 管家透過專屬對話協調複雜任務。"
+  },
+  'persona-eva-name': { en: 'Eva Chen · 45 years old',                  zh: 'Eva 陳 · 45 歲' },
+  'persona-eva-meta': { en: 'Brand Manager · Taipei · Family coordinator for Wei, Yuki, Ethan & Grandma', zh: '品牌經理 · 台北 · 負責協調 Wei、Yuki、Ethan 和奶奶的家庭事務' },
+  'ptag-eva-1': { en: 'Working mom',       zh: '職業媽媽' },
+  'ptag-eva-2': { en: 'Primary caregiver', zh: '主要照顧者' },
+  'ptag-eva-3': { en: 'Health manager',    zh: '健康管理者' },
+  'ptag-eva-4': { en: 'Risk-aware',        zh: '風險意識強' },
+  'ptag-eva-5': { en: 'Delegates to AI',   zh: '善用 AI 委派' },
+  'principles-eva-eyebrow': { en: 'Design Principles', zh: '設計原則' },
+  'p-eva-1': {
+    en: "<strong>Eva at the center</strong> — As the primary caregiver, Eva sees herself surrounded by her family. Each node represents a relationship she actively monitors, not just a contact list.",
+    zh: "<strong>Eva 居中</strong> — 作為主要照顧者，Eva 看到自己被家人圍繞。每個節點代表她積極監控的關係，而非單純的聯絡人清單。"
+  },
+  'p-eva-2': {
+    en: "<strong>Proactive alerts</strong> — Three stacked alert pills appear at the top right, surfacing urgent issues before Eva looks for them. Each is independently dismissible once reviewed.",
+    zh: "<strong>主動警報</strong> — 三個堆疊警報標籤顯示在右上角，在 Eva 尋找之前就浮現緊急問題。每個標籤在查看後可單獨關閉。"
+  },
+  'p-eva-3': {
+    en: "<strong>Per-member depth</strong> — Tapping any family node navigates to that person's dedicated protection or health report. No member's status is more than one tap away.",
+    zh: "<strong>個別成員深度</strong> — 點擊任何家庭節點可進入該成員的專屬保護或健康報告。任何成員的狀態距離都不超過一次點擊。"
+  },
+  'p-eva-4': {
+    en: "<strong>Guardian Arc as action gateway</strong> — The arc navigates directly to AI Butler chat — the highest-frequency action for Eva as a coordinator. The arc is both a reassurance symbol and a shortcut.",
+    zh: "<strong>守護穹頂作為行動入口</strong> — 穹頂直接導航到 AI 管家對話——這是 Eva 作為協調者最頻繁的操作。穹頂既是安心符號，也是快捷方式。"
+  },
+  'p-eva-5': {
+    en: "<strong>Events as cross-member audit trail</strong> — The middle tab shows a chronological family-wide activity log, giving Eva a single view of what happened across everyone without opening each profile.",
+    zh: "<strong>事件作為跨成員審計記錄</strong> — 中間分頁顯示按時間排列的全家庭活動記錄，讓 Eva 無需逐一開啟個人頁面即可一覽所有動態。"
+  },
+
+  /* Eva screen names */
+  'sc-eva-0-name': { en: 'Constellation Home',       zh: '星座圖首頁' },
+  'sc-eva-1-name': { en: "Grandma's Health Report",  zh: '奶奶的健康報告' },
+  'sc-eva-2-name': { en: 'Family Events',            zh: '家庭事件' },
+  'sc-eva-3-name': { en: 'Chat with Grandma',        zh: '與奶奶的對話' },
+  'sc-eva-4-name': { en: 'Yuki — Protection',        zh: 'Yuki — 保護報告' },
+  'sc-eva-5-name': { en: 'Wei — Protection',         zh: 'Wei — 保護報告' },
+  'sc-eva-6-name': { en: 'Ethan — Protection',       zh: 'Ethan — 保護報告' },
+  'sc-eva-7-name': { en: 'AI Butler Chat',           zh: 'AI 管家對話' },
+  'sc-eva-8-name': { en: 'Scam Call — Grandma',      zh: '詐騙電話 — 奶奶' },
+  'sc-eva-9-name': { en: 'Phishing Link — Yuki',     zh: '釣魚連結 — Yuki' },
+
+  /* Eva screen descs */
+  'sc-eva-0-desc': {
+    en: "Eva at center, Grandma above with ⚠ pulse ring, Wei / Yuki / Ethan as orbiting nodes. Three stacked alert pills (health report, scam call, phishing link) in the top right — each dismissible. Guardian Arc above navigates to AI Butler chat.",
+    zh: "Eva 居中，奶奶在上方帶有 ⚠ 脈衝環，Wei / Yuki / Ethan 為環繞節點。右上角三個堆疊警報標籤（健康報告、詐騙電話、釣魚連結）——每個均可關閉。頂部守護穹頂可導航到 AI 管家對話。"
+  },
+  'sc-eva-1-desc': {
+    en: "Annual checkup results viewed from Eva's perspective. AI summary with cardiology follow-up recommendation; marker table (BP ⚠ 145/92, HbA1c Watch, others Normal). Three action buttons: book follow-up, review medication, export to family record.",
+    zh: "從 Eva 視角查看的年度健檢結果。AI 摘要附心臟科追蹤建議；指標表格（血壓 ⚠ 145/92、HbA1c 注意、其他正常）。三個操作按鈕：預約追蹤、檢視藥物、匯出家庭記錄。"
+  },
+  'sc-eva-2-desc': {
+    en: "Cross-member chronological activity feed. Four events: Grandma blood pressure alert, Yuki phishing link blocked, Ethan social media overuse, Wei device login verified. Tab bar at bottom (Events tab active).",
+    zh: "跨成員按時間排列的活動記錄。四則事件：奶奶血壓警報、Yuki 釣魚連結攔截、Ethan 社群媒體過度使用、Wei 設備登入已驗證。底部分頁列（事件分頁啟動中）。"
+  },
+  'sc-eva-3-desc': {
+    en: "Direct messaging thread between Eva and Grandma. Five messages covering the health report results — Grandma asks about checkup, Eva confirms 145/92 concern, Eva recommends cardiologist, Grandma agrees to go.",
+    zh: "Eva 與奶奶之間的直接訊息串。五則訊息涵蓋健康報告結果——奶奶詢問健檢，Eva 確認 145/92 的疑慮，Eva 建議心臟科，奶奶同意前往。"
+  },
+  'sc-eva-4-desc': {
+    en: "Yuki's protection report: 3 threats blocked, 0 incidents, 14 days protected. Latest block card shows the phishing link intercept (bit.ly/secure-bank-verify → fake bank page). This week's status: browsing safe, usage normal.",
+    zh: "Yuki 的保護報告：已封鎖 3 次威脅、0 起事件、14 天受保護。最新封鎖卡片顯示釣魚連結攔截（bit.ly/secure-bank-verify → 假銀行頁面）。本週狀態：瀏覽安全、使用正常。"
+  },
+  'sc-eva-5-desc': {
+    en: "Wei's device security report. Recent new device login verified via two-factor authentication; work device confirmed secure. No anomalies detected this week.",
+    zh: "Wei 的設備安全報告。近期新設備登入已透過雙重驗證確認；工作設備已確認安全。本週未檢測到異常。"
+  },
+  'sc-eva-6-desc': {
+    en: "Ethan's screen time and safety report. Usage alert: 3.5 hours of social media after midnight, exceeding family limit. AI Butler action taken: social media restricted after 10 PM starting tonight.",
+    zh: "Ethan 的螢幕時間與安全報告。使用警報：午夜後社群媒體使用 3.5 小時，超出家庭限制。AI 管家已採取行動：從今晚起晚上 10 點後限制社群媒體。"
+  },
+  'sc-eva-7-desc': {
+    en: "Direct conversation with the AI Butler. Eva asks to book the earliest cardiology appointment for Grandma — AI confirms and notifies. Eva also sets a late-night screen time limit for Ethan — AI applies the restriction and will send a heads-up message.",
+    zh: "與 AI 管家的直接對話。Eva 要求為奶奶預約最早的心臟科門診——AI 確認並通知。Eva 也為 Ethan 設定深夜螢幕時間限制——AI 套用限制並將發送提醒訊息。"
+  },
+  'sc-eva-8-desc': {
+    en: "Incident detail for the blocked scam call on Grandma's device. Caller: +886-900-123-456, 847 community scam reports, impersonating a bank representative. AI blocked with 0-second ring time. Three action buttons: notify Grandma, view call log, block permanently.",
+    zh: "奶奶設備上被攔截詐騙電話的事件詳情。來電者：+886-900-123-456，847 筆社群詐騙回報，冒充銀行代表。AI 以 0 秒響鈴時間攔截。三個操作按鈕：通知奶奶、查看通話記錄、永久封鎖。"
+  },
+  'sc-eva-9-desc': {
+    en: "Incident detail for the phishing link blocked on Yuki's device. Site: secure-bank-login.xyz, impersonates Cathay Bank, SSL mismatch, domain 3 days old. Page blocked before loading — no data exposed. Reported to safe-browsing network.",
+    zh: "Yuki 設備上被攔截釣魚連結的事件詳情。網站：secure-bank-login.xyz，冒充國泰銀行，SSL 憑證不符，網域僅 3 天。頁面在載入前被封鎖——無資料外洩。已回報至安全瀏覽網絡。"
+  },
+
+  /* Eva screens section */
+  'screens-eva-title': { en: 'Screens & Flows',                        zh: '畫面與流程' },
+  'screens-eva-sub':   { en: "10 screens · Eva's caregiver constellation view", zh: '10 個畫面 · Eva 照顧者星座圖視角' },
+
+  /* Footer */
+  'footer-text':  { en: 'TrendLife AI Butler · Constellation Design Spec · March 2026', zh: 'TrendLife AI 管家 · 星座圖設計規格 · 2026 年 3 月' },
+  'footer-brand': { en: 'TrendLife', zh: 'TrendLife' },
+};
+
+let currentLang = localStorage.getItem('tl-const-spec-lang') || 'en';
+
+function setLang(lang) {
+  document.body.classList.add('lang-switching');
+  setTimeout(() => {
+    currentLang = lang;
+    localStorage.setItem('tl-const-spec-lang', lang);
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+    document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (dict[key]?.[lang] !== undefined) el.textContent = dict[key][lang];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.dataset.i18nHtml;
+      if (dict[key]?.[lang] !== undefined) el.innerHTML = dict[key][lang];
+    });
+    document.body.classList.remove('lang-switching');
+  }, 160);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (currentLang !== 'en') setLang(currentLang);
+});
+
+/* ── VIEW SWITCHER ── */
+function switchView(view) {
+  document.getElementById('view-grace').style.display = view === 'grace' ? '' : 'none';
+  document.getElementById('view-eva').style.display   = view === 'eva'   ? '' : 'none';
+  document.getElementById('tab-btn-grace').classList.toggle('nav-vtab-active', view === 'grace');
+  document.getElementById('tab-btn-eva').classList.toggle('nav-vtab-active',   view === 'eva');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ── GRACE SCREEN NAVIGATOR ── */
+function graceGoTo(n) {
+  const iframe = document.getElementById('graceIframe');
+  if (iframe?.contentWindow) {
+    try { iframe.contentWindow.goTo(n); } catch(e) {}
+  }
+  document.querySelectorAll('#screenNavGrace .snav-item').forEach((b, i) => {
+    b.classList.toggle('snav-active', i === n);
+  });
+}
+
+/* ── EVA SCREEN NAVIGATOR ── */
+function evaGoTo(n) {
+  const iframe = document.getElementById('evaIframe');
+  if (iframe?.contentWindow) {
+    try { iframe.contentWindow.goTo(n); } catch(e) {}
+  }
+  document.querySelectorAll('#screenNavEva .snav-item').forEach((b, i) => {
+    b.classList.toggle('snav-active', i === n);
+  });
+}
+
+/* ── SCROLL TO PHONE ── */
+function scrollToPhone(iframeId) {
+  document.getElementById(iframeId)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+</script>
+</body>
+</html>
