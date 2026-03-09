@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -439,8 +439,8 @@
     <div class="screen active" id="tab-home">
 
       <div class="home-header">
-        <div class="home-date">2026 年 3 月 9 日 · 週一</div>
-        <div class="home-greeting">早安，<span>玫瑰</span></div>
+        <div class="home-date">Monday, March 9, 2026</div>
+        <div class="home-greeting">Good morning, <span>Rose</span></div>
       </div>
 
       <div class="butler-row">
@@ -449,25 +449,25 @@
           <svg viewBox="0 0 20 20" fill="white"><path d="M10 2a3 3 0 100 6 3 3 0 000-6zM5.5 10A2.5 2.5 0 003 12.5V13a5 5 0 0014 0v-.5A2.5 2.5 0 0014.5 10h-9z"/></svg>
         </div>
         <div class="butler-bubble">
-          <div class="butler-tag"><span class="butler-blink"></span>AI 管家小趨</div>
-          <div class="butler-text">玫瑰早安！今天血壓記得量喔。你的<strong>年度健檢報告</strong>出來了，要我幫你看看嗎？</div>
+          <div class="butler-tag"><span class="butler-blink"></span>AI Butler</div>
+          <div class="butler-text">Good morning, Rose! Don't forget your blood pressure reading today. Your <strong>annual health report</strong> is ready — want me to walk you through it?</div>
         </div>
       </div>
 
       <div class="home-chips">
         <button class="home-chip home-chip-health" onclick="switchTab('tab-health')">
           <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          我的健康
+          My Health
           <span class="chip-badge">1</span>
         </button>
         <button class="home-chip home-chip-family" onclick="switchTab('tab-family')">
           <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-          聯繫家人
+          Family
         </button>
       </div>
 
       <div class="chat-messages">
-        <div class="chat-date-label">今天</div>
+        <div class="chat-date-label">Today</div>
 
         <!-- AI initiates -->
         <div class="msg-row">
@@ -476,12 +476,12 @@
           </div>
           <div>
             <div class="msg-bubble ai-bubble">
-              <div class="ai-label">小趨</div>
-              健檢報告摘要如下：
+              <div class="ai-label">TrendCare</div>
+              Here's a summary of your health report:
               <br><br>
-              整體分數 <strong>92 分</strong>，血壓偏高（138/88），膽固醇偏高（210 mg/dL）。
+              Overall score: <strong>92/100</strong>. Blood pressure is elevated (138/88) and cholesterol is high (210 mg/dL).
               <br><br>
-              要我幫你預約心臟科回診嗎？
+              Should I book a follow-up with your cardiologist?
             </div>
             <div class="msg-time">09:10</div>
             <div class="action-cards">
@@ -490,8 +490,8 @@
                   <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
                 </div>
                 <div class="action-body">
-                  <div class="action-title">查看完整報告</div>
-                  <div class="action-sub">整體 92 分・血壓偏高</div>
+                  <div class="action-title">Full Health Report</div>
+                  <div class="action-sub">Score 92 · Blood pressure elevated</div>
                 </div>
                 <span class="action-arrow">›</span>
               </div>
@@ -500,8 +500,8 @@
                   <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
                 </div>
                 <div class="action-body">
-                  <div class="action-title">預約心臟科</div>
-                  <div class="action-sub">下週可預約</div>
+                  <div class="action-title">Book Cardiology</div>
+                  <div class="action-sub">Available next week</div>
                 </div>
                 <span class="action-arrow">›</span>
               </div>
@@ -512,10 +512,10 @@
         <!-- User reply -->
         <div class="msg-row sent">
           <div class="msg-av" style="background:#B45309;border-radius:50%;">
-            <img src="https://i.pravatar.cc/96?img=47" alt="玫瑰">
+            <img src="https://i.pravatar.cc/96?img=47" alt="Rose">
           </div>
           <div>
-            <div class="msg-bubble sent-bubble">好，幫我預約下週五下午</div>
+            <div class="msg-bubble sent-bubble">Yes, book it for next Friday afternoon</div>
             <div class="msg-time">09:12</div>
           </div>
         </div>
@@ -527,8 +527,8 @@
           </div>
           <div>
             <div class="msg-bubble ai-bubble">
-              <div class="ai-label">小趨</div>
-              已確認！<strong>3 月 13 日（週五）下午 2:00</strong>，台大醫院陳偉醫師。要通知 Eva 一起陪你去嗎？
+              <div class="ai-label">TrendCare</div>
+              Done! <strong>Friday, March 13 at 2:00 PM</strong> with Dr. Chen at Memorial Hospital. Want me to let Eva know so she can come with you?
             </div>
             <div class="msg-time">09:12</div>
           </div>
@@ -550,7 +550,7 @@
         <button class="mic-btn">
           <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/></svg>
         </button>
-        <input class="chat-input" type="text" placeholder="輸入訊息...">
+        <input class="chat-input" type="text" placeholder="Message...">
         <button class="chat-send">
           <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
         </button>
@@ -568,8 +568,8 @@
             <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
           </div>
           <div>
-            <div class="health-hero-title">我的健康</div>
-            <div class="health-hero-sub">小趨醫師為您分析報告</div>
+            <div class="health-hero-title">My Health</div>
+            <div class="health-hero-sub">Your personalized health analysis</div>
           </div>
         </div>
       </div>
@@ -577,50 +577,50 @@
       <div class="health-scores">
         <div class="health-score-card">
           <div class="hsc-value" style="color:var(--green)">92</div>
-          <div class="hsc-label">整體分數</div>
-          <div class="hsc-tag tag-ok">良好</div>
+          <div class="hsc-label">Overall Score</div>
+          <div class="hsc-tag tag-ok">Good</div>
         </div>
         <div class="health-score-card">
           <div class="hsc-value" style="color:var(--amber)">138</div>
-          <div class="hsc-label">血壓收縮</div>
-          <div class="hsc-tag tag-warn">偏高</div>
+          <div class="hsc-label">Systolic BP</div>
+          <div class="hsc-tag tag-warn">Elevated</div>
         </div>
         <div class="health-score-card">
           <div class="hsc-value" style="color:var(--green)">5.4</div>
           <div class="hsc-label">HbA1c</div>
-          <div class="hsc-tag tag-ok">正常</div>
+          <div class="hsc-tag tag-ok">Normal</div>
         </div>
       </div>
 
       <div class="health-list">
         <div class="health-row">
-          <span class="health-row-name">總膽固醇</span>
-          <span><span class="health-row-val">210 mg/dL</span><span class="health-row-badge tag-warn">偏高</span></span>
+          <span class="health-row-name">Total Cholesterol</span>
+          <span><span class="health-row-val">210 mg/dL</span><span class="health-row-badge tag-warn">Elevated</span></span>
         </div>
         <div class="health-row">
-          <span class="health-row-name">空腹血糖</span>
-          <span><span class="health-row-val">95 mg/dL</span><span class="health-row-badge tag-ok">正常</span></span>
+          <span class="health-row-name">Fasting Blood Sugar</span>
+          <span><span class="health-row-val">95 mg/dL</span><span class="health-row-badge tag-ok">Normal</span></span>
         </div>
         <div class="health-row">
-          <span class="health-row-name">三酸甘油脂</span>
-          <span><span class="health-row-val">145 mg/dL</span><span class="health-row-badge tag-ok">正常</span></span>
+          <span class="health-row-name">Triglycerides</span>
+          <span><span class="health-row-val">145 mg/dL</span><span class="health-row-badge tag-ok">Normal</span></span>
         </div>
         <div class="health-row">
-          <span class="health-row-name">肌酸酐</span>
-          <span><span class="health-row-val">0.9 mg/dL</span><span class="health-row-badge tag-ok">正常</span></span>
+          <span class="health-row-name">Creatinine</span>
+          <span><span class="health-row-val">0.9 mg/dL</span><span class="health-row-badge tag-ok">Normal</span></span>
         </div>
         <div class="health-row">
-          <span class="health-row-name">血壓舒張</span>
-          <span><span class="health-row-val">88 mmHg</span><span class="health-row-badge tag-warn">偏高</span></span>
+          <span class="health-row-name">Diastolic BP</span>
+          <span><span class="health-row-val">88 mmHg</span><span class="health-row-badge tag-warn">Elevated</span></span>
         </div>
       </div>
 
       <div class="ai-card">
-        <div class="ai-card-label">小趨醫師建議</div>
-        <div class="ai-card-text">玫瑰，血壓和膽固醇<strong>偏高</strong>，建議下次回診跟陳醫師討論。要我幫你預約嗎？</div>
+        <div class="ai-card-label">TrendCare Recommendation</div>
+        <div class="ai-card-text">Rose, your blood pressure and cholesterol are <strong>elevated</strong>. I'd recommend discussing this with Dr. Chen at your next visit. Want me to schedule it?</div>
         <button class="ai-card-btn" onclick="switchTab('tab-schedule')">
           <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          預約回診
+          Schedule Follow-up
         </button>
       </div>
 
@@ -637,19 +637,19 @@
             <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
           </div>
           <div>
-            <div class="schedule-date-big">3 月 9 日</div>
-            <div class="schedule-date-sub">週一 · 3 項活動</div>
+            <div class="schedule-date-big">March 9</div>
+            <div class="schedule-date-sub">Monday · 3 activities</div>
             <div class="schedule-pill">
               <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-              下一項：量血壓 10:30
+              Next: Blood pressure check at 10:30
             </div>
           </div>
         </div>
       </div>
 
       <div class="schedule-ai-tip">
-        <div class="butler-tag" style="margin-bottom:5px;"><span class="butler-blink"></span>小趨提醒</div>
-        <div class="schedule-ai-tip-text">下午要去醫院喔！要我幫你叫計程車，再<strong>通知 Eva</strong> 嗎？</div>
+        <div class="butler-tag" style="margin-bottom:5px;"><span class="butler-blink"></span>TrendCare Reminder</div>
+        <div class="schedule-ai-tip-text">You have a hospital visit this afternoon! Want me to arrange a ride and <strong>notify Eva</strong>?</div>
       </div>
 
       <div class="timeline">
@@ -659,8 +659,8 @@
           </div>
           <div class="tl-body">
             <div class="tl-time">08:00 – 08:30</div>
-            <div class="tl-title done">晨間散步</div>
-            <div class="tl-sub">大安森林公園 · 已完成</div>
+            <div class="tl-title done">Morning Walk</div>
+            <div class="tl-sub">Central Park · Completed</div>
           </div>
         </div>
 
@@ -670,8 +670,8 @@
           </div>
           <div class="tl-body">
             <div class="tl-time">10:30</div>
-            <div class="tl-title now">量血壓</div>
-            <div class="tl-sub">連續第 7 天！</div>
+            <div class="tl-title now">Blood Pressure Check</div>
+            <div class="tl-sub">7-day streak!</div>
           </div>
         </div>
 
@@ -680,12 +680,12 @@
             <svg viewBox="0 0 12 12" style="width:12px;height:12px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><circle cx="6" cy="6" r="4"/></svg>
           </div>
           <div class="tl-body">
-            <div class="tl-time">14:00 – 15:00</div>
-            <div class="tl-title">心臟科回診</div>
-            <div class="tl-sub">台大醫院 · 陳偉醫師</div>
+            <div class="tl-time">2:00 – 3:00 PM</div>
+            <div class="tl-title">Cardiology Follow-up</div>
+            <div class="tl-sub">Memorial Hospital · Dr. Chen</div>
             <div class="tl-actions">
-              <button class="tl-btn tl-btn-teal">叫計程車</button>
-              <button class="tl-btn tl-btn-navy" onclick="switchTab('tab-family')">通知 Eva</button>
+              <button class="tl-btn tl-btn-teal">Get a Ride</button>
+              <button class="tl-btn tl-btn-navy" onclick="switchTab('tab-family')">Notify Eva</button>
             </div>
           </div>
         </div>
@@ -695,9 +695,9 @@
             <svg viewBox="0 0 12 12" style="width:8px;height:8px;stroke:var(--gray-400);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><circle cx="6" cy="6" r="4"/></svg>
           </div>
           <div class="tl-body">
-            <div class="tl-time">17:00</div>
-            <div class="tl-title">與 Eva 視訊通話</div>
-            <div class="tl-sub">每週固定</div>
+            <div class="tl-time">5:00 PM</div>
+            <div class="tl-title">Video Call with Eva</div>
+            <div class="tl-sub">Weekly recurring</div>
           </div>
         </div>
       </div>
@@ -715,8 +715,8 @@
             <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
           </div>
           <div>
-            <div class="family-hero-title">聯繫家人</div>
-            <div class="family-hero-sub">3 位家人在線上</div>
+            <div class="family-hero-title">Family</div>
+            <div class="family-hero-sub">3 family members online</div>
           </div>
         </div>
       </div>
@@ -724,11 +724,11 @@
       <div class="emergency-bar">
         <button class="emergency-btn emergency-red">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 012 4.19 2 2 0 014 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          緊急呼叫
+          Emergency Call
         </button>
         <button class="emergency-btn emergency-green" onclick="switchTab('tab-home')">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 012 4.19 2 2 0 014 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          打給 Eva
+          Call Eva
         </button>
       </div>
 
@@ -737,12 +737,12 @@
         <div class="family-card" style="background:linear-gradient(150deg,#7C3AED,#5B21B6);">
           <div class="family-card-photo"><img src="https://i.pravatar.cc/112?img=49" alt="Eva"></div>
           <div class="family-card-name">Eva</div>
-          <div class="family-card-role">女兒 · 台北</div>
+          <div class="family-card-role">Daughter · New York</div>
           <div class="family-card-status">
             <span class="f-online-dot f-online"></span>
-            <span class="family-card-status-text">線上</span>
+            <span class="family-card-status-text">Online</span>
           </div>
-          <div class="family-card-last">3 天前通話</div>
+          <div class="family-card-last">Called 3 days ago</div>
           <div class="family-card-actions">
             <button class="fca-btn" onclick="switchTab('tab-home')">
               <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
@@ -760,12 +760,12 @@
         <div class="family-card" style="background:linear-gradient(150deg,#1C2B35,#2E4455);">
           <div class="family-card-photo"><img src="https://i.pravatar.cc/112?img=12" alt="Wei"></div>
           <div class="family-card-name">Wei</div>
-          <div class="family-card-role">女婿 · 台北</div>
+          <div class="family-card-role">Son-in-law · New York</div>
           <div class="family-card-status">
             <span class="f-online-dot f-online"></span>
-            <span class="family-card-status-text">線上</span>
+            <span class="family-card-status-text">Online</span>
           </div>
-          <div class="family-card-last">5 天前通話</div>
+          <div class="family-card-last">Called 5 days ago</div>
           <div class="family-card-actions">
             <button class="fca-btn"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></button>
             <button class="fca-btn"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 012 4.19 2 2 0 014 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></button>
@@ -777,12 +777,12 @@
         <div class="family-card" style="background:linear-gradient(150deg,#059669,#047857);">
           <div class="family-card-photo"><img src="https://i.pravatar.cc/112?img=25" alt="Yvonne"></div>
           <div class="family-card-name">Yvonne</div>
-          <div class="family-card-role">孫女 · 新竹</div>
+          <div class="family-card-role">Granddaughter · Boston</div>
           <div class="family-card-status">
             <span class="f-online-dot f-offline"></span>
-            <span class="family-card-status-text">離線</span>
+            <span class="family-card-status-text">Offline</span>
           </div>
-          <div class="family-card-last">昨天傳訊</div>
+          <div class="family-card-last">Messaged yesterday</div>
           <div class="family-card-actions">
             <button class="fca-btn"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></button>
             <button class="fca-btn"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 012 4.19 2 2 0 014 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></button>
@@ -794,12 +794,12 @@
         <div class="family-card" style="background:linear-gradient(150deg,#DC2626,#B91C1C);">
           <div class="family-card-photo"><img src="https://i.pravatar.cc/112?img=11" alt="Ethan"></div>
           <div class="family-card-name">Ethan</div>
-          <div class="family-card-role">孫子 · 台北</div>
+          <div class="family-card-role">Grandson · Chicago</div>
           <div class="family-card-status">
             <span class="f-online-dot f-online"></span>
-            <span class="family-card-status-text">線上</span>
+            <span class="family-card-status-text">Online</span>
           </div>
-          <div class="family-card-last">2 天前通話</div>
+          <div class="family-card-last">Called 2 days ago</div>
           <div class="family-card-actions">
             <button class="fca-btn"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></button>
             <button class="fca-btn"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 012 4.19 2 2 0 014 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></button>
@@ -813,7 +813,7 @@
           <svg viewBox="0 0 20 20" fill="white"><path d="M10 2a3 3 0 100 6 3 3 0 000-6zM5.5 10A2.5 2.5 0 003 12.5V13a5 5 0 0014 0v-.5A2.5 2.5 0 0014.5 10h-9z"/></svg>
         </div>
         <div class="family-ai-text">
-          Eva 上次通話是 <strong>3 天前</strong>，要不要跟她聊聊今天的健檢結果？
+          Your last call with Eva was <strong>3 days ago</strong>. Want to catch up and share today's health results?
         </div>
       </div>
 
@@ -828,14 +828,14 @@
         <!-- Home icon -->
         <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       </div>
-      <span class="tab-label">首頁</span>
+      <span class="tab-label">Home</span>
     </button>
     <button class="tab-item" id="btn-health" onclick="switchTab('tab-health')">
       <div class="tab-icon">
         <!-- Pulse/health icon -->
         <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
       </div>
-      <span class="tab-label">健康</span>
+      <span class="tab-label">Health</span>
       <span class="tab-dot"></span>
     </button>
     <button class="tab-item" id="btn-schedule" onclick="switchTab('tab-schedule')">
@@ -843,14 +843,14 @@
         <!-- Calendar icon -->
         <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
       </div>
-      <span class="tab-label">行程</span>
+      <span class="tab-label">Schedule</span>
     </button>
     <button class="tab-item" id="btn-family" onclick="switchTab('tab-family')">
       <div class="tab-icon">
         <!-- People icon -->
         <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
       </div>
-      <span class="tab-label">家人</span>
+      <span class="tab-label">Family</span>
     </button>
   </nav>
 
