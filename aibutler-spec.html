@@ -257,6 +257,24 @@
   .snav-item.snav-active .snav-name { color: #FF7A7E; font-weight: 700; }
   .snav-item.snav-active .snav-num { background: var(--red); color: white; }
 
+  /* ── A/B VERSION TOGGLE ── */
+  .version-toggle {
+    display: flex; align-self: flex-start;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.13);
+    border-radius: 24px; padding: 3px; gap: 2px;
+    margin-bottom: 12px;
+  }
+  .ver-btn {
+    font-size: 11.5px; font-weight: 700;
+    padding: 5px 15px; border-radius: 20px;
+    cursor: pointer; border: none;
+    background: transparent; color: rgba(255,255,255,0.38);
+    letter-spacing: 0.01em; transition: all 0.18s;
+    font-family: inherit;
+  }
+  .ver-btn.active { background: var(--red); color: white; }
+
   /* ── SCREENS GRID ── */
   .screens-section {
     position: relative; z-index: 1;
@@ -821,8 +839,13 @@
 
   <!-- Right: sticky phone iframe -->
   <div class="hero-right">
+    <div class="version-toggle">
+      <button class="ver-btn active" id="ver-a-btn" onclick="switchGrandmaVersion('A')">Ver. A — Original</button>
+      <button class="ver-btn" id="ver-b-btn" onclick="switchGrandmaVersion('B')">Ver. B — 4 Tabs</button>
+    </div>
     <div class="phone-shell">
       <iframe
+        id="grandmaIframe"
         src="mockup-member-grandma.html"
         title="Grandma AI Butler Mockup"
         scrolling="no">
@@ -838,6 +861,13 @@
       <button class="snav-item" onclick="specGoTo(5)"><span class="snav-icon">📅</span><span class="snav-name" data-i18n="sc5-name">Today's Schedule</span><span class="snav-num">5</span></button>
       <button class="snav-item" onclick="specGoTo(6)"><span class="snav-icon">📸</span><span class="snav-name" data-i18n="sc6-name">Family Photos</span><span class="snav-num">6</span></button>
       <button class="snav-item" onclick="specGoTo(7)"><span class="snav-icon">🏥</span><span class="snav-name" data-i18n="sc7-name">Book Appointment</span><span class="snav-num">7</span></button>
+    </div>
+    <div class="screen-nav" id="screenNavB" style="display:none">
+      <div class="snav-instruction">點擊畫面互動，或點擊選單切換 tab</div>
+      <button class="snav-item snav-active" onclick="specTabTo('tab-home', this)"><span class="snav-icon">🏠</span><span class="snav-name">Home</span></button>
+      <button class="snav-item" onclick="specTabTo('tab-health', this)"><span class="snav-icon">🩺</span><span class="snav-name">Health</span></button>
+      <button class="snav-item" onclick="specTabTo('tab-schedule', this)"><span class="snav-icon">📅</span><span class="snav-name">Schedule</span></button>
+      <button class="snav-item" onclick="specTabTo('tab-family', this)"><span class="snav-icon">👨‍👩‍👧‍👦</span><span class="snav-name">Family</span></button>
     </div>
   </div>
 
@@ -1564,11 +1594,40 @@ function switchView(view) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// ── GRANDMA VERSION TOGGLE ──
+function switchGrandmaVersion(v) {
+  const iframe = document.getElementById('grandmaIframe');
+  const navA = document.getElementById('screenNav');
+  const navB = document.getElementById('screenNavB');
+  const btnA = document.getElementById('ver-a-btn');
+  const btnB = document.getElementById('ver-b-btn');
+  if (v === 'A') {
+    iframe.src = 'mockup-member-grandma.html';
+    navA.style.display = ''; navB.style.display = 'none';
+    btnA.classList.add('active'); btnB.classList.remove('active');
+  } else {
+    iframe.src = 'mockup-member-grandma-4tabs.html';
+    navA.style.display = 'none'; navB.style.display = '';
+    btnA.classList.remove('active'); btnB.classList.add('active');
+    // reset B snav to Home
+    document.querySelectorAll('#screenNavB .snav-item').forEach((b, i) => b.classList.toggle('snav-active', i === 0));
+  }
+}
+
+function specTabTo(tabId, el) {
+  const iframe = document.getElementById('grandmaIframe');
+  if (iframe && iframe.contentWindow) {
+    try { iframe.contentWindow.switchTab(tabId); } catch(e) {}
+  }
+  document.querySelectorAll('#screenNavB .snav-item').forEach(b => b.classList.remove('snav-active'));
+  if (el) el.classList.add('snav-active');
+}
+
 // ── GRANDMA SCREEN NAVIGATOR ──
 let specScreen = 0;
 function specGoTo(n) {
   specScreen = n;
-  const iframe = document.querySelector('#view-grandma .phone-shell iframe');
+  const iframe = document.getElementById('grandmaIframe');
   if (iframe && iframe.contentWindow) {
     iframe.contentWindow.postMessage({ goTo: n }, '*');
   }
