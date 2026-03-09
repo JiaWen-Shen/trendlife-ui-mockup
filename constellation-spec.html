@@ -343,6 +343,44 @@
     .screens-section { padding: 0 20px 60px; }
     .footer { padding: 20px; flex-direction: column; gap: 10px; align-items: flex-start; }
   }
+
+  /* ── LIGHT MODE ── */
+  body.light {
+    --bg:      #F4F7FA;
+    --surface: #FFFFFF;
+    --surface2:#EEF2F6;
+    --border:  rgba(10,10,20,0.07);
+    --border2: rgba(10,10,20,0.12);
+    --text:    #0A0A14;
+    --muted:   #6B7280;
+    --muted2:  #4B5563;
+    --navy:    #EEF2F6;
+    --blue-dim:rgba(33,150,243,0.08);
+    --red-dim: rgba(215,25,32,0.08);
+  }
+  body.light .site-nav { background: rgba(244,247,250,0.92); }
+  body.light .hero-tag { background: rgba(215,25,32,0.07); }
+  body.light .hero-kicker { color: rgba(10,10,20,0.45); }
+  body.light .lang-toggle,
+  body.light .theme-toggle { background: rgba(10,10,20,0.05); }
+  body.light .ptag { background: rgba(10,10,20,0.06); color: rgba(10,10,20,0.5); }
+  body.light .ptag.red { background: rgba(215,25,32,0.08); color: #D71920; }
+  body.light .ptag.blue { background: rgba(33,150,243,0.09); color: #1976D2; }
+  body.light .sc { background: var(--surface); }
+  body.light .sc-name { color: rgba(10,10,20,0.75); }
+  body.light .sc-desc { color: rgba(10,10,20,0.48); }
+  body.light .sc-num  { color: rgba(10,10,20,0.22); }
+  body.light .section-label { color: rgba(10,10,20,0.35); }
+  body.light .section-label::after { background: rgba(10,10,20,0.1); }
+  body.light .section-title { color: rgba(10,10,20,0.85); }
+  body.light .principle { border-left-color: rgba(10,10,20,0.12); }
+  body.light .p-num { color: rgba(10,10,20,0.25); }
+  body.light .p-text { color: rgba(10,10,20,0.65); }
+  body.light .snav-item { color: rgba(10,10,20,0.45); }
+  body.light .snav-item:hover { background: rgba(10,10,20,0.04); color: rgba(10,10,20,0.8); }
+  body.light .snav-item.snav-active { background: rgba(10,10,20,0.06); color: rgba(10,10,20,0.85); }
+  body.light .snav-instruction { color: rgba(10,10,20,0.3); }
+  body.light .footer { border-top-color: rgba(10,10,20,0.07); color: rgba(10,10,20,0.35); }
 </style>
 </head>
 <body>
@@ -395,7 +433,7 @@
         Grace's<br><span class="accent">Constellation</span><br><span class="accent2" style="font-size:38px;">Member's View</span>
       </div>
       <p class="hero-sub" data-i18n="hero-grace-sub">
-        A personal digital space where the individual member sees herself at the center of her family network. The AI Guardian Arc monitors silently above; family nodes reflect connection and care. Tapping navigates to health data, voice, and relationship depth.
+        A personal digital space where every member sees herself at the heart of her family network. The AI Companion Arc stays close, quietly available; family nodes reflect connection and care. Tapping navigates to health data, voice, and relationship depth.
       </p>
     </div>
 
@@ -423,11 +461,11 @@
       <div class="principles">
         <div class="principle">
           <div class="p-num">1</div>
-          <div class="p-text" data-i18n-html="p-grace-1"><strong>Self at center</strong> — Grace sees herself surrounded by her loved ones, not managed by them. The design reinforces her agency and presence within the family network.</div>
+          <div class="p-text" data-i18n-html="p-grace-1"><strong>Self at center</strong> — Grace sees herself at the heart of her family network, surrounded by her loved ones. The design reinforces her agency and equal standing within the constellation.</div>
         </div>
         <div class="principle">
           <div class="p-num">2</div>
-          <div class="p-text" data-i18n-html="p-grace-2"><strong>Guardian Arc as ambient shield</strong> — The AI Butler arc at the top conveys protection without intruding. It's always present, quietly watching — tapping reveals the AI's actions for the day.</div>
+          <div class="p-text" data-i18n-html="p-grace-2"><strong>AI Companion Arc as ambient presence</strong> — The AI arc at the top conveys care without intruding. It's always present, quietly available — tapping reveals the AI's actions for the day.</div>
         </div>
         <div class="principle">
           <div class="p-num">3</div>
@@ -484,7 +522,7 @@
         <div class="sc-name" data-i18n="sc-grace-0-name">Constellation Home</div>
       </div>
       <div class="sc-body">
-        <div class="sc-desc" data-i18n="sc-grace-0-desc">Grace at center, family nodes orbit around her. Guardian Arc spans the top as AI shield. Each node pulses with live status. Tapping a node navigates to that relationship's depth screen.</div>
+        <div class="sc-desc" data-i18n="sc-grace-0-desc">Grace at center, family nodes orbit around her. AI Companion Arc spans the top, always ready to assist. Each node pulses with live status. Tapping a node navigates to that relationship's depth screen.</div>
         <div class="sc-tags">
           <span class="sc-tag tag-blue">Entry point</span>
           <span class="sc-tag tag-amber">Family network</span>
@@ -499,7 +537,7 @@
         <div class="sc-name" data-i18n="sc-grace-1-name">AI Ripple</div>
       </div>
       <div class="sc-body">
-        <div class="sc-desc" data-i18n="sc-grace-1-desc">Triggered by tapping the Guardian Arc. Shows the AI Butler's recent activity across the family network as an animated ripple event chain — health checks, blocked calls, and family updates.</div>
+        <div class="sc-desc" data-i18n="sc-grace-1-desc">Triggered by tapping the AI Companion Arc. Shows the AI Butler's recent activity across the family network as an animated ripple event chain — health checks, blocked calls, and family updates.</div>
         <div class="sc-tags">
           <span class="sc-tag tag-blue">AI Butler</span>
           <span class="sc-tag tag-muted">Event chain</span>
@@ -588,10 +626,10 @@
         <span data-i18n="hero-eva-kicker">Interactive Prototype</span>
       </div>
       <div class="hero-title" data-i18n-html="hero-eva-title">
-        Eva's<br><span class="accent">Family Network</span><br><span class="accent2" style="font-size:38px;">Manager's View</span>
+        Eva's<br><span class="accent">Family Network</span><br><span class="accent2" style="font-size:38px;">Connected View</span>
       </div>
       <p class="hero-sub" data-i18n="hero-eva-sub">
-        A caregiver command center where Eva monitors all family members from the center of the network. Alerts surface proactively at the top right; each member node leads to their protection or health report; the AI Butler coordinates complex tasks through a dedicated chat.
+        A family hub where Eva stays connected with everyone in her network. Alerts surface proactively at the top right; each member node opens their wellbeing and security updates; the AI Butler coordinates complex tasks through a dedicated chat.
       </p>
     </div>
 
@@ -601,13 +639,13 @@
         <div class="persona-av" style="background: linear-gradient(135deg, #7B3F9E, #4C1D95);">E</div>
         <div>
           <div class="persona-name" data-i18n="persona-eva-name">Eva Chen · 45 years old</div>
-          <div class="persona-meta" data-i18n="persona-eva-meta">Brand Manager · Taipei · Family coordinator for Wei, Yuki, Ethan &amp; Grandma</div>
+          <div class="persona-meta" data-i18n="persona-eva-meta">Brand Manager · Taipei · Connected to Wei, Yuki, Ethan &amp; Grandma</div>
         </div>
       </div>
       <div class="persona-tags">
         <span class="ptag" data-i18n="ptag-eva-1">Working mom</span>
-        <span class="ptag" data-i18n="ptag-eva-2">Primary caregiver</span>
-        <span class="ptag" data-i18n="ptag-eva-3">Health manager</span>
+        <span class="ptag" data-i18n="ptag-eva-2">Family anchor</span>
+        <span class="ptag" data-i18n="ptag-eva-3">Health ally</span>
         <span class="ptag" data-i18n="ptag-eva-4">Risk-aware</span>
         <span class="ptag" data-i18n="ptag-eva-5">Delegates to AI</span>
       </div>
@@ -619,7 +657,7 @@
       <div class="principles">
         <div class="principle">
           <div class="p-num">1</div>
-          <div class="p-text" data-i18n-html="p-eva-1"><strong>Eva at the center</strong> — As the primary caregiver, Eva sees herself surrounded by her family. Each node represents a relationship she actively monitors, not just a contact list.</div>
+          <div class="p-text" data-i18n-html="p-eva-1"><strong>Eva at the center</strong> — Eva sees herself at the heart of her family network. Each node is a living connection — a relationship she stays close to, not just a contact list.</div>
         </div>
         <div class="principle">
           <div class="p-num">2</div>
@@ -627,15 +665,19 @@
         </div>
         <div class="principle">
           <div class="p-num">3</div>
-          <div class="p-text" data-i18n-html="p-eva-3"><strong>Per-member depth</strong> — Tapping any family node navigates to that person's dedicated protection or health report. No member's status is more than one tap away.</div>
+          <div class="p-text" data-i18n-html="p-eva-3"><strong>Per-member depth</strong> — Tapping any family node opens that person's wellbeing and security updates. No member's latest news is more than one tap away.</div>
         </div>
         <div class="principle">
           <div class="p-num">4</div>
-          <div class="p-text" data-i18n-html="p-eva-4"><strong>Guardian Arc as action gateway</strong> — The arc navigates directly to AI Butler chat — the highest-frequency action for Eva as a coordinator. The arc is both a reassurance symbol and a shortcut.</div>
+          <div class="p-text" data-i18n-html="p-eva-4"><strong>AI Companion Arc as action gateway</strong> — The arc navigates directly to AI Butler chat — the highest-frequency action for Eva as a coordinator. The arc is both a reassurance symbol and a shortcut.</div>
         </div>
         <div class="principle">
           <div class="p-num">5</div>
-          <div class="p-text" data-i18n-html="p-eva-5"><strong>Events as cross-member audit trail</strong> — The middle tab shows a chronological family-wide activity log, giving Eva a single view of what happened across everyone without opening each profile.</div>
+          <div class="p-text" data-i18n-html="p-eva-5"><strong>Events as shared family timeline</strong> — The middle tab shows a chronological family-wide activity log, giving everyone a single view of what happened across the network without opening each profile.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">6</div>
+          <div class="p-text" data-i18n-html="p-eva-6"><strong>Read-state lifecycle</strong> — Alert nodes have three states: unread (pulsing ring, circle clickable), read-active within 12h (circle dimmed, status chips become the entry point), and resolved (fully dimmed, ✓ badge). All past events collect in the AI Butler History tab.</div>
         </div>
       </div>
     </div>
@@ -648,7 +690,7 @@
       <iframe
         src="mockup-eva-view.html"
         id="evaIframe"
-        title="Eva Manager View"
+        title="Eva's Connected View"
         scrolling="no">
       </iframe>
     </div>
@@ -661,7 +703,7 @@
       <button class="snav-item" onclick="evaGoTo(4)"><span class="snav-icon">🛡</span><span class="snav-name" data-i18n="sc-eva-4-name">Yuki — Protection</span><span class="snav-num">4</span></button>
       <button class="snav-item" onclick="evaGoTo(5)"><span class="snav-icon">🔒</span><span class="snav-name" data-i18n="sc-eva-5-name">Wei — Protection</span><span class="snav-num">5</span></button>
       <button class="snav-item" onclick="evaGoTo(6)"><span class="snav-icon">📱</span><span class="snav-name" data-i18n="sc-eva-6-name">Ethan — Protection</span><span class="snav-num">6</span></button>
-      <button class="snav-item" onclick="evaGoTo(7)"><span class="snav-icon">◈</span><span class="snav-name" data-i18n="sc-eva-7-name">AI Butler Chat</span><span class="snav-num">7</span></button>
+      <button class="snav-item" onclick="evaGoTo(7)"><span class="snav-icon">◈</span><span class="snav-name" data-i18n="sc-eva-7-name">AI Butler</span><span class="snav-num">7</span></button>
       <button class="snav-item" onclick="evaGoTo(8)"><span class="snav-icon">📵</span><span class="snav-name" data-i18n="sc-eva-8-name">Scam Call — Grandma</span><span class="snav-num">8</span></button>
       <button class="snav-item" onclick="evaGoTo(9)"><span class="snav-icon">🚫</span><span class="snav-name" data-i18n="sc-eva-9-name">Phishing Link — Yuki</span><span class="snav-num">9</span></button>
     </div>
@@ -674,7 +716,7 @@
   <div class="section-divider" style="margin-bottom:48px;"></div>
   <div class="section-header">
     <div class="section-title" data-i18n="screens-eva-title">Screens &amp; Flows</div>
-    <div class="section-sub" data-i18n="screens-eva-sub">10 screens · Eva's caregiver constellation view</div>
+    <div class="section-sub" data-i18n="screens-eva-sub">10 screens · Eva's family constellation view</div>
   </div>
   <div class="screen-cards">
 
@@ -684,11 +726,11 @@
         <div class="sc-name" data-i18n="sc-eva-0-name">Constellation Home</div>
       </div>
       <div class="sc-body">
-        <div class="sc-desc" data-i18n="sc-eva-0-desc">Eva at center, Grandma above with ⚠ pulse ring, Wei / Yuki / Ethan as orbiting nodes. Three stacked alert pills (health report, scam call, phishing link) in the top right — each dismissible. Guardian Arc above navigates to AI Butler chat.</div>
+        <div class="sc-desc" data-i18n="sc-eva-0-desc">Eva at center, Grandma above with ⚠ pulse ring, Wei / Yuki / Ethan as orbiting nodes. Three stacked alert pills (health report, scam call, phishing link) in the top right — each dismissible. AI Companion Arc above navigates to AI Butler chat.</div>
         <div class="sc-tags">
           <span class="sc-tag tag-purple">Entry point</span>
           <span class="sc-tag tag-red">Alert pills</span>
-          <span class="sc-tag tag-blue">Guardian Arc</span>
+          <span class="sc-tag tag-blue">AI Companion Arc</span>
         </div>
       </div>
     </div>
@@ -714,7 +756,7 @@
         <div class="sc-name" data-i18n="sc-eva-2-name">Family Events</div>
       </div>
       <div class="sc-body">
-        <div class="sc-desc" data-i18n="sc-eva-2-desc">Cross-member chronological activity feed. Four events: Grandma blood pressure alert, Yuki phishing link blocked, Ethan social media overuse, Wei device login verified. Tab bar at bottom (Events tab active).</div>
+        <div class="sc-desc" data-i18n="sc-eva-2-desc">Cross-member chronological activity feed. Four events: Grandma blood pressure alert, Yuki phishing link blocked, Ethan screen time alert, Wei device login verified. Tab bar at bottom (Events tab active).</div>
         <div class="sc-tags">
           <span class="sc-tag tag-purple">Activity feed</span>
           <span class="sc-tag tag-red">Health alert</span>
@@ -774,10 +816,10 @@
         <div class="sc-name" data-i18n="sc-eva-6-name">Ethan — Protection</div>
       </div>
       <div class="sc-body">
-        <div class="sc-desc" data-i18n="sc-eva-6-desc">Ethan's screen time and safety report. Usage alert: 3.5 hours of social media after midnight, exceeding family limit. AI Butler action taken: social media restricted after 10 PM starting tonight.</div>
+        <div class="sc-desc" data-i18n="sc-eva-6-desc">Ethan's screen time and safety report. Usage alert: 3.5 hours of social media after midnight, exceeding the family's agreed limit. AI Butler action taken: social media paused after 10 PM starting tonight per family setting.</div>
         <div class="sc-tags">
           <span class="sc-tag tag-red">Usage alert</span>
-          <span class="sc-tag tag-blue">AI restriction</span>
+          <span class="sc-tag tag-blue">AI suggestion</span>
           <span class="sc-tag tag-muted">Screen time</span>
         </div>
       </div>
@@ -786,14 +828,14 @@
     <div class="sc" onclick="evaGoTo(7);scrollToPhone('evaIframe')">
       <div class="sc-head">
         <div class="sc-num" style="background:var(--blue)">7</div>
-        <div class="sc-name" data-i18n="sc-eva-7-name">AI Butler Chat</div>
+        <div class="sc-name" data-i18n="sc-eva-7-name">AI Butler</div>
       </div>
       <div class="sc-body">
-        <div class="sc-desc" data-i18n="sc-eva-7-desc">Direct conversation with the AI Butler. Eva asks to book the earliest cardiology appointment for Grandma — AI confirms and notifies. Eva also sets a late-night screen time limit for Ethan — AI applies the restriction and will send a heads-up message.</div>
+        <div class="sc-desc" data-i18n="sc-eva-7-desc">Two-tab screen: Chat and History. Chat: Eva converses with AI Butler — books a cardiology appointment for Grandma, updates Ethan's screen time settings. History: chronological timeline of all alerts and AI actions across family members, grouped by day.</div>
         <div class="sc-tags">
           <span class="sc-tag tag-blue">AI Butler</span>
-          <span class="sc-tag tag-amber">Booking</span>
-          <span class="sc-tag tag-red">Screen limit</span>
+          <span class="sc-tag tag-purple">Chat + History</span>
+          <span class="sc-tag tag-muted">Timeline</span>
         </div>
       </div>
     </div>
@@ -819,7 +861,7 @@
         <div class="sc-name" data-i18n="sc-eva-9-name">Phishing Link — Yuki</div>
       </div>
       <div class="sc-body">
-        <div class="sc-desc" data-i18n="sc-eva-9-desc">Incident detail for the phishing link blocked on Yuki's device. Site: secure-bank-login.xyz, impersonates Cathay Bank, SSL mismatch, domain 3 days old. Page blocked before loading — no data exposed. Reported to safe-browsing network. Three action buttons: message Yuki, report site, tighten filter.</div>
+        <div class="sc-desc" data-i18n="sc-eva-9-desc">Incident detail for the phishing link blocked on Yuki's device. Site: secure-bank-login.xyz, impersonates Cathay Bank, SSL mismatch, domain 3 days old. Page blocked before loading — no data exposed. Reported to safe-browsing network. Three action buttons: message Yuki, report site, adjust browsing settings.</div>
         <div class="sc-tags">
           <span class="sc-tag tag-purple">Phishing blocked</span>
           <span class="sc-tag tag-green">No data exposed</span>
@@ -852,7 +894,7 @@ const dict = {
   'nav-product':  { en: 'TrendLife AI Butler', zh: 'TrendLife AI 管家' },
   'nav-subtitle': { en: 'Constellation Spec',  zh: '星座圖規格' },
   'tab-grace':    { en: "Grace's View",        zh: 'Grace 個人視角' },
-  'tab-eva':      { en: "Eva's View",          zh: 'Eva 管理者視角' },
+  'tab-eva':      { en: "Eva's View",          zh: 'Eva 連結視角' },
   'snav-hint':    { en: 'Click screens to interact, or use the list to jump to a specific screen.', zh: '點擊畫面互動，或點擊選單查看個別畫面' },
 
   /* Grace hero */
@@ -862,8 +904,8 @@ const dict = {
     zh: "Grace 的<br><span class='accent'>星座圖</span><br><span class='accent2' style='font-size:38px;'>會員視角</span>"
   },
   'hero-grace-sub': {
-    en: "A personal digital space where the individual member sees herself at the center of her family network. The AI Guardian Arc monitors silently above; family nodes reflect connection and care. Tapping navigates to health data, voice, and relationship depth.",
-    zh: "一個以自我為中心的數位空間，讓成員看到自己處於家庭網絡的核心。AI 守護穹頂在上方靜默守護；家庭節點反映關係與關愛。點擊可深入健康資料、語音功能與家人互動。"
+    en: "A personal digital space where every member sees herself at the heart of her family network. The AI Companion Arc stays close, quietly available; family nodes reflect connection and care. Tapping navigates to health data, voice, and relationship depth.",
+    zh: "一個以自我為中心的數位空間，讓每位成員看到自己處於家庭網絡的核心。AI 陪伴穹頂靜靜陪伴，隨時可以協助；家庭節點反映關係與關愛。點擊可深入健康資料、語音功能與家人互動。"
   },
   'persona-grace-name': { en: 'Grace Chen · 68 years old',             zh: '陳奶奶 · 68 歲' },
   'persona-grace-meta': { en: 'Retired homemaker · Taipei · Grandma in the Chen family', zh: '退休家庭主婦 · 台北 · 陳家奶奶' },
@@ -874,12 +916,12 @@ const dict = {
   'ptag-grace-5': { en: 'Family-connected',  zh: '家庭核心' },
   'principles-grace-eyebrow': { en: 'Design Principles', zh: '設計原則' },
   'p-grace-1': {
-    en: "<strong>Self at center</strong> — Grace sees herself surrounded by her loved ones, not managed by them. The design reinforces her agency and presence within the family network.",
-    zh: "<strong>自我為中心</strong> — Grace 看到自己被家人圍繞，而非被管理。設計強化她在家庭網絡中的主體感與存在感。"
+    en: "<strong>Self at center</strong> — Grace sees herself at the heart of her family network, surrounded by her loved ones. The design reinforces her agency and equal standing within the constellation.",
+    zh: "<strong>自我為中心</strong> — Grace 看到自己處於家庭網絡的核心，被家人所圍繞。設計強化她在星座圖中的主體感與平等地位。"
   },
   'p-grace-2': {
-    en: "<strong>Guardian Arc as ambient shield</strong> — The AI Butler arc at the top conveys protection without intruding. It's always present, quietly watching — tapping reveals the AI's actions for the day.",
-    zh: "<strong>守護穹頂作為環境屏障</strong> — 頂部的 AI 管家穹頂傳遞保護感而不打擾。始終存在，靜默守護——點擊可查看 AI 今日行動。"
+    en: "<strong>AI Companion Arc as ambient presence</strong> — The AI arc at the top conveys care without intruding. It's always present, quietly available — tapping reveals the AI's actions for the day.",
+    zh: "<strong>AI 陪伴穹頂作為環境陪伴</strong> — 頂部的 AI 穹頂傳遞關懷感而不打擾。始終存在，靜靜等候——點擊可查看 AI 今日行動。"
   },
   'p-grace-3': {
     en: "<strong>Relational depth on tap</strong> — Each family node is a doorway: voice messages, shared memories, or live health updates. Navigating is exploratory, not task-driven.",
@@ -904,12 +946,12 @@ const dict = {
 
   /* Grace screen descs */
   'sc-grace-0-desc': {
-    en: "Grace at center, family nodes orbit around her. Guardian Arc spans the top as AI shield. Each node pulses with live status. Tapping a node navigates to that relationship's depth screen.",
-    zh: "Grace 居中，家庭節點在其周圍運行。守護穹頂橫跨頂部作為 AI 屏障。每個節點隨即時狀態跳動。點擊節點進入該關係的深度頁面。"
+    en: "Grace at center, family nodes orbit around her. AI Companion Arc spans the top, always ready to assist. Each node pulses with live status. Tapping a node navigates to that relationship's depth screen.",
+    zh: "Grace 居中，家庭節點在其周圍運行。AI 陪伴穹頂橫跨頂部，隨時可以協助。每個節點隨即時狀態跳動。點擊節點進入該關係的深度頁面。"
   },
   'sc-grace-1-desc': {
-    en: "Triggered by tapping the Guardian Arc. Shows the AI Butler's recent activity across the family network as an animated ripple event chain — health checks, blocked calls, and family updates.",
-    zh: "點擊守護穹頂觸發。以動態漣漪事件鏈呈現 AI 管家近期的家庭網絡活動——健康檢查、攔截電話和家庭更新。"
+    en: "Triggered by tapping the AI Companion Arc. Shows the AI Butler's recent activity across the family network as an animated ripple event chain — health checks, blocked calls, and family updates.",
+    zh: "點擊 AI 陪伴穹頂觸發。以動態漣漪事件鏈呈現 AI 管家近期的家庭網絡活動——健康檢查、攔截電話和家庭更新。"
   },
   'sc-grace-2-desc': {
     en: "Annual checkup results for Grace. AI summary at top; marker table below (Blood Pressure ⚠ Elevated, HbA1c Watch, ECG/Bone Density Normal). Three AI-recommended action buttons including cardiology follow-up.",
@@ -935,40 +977,44 @@ const dict = {
   /* Eva hero */
   'hero-eva-kicker':   { en: 'Interactive Prototype',      zh: '互動原型' },
   'hero-eva-title':    {
-    en: "Eva's<br><span class='accent'>Family Network</span><br><span class='accent2' style='font-size:38px;'>Manager's View</span>",
-    zh: "Eva 的<br><span class='accent'>家庭網絡</span><br><span class='accent2' style='font-size:38px;'>管理者視角</span>"
+    en: "Eva's<br><span class='accent'>Family Network</span><br><span class='accent2' style='font-size:38px;'>Connected View</span>",
+    zh: "Eva 的<br><span class='accent'>家庭網絡</span><br><span class='accent2' style='font-size:38px;'>連結視角</span>"
   },
   'hero-eva-sub': {
-    en: "A caregiver command center where Eva monitors all family members from the center of the network. Alerts surface proactively at the top right; each member node leads to their protection or health report; the AI Butler coordinates complex tasks through a dedicated chat.",
-    zh: "以照顧者為中心的指揮中樞，Eva 從網絡中心監控所有家庭成員。右上角主動顯示警報；每個成員節點通往其保護或健康報告；AI 管家透過專屬對話協調複雜任務。"
+    en: "A family hub where Eva stays connected with everyone in her network. Alerts surface proactively at the top right; each member node opens their wellbeing and security updates; the AI Butler coordinates complex tasks through a dedicated chat.",
+    zh: "以家庭為核心的連結中樞，Eva 與網絡中每位成員保持聯繫。右上角主動顯示提醒；每個成員節點通往其健康與安全動態；AI 管家透過專屬對話協調複雜任務。"
   },
   'persona-eva-name': { en: 'Eva Chen · 45 years old',                  zh: 'Eva 陳 · 45 歲' },
-  'persona-eva-meta': { en: 'Brand Manager · Taipei · Family coordinator for Wei, Yuki, Ethan & Grandma', zh: '品牌經理 · 台北 · 負責協調 Wei、Yuki、Ethan 和奶奶的家庭事務' },
-  'ptag-eva-1': { en: 'Working mom',       zh: '職業媽媽' },
-  'ptag-eva-2': { en: 'Primary caregiver', zh: '主要照顧者' },
-  'ptag-eva-3': { en: 'Health manager',    zh: '健康管理者' },
+  'persona-eva-meta': { en: 'Brand Manager · Taipei · Connected to Wei, Yuki, Ethan & Grandma', zh: '品牌經理 · 台北 · 與 Wei、Yuki、Ethan 和奶奶保持聯繫' },
+  'ptag-eva-1': { en: 'Working mom',    zh: '職業媽媽' },
+  'ptag-eva-2': { en: 'Family anchor',  zh: '家庭核心' },
+  'ptag-eva-3': { en: 'Health ally',    zh: '健康夥伴' },
   'ptag-eva-4': { en: 'Risk-aware',        zh: '風險意識強' },
   'ptag-eva-5': { en: 'Delegates to AI',   zh: '善用 AI 委派' },
   'principles-eva-eyebrow': { en: 'Design Principles', zh: '設計原則' },
   'p-eva-1': {
-    en: "<strong>Eva at the center</strong> — As the primary caregiver, Eva sees herself surrounded by her family. Each node represents a relationship she actively monitors, not just a contact list.",
-    zh: "<strong>Eva 居中</strong> — 作為主要照顧者，Eva 看到自己被家人圍繞。每個節點代表她積極監控的關係，而非單純的聯絡人清單。"
+    en: "<strong>Eva at the center</strong> — Eva sees herself at the heart of her family network. Each node is a living connection — a relationship she stays close to, not just a contact list.",
+    zh: "<strong>Eva 居中</strong> — Eva 看到自己處於家庭網絡的核心。每個節點都是一段活生生的關係——她與之保持聯繫，而非單純的聯絡人清單。"
   },
   'p-eva-2': {
     en: "<strong>Proactive alerts</strong> — Three stacked alert pills appear at the top right, surfacing urgent issues before Eva looks for them. Each is independently dismissible once reviewed.",
     zh: "<strong>主動警報</strong> — 三個堆疊警報標籤顯示在右上角，在 Eva 尋找之前就浮現緊急問題。每個標籤在查看後可單獨關閉。"
   },
   'p-eva-3': {
-    en: "<strong>Per-member depth</strong> — Tapping any family node navigates to that person's dedicated protection or health report. No member's status is more than one tap away.",
-    zh: "<strong>個別成員深度</strong> — 點擊任何家庭節點可進入該成員的專屬保護或健康報告。任何成員的狀態距離都不超過一次點擊。"
+    en: "<strong>Per-member depth</strong> — Tapping any family node opens that person's wellbeing and security updates. No member's latest news is more than one tap away.",
+    zh: "<strong>個別成員深度</strong> — 點擊任何家庭節點可查看該成員的健康與安全動態。任何成員的最新動態距離都不超過一次點擊。"
   },
   'p-eva-4': {
-    en: "<strong>Guardian Arc as action gateway</strong> — The arc navigates directly to AI Butler chat — the highest-frequency action for Eva as a coordinator. The arc is both a reassurance symbol and a shortcut.",
-    zh: "<strong>守護穹頂作為行動入口</strong> — 穹頂直接導航到 AI 管家對話——這是 Eva 作為協調者最頻繁的操作。穹頂既是安心符號，也是快捷方式。"
+    en: "<strong>AI Companion Arc as action gateway</strong> — The arc navigates directly to AI Butler chat — the highest-frequency action for Eva as a coordinator. The arc is both a reassurance symbol and a shortcut.",
+    zh: "<strong>AI 陪伴穹頂作為行動入口</strong> — 穹頂直接導航到 AI 管家對話——這是 Eva 作為協調者最頻繁的操作。穹頂既是安心符號，也是快捷方式。"
   },
   'p-eva-5': {
-    en: "<strong>Events as cross-member audit trail</strong> — The middle tab shows a chronological family-wide activity log, giving Eva a single view of what happened across everyone without opening each profile.",
-    zh: "<strong>事件作為跨成員審計記錄</strong> — 中間分頁顯示按時間排列的全家庭活動記錄，讓 Eva 無需逐一開啟個人頁面即可一覽所有動態。"
+    en: "<strong>Events as shared family timeline</strong> — The middle tab shows a chronological family-wide activity log, giving everyone a single view of what happened across the network without opening each profile.",
+    zh: "<strong>事件作為家庭共同時間軸</strong> — 中間分頁顯示按時間排列的全家庭活動記錄，讓每位成員無需逐一開啟個人頁面即可一覽所有動態。"
+  },
+  'p-eva-6': {
+    en: "<strong>Read-state lifecycle</strong> — Alert nodes have three states: unread (pulsing ring, circle clickable), read-active within 12h (circle dimmed, status chips become the entry point), and resolved (fully dimmed, ✓ badge). All past events collect in the AI Butler History tab.",
+    zh: "<strong>已讀狀態週期</strong> — 警報節點有三種狀態：未讀（脈衝環，圓圈可點擊）、12小時內已讀（圓圈淡化，狀態膠囊成為入口）、已解決（完全淡化，✓ 徽章）。所有過往事件收錄於 AI 管家的歷史分頁。"
   },
 
   /* Eva screen names */
@@ -979,22 +1025,22 @@ const dict = {
   'sc-eva-4-name': { en: 'Yuki — Protection',        zh: 'Yuki — 保護報告' },
   'sc-eva-5-name': { en: 'Wei — Protection',         zh: 'Wei — 保護報告' },
   'sc-eva-6-name': { en: 'Ethan — Protection',       zh: 'Ethan — 保護報告' },
-  'sc-eva-7-name': { en: 'AI Butler Chat',           zh: 'AI 管家對話' },
+  'sc-eva-7-name': { en: 'AI Butler',                zh: 'AI 管家' },
   'sc-eva-8-name': { en: 'Scam Call — Grandma',      zh: '詐騙電話 — 奶奶' },
   'sc-eva-9-name': { en: 'Phishing Link — Yuki',     zh: '釣魚連結 — Yuki' },
 
   /* Eva screen descs */
   'sc-eva-0-desc': {
-    en: "Eva at center, Grandma above with ⚠ pulse ring, Wei / Yuki / Ethan as orbiting nodes. Three stacked alert pills (health report, scam call, phishing link) in the top right — each dismissible. Guardian Arc above navigates to AI Butler chat.",
-    zh: "Eva 居中，奶奶在上方帶有 ⚠ 脈衝環，Wei / Yuki / Ethan 為環繞節點。右上角三個堆疊警報標籤（健康報告、詐騙電話、釣魚連結）——每個均可關閉。頂部守護穹頂可導航到 AI 管家對話。"
+    en: "Eva at center, Grandma above with ⚠ pulse ring, Wei / Yuki / Ethan as orbiting nodes. Three stacked alert pills (health report, scam call, phishing link) in the top right — each dismissible. AI Companion Arc above navigates to AI Butler chat.",
+    zh: "Eva 居中，奶奶在上方帶有 ⚠ 脈衝環，Wei / Yuki / Ethan 為環繞節點。右上角三個堆疊提醒標籤（健康報告、詐騙電話、釣魚連結）——每個均可關閉。頂部 AI 陪伴穹頂可導航到 AI 管家對話。"
   },
   'sc-eva-1-desc': {
     en: "Annual checkup results viewed from Eva's perspective. AI summary with cardiology follow-up recommendation; marker table (BP ⚠ 145/92, HbA1c Watch, others Normal). Three action buttons: book follow-up, review medication, export to family record.",
     zh: "從 Eva 視角查看的年度健檢結果。AI 摘要附心臟科追蹤建議；指標表格（血壓 ⚠ 145/92、HbA1c 注意、其他正常）。三個操作按鈕：預約追蹤、檢視藥物、匯出家庭記錄。"
   },
   'sc-eva-2-desc': {
-    en: "Cross-member chronological activity feed. Four events: Grandma blood pressure alert, Yuki phishing link blocked, Ethan social media overuse, Wei device login verified. Tab bar at bottom (Events tab active).",
-    zh: "跨成員按時間排列的活動記錄。四則事件：奶奶血壓警報、Yuki 釣魚連結攔截、Ethan 社群媒體過度使用、Wei 設備登入已驗證。底部分頁列（事件分頁啟動中）。"
+    en: "Cross-member chronological activity feed. Four events: Grandma blood pressure alert, Yuki phishing link blocked, Ethan screen time alert, Wei device login verified. Tab bar at bottom (Events tab active).",
+    zh: "跨成員按時間排列的活動記錄。四則事件：奶奶血壓警報、Yuki 釣魚連結攔截、Ethan 螢幕時間提醒、Wei 設備登入已驗證。底部分頁列（事件分頁啟動中）。"
   },
   'sc-eva-3-desc': {
     en: "Direct messaging thread between Eva and Grandma. Five messages covering the health report results — Grandma asks about checkup, Eva confirms 145/92 concern, Eva recommends cardiologist, Grandma agrees to go.",
@@ -1009,12 +1055,12 @@ const dict = {
     zh: "Wei 的設備安全報告。近期新設備登入已透過雙重驗證確認；工作設備已確認安全。本週未檢測到異常。"
   },
   'sc-eva-6-desc': {
-    en: "Ethan's screen time and safety report. Usage alert: 3.5 hours of social media after midnight, exceeding family limit. AI Butler action taken: social media restricted after 10 PM starting tonight.",
-    zh: "Ethan 的螢幕時間與安全報告。使用警報：午夜後社群媒體使用 3.5 小時，超出家庭限制。AI 管家已採取行動：從今晚起晚上 10 點後限制社群媒體。"
+    en: "Ethan's screen time and safety report. Usage alert: 3.5 hours of social media after midnight, exceeding the family's agreed limit. AI Butler action taken: social media paused after 10 PM starting tonight per family setting.",
+    zh: "Ethan 的螢幕時間與安全報告。使用提醒：午夜後社群媒體使用 3.5 小時，超出家庭共識限制。AI 管家已採取行動：依家庭設定，從今晚起晚上 10 點後暫停社群媒體。"
   },
   'sc-eva-7-desc': {
-    en: "Direct conversation with the AI Butler. Eva asks to book the earliest cardiology appointment for Grandma — AI confirms and notifies. Eva also sets a late-night screen time limit for Ethan — AI applies the restriction and will send a heads-up message.",
-    zh: "與 AI 管家的直接對話。Eva 要求為奶奶預約最早的心臟科門診——AI 確認並通知。Eva 也為 Ethan 設定深夜螢幕時間限制——AI 套用限制並將發送提醒訊息。"
+    en: "Two-tab screen: Chat and History. Chat: Eva converses with AI Butler — books a cardiology appointment for Grandma, updates Ethan's screen time settings. History: chronological timeline of all alerts and AI actions across family members, grouped by day.",
+    zh: "雙分頁畫面：對話與歷史。對話：Eva 與 AI 管家互動——為奶奶預約心臟科門診、更新 Ethan 的螢幕時間設定。歷史：按時間排列的家庭成員警報與 AI 行動紀錄，依日期分組。"
   },
   'sc-eva-8-desc': {
     en: "Incident detail for the blocked scam call on Grandma's device. Caller: +886-900-123-456, 847 community scam reports, impersonating a bank representative. AI blocked with 0-second ring time. Three action buttons: notify Grandma, view call log, block permanently.",
@@ -1022,12 +1068,12 @@ const dict = {
   },
   'sc-eva-9-desc': {
     en: "Incident detail for the phishing link blocked on Yuki's device. Site: secure-bank-login.xyz, impersonates Cathay Bank, SSL mismatch, domain 3 days old. Page blocked before loading — no data exposed. Reported to safe-browsing network.",
-    zh: "Yuki 設備上被攔截釣魚連結的事件詳情。網站：secure-bank-login.xyz，冒充國泰銀行，SSL 憑證不符，網域僅 3 天。頁面在載入前被封鎖——無資料外洩。已回報至安全瀏覽網絡。"
+    zh: "Yuki 設備上被攔截釣魚連結的事件詳情。網站：secure-bank-login.xyz，冒充國泰銀行，SSL 憑證不符，網域僅 3 天。頁面在載入前被封鎖——無資料外洩。已回報至安全瀏覽網絡。三個操作按鈕：傳訊給 Yuki、回報網站、調整瀏覽設定。"
   },
 
   /* Eva screens section */
   'screens-eva-title': { en: 'Screens & Flows',                        zh: '畫面與流程' },
-  'screens-eva-sub':   { en: "10 screens · Eva's caregiver constellation view", zh: '10 個畫面 · Eva 照顧者星座圖視角' },
+  'screens-eva-sub':   { en: "10 screens · Eva's family constellation view", zh: '10 個畫面 · Eva 家庭星座圖視角' },
 
   /* Footer */
   'footer-text':  { en: 'TrendLife AI Butler · Constellation Design Spec · March 2026', zh: 'TrendLife AI 管家 · 星座圖設計規格 · 2026 年 3 月' },
@@ -1072,9 +1118,7 @@ function switchView(view) {
 /* ── GRACE SCREEN NAVIGATOR ── */
 function graceGoTo(n) {
   const iframe = document.getElementById('graceIframe');
-  if (iframe?.contentWindow) {
-    try { iframe.contentWindow.goTo(n); } catch(e) {}
-  }
+  if (iframe?.contentWindow) iframe.contentWindow.postMessage({type:'goTo', screen:n}, '*');
   document.querySelectorAll('#screenNavGrace .snav-item').forEach((b, i) => {
     b.classList.toggle('snav-active', i === n);
   });
@@ -1083,9 +1127,7 @@ function graceGoTo(n) {
 /* ── EVA SCREEN NAVIGATOR ── */
 function evaGoTo(n) {
   const iframe = document.getElementById('evaIframe');
-  if (iframe?.contentWindow) {
-    try { iframe.contentWindow.goTo(n); } catch(e) {}
-  }
+  if (iframe?.contentWindow) iframe.contentWindow.postMessage({type:'goTo', screen:n}, '*');
   document.querySelectorAll('#screenNavEva .snav-item').forEach((b, i) => {
     b.classList.toggle('snav-active', i === n);
   });
@@ -1098,9 +1140,10 @@ function scrollToPhone(iframeId) {
 
 /* ── THEME SWITCHER ── */
 function setTheme(t) {
+  document.body.classList.toggle('light', t === 'light');
   ['graceIframe','evaIframe'].forEach(id => {
     const f = document.getElementById(id);
-    if (f?.contentWindow) try { f.contentWindow.setTheme(t); } catch(e) {}
+    if (f?.contentWindow) f.contentWindow.postMessage({type:'setTheme', theme:t}, '*');
   });
   document.getElementById('btn-dark').classList.toggle('active', t === 'dark');
   document.getElementById('btn-light').classList.toggle('active', t === 'light');

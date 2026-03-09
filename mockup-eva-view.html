@@ -254,11 +254,64 @@ body.light .bubble-time{color:rgba(10,10,20,0.52)}
 body.light .chat-input-bar{border-top-color:rgba(10,10,20,0.08)}
 body.light .chat-input{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.55)}
 body.light .chat-mic{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.55)}
+/* AI Butler light mode */
+body.light .chat-header-av.ai{background:rgba(100,181,246,0.1);border-color:rgba(100,181,246,0.25);color:#2196F3}
+body.light .chat-header-status.ai-status{color:rgba(33,150,243,0.65)}
+body.light .bubble.ai-msg{background:rgba(33,150,243,0.07);border-color:rgba(33,150,243,0.15);color:rgba(10,10,20,0.78)}
+body.light .bubble.me{background:rgba(147,51,234,0.07);border-color:rgba(147,51,234,0.15);color:rgba(10,10,20,0.78)}
+body.light .msg-av.ai{background:rgba(33,150,243,0.08);border-color:rgba(33,150,243,0.2);color:#2196F3}
+body.light .msg-av.eva{background:rgba(147,51,234,0.08);border-color:rgba(147,51,234,0.2);color:#9333EA}
+body.light .chat-send{background:rgba(147,51,234,0.09);border-color:rgba(147,51,234,0.2);color:#9333EA}
+body.light .chat-send.ai-send{background:rgba(33,150,243,0.1);border-color:rgba(33,150,243,0.22);color:#2196F3}
 body.light .rel-peek{background:rgba(248,248,252,0.97);border-color:rgba(10,10,20,0.1)}
 body.light .rel-peek-name{color:rgba(10,10,20,0.92)}
 body.light .rel-peek-role{color:rgba(10,10,20,0.52)}
 body.light .rel-peek-x{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.5)}
 body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.04);color:rgba(10,10,20,0.7)}
+
+/* ── Zoom Overlay ── */
+#zoom-overlay{
+  position:absolute;inset:0;z-index:90;
+  pointer-events:none;opacity:0;
+  will-change:clip-path,opacity;
+  border-radius:inherit;
+}
+/* ── Screen enter animation ── */
+.screen-entering{animation:screenIn 0.3s cubic-bezier(0.2,0,0.2,1) both}
+@keyframes screenIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── AI Butler Tab Bar ── */
+.butler-tab-bar{display:flex;padding:0 20px;border-bottom:1px solid rgba(255,255,255,0.07);flex-shrink:0}
+.butler-tab{flex:1;text-align:center;padding:9px 0 8px;font-size:11px;font-weight:700;letter-spacing:0.6px;
+  font-family:'Inter',sans-serif;color:rgba(255,255,255,0.35);cursor:pointer;position:relative;
+  transition:color 0.18s;text-transform:uppercase}
+.butler-tab.active{color:#C084FC}
+.butler-tab.active::after{content:'';position:absolute;bottom:-1px;left:25%;right:25%;height:2px;
+  background:#C084FC;border-radius:1px}
+/* ── History Timeline ── */
+.hist-scroll{flex:1;overflow-y:auto;padding:4px 16px 12px;display:flex;flex-direction:column}
+.hist-day{font-size:9px;font-weight:700;letter-spacing:0.5px;color:rgba(255,255,255,0.28);
+  text-transform:uppercase;padding:12px 0 5px;font-family:'Inter',sans-serif}
+.hist-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;position:relative}
+.hist-item:not(:last-child)::before{content:'';position:absolute;left:13px;top:30px;bottom:-8px;
+  width:1px;background:rgba(255,255,255,0.06)}
+.hist-dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:12px;border:1px solid rgba(255,255,255,0.1);margin-top:1px}
+.hist-body{flex:1;min-width:0}
+.hist-who{font-size:10px;font-weight:700;font-family:'Inter',sans-serif;color:rgba(255,255,255,0.42);margin-bottom:2px}
+.hist-text{font-size:12px;font-weight:500;font-family:'Inter',sans-serif;color:rgba(255,255,255,0.8);line-height:1.38}
+.hist-time{font-size:10px;font-family:'Inter',sans-serif;color:rgba(255,255,255,0.32);margin-top:3px}
+/* light overrides */
+body.light .butler-tab-bar{border-bottom-color:rgba(10,10,20,0.07)}
+body.light .butler-tab{color:rgba(10,10,20,0.35)}
+body.light .butler-tab.active{color:#9333EA}
+body.light .butler-tab.active::after{background:#9333EA}
+body.light .hist-day{color:rgba(10,10,20,0.28)}
+body.light .hist-item:not(:last-child)::before{background:rgba(10,10,20,0.07)}
+body.light .hist-dot{border-color:rgba(10,10,20,0.1)}
+body.light .hist-who{color:rgba(10,10,20,0.42)}
+body.light .hist-text{color:rgba(10,10,20,0.78)}
+body.light .hist-time{color:rgba(10,10,20,0.35)}
 
 </style>
 </head>
@@ -335,7 +388,7 @@ body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.0
       <span class="status-icons">●●● Wi-Fi ▮</span>
     </div>
     <div class="screen-header">
-      <div class="back-btn" onclick="goTo(0)">←</div>
+      <div class="back-btn" onclick="zoomBack()">←</div>
       <div class="screen-title">Grandma's Health Report</div>
     </div>
     <div class="lens-body" id="health-body"></div>
@@ -495,7 +548,7 @@ body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.0
       <span class="status-icons">●●● Wi-Fi ▮</span>
     </div>
     <div class="screen-header">
-      <div class="back-btn" onclick="goTo(0)">←</div>
+      <div class="back-btn" onclick="zoomBack()">←</div>
       <div class="screen-title">Protection Report</div>
     </div>
     <div class="protect-body">
@@ -590,7 +643,7 @@ body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.0
       <span class="status-icons">●●● Wi-Fi ▮</span>
     </div>
     <div class="screen-header">
-      <div class="back-btn" onclick="goTo(0)">←</div>
+      <div class="back-btn" onclick="zoomBack()">←</div>
       <div class="screen-title">Protection Report</div>
     </div>
     <div class="protect-body">
@@ -645,7 +698,13 @@ body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.0
         <div class="chat-header-status ai-status">● Always active</div>
       </div>
     </div>
-    <div class="chat-messages">
+    <div class="butler-tab-bar">
+      <div class="butler-tab active" onclick="switchButlerTab('chat')">Chat</div>
+      <div class="butler-tab" onclick="switchButlerTab('history')">History</div>
+    </div>
+
+    <!-- CHAT TAB -->
+    <div class="chat-messages" id="butler-chat">
 
       <div class="msg-row">
         <div class="msg-av ai">◈</div>
@@ -696,7 +755,80 @@ body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.0
       </div>
 
     </div>
-    <div class="chat-input-bar">
+
+    <!-- HISTORY TAB -->
+    <div class="hist-scroll" id="butler-history" style="display:none">
+
+      <div class="hist-day">Today · Mar 9</div>
+
+      <div class="hist-item">
+        <div class="hist-dot" style="background:rgba(255,195,100,0.18);color:#FFC364">⚕</div>
+        <div class="hist-body">
+          <div class="hist-who">Grandma</div>
+          <div class="hist-text">Blood pressure 145/92 flagged — cardiology referral drafted and sent</div>
+          <div class="hist-time">9:32 AM · Health Monitoring</div>
+        </div>
+      </div>
+
+      <div class="hist-item">
+        <div class="hist-dot" style="background:rgba(255,195,100,0.18);color:#FFC364">📵</div>
+        <div class="hist-body">
+          <div class="hist-who">Grandma</div>
+          <div class="hist-text">Scam call blocked — caller posed as bank fraud dept, call terminated automatically</div>
+          <div class="hist-time">8:50 AM · Scam Protection</div>
+        </div>
+      </div>
+
+      <div class="hist-item">
+        <div class="hist-dot" style="background:rgba(74,222,128,0.18);color:#4ADE80">🛡</div>
+        <div class="hist-body">
+          <div class="hist-who">Yuki</div>
+          <div class="hist-text">Phishing link blocked — secure-bank-login.xyz intercepted before loading</div>
+          <div class="hist-time">8:15 AM · Safe Browsing</div>
+        </div>
+      </div>
+
+      <div class="hist-item">
+        <div class="hist-dot" style="background:rgba(251,146,60,0.18);color:#FB923C">⏰</div>
+        <div class="hist-body">
+          <div class="hist-who">Ethan</div>
+          <div class="hist-text">3 hrs screen time on social media — alert sent to Eva, 10 PM limit applied</div>
+          <div class="hist-time">7:00 AM · Screen Time</div>
+        </div>
+      </div>
+
+      <div class="hist-day">Yesterday · Mar 8</div>
+
+      <div class="hist-item">
+        <div class="hist-dot" style="background:rgba(255,195,100,0.18);color:#FFC364">📵</div>
+        <div class="hist-body">
+          <div class="hist-who">Grandma</div>
+          <div class="hist-text">Scam call blocked — unknown number impersonating Social Security office</div>
+          <div class="hist-time">7:23 PM · Scam Protection</div>
+        </div>
+      </div>
+
+      <div class="hist-item">
+        <div class="hist-dot" style="background:rgba(251,146,60,0.18);color:#FB923C">⏰</div>
+        <div class="hist-body">
+          <div class="hist-who">Ethan</div>
+          <div class="hist-text">Daily screen time limit reached — devices locked until 7 AM</div>
+          <div class="hist-time">10:05 PM · Screen Time</div>
+        </div>
+      </div>
+
+      <div class="hist-item">
+        <div class="hist-dot" style="background:rgba(96,165,250,0.18);color:#60A5FA">🔒</div>
+        <div class="hist-body">
+          <div class="hist-who">Wei</div>
+          <div class="hist-text">New device login verified — 2FA approved from iPhone 16 Pro</div>
+          <div class="hist-time">2:14 PM · Device Security</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="chat-input-bar" id="butler-chat-input">
       <div class="chat-mic">🎙</div>
       <input class="chat-input" placeholder="Ask AI Butler…" readonly>
       <div class="chat-send ai-send">↑</div>
@@ -802,6 +934,9 @@ body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.0
     </div>
   </div>
 
+  <!-- Zoom transition overlay -->
+  <div id="zoom-overlay"></div>
+
 </div>
 
 <script>
@@ -821,16 +956,49 @@ function dismissAlert(id){
   if(el) el.style.display='none';
 }
 
+// ── Read-state lifecycle (12h TTL via localStorage) ──
+function markRead(id){
+  localStorage.setItem('tl_read_'+id, Date.now().toString());
+}
+function isRead(id){
+  const t=localStorage.getItem('tl_read_'+id);
+  if(!t) return false;
+  return (Date.now()-parseInt(t))<12*3600*1000;
+}
+function chipExpired(id){
+  const t=localStorage.getItem('tl_read_'+id);
+  if(!t) return true;
+  return (Date.now()-parseInt(t))>=12*3600*1000;
+}
+function wasEverRead(id){
+  return !!localStorage.getItem('tl_read_'+id);
+}
+function switchButlerTab(tab){
+  const chat=document.getElementById('butler-chat');
+  const hist=document.getElementById('butler-history');
+  const inp=document.getElementById('butler-chat-input');
+  chat.style.display=tab==='chat'?'':'none';
+  hist.style.display=tab==='history'?'flex':'none';
+  inp.style.display=tab==='chat'?'':'none';
+  document.querySelectorAll('#s7 .butler-tab').forEach((el,i)=>{
+    el.classList.toggle('active',(i===0&&tab==='chat')||(i===1&&tab==='history'));
+  });
+}
+
 const NODES=[
-  {id:'grandma', label:'Grandma', note:'Mom',           icon:'✦',  color:'#FFC364', x:195, y:105, r:28, screen:1,
-   chips:['⚕ Health Monitoring','📵 Scam Blocked']},
+  {id:'grandma', label:'Grandma', note:'Mom',           icon:'✦',  color:'#FFC364', x:195, y:105, r:28, screen:1, alert:true,
+   chips:['⚕ Health Monitoring','📵 Scam Blocked'],
+   status:['⚕ Health', '🚫 Scam Blocked']},
   {id:'eva',     label:'Eva',     note:'You',           icon:'E',  color:'#C084FC', x:195, y:225, r:36, center:true},
-  {id:'wei',     label:'Wei',     note:'Husband',       icon:'W',  color:'#60A5FA', x:322, y:215, r:22, screen:5,
-   chips:['🔒 2FA Active','📱 Devices OK']},
-  {id:'yuki',    label:'Yuki',    note:'Granddaughter', icon:'Yv', color:'#4ADE80', x: 90, y:335, r:20, screen:4,
-   chips:['🛡 Link Blocked','🌐 Safe Browsing']},
-  {id:'ethan',   label:'Ethan',   note:'Son',           icon:'Et', color:'#FB923C', x:298, y:335, r:20, screen:6,
-   chips:['⏰ Screen Time Alert','🔒 Browsing Safe']},
+  {id:'wei',     label:'Wei',     note:'Husband',       icon:'W',  color:'#60A5FA', x:322, y:215, r:22, screen:5, alert:false,
+   chips:['🔒 2FA Active','📱 Devices OK'],
+   status:['🔒 Secure', '📱 OK']},
+  {id:'yuki',    label:'Yuki',    note:'Granddaughter', icon:'Yv', color:'#4ADE80', x: 90, y:335, r:20, screen:4, alert:true,
+   chips:['🛡 Link Blocked','🌐 Safe Browsing'],
+   status:['🛡 Blocked', '🌐 Safe']},
+  {id:'ethan',   label:'Ethan',   note:'Son',           icon:'Et', color:'#FB923C', x:298, y:335, r:20, screen:6, alert:true,
+   chips:['⏰ Screen Time Alert','🔒 Browsing Safe'],
+   status:['⏰ Screen Alert']},
 ];
 
 const EDGES=[
@@ -902,31 +1070,12 @@ function buildConstellation(){
     line.setAttribute('stroke', currentTheme==='light'?`rgba(10,10,20,${e.w*0.1})`:`rgba(255,255,255,${e.w*0.09})`);
     line.setAttribute('stroke-width',e.w*2.5);
     svg.appendChild(line);
-    if(e.edgeLabel){
-      const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
-      const tw=e.edgeLabel.length*5.0+14;
-      const bg=document.createElementNS('http://www.w3.org/2000/svg','rect');
-      bg.setAttribute('x',mx-tw/2);bg.setAttribute('y',my-8);
-      bg.setAttribute('width',tw);bg.setAttribute('height',15);bg.setAttribute('rx','7');
-      bg.setAttribute('fill',currentTheme==='light'?'rgba(232,233,239,0.95)':'rgba(14,14,22,0.88)');
-      bg.setAttribute('stroke',currentTheme==='light'?'rgba(10,10,20,0.09)':'rgba(255,255,255,0.09)');
-      bg.setAttribute('stroke-width','0.8');
-      svg.appendChild(bg);
-      const lbl=document.createElementNS('http://www.w3.org/2000/svg','text');
-      lbl.setAttribute('x',mx);lbl.setAttribute('y',my+1);
-      lbl.setAttribute('text-anchor','middle');lbl.setAttribute('dominant-baseline','middle');
-      lbl.setAttribute('font-size','7.5');lbl.setAttribute('font-family','Inter,sans-serif');
-      lbl.setAttribute('font-weight','600');
-      lbl.setAttribute('fill',nm[e.b].color);lbl.setAttribute('opacity','0.82');
-      lbl.textContent=e.edgeLabel;
-      svg.appendChild(lbl);
-    }
   });
 
   // ── Nodes ──
   NODES.forEach(n=>{
     const g=document.createElementNS('http://www.w3.org/2000/svg','g');
-    g.style.cursor='pointer';
+    g.style.cursor='default';
 
     const glow=document.createElementNS('http://www.w3.org/2000/svg','circle');
     glow.setAttribute('cx',n.x);glow.setAttribute('cy',n.y);glow.setAttribute('r',n.r+10);
@@ -968,8 +1117,51 @@ function buildConstellation(){
     note.textContent=n.note;
     g.appendChild(note);
 
-    // Grandma — red pulsing alert ring + ⚠ badge
-    if(n.id==='grandma'){
+    // ── Floating status chips (below circle) ──
+    // Show chips for: non-alert nodes always; alert nodes only if unread or read-within-12h
+    const showChips = !n.center && n.status && n.status.length &&
+                      (!n.alert || !wasEverRead(n.id) || isRead(n.id));
+    const chipsClickable = n.alert && isRead(n.id); // read state: chips are entry points
+    if(showChips){
+      const chipH=15, chipGap=5;
+      n.status.forEach((txt,i)=>{
+        const chipBaseY=n.y+n.r+36+i*(chipH+chipGap);
+        const charW=[...txt].reduce((s,c)=>/\p{Emoji}/u.test(c)?s+9:s+5.6,0)+14;
+        const chipW=Math.min(Math.max(charW,36),90);
+        const chipX=n.x-chipW/2;
+        const chipG=document.createElementNS('http://www.w3.org/2000/svg','g');
+
+        const chipBg=document.createElementNS('http://www.w3.org/2000/svg','rect');
+        chipBg.setAttribute('x',chipX);chipBg.setAttribute('y',chipBaseY);
+        chipBg.setAttribute('width',chipW);chipBg.setAttribute('height',chipH);
+        chipBg.setAttribute('rx','7.5');
+        // Brighter fill/stroke when chips are the entry point (read state)
+        chipBg.setAttribute('fill',n.color+(chipsClickable?(currentTheme==='light'?'33':'28'):(currentTheme==='light'?'22':'1e')));
+        chipBg.setAttribute('stroke',n.color+(chipsClickable?(currentTheme==='light'?'cc':'aa'):(currentTheme==='light'?'55':'44')));
+        chipBg.setAttribute('stroke-width',chipsClickable?'1.2':'0.8');
+        chipG.appendChild(chipBg);
+
+        const chipTxt=document.createElementNS('http://www.w3.org/2000/svg','text');
+        chipTxt.setAttribute('x',n.x);chipTxt.setAttribute('y',chipBaseY+chipH/2+0.5);
+        chipTxt.setAttribute('text-anchor','middle');chipTxt.setAttribute('dominant-baseline','middle');
+        chipTxt.setAttribute('fill',n.color);
+        chipTxt.setAttribute('opacity',chipsClickable?'1':(i===0?'0.92':'0.6'));
+        chipTxt.setAttribute('font-size','7.5');chipTxt.setAttribute('font-family','Inter,sans-serif');
+        chipTxt.setAttribute('font-weight','700');chipTxt.setAttribute('letter-spacing','0.15');
+        chipTxt.textContent=txt;
+        chipG.appendChild(chipTxt);
+
+        // In read state: only first chip links to detail (primary entry)
+        if(chipsClickable && i===0){
+          chipG.style.cursor='pointer';
+          chipG.addEventListener('click',(e)=>{e.stopPropagation();zoomToNode(n);});
+        }
+        g.appendChild(chipG);
+      });
+    }
+
+    // Grandma — red pulsing alert ring + ⚠ badge (only when unread)
+    if(n.id==='grandma' && !isRead(n.id)){
       const pulseRing=document.createElementNS('http://www.w3.org/2000/svg','circle');
       pulseRing.setAttribute('cx',n.x);pulseRing.setAttribute('cy',n.y);
       pulseRing.setAttribute('r',n.r+8);
@@ -1015,8 +1207,8 @@ function buildConstellation(){
       g.appendChild(ptxt);
     }
 
-    // Yuki — shield badge
-    if(n.id==='yuki'){
+    // Yuki — shield badge (only when unread)
+    if(n.id==='yuki' && !isRead(n.id)){
       const bx=n.x+n.r*0.65, by=n.y-n.r*0.65;
       const bdot=document.createElementNS('http://www.w3.org/2000/svg','circle');
       bdot.setAttribute('cx',bx);bdot.setAttribute('cy',by);
@@ -1031,14 +1223,149 @@ function buildConstellation(){
       btxt.textContent='🛡';g.appendChild(btxt);
     }
 
-    // Navigation
-    if(n.id==='grandma') g.onclick=(e)=>{e.stopPropagation();showPeek(n)};
-    if(n.id==='wei')     g.onclick=(e)=>{e.stopPropagation();showPeek(n)};
-    if(n.id==='yuki')    g.onclick=(e)=>{e.stopPropagation();showPeek(n)};
-    if(n.id==='ethan')   g.onclick=(e)=>{e.stopPropagation();showPeek(n)};
+    // Navigation + visual state (3 states)
+    if(!n.center){
+      if(n.alert && !wasEverRead(n.id)){
+        // STATE 1 · Unread alert — pulsing glow, circle is clickable
+        g.style.cursor='pointer';
+        g.onclick=(e)=>{e.stopPropagation();zoomToNode(n);};
+        glow.setAttribute('opacity','0.22');
+        glow.setAttribute('r',n.r+14);
+
+      } else if(n.alert && isRead(n.id)){
+        // STATE 2 · Read within 12h — dimmed circle, chips are entry points
+        g.style.opacity='0.72';
+        g.style.cursor='default';
+        glow.setAttribute('opacity','0');
+
+      } else {
+        // STATE 3 · Non-alert or expired (>12h) — fully dimmed, ✓ badge
+        g.style.opacity='0.42';
+        g.style.cursor='default';
+        const cbx=n.x+n.r*0.72, cby=n.y-n.r*0.72;
+        const cdot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+        cdot.setAttribute('cx',cbx);cdot.setAttribute('cy',cby);
+        cdot.setAttribute('r','7');cdot.setAttribute('fill','rgba(74,222,128,0.75)');
+        cdot.setAttribute('stroke',currentTheme==='light'?'#FFFFFF':'#0E0E14');
+        cdot.setAttribute('stroke-width','1.5');
+        g.appendChild(cdot);
+        const ctxt=document.createElementNS('http://www.w3.org/2000/svg','text');
+        ctxt.setAttribute('x',cbx);ctxt.setAttribute('y',cby+1);
+        ctxt.setAttribute('text-anchor','middle');ctxt.setAttribute('dominant-baseline','middle');
+        ctxt.setAttribute('fill','white');ctxt.setAttribute('font-size','8');
+        ctxt.setAttribute('font-weight','700');ctxt.setAttribute('font-family','Inter,sans-serif');
+        ctxt.textContent='✓';g.appendChild(ctxt);
+      }
+    }
+
+    // ── Node float animation (non-center only) ──
+    if(!n.center){
+      const fp={grandma:{dur:4.6,begin:0},wei:{dur:5.3,begin:1.15},
+                yuki:{dur:5.9,begin:2.1},ethan:{dur:6.4,begin:3.2}};
+      const p=fp[n.id]||{dur:5,begin:0};
+      const fa=document.createElementNS('http://www.w3.org/2000/svg','animateTransform');
+      fa.setAttribute('attributeName','transform');fa.setAttribute('type','translate');
+      fa.setAttribute('values','0,0;0,-2.5;0,0');
+      fa.setAttribute('dur',p.dur+'s');fa.setAttribute('begin',p.begin+'s');
+      fa.setAttribute('repeatCount','indefinite');fa.setAttribute('calcMode','spline');
+      fa.setAttribute('keyTimes','0;0.5;1');
+      fa.setAttribute('keySplines','0.45 0 0.55 1;0.45 0 0.55 1');
+      g.appendChild(fa);
+    }
 
     svg.appendChild(g);
   });
+}
+
+// ── Zoom Transition ──
+let _zoomCtx=null;
+
+function _getNodePos(n){
+  const svg=document.getElementById('const-svg');
+  const phone=document.querySelector('.phone');
+  const sr=svg.getBoundingClientRect();
+  const pr=phone.getBoundingClientRect();
+  const vbW=390,vbH=480;
+  const scale=Math.min(sr.width/vbW,sr.height/vbH);
+  const ox=(sr.width-vbW*scale)/2;
+  const oy=(sr.height-vbH*scale)/2;
+  return{
+    x:(sr.left-pr.left)+ox+n.x*scale,
+    y:(sr.top -pr.top )+oy+n.y*scale,
+    r:n.r*scale
+  };
+}
+
+function zoomToNode(n){
+  const pos=_getNodePos(n);
+  const ph=document.querySelector('.phone');
+  const pw=ph.offsetWidth, phh=ph.offsetHeight;
+  const cx=(pos.x/pw*100).toFixed(2)+'%';
+  const cy=(pos.y/phh*100).toFixed(2)+'%';
+  const rSmall=pos.r+'px';
+  const rFull='200%';
+
+  _zoomCtx={n,cx,cy};
+
+  const ov=document.getElementById('zoom-overlay');
+  ov.style.background=n.color;
+  ov.style.opacity='0';
+  ov.style.clipPath=`circle(${rSmall} at ${cx} ${cy})`;
+  ov.style.transition='none';
+  ov.style.pointerEvents='auto';
+
+  // Kickoff: fade in + expand
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{
+      ov.style.transition='clip-path 0.46s cubic-bezier(0.4,0,0.2,1), opacity 0.06s ease';
+      ov.style.opacity='0.92';
+      ov.style.clipPath=`circle(${rFull} at ${cx} ${cy})`;
+    });
+  });
+
+  // After circle fills screen → mark read, rebuild SVG, switch + fade out
+  setTimeout(()=>{
+    markRead(n.id);
+    buildConstellation();
+    goTo(n.screen);
+    const scr=document.getElementById('s'+n.screen);
+    scr.classList.add('screen-entering');
+    scr.addEventListener('animationend',()=>scr.classList.remove('screen-entering'),{once:true});
+    ov.style.transition='opacity 0.22s ease';
+    ov.style.opacity='0';
+    setTimeout(()=>{ov.style.pointerEvents='none';},240);
+  },420);
+}
+
+function zoomBack(){
+  if(!_zoomCtx){goTo(0);return;}
+  const{n,cx,cy}=_zoomCtx;
+  const pos=_getNodePos(n);
+  const rSmall=pos.r+'px';
+  const rFull='200%';
+  const ov=document.getElementById('zoom-overlay');
+
+  ov.style.background=n.color;
+  ov.style.opacity='0.9';
+  ov.style.clipPath=`circle(${rFull} at ${cx} ${cy})`;
+  ov.style.transition='none';
+  ov.style.pointerEvents='auto';
+
+  // Switch to constellation first (hidden behind overlay)
+  goTo(0);
+
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{
+      ov.style.transition='clip-path 0.46s cubic-bezier(0.4,0,0.2,1), opacity 0.18s ease 0.28s';
+      ov.style.clipPath=`circle(${rSmall} at ${cx} ${cy})`;
+      ov.style.opacity='0';
+    });
+  });
+
+  setTimeout(()=>{
+    ov.style.pointerEvents='none';
+    _zoomCtx=null;
+  },520);
 }
 
 const EVA_HTML=`
@@ -1087,6 +1414,14 @@ function setTheme(t){
   svg.innerHTML='';
   buildConstellation();
 }
+window.addEventListener('message',e=>{
+  if(!e.data||typeof e.data!=='object') return;
+  if(e.data.type==='setTheme') setTheme(e.data.theme);
+  if(e.data.type==='goTo') goTo(e.data.screen);
+});
+
+// Reset read-state on every page load so nodes always start as unread
+Object.keys(localStorage).filter(k=>k.startsWith('tl_read_')).forEach(k=>localStorage.removeItem(k));
 
 buildConstellation();
 document.getElementById('health-body').innerHTML = EVA_HTML;

@@ -353,6 +353,22 @@ body.light .rel-peek-name{color:rgba(10,10,20,0.92)}
 body.light .rel-peek-role{color:rgba(10,10,20,0.52)}
 body.light .rel-peek-x{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.5)}
 body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.04);color:rgba(10,10,20,0.7)}
+body.light .chat-header-status{color:rgba(10,10,20,0.45)}
+body.light .bubble.me{background:rgba(255,195,100,0.08);border-color:rgba(255,195,100,0.2);color:rgba(10,10,20,0.78)}
+body.light .msg-av.grace{background:rgba(255,195,100,0.1);border-color:rgba(255,195,100,0.25);color:#FFC364}
+body.light .msg-av.eva{background:rgba(192,132,252,0.08);border-color:rgba(192,132,252,0.2);color:#C084FC}
+body.light .chat-send{background:rgba(255,195,100,0.1);border-color:rgba(255,195,100,0.22);color:#A06000}
+
+/* ── Zoom Overlay ── */
+#zoom-overlay{
+  position:absolute;inset:0;z-index:90;
+  pointer-events:none;opacity:0;
+  will-change:clip-path,opacity;
+  border-radius:inherit;
+}
+/* ── Screen enter animation ── */
+.screen-entering{animation:screenIn 0.3s cubic-bezier(0.2,0,0.2,1) both}
+@keyframes screenIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
 </style>
 </head>
@@ -567,7 +583,7 @@ body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.0
       <span class="status-icons">●●● Wi-Fi ▮</span>
     </div>
     <div class="screen-header">
-      <div class="back-btn" onclick="goTo(0)">←</div>
+      <div class="back-btn" onclick="zoomBack()">←</div>
       <div class="screen-title">Your World</div>
     </div>
     <div class="world-scroll">
@@ -646,7 +662,7 @@ body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.0
       <span class="status-icons">●●● Wi-Fi ▮</span>
     </div>
     <div class="screen-header">
-      <div class="back-btn" onclick="goTo(0)">←</div>
+      <div class="back-btn" onclick="zoomBack()">←</div>
       <div class="chat-header-av">E</div>
       <div class="chat-header-info">
         <div class="chat-header-name">Eva</div>
@@ -695,6 +711,9 @@ body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.0
     </div>
   </div>
 
+  <!-- Zoom transition overlay -->
+  <div id="zoom-overlay"></div>
+
 </div>
 
 <script>
@@ -704,17 +723,34 @@ function goTo(n){
   document.getElementById('s'+n).classList.add('active');
 }
 
+// ── Read-state lifecycle (12h TTL via localStorage) ──
+function markRead(id){
+  localStorage.setItem('tl_read_'+id, Date.now().toString());
+}
+function isRead(id){
+  const t=localStorage.getItem('tl_read_'+id);
+  if(!t) return false;
+  return (Date.now()-parseInt(t))<12*3600*1000;
+}
+function wasEverRead(id){
+  return !!localStorage.getItem('tl_read_'+id);
+}
+
 // ── Constellation ──
 const NODES=[
   {id:'grace',  label:'Grace',  note:'You',               icon:'✦',  color:'#FFC364', x:195, y:210, r:36, center:true},
-  {id:'eva',    label:'Eva',    note:'Daughter · Online', icon:'E',  color:'#C084FC', x: 88, y:130, r:27, screen:5,
-   chips:['❤ Your Daughter','🏥 Health Report Shared']},
-  {id:'wei',    label:'Wei',    note:'Son-in-law',        icon:'W',  color:'#60A5FA', x:302, y:130, r:25, screen:4,
-   chips:['👨 Son-in-law','🔒 Devices Secure']},
-  {id:'yvonne', label:'Yvonne', note:'Granddaughter',     icon:'Yv', color:'#4ADE80', x: 80, y:315, r:22, screen:4,
-   chips:['👧 Granddaughter','🛡 Safe Online']},
-  {id:'ethan',  label:'Ethan',  note:'Grandson',          icon:'Et', color:'#FB923C', x:310, y:315, r:22, screen:4,
-   chips:['👦 Grandson','⏰ Usage Alert']},
+  {id:'eva',    label:'Eva',    note:'Daughter · Online', icon:'E',  color:'#C084FC', x: 88, y:130, r:27, screen:5, alert:true,
+   chips:['❤ Your Daughter','🏥 Health Report Shared'],
+   status:['❤ Caregiver', '🔔 1 New']},
+  {id:'wei',    label:'Wei',    note:'Son-in-law',        icon:'W',  color:'#60A5FA', x:302, y:130, r:25, screen:4, alert:false,
+   chips:['👨 Son-in-law','🔒 Devices Secure'],
+   status:['🔒 Secure']},
+  {id:'yvonne', label:'Yvonne', note:'Granddaughter',     icon:'Yv', color:'#4ADE80', x: 80, y:315, r:22, screen:4, alert:false,
+   chips:['👧 Granddaughter','🛡 Safe Online'],
+   status:['🛡 Safe']},
+  {id:'ethan',  label:'Ethan',  note:'Grandson',          icon:'Et', color:'#FB923C', x:310, y:315, r:22, screen:4, alert:true,
+   chips:['👦 Grandson','⏰ Usage Alert'],
+   status:['⏰ Screen Alert']},
 ];
 
 const EDGES=[
@@ -794,31 +830,12 @@ function buildConstellation(){
     line.setAttribute('stroke', currentTheme==='light'?`rgba(10,10,20,${e.w*0.1})`:`rgba(255,255,255,${e.w*0.09})`);
     line.setAttribute('stroke-width',e.w*2.5);
     svg.appendChild(line);
-    if(e.edgeLabel){
-      const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
-      const tw=e.edgeLabel.length*5.0+14;
-      const bg=document.createElementNS('http://www.w3.org/2000/svg','rect');
-      bg.setAttribute('x',mx-tw/2);bg.setAttribute('y',my-8);
-      bg.setAttribute('width',tw);bg.setAttribute('height',15);bg.setAttribute('rx','7');
-      bg.setAttribute('fill',currentTheme==='light'?'rgba(232,233,239,0.95)':'rgba(14,14,22,0.88)');
-      bg.setAttribute('stroke',currentTheme==='light'?'rgba(10,10,20,0.09)':'rgba(255,255,255,0.09)');
-      bg.setAttribute('stroke-width','0.8');
-      svg.appendChild(bg);
-      const lbl=document.createElementNS('http://www.w3.org/2000/svg','text');
-      lbl.setAttribute('x',mx);lbl.setAttribute('y',my+1);
-      lbl.setAttribute('text-anchor','middle');lbl.setAttribute('dominant-baseline','middle');
-      lbl.setAttribute('font-size','7.5');lbl.setAttribute('font-family','Inter,sans-serif');
-      lbl.setAttribute('font-weight','600');
-      lbl.setAttribute('fill',nm[e.b].color);lbl.setAttribute('opacity','0.82');
-      lbl.textContent=e.edgeLabel;
-      svg.appendChild(lbl);
-    }
   });
 
   // nodes
   NODES.forEach(n=>{
     const g=document.createElementNS('http://www.w3.org/2000/svg','g');
-    g.style.cursor='pointer';
+    g.style.cursor='default';
 
     // glow ring
     const glow=document.createElementNS('http://www.w3.org/2000/svg','circle');
@@ -865,9 +882,50 @@ function buildConstellation(){
     note.textContent=n.note;
     g.appendChild(note);
 
-    // Eva gets notification pulse + badge
-    if(n.id==='eva'){
-      // animated pulsing ring
+    // ── Floating status chips (below circle) ──
+    // Show chips for: non-alert nodes always; alert nodes only if unread or read-within-12h
+    const showChips = !n.center && n.status && n.status.length &&
+                      (!n.alert || !wasEverRead(n.id) || isRead(n.id));
+    const chipsClickable = n.alert && isRead(n.id); // read state: chips become entry points
+    if(showChips){
+      const chipH=15, chipGap=5;
+      n.status.forEach((txt,i)=>{
+        const chipBaseY=n.y+n.r+36+i*(chipH+chipGap);
+        const charW=[...txt].reduce((s,c)=>/\p{Emoji}/u.test(c)?s+9:s+5.6,0)+14;
+        const chipW=Math.min(Math.max(charW,36),90);
+        const chipX=n.x-chipW/2;
+        const chipG=document.createElementNS('http://www.w3.org/2000/svg','g');
+
+        const chipBg=document.createElementNS('http://www.w3.org/2000/svg','rect');
+        chipBg.setAttribute('x',chipX);chipBg.setAttribute('y',chipBaseY);
+        chipBg.setAttribute('width',chipW);chipBg.setAttribute('height',chipH);
+        chipBg.setAttribute('rx','7.5');
+        chipBg.setAttribute('fill',n.color+(chipsClickable?(currentTheme==='light'?'33':'28'):(currentTheme==='light'?'22':'1e')));
+        chipBg.setAttribute('stroke',n.color+(chipsClickable?(currentTheme==='light'?'cc':'aa'):(currentTheme==='light'?'55':'44')));
+        chipBg.setAttribute('stroke-width',chipsClickable?'1.2':'0.8');
+        chipG.appendChild(chipBg);
+
+        const chipTxt=document.createElementNS('http://www.w3.org/2000/svg','text');
+        chipTxt.setAttribute('x',n.x);chipTxt.setAttribute('y',chipBaseY+chipH/2+0.5);
+        chipTxt.setAttribute('text-anchor','middle');chipTxt.setAttribute('dominant-baseline','middle');
+        chipTxt.setAttribute('fill',n.color);
+        chipTxt.setAttribute('opacity',chipsClickable?'1':(i===0?'0.92':'0.6'));
+        chipTxt.setAttribute('font-size','7.5');chipTxt.setAttribute('font-family','Inter,sans-serif');
+        chipTxt.setAttribute('font-weight','700');chipTxt.setAttribute('letter-spacing','0.15');
+        chipTxt.textContent=txt;
+        chipG.appendChild(chipTxt);
+
+        // In read state: only first chip links to detail (primary entry)
+        if(chipsClickable && i===0){
+          chipG.style.cursor='pointer';
+          chipG.addEventListener('click',(e)=>{e.stopPropagation();zoomToNode(n);});
+        }
+        g.appendChild(chipG);
+      });
+    }
+
+    // Eva — pulsing alert ring + ⚠ badge (only when unread)
+    if(n.id==='eva' && !isRead(n.id)){
       const pulseRing=document.createElementNS('http://www.w3.org/2000/svg','circle');
       pulseRing.setAttribute('cx',n.x); pulseRing.setAttribute('cy',n.y);
       pulseRing.setAttribute('r',n.r+8);
@@ -881,22 +939,18 @@ function buildConstellation(){
       pa2.setAttribute('dur','2.2s'); pa2.setAttribute('repeatCount','indefinite');
       pulseRing.appendChild(pa1); pulseRing.appendChild(pa2);
       g.insertBefore(pulseRing, g.firstChild);
-      // notification dot
       const bx=n.x+n.r*0.65, by=n.y-n.r*0.65;
       const bdot=document.createElementNS('http://www.w3.org/2000/svg','circle');
       bdot.setAttribute('cx',bx); bdot.setAttribute('cy',by);
       bdot.setAttribute('r','8'); bdot.setAttribute('fill','#FF4D4D');
       bdot.setAttribute('stroke', currentTheme==='light'?'#FFFFFF':'#0E0E14'); bdot.setAttribute('stroke-width','2');
-      const ba=document.createElementNS('http://www.w3.org/2000/svg','animate');
-      ba.setAttribute('attributeName','r'); ba.setAttribute('values','7;9.5;7');
-      ba.setAttribute('dur','1.6s'); ba.setAttribute('repeatCount','indefinite');
-      bdot.appendChild(ba); g.appendChild(bdot);
+      g.appendChild(bdot);
       const btxt=document.createElementNS('http://www.w3.org/2000/svg','text');
       btxt.setAttribute('x',bx); btxt.setAttribute('y',by+1);
       btxt.setAttribute('text-anchor','middle'); btxt.setAttribute('dominant-baseline','middle');
       btxt.setAttribute('fill','white'); btxt.setAttribute('font-size','8');
       btxt.setAttribute('font-weight','700'); btxt.setAttribute('font-family','Inter,sans-serif');
-      btxt.textContent='1'; g.appendChild(btxt);
+      btxt.textContent='⚠'; g.appendChild(btxt);
     }
 
     // Grace gets a "choices" annotation
@@ -917,14 +971,145 @@ function buildConstellation(){
       g.appendChild(ptxt);
     }
 
-    // navigation
-    if(n.id==='grace') g.onclick=(e)=>{e.stopPropagation();goTo(3)};
-    if(n.id==='eva')   g.onclick=(e)=>{e.stopPropagation();showPeek(n)};
-    if(['wei','yvonne','ethan'].includes(n.id)) g.onclick=(e)=>{e.stopPropagation();showPeek(n)};
+    // Navigation + visual state (3 states)
+    if(n.id==='grace'){
+      g.style.cursor='pointer';
+      g.onclick=(e)=>{e.stopPropagation();goTo(3)};
+    } else if(!n.center){
+      if(n.alert && !wasEverRead(n.id)){
+        // STATE 1 · Unread alert — pulsing glow, circle is clickable
+        g.style.cursor='pointer';
+        g.onclick=(e)=>{e.stopPropagation();zoomToNode(n);};
+        glow.setAttribute('opacity','0.22');
+        glow.setAttribute('r',n.r+14);
+      } else if(n.alert && isRead(n.id)){
+        // STATE 2 · Read within 12h — dimmed circle, chips are entry points
+        g.style.opacity='0.72';
+        g.style.cursor='default';
+        glow.setAttribute('opacity','0');
+      } else {
+        // STATE 3 · Non-alert or expired (>12h) — fully dimmed, ✓ badge
+        g.style.opacity='0.42';
+        g.style.cursor='default';
+        const cbx=n.x+n.r*0.72, cby=n.y-n.r*0.72;
+        const cdot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+        cdot.setAttribute('cx',cbx);cdot.setAttribute('cy',cby);
+        cdot.setAttribute('r','7');cdot.setAttribute('fill','rgba(74,222,128,0.75)');
+        cdot.setAttribute('stroke',currentTheme==='light'?'#FFFFFF':'#0E0E14');
+        cdot.setAttribute('stroke-width','1.5');
+        g.appendChild(cdot);
+        const ctxt=document.createElementNS('http://www.w3.org/2000/svg','text');
+        ctxt.setAttribute('x',cbx);ctxt.setAttribute('y',cby+1);
+        ctxt.setAttribute('text-anchor','middle');ctxt.setAttribute('dominant-baseline','middle');
+        ctxt.setAttribute('fill','white');ctxt.setAttribute('font-size','8');
+        ctxt.setAttribute('font-weight','700');ctxt.setAttribute('font-family','Inter,sans-serif');
+        ctxt.textContent='✓';g.appendChild(ctxt);
+      }
+    }
+
+    // ── Node float animation (non-center only) ──
+    if(!n.center){
+      const fp={eva:{dur:4.6,begin:0},wei:{dur:5.3,begin:1.15},
+                yvonne:{dur:5.9,begin:2.1},ethan:{dur:6.4,begin:3.2}};
+      const p=fp[n.id]||{dur:5,begin:0};
+      const fa=document.createElementNS('http://www.w3.org/2000/svg','animateTransform');
+      fa.setAttribute('attributeName','transform');fa.setAttribute('type','translate');
+      fa.setAttribute('values','0,0;0,-2.5;0,0');
+      fa.setAttribute('dur',p.dur+'s');fa.setAttribute('begin',p.begin+'s');
+      fa.setAttribute('repeatCount','indefinite');fa.setAttribute('calcMode','spline');
+      fa.setAttribute('keyTimes','0;0.5;1');
+      fa.setAttribute('keySplines','0.45 0 0.55 1;0.45 0 0.55 1');
+      g.appendChild(fa);
+    }
 
     svg.appendChild(g);
   });
 
+}
+
+// ── Zoom Transition ──
+let _zoomCtx=null;
+
+function _getNodePos(n){
+  const svg=document.getElementById('const-svg');
+  const phone=document.querySelector('.phone');
+  const sr=svg.getBoundingClientRect();
+  const pr=phone.getBoundingClientRect();
+  const vbW=390,vbH=480;
+  const scale=Math.min(sr.width/vbW,sr.height/vbH);
+  const ox=(sr.width-vbW*scale)/2;
+  const oy=(sr.height-vbH*scale)/2;
+  return{
+    x:(sr.left-pr.left)+ox+n.x*scale,
+    y:(sr.top -pr.top )+oy+n.y*scale,
+    r:n.r*scale
+  };
+}
+
+function zoomToNode(n){
+  const pos=_getNodePos(n);
+  const ph=document.querySelector('.phone');
+  const pw=ph.offsetWidth, phh=ph.offsetHeight;
+  const cx=(pos.x/pw*100).toFixed(2)+'%';
+  const cy=(pos.y/phh*100).toFixed(2)+'%';
+  const rSmall=pos.r+'px';
+
+  _zoomCtx={n,cx,cy};
+
+  const ov=document.getElementById('zoom-overlay');
+  ov.style.background=n.color;
+  ov.style.opacity='0';
+  ov.style.clipPath=`circle(${rSmall} at ${cx} ${cy})`;
+  ov.style.transition='none';
+  ov.style.pointerEvents='auto';
+
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{
+      ov.style.transition='clip-path 0.46s cubic-bezier(0.4,0,0.2,1), opacity 0.06s ease';
+      ov.style.opacity='0.92';
+      ov.style.clipPath=`circle(200% at ${cx} ${cy})`;
+    });
+  });
+
+  setTimeout(()=>{
+    markRead(n.id);
+    buildConstellation();
+    goTo(n.screen);
+    const scr=document.getElementById('s'+n.screen);
+    scr.classList.add('screen-entering');
+    scr.addEventListener('animationend',()=>scr.classList.remove('screen-entering'),{once:true});
+    ov.style.transition='opacity 0.22s ease';
+    ov.style.opacity='0';
+    setTimeout(()=>{ov.style.pointerEvents='none';},240);
+  },420);
+}
+
+function zoomBack(){
+  if(!_zoomCtx){goTo(0);return;}
+  const{n,cx,cy}=_zoomCtx;
+  const pos=_getNodePos(n);
+  const ov=document.getElementById('zoom-overlay');
+
+  ov.style.background=n.color;
+  ov.style.opacity='0.9';
+  ov.style.clipPath=`circle(200% at ${cx} ${cy})`;
+  ov.style.transition='none';
+  ov.style.pointerEvents='auto';
+
+  goTo(0);
+
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{
+      ov.style.transition='clip-path 0.46s cubic-bezier(0.4,0,0.2,1), opacity 0.18s ease 0.28s';
+      ov.style.clipPath=`circle(${pos.r}px at ${cx} ${cy})`;
+      ov.style.opacity='0';
+    });
+  });
+
+  setTimeout(()=>{
+    ov.style.pointerEvents='none';
+    _zoomCtx=null;
+  },520);
 }
 
 // ── Dual Lens ──
@@ -1004,8 +1189,15 @@ function setTheme(t){
   svg.innerHTML='';
   buildConstellation();
 }
+window.addEventListener('message',e=>{
+  if(!e.data||typeof e.data!=='object') return;
+  if(e.data.type==='setTheme') setTheme(e.data.theme);
+  if(e.data.type==='goTo') goTo(e.data.screen);
+});
 
-// Init
+// Reset read-state on every page load so nodes always start as unread
+Object.keys(localStorage).filter(k=>k.startsWith('tl_read_')).forEach(k=>localStorage.removeItem(k));
+
 buildConstellation();
 document.getElementById('lens-body').innerHTML = GRACE_HTML;
 </script>
