@@ -131,15 +131,34 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 /* ─────────────────────────────
    SCREEN 3 — Your Voice
    ───────────────────────────── */
-.voice-intro{padding:2px 20px 16px;flex-shrink:0}
-.voice-eyebrow{font-size:10px;color:rgba(255,255,255,0.22);letter-spacing:0.5px;
-  text-transform:uppercase;margin-bottom:10px}
-.voice-tag-row{display:flex;gap:6px;flex-wrap:wrap}
-.vtag{font-size:10.5px;padding:4px 11px;border-radius:8px;
-  background:rgba(255,195,100,0.07);color:rgba(255,195,100,0.55);
-  border:1px solid rgba(255,195,100,0.14)}
+/* ── VOICE INPUT ── */
+.voice-body{flex:1;display:flex;flex-direction:column;align-items:center;overflow-y:auto;padding:0 20px 16px}
+.voice-orb-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;padding:28px 0 22px;flex-shrink:0}
+.voice-rings{position:relative;width:120px;height:120px;display:flex;align-items:center;justify-content:center}
+.voice-ring{position:absolute;border-radius:50%;border:1px solid rgba(100,181,246,0.2)}
+.voice-ring-1{width:120px;height:120px;animation:vring 2.8s ease-in-out infinite}
+.voice-ring-2{width:90px;height:90px;animation:vring 2.8s ease-in-out infinite 0.5s}
+.voice-ring-3{width:65px;height:65px;animation:vring 2.8s ease-in-out infinite 1s}
+@keyframes vring{0%,100%{opacity:0.15;transform:scale(1)}50%{opacity:0.55;transform:scale(1.05)}}
+.voice-mic-orb{width:52px;height:52px;border-radius:50%;
+  background:rgba(100,181,246,0.1);border:1.5px solid rgba(100,181,246,0.4);
+  display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;z-index:1}
+.voice-state{font-size:12px;color:rgba(100,181,246,0.8);letter-spacing:0.5px;font-weight:600;display:flex;align-items:center;gap:5px}
+.vdots{display:flex;gap:3px;align-items:center}
+.vdot-anim{width:4px;height:4px;border-radius:50%;background:rgba(100,181,246,0.65);animation:vdot-p 1.2s ease-in-out infinite}
+.vdot-anim:nth-child(2){animation-delay:0.2s}
+.vdot-anim:nth-child(3){animation-delay:0.4s}
+@keyframes vdot-p{0%,80%,100%{transform:scale(0.5);opacity:0.25}40%{transform:scale(1);opacity:1}}
+.voice-transcript{font-size:13.5px;color:rgba(255,255,255,0.2);font-style:italic;text-align:center;min-height:20px;max-width:260px}
+.voice-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding-bottom:22px;flex-shrink:0}
+.vchip{font-size:11.5px;padding:6px 13px;border-radius:20px;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);
+  color:rgba(255,255,255,0.45);cursor:pointer;white-space:nowrap}
 
-.voice-scroll{flex:1;overflow-y:auto;padding:0 20px 24px}
+/* ── VOICE HISTORY ── */
+.voice-history{width:100%;padding-bottom:8px}
+.vh-eyebrow{font-size:10px;color:rgba(255,255,255,0.22);letter-spacing:0.6px;
+  text-transform:uppercase;margin-bottom:10px;padding-left:2px}
 .voice-item{display:flex;gap:12px;padding:13px 0;position:relative}
 .voice-item:not(:last-child)::after{content:'';position:absolute;left:17px;top:48px;
   width:1px;height:calc(100% - 24px);background:rgba(255,255,255,0.06)}
@@ -353,76 +372,69 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="screen-title">Your Voice</div>
     </div>
-    <div class="voice-intro">
-      <div class="voice-eyebrow">What you've shaped this month</div>
-      <div class="voice-tag-row">
-        <span class="vtag">9 preferences set</span>
-        <span class="vtag">3 things declined</span>
-        <span class="vtag">2 boundaries kept</span>
-      </div>
-    </div>
-    <div class="voice-scroll">
+    <div class="voice-body">
 
-      <div class="voice-item">
-        <div class="vdot set">🎯</div>
-        <div class="vbody">
-          <div class="vtype">Preference Set</div>
-          <div class="vtext">No calls before 9 AM — AI adjusted all morning reminders to fit your rhythm</div>
-          <div class="vfoot">
-            <span class="vbadge yours">your choice</span>
-            <span class="vtime">3 days ago</span>
+      <!-- Listening orb -->
+      <div class="voice-orb-wrap">
+        <div class="voice-rings">
+          <div class="voice-ring voice-ring-1"></div>
+          <div class="voice-ring voice-ring-2"></div>
+          <div class="voice-ring voice-ring-3"></div>
+          <div class="voice-mic-orb">🎙</div>
+        </div>
+        <div class="voice-state">Listening <div class="vdots"><span class="vdot-anim"></span><span class="vdot-anim"></span><span class="vdot-anim"></span></div></div>
+        <div class="voice-transcript">"Say something…"</div>
+      </div>
+
+      <!-- Quick command chips -->
+      <div class="voice-chips">
+        <span class="vchip">📨 Message Eva</span>
+        <span class="vchip">🏥 Health report</span>
+        <span class="vchip">📅 Today's schedule</span>
+        <span class="vchip">◈ Ask AI Butler</span>
+      </div>
+
+      <!-- Recent voice history -->
+      <div class="voice-history">
+        <div class="vh-eyebrow">Recent preferences</div>
+
+        <div class="voice-item">
+          <div class="vdot set">🎯</div>
+          <div class="vbody">
+            <div class="vtype">Preference Set</div>
+            <div class="vtext">No calls before 9 AM — AI adjusted all morning reminders to fit your rhythm</div>
+            <div class="vfoot">
+              <span class="vbadge yours">your choice</span>
+              <span class="vtime">3 days ago</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="voice-item">
-        <div class="vdot declined">✋</div>
-        <div class="vbody">
-          <div class="vtype">Declined · AI Adjusted</div>
-          <div class="vtext">Metformin reminder at 7 AM — you declined twice. AI moved it to noon without being asked.</div>
-          <div class="vfoot">
-            <span class="vbadge adjusted">AI adapted</span>
-            <span class="vtime">last week</span>
+        <div class="voice-item">
+          <div class="vdot declined">✋</div>
+          <div class="vbody">
+            <div class="vtype">Declined · AI Adjusted</div>
+            <div class="vtext">Metformin reminder at 7 AM — you declined twice. AI moved it to noon without being asked.</div>
+            <div class="vfoot">
+              <span class="vbadge adjusted">AI adapted</span>
+              <span class="vtime">last week</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="voice-item">
-        <div class="vdot set">🍽️</div>
-        <div class="vbody">
-          <div class="vtype">Added to Your World</div>
-          <div class="vtext">龍鳳茶樓 added to weekend favorites — Eva can now suggest it when planning outings</div>
-          <div class="vfoot">
-            <span class="vbadge yours">your choice</span>
-            <span class="vtime">5 days ago</span>
+        <div class="voice-item">
+          <div class="vdot boundary">🔒</div>
+          <div class="vbody">
+            <div class="vtype">Boundary Set</div>
+            <div class="vtext">Location not shared with Ethan — you set this. It's been respected every day since.</div>
+            <div class="vfoot">
+              <span class="vbadge boundary">boundary</span>
+              <span class="vtime">2 weeks ago</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="voice-item">
-        <div class="vdot boundary">🔒</div>
-        <div class="vbody">
-          <div class="vtype">Boundary Set</div>
-          <div class="vtext">Location not shared with Ethan — you set this. It's been respected every day since.</div>
-          <div class="vfoot">
-            <span class="vbadge boundary">boundary</span>
-            <span class="vtime">2 weeks ago</span>
-          </div>
-        </div>
       </div>
-
-      <div class="voice-item">
-        <div class="vdot set">💬</div>
-        <div class="vbody">
-          <div class="vtype">Preference Set</div>
-          <div class="vtext">Summarise family messages, don't forward them — AI has filtered 14 notifications this way</div>
-          <div class="vfoot">
-            <span class="vbadge kept">kept</span>
-            <span class="vtime">1 month ago</span>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 
