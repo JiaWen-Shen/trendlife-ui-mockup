@@ -44,14 +44,6 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
   padding:5px 12px;border-radius:20px;cursor:pointer;letter-spacing:0.2px}
 
 
-.tab-bar{height:82px;display:flex;align-items:flex-start;justify-content:space-around;
-  padding:10px 0 0;border-top:1px solid rgba(255,255,255,0.05);flex-shrink:0}
-.tab-item{display:flex;flex-direction:column;align-items:center;gap:4px;
-  cursor:pointer;padding:4px 14px;opacity:0.4;transition:opacity 0.2s}
-.tab-item.active{opacity:1}
-.tab-icon{font-size:20px}
-.tab-label{font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:0.4px}
-.tab-item.active .tab-label{color:#FFC364}
 
 /* ─────────────────────────────
    SCREEN 1 — Ripple / Event Chain
@@ -259,24 +251,6 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
     <div class="const-area">
       <svg class="const-svg" id="const-svg" viewBox="0 0 390 480" xmlns="http://www.w3.org/2000/svg"></svg>
       <div class="notif-pill" onclick="goTo(2)" style="background:rgba(255,195,100,0.12);border-color:rgba(255,195,100,0.28);color:rgba(255,195,100,0.9)">Your health report ›</div>
-    </div>
-    <div class="tab-bar">
-      <div class="tab-item active" onclick="goTo(0)">
-        <span class="tab-icon">✦</span>
-        <span class="tab-label">World</span>
-      </div>
-      <div class="tab-item" onclick="goTo(3)">
-        <span class="tab-icon">🗣</span>
-        <span class="tab-label">Voice</span>
-      </div>
-      <div class="tab-item" onclick="goTo(2)">
-        <span class="tab-icon">♥</span>
-        <span class="tab-label">Health</span>
-      </div>
-      <div class="tab-item" onclick="goTo(4)">
-        <span class="tab-icon">🌐</span>
-        <span class="tab-label">Together</span>
-      </div>
     </div>
   </div>
 
@@ -595,11 +569,6 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 function goTo(n){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('s'+n).classList.add('active');
-  // sync tab bar active state
-  document.querySelectorAll('#s0 .tab-item').forEach((t,i)=>{
-    const map=[0,3,2,4];
-    t.classList.toggle('active', map[i]===n || (n===1&&map[i]===0));
-  });
 }
 
 // ── Constellation ──

@@ -248,6 +248,56 @@ function buildConstellation(){
   const svg=document.getElementById('const-svg');
   const nm=Object.fromEntries(NODES.map(n=>[n.id,n]));
 
+  // ── Guardian Arc ──
+  const arcG=document.createElementNS('http://www.w3.org/2000/svg','g');
+  arcG.style.cursor='pointer';
+  arcG.onclick=()=>goTo(1);
+
+  const arcBg=document.createElementNS('http://www.w3.org/2000/svg','path');
+  arcBg.setAttribute('d','M 30 82 C 30 20 360 20 360 82 Z');
+  arcBg.setAttribute('fill','rgba(100,181,246,0.07)');
+  arcBg.setAttribute('stroke','none');
+  arcG.appendChild(arcBg);
+
+  const arcBorder=document.createElementNS('http://www.w3.org/2000/svg','path');
+  arcBorder.setAttribute('d','M 30 82 C 30 20 360 20 360 82');
+  arcBorder.setAttribute('fill','none');
+  arcBorder.setAttribute('stroke','rgba(100,181,246,0.65)');
+  arcBorder.setAttribute('stroke-width','1.5');
+  arcBorder.setAttribute('stroke-dasharray','3 5');
+  arcG.appendChild(arcBorder);
+
+  const arcBase=document.createElementNS('http://www.w3.org/2000/svg','line');
+  arcBase.setAttribute('x1','30'); arcBase.setAttribute('y1','82');
+  arcBase.setAttribute('x2','360'); arcBase.setAttribute('y2','82');
+  arcBase.setAttribute('stroke','rgba(100,181,246,0.3)');
+  arcBase.setAttribute('stroke-width','1');
+  arcG.appendChild(arcBase);
+
+  const arcSym=document.createElementNS('http://www.w3.org/2000/svg','text');
+  arcSym.setAttribute('x','195'); arcSym.setAttribute('y','38');
+  arcSym.setAttribute('text-anchor','middle'); arcSym.setAttribute('dominant-baseline','middle');
+  arcSym.setAttribute('fill','#64B5F6'); arcSym.setAttribute('font-size','16');
+  arcSym.setAttribute('font-family','Inter,sans-serif'); arcSym.setAttribute('font-weight','700');
+  arcSym.textContent='◈';
+  const arcSymAnim=document.createElementNS('http://www.w3.org/2000/svg','animate');
+  arcSymAnim.setAttribute('attributeName','opacity');
+  arcSymAnim.setAttribute('values','1;0.4;1');
+  arcSymAnim.setAttribute('dur','3.5s'); arcSymAnim.setAttribute('repeatCount','indefinite');
+  arcSym.appendChild(arcSymAnim);
+  arcG.appendChild(arcSym);
+
+  const arcLbl=document.createElementNS('http://www.w3.org/2000/svg','text');
+  arcLbl.setAttribute('x','195'); arcLbl.setAttribute('y','57');
+  arcLbl.setAttribute('text-anchor','middle');
+  arcLbl.setAttribute('fill','rgba(100,181,246,0.7)'); arcLbl.setAttribute('font-size','9');
+  arcLbl.setAttribute('font-family','Inter,sans-serif'); arcLbl.setAttribute('font-weight','600');
+  arcLbl.setAttribute('letter-spacing','1.2');
+  arcLbl.textContent='AI BUTLER · 3 ACTIONS TODAY ›';
+  arcG.appendChild(arcLbl);
+
+  svg.appendChild(arcG);
+
   EDGES.forEach(e=>{
     const a=nm[e.a],b=nm[e.b];
     const line=document.createElementNS('http://www.w3.org/2000/svg','line');
