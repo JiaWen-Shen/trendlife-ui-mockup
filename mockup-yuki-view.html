@@ -101,7 +101,8 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
   background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.08);
   cursor:pointer;transition:all 0.15s}
 .interest-card.selected{background:rgba(0,188,212,0.1);border-color:rgba(0,188,212,0.6)}
-.interest-emoji{font-size:22px;display:block;margin-bottom:8px}
+.interest-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;font-size:11px;font-weight:800;margin-bottom:8px;letter-spacing:0.3px;flex-shrink:0}
 .interest-name{font-size:12.5px;font-weight:600;color:rgba(255,255,255,0.6)}
 .interest-card.selected .interest-name{color:#00BCD4}
 
@@ -409,16 +410,24 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
     </div>
     <div class="const-header">
       <div class="greeting">TrendLife · My World</div>
-      <div class="greeting-name">Hi, Yuki 🎨</div>
+      <div class="greeting-name">Hi, Yuki</div>
     </div>
     <div class="const-area">
       <svg class="const-svg" id="const-svg" viewBox="0 0 390 420" preserveAspectRatio="xMidYMid meet"></svg>
     </div>
     <div class="tab-bar">
       <div class="tab-item active"><div class="tab-icon">✦</div><div class="tab-label">Home</div></div>
-      <div class="tab-item" onclick="launchCrewCreate()"><div class="tab-icon">🎨</div><div class="tab-label">Create</div></div>
-      <div class="tab-item"><div class="tab-icon">◈</div><div class="tab-label">AI</div></div>
-      <div class="tab-item"><div class="tab-icon">👤</div><div class="tab-label">Me</div></div>
+      <div class="tab-item" onclick="launchCrewCreate()">
+        <div class="tab-icon" style="font-size:22px;font-weight:900;color:rgba(255,255,255,0.5);line-height:1">+</div>
+        <div class="tab-label">Create</div>
+      </div>
+      <div class="tab-item" onclick="goTo(6)"><div class="tab-icon">◈</div><div class="tab-label">AI</div></div>
+      <div class="tab-item">
+        <div class="tab-icon" style="font-size:18px;line-height:1">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </div>
+        <div class="tab-label">Me</div>
+      </div>
     </div>
   </div>
 
@@ -432,7 +441,9 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
     </div>
     <div style="flex:1;display:flex;flex-direction:column;align-items:center;
                 justify-content:center;padding:28px 24px;overflow-y:auto">
-      <div class="cc-icon-wrap">🛡</div>
+      <div class="cc-icon-wrap" style="flex-direction:column;gap:0">
+        <span style="font-size:22px;font-weight:900;color:white;letter-spacing:-1px;line-height:1">CC</span>
+      </div>
       <div class="cc-title">歡迎來到 CrewCreate</div>
       <div class="cc-sub">我們需要驗證你的年齡，以提供適合的創作體驗並確保你的安全。我們絕不會分享你的個人資訊。</div>
       <div style="width:100%;margin-bottom:24px">
@@ -472,27 +483,27 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
       <div class="cc-section-sub">選擇你最感興趣的領域，我們會推薦適合你的創意靈感和趨勢</div>
       <div class="interest-grid">
         <div class="interest-card selected">
-          <span class="interest-emoji">👗</span>
+          <div class="interest-icon" style="background:rgba(255,45,135,0.18);color:#FF5BA7">FA</div>
           <div class="interest-name">Fashion &amp; Style</div>
         </div>
         <div class="interest-card">
-          <span class="interest-emoji">🎮</span>
+          <div class="interest-icon" style="background:rgba(96,165,250,0.18);color:#60A5FA">GA</div>
           <div class="interest-name">Gaming</div>
         </div>
         <div class="interest-card selected">
-          <span class="interest-emoji">🎨</span>
+          <div class="interest-icon" style="background:rgba(0,188,212,0.18);color:#00BCD4">AR</div>
           <div class="interest-name">Art &amp; Design</div>
         </div>
         <div class="interest-card">
-          <span class="interest-emoji">🎵</span>
+          <div class="interest-icon" style="background:rgba(192,132,252,0.18);color:#C084FC">MU</div>
           <div class="interest-name">Music &amp; Dance</div>
         </div>
         <div class="interest-card">
-          <span class="interest-emoji">🍳</span>
+          <div class="interest-icon" style="background:rgba(255,195,100,0.18);color:#FFC364">FO</div>
           <div class="interest-name">Food &amp; Cooking</div>
         </div>
         <div class="interest-card">
-          <span class="interest-emoji">⚽</span>
+          <div class="interest-icon" style="background:rgba(74,222,128,0.18);color:#4ADE80">SP</div>
           <div class="interest-name">Sports &amp; Fitness</div>
         </div>
       </div>
@@ -518,19 +529,19 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
       <div class="cc-section-sub">告訴我們你想怎麼成長，我們會幫你實現</div>
       <div class="goal-list">
         <div class="goal-item selected">
-          <span class="goal-icon">📸</span>
+          <span class="goal-icon" style="font-size:13px;font-weight:800;color:#FF5BA7">◎</span>
           <div class="goal-name">Jump on trends faster</div>
         </div>
         <div class="goal-item">
-          <span class="goal-icon">👥</span>
+          <span class="goal-icon" style="font-size:13px;font-weight:800">⊙</span>
           <div class="goal-name">Create content with friends</div>
         </div>
         <div class="goal-item">
-          <span class="goal-icon" style="font-size:16px">✦</span>
+          <span class="goal-icon" style="font-size:14px">✦</span>
           <div class="goal-name">Get creative ideas</div>
         </div>
         <div class="goal-item">
-          <span class="goal-icon">📈</span>
+          <span class="goal-icon" style="font-size:13px;font-weight:800">↗</span>
           <div class="goal-name">Grow my following</div>
         </div>
       </div>
@@ -674,10 +685,10 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
       </div>
     </div>
     <div class="butler-quick">
-      <div class="butler-chip" onclick="goTo(8)">🎨 打開創作工具</div>
-      <div class="butler-chip">📈 今日趨勢</div>
-      <div class="butler-chip">❤ 家人動態</div>
-      <div class="butler-chip">🛡 安全提醒</div>
+      <div class="butler-chip" onclick="goTo(8)">打開創作工具</div>
+      <div class="butler-chip">今日趨勢</div>
+      <div class="butler-chip">家人動態</div>
+      <div class="butler-chip">安全提醒</div>
     </div>
     <div class="butler-bar">
       <div class="butler-input">輸入訊息...</div>
@@ -694,7 +705,7 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
       <span class="status-icons">●●● Wi-Fi ▮</span>
     </div>
     <div class="joining-body">
-      <div class="joining-logo-wrap">🎨</div>
+      <div class="joining-logo-wrap"><span style="font-size:26px;font-weight:900;color:white;letter-spacing:-1.5px">CC</span></div>
       <div style="text-align:center">
         <div class="joining-title">進入 CrewCreate</div>
         <div class="joining-sub">正在載入你的創作空間…</div>
@@ -743,7 +754,7 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
     <div class="cc-ws-body">
       <!-- Hero create -->
       <div class="cc-ws-hero">
-        <div class="cc-ws-hero-icon">✦</div>
+        <div class="cc-ws-hero-icon" style="font-size:26px;font-weight:900;color:white;letter-spacing:-1px;font-family:'Inter',sans-serif">+</div>
         <div class="cc-ws-hero-text">
           <div class="cc-ws-hero-title">開始創作</div>
           <div class="cc-ws-hero-sub">上傳影片・圖片・短貼文</div>
@@ -753,7 +764,7 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
 
       <!-- Tabs -->
       <div class="cc-ws-tabs">
-        <button class="cc-ws-tab active">🔥 趨勢</button>
+        <button class="cc-ws-tab active">趨勢</button>
         <button class="cc-ws-tab">我的貼文</button>
         <button class="cc-ws-tab">Crew</button>
       </div>
@@ -762,27 +773,27 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
       <div class="cc-ws-section">今日熱門趨勢</div>
       <div class="trend-row">
         <div class="trend-card">
-          <div class="trend-thumb" style="background:linear-gradient(135deg,rgba(255,45,135,0.12),rgba(255,91,167,0.06))">👗</div>
+          <img src="https://picsum.photos/seed/yuki-fashion/264/180" alt="" style="width:100%;height:90px;object-fit:cover;display:block">
           <div class="trend-info">
             <div class="trend-tag">FASHION</div>
             <div class="trend-name">Y2K 復古格紋穿搭</div>
-            <div class="trend-heat">🔥 12.4K 影片</div>
+            <div class="trend-heat">↑ 12.4K 影片</div>
           </div>
         </div>
         <div class="trend-card">
-          <div class="trend-thumb" style="background:linear-gradient(135deg,rgba(0,188,212,0.12),rgba(0,188,212,0.04))">🎨</div>
+          <img src="https://picsum.photos/seed/yuki-art/264/180" alt="" style="width:100%;height:90px;object-fit:cover;display:block">
           <div class="trend-info">
             <div class="trend-tag">ART</div>
             <div class="trend-name">霓虹油畫塗鴉挑戰</div>
-            <div class="trend-heat">🔥 8.7K 影片</div>
+            <div class="trend-heat">↑ 8.7K 影片</div>
           </div>
         </div>
         <div class="trend-card">
-          <div class="trend-thumb" style="background:linear-gradient(135deg,rgba(251,146,60,0.1),rgba(251,146,60,0.04))">✨</div>
+          <img src="https://picsum.photos/seed/yuki-street/264/180" alt="" style="width:100%;height:90px;object-fit:cover;display:block">
           <div class="trend-info">
             <div class="trend-tag">STYLE</div>
             <div class="trend-name">Streetwear Mix &amp; Match</div>
-            <div class="trend-heat">🔥 6.1K 影片</div>
+            <div class="trend-heat">↑ 6.1K 影片</div>
           </div>
         </div>
       </div>
@@ -790,7 +801,9 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
       <!-- For you -->
       <div class="cc-ws-section" style="margin-top:14px">為你推薦</div>
       <div class="cc-ws-post">
-        <div class="cc-ws-post-av">👗</div>
+        <div class="cc-ws-post-av" style="overflow:hidden;padding:0">
+          <img src="https://picsum.photos/seed/post-fashion1/72/72" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
+        </div>
         <div class="cc-ws-post-text">
           <div class="cc-ws-post-name">Fashion Challenge #2024</div>
           <div class="cc-ws-post-sub">正在熱傳 · 適合你的風格</div>
@@ -798,7 +811,9 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
         <div class="cc-ws-post-badge">參加</div>
       </div>
       <div class="cc-ws-post">
-        <div class="cc-ws-post-av" style="background:rgba(74,222,128,0.08);border-color:rgba(74,222,128,0.2)">🎨</div>
+        <div class="cc-ws-post-av" style="overflow:hidden;padding:0;border-color:rgba(74,222,128,0.2)">
+          <img src="https://picsum.photos/seed/post-art2/72/72" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
+        </div>
         <div class="cc-ws-post-text">
           <div class="cc-ws-post-name">Art Collab with @mia</div>
           <div class="cc-ws-post-sub">你的 Crew 邀請你合作</div>
@@ -810,15 +825,19 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
 
     <!-- Bottom nav -->
     <div class="cc-ws-bottomnav">
-      <div class="cc-ws-tab-item">
-        <div class="cc-ws-tab-icon">🏠</div>
+      <div class="cc-ws-tab-item" onclick="goTo(0)">
+        <div class="cc-ws-tab-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.45"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        </div>
         <div class="cc-ws-tab-label">首頁</div>
       </div>
       <div class="cc-ws-tab-item active">
         <div class="cc-ws-create-btn">+</div>
       </div>
       <div class="cc-ws-tab-item">
-        <div class="cc-ws-tab-icon">👤</div>
+        <div class="cc-ws-tab-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(0,188,212,0.5)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </div>
         <div class="cc-ws-tab-label">我的</div>
       </div>
     </div>
@@ -850,13 +869,13 @@ function toggleConsent(){
 const NODES=[
   {id:'yuki',   label:'Yuki',    note:'You',           icon:'Yv', color:'#4ADE80', x:195, y:195, r:36, center:true},
   {id:'eva',    label:'Mom',     note:'Eva · Online',  icon:'E',  color:'#C084FC', x: 88, y:120, r:27,
-   status:['❤ Mom','◈ AI Butler']},
+   status:['◎ Mom','◈ AI Butler']},
   {id:'wei',    label:'Dad',     note:'Wei',           icon:'W',  color:'#60A5FA', x:302, y:120, r:25,
-   status:['👨 Dad']},
+   status:['◎ Dad']},
   {id:'grace',  label:'Grandma', note:'Grace',         icon:'✦',  color:'#FFC364', x: 80, y:308, r:22,
-   status:['✦ Grandma','❤ Healthy']},
+   status:['✦ Grandma','○ Healthy']},
   {id:'ethan',  label:'Ethan',   note:'Brother',       icon:'Et', color:'#FB923C', x:310, y:308, r:22,
-   status:['👦 Brother']},
+   status:['◎ Brother']},
 ];
 const EDGES=[
   {a:'yuki', b:'eva',   w:0.85},
