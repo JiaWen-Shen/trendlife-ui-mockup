@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>TrendLife — Yuki's View</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#111118;display:flex;justify-content:center;align-items:center;min-height:100vh;font-family:'Inter',sans-serif}
+.phone{width:390px;height:844px;background:#0E0E14;border-radius:44px;overflow:hidden;position:relative;
+  box-shadow:0 40px 100px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.07)}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;overflow:hidden}
+.screen.active{display:flex}
+
+/* ── Status bar ── */
+.status-bar{height:44px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;flex-shrink:0}
+.status-time{font-size:15px;font-weight:600;color:rgba(255,255,255,0.7)}
+.status-icons{font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px}
+
+/* ── Back btn ── */
+.back-btn{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:15px;color:rgba(255,255,255,0.45);flex-shrink:0}
+
+/* ─────────────────────────────
+   S0 · Constellation Home
+   ───────────────────────────── */
+.const-header{padding:2px 22px 10px;flex-shrink:0}
+.greeting{font-size:12px;color:rgba(255,255,255,0.3);letter-spacing:0.3px;margin-bottom:1px}
+.greeting-name{font-size:26px;font-weight:800;color:rgba(255,255,255,0.85);letter-spacing:-0.5px}
+.const-area{flex:1;position:relative;overflow:hidden}
+.const-svg{position:absolute;inset:0;width:100%;height:100%}
+.tab-bar{height:82px;display:flex;align-items:flex-start;justify-content:space-around;
+  padding:10px 0 0;border-top:1px solid rgba(255,255,255,0.05);flex-shrink:0}
+.tab-item{display:flex;flex-direction:column;align-items:center;gap:4px;
+  cursor:pointer;padding:4px 18px;opacity:0.4;transition:opacity 0.2s}
+.tab-item.active{opacity:1}
+.tab-icon{font-size:20px}
+.tab-label{font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:0.4px}
+.tab-item.active .tab-label{color:#4ADE80}
+
+/* ─────────────────────────────
+   CrewCreate shared styles
+   ───────────────────────────── */
+.cc-progress{display:flex;gap:6px;padding:16px 24px 0;flex-shrink:0}
+.cc-prog-seg{height:3px;flex:1;border-radius:2px;background:rgba(255,255,255,0.1)}
+.cc-prog-seg.done{background:#00BCD4}
+.cc-prog-seg.active{background:linear-gradient(90deg,#00BCD4,#29B6CF)}
+
+.cc-body{flex:1;overflow-y:auto;padding:24px}
+
+.cc-icon-wrap{width:72px;height:72px;border-radius:20px;
+  background:linear-gradient(135deg,#00BCD4,#00838F);
+  display:flex;align-items:center;justify-content:center;
+  font-size:32px;margin:0 auto 20px;flex-shrink:0}
+.cc-title{font-size:22px;font-weight:800;color:rgba(255,255,255,0.92);
+  text-align:center;margin-bottom:10px;letter-spacing:-0.3px}
+.cc-sub{font-size:13px;color:rgba(255,255,255,0.38);text-align:center;
+  line-height:1.7;margin-bottom:24px}
+
+/* Date fields */
+.cc-field-label{font-size:14px;font-weight:700;color:rgba(255,255,255,0.75);margin-bottom:12px}
+.cc-date-row{display:flex;gap:10px;margin-bottom:24px}
+.cc-date-field{flex:1;height:52px;border-radius:14px;
+  background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:600;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif}
+.cc-date-field.filled{color:rgba(255,255,255,0.75);border-color:rgba(0,188,212,0.35)}
+
+/* Buttons */
+.cc-btn{width:100%;height:54px;border-radius:16px;border:none;
+  background:linear-gradient(135deg,#00BCD4,#00ACC1);
+  color:white;font-size:16px;font-weight:700;letter-spacing:-0.1px;
+  cursor:pointer;font-family:'Inter',sans-serif;
+  display:flex;align-items:center;justify-content:center;gap:6px}
+.cc-btn:disabled,.cc-btn.inactive{opacity:0.38;cursor:default}
+.cc-btn-secondary{height:48px;padding:0 20px;border-radius:14px;
+  background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.65);font-size:14px;font-weight:600;
+  cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap}
+.cc-btn-row{display:flex;gap:10px;margin-top:4px}
+.cc-btn-row .cc-btn{flex:1}
+
+/* Info card */
+.cc-info-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);
+  border-radius:14px;padding:14px 16px;margin-top:16px}
+.cc-info-label{font-size:12px;font-weight:700;color:rgba(255,255,255,0.65);margin-bottom:5px}
+.cc-info-text{font-size:12px;color:rgba(255,255,255,0.33);line-height:1.7}
+
+/* ─────────────────────────────
+   S2 · Interests
+   ───────────────────────────── */
+.cc-section-title{font-size:20px;font-weight:800;color:rgba(255,255,255,0.92);
+  letter-spacing:-0.2px;margin-bottom:6px}
+.cc-section-sub{font-size:12.5px;color:rgba(255,255,255,0.38);line-height:1.6;margin-bottom:18px}
+.interest-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.interest-card{padding:14px 12px 12px;border-radius:14px;
+  background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.08);
+  cursor:pointer;transition:all 0.15s}
+.interest-card.selected{background:rgba(0,188,212,0.1);border-color:rgba(0,188,212,0.6)}
+.interest-emoji{font-size:22px;display:block;margin-bottom:8px}
+.interest-name{font-size:12.5px;font-weight:600;color:rgba(255,255,255,0.6)}
+.interest-card.selected .interest-name{color:#00BCD4}
+
+/* ─────────────────────────────
+   S3 · Goals
+   ───────────────────────────── */
+.goal-list{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.goal-item{display:flex;align-items:center;gap:14px;padding:15px 16px;border-radius:14px;
+  background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.08);
+  cursor:pointer;transition:all 0.15s}
+.goal-item.selected{background:rgba(255,45,135,0.1);border-color:rgba(255,45,135,0.55)}
+.goal-icon{font-size:18px;flex-shrink:0;width:24px;text-align:center}
+.goal-name{font-size:14px;font-weight:600;color:rgba(255,255,255,0.62)}
+.goal-item.selected .goal-name{color:#FF5BA7}
+
+/* ─────────────────────────────
+   S4 · Parental Consent
+   ───────────────────────────── */
+.tl-banner{background:rgba(74,222,128,0.07);border:1px solid rgba(74,222,128,0.22);
+  border-radius:14px;padding:12px 14px;display:flex;gap:10px;
+  align-items:flex-start;margin-bottom:14px}
+.tl-banner-logo{width:26px;height:26px;border-radius:7px;background:#D71920;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:900;color:white;flex-shrink:0}
+.tl-banner-text{font-size:12px;color:rgba(74,222,128,0.8);line-height:1.6}
+
+.cc-consent-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);
+  border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.cc-consent-title{font-size:12px;font-weight:700;color:rgba(255,255,255,0.65);margin-bottom:10px}
+.cc-consent-item{display:flex;align-items:flex-start;gap:9px;padding:4px 0;
+  font-size:12px;color:rgba(255,255,255,0.4);line-height:1.55}
+.cc-consent-check{color:#FF5BA7;font-weight:700;flex-shrink:0}
+.cc-checkbox-row{display:flex;align-items:flex-start;gap:12px;
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px;padding:14px;margin-bottom:18px;cursor:pointer;
+  transition:border-color 0.15s}
+.cc-checkbox-row.checked{border-color:rgba(0,188,212,0.4)}
+.cc-checkbox{width:20px;height:20px;border-radius:6px;
+  border:1.5px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.04);
+  flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;
+  font-size:11px;transition:all 0.15s}
+.cc-checkbox.checked{background:#00BCD4;border-color:#00BCD4;color:white}
+.cc-checkbox-text{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.65}
+.cc-checkbox-row.checked .cc-checkbox-text{color:rgba(255,255,255,0.6)}
+
+/* ─────────────────────────────
+   S5 · Waiting for Eva
+   ───────────────────────────── */
+.waiting-body{flex:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:28px 24px;gap:28px}
+.waiting-av-wrap{position:relative;display:flex;align-items:center;justify-content:center}
+.waiting-ring{position:absolute;border-radius:50%;border:1.5px solid rgba(192,132,252,0.3);
+  animation:wring 2.2s ease-out infinite}
+.waiting-ring:nth-child(1){width:112px;height:112px}
+.waiting-ring:nth-child(2){width:136px;height:136px;animation-delay:0.7s}
+@keyframes wring{0%{opacity:0.65;transform:scale(0.94)}100%{opacity:0;transform:scale(1.06)}}
+.waiting-av{width:80px;height:80px;border-radius:50%;position:relative;z-index:1;
+  background:rgba(192,132,252,0.12);border:2px solid rgba(192,132,252,0.35);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;font-weight:800;color:#C084FC;letter-spacing:-1px}
+.waiting-dots{display:flex;gap:7px;align-items:center}
+.waiting-dot{width:6px;height:6px;border-radius:50%;background:rgba(0,188,212,0.6);
+  animation:wdot 1.4s ease-in-out infinite}
+.waiting-dot:nth-child(2){animation-delay:0.2s}
+.waiting-dot:nth-child(3){animation-delay:0.4s}
+@keyframes wdot{0%,80%,100%{transform:scale(0.45);opacity:0.25}40%{transform:scale(1);opacity:1}}
+.waiting-title{font-size:20px;font-weight:800;color:rgba(255,255,255,0.9);
+  text-align:center;letter-spacing:-0.2px;margin-bottom:6px}
+.waiting-sub{font-size:13px;color:rgba(255,255,255,0.38);text-align:center;line-height:1.7}
+
+.tl-notify-card{width:100%;background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:16px}
+.tl-notify-row{display:flex;align-items:flex-start;gap:12px}
+.tl-notify-logo{width:36px;height:36px;border-radius:10px;background:#D71920;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:900;color:white;flex-shrink:0}
+.tl-notify-app{font-size:10.5px;color:rgba(255,255,255,0.28);letter-spacing:0.3px;margin-bottom:3px}
+.tl-notify-msg{font-size:13px;color:rgba(255,255,255,0.72);font-weight:500;line-height:1.5}
+.tl-notify-footer{display:flex;align-items:center;justify-content:space-between;
+  margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06)}
+.tl-notify-time{font-size:10.5px;color:rgba(255,255,255,0.22)}
+.tl-notify-badge{font-size:10px;font-weight:700;color:rgba(74,222,128,0.85);
+  background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.2);
+  padding:2px 9px;border-radius:20px}
+
+/* ─────────────────────────────
+   Light mode
+   ───────────────────────────── */
+body.light{background:#E8E9EF}
+body.light .phone{background:#FFFFFF;border-color:rgba(0,0,0,0.09);box-shadow:0 24px 64px rgba(0,0,0,0.13)}
+body.light .status-time{color:rgba(10,10,20,0.75)}
+body.light .status-icons{color:rgba(10,10,20,0.55)}
+body.light .back-btn{border-color:rgba(10,10,20,0.12);background:rgba(10,10,20,0.04);color:rgba(10,10,20,0.62)}
+body.light .greeting{color:rgba(10,10,20,0.55)}
+body.light .greeting-name{color:rgba(10,10,20,0.92)}
+body.light .tab-bar{border-top-color:rgba(10,10,20,0.06)}
+body.light .tab-label{color:rgba(10,10,20,0.52)}
+body.light .tab-item.active .tab-label{color:#16A34A}
+body.light .cc-title{color:rgba(10,10,20,0.92)}
+body.light .cc-sub{color:rgba(10,10,20,0.45)}
+body.light .cc-field-label{color:rgba(10,10,20,0.75)}
+body.light .cc-date-field{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.32)}
+body.light .cc-date-field.filled{color:rgba(10,10,20,0.8);border-color:rgba(0,188,212,0.4)}
+body.light .cc-info-card{background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.07)}
+body.light .cc-info-label{color:rgba(10,10,20,0.65)}
+body.light .cc-info-text{color:rgba(10,10,20,0.38)}
+body.light .cc-section-title{color:rgba(10,10,20,0.92)}
+body.light .cc-section-sub{color:rgba(10,10,20,0.45)}
+body.light .interest-card{background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.08)}
+body.light .interest-card.selected{background:rgba(0,188,212,0.07);border-color:rgba(0,150,170,0.55)}
+body.light .interest-name{color:rgba(10,10,20,0.62)}
+body.light .interest-card.selected .interest-name{color:#007B8A}
+body.light .goal-item{background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.08)}
+body.light .goal-item.selected{background:rgba(255,45,135,0.06);border-color:rgba(255,45,135,0.45)}
+body.light .goal-name{color:rgba(10,10,20,0.62)}
+body.light .goal-item.selected .goal-name{color:#CC0060}
+body.light .tl-banner{background:rgba(22,163,74,0.06);border-color:rgba(22,163,74,0.2)}
+body.light .tl-banner-text{color:rgba(22,163,74,0.85)}
+body.light .cc-consent-box{background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.07)}
+body.light .cc-consent-title{color:rgba(10,10,20,0.65)}
+body.light .cc-consent-item{color:rgba(10,10,20,0.45)}
+body.light .cc-checkbox-row{background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.08)}
+body.light .cc-checkbox-row.checked{border-color:rgba(0,150,170,0.4)}
+body.light .cc-checkbox{border-color:rgba(10,10,20,0.18);background:rgba(10,10,20,0.04)}
+body.light .cc-checkbox-text{color:rgba(10,10,20,0.45)}
+body.light .cc-checkbox-row.checked .cc-checkbox-text{color:rgba(10,10,20,0.65)}
+body.light .cc-btn-secondary{background:rgba(10,10,20,0.06);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.72)}
+body.light .waiting-title{color:rgba(10,10,20,0.9)}
+body.light .waiting-sub{color:rgba(10,10,20,0.45)}
+body.light .waiting-av{background:rgba(147,51,234,0.08);border-color:rgba(147,51,234,0.25);color:#7C3AED}
+body.light .tl-notify-card{background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.08)}
+body.light .tl-notify-app{color:rgba(10,10,20,0.35)}
+body.light .tl-notify-msg{color:rgba(10,10,20,0.72)}
+body.light .tl-notify-footer{border-top-color:rgba(10,10,20,0.06)}
+body.light .tl-notify-time{color:rgba(10,10,20,0.3)}
+
+/* ── Zoom overlay ── */
+#zoom-overlay{position:absolute;inset:0;z-index:90;pointer-events:none;opacity:0;
+  will-change:clip-path,opacity;border-radius:inherit}
+.screen-entering{animation:screenIn 0.3s cubic-bezier(0.2,0,0.2,1) both}
+@keyframes screenIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <!-- ══════════════════════════════
+       S0 · Yuki's Constellation Home
+       ══════════════════════════════ -->
+  <div class="screen active" id="s0">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="const-header">
+      <div class="greeting">TrendLife · My World</div>
+      <div class="greeting-name">Hi, Yuki 🎨</div>
+    </div>
+    <div class="const-area">
+      <svg class="const-svg" id="const-svg" viewBox="0 0 390 420" preserveAspectRatio="xMidYMid meet"></svg>
+    </div>
+    <div class="tab-bar">
+      <div class="tab-item active"><div class="tab-icon">✦</div><div class="tab-label">Home</div></div>
+      <div class="tab-item" onclick="launchCrewCreate()"><div class="tab-icon">🎨</div><div class="tab-label">Create</div></div>
+      <div class="tab-item"><div class="tab-icon">◈</div><div class="tab-label">AI</div></div>
+      <div class="tab-item"><div class="tab-icon">👤</div><div class="tab-label">Me</div></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       S1 · CrewCreate — Age Verification
+       ══════════════════════════════ -->
+  <div class="screen" id="s1">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;
+                justify-content:center;padding:28px 24px;overflow-y:auto">
+      <div class="cc-icon-wrap">🛡</div>
+      <div class="cc-title">歡迎來到 CrewCreate</div>
+      <div class="cc-sub">我們需要驗證你的年齡，以提供適合的創作體驗並確保你的安全。我們絕不會分享你的個人資訊。</div>
+      <div style="width:100%;margin-bottom:24px">
+        <div class="cc-field-label">你的出生日期是？</div>
+        <div class="cc-date-row">
+          <div class="cc-date-field">MM</div>
+          <div class="cc-date-field">DD</div>
+          <div class="cc-date-field filled" style="flex:1.4">2008</div>
+        </div>
+      </div>
+      <button class="cc-btn" onclick="goTo(2)">繼續 →</button>
+      <div class="cc-info-card" style="width:100%">
+        <div class="cc-info-label">為什麼我們需要這個資訊</div>
+        <div class="cc-info-text">年齡驗證幫助我們提供適當的內容，啟用家長控制，並遵守旨在保護你的隱私法規。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       S2 · CrewCreate — Interests
+       ══════════════════════════════ -->
+  <div class="screen" id="s2">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="cc-progress">
+      <div class="cc-prog-seg done"></div>
+      <div class="cc-prog-seg active"></div>
+      <div class="cc-prog-seg"></div>
+    </div>
+    <div class="cc-body">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+        <span style="font-size:18px;color:#FF5BA7">✦</span>
+        <div class="cc-section-title">你喜歡創作什麼內容？</div>
+      </div>
+      <div class="cc-section-sub">選擇你最感興趣的領域，我們會推薦適合你的創意靈感和趨勢</div>
+      <div class="interest-grid">
+        <div class="interest-card selected">
+          <span class="interest-emoji">👗</span>
+          <div class="interest-name">Fashion &amp; Style</div>
+        </div>
+        <div class="interest-card">
+          <span class="interest-emoji">🎮</span>
+          <div class="interest-name">Gaming</div>
+        </div>
+        <div class="interest-card selected">
+          <span class="interest-emoji">🎨</span>
+          <div class="interest-name">Art &amp; Design</div>
+        </div>
+        <div class="interest-card">
+          <span class="interest-emoji">🎵</span>
+          <div class="interest-name">Music &amp; Dance</div>
+        </div>
+        <div class="interest-card">
+          <span class="interest-emoji">🍳</span>
+          <div class="interest-name">Food &amp; Cooking</div>
+        </div>
+        <div class="interest-card">
+          <span class="interest-emoji">⚽</span>
+          <div class="interest-name">Sports &amp; Fitness</div>
+        </div>
+      </div>
+      <button class="cc-btn" onclick="goTo(3)">繼續 →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       S3 · CrewCreate — Goals
+       ══════════════════════════════ -->
+  <div class="screen" id="s3">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="cc-progress">
+      <div class="cc-prog-seg done"></div>
+      <div class="cc-prog-seg done"></div>
+      <div class="cc-prog-seg active"></div>
+    </div>
+    <div class="cc-body">
+      <div class="cc-section-title" style="margin-bottom:6px">你想達成什麼目標？</div>
+      <div class="cc-section-sub">告訴我們你想怎麼成長，我們會幫你實現</div>
+      <div class="goal-list">
+        <div class="goal-item selected">
+          <span class="goal-icon">📸</span>
+          <div class="goal-name">Jump on trends faster</div>
+        </div>
+        <div class="goal-item">
+          <span class="goal-icon">👥</span>
+          <div class="goal-name">Create content with friends</div>
+        </div>
+        <div class="goal-item">
+          <span class="goal-icon" style="font-size:16px">✦</span>
+          <div class="goal-name">Get creative ideas</div>
+        </div>
+        <div class="goal-item">
+          <span class="goal-icon">📈</span>
+          <div class="goal-name">Grow my following</div>
+        </div>
+      </div>
+      <div class="cc-btn-row">
+        <button class="cc-btn-secondary" onclick="goTo(2)">返回</button>
+        <button class="cc-btn" onclick="goTo(4)">繼續 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       S4 · CrewCreate — Parental Consent
+       ══════════════════════════════ -->
+  <div class="screen" id="s4">
+    <div class="status-bar">
+      <span class="status-time">9:42</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="cc-progress">
+      <div class="cc-prog-seg done"></div>
+      <div class="cc-prog-seg done"></div>
+      <div class="cc-prog-seg done"></div>
+    </div>
+    <div class="cc-body">
+      <div class="cc-section-title" style="margin-bottom:6px">最後一步...</div>
+      <div class="cc-section-sub" style="margin-bottom:14px">因為你未滿 18 歲，需要家長批准你的帳號。這能確保你在安全的環境中創作內容。</div>
+
+      <div class="tl-banner">
+        <div class="tl-banner-logo">T</div>
+        <div class="tl-banner-text">透過 <strong>TrendLife AI Butler</strong>，批准請求會直接傳送給媽媽 Eva，不需要傳統電子郵件</div>
+      </div>
+
+      <div class="cc-consent-box">
+        <div class="cc-consent-title">家長可以：</div>
+        <div class="cc-consent-item">
+          <span class="cc-consent-check">✓</span>查看內容創作活動摘要（不包含完整內容細節）
+        </div>
+        <div class="cc-consent-item">
+          <span class="cc-consent-check">✓</span>設定使用時間限制和內容過濾器
+        </div>
+        <div class="cc-consent-item">
+          <span class="cc-consent-check">✓</span>在偵測到不當內容時收到安全提醒
+        </div>
+      </div>
+
+      <div class="cc-checkbox-row checked" id="consent-row" onclick="toggleConsent()">
+        <div class="cc-checkbox checked" id="consent-box">✓</div>
+        <div class="cc-checkbox-text">我了解家長或監護人將透過 TrendLife 收到通知以批准我的帳號，並可以查看活動摘要</div>
+      </div>
+
+      <div class="cc-btn-row">
+        <button class="cc-btn-secondary" onclick="goTo(3)">返回</button>
+        <button class="cc-btn" id="start-btn" onclick="goTo(5)">開始創作 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       S5 · Waiting for Eva's Approval
+       ══════════════════════════════ -->
+  <div class="screen" id="s5">
+    <div class="status-bar">
+      <span class="status-time">9:42</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="waiting-body">
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+        <div style="font-size:11px;color:rgba(255,255,255,0.28);letter-spacing:0.6px;
+                    text-transform:uppercase">批准請求已傳送給</div>
+        <div class="waiting-av-wrap">
+          <div class="waiting-ring"></div>
+          <div class="waiting-ring"></div>
+          <div class="waiting-av">E</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:17px;font-weight:700;color:rgba(255,255,255,0.85)">媽媽 Eva</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.32);margin-top:3px">透過 TrendLife AI Butler</div>
+        </div>
+      </div>
+
+      <div class="waiting-dots">
+        <div class="waiting-dot"></div>
+        <div class="waiting-dot"></div>
+        <div class="waiting-dot"></div>
+      </div>
+
+      <div style="text-align:center">
+        <div class="waiting-title">等待批准中...</div>
+        <div class="waiting-sub">媽媽會在 TrendLife 上看到你的請求<br>通常幾分鐘內就會批准 ✦</div>
+      </div>
+
+      <div class="tl-notify-card">
+        <div class="tl-notify-row">
+          <div class="tl-notify-logo">T</div>
+          <div style="flex:1">
+            <div class="tl-notify-app">TrendLife · AI Butler</div>
+            <div class="tl-notify-msg">Yuki 想加入 CrewCreate 創作平台，需要你的批准</div>
+          </div>
+        </div>
+        <div class="tl-notify-footer">
+          <div class="tl-notify-time">剛剛傳送 · 已送達</div>
+          <div class="tl-notify-badge">✓ 已送達</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Zoom overlay -->
+  <div id="zoom-overlay"></div>
+
+</div>
+
+<script>
+// ── Navigation ──
+function goTo(n){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+}
+
+// ── Consent toggle ──
+function toggleConsent(){
+  const row=document.getElementById('consent-row');
+  const box=document.getElementById('consent-box');
+  const btn=document.getElementById('start-btn');
+  const on=box.classList.toggle('checked');
+  row.classList.toggle('checked',on);
+  btn.classList.toggle('inactive',!on);
+}
+
+// ── Constellation data — Yuki at center ──
+const NODES=[
+  {id:'yuki',   label:'Yuki',    note:'You',           icon:'Yv', color:'#4ADE80', x:195, y:195, r:36, center:true},
+  {id:'eva',    label:'Mom',     note:'Eva · Online',  icon:'E',  color:'#C084FC', x: 88, y:120, r:27,
+   status:['❤ Mom','◈ AI Butler']},
+  {id:'wei',    label:'Dad',     note:'Wei',           icon:'W',  color:'#60A5FA', x:302, y:120, r:25,
+   status:['👨 Dad']},
+  {id:'grace',  label:'Grandma', note:'Grace',         icon:'✦',  color:'#FFC364', x: 80, y:308, r:22,
+   status:['✦ Grandma','❤ Healthy']},
+  {id:'ethan',  label:'Ethan',   note:'Brother',       icon:'Et', color:'#FB923C', x:310, y:308, r:22,
+   status:['👦 Brother']},
+];
+const EDGES=[
+  {a:'yuki', b:'eva',   w:0.85},
+  {a:'yuki', b:'wei',   w:0.7},
+  {a:'yuki', b:'grace', w:0.55},
+  {a:'yuki', b:'ethan', w:0.65},
+  {a:'eva',  b:'wei',   w:0.5},
+];
+// CrewCreate discovery node (below Yuki)
+const CC={x:195, y:368, r:19, color:'#00BCD4'};
+
+let currentTheme='dark';
+
+function buildConstellation(){
+  const svg=document.getElementById('const-svg');
+  svg.innerHTML='';
+  const nm=Object.fromEntries(NODES.map(n=>[n.id,n]));
+
+  // ── AI Butler Arc ──
+  const arcG=document.createElementNS('http://www.w3.org/2000/svg','g');
+  const arcBg=document.createElementNS('http://www.w3.org/2000/svg','path');
+  arcBg.setAttribute('d','M 28 80 C 28 18 362 18 362 80 Z');
+  arcBg.setAttribute('fill','rgba(74,222,128,0.04)');
+  arcG.appendChild(arcBg);
+  const arcLine=document.createElementNS('http://www.w3.org/2000/svg','path');
+  arcLine.setAttribute('d','M 28 80 C 28 18 362 18 362 80');
+  arcLine.setAttribute('fill','none');
+  arcLine.setAttribute('stroke','rgba(74,222,128,0.5)');
+  arcLine.setAttribute('stroke-width','1.5');
+  arcLine.setAttribute('stroke-dasharray','3 5');
+  arcG.appendChild(arcLine);
+  const arcBase=document.createElementNS('http://www.w3.org/2000/svg','line');
+  arcBase.setAttribute('x1','28');arcBase.setAttribute('y1','80');
+  arcBase.setAttribute('x2','362');arcBase.setAttribute('y2','80');
+  arcBase.setAttribute('stroke','rgba(74,222,128,0.18)');arcBase.setAttribute('stroke-width','1');
+  arcG.appendChild(arcBase);
+  const arcSym=document.createElementNS('http://www.w3.org/2000/svg','text');
+  arcSym.setAttribute('x','195');arcSym.setAttribute('y','36');
+  arcSym.setAttribute('text-anchor','middle');arcSym.setAttribute('dominant-baseline','middle');
+  arcSym.setAttribute('fill','#4ADE80');arcSym.setAttribute('font-size','14');
+  arcSym.setAttribute('font-family','Inter,sans-serif');arcSym.setAttribute('font-weight','700');
+  arcSym.textContent='◈';
+  const anim1=document.createElementNS('http://www.w3.org/2000/svg','animate');
+  anim1.setAttribute('attributeName','opacity');anim1.setAttribute('values','1;0.35;1');
+  anim1.setAttribute('dur','3.5s');anim1.setAttribute('repeatCount','indefinite');
+  arcSym.appendChild(anim1);arcG.appendChild(arcSym);
+  const arcLbl=document.createElementNS('http://www.w3.org/2000/svg','text');
+  arcLbl.setAttribute('x','195');arcLbl.setAttribute('y','55');
+  arcLbl.setAttribute('text-anchor','middle');
+  arcLbl.setAttribute('fill','rgba(74,222,128,0.58)');arcLbl.setAttribute('font-size','9');
+  arcLbl.setAttribute('font-family','Inter,sans-serif');arcLbl.setAttribute('font-weight','600');
+  arcLbl.setAttribute('letter-spacing','1.2');
+  arcLbl.textContent='AI BUTLER · SAFE ONLINE ›';
+  arcG.appendChild(arcLbl);
+  svg.appendChild(arcG);
+
+  // ── Edges ──
+  EDGES.forEach(e=>{
+    const a=nm[e.a],b=nm[e.b];
+    const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+    line.setAttribute('x1',a.x);line.setAttribute('y1',a.y);
+    line.setAttribute('x2',b.x);line.setAttribute('y2',b.y);
+    line.setAttribute('stroke', currentTheme==='light'?`rgba(10,10,20,${e.w*0.08})`:`rgba(255,255,255,${e.w*0.08})`);
+    line.setAttribute('stroke-width',e.w*2.2);
+    svg.appendChild(line);
+  });
+
+  // ── CrewCreate discovery node ──
+  const ccG=document.createElementNS('http://www.w3.org/2000/svg','g');
+  ccG.style.cursor='pointer';
+  ccG.onclick=()=>launchCrewCreate();
+
+  // Dashed connector from Yuki to CC
+  const yukiBot=195+36+4; // y=235
+  const ccTop=CC.y-CC.r-4;  // y=345
+  const ccConn=document.createElementNS('http://www.w3.org/2000/svg','line');
+  ccConn.setAttribute('x1','195');ccConn.setAttribute('y1',yukiBot);
+  ccConn.setAttribute('x2','195');ccConn.setAttribute('y2',ccTop);
+  ccConn.setAttribute('stroke','rgba(0,188,212,0.3)');ccConn.setAttribute('stroke-width','1');
+  ccConn.setAttribute('stroke-dasharray','3 4');
+  svg.appendChild(ccConn);
+
+  // Pulsing glow
+  const ccGlow=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  ccGlow.setAttribute('cx',CC.x);ccGlow.setAttribute('cy',CC.y);ccGlow.setAttribute('r',CC.r+8);
+  ccGlow.setAttribute('fill','none');ccGlow.setAttribute('stroke','#00BCD4');
+  ccGlow.setAttribute('stroke-width','1.2');ccGlow.setAttribute('opacity','0.3');
+  const cg1=document.createElementNS('http://www.w3.org/2000/svg','animate');
+  cg1.setAttribute('attributeName','r');cg1.setAttribute('values',`${CC.r+5};${CC.r+18};${CC.r+5}`);
+  cg1.setAttribute('dur','2.6s');cg1.setAttribute('repeatCount','indefinite');
+  const cg2=document.createElementNS('http://www.w3.org/2000/svg','animate');
+  cg2.setAttribute('attributeName','opacity');cg2.setAttribute('values','0.38;0;0.38');
+  cg2.setAttribute('dur','2.6s');cg2.setAttribute('repeatCount','indefinite');
+  ccGlow.appendChild(cg1);ccGlow.appendChild(cg2);ccG.appendChild(ccGlow);
+
+  // Circle
+  const ccCirc=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  ccCirc.setAttribute('cx',CC.x);ccCirc.setAttribute('cy',CC.y);ccCirc.setAttribute('r',CC.r);
+  ccCirc.setAttribute('fill',currentTheme==='light'?'rgba(0,188,212,0.08)':'rgba(0,188,212,0.1)');
+  ccCirc.setAttribute('stroke','#00BCD4');ccCirc.setAttribute('stroke-width','1.5');
+  ccCirc.setAttribute('stroke-opacity','0.6');
+  ccG.appendChild(ccCirc);
+
+  // CC label inside circle
+  const ccTxt=document.createElementNS('http://www.w3.org/2000/svg','text');
+  ccTxt.setAttribute('x',CC.x);ccTxt.setAttribute('y',CC.y+1);
+  ccTxt.setAttribute('text-anchor','middle');ccTxt.setAttribute('dominant-baseline','middle');
+  ccTxt.setAttribute('fill','#00BCD4');ccTxt.setAttribute('font-size','11');
+  ccTxt.setAttribute('font-weight','800');ccTxt.setAttribute('font-family','Inter,sans-serif');
+  ccTxt.textContent='CC';ccG.appendChild(ccTxt);
+
+  // Name below
+  const ccName=document.createElementNS('http://www.w3.org/2000/svg','text');
+  ccName.setAttribute('x',CC.x);ccName.setAttribute('y',CC.y+CC.r+13);
+  ccName.setAttribute('text-anchor','middle');
+  ccName.setAttribute('fill',currentTheme==='light'?'rgba(0,130,150,0.8)':'rgba(0,188,212,0.72)');
+  ccName.setAttribute('font-size','9.5');ccName.setAttribute('font-family','Inter,sans-serif');
+  ccName.setAttribute('font-weight','700');ccName.setAttribute('letter-spacing','0.2');
+  ccName.textContent='CrewCreate';ccG.appendChild(ccName);
+
+  // "Join →" chip
+  const chipW=52, chipH=14, chipX=CC.x-chipW/2, chipY=CC.y+CC.r+26;
+  const ccChip=document.createElementNS('http://www.w3.org/2000/svg','rect');
+  ccChip.setAttribute('x',chipX);ccChip.setAttribute('y',chipY);
+  ccChip.setAttribute('width',chipW);ccChip.setAttribute('height',chipH);
+  ccChip.setAttribute('rx','7');
+  ccChip.setAttribute('fill','rgba(0,188,212,0.14)');
+  ccChip.setAttribute('stroke','rgba(0,188,212,0.48)');ccChip.setAttribute('stroke-width','0.8');
+  ccG.appendChild(ccChip);
+  const ccChipTxt=document.createElementNS('http://www.w3.org/2000/svg','text');
+  ccChipTxt.setAttribute('x',CC.x);ccChipTxt.setAttribute('y',chipY+chipH/2+0.5);
+  ccChipTxt.setAttribute('text-anchor','middle');ccChipTxt.setAttribute('dominant-baseline','middle');
+  ccChipTxt.setAttribute('fill','#00BCD4');ccChipTxt.setAttribute('font-size','7.5');
+  ccChipTxt.setAttribute('font-weight','700');ccChipTxt.setAttribute('font-family','Inter,sans-serif');
+  ccChipTxt.textContent='Join →';ccG.appendChild(ccChipTxt);
+  svg.appendChild(ccG);
+
+  // ── Family nodes ──
+  NODES.forEach(n=>{
+    const g=document.createElementNS('http://www.w3.org/2000/svg','g');
+
+    const glow=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    glow.setAttribute('cx',n.x);glow.setAttribute('cy',n.y);glow.setAttribute('r',n.r+10);
+    glow.setAttribute('fill','none');glow.setAttribute('stroke',n.color);
+    glow.setAttribute('stroke-width','1');glow.setAttribute('opacity','0.1');
+    g.appendChild(glow);
+
+    const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',n.x);c.setAttribute('cy',n.y);c.setAttribute('r',n.r);
+    c.setAttribute('fill',n.center?n.color+'1a': currentTheme==='light'?'rgba(10,10,20,0.04)':'rgba(255,255,255,0.04)');
+    c.setAttribute('stroke',n.color);
+    c.setAttribute('stroke-width',n.center?'2':'1');
+    c.setAttribute('stroke-opacity',n.center?'0.55':'0.25');
+    g.appendChild(c);
+
+    const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+    t.setAttribute('x',n.x);t.setAttribute('y',n.y+1);
+    t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','middle');
+    t.setAttribute('fill',n.color);t.setAttribute('opacity','0.75');
+    t.setAttribute('font-size',n.center?'14':n.id==='ethan'?'9':'12');
+    t.setAttribute('font-family','Inter,sans-serif');t.setAttribute('font-weight','700');
+    t.textContent=n.icon;g.appendChild(t);
+
+    const lbl=document.createElementNS('http://www.w3.org/2000/svg','text');
+    lbl.setAttribute('x',n.x);lbl.setAttribute('y',n.y+n.r+13);
+    lbl.setAttribute('text-anchor','middle');
+    lbl.setAttribute('fill', currentTheme==='light'?'rgba(10,10,20,0.5)':'rgba(255,255,255,0.45)');
+    lbl.setAttribute('font-size','10.5');lbl.setAttribute('font-family','Inter,sans-serif');
+    lbl.setAttribute('font-weight','500');lbl.textContent=n.label;g.appendChild(lbl);
+
+    const note=document.createElementNS('http://www.w3.org/2000/svg','text');
+    note.setAttribute('x',n.x);note.setAttribute('y',n.y+n.r+24);
+    note.setAttribute('text-anchor','middle');
+    note.setAttribute('fill', currentTheme==='light'?'rgba(10,10,20,0.22)':'rgba(255,255,255,0.18)');
+    note.setAttribute('font-size','8.5');note.setAttribute('font-family','Inter,sans-serif');
+    note.textContent=n.note;g.appendChild(note);
+
+    // Status chips (family members only)
+    if(!n.center && n.status){
+      const chipH=14, chipGap=4;
+      n.status.forEach((txt,i)=>{
+        const chipY=n.y+n.r+33+i*(chipH+chipGap);
+        const charW=[...txt].reduce((s,c)=>/\p{Emoji}/u.test(c)?s+9:s+5.4,0)+12;
+        const chipW=Math.min(Math.max(charW,30),86);
+        const chipG=document.createElementNS('http://www.w3.org/2000/svg','g');
+        const chipBg=document.createElementNS('http://www.w3.org/2000/svg','rect');
+        chipBg.setAttribute('x',n.x-chipW/2);chipBg.setAttribute('y',chipY);
+        chipBg.setAttribute('width',chipW);chipBg.setAttribute('height',chipH);
+        chipBg.setAttribute('rx','7');
+        chipBg.setAttribute('fill',n.color+(currentTheme==='light'?'18':'15'));
+        chipBg.setAttribute('stroke',n.color+(currentTheme==='light'?'44':'33'));
+        chipBg.setAttribute('stroke-width','0.7');chipG.appendChild(chipBg);
+        const chipTxt=document.createElementNS('http://www.w3.org/2000/svg','text');
+        chipTxt.setAttribute('x',n.x);chipTxt.setAttribute('y',chipY+chipH/2+0.5);
+        chipTxt.setAttribute('text-anchor','middle');chipTxt.setAttribute('dominant-baseline','middle');
+        chipTxt.setAttribute('fill',n.color);chipTxt.setAttribute('opacity',i===0?'0.85':'0.5');
+        chipTxt.setAttribute('font-size','7');chipTxt.setAttribute('font-family','Inter,sans-serif');
+        chipTxt.setAttribute('font-weight','700');chipTxt.textContent=txt;
+        chipG.appendChild(chipTxt);g.appendChild(chipG);
+      });
+    }
+
+    // Yuki center — "creator" badge pill
+    if(n.center){
+      const pill=document.createElementNS('http://www.w3.org/2000/svg','rect');
+      pill.setAttribute('x',n.x+n.r+4);pill.setAttribute('y',n.y-10);
+      pill.setAttribute('width','52');pill.setAttribute('height','18');
+      pill.setAttribute('rx','9');pill.setAttribute('fill','rgba(74,222,128,0.1)');
+      pill.setAttribute('stroke','rgba(74,222,128,0.22)');pill.setAttribute('stroke-width','0.8');
+      g.appendChild(pill);
+      const ptxt=document.createElementNS('http://www.w3.org/2000/svg','text');
+      ptxt.setAttribute('x',n.x+n.r+30);ptxt.setAttribute('y',n.y+1);
+      ptxt.setAttribute('text-anchor','middle');ptxt.setAttribute('dominant-baseline','middle');
+      ptxt.setAttribute('fill','rgba(74,222,128,0.65)');
+      ptxt.setAttribute('font-size','8');ptxt.setAttribute('font-family','Inter,sans-serif');
+      ptxt.setAttribute('font-weight','600');ptxt.textContent='creator';g.appendChild(ptxt);
+    } else {
+      g.style.opacity='0.7';
+      // Float animation
+      const fp={eva:{dur:4.8,begin:0},wei:{dur:5.5,begin:1.2},grace:{dur:6.1,begin:2.3},ethan:{dur:5.8,begin:3.1}};
+      const p=fp[n.id]||{dur:5,begin:0};
+      const fa=document.createElementNS('http://www.w3.org/2000/svg','animateTransform');
+      fa.setAttribute('attributeName','transform');fa.setAttribute('type','translate');
+      fa.setAttribute('values','0,0;0,-2.5;0,0');
+      fa.setAttribute('dur',p.dur+'s');fa.setAttribute('begin',p.begin+'s');
+      fa.setAttribute('repeatCount','indefinite');fa.setAttribute('calcMode','spline');
+      fa.setAttribute('keyTimes','0;0.5;1');
+      fa.setAttribute('keySplines','0.45 0 0.55 1;0.45 0 0.55 1');
+      g.appendChild(fa);
+    }
+    svg.appendChild(g);
+  });
+}
+
+// ── Zoom-launch from CC node into CrewCreate ──
+function launchCrewCreate(){
+  const svg=document.getElementById('const-svg');
+  const phone=document.querySelector('.phone');
+  const sr=svg.getBoundingClientRect();
+  const pr=phone.getBoundingClientRect();
+  const vbW=390, vbH=420;
+  const scale=Math.min(sr.width/vbW, sr.height/vbH);
+  const ox=(sr.width-vbW*scale)/2;
+  const oy=(sr.height-vbH*scale)/2;
+  const ax=(sr.left-pr.left)+ox+CC.x*scale;
+  const ay=(sr.top-pr.top)+oy+CC.y*scale;
+  const cx=(ax/phone.offsetWidth*100).toFixed(2)+'%';
+  const cy=(ay/phone.offsetHeight*100).toFixed(2)+'%';
+  const rSmall=(CC.r*scale)+'px';
+
+  const ov=document.getElementById('zoom-overlay');
+  ov.style.background='#00BCD4';
+  ov.style.opacity='0';
+  ov.style.clipPath=`circle(${rSmall} at ${cx} ${cy})`;
+  ov.style.transition='none';
+  ov.style.pointerEvents='auto';
+
+  requestAnimationFrame(()=>{requestAnimationFrame(()=>{
+    ov.style.transition='clip-path 0.46s cubic-bezier(0.4,0,0.2,1), opacity 0.06s ease';
+    ov.style.opacity='0.92';
+    ov.style.clipPath=`circle(200% at ${cx} ${cy})`;
+  });});
+
+  setTimeout(()=>{
+    goTo(1);
+    ov.style.transition='opacity 0.22s ease';
+    ov.style.opacity='0';
+    setTimeout(()=>{ov.style.pointerEvents='none';},240);
+  },420);
+}
+
+// ── Theme ──
+function setTheme(t){
+  currentTheme=t;
+  document.body.classList.toggle('light',t==='light');
+  document.getElementById('const-svg').innerHTML='';
+  buildConstellation();
+}
+window.addEventListener('message',e=>{
+  if(!e.data||typeof e.data!=='object') return;
+  if(e.data.type==='setTheme') setTheme(e.data.theme);
+  if(e.data.type==='goTo') goTo(e.data.screen);
+});
+
+buildConstellation();
+</script>
+</body>
+</html>

@@ -403,6 +403,9 @@
       <a class="nav-vtab nav-vtab-active" id="tab-btn-eva"
          onclick="switchView('eva');return false;" href="#"
          data-i18n="tab-eva">Eva's View</a>
+      <a class="nav-vtab" id="tab-btn-yuki"
+         onclick="switchView('yuki');return false;" href="#"
+         data-i18n="tab-yuki">Yuki's View</a>
     </nav>
     <div class="theme-toggle">
       <button class="theme-btn active" id="btn-dark"  onclick="setTheme('dark')">Dark</button>
@@ -876,6 +879,199 @@
 </div><!-- /view-eva -->
 
 
+<!-- ══════════════════════════════════════════════════
+     YUKI'S VIEW
+     ══════════════════════════════════════════════════ -->
+<div id="view-yuki" style="display:none">
+
+<section class="hero">
+  <div class="hero-left">
+
+    <div>
+      <div class="hero-kicker">
+        <span class="hero-kicker-dot"></span>
+        <span data-i18n="hero-yuki-kicker">Interactive Prototype</span>
+      </div>
+      <div class="hero-title" data-i18n-html="hero-yuki-title">
+        Yuki's<br><span class="accent">Constellation</span><br><span class="accent2" style="font-size:38px;">Creator's View</span>
+      </div>
+      <p class="hero-sub" data-i18n="hero-yuki-sub">
+        A young creator's personal world — Yuki at center, family around her, and a gateway to CrewCreate built right into the constellation. TrendLife bridges Yuki's creative ambitions with the family's trust layer, making parental involvement feel natural rather than restrictive.
+      </p>
+    </div>
+
+    <!-- Persona -->
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-av" style="background: linear-gradient(135deg, #16A34A, #065F46);">Yv</div>
+        <div>
+          <div class="persona-name" data-i18n="persona-yuki-name">Yuki Chen · 16 years old</div>
+          <div class="persona-meta" data-i18n="persona-yuki-meta">High school student · Taipei · Eva &amp; Wei's daughter, Ethan's sister</div>
+        </div>
+      </div>
+      <div class="persona-tags">
+        <span class="ptag" data-i18n="ptag-yuki-1">Teen creator</span>
+        <span class="ptag" data-i18n="ptag-yuki-2">Fashion &amp; Art</span>
+        <span class="ptag" data-i18n="ptag-yuki-3">Digitally native</span>
+        <span class="ptag" data-i18n="ptag-yuki-4">Values autonomy</span>
+        <span class="ptag" data-i18n="ptag-yuki-5">AI-friendly</span>
+      </div>
+    </div>
+
+    <!-- Design Principles -->
+    <div>
+      <div class="section-eyebrow" data-i18n="principles-yuki-eyebrow">Design Principles</div>
+      <div class="principles">
+        <div class="principle">
+          <div class="p-num">1</div>
+          <div class="p-text" data-i18n-html="p-yuki-1"><strong>Creator at center</strong> — Yuki sees herself as the main character of her own world. The constellation reflects her creative identity and her connections — not a view managed by parents.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">2</div>
+          <div class="p-text" data-i18n-html="p-yuki-2"><strong>CrewCreate as a constellation node</strong> — Third-party creative platforms appear as discoverable nodes below Yuki, connected by a dashed line. Tapping triggers a teal zoom launch transition into the app's onboarding flow.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">3</div>
+          <div class="p-text" data-i18n-html="p-yuki-3"><strong>Parental approval without friction</strong> — When an under-18 gate is hit, TrendLife routes the consent request directly to Eva via AI Butler — no email, no separate app. Yuki sees a waiting screen with real-time delivery confirmation.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">4</div>
+          <div class="p-text" data-i18n-html="p-yuki-4"><strong>Transparency, not surveillance</strong> — The consent screen tells Yuki exactly what parents can see (activity summary, time limits, safety alerts) and what they can't (full content detail). Trust is built through clarity.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">5</div>
+          <div class="p-text" data-i18n-html="p-yuki-5"><strong>AI Butler as Yuki's ally</strong> — The AI Companion Arc uses Yuki's color (green) and language. It's her helper, not a parental watchdog embedded in her view.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /hero-left -->
+
+  <!-- Right: sticky phone iframe -->
+  <div class="hero-right">
+    <div class="phone-shell">
+      <iframe
+        src="mockup-yuki-view.html"
+        id="yukiIframe"
+        title="Yuki's Creator View"
+        scrolling="no">
+      </iframe>
+    </div>
+    <div class="screen-nav" id="screenNavYuki">
+      <div class="snav-instruction" data-i18n="snav-hint">Click screens to interact, or use the list to jump to a specific screen.</div>
+      <button class="snav-item snav-active" onclick="yukiGoTo(0)"><span class="snav-icon">✦</span><span class="snav-name" data-i18n="sc-yuki-0-name">Constellation Home</span><span class="snav-num">0</span></button>
+      <button class="snav-item" onclick="yukiGoTo(1)"><span class="snav-icon">🛡</span><span class="snav-name" data-i18n="sc-yuki-1-name">CrewCreate — Age Verify</span><span class="snav-num">1</span></button>
+      <button class="snav-item" onclick="yukiGoTo(2)"><span class="snav-icon">🎨</span><span class="snav-name" data-i18n="sc-yuki-2-name">Interests</span><span class="snav-num">2</span></button>
+      <button class="snav-item" onclick="yukiGoTo(3)"><span class="snav-icon">🎯</span><span class="snav-name" data-i18n="sc-yuki-3-name">Goals</span><span class="snav-num">3</span></button>
+      <button class="snav-item" onclick="yukiGoTo(4)"><span class="snav-icon">👨‍👩‍👧</span><span class="snav-name" data-i18n="sc-yuki-4-name">Parental Consent</span><span class="snav-num">4</span></button>
+      <button class="snav-item" onclick="yukiGoTo(5)"><span class="snav-icon">⏳</span><span class="snav-name" data-i18n="sc-yuki-5-name">Waiting for Approval</span><span class="snav-num">5</span></button>
+    </div>
+  </div>
+
+</section>
+
+<!-- Screens Grid -->
+<section class="screens-section">
+  <div class="section-divider" style="margin-bottom:48px;"></div>
+  <div class="section-header">
+    <div class="section-title" data-i18n="screens-yuki-title">Screens &amp; Flows</div>
+    <div class="section-sub" data-i18n="screens-yuki-sub">6 screens · Yuki's creator constellation view</div>
+  </div>
+  <div class="screen-cards">
+
+    <div class="sc" onclick="yukiGoTo(0);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--green)">0</div>
+        <div class="sc-name" data-i18n="sc-yuki-0-name">Constellation Home</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-0-desc">Yuki at center with a "creator" badge. Family members orbit around her. AI Companion Arc spans the top in green. A CrewCreate node glows below with a pulsing teal ring and "Join →" chip — tapping launches the onboarding flow with a zoom transition.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-green">Creator</span>
+          <span class="sc-tag tag-blue">Constellation</span>
+          <span class="sc-tag" style="color:rgba(0,188,212,0.85);background:rgba(0,188,212,0.1);border-color:rgba(0,188,212,0.2)">CrewCreate</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="yukiGoTo(1);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:rgba(0,188,212,0.7)">1</div>
+        <div class="sc-name" data-i18n="sc-yuki-1-name">CrewCreate — Age Verify</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-1-desc">Welcome screen for CrewCreate. Teal shield icon, birth date fields (Yuki enters 2008), privacy notice. No progress bar — this is the gate step before onboarding begins. Teal CTA "繼續 →" proceeds to interest selection.</div>
+        <div class="sc-tags">
+          <span class="sc-tag" style="color:rgba(0,188,212,0.85);background:rgba(0,188,212,0.1);border-color:rgba(0,188,212,0.2)">CrewCreate</span>
+          <span class="sc-tag tag-blue">Age gate</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="yukiGoTo(2);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:rgba(0,188,212,0.7)">2</div>
+        <div class="sc-name" data-i18n="sc-yuki-2-name">Interests</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-2-desc">Step 1 of 3. "你喜歡創作什麼內容？" — 6 category cards in a 2-column grid: Fashion &amp; Style and Art &amp; Design pre-selected (teal highlight). Pink sparkle icon as section header. "繼續 →" advances to goals.</div>
+        <div class="sc-tags">
+          <span class="sc-tag" style="color:rgba(0,188,212,0.85);background:rgba(0,188,212,0.1);border-color:rgba(0,188,212,0.2)">CrewCreate</span>
+          <span class="sc-tag tag-amber">Onboarding 1/3</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="yukiGoTo(3);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:rgba(255,45,135,0.6)">3</div>
+        <div class="sc-name" data-i18n="sc-yuki-3-name">Goals</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-3-desc">Step 2 of 3. "你想達成什麼目標？" — 4 goal rows: Jump on trends faster (pre-selected, pink), Create content with friends, Get creative ideas, Grow my following. Back + Continue buttons at bottom.</div>
+        <div class="sc-tags">
+          <span class="sc-tag" style="color:rgba(255,45,135,0.85);background:rgba(255,45,135,0.1);border-color:rgba(255,45,135,0.2)">Goals</span>
+          <span class="sc-tag tag-amber">Onboarding 2/3</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="yukiGoTo(4);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--green)">4</div>
+        <div class="sc-name" data-i18n="sc-yuki-4-name">Parental Consent</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-4-desc">Step 3 of 3. Under-18 gate. TrendLife green banner explains the request goes via AI Butler directly to Mom Eva — no email. Parent permissions listed (summary only, time limits, safety alerts). Checkbox consent + "開始創作 →" sends the request.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-green">TrendLife integration</span>
+          <span class="sc-tag tag-amber">Onboarding 3/3</span>
+          <span class="sc-tag tag-blue">Parental consent</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="yukiGoTo(5);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--purple)">5</div>
+        <div class="sc-name" data-i18n="sc-yuki-5-name">Waiting for Approval</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-5-desc">Eva's purple avatar with pulsing rings. Animated loading dots. "等待批准中..." with reassuring copy. A TrendLife notification card at the bottom confirms delivery — "Yuki 想加入 CrewCreate，需要你的批准 →" with a green "已送達" badge.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-purple">Waiting</span>
+          <span class="sc-tag tag-green">Delivered</span>
+          <span class="sc-tag tag-blue">AI Butler</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</div><!-- /view-yuki -->
+
+
 <!-- ── FOOTER ── -->
 <footer class="footer">
   <div class="footer-left" data-i18n="footer-text">TrendLife AI Butler · Constellation Design Spec · March 2026</div>
@@ -1075,6 +1271,86 @@ const dict = {
   'screens-eva-title': { en: 'Screens & Flows',                        zh: '畫面與流程' },
   'screens-eva-sub':   { en: "10 screens · Eva's family constellation view", zh: '10 個畫面 · Eva 家庭星座圖視角' },
 
+  /* Yuki nav tab */
+  'tab-yuki': { en: "Yuki's View", zh: 'Yuki 創作視角' },
+
+  /* Yuki hero */
+  'hero-yuki-kicker': { en: 'Interactive Prototype', zh: '互動原型' },
+  'hero-yuki-title': {
+    en: "Yuki's<br><span class='accent'>Constellation</span><br><span class='accent2' style='font-size:38px;'>Creator's View</span>",
+    zh: "Yuki 的<br><span class='accent'>星座圖</span><br><span class='accent2' style='font-size:38px;'>創作者視角</span>"
+  },
+  'hero-yuki-sub': {
+    en: "A young creator's personal world — Yuki at center, family around her, and a gateway to CrewCreate built right into the constellation. TrendLife bridges Yuki's creative ambitions with the family's trust layer, making parental involvement feel natural rather than restrictive.",
+    zh: "年輕創作者的個人世界——Yuki 居中，家人環繞，CrewCreate 入口直接整合在星座圖中。TrendLife 將 Yuki 的創作抱負與家庭信任層連結，讓家長的參與感覺自然而非限制。"
+  },
+  'persona-yuki-name': { en: 'Yuki Chen · 16 years old', zh: '陳 Yuki · 16 歲' },
+  'persona-yuki-meta': { en: 'High school student · Taipei · Eva & Wei\'s daughter, Ethan\'s sister', zh: '高中生 · 台北 · Eva 與 Wei 的女兒，Ethan 的姐姐' },
+  'ptag-yuki-1': { en: 'Teen creator',      zh: '青少年創作者' },
+  'ptag-yuki-2': { en: 'Fashion & Art',     zh: '時尚與藝術' },
+  'ptag-yuki-3': { en: 'Digitally native',  zh: '數位原住民' },
+  'ptag-yuki-4': { en: 'Values autonomy',   zh: '重視自主' },
+  'ptag-yuki-5': { en: 'AI-friendly',       zh: 'AI 親近' },
+  'principles-yuki-eyebrow': { en: 'Design Principles', zh: '設計原則' },
+  'p-yuki-1': {
+    en: "<strong>Creator at center</strong> — Yuki sees herself as the main character of her own world. The constellation reflects her creative identity and her connections — not a view managed by parents.",
+    zh: "<strong>創作者居中</strong> — Yuki 將自己視為自己世界的主角。星座圖反映她的創作身份與連結，而非由家長管理的視角。"
+  },
+  'p-yuki-2': {
+    en: "<strong>CrewCreate as a constellation node</strong> — Third-party creative platforms appear as discoverable nodes below Yuki, connected by a dashed line. Tapping triggers a teal zoom launch transition into the app's onboarding flow.",
+    zh: "<strong>CrewCreate 作為星座節點</strong> — 第三方創作平台以可探索節點形式顯示在 Yuki 下方，以虛線相連。點擊觸發青藍色縮放過渡進入應用程式的引導流程。"
+  },
+  'p-yuki-3': {
+    en: "<strong>Parental approval without friction</strong> — When an under-18 gate is hit, TrendLife routes the consent request directly to Eva via AI Butler — no email, no separate app. Yuki sees a waiting screen with real-time delivery confirmation.",
+    zh: "<strong>無摩擦的家長批准</strong> — 當遇到未滿 18 歲的限制時，TrendLife 透過 AI Butler 直接將同意請求傳送給 Eva，無需電子郵件或另開應用程式。Yuki 看到等待畫面，並即時確認送達。"
+  },
+  'p-yuki-4': {
+    en: "<strong>Transparency, not surveillance</strong> — The consent screen tells Yuki exactly what parents can see (activity summary, time limits, safety alerts) and what they can't (full content detail). Trust is built through clarity.",
+    zh: "<strong>透明，而非監控</strong> — 同意畫面明確告訴 Yuki 家長能看到什麼（活動摘要、時間限制、安全提醒）以及不能看到什麼（完整內容細節）。信任透過清晰建立。"
+  },
+  'p-yuki-5': {
+    en: "<strong>AI Butler as Yuki's ally</strong> — The AI Companion Arc uses Yuki's color (green) and language. It's her helper, not a parental watchdog embedded in her view.",
+    zh: "<strong>AI Butler 作為 Yuki 的夥伴</strong> — AI 陪伴穹頂使用 Yuki 的顏色（綠色）和語言。它是她的助手，而非嵌入她視角中的家長監控工具。"
+  },
+
+  /* Yuki screen names */
+  'sc-yuki-0-name': { en: 'Constellation Home',        zh: '星座圖首頁' },
+  'sc-yuki-1-name': { en: 'CrewCreate — Age Verify',   zh: 'CrewCreate · 年齡驗證' },
+  'sc-yuki-2-name': { en: 'Interests',                 zh: '創作興趣' },
+  'sc-yuki-3-name': { en: 'Goals',                     zh: '創作目標' },
+  'sc-yuki-4-name': { en: 'Parental Consent',          zh: '家長批准' },
+  'sc-yuki-5-name': { en: 'Waiting for Approval',      zh: '等待批准中' },
+
+  /* Yuki screen descs */
+  'sc-yuki-0-desc': {
+    en: "Yuki at center with a 'creator' badge. Family members orbit around her. AI Companion Arc spans the top in green. A CrewCreate node glows below with a pulsing teal ring and 'Join →' chip — tapping launches the onboarding flow with a zoom transition.",
+    zh: "Yuki 居中，帶有「creator」徽章。家庭成員在其周圍運行。AI 陪伴穹頂以綠色橫跨頂部。CrewCreate 節點在下方發光，帶有跳動的青藍色圓環和「Join →」標籤——點擊以縮放過渡啟動引導流程。"
+  },
+  'sc-yuki-1-desc': {
+    en: "Welcome screen for CrewCreate. Teal shield icon, birth date fields (Yuki enters 2008), privacy notice. No progress bar — this is the gate step before onboarding begins. Teal CTA '繼續 →' proceeds to interest selection.",
+    zh: "CrewCreate 歡迎畫面。青藍色盾牌圖示、出生日期欄位（Yuki 輸入 2008）、隱私聲明。無進度條——這是引導開始前的驗證步驟。青藍色 CTA「繼續 →」進入興趣選擇。"
+  },
+  'sc-yuki-2-desc': {
+    en: "Step 1 of 3. 你喜歡創作什麼內容？ — 6 category cards in a 2-column grid: Fashion & Style and Art & Design pre-selected (teal highlight). Pink sparkle icon as section header. 繼續 → advances to goals.",
+    zh: "第 1 步，共 3 步。你喜歡創作什麼內容？——6 個類別卡片以 2 欄顯示：時尚穿搭與藝術設計預先選取（青藍色高亮）。粉紅色閃光圖示作為標題。「繼續 →」進入目標設定。"
+  },
+  'sc-yuki-3-desc': {
+    en: "Step 2 of 3. 你想達成什麼目標？ — 4 goal rows: Jump on trends faster (pre-selected, pink), Create content with friends, Get creative ideas, Grow my following. Back + Continue buttons at bottom.",
+    zh: "第 2 步，共 3 步。你想達成什麼目標？——4 個目標列：Jump on trends faster（預先選取，粉紅色）、與朋友創作內容、獲得創意靈感、增加追蹤者。底部有返回與繼續按鈕。"
+  },
+  'sc-yuki-4-desc': {
+    en: "Step 3 of 3. Under-18 gate. TrendLife green banner explains the request goes via AI Butler directly to Mom Eva — no email. Parent permissions listed (summary only, time limits, safety alerts). Checkbox consent + 開始創作 → sends the request.",
+    zh: "第 3 步，共 3 步。未滿 18 歲驗證。TrendLife 綠色橫幅說明請求透過 AI Butler 直接傳送給媽媽 Eva，無需電子郵件。列出家長權限（僅摘要、時間限制、安全提醒）。勾選同意 + 「開始創作 →」傳送請求。"
+  },
+  'sc-yuki-5-desc': {
+    en: "Eva's purple avatar with pulsing rings. Animated loading dots. 等待批准中... with reassuring copy. A TrendLife notification card at the bottom confirms delivery — 'Yuki 想加入 CrewCreate，需要你的批准 →' with a green 已送達 badge.",
+    zh: "Eva 的紫色頭像帶有跳動圓環。動態載入圓點。「等待批准中...」附有安撫說明。底部 TrendLife 通知卡確認送達——「Yuki 想加入 CrewCreate，需要你的批准 →」附有綠色「已送達」徽章。"
+  },
+
+  /* Yuki screens section */
+  'screens-yuki-title': { en: 'Screens & Flows',                         zh: '畫面與流程' },
+  'screens-yuki-sub':   { en: "6 screens · Yuki's creator constellation view", zh: '6 個畫面 · Yuki 創作者星座圖視角' },
+
   /* Footer */
   'footer-text':  { en: 'TrendLife AI Butler · Constellation Design Spec · March 2026', zh: 'TrendLife AI 管家 · 星座圖設計規格 · 2026 年 3 月' },
   'footer-brand': { en: 'TrendLife', zh: 'TrendLife' },
@@ -1110,8 +1386,10 @@ document.addEventListener('DOMContentLoaded', () => {
 function switchView(view) {
   document.getElementById('view-grace').style.display = view === 'grace' ? '' : 'none';
   document.getElementById('view-eva').style.display   = view === 'eva'   ? '' : 'none';
+  document.getElementById('view-yuki').style.display  = view === 'yuki'  ? '' : 'none';
   document.getElementById('tab-btn-grace').classList.toggle('nav-vtab-active', view === 'grace');
   document.getElementById('tab-btn-eva').classList.toggle('nav-vtab-active',   view === 'eva');
+  document.getElementById('tab-btn-yuki').classList.toggle('nav-vtab-active',  view === 'yuki');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -1133,6 +1411,15 @@ function evaGoTo(n) {
   });
 }
 
+/* ── YUKI SCREEN NAVIGATOR ── */
+function yukiGoTo(n) {
+  const iframe = document.getElementById('yukiIframe');
+  if (iframe?.contentWindow) iframe.contentWindow.postMessage({type:'goTo', screen:n}, '*');
+  document.querySelectorAll('#screenNavYuki .snav-item').forEach((b, i) => {
+    b.classList.toggle('snav-active', i === n);
+  });
+}
+
 /* ── SCROLL TO PHONE ── */
 function scrollToPhone(iframeId) {
   document.getElementById(iframeId)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1141,7 +1428,7 @@ function scrollToPhone(iframeId) {
 /* ── THEME SWITCHER ── */
 function setTheme(t) {
   document.body.classList.toggle('light', t === 'light');
-  ['graceIframe','evaIframe'].forEach(id => {
+  ['graceIframe','evaIframe','yukiIframe'].forEach(id => {
     const f = document.getElementById(id);
     if (f?.contentWindow) f.contentWindow.postMessage({type:'setTheme', theme:t}, '*');
   });
