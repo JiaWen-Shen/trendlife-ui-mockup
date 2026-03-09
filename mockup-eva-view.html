@@ -26,7 +26,7 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 .screen-title{font-size:17px;font-weight:700;color:rgba(255,255,255,0.8);letter-spacing:-0.2px}
 
 /* ─────────────────────────────
-   SCREEN 0 — Eva's Constellation
+   SCREEN 0 — Constellation
    ───────────────────────────── */
 .const-header{padding:2px 22px 10px;flex-shrink:0}
 .greeting{font-size:12px;color:rgba(255,255,255,0.3);letter-spacing:0.3px;margin-bottom:1px}
@@ -65,6 +65,9 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 .tag{font-size:10px;padding:2px 8px;border-radius:6px;font-weight:600}
 .tag.ok{color:#4ADE80;background:rgba(74,222,128,0.1)}
 .tag.watch{color:#FFB84D;background:rgba(255,184,77,0.1)}
+.tag.alert{color:#FF7875;background:rgba(255,120,120,0.12)}
+.tag.safe{color:#4ADE80;background:rgba(74,222,128,0.1)}
+.tag.blocked{color:#C084FC;background:rgba(192,132,252,0.1)}
 .actions{display:flex;flex-direction:column;gap:8px}
 .abtn{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);
   background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.6);font-size:13px;font-weight:500;
@@ -73,7 +76,58 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 .abtn.hi{background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.2);color:#C084FC}
 
 /* ─────────────────────────────
-   SCREEN 2 — Chat with Grace
+   SCREEN 2 — Family Events
+   ───────────────────────────── */
+.events-scroll{flex:1;overflow-y:auto;padding:4px 20px 24px}
+.event-item{display:flex;gap:12px;padding:13px 0;position:relative}
+.event-item:not(:last-child)::after{content:'';position:absolute;left:17px;top:46px;
+  width:1px;height:calc(100% - 22px);background:rgba(255,255,255,0.06)}
+.ev-dot{width:34px;height:34px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:15px;
+  border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03)}
+.ev-dot.health{background:rgba(255,120,120,0.08);border-color:rgba(255,120,120,0.22)}
+.ev-dot.shield{background:rgba(192,132,252,0.08);border-color:rgba(192,132,252,0.22)}
+.ev-dot.screen-time{background:rgba(255,184,77,0.08);border-color:rgba(255,184,77,0.22)}
+.ev-dot.login{background:rgba(100,181,246,0.08);border-color:rgba(100,181,246,0.22)}
+.ev-body{flex:1}
+.ev-who{font-size:10px;font-weight:600;color:rgba(255,255,255,0.3);
+  letter-spacing:0.5px;text-transform:uppercase;margin-bottom:3px}
+.ev-text{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.55}
+.ev-foot{display:flex;align-items:center;gap:8px;margin-top:5px}
+.ev-badge{font-size:10px;padding:2px 8px;border-radius:6px;font-weight:600}
+.ev-badge.red{color:#FF7875;background:rgba(255,120,120,0.1)}
+.ev-badge.purple{color:#C084FC;background:rgba(192,132,252,0.1)}
+.ev-badge.amber{color:#FFB84D;background:rgba(255,184,77,0.1)}
+.ev-badge.blue{color:#64B5F6;background:rgba(100,181,246,0.1)}
+.ev-time{font-size:10px;color:rgba(255,255,255,0.2)}
+
+/* ─────────────────────────────
+   SCREENS 4–6 — Protection Reports
+   ───────────────────────────── */
+.protect-body{flex:1;overflow-y:auto;padding:0 20px 24px}
+.protect-hero{text-align:center;padding:14px 0 20px}
+.protect-av{width:68px;height:68px;border-radius:50%;margin:0 auto 12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-weight:700;border:2px solid rgba(255,255,255,0.15);
+  background:rgba(255,255,255,0.04)}
+.protect-name{font-size:18px;font-weight:700;color:rgba(255,255,255,0.85);margin-bottom:3px}
+.protect-role{font-size:12px;color:rgba(255,255,255,0.28)}
+.protect-status-row{display:flex;gap:10px;justify-content:center;margin-top:14px}
+.pstat{text-align:center;padding:10px 16px;border-radius:12px;
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07)}
+.pstat-val{font-size:20px;font-weight:800;margin-bottom:2px}
+.pstat-lbl{font-size:9.5px;color:rgba(255,255,255,0.25);letter-spacing:0.3px}
+
+.protect-card{border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.protect-card.warn{background:rgba(192,132,252,0.06);border:1px solid rgba(192,132,252,0.16)}
+.protect-card.safe-card{background:rgba(74,222,128,0.05);border:1px solid rgba(74,222,128,0.14)}
+.protect-card.amber-card{background:rgba(255,184,77,0.06);border:1px solid rgba(255,184,77,0.16)}
+.pc-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:6px}
+.pc-text{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6}
+.pc-detail{font-size:11.5px;color:rgba(255,255,255,0.3);margin-top:5px;line-height:1.5}
+
+/* ─────────────────────────────
+   SCREEN 3 — Chat with Grace
    ───────────────────────────── */
 .chat-header-av{width:34px;height:34px;border-radius:50%;
   background:rgba(255,195,100,0.12);border:1px solid rgba(255,195,100,0.3);
@@ -134,11 +188,11 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
         <span class="tab-icon">✦</span>
         <span class="tab-label">Family</span>
       </div>
-      <div class="tab-item" onclick="goTo(1)">
-        <span class="tab-icon">♥</span>
-        <span class="tab-label">Health</span>
-      </div>
       <div class="tab-item" onclick="goTo(2)">
+        <span class="tab-icon">📋</span>
+        <span class="tab-label">Events</span>
+      </div>
+      <div class="tab-item" onclick="goTo(3)">
         <span class="tab-icon">💬</span>
         <span class="tab-label">Chat</span>
       </div>
@@ -161,9 +215,74 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
   </div>
 
   <!-- ══════════════════════════════
-       SCREEN 2 · Chat with Grace
+       SCREEN 2 · Family Events
        ══════════════════════════════ -->
   <div class="screen" id="s2">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="screen-header">
+      <div class="back-btn" onclick="goTo(0)">←</div>
+      <div class="screen-title">家庭事件摘要</div>
+    </div>
+    <div class="events-scroll">
+
+      <div class="event-item">
+        <div class="ev-dot health">🏥</div>
+        <div class="ev-body">
+          <div class="ev-who">Grace · Mom</div>
+          <div class="ev-text">血壓偏高 145/92，HbA1c 需觀察。AI Butler 建議心臟科追蹤。</div>
+          <div class="ev-foot">
+            <span class="ev-badge red">健康警示</span>
+            <span class="ev-time">Today 8:45 AM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="ev-dot shield">🛡️</div>
+        <div class="ev-body">
+          <div class="ev-who">Yuki · Granddaughter</div>
+          <div class="ev-text">AI Butler 攔截了一個釣魚連結 — 偽裝成銀行官網，已封鎖。</div>
+          <div class="ev-foot">
+            <span class="ev-badge purple">已阻擋</span>
+            <span class="ev-time">Yesterday 4:23 PM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="ev-dot screen-time">📱</div>
+        <div class="ev-body">
+          <div class="ev-who">Ethan · Son</div>
+          <div class="ev-text">凌晨後社群媒體使用 3.5 小時，超過設定的家庭守護上限。</div>
+          <div class="ev-foot">
+            <span class="ev-badge amber">使用警示</span>
+            <span class="ev-time">Yesterday 11:59 PM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="ev-dot login">🔒</div>
+        <div class="ev-body">
+          <div class="ev-who">Wei · Husband</div>
+          <div class="ev-text">新裝置登入已通過雙步驟驗證，工作設備安全確認。</div>
+          <div class="ev-foot">
+            <span class="ev-badge blue">已驗證</span>
+            <span class="ev-time">2 days ago</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SCREEN 3 · Chat with Grace
+       ══════════════════════════════ -->
+  <div class="screen" id="s3">
     <div class="status-bar">
       <span class="status-time">9:41</span>
       <span class="status-icons">●●● Wi-Fi ▮</span>
@@ -217,31 +336,185 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
     </div>
   </div>
 
+  <!-- ══════════════════════════════
+       SCREEN 4 · Yuki — Protection Report
+       ══════════════════════════════ -->
+  <div class="screen" id="s4">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="screen-header">
+      <div class="back-btn" onclick="goTo(0)">←</div>
+      <div class="screen-title">Protection Report</div>
+    </div>
+    <div class="protect-body">
+      <div class="protect-hero">
+        <div class="protect-av" style="color:#4ADE80;border-color:rgba(74,222,128,0.3)">Yv</div>
+        <div class="protect-name">Yuki</div>
+        <div class="protect-role">Granddaughter · Age 14</div>
+        <div class="protect-status-row">
+          <div class="pstat">
+            <div class="pstat-val" style="color:#C084FC">3</div>
+            <div class="pstat-lbl">Threats blocked</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-val" style="color:#4ADE80">0</div>
+            <div class="pstat-lbl">Incidents</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-val" style="color:#64B5F6">14</div>
+            <div class="pstat-lbl">Days protected</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="protect-card warn">
+        <div class="pc-eyebrow" style="color:#C084FC">◈ Latest Block · Yesterday 4:23 PM</div>
+        <div class="pc-text">AI Butler 攔截了一個釣魚連結，阻止載入前已封鎖。</div>
+        <div class="pc-detail">URL: bit.ly/secure-bank-verify → 偽裝成銀行官網 · 已列入封鎖清單</div>
+      </div>
+
+      <div class="protect-card safe-card">
+        <div class="pc-eyebrow" style="color:#4ADE80">✓ 本週安全摘要</div>
+        <div class="pc-text">瀏覽環境安全，社群媒體使用正常，無異常登入記錄。</div>
+      </div>
+
+      <div class="actions" style="margin-top:4px">
+        <button class="abtn hi">🔔  調整防護規則</button>
+        <button class="abtn">📊  查看完整封鎖紀錄</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SCREEN 5 · Wei — Protection Report
+       ══════════════════════════════ -->
+  <div class="screen" id="s5">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="screen-header">
+      <div class="back-btn" onclick="goTo(0)">←</div>
+      <div class="screen-title">Protection Report</div>
+    </div>
+    <div class="protect-body">
+      <div class="protect-hero">
+        <div class="protect-av" style="color:#60A5FA;border-color:rgba(96,165,250,0.3)">W</div>
+        <div class="protect-name">Wei</div>
+        <div class="protect-role">Husband · Work Device Active</div>
+        <div class="protect-status-row">
+          <div class="pstat">
+            <div class="pstat-val" style="color:#4ADE80">0</div>
+            <div class="pstat-lbl">Threats</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-val" style="color:#64B5F6">2</div>
+            <div class="pstat-lbl">Devices</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-val" style="color:#4ADE80">✓</div>
+            <div class="pstat-lbl">2FA Active</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="protect-card safe-card">
+        <div class="pc-eyebrow" style="color:#4ADE80">✓ 本週無威脅偵測</div>
+        <div class="pc-text">所有裝置存取正常，無可疑登入，工作帳號安全。</div>
+      </div>
+
+      <div class="protect-card" style="background:rgba(100,181,246,0.05);border:1px solid rgba(100,181,246,0.14)">
+        <div class="pc-eyebrow" style="color:#64B5F6">◈ 2 days ago · New Device</div>
+        <div class="pc-text">新裝置登入已通過雙步驟驗證，設備已加入信任清單。</div>
+        <div class="pc-detail">MacBook Pro · Taipei · 10:24 AM · 已確認</div>
+      </div>
+
+      <div class="actions" style="margin-top:4px">
+        <button class="abtn">📱  管理受信任裝置</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SCREEN 6 · Ethan — Protection Report
+       ══════════════════════════════ -->
+  <div class="screen" id="s6">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="screen-header">
+      <div class="back-btn" onclick="goTo(0)">←</div>
+      <div class="screen-title">Protection Report</div>
+    </div>
+    <div class="protect-body">
+      <div class="protect-hero">
+        <div class="protect-av" style="color:#FB923C;border-color:rgba(251,146,60,0.3)">Et</div>
+        <div class="protect-name">Ethan</div>
+        <div class="protect-role">Son · Age 11</div>
+        <div class="protect-status-row">
+          <div class="pstat">
+            <div class="pstat-val" style="color:#4ADE80">0</div>
+            <div class="pstat-lbl">Threats</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-val" style="color:#FFB84D">1</div>
+            <div class="pstat-lbl">Alerts</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-val" style="color:#64B5F6">2.4h</div>
+            <div class="pstat-lbl">Avg daily</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="protect-card amber-card">
+        <div class="pc-eyebrow" style="color:#FFB84D">⚠ Yesterday 11:59 PM · Screen Time</div>
+        <div class="pc-text">凌晨後社群媒體使用 3.5 小時，超過家庭守護設定上限。</div>
+        <div class="pc-detail">Instagram · TikTok · 11:42 PM – 3:18 AM</div>
+      </div>
+
+      <div class="protect-card safe-card">
+        <div class="pc-eyebrow" style="color:#4ADE80">✓ 網路安全狀態</div>
+        <div class="pc-text">無可疑連結或惡意內容，瀏覽環境正常。</div>
+      </div>
+
+      <div class="actions" style="margin-top:4px">
+        <button class="abtn hi">🌙  設定深夜使用限制</button>
+        <button class="abtn">📊  查看使用紀錄</button>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <script>
 function goTo(n){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('s'+n).classList.add('active');
+  // sync tab bar: tab 0→S0, tab 1→S2, tab 2→S3
+  const map=[0,2,3];
   document.querySelectorAll('#s0 .tab-item').forEach((t,i)=>{
-    t.classList.toggle('active', i===n);
+    t.classList.toggle('active', map[i]===n);
   });
 }
 
 // ── Eva's Constellation — Eva at center ──
 const NODES=[
-  {id:'eva',    label:'Eva',    note:'You',            icon:'E',  color:'#C084FC', x:195, y:225, r:36, center:true},
-  {id:'grace',  label:'Grace',  note:'Mom',            icon:'✦',  color:'#FFC364', x:195, y:105, r:28},
-  {id:'wei',    label:'Wei',    note:'Husband',        icon:'W',  color:'#60A5FA', x:322, y:215, r:22},
-  {id:'yvonne', label:'Yvonne', note:'Daughter',       icon:'Yv', color:'#4ADE80', x: 90, y:335, r:20},
-  {id:'ethan',  label:'Ethan',  note:'Son',            icon:'Et', color:'#FB923C', x:298, y:335, r:20},
+  {id:'eva',   label:'Eva',   note:'You',          icon:'E',  color:'#C084FC', x:195, y:225, r:36, center:true},
+  {id:'grace', label:'Grace', note:'Mom',           icon:'✦',  color:'#FFC364', x:195, y:105, r:28},
+  {id:'wei',   label:'Wei',   note:'Husband',       icon:'W',  color:'#60A5FA', x:322, y:215, r:22},
+  {id:'yuki',  label:'Yuki',  note:'Granddaughter', icon:'Yv', color:'#4ADE80', x: 90, y:335, r:20},
+  {id:'ethan', label:'Ethan', note:'Son',           icon:'Et', color:'#FB923C', x:298, y:335, r:20},
 ];
 
 const EDGES=[
-  {a:'eva',b:'grace',  w:0.9},
-  {a:'eva',b:'wei',    w:0.7},
-  {a:'eva',b:'yvonne', w:0.6},
-  {a:'eva',b:'ethan',  w:0.5},
+  {a:'eva',b:'grace', w:0.9},
+  {a:'eva',b:'wei',   w:0.7},
+  {a:'eva',b:'yuki',  w:0.6},
+  {a:'eva',b:'ethan', w:0.5},
 ];
 
 function buildConstellation(){
@@ -251,7 +524,7 @@ function buildConstellation(){
   // ── Guardian Arc ──
   const arcG=document.createElementNS('http://www.w3.org/2000/svg','g');
   arcG.style.cursor='pointer';
-  arcG.onclick=()=>goTo(1);
+  arcG.onclick=()=>goTo(2);
 
   const arcBg=document.createElementNS('http://www.w3.org/2000/svg','path');
   arcBg.setAttribute('d','M 30 82 C 30 20 360 20 360 82 Z');
@@ -298,6 +571,7 @@ function buildConstellation(){
 
   svg.appendChild(arcG);
 
+  // ── Edges ──
   EDGES.forEach(e=>{
     const a=nm[e.a],b=nm[e.b];
     const line=document.createElementNS('http://www.w3.org/2000/svg','line');
@@ -308,6 +582,7 @@ function buildConstellation(){
     svg.appendChild(line);
   });
 
+  // ── Nodes ──
   NODES.forEach(n=>{
     const g=document.createElementNS('http://www.w3.org/2000/svg','g');
     g.style.cursor='pointer';
@@ -330,7 +605,7 @@ function buildConstellation(){
     t.setAttribute('x',n.x);t.setAttribute('y',n.y+1);
     t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','middle');
     t.setAttribute('fill',n.color);t.setAttribute('opacity','0.75');
-    t.setAttribute('font-size',n.center?'16':n.id==='yvonne'||n.id==='ethan'?'10':'12');
+    t.setAttribute('font-size',n.center?'16':n.id==='yuki'||n.id==='ethan'?'10':'12');
     t.setAttribute('font-family','Inter,sans-serif');t.setAttribute('font-weight','700');
     t.textContent=n.icon;
     g.appendChild(t);
@@ -352,7 +627,7 @@ function buildConstellation(){
     note.textContent=n.note;
     g.appendChild(note);
 
-    // Grace gets a pulsing red alert ring + ⚠ badge
+    // Grace — red pulsing alert ring + ⚠ badge
     if(n.id==='grace'){
       const pulseRing=document.createElementNS('http://www.w3.org/2000/svg','circle');
       pulseRing.setAttribute('cx',n.x);pulseRing.setAttribute('cy',n.y);
@@ -381,7 +656,7 @@ function buildConstellation(){
       btxt.textContent='⚠';g.appendChild(btxt);
     }
 
-    // Eva (center) — "caregiver" badge
+    // Eva (center) — caregiver badge
     if(n.id==='eva'){
       const pill=document.createElementNS('http://www.w3.org/2000/svg','rect');
       pill.setAttribute('x',n.x+n.r+4);pill.setAttribute('y',n.y-10);
@@ -399,8 +674,27 @@ function buildConstellation(){
       g.appendChild(ptxt);
     }
 
+    // Yuki — shield badge (blocked threat)
+    if(n.id==='yuki'){
+      const bx=n.x+n.r*0.65, by=n.y-n.r*0.65;
+      const bdot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      bdot.setAttribute('cx',bx);bdot.setAttribute('cy',by);
+      bdot.setAttribute('r','7');bdot.setAttribute('fill','rgba(192,132,252,0.85)');
+      bdot.setAttribute('stroke','#0E0E14');bdot.setAttribute('stroke-width','1.5');
+      g.appendChild(bdot);
+      const btxt=document.createElementNS('http://www.w3.org/2000/svg','text');
+      btxt.setAttribute('x',bx);btxt.setAttribute('y',by+1);
+      btxt.setAttribute('text-anchor','middle');btxt.setAttribute('dominant-baseline','middle');
+      btxt.setAttribute('fill','white');btxt.setAttribute('font-size','8');
+      btxt.setAttribute('font-weight','700');btxt.setAttribute('font-family','Inter,sans-serif');
+      btxt.textContent='🛡';g.appendChild(btxt);
+    }
+
+    // Navigation
     if(n.id==='grace') g.onclick=()=>goTo(1);
-    if(n.id==='wei'||n.id==='yvonne'||n.id==='ethan') g.onclick=()=>goTo(2);
+    if(n.id==='wei')   g.onclick=()=>goTo(5);
+    if(n.id==='yuki')  g.onclick=()=>goTo(4);
+    if(n.id==='ethan') g.onclick=()=>goTo(6);
 
     svg.appendChild(g);
   });
