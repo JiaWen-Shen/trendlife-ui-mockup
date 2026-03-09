@@ -238,6 +238,157 @@ body.light .tl-notify-msg{color:rgba(10,10,20,0.72)}
 body.light .tl-notify-footer{border-top-color:rgba(10,10,20,0.06)}
 body.light .tl-notify-time{color:rgba(10,10,20,0.3)}
 
+/* ─────────────────────────────
+   S6 · AI Butler Chat
+   ───────────────────────────── */
+.butler-header{padding:12px 20px 10px;display:flex;align-items:center;gap:12px;
+  border-bottom:1px solid rgba(255,255,255,0.05);flex-shrink:0}
+.butler-av{width:40px;height:40px;border-radius:50%;
+  background:rgba(74,222,128,0.1);border:1.5px solid rgba(74,222,128,0.35);
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px;color:#4ADE80;font-weight:800;flex-shrink:0}
+.butler-title{font-size:15px;font-weight:700;color:rgba(255,255,255,0.88)}
+.butler-subtitle{font-size:11px;color:rgba(74,222,128,0.55);margin-top:1px;font-weight:500}
+.butler-msgs{flex:1;overflow-y:auto;padding:14px 18px;display:flex;flex-direction:column;gap:12px}
+.butler-msg{display:flex;gap:9px;align-items:flex-end}
+.butler-msg.me{flex-direction:row-reverse}
+.butler-bubble{max-width:78%;padding:10px 14px;border-radius:16px;
+  font-size:12.5px;line-height:1.55}
+.butler-bubble.ai{background:rgba(74,222,128,0.07);border:1px solid rgba(74,222,128,0.18);
+  border-bottom-left-radius:4px;color:rgba(255,255,255,0.75)}
+.butler-bubble.user{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);
+  border-bottom-right-radius:4px;color:rgba(255,255,255,0.82)}
+.butler-quick{padding:0 18px 14px;display:flex;flex-wrap:wrap;gap:7px;flex-shrink:0}
+.butler-chip{padding:8px 14px;border-radius:20px;
+  background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.22);
+  font-size:12px;font-weight:600;color:rgba(74,222,128,0.8);cursor:pointer;
+  white-space:nowrap;font-family:'Inter',sans-serif;transition:background 0.15s}
+.butler-chip:hover{background:rgba(74,222,128,0.12)}
+.butler-bar{display:flex;gap:10px;padding:12px 18px;border-top:1px solid rgba(255,255,255,0.05);flex-shrink:0}
+.butler-input{flex:1;height:42px;border-radius:12px;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);
+  font-size:13px;color:rgba(255,255,255,0.55);padding:0 14px;font-family:'Inter',sans-serif;
+  display:flex;align-items:center}
+.butler-send{width:42px;height:42px;border-radius:12px;flex-shrink:0;
+  background:rgba(74,222,128,0.15);border:1px solid rgba(74,222,128,0.3);
+  display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer}
+
+/* ─────────────────────────────
+   S7 · Joining CrewCreate
+   ───────────────────────────── */
+.joining-body{flex:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:36px 28px;gap:24px}
+.joining-logo-wrap{width:88px;height:88px;border-radius:26px;
+  background:linear-gradient(135deg,#00BCD4,#00838F);
+  display:flex;align-items:center;justify-content:center;font-size:38px;
+  box-shadow:0 12px 40px rgba(0,188,212,0.25)}
+.joining-title{font-size:22px;font-weight:800;color:rgba(255,255,255,0.9);
+  text-align:center;letter-spacing:-0.3px}
+.joining-sub{font-size:13px;color:rgba(255,255,255,0.38);text-align:center;line-height:1.7}
+.joining-prog-track{width:100%;height:4px;border-radius:2px;
+  background:rgba(255,255,255,0.08);overflow:hidden}
+.joining-prog-bar{height:100%;border-radius:2px;width:0;
+  background:linear-gradient(90deg,#00BCD4,#00E5FF)}
+.joining-steps{display:flex;flex-direction:column;gap:9px;width:100%}
+.joining-step{display:flex;align-items:center;gap:10px;
+  font-size:12.5px;color:rgba(255,255,255,0.35);transition:color 0.4s}
+.joining-step.done{color:rgba(0,188,212,0.75)}
+.joining-step-icon{width:18px;height:18px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;
+  font-size:9px;flex-shrink:0;transition:all 0.4s}
+.joining-step.done .joining-step-icon{background:#00BCD4;border-color:#00BCD4;color:white}
+
+/* ─────────────────────────────
+   S8 · CrewCreate Workspace
+   ───────────────────────────── */
+.cc-ws-header{padding:12px 20px 10px;display:flex;align-items:center;
+  justify-content:space-between;border-bottom:1px solid rgba(0,188,212,0.1);flex-shrink:0}
+.cc-ws-logo{font-size:17px;font-weight:900;color:#00BCD4;letter-spacing:-0.3px}
+.cc-ws-badge{font-size:10px;font-weight:700;background:rgba(255,45,135,0.15);
+  border:1px solid rgba(255,45,135,0.3);color:#FF5BA7;padding:3px 9px;border-radius:20px}
+.cc-ws-body{flex:1;overflow-y:auto}
+.cc-ws-hero{margin:14px 16px;padding:18px 20px;border-radius:18px;cursor:pointer;
+  background:linear-gradient(135deg,rgba(0,188,212,0.12),rgba(255,45,135,0.06));
+  border:1px solid rgba(0,188,212,0.2);display:flex;align-items:center;gap:14px}
+.cc-ws-hero-icon{width:52px;height:52px;border-radius:16px;flex-shrink:0;
+  background:linear-gradient(135deg,#00BCD4,#FF2D87);
+  display:flex;align-items:center;justify-content:center;font-size:22px}
+.cc-ws-hero-text{flex:1}
+.cc-ws-hero-title{font-size:15px;font-weight:800;color:rgba(255,255,255,0.9);margin-bottom:3px}
+.cc-ws-hero-sub{font-size:12px;color:rgba(255,255,255,0.38);line-height:1.4}
+.cc-ws-section{padding:6px 16px 8px;font-size:11px;font-weight:700;
+  color:rgba(255,255,255,0.28);letter-spacing:1px;text-transform:uppercase}
+.cc-ws-tabs{display:flex;padding:0 16px;gap:6px;margin-bottom:12px}
+.cc-ws-tab{padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600;
+  border:1.5px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.38);
+  background:transparent;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s}
+.cc-ws-tab.active{background:rgba(0,188,212,0.1);border-color:rgba(0,188,212,0.4);color:#00BCD4}
+.trend-row{display:flex;gap:10px;padding:0 16px 4px;overflow-x:auto;scrollbar-width:none}
+.trend-row::-webkit-scrollbar{display:none}
+.trend-card{flex-shrink:0;width:132px;border-radius:16px;overflow:hidden;
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);cursor:pointer}
+.trend-thumb{width:100%;height:90px;display:flex;align-items:center;
+  justify-content:center;font-size:34px;background:rgba(255,255,255,0.02)}
+.trend-info{padding:8px 10px 10px}
+.trend-tag{font-size:9.5px;font-weight:700;color:#FF5BA7;letter-spacing:0.2px;margin-bottom:3px}
+.trend-name{font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);line-height:1.35}
+.trend-heat{font-size:9.5px;color:rgba(255,255,255,0.28);margin-top:4px}
+.cc-ws-post{margin:0 16px 10px;padding:14px;border-radius:14px;
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);
+  display:flex;gap:12px;align-items:center}
+.cc-ws-post-av{width:36px;height:36px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+  background:rgba(255,45,135,0.1);border:1.5px solid rgba(255,45,135,0.25)}
+.cc-ws-post-text{flex:1}
+.cc-ws-post-name{font-size:12px;font-weight:700;color:rgba(255,255,255,0.7)}
+.cc-ws-post-sub{font-size:11.5px;color:rgba(255,255,255,0.32);margin-top:2px}
+.cc-ws-post-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:12px;
+  background:rgba(0,188,212,0.1);border:1px solid rgba(0,188,212,0.25);color:#00BCD4}
+.cc-ws-bottomnav{height:72px;border-top:1px solid rgba(0,188,212,0.1);
+  display:flex;align-items:flex-start;justify-content:space-around;
+  padding:10px 0 0;flex-shrink:0}
+.cc-ws-tab-item{display:flex;flex-direction:column;align-items:center;gap:4px;
+  cursor:pointer;padding:2px 16px;opacity:0.38}
+.cc-ws-tab-item.active{opacity:1}
+.cc-ws-tab-icon{font-size:19px}
+.cc-ws-tab-label{font-size:9.5px;color:rgba(0,188,212,0.7);letter-spacing:0.3px;font-weight:600}
+.cc-ws-create-btn{width:48px;height:48px;border-radius:16px;margin-top:-6px;
+  background:linear-gradient(135deg,#00BCD4,#00ACC1);
+  display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,188,212,0.35)}
+
+/* Light mode — new screens */
+body.light .butler-bubble.ai{background:rgba(22,163,74,0.06);border-color:rgba(22,163,74,0.18);color:rgba(10,10,20,0.72)}
+body.light .butler-bubble.user{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.82)}
+body.light .butler-title{color:rgba(10,10,20,0.88)}
+body.light .butler-subtitle{color:rgba(22,163,74,0.65)}
+body.light .butler-chip{background:rgba(22,163,74,0.06);border-color:rgba(22,163,74,0.22);color:rgba(22,163,74,0.85)}
+body.light .butler-input{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.45)}
+body.light .butler-send{background:rgba(22,163,74,0.1);border-color:rgba(22,163,74,0.25)}
+body.light .butler-header{border-bottom-color:rgba(10,10,20,0.06)}
+body.light .butler-bar{border-top-color:rgba(10,10,20,0.06)}
+body.light .joining-title{color:rgba(10,10,20,0.9)}
+body.light .joining-sub{color:rgba(10,10,20,0.45)}
+body.light .joining-prog-track{background:rgba(10,10,20,0.08)}
+body.light .joining-step{color:rgba(10,10,20,0.38)}
+body.light .joining-step-icon{border-color:rgba(10,10,20,0.12)}
+body.light .cc-ws-logo{color:#007B8A}
+body.light .cc-ws-hero{background:linear-gradient(135deg,rgba(0,150,170,0.08),rgba(255,45,135,0.04));border-color:rgba(0,150,170,0.2)}
+body.light .cc-ws-hero-title{color:rgba(10,10,20,0.9)}
+body.light .cc-ws-hero-sub{color:rgba(10,10,20,0.4)}
+body.light .cc-ws-section{color:rgba(10,10,20,0.3)}
+body.light .cc-ws-tab{border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.4)}
+body.light .cc-ws-tab.active{background:rgba(0,150,170,0.08);border-color:rgba(0,150,170,0.4);color:#007B8A}
+body.light .trend-card{background:rgba(10,10,20,0.03);border-color:rgba(10,10,20,0.07)}
+body.light .trend-thumb{background:rgba(10,10,20,0.02)}
+body.light .trend-name{color:rgba(10,10,20,0.72)}
+body.light .trend-heat{color:rgba(10,10,20,0.3)}
+body.light .cc-ws-post{background:rgba(10,10,20,0.03);border-color:rgba(10,10,20,0.07)}
+body.light .cc-ws-post-name{color:rgba(10,10,20,0.72)}
+body.light .cc-ws-post-sub{color:rgba(10,10,20,0.38)}
+body.light .cc-ws-bottomnav{border-top-color:rgba(0,150,170,0.12)}
+body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
+
 /* ── Zoom overlay ── */
 #zoom-overlay{position:absolute;inset:0;z-index:90;pointer-events:none;opacity:0;
   will-change:clip-path,opacity;border-radius:inherit}
@@ -489,6 +640,190 @@ body.light .tl-notify-time{color:rgba(10,10,20,0.3)}
     </div>
   </div>
 
+  <!-- ══════════════════════════════
+       S6 · AI Butler Chat
+       ══════════════════════════════ -->
+  <div class="screen" id="s6">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="butler-header">
+      <div class="back-btn" onclick="goTo(0)">←</div>
+      <div class="butler-av">◈</div>
+      <div>
+        <div class="butler-title">AI Butler</div>
+        <div class="butler-subtitle">● 線上 · 隨時幫你</div>
+      </div>
+    </div>
+    <div class="butler-msgs">
+      <div class="butler-msg">
+        <div class="butler-av" style="width:30px;height:30px;font-size:13px">◈</div>
+        <div class="butler-bubble ai">嗨 Yuki！我是你的 AI Butler。今天想做什麼創作？🎨</div>
+      </div>
+      <div class="butler-msg">
+        <div class="butler-av" style="width:30px;height:30px;font-size:13px">◈</div>
+        <div class="butler-bubble ai">你之前選了 <strong style="color:#00BCD4">Fashion & Style</strong> 和 <strong style="color:#FF5BA7">Art & Design</strong>，我找到 3 個今天很熱的趨勢！</div>
+      </div>
+      <div class="butler-msg me">
+        <div class="butler-bubble user">幫我看一下媽媽最近忙不忙 😅</div>
+      </div>
+      <div class="butler-msg">
+        <div class="butler-av" style="width:30px;height:30px;font-size:13px">◈</div>
+        <div class="butler-bubble ai">媽媽 Eva 今天下午有會議，但 6 點後應該有空。要我幫你安排提醒她幫你確認 CrewCreate 嗎？✦</div>
+      </div>
+    </div>
+    <div class="butler-quick">
+      <div class="butler-chip" onclick="goTo(8)">🎨 打開創作工具</div>
+      <div class="butler-chip">📈 今日趨勢</div>
+      <div class="butler-chip">❤ 家人動態</div>
+      <div class="butler-chip">🛡 安全提醒</div>
+    </div>
+    <div class="butler-bar">
+      <div class="butler-input">輸入訊息...</div>
+      <div class="butler-send">↑</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       S7 · Joining CrewCreate (3s auto-advance)
+       ══════════════════════════════ -->
+  <div class="screen" id="s7">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="joining-body">
+      <div class="joining-logo-wrap">🎨</div>
+      <div style="text-align:center">
+        <div class="joining-title">進入 CrewCreate</div>
+        <div class="joining-sub">正在載入你的創作空間…</div>
+      </div>
+      <div style="width:100%">
+        <div class="joining-prog-track">
+          <div class="joining-prog-bar" id="joining-bar"></div>
+        </div>
+      </div>
+      <div class="joining-steps">
+        <div class="joining-step done" id="jstep0">
+          <div class="joining-step-icon">✓</div>
+          <span>驗證身份</span>
+        </div>
+        <div class="joining-step" id="jstep1">
+          <div class="joining-step-icon"></div>
+          <span>載入你的興趣偏好</span>
+        </div>
+        <div class="joining-step" id="jstep2">
+          <div class="joining-step-icon"></div>
+          <span>準備趨勢推薦</span>
+        </div>
+        <div class="joining-step" id="jstep3">
+          <div class="joining-step-icon"></div>
+          <span>開啟創作空間</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       S8 · CrewCreate Creation Workspace
+       ══════════════════════════════ -->
+  <div class="screen" id="s8">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="cc-ws-header">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="back-btn" onclick="goTo(0)">←</div>
+        <div class="cc-ws-logo">CrewCreate</div>
+      </div>
+      <div class="cc-ws-badge">Yuki 🎨</div>
+    </div>
+    <div class="cc-ws-body">
+      <!-- Hero create -->
+      <div class="cc-ws-hero">
+        <div class="cc-ws-hero-icon">✦</div>
+        <div class="cc-ws-hero-text">
+          <div class="cc-ws-hero-title">開始創作</div>
+          <div class="cc-ws-hero-sub">上傳影片・圖片・短貼文</div>
+        </div>
+        <div style="font-size:20px;color:rgba(255,255,255,0.25)">›</div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="cc-ws-tabs">
+        <button class="cc-ws-tab active">🔥 趨勢</button>
+        <button class="cc-ws-tab">我的貼文</button>
+        <button class="cc-ws-tab">Crew</button>
+      </div>
+
+      <!-- Trending cards -->
+      <div class="cc-ws-section">今日熱門趨勢</div>
+      <div class="trend-row">
+        <div class="trend-card">
+          <div class="trend-thumb" style="background:linear-gradient(135deg,rgba(255,45,135,0.12),rgba(255,91,167,0.06))">👗</div>
+          <div class="trend-info">
+            <div class="trend-tag">FASHION</div>
+            <div class="trend-name">Y2K 復古格紋穿搭</div>
+            <div class="trend-heat">🔥 12.4K 影片</div>
+          </div>
+        </div>
+        <div class="trend-card">
+          <div class="trend-thumb" style="background:linear-gradient(135deg,rgba(0,188,212,0.12),rgba(0,188,212,0.04))">🎨</div>
+          <div class="trend-info">
+            <div class="trend-tag">ART</div>
+            <div class="trend-name">霓虹油畫塗鴉挑戰</div>
+            <div class="trend-heat">🔥 8.7K 影片</div>
+          </div>
+        </div>
+        <div class="trend-card">
+          <div class="trend-thumb" style="background:linear-gradient(135deg,rgba(251,146,60,0.1),rgba(251,146,60,0.04))">✨</div>
+          <div class="trend-info">
+            <div class="trend-tag">STYLE</div>
+            <div class="trend-name">Streetwear Mix &amp; Match</div>
+            <div class="trend-heat">🔥 6.1K 影片</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- For you -->
+      <div class="cc-ws-section" style="margin-top:14px">為你推薦</div>
+      <div class="cc-ws-post">
+        <div class="cc-ws-post-av">👗</div>
+        <div class="cc-ws-post-text">
+          <div class="cc-ws-post-name">Fashion Challenge #2024</div>
+          <div class="cc-ws-post-sub">正在熱傳 · 適合你的風格</div>
+        </div>
+        <div class="cc-ws-post-badge">參加</div>
+      </div>
+      <div class="cc-ws-post">
+        <div class="cc-ws-post-av" style="background:rgba(74,222,128,0.08);border-color:rgba(74,222,128,0.2)">🎨</div>
+        <div class="cc-ws-post-text">
+          <div class="cc-ws-post-name">Art Collab with @mia</div>
+          <div class="cc-ws-post-sub">你的 Crew 邀請你合作</div>
+        </div>
+        <div class="cc-ws-post-badge" style="color:#4ADE80;background:rgba(74,222,128,0.08);border-color:rgba(74,222,128,0.25)">查看</div>
+      </div>
+      <div style="height:16px"></div>
+    </div>
+
+    <!-- Bottom nav -->
+    <div class="cc-ws-bottomnav">
+      <div class="cc-ws-tab-item">
+        <div class="cc-ws-tab-icon">🏠</div>
+        <div class="cc-ws-tab-label">首頁</div>
+      </div>
+      <div class="cc-ws-tab-item active">
+        <div class="cc-ws-create-btn">+</div>
+      </div>
+      <div class="cc-ws-tab-item">
+        <div class="cc-ws-tab-icon">👤</div>
+        <div class="cc-ws-tab-label">我的</div>
+      </div>
+    </div>
+  </div>
+
   <!-- Zoom overlay -->
   <div id="zoom-overlay"></div>
 
@@ -574,8 +909,10 @@ function buildConstellation(){
   arcLbl.setAttribute('fill','rgba(74,222,128,0.58)');arcLbl.setAttribute('font-size','9');
   arcLbl.setAttribute('font-family','Inter,sans-serif');arcLbl.setAttribute('font-weight','600');
   arcLbl.setAttribute('letter-spacing','1.2');
-  arcLbl.textContent='AI BUTLER · SAFE ONLINE ›';
+  arcLbl.textContent='AI BUTLER · TAP TO CHAT ›';
   arcG.appendChild(arcLbl);
+  arcG.style.cursor='pointer';
+  arcG.onclick=()=>goTo(6);
   svg.appendChild(arcG);
 
   // ── Edges ──
@@ -756,6 +1093,43 @@ function buildConstellation(){
   });
 }
 
+// ── Joining screen animation + auto-advance ──
+function startJoining(){
+  const bar=document.getElementById('joining-bar');
+  const steps=[
+    document.getElementById('jstep0'),
+    document.getElementById('jstep1'),
+    document.getElementById('jstep2'),
+    document.getElementById('jstep3'),
+  ];
+  // Reset
+  steps.forEach((s,i)=>{
+    s.classList.toggle('done', i===0);
+    s.querySelector('.joining-step-icon').textContent = i===0 ? '✓' : '';
+  });
+  bar.style.transition='none';
+  bar.style.width='0';
+
+  // Animate progress bar over 3s
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    bar.style.transition='width 3s linear';
+    bar.style.width='100%';
+  }));
+
+  // Step reveals
+  const timings=[800, 1600, 2400];
+  timings.forEach((t,i)=>{
+    setTimeout(()=>{
+      const s=steps[i+1];
+      s.classList.add('done');
+      s.querySelector('.joining-step-icon').textContent='✓';
+    }, t);
+  });
+
+  // Auto-advance to creation workspace
+  setTimeout(()=>goTo(8), 3000);
+}
+
 // ── Zoom-launch from CC node into CrewCreate ──
 function launchCrewCreate(){
   const svg=document.getElementById('const-svg');
@@ -786,7 +1160,8 @@ function launchCrewCreate(){
   });});
 
   setTimeout(()=>{
-    goTo(1);
+    goTo(7);
+    startJoining();
     ov.style.transition='opacity 0.22s ease';
     ov.style.opacity='0';
     setTimeout(()=>{ov.style.pointerEvents='none';},240);
