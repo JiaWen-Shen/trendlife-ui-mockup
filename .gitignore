@@ -3,3 +3,4 @@
 *.pdf
 *_embedded.html
 ref/
+.vercel
