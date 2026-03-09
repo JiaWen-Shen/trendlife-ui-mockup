@@ -50,7 +50,7 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 .tab-item.active .tab-label{color:#C084FC}
 
 /* ─────────────────────────────
-   SCREEN 1 — Grace's Health (Eva's View)
+   SCREEN 1 — Health Report
    ───────────────────────────── */
 .lens-body{flex:1;overflow-y:auto;padding:0 20px 24px}
 .eva-view{padding:4px 0}
@@ -65,9 +65,6 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 .tag{font-size:10px;padding:2px 8px;border-radius:6px;font-weight:600}
 .tag.ok{color:#4ADE80;background:rgba(74,222,128,0.1)}
 .tag.watch{color:#FFB84D;background:rgba(255,184,77,0.1)}
-.tag.alert{color:#FF7875;background:rgba(255,120,120,0.12)}
-.tag.safe{color:#4ADE80;background:rgba(74,222,128,0.1)}
-.tag.blocked{color:#C084FC;background:rgba(192,132,252,0.1)}
 .actions{display:flex;flex-direction:column;gap:8px}
 .abtn{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);
   background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.6);font-size:13px;font-weight:500;
@@ -117,25 +114,29 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
   background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07)}
 .pstat-val{font-size:20px;font-weight:800;margin-bottom:2px}
 .pstat-lbl{font-size:9.5px;color:rgba(255,255,255,0.25);letter-spacing:0.3px}
-
 .protect-card{border-radius:14px;padding:14px 16px;margin-bottom:12px}
 .protect-card.warn{background:rgba(192,132,252,0.06);border:1px solid rgba(192,132,252,0.16)}
 .protect-card.safe-card{background:rgba(74,222,128,0.05);border:1px solid rgba(74,222,128,0.14)}
 .protect-card.amber-card{background:rgba(255,184,77,0.06);border:1px solid rgba(255,184,77,0.16)}
+.protect-card.blue-card{background:rgba(100,181,246,0.05);border:1px solid rgba(100,181,246,0.14)}
 .pc-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:6px}
 .pc-text{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6}
 .pc-detail{font-size:11.5px;color:rgba(255,255,255,0.3);margin-top:5px;line-height:1.5}
 
 /* ─────────────────────────────
-   SCREEN 3 — Chat with Grace
+   SCREEN 3 — Chat with Grandma
+   SCREEN 7 — AI Butler Chat
    ───────────────────────────── */
 .chat-header-av{width:34px;height:34px;border-radius:50%;
-  background:rgba(255,195,100,0.12);border:1px solid rgba(255,195,100,0.3);
   display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:700;color:#FFC364;flex-shrink:0}
+  font-size:13px;font-weight:700;flex-shrink:0}
+.chat-header-av.grandma{background:rgba(255,195,100,0.12);border:1px solid rgba(255,195,100,0.3);color:#FFC364}
+.chat-header-av.ai{background:rgba(100,181,246,0.12);border:1px solid rgba(100,181,246,0.3);color:#64B5F6}
 .chat-header-info{flex:1}
 .chat-header-name{font-size:16px;font-weight:700;color:rgba(255,255,255,0.85)}
-.chat-header-status{font-size:11px;color:rgba(74,222,128,0.7);margin-top:1px}
+.chat-header-status{font-size:11px;margin-top:1px}
+.chat-header-status.online{color:rgba(74,222,128,0.7)}
+.chat-header-status.ai-status{color:rgba(100,181,246,0.6)}
 
 .chat-messages{flex:1;overflow-y:auto;padding:8px 16px 16px;display:flex;flex-direction:column;gap:10px}
 .msg-row{display:flex;gap:8px;align-items:flex-end}
@@ -143,13 +144,16 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 .msg-av{width:28px;height:28px;border-radius:50%;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
   font-size:11px;font-weight:700}
-.msg-av.grace{background:rgba(255,195,100,0.1);border:1px solid rgba(255,195,100,0.22);color:#FFC364}
+.msg-av.grandma{background:rgba(255,195,100,0.1);border:1px solid rgba(255,195,100,0.22);color:#FFC364}
 .msg-av.eva{background:rgba(192,132,252,0.12);border:1px solid rgba(192,132,252,0.25);color:#C084FC}
+.msg-av.ai{background:rgba(100,181,246,0.1);border:1px solid rgba(100,181,246,0.22);color:#64B5F6;font-size:10px}
 .bubble{padding:11px 14px;border-radius:18px;max-width:262px;line-height:1.55}
 .bubble.them{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.07);
   border-bottom-left-radius:5px;font-size:13.5px;color:rgba(255,255,255,0.75)}
 .bubble.me{background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.18);
   border-bottom-right-radius:5px;font-size:13.5px;color:rgba(192,132,252,0.9)}
+.bubble.ai-msg{background:rgba(100,181,246,0.08);border:1px solid rgba(100,181,246,0.18);
+  border-bottom-left-radius:5px;font-size:13.5px;color:rgba(100,181,246,0.85)}
 .bubble-time{font-size:10px;color:rgba(255,255,255,0.18);margin-top:3px;padding:0 4px}
 .msg-row.me .bubble-time{text-align:right}
 
@@ -161,6 +165,7 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 .chat-send{width:38px;height:38px;border-radius:50%;
   background:rgba(192,132,252,0.18);border:1px solid rgba(192,132,252,0.3);
   color:#C084FC;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+.chat-send.ai-send{background:rgba(100,181,246,0.18);border-color:rgba(100,181,246,0.3);color:#64B5F6}
 </style>
 </head>
 <body>
@@ -168,7 +173,7 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 <div class="phone">
 
   <!-- ══════════════════════════════
-       SCREEN 0 · Eva's Constellation
+       SCREEN 0 · Constellation
        ══════════════════════════════ -->
   <div class="screen active" id="s0">
     <div class="status-bar">
@@ -181,7 +186,7 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
     </div>
     <div class="const-area">
       <svg class="const-svg" id="const-svg" viewBox="0 0 390 480" xmlns="http://www.w3.org/2000/svg"></svg>
-      <div class="alert-pill" onclick="goTo(1)">⚠ Grace's health report ›</div>
+      <div class="alert-pill" onclick="goTo(1)">⚠ Grandma's health report ›</div>
     </div>
     <div class="tab-bar">
       <div class="tab-item active" onclick="goTo(0)">
@@ -192,15 +197,15 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
         <span class="tab-icon">📋</span>
         <span class="tab-label">Events</span>
       </div>
-      <div class="tab-item" onclick="goTo(3)">
-        <span class="tab-icon">💬</span>
-        <span class="tab-label">Chat</span>
+      <div class="tab-item" onclick="goTo(7)">
+        <span class="tab-icon">◈</span>
+        <span class="tab-label">AI Butler</span>
       </div>
     </div>
   </div>
 
   <!-- ══════════════════════════════
-       SCREEN 1 · Grace's Health Report
+       SCREEN 1 · Grandma's Health Report
        ══════════════════════════════ -->
   <div class="screen" id="s1">
     <div class="status-bar">
@@ -209,7 +214,7 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
     </div>
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(0)">←</div>
-      <div class="screen-title">Grace's Health Report</div>
+      <div class="screen-title">Grandma's Health Report</div>
     </div>
     <div class="lens-body" id="health-body"></div>
   </div>
@@ -224,17 +229,17 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
     </div>
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(0)">←</div>
-      <div class="screen-title">家庭事件摘要</div>
+      <div class="screen-title">Family Events</div>
     </div>
     <div class="events-scroll">
 
       <div class="event-item">
         <div class="ev-dot health">🏥</div>
         <div class="ev-body">
-          <div class="ev-who">Grace · Mom</div>
-          <div class="ev-text">血壓偏高 145/92，HbA1c 需觀察。AI Butler 建議心臟科追蹤。</div>
+          <div class="ev-who">Grandma</div>
+          <div class="ev-text">Blood pressure elevated at 145/92, HbA1c needs monitoring. AI Butler recommends cardiology follow-up.</div>
           <div class="ev-foot">
-            <span class="ev-badge red">健康警示</span>
+            <span class="ev-badge red">Health Alert</span>
             <span class="ev-time">Today 8:45 AM</span>
           </div>
         </div>
@@ -244,9 +249,9 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
         <div class="ev-dot shield">🛡️</div>
         <div class="ev-body">
           <div class="ev-who">Yuki · Granddaughter</div>
-          <div class="ev-text">AI Butler 攔截了一個釣魚連結 — 偽裝成銀行官網，已封鎖。</div>
+          <div class="ev-text">AI Butler blocked a phishing link — disguised as a bank login page before it could load.</div>
           <div class="ev-foot">
-            <span class="ev-badge purple">已阻擋</span>
+            <span class="ev-badge purple">Blocked</span>
             <span class="ev-time">Yesterday 4:23 PM</span>
           </div>
         </div>
@@ -256,9 +261,9 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
         <div class="ev-dot screen-time">📱</div>
         <div class="ev-body">
           <div class="ev-who">Ethan · Son</div>
-          <div class="ev-text">凌晨後社群媒體使用 3.5 小時，超過設定的家庭守護上限。</div>
+          <div class="ev-text">3.5 hours of social media use after midnight, exceeding the family safety limit.</div>
           <div class="ev-foot">
-            <span class="ev-badge amber">使用警示</span>
+            <span class="ev-badge amber">Usage Alert</span>
             <span class="ev-time">Yesterday 11:59 PM</span>
           </div>
         </div>
@@ -268,9 +273,9 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
         <div class="ev-dot login">🔒</div>
         <div class="ev-body">
           <div class="ev-who">Wei · Husband</div>
-          <div class="ev-text">新裝置登入已通過雙步驟驗證，工作設備安全確認。</div>
+          <div class="ev-text">New device login verified via two-factor authentication. Work device confirmed secure.</div>
           <div class="ev-foot">
-            <span class="ev-badge blue">已驗證</span>
+            <span class="ev-badge blue">Verified</span>
             <span class="ev-time">2 days ago</span>
           </div>
         </div>
@@ -280,7 +285,7 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
   </div>
 
   <!-- ══════════════════════════════
-       SCREEN 3 · Chat with Grace
+       SCREEN 3 · Chat with Grandma
        ══════════════════════════════ -->
   <div class="screen" id="s3">
     <div class="status-bar">
@@ -289,18 +294,18 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
     </div>
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(0)">←</div>
-      <div class="chat-header-av">✦</div>
+      <div class="chat-header-av grandma">✦</div>
       <div class="chat-header-info">
-        <div class="chat-header-name">Grace</div>
-        <div class="chat-header-status">● Online now</div>
+        <div class="chat-header-name">Grandma</div>
+        <div class="chat-header-status online">● Online now</div>
       </div>
     </div>
     <div class="chat-messages">
 
       <div class="msg-row">
-        <div class="msg-av grace">✦</div>
+        <div class="msg-av grandma">✦</div>
         <div>
-          <div class="bubble them">媽，今天健檢報告出來了，你的血壓有點高，145/92，我有點擔心。</div>
+          <div class="bubble them">Hi Eva, did my checkup results come in?</div>
           <div class="bubble-time">9:21 AM</div>
         </div>
       </div>
@@ -308,30 +313,38 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
       <div class="msg-row me">
         <div class="msg-av eva">E</div>
         <div>
-          <div class="bubble me">我看到了，HbA1c 也要注意一下。建議你這兩週內去看心臟科。</div>
+          <div class="bubble me">Yes, Grandma. Your blood pressure is a bit high — 145/92. I'm a little concerned.</div>
           <div class="bubble-time">9:34 AM</div>
         </div>
       </div>
 
       <div class="msg-row">
-        <div class="msg-av grace">✦</div>
+        <div class="msg-av grandma">✦</div>
         <div>
-          <div class="bubble them">好，我知道了。你幫我約嗎？</div>
-          <div class="bubble-time">9:38 AM</div>
+          <div class="bubble them">Oh, is that serious?</div>
+          <div class="bubble-time">9:36 AM</div>
         </div>
       </div>
 
       <div class="msg-row me">
         <div class="msg-av eva">E</div>
         <div>
-          <div class="bubble me">好，我來幫你約，這週儘量安排。</div>
+          <div class="bubble me">Let's have you see a cardiologist within the next two weeks, just to be safe. I'll set up the appointment.</div>
+          <div class="bubble-time">9:38 AM</div>
+        </div>
+      </div>
+
+      <div class="msg-row">
+        <div class="msg-av grandma">✦</div>
+        <div>
+          <div class="bubble them">Thank you. I'll go whenever you schedule it.</div>
           <div class="bubble-time">9:39 AM</div>
         </div>
       </div>
 
     </div>
     <div class="chat-input-bar">
-      <input class="chat-input" placeholder="Reply to Grace…" readonly>
+      <input class="chat-input" placeholder="Reply to Grandma…" readonly>
       <div class="chat-send">↑</div>
     </div>
   </div>
@@ -368,21 +381,18 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
           </div>
         </div>
       </div>
-
       <div class="protect-card warn">
         <div class="pc-eyebrow" style="color:#C084FC">◈ Latest Block · Yesterday 4:23 PM</div>
-        <div class="pc-text">AI Butler 攔截了一個釣魚連結，阻止載入前已封鎖。</div>
-        <div class="pc-detail">URL: bit.ly/secure-bank-verify → 偽裝成銀行官網 · 已列入封鎖清單</div>
+        <div class="pc-text">AI Butler intercepted a phishing link before it could load on Yuki's device.</div>
+        <div class="pc-detail">bit.ly/secure-bank-verify → fake bank login page · added to block list</div>
       </div>
-
       <div class="protect-card safe-card">
-        <div class="pc-eyebrow" style="color:#4ADE80">✓ 本週安全摘要</div>
-        <div class="pc-text">瀏覽環境安全，社群媒體使用正常，無異常登入記錄。</div>
+        <div class="pc-eyebrow" style="color:#4ADE80">✓ This Week</div>
+        <div class="pc-text">Browsing environment is safe, social media usage normal, no unusual logins.</div>
       </div>
-
       <div class="actions" style="margin-top:4px">
-        <button class="abtn hi">🔔  調整防護規則</button>
-        <button class="abtn">📊  查看完整封鎖紀錄</button>
+        <button class="abtn hi">🔔  Adjust protection rules</button>
+        <button class="abtn">📊  View full block history</button>
       </div>
     </div>
   </div>
@@ -419,20 +429,17 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
           </div>
         </div>
       </div>
-
       <div class="protect-card safe-card">
-        <div class="pc-eyebrow" style="color:#4ADE80">✓ 本週無威脅偵測</div>
-        <div class="pc-text">所有裝置存取正常，無可疑登入，工作帳號安全。</div>
+        <div class="pc-eyebrow" style="color:#4ADE80">✓ No Threats This Week</div>
+        <div class="pc-text">All devices are secure, no suspicious logins, work accounts verified.</div>
       </div>
-
-      <div class="protect-card" style="background:rgba(100,181,246,0.05);border:1px solid rgba(100,181,246,0.14)">
-        <div class="pc-eyebrow" style="color:#64B5F6">◈ 2 days ago · New Device</div>
-        <div class="pc-text">新裝置登入已通過雙步驟驗證，設備已加入信任清單。</div>
-        <div class="pc-detail">MacBook Pro · Taipei · 10:24 AM · 已確認</div>
+      <div class="protect-card blue-card">
+        <div class="pc-eyebrow" style="color:#64B5F6">◈ 2 Days Ago · New Device</div>
+        <div class="pc-text">New device login verified via two-factor authentication.</div>
+        <div class="pc-detail">MacBook Pro · Taipei · 10:24 AM · Confirmed</div>
       </div>
-
       <div class="actions" style="margin-top:4px">
-        <button class="abtn">📱  管理受信任裝置</button>
+        <button class="abtn">📱  Manage trusted devices</button>
       </div>
     </div>
   </div>
@@ -469,22 +476,92 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
           </div>
         </div>
       </div>
-
       <div class="protect-card amber-card">
         <div class="pc-eyebrow" style="color:#FFB84D">⚠ Yesterday 11:59 PM · Screen Time</div>
-        <div class="pc-text">凌晨後社群媒體使用 3.5 小時，超過家庭守護設定上限。</div>
+        <div class="pc-text">3.5 hours of social media after midnight, exceeding the family safety limit.</div>
         <div class="pc-detail">Instagram · TikTok · 11:42 PM – 3:18 AM</div>
       </div>
-
       <div class="protect-card safe-card">
-        <div class="pc-eyebrow" style="color:#4ADE80">✓ 網路安全狀態</div>
-        <div class="pc-text">無可疑連結或惡意內容，瀏覽環境正常。</div>
+        <div class="pc-eyebrow" style="color:#4ADE80">✓ Browsing Safety</div>
+        <div class="pc-text">No suspicious links or harmful content detected. Browsing environment is normal.</div>
+      </div>
+      <div class="actions" style="margin-top:4px">
+        <button class="abtn hi">🌙  Set late-night usage limits</button>
+        <button class="abtn">📊  View usage history</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SCREEN 7 · AI Butler Chat
+       ══════════════════════════════ -->
+  <div class="screen" id="s7">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="screen-header">
+      <div class="back-btn" onclick="goTo(0)">←</div>
+      <div class="chat-header-av ai">◈</div>
+      <div class="chat-header-info">
+        <div class="chat-header-name">AI Butler</div>
+        <div class="chat-header-status ai-status">● Always active</div>
+      </div>
+    </div>
+    <div class="chat-messages">
+
+      <div class="msg-row">
+        <div class="msg-av ai">◈</div>
+        <div>
+          <div class="bubble ai-msg">Good morning, Eva. I've processed 3 updates since last night.</div>
+          <div class="bubble-time">9:32 AM</div>
+        </div>
       </div>
 
-      <div class="actions" style="margin-top:4px">
-        <button class="abtn hi">🌙  設定深夜使用限制</button>
-        <button class="abtn">📊  查看使用紀錄</button>
+      <div class="msg-row">
+        <div class="msg-av ai">◈</div>
+        <div>
+          <div class="bubble ai-msg">Grandma's blood pressure reading at 7:42 AM was 145/92 — I've flagged it for your review and prepared a cardiology referral draft.</div>
+          <div class="bubble-time">9:32 AM</div>
+        </div>
       </div>
+
+      <div class="msg-row me">
+        <div class="msg-av eva">E</div>
+        <div>
+          <div class="bubble me">Thanks. Go ahead and schedule the earliest available cardiology appointment for her.</div>
+          <div class="bubble-time">9:35 AM</div>
+        </div>
+      </div>
+
+      <div class="msg-row">
+        <div class="msg-av ai">◈</div>
+        <div>
+          <div class="bubble ai-msg">Got it. I'll confirm the slot once booked and notify Grandma directly. Anything else?</div>
+          <div class="bubble-time">9:35 AM</div>
+        </div>
+      </div>
+
+      <div class="msg-row me">
+        <div class="msg-av eva">E</div>
+        <div>
+          <div class="bubble me">Also set a late-night screen time limit for Ethan — no social media after 10 PM.</div>
+          <div class="bubble-time">9:36 AM</div>
+        </div>
+      </div>
+
+      <div class="msg-row">
+        <div class="msg-av ai">◈</div>
+        <div>
+          <div class="bubble ai-msg">Done. Social media restricted after 10 PM on Ethan's device starting tonight. I'll send him a heads-up message.</div>
+          <div class="bubble-time">9:36 AM</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="chat-input-bar">
+      <input class="chat-input" placeholder="Ask AI Butler…" readonly>
+      <div class="chat-send ai-send">↑</div>
     </div>
   </div>
 
@@ -494,27 +571,26 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 function goTo(n){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('s'+n).classList.add('active');
-  // sync tab bar: tab 0→S0, tab 1→S2, tab 2→S3
-  const map=[0,2,3];
+  // tab sync: tab 0→S0, tab 1→S2, tab 2→S7
+  const map=[0,2,7];
   document.querySelectorAll('#s0 .tab-item').forEach((t,i)=>{
     t.classList.toggle('active', map[i]===n);
   });
 }
 
-// ── Eva's Constellation — Eva at center ──
 const NODES=[
-  {id:'eva',   label:'Eva',   note:'You',          icon:'E',  color:'#C084FC', x:195, y:225, r:36, center:true},
-  {id:'grace', label:'Grace', note:'Mom',           icon:'✦',  color:'#FFC364', x:195, y:105, r:28},
-  {id:'wei',   label:'Wei',   note:'Husband',       icon:'W',  color:'#60A5FA', x:322, y:215, r:22},
-  {id:'yuki',  label:'Yuki',  note:'Granddaughter', icon:'Yv', color:'#4ADE80', x: 90, y:335, r:20},
-  {id:'ethan', label:'Ethan', note:'Son',           icon:'Et', color:'#FB923C', x:298, y:335, r:20},
+  {id:'grandma', label:'Grandma', note:'Mom',           icon:'✦',  color:'#FFC364', x:195, y:105, r:28},
+  {id:'eva',     label:'Eva',     note:'You',           icon:'E',  color:'#C084FC', x:195, y:225, r:36, center:true},
+  {id:'wei',     label:'Wei',     note:'Husband',       icon:'W',  color:'#60A5FA', x:322, y:215, r:22},
+  {id:'yuki',    label:'Yuki',    note:'Granddaughter', icon:'Yv', color:'#4ADE80', x: 90, y:335, r:20},
+  {id:'ethan',   label:'Ethan',   note:'Son',           icon:'Et', color:'#FB923C', x:298, y:335, r:20},
 ];
 
 const EDGES=[
-  {a:'eva',b:'grace', w:0.9},
-  {a:'eva',b:'wei',   w:0.7},
-  {a:'eva',b:'yuki',  w:0.6},
-  {a:'eva',b:'ethan', w:0.5},
+  {a:'eva',b:'grandma', w:0.9},
+  {a:'eva',b:'wei',     w:0.7},
+  {a:'eva',b:'yuki',    w:0.6},
+  {a:'eva',b:'ethan',   w:0.5},
 ];
 
 function buildConstellation(){
@@ -524,7 +600,7 @@ function buildConstellation(){
   // ── Guardian Arc ──
   const arcG=document.createElementNS('http://www.w3.org/2000/svg','g');
   arcG.style.cursor='pointer';
-  arcG.onclick=()=>goTo(2);
+  arcG.onclick=()=>goTo(7);
 
   const arcBg=document.createElementNS('http://www.w3.org/2000/svg','path');
   arcBg.setAttribute('d','M 30 82 C 30 20 360 20 360 82 Z');
@@ -568,7 +644,6 @@ function buildConstellation(){
   arcLbl.setAttribute('letter-spacing','1.2');
   arcLbl.textContent='AI BUTLER · 3 ACTIONS TODAY ›';
   arcG.appendChild(arcLbl);
-
   svg.appendChild(arcG);
 
   // ── Edges ──
@@ -627,8 +702,8 @@ function buildConstellation(){
     note.textContent=n.note;
     g.appendChild(note);
 
-    // Grace — red pulsing alert ring + ⚠ badge
-    if(n.id==='grace'){
+    // Grandma — red pulsing alert ring + ⚠ badge
+    if(n.id==='grandma'){
       const pulseRing=document.createElementNS('http://www.w3.org/2000/svg','circle');
       pulseRing.setAttribute('cx',n.x);pulseRing.setAttribute('cy',n.y);
       pulseRing.setAttribute('r',n.r+8);
@@ -674,7 +749,7 @@ function buildConstellation(){
       g.appendChild(ptxt);
     }
 
-    // Yuki — shield badge (blocked threat)
+    // Yuki — shield badge
     if(n.id==='yuki'){
       const bx=n.x+n.r*0.65, by=n.y-n.r*0.65;
       const bdot=document.createElementNS('http://www.w3.org/2000/svg','circle');
@@ -691,10 +766,10 @@ function buildConstellation(){
     }
 
     // Navigation
-    if(n.id==='grace') g.onclick=()=>goTo(1);
-    if(n.id==='wei')   g.onclick=()=>goTo(5);
-    if(n.id==='yuki')  g.onclick=()=>goTo(4);
-    if(n.id==='ethan') g.onclick=()=>goTo(6);
+    if(n.id==='grandma') g.onclick=()=>goTo(3);
+    if(n.id==='wei')     g.onclick=()=>goTo(5);
+    if(n.id==='yuki')    g.onclick=()=>goTo(4);
+    if(n.id==='ethan')   g.onclick=()=>goTo(6);
 
     svg.appendChild(g);
   });
