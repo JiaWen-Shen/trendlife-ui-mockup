@@ -120,6 +120,10 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
   background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07)}
 .pstat-val{font-size:20px;font-weight:800;margin-bottom:2px}
 .pstat-lbl{font-size:9.5px;color:rgba(255,255,255,0.25);letter-spacing:0.3px}
+.report-section-lbl{font-size:10px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;
+  color:rgba(255,255,255,0.32);font-family:'Inter',sans-serif;
+  margin:16px 0 10px;padding-bottom:7px;border-bottom:1px solid rgba(255,255,255,0.06);}
+body.light .report-section-lbl{color:rgba(10,10,20,0.35);border-bottom-color:rgba(10,10,20,0.07);}
 .protect-card{border-radius:14px;padding:14px 16px;margin-bottom:12px}
 .protect-card.warn{background:rgba(192,132,252,0.06);border:1px solid rgba(192,132,252,0.16)}
 .protect-card.safe-card{background:rgba(74,222,128,0.05);border:1px solid rgba(74,222,128,0.14)}
@@ -269,61 +273,69 @@ body.light .rel-peek-role{color:rgba(10,10,20,0.52)}
 body.light .rel-peek-x{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.5)}
 body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.04);color:rgba(10,10,20,0.7)}
 
-/* ── AI Butler Pull Tab (Option B) ── */
-#ai-pull-tab{position:absolute;right:0;top:50%;transform:translateY(-50%);
-  width:26px;height:68px;background:rgba(192,132,252,0.1);
-  border:1px solid rgba(192,132,252,0.24);border-right:none;border-radius:10px 0 0 10px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
-  cursor:pointer;z-index:50;transition:background 0.2s;}
-#ai-pull-tab:hover,#ai-pull-tab.open{background:rgba(192,132,252,0.2);}
-#ai-pull-tab.hidden{display:none;}
-.ai-tab-icon{font-size:13px;color:#C084FC;}
-.ai-tab-label{font-size:7px;font-weight:700;color:rgba(192,132,252,0.65);
-  letter-spacing:0.3px;font-family:'Inter',sans-serif;
-  writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);}
-/* Backdrop */
-#ai-panel-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.42);
-  z-index:55;opacity:0;pointer-events:none;transition:opacity 0.25s;border-radius:inherit;}
-#ai-panel-backdrop.visible{opacity:1;pointer-events:auto;}
-/* Slide panel */
-#ai-panel{position:absolute;top:0;right:0;bottom:0;width:80%;
-  background:rgba(14,14,22,0.98);backdrop-filter:blur(20px);
-  border-left:1px solid rgba(192,132,252,0.18);z-index:60;
-  transform:translateX(100%);transition:transform 0.28s cubic-bezier(0.2,0,0,1);
-  display:flex;flex-direction:column;border-radius:0 44px 44px 0;}
-#ai-panel.visible{transform:translateX(0);}
-#ai-panel-head{padding:52px 16px 14px;border-bottom:1px solid rgba(255,255,255,0.07);flex-shrink:0;}
-.aip-eyebrow{font-size:9px;font-weight:700;letter-spacing:0.7px;text-transform:uppercase;
-  color:rgba(192,132,252,0.6);font-family:'Inter',sans-serif;margin-bottom:4px;}
-.aip-title{font-size:15px;font-weight:800;color:rgba(255,255,255,0.88);
+/* ── AI Orb FAB (Option A) ── */
+#ai-orb{position:absolute;bottom:96px;right:16px;width:44px;height:44px;border-radius:50%;
+  background:radial-gradient(circle at 38% 35%,rgba(216,180,254,0.95),rgba(147,51,234,0.75));
+  box-shadow:0 0 0 0 rgba(192,132,252,0.5),0 4px 18px rgba(147,51,234,0.45);
+  cursor:pointer;z-index:50;display:flex;align-items:center;justify-content:center;
+  animation:orbPulse 3s ease-in-out infinite;transition:transform 0.15s;}
+#ai-orb:active{transform:scale(0.92);}
+#ai-orb.hidden{display:none;}
+.orb-icon{font-size:19px;color:rgba(255,255,255,0.95);user-select:none;}
+@keyframes orbPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(192,132,252,0.45),0 4px 18px rgba(147,51,234,0.4);}
+  50%{box-shadow:0 0 0 9px rgba(192,132,252,0),0 4px 28px rgba(147,51,234,0.65);}
+}
+/* Screen scale-down while sheet is open */
+.phone.sheet-open .screen.active{
+  transform:scale(0.92) translateY(-18px);border-radius:20px;overflow:hidden;
+  transition:transform 0.35s cubic-bezier(0.2,0,0,1);}
+.screen{transition:transform 0.35s cubic-bezier(0.2,0,0,1);}
+/* Dim overlay */
+#ai-sheet-dim{position:absolute;inset:0;background:rgba(0,0,0,0);z-index:55;
+  pointer-events:none;transition:background 0.3s;border-radius:inherit;}
+#ai-sheet-dim.visible{background:rgba(0,0,0,0.45);pointer-events:auto;}
+/* Bottom Sheet */
+#ai-sheet{position:absolute;left:0;right:0;bottom:0;height:68%;
+  background:rgba(14,14,22,0.97);backdrop-filter:blur(24px);
+  border-radius:22px 22px 0 0;border-top:1px solid rgba(192,132,252,0.22);
+  z-index:60;transform:translateY(100%);
+  transition:transform 0.35s cubic-bezier(0.2,0,0,1);display:flex;flex-direction:column;}
+#ai-sheet.visible{transform:translateY(0);}
+.sheet-handle{width:36px;height:4px;background:rgba(255,255,255,0.15);
+  border-radius:2px;margin:12px auto 0;flex-shrink:0;}
+#ai-sheet-head{padding:14px 20px 14px;border-bottom:1px solid rgba(255,255,255,0.07);
+  flex-shrink:0;display:flex;align-items:center;gap:12px;}
+.sheet-orb-mini{width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  background:radial-gradient(circle at 38% 35%,rgba(216,180,254,0.85),rgba(147,51,234,0.65));
+  display:flex;align-items:center;justify-content:center;font-size:14px;color:white;}
+.sheet-title{font-size:15px;font-weight:800;color:rgba(255,255,255,0.9);
   font-family:'Inter',sans-serif;letter-spacing:-0.2px;}
-.aip-hint{font-size:11px;color:rgba(255,255,255,0.38);font-family:'Inter',sans-serif;margin-top:2px;}
-#ai-panel-body{flex:1;overflow-y:auto;padding:14px 16px 8px;}
-.aip-section{font-size:9px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;
+.sheet-subtitle{font-size:11px;color:rgba(255,255,255,0.38);font-family:'Inter',sans-serif;margin-top:1px;}
+#ai-sheet-body{flex:1;overflow-y:auto;padding:14px 20px 8px;}
+.sheet-section{font-size:9px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;
   color:rgba(255,255,255,0.28);font-family:'Inter',sans-serif;margin-bottom:9px;}
-.aip-action{width:100%;padding:10px 12px;margin-bottom:7px;border-radius:11px;
-  border:1px solid rgba(192,132,252,0.14);background:rgba(192,132,252,0.06);
-  color:rgba(255,255,255,0.7);font-size:12px;font-weight:500;cursor:pointer;
+.sheet-action{width:100%;padding:11px 14px;margin-bottom:8px;border-radius:12px;
+  border:1px solid rgba(192,132,252,0.15);background:rgba(192,132,252,0.07);
+  color:rgba(255,255,255,0.72);font-size:12.5px;font-weight:500;cursor:pointer;
   font-family:'Inter',sans-serif;text-align:left;display:flex;align-items:center;
-  gap:8px;letter-spacing:-0.1px;}
-.aip-action::before{content:'◈';color:#C084FC;font-size:10px;flex-shrink:0;}
-#ai-panel-input-wrap{padding:10px 16px 28px;border-top:1px solid rgba(255,255,255,0.06);
-  flex-shrink:0;display:flex;gap:8px;align-items:center;}
-.aip-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(192,132,252,0.16);
-  border-radius:20px;padding:9px 14px;font-size:12.5px;color:rgba(255,255,255,0.4);
+  gap:9px;letter-spacing:-0.1px;}
+.sheet-action::before{content:'◈';color:#C084FC;font-size:11px;flex-shrink:0;}
+#ai-sheet-input-wrap{padding:10px 20px 28px;border-top:1px solid rgba(255,255,255,0.07);
+  flex-shrink:0;display:flex;gap:10px;align-items:center;}
+.sheet-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(192,132,252,0.18);
+  border-radius:22px;padding:10px 16px;font-size:13px;color:rgba(255,255,255,0.42);
   font-family:'Inter',sans-serif;outline:none;}
-.aip-send{width:34px;height:34px;border-radius:50%;background:rgba(192,132,252,0.18);
-  border:1px solid rgba(192,132,252,0.3);color:#C084FC;font-size:14px;
-  display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.sheet-send{width:38px;height:38px;border-radius:50%;
+  background:rgba(192,132,252,0.2);border:1px solid rgba(192,132,252,0.35);
+  color:#C084FC;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
 /* light overrides */
-body.light #ai-pull-tab{background:rgba(147,51,234,0.07);border-color:rgba(147,51,234,0.18);}
-body.light .ai-tab-icon{color:#9333EA;}
-body.light .ai-tab-label{color:rgba(147,51,234,0.6);}
-body.light #ai-panel{background:rgba(250,250,254,0.98);border-left-color:rgba(147,51,234,0.14);}
-body.light .aip-title{color:rgba(10,10,20,0.9);}body.light .aip-hint{color:rgba(10,10,20,0.42);}
-body.light .aip-action{background:rgba(147,51,234,0.05);border-color:rgba(147,51,234,0.14);color:rgba(10,10,20,0.72);}
-body.light .aip-input{background:rgba(10,10,20,0.04);border-color:rgba(147,51,234,0.15);color:rgba(10,10,20,0.45);}
-body.light .aip-send{background:rgba(147,51,234,0.1);border-color:rgba(147,51,234,0.25);color:#9333EA;}
+body.light #ai-orb{background:radial-gradient(circle at 38% 35%,rgba(192,132,252,0.9),rgba(109,40,217,0.7));}
+body.light #ai-sheet{background:rgba(250,250,254,0.98);border-top-color:rgba(147,51,234,0.2);}
+body.light .sheet-title{color:rgba(10,10,20,0.9);}body.light .sheet-subtitle{color:rgba(10,10,20,0.42);}
+body.light .sheet-action{background:rgba(147,51,234,0.05);border-color:rgba(147,51,234,0.14);color:rgba(10,10,20,0.72);}
+body.light .sheet-input{background:rgba(10,10,20,0.04);border-color:rgba(147,51,234,0.15);color:rgba(10,10,20,0.45);}
+body.light .sheet-send{background:rgba(147,51,234,0.1);border-color:rgba(147,51,234,0.25);color:#9333EA;}
 
 /* ── Zoom Overlay ── */
 #zoom-overlay{
@@ -596,7 +608,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
   </div>
 
   <!-- ══════════════════════════════
-       SCREEN 4 · Yuki — Protection Report
+       SCREEN 4 · Yuki — Growth + Protection
        ══════════════════════════════ -->
   <div class="screen" id="s4">
     <div class="status-bar">
@@ -605,7 +617,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     </div>
     <div class="screen-header">
       <div class="back-btn" onclick="zoomBack()">←</div>
-      <div class="screen-title">Protection Report</div>
+      <div class="screen-title">Yuki's Report</div>
     </div>
     <div class="protect-body">
       <div class="protect-hero">
@@ -614,30 +626,62 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
         <div class="protect-role">Granddaughter · Age 14</div>
         <div class="protect-status-row">
           <div class="pstat">
+            <div class="pstat-val" style="color:#FCD34D">2</div>
+            <div class="pstat-lbl">Projects today</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-val" style="color:#4ADE80">+15%</div>
+            <div class="pstat-lbl">Critical thinking</div>
+          </div>
+          <div class="pstat">
             <div class="pstat-val" style="color:#C084FC">3</div>
             <div class="pstat-lbl">Threats blocked</div>
           </div>
-          <div class="pstat">
-            <div class="pstat-val" style="color:#4ADE80">0</div>
-            <div class="pstat-lbl">Incidents</div>
-          </div>
-          <div class="pstat">
-            <div class="pstat-val" style="color:#64B5F6">14</div>
-            <div class="pstat-lbl">Days protected</div>
-          </div>
         </div>
       </div>
+
+      <!-- ── Block 1: Protection ── -->
+      <div class="report-section-lbl">🛡 Protection Overview</div>
       <div class="protect-card warn">
         <div class="pc-eyebrow" style="color:#C084FC">◈ Latest Block · Yesterday 4:23 PM</div>
-        <div class="pc-text">AI Butler intercepted a phishing link before it could load on Yuki's device.</div>
-        <div class="pc-detail">bit.ly/secure-bank-verify → fake bank login page · added to block list</div>
+        <div class="pc-text" style="font-size:13px">Phishing link blocked <span style="color:rgba(255,255,255,0.35);font-size:11px">— secure-bank-verify.xyz</span></div>
+        <div style="display:flex;gap:6px;margin-top:8px">
+          <span class="ev-badge purple">Phishing</span>
+          <span class="ev-badge red">High Risk</span>
+          <span class="ev-badge" style="color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.05)">Blocked</span>
+        </div>
       </div>
       <div class="protect-card safe-card">
         <div class="pc-eyebrow" style="color:#4ADE80">✓ This Week</div>
-        <div class="pc-text">Browsing environment is safe, social media usage normal, no unusual logins.</div>
+        <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
+          <span class="ev-badge" style="color:#C084FC;background:rgba(192,132,252,0.1)">3 Blocked</span>
+          <span class="ev-badge" style="color:#4ADE80;background:rgba(74,222,128,0.1)">0 Incidents</span>
+          <span class="ev-badge" style="color:#4ADE80;background:rgba(74,222,128,0.1)">Browsing Safe</span>
+        </div>
       </div>
+
+      <!-- ── Block 2: Growth ── -->
+      <div class="report-section-lbl">✦ Growth Today</div>
+      <div class="protect-card" style="background:rgba(252,211,77,0.05);border:1px solid rgba(252,211,77,0.15)">
+        <div class="pc-eyebrow" style="color:#FCD34D">◈ AI-Guided Learning · 45 min</div>
+        <div class="pc-text" style="font-size:13px">Photosynthesis · Socratic dialogue</div>
+        <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+          <span class="ev-badge" style="color:#FCD34D;background:rgba(252,211,77,0.1)">Critical Thinking ↑</span>
+          <span class="ev-badge" style="color:#FCD34D;background:rgba(252,211,77,0.1)">3 Insights</span>
+        </div>
+      </div>
+      <div class="protect-card" style="background:rgba(74,222,128,0.04);border:1px solid rgba(74,222,128,0.13)">
+        <div class="pc-eyebrow" style="color:#4ADE80">✦ Creative Writing · Today</div>
+        <div class="pc-text" style="font-size:13px">Short story — history topic reimagined</div>
+        <div class="pc-detail" style="margin-top:5px;font-style:italic">"Strong voice. Try a plot twist next time."</div>
+        <div style="display:flex;gap:6px;margin-top:7px">
+          <span class="ev-badge" style="color:#4ADE80;background:rgba(74,222,128,0.1)">Creativity ↑</span>
+        </div>
+      </div>
+
       <div class="actions" style="margin-top:4px">
-        <button class="abtn hi">Adjust protection rules</button>
+        <button class="abtn hi">Send Yuki a learning challenge</button>
+        <button class="abtn">Adjust protection rules</button>
         <button class="abtn">View full block history</button>
       </div>
     </div>
@@ -993,22 +1037,24 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
   <!-- Zoom transition overlay -->
   <div id="zoom-overlay"></div>
 
-  <!-- ── AI Butler Pull Tab ── -->
-  <div id="ai-pull-tab" onclick="toggleAIPanel()">
-    <span class="ai-tab-icon">◈</span>
-    <span class="ai-tab-label">ASK AI</span>
+  <!-- ── AI Orb FAB ── -->
+  <div id="ai-orb" onclick="toggleAISheet()">
+    <span class="orb-icon">◈</span>
   </div>
-  <div id="ai-panel-backdrop" onclick="closeAIPanel()"></div>
-  <div id="ai-panel">
-    <div id="ai-panel-head">
-      <div class="aip-eyebrow">AI Butler</div>
-      <div class="aip-title" id="aip-title">What can I help with?</div>
-      <div class="aip-hint" id="aip-hint">Context-aware suggestions</div>
+  <div id="ai-sheet-dim" onclick="closeAISheet()"></div>
+  <div id="ai-sheet">
+    <div class="sheet-handle"></div>
+    <div id="ai-sheet-head">
+      <div class="sheet-orb-mini">◈</div>
+      <div>
+        <div class="sheet-title" id="sheet-title">AI Butler</div>
+        <div class="sheet-subtitle" id="sheet-subtitle">Always watching, always ready</div>
+      </div>
     </div>
-    <div id="ai-panel-body"></div>
-    <div id="ai-panel-input-wrap">
-      <input class="aip-input" placeholder="Ask AI Butler anything…" readonly>
-      <div class="aip-send">↑</div>
+    <div id="ai-sheet-body"></div>
+    <div id="ai-sheet-input-wrap">
+      <input class="sheet-input" placeholder="Ask AI Butler anything…" readonly>
+      <div class="sheet-send">↑</div>
     </div>
   </div>
 
@@ -1016,16 +1062,16 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
 
 <script>
 let _currentScreen=0;
-let _aiPanelOpen=false;
+let _aiSheetOpen=false;
 
 function goTo(n){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('s'+n).classList.add('active');
   _currentScreen=n;
-  // Hide pull tab on AI Butler screen; close panel if open
-  const tab=document.getElementById('ai-pull-tab');
-  if(tab) tab.classList.toggle('hidden', n===7);
-  if(n===7 && _aiPanelOpen) closeAIPanel();
+  // Hide orb on AI Butler screen; close sheet if open
+  const orb=document.getElementById('ai-orb');
+  if(orb) orb.classList.toggle('hidden', n===7);
+  if(n===7 && _aiSheetOpen) closeAISheet();
   // tab sync: tab 0→S0, tab 1→S2, tab 2→S7
   const map=[0,2,7];
   ['#s0','#s2'].forEach(id=>{
@@ -1077,8 +1123,8 @@ const NODES=[
    chips:['2FA Active','Devices OK'],
    status:['Secure', 'Devices OK']},
   {id:'yuki',    label:'Yuki',    note:'Granddaughter', icon:'Yv', color:'#4ADE80', x: 90, y:335, r:20, screen:4, alert:true,
-   chips:['Link Blocked','Safe Browsing'],
-   status:['Blocked', 'Safe']},
+   chips:['Growth +15%','Link Blocked'],
+   status:['Growth +15%', 'Link Blocked']},
   {id:'ethan',   label:'Hiro',   note:'Son',           icon:'Hi', color:'#FB923C', x:298, y:335, r:20, screen:6, alert:true,
    chips:['Screen Time Alert','Browsing Safe'],
    status:['Screen Alert']},
@@ -1558,8 +1604,8 @@ const AI_CTX={
      actions:['Set alert notification rules','Schedule a family check-in','Generate weekly summary report']},
   3:{title:'Chat with Grandma', hint:'Conversation context loaded',
      actions:['Draft a reply for me','Summarize this conversation','Schedule a follow-up call']},
-  4:{title:'Yuki\'s Report',    hint:'Safe browsing · 3 blocks this week',
-     actions:['Tighten Yuki\'s browsing filter','View full block history','Set allowed sites list']},
+  4:{title:'Yuki\'s Report',    hint:'Growth + Safety · Today',
+     actions:['Send Yuki a learning challenge','View today\'s growth report','Adjust browsing & protection rules']},
   5:{title:'Kenji\'s Report',   hint:'Devices secure · 2FA active',
      actions:['Manage trusted devices','Review login activity','Update security rules']},
   6:{title:'Hiro\'s Report',    hint:'Screen time alert · Last night',
@@ -1570,24 +1616,24 @@ const AI_CTX={
      actions:['Message Yuki about this threat','Tighten Yuki\'s browsing filter','Report site to network']},
 };
 
-function toggleAIPanel(){_aiPanelOpen?closeAIPanel():openAIPanel();}
-function openAIPanel(){
+function toggleAISheet(){_aiSheetOpen?closeAISheet():openAISheet();}
+function openAISheet(){
   const ctx=AI_CTX[_currentScreen]||{title:'AI Butler',hint:'How can I help?',actions:[]};
-  document.getElementById('aip-title').textContent=ctx.title;
-  document.getElementById('aip-hint').textContent=ctx.hint;
-  const body=document.getElementById('ai-panel-body');
-  body.innerHTML=`<div class="aip-section">Quick Actions</div>`+
-    ctx.actions.map(a=>`<button class="aip-action">${a}</button>`).join('');
-  document.getElementById('ai-panel').classList.add('visible');
-  document.getElementById('ai-panel-backdrop').classList.add('visible');
-  document.getElementById('ai-pull-tab').classList.add('open');
-  _aiPanelOpen=true;
+  document.getElementById('sheet-title').textContent=ctx.title;
+  document.getElementById('sheet-subtitle').textContent=ctx.hint;
+  const body=document.getElementById('ai-sheet-body');
+  body.innerHTML=`<div class="sheet-section">Quick Actions</div>`+
+    ctx.actions.map(a=>`<button class="sheet-action">${a}</button>`).join('');
+  document.getElementById('ai-sheet').classList.add('visible');
+  document.getElementById('ai-sheet-dim').classList.add('visible');
+  document.querySelector('.phone').classList.add('sheet-open');
+  _aiSheetOpen=true;
 }
-function closeAIPanel(){
-  document.getElementById('ai-panel').classList.remove('visible');
-  document.getElementById('ai-panel-backdrop').classList.remove('visible');
-  document.getElementById('ai-pull-tab').classList.remove('open');
-  _aiPanelOpen=false;
+function closeAISheet(){
+  document.getElementById('ai-sheet').classList.remove('visible');
+  document.getElementById('ai-sheet-dim').classList.remove('visible');
+  document.querySelector('.phone').classList.remove('sheet-open');
+  _aiSheetOpen=false;
 }
 
 // Reset read-state on every page load so nodes always start as unread

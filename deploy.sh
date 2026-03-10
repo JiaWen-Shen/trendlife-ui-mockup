@@ -25,7 +25,9 @@ print("  ✓ mockup-scene1-standalone.html updated")
 PYEOF
 
 echo "📤 Committing and pushing to GitHub..."
-git add mockup-scene1.html mockup-scene1-standalone.html index.html
+git add mockup-scene1.html mockup-scene1-standalone.html index.html \
+        constellation-spec.html mockup-constellation-draft.html mockup-eva-view.html \
+        mockup-yuki-view.html
 git diff --staged --quiet || git commit -m "update mockup"
 git push
 
