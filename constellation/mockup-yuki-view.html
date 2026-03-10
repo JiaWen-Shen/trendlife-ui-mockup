@@ -358,6 +358,81 @@ body.light .tl-notify-time{color:rgba(10,10,20,0.3)}
   display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;
   box-shadow:0 4px 18px rgba(0,188,212,0.35)}
 
+/* ─────────────────────────────
+   S8 · Collab Workspace styles
+   ───────────────────────────── */
+.collab-banner{margin:12px 16px 0;padding:14px 16px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(0,188,212,0.08),rgba(192,132,252,0.06));
+  border:1px solid rgba(0,188,212,0.15);display:flex;flex-direction:column;gap:6px}
+.collab-project-name{font-size:16px;font-weight:800;color:rgba(255,255,255,0.88);letter-spacing:-0.3px}
+.collab-meta{font-size:11px;color:rgba(255,255,255,0.35)}
+.collab-live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:#4ADE80;margin-right:4px;vertical-align:middle;animation:livePulse 1.4s infinite}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+.collab-members{display:flex;align-items:center;gap:0}
+.collab-av{width:26px;height:26px;border-radius:50%;border:2px solid rgba(14,14,20,0.85);
+  object-fit:cover;margin-right:-6px;flex-shrink:0}
+.collab-av-more{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,0.08);
+  border:1.5px solid rgba(255,255,255,0.12);font-size:10px;font-weight:700;
+  color:rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;margin-left:12px;flex-shrink:0}
+.collab-canvas-card{margin:10px 16px 0;border-radius:18px;overflow:hidden;
+  border:1px solid rgba(0,188,212,0.18);background:rgba(255,255,255,0.03)}
+.canvas-preview{position:relative;height:136px;overflow:hidden}
+.canvas-preview img{width:100%;height:100%;object-fit:cover}
+.canvas-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(14,14,20,0.7) 0%,transparent 55%)}
+.cursor-badge{position:absolute;display:flex;align-items:center;gap:5px;
+  background:rgba(14,14,20,0.78);border:1px solid rgba(255,255,255,0.1);
+  border-radius:20px;padding:3px 8px;backdrop-filter:blur(6px)}
+.cursor-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.cursor-label{font-size:10px;font-weight:600;color:rgba(255,255,255,0.7)}
+.canvas-title-overlay{position:absolute;bottom:10px;left:12px;right:12px}
+.canvas-title-text{font-size:13px;font-weight:700;color:rgba(255,255,255,0.88)}
+.canvas-title-sub{font-size:10.5px;color:rgba(255,255,255,0.38);margin-top:2px}
+.canvas-footer{display:flex;align-items:center;justify-content:space-between;padding:10px 14px}
+.canvas-meta{font-size:11px;color:rgba(255,255,255,0.3)}
+.canvas-edit-btn{font-size:11px;font-weight:700;color:#00BCD4;
+  background:rgba(0,188,212,0.1);border:1px solid rgba(0,188,212,0.25);
+  border-radius:20px;padding:5px 12px;cursor:pointer;font-family:'Inter',sans-serif}
+.ai-guide-card{margin:8px 16px 4px;padding:12px 14px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(192,132,252,0.1),rgba(99,102,241,0.08));
+  border:1px solid rgba(192,132,252,0.2);display:flex;align-items:flex-start;gap:10px}
+.ai-guide-icon{width:30px;height:30px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,#7C3AED,#4F46E5);
+  display:flex;align-items:center;justify-content:center;font-size:13px;color:white}
+.ai-guide-text{flex:1}
+.ai-guide-title{font-size:10.5px;font-weight:700;color:rgba(192,132,252,0.8);
+  text-transform:uppercase;letter-spacing:0.6px;margin-bottom:3px}
+.ai-guide-body{font-size:12px;color:rgba(255,255,255,0.58);line-height:1.5}
+.ai-guide-apply{font-size:11px;font-weight:700;color:#C084FC;
+  background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.25);
+  border-radius:20px;padding:5px 10px;cursor:pointer;font-family:'Inter',sans-serif;
+  flex-shrink:0;align-self:center}
+.contrib-item{margin:0 16px 8px;padding:12px 14px;border-radius:14px;
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);
+  display:flex;gap:10px}
+.contrib-item.yuki-item{border-color:rgba(74,222,128,0.15);background:rgba(74,222,128,0.04)}
+.contrib-item.ai-item{border-color:rgba(192,132,252,0.12);background:rgba(192,132,252,0.04)}
+.contrib-av{width:34px;height:34px;border-radius:50%;flex-shrink:0;overflow:hidden}
+.contrib-av img{width:100%;height:100%;object-fit:cover}
+.contrib-av-icon{width:34px;height:34px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:14px}
+.contrib-content{flex:1;min-width:0}
+.contrib-header{display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.contrib-name{font-size:12px;font-weight:700;color:rgba(255,255,255,0.72)}
+.contrib-tag{font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:10px}
+.contrib-tag.draft{background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.25);color:#4ADE80}
+.contrib-tag.added{background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.2);color:#60A5FA}
+.contrib-tag.ai-tag{background:rgba(192,132,252,0.12);border:1px solid rgba(192,132,252,0.2);color:#C084FC}
+.contrib-body{font-size:11.5px;color:rgba(255,255,255,0.42);line-height:1.4}
+.contrib-thumb-row{display:flex;gap:6px;margin-top:8px}
+.contrib-thumb-item{width:58px;height:42px;border-radius:8px;overflow:hidden;
+  background:rgba(255,255,255,0.06);flex-shrink:0}
+.contrib-thumb-item img{width:100%;height:100%;object-fit:cover}
+.contrib-thumb-add{width:42px;height:42px;border-radius:8px;
+  border:1.5px dashed rgba(74,222,128,0.35);display:flex;align-items:center;
+  justify-content:center;font-size:16px;color:rgba(74,222,128,0.5);cursor:pointer}
+.contrib-time{font-size:10px;color:rgba(255,255,255,0.2);margin-top:4px}
+
 /* Light mode — new screens */
 body.light .butler-bubble.ai{background:rgba(22,163,74,0.06);border-color:rgba(22,163,74,0.18);color:rgba(10,10,20,0.72)}
 body.light .butler-bubble.user{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.82)}
@@ -389,6 +464,25 @@ body.light .cc-ws-post-name{color:rgba(10,10,20,0.72)}
 body.light .cc-ws-post-sub{color:rgba(10,10,20,0.38)}
 body.light .cc-ws-bottomnav{border-top-color:rgba(0,150,170,0.12)}
 body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
+body.light .collab-banner{background:linear-gradient(135deg,rgba(0,150,170,0.07),rgba(150,80,220,0.04));border-color:rgba(0,150,170,0.15)}
+body.light .collab-project-name{color:rgba(10,10,20,0.9)}
+body.light .collab-meta{color:rgba(10,10,20,0.38)}
+body.light .collab-av-more{background:rgba(10,10,20,0.06);border-color:rgba(10,10,20,0.12);color:rgba(10,10,20,0.4)}
+body.light .collab-canvas-card{border-color:rgba(0,150,170,0.18);background:rgba(10,10,20,0.02)}
+body.light .cursor-badge{background:rgba(255,255,255,0.82);border-color:rgba(10,10,20,0.1)}
+body.light .cursor-label{color:rgba(10,10,20,0.7)}
+body.light .canvas-title-text{color:rgba(255,255,255,0.92)}
+body.light .canvas-meta{color:rgba(10,10,20,0.35)}
+body.light .canvas-edit-btn{color:#007B8A;background:rgba(0,150,170,0.08);border-color:rgba(0,150,170,0.25)}
+body.light .ai-guide-body{color:rgba(10,10,20,0.55)}
+body.light .ai-guide-apply{color:#7C3AED;background:rgba(124,58,237,0.06);border-color:rgba(124,58,237,0.2)}
+body.light .contrib-item{background:rgba(10,10,20,0.02);border-color:rgba(10,10,20,0.07)}
+body.light .contrib-item.yuki-item{background:rgba(74,222,128,0.03);border-color:rgba(74,222,128,0.12)}
+body.light .contrib-item.ai-item{background:rgba(150,80,220,0.03);border-color:rgba(150,80,220,0.1)}
+body.light .contrib-name{color:rgba(10,10,20,0.72)}
+body.light .contrib-body{color:rgba(10,10,20,0.42)}
+body.light .contrib-time{color:rgba(10,10,20,0.25)}
+body.light .contrib-thumb-add{border-color:rgba(74,222,128,0.3);color:rgba(40,160,80,0.5)}
 
 /* ── Zoom overlay ── */
 #zoom-overlay{position:absolute;inset:0;z-index:90;pointer-events:none;opacity:0;
@@ -860,7 +954,7 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
   </div>
 
   <!-- ══════════════════════════════
-       S8 · CrewCreate Creation Workspace
+       S8 · CrewCreate Collab Workspace
        ══════════════════════════════ -->
   <div class="screen" id="s8">
     <div class="status-bar">
@@ -872,77 +966,139 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
         <div class="back-btn" onclick="goTo(0)">←</div>
         <div class="cc-ws-logo">CrewCreate</div>
       </div>
-      <div class="cc-ws-badge">Yuki 🎨</div>
+      <div class="cc-ws-badge">協作中 🎬</div>
     </div>
     <div class="cc-ws-body">
-      <!-- Hero create -->
-      <div class="cc-ws-hero">
-        <div class="cc-ws-hero-icon" style="font-size:26px;font-weight:900;color:white;letter-spacing:-1px;font-family:'Inter',sans-serif">+</div>
-        <div class="cc-ws-hero-text">
-          <div class="cc-ws-hero-title">開始創作</div>
-          <div class="cc-ws-hero-sub">上傳影片・圖片・短貼文</div>
-        </div>
-        <div style="font-size:20px;color:rgba(255,255,255,0.25)">›</div>
-      </div>
 
-      <!-- Tabs -->
-      <div class="cc-ws-tabs">
-        <button class="cc-ws-tab active">趨勢</button>
-        <button class="cc-ws-tab">我的貼文</button>
-        <button class="cc-ws-tab">Crew</button>
-      </div>
-
-      <!-- Trending cards -->
-      <div class="cc-ws-section">今日熱門趨勢</div>
-      <div class="trend-row">
-        <div class="trend-card">
-          <img src="https://picsum.photos/seed/yuki-fashion/264/180" alt="" style="width:100%;height:90px;object-fit:cover;display:block">
-          <div class="trend-info">
-            <div class="trend-tag">FASHION</div>
-            <div class="trend-name">Y2K 復古格紋穿搭</div>
-            <div class="trend-heat">↑ 12.4K 影片</div>
+      <!-- Collab project banner -->
+      <div class="collab-banner">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="collab-project-name">🎬 Summer Vibes</div>
+          <div style="font-size:10.5px;font-weight:600;color:rgba(74,222,128,0.8)">
+            <span class="collab-live-dot"></span>Live · 3 人協作
           </div>
         </div>
-        <div class="trend-card">
-          <img src="https://picsum.photos/seed/yuki-art/264/180" alt="" style="width:100%;height:90px;object-fit:cover;display:block">
-          <div class="trend-info">
-            <div class="trend-tag">ART</div>
-            <div class="trend-name">霓虹油畫塗鴉挑戰</div>
-            <div class="trend-heat">↑ 8.7K 影片</div>
-          </div>
-        </div>
-        <div class="trend-card">
-          <img src="https://picsum.photos/seed/yuki-street/264/180" alt="" style="width:100%;height:90px;object-fit:cover;display:block">
-          <div class="trend-info">
-            <div class="trend-tag">STYLE</div>
-            <div class="trend-name">Streetwear Mix &amp; Match</div>
-            <div class="trend-heat">↑ 6.1K 影片</div>
-          </div>
+        <div class="collab-meta">與好友共同創作 · 今天 4 個新編輯</div>
+        <div class="collab-members">
+          <img class="collab-av" src="faces/yuki.png" alt="Yuki" title="Yuki（你）">
+          <img class="collab-av" src="https://i.pravatar.cc/52?img=5" alt="Mia" title="Mia">
+          <img class="collab-av" src="https://i.pravatar.cc/52?img=11" alt="Jake" title="Jake">
+          <div class="collab-av-more">+1</div>
+          <div style="flex:1"></div>
+          <div style="font-size:10.5px;color:rgba(255,255,255,0.25)">3 mins ago 加入</div>
         </div>
       </div>
 
-      <!-- For you -->
-      <div class="cc-ws-section" style="margin-top:14px">為你推薦</div>
-      <div class="cc-ws-post">
-        <div class="cc-ws-post-av" style="overflow:hidden;padding:0">
-          <img src="https://picsum.photos/seed/post-fashion1/72/72" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
+      <!-- Shared canvas card -->
+      <div class="collab-canvas-card">
+        <div class="canvas-preview">
+          <img src="https://picsum.photos/seed/summer-vibes-collab/780/272" alt="">
+          <div class="canvas-overlay"></div>
+          <!-- Live editing cursors -->
+          <div class="cursor-badge" style="top:9px;left:10px">
+            <div class="cursor-dot" style="background:#60A5FA"></div>
+            <span class="cursor-label">Mia 正在編輯…</span>
+          </div>
+          <div class="cursor-badge" style="top:9px;right:10px">
+            <div class="cursor-dot" style="background:#FB923C"></div>
+            <span class="cursor-label">Jake 加了字幕</span>
+          </div>
+          <div class="canvas-title-overlay">
+            <div class="canvas-title-text">Summer Vibes 2024 ☀️</div>
+            <div class="canvas-title-sub">影片 · 00:45 · v3 · 4 clips</div>
+          </div>
         </div>
-        <div class="cc-ws-post-text">
-          <div class="cc-ws-post-name">Fashion Challenge #2024</div>
-          <div class="cc-ws-post-sub">正在熱傳 · 適合你的風格</div>
+        <div class="canvas-footer">
+          <span class="canvas-meta">🎬 4 clips &nbsp;·&nbsp; 2 transitions &nbsp;·&nbsp; 1 filter</span>
+          <button class="canvas-edit-btn">✎ 繼續編輯</button>
         </div>
-        <div class="cc-ws-post-badge">參加</div>
       </div>
-      <div class="cc-ws-post">
-        <div class="cc-ws-post-av" style="overflow:hidden;padding:0;border-color:rgba(74,222,128,0.2)">
-          <img src="https://picsum.photos/seed/post-art2/72/72" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
+
+      <!-- AI guidance card -->
+      <div class="ai-guide-card">
+        <div class="ai-guide-icon">✦</div>
+        <div class="ai-guide-text">
+          <div class="ai-guide-title">AI Butler 建議</div>
+          <div class="ai-guide-body">在第 2 和第 3 片段間加入淡入轉場 — 配合 Mia 的色調很自然！</div>
         </div>
-        <div class="cc-ws-post-text">
-          <div class="cc-ws-post-name">Art Collab with @mia</div>
-          <div class="cc-ws-post-sub">你的 Crew 邀請你合作</div>
-        </div>
-        <div class="cc-ws-post-badge" style="color:#4ADE80;background:rgba(74,222,128,0.08);border-color:rgba(74,222,128,0.25)">查看</div>
+        <button class="ai-guide-apply">套用</button>
       </div>
+
+      <!-- Contribution feed -->
+      <div class="cc-ws-section" style="margin-top:6px">合作進度</div>
+
+      <!-- Yuki's draft attempt -->
+      <div class="contrib-item yuki-item">
+        <div class="contrib-av">
+          <img src="faces/yuki.png" alt="">
+        </div>
+        <div class="contrib-content">
+          <div class="contrib-header">
+            <span class="contrib-name">Yuki（你）</span>
+            <span class="contrib-tag draft">草稿</span>
+          </div>
+          <div class="contrib-body">加了片頭字卡「Summer 2024 ☀️」</div>
+          <div class="contrib-thumb-row">
+            <div class="contrib-thumb-item">
+              <img src="https://picsum.photos/seed/yuki-title-card/116/84" alt="">
+            </div>
+            <div class="contrib-thumb-add">＋</div>
+          </div>
+          <div class="contrib-time">剛才 · 3 mins ago</div>
+        </div>
+      </div>
+
+      <!-- Mia's contribution -->
+      <div class="contrib-item">
+        <div class="contrib-av">
+          <img src="https://i.pravatar.cc/68?img=5" alt="">
+        </div>
+        <div class="contrib-content">
+          <div class="contrib-header">
+            <span class="contrib-name">Mia</span>
+            <span class="contrib-tag added">新增片段</span>
+          </div>
+          <div class="contrib-body">海灘夕陽 montage — 00:22，色調超美 🌅</div>
+          <div class="contrib-thumb-row">
+            <div class="contrib-thumb-item">
+              <img src="https://picsum.photos/seed/mia-beach1/116/84" alt="">
+            </div>
+            <div class="contrib-thumb-item">
+              <img src="https://picsum.photos/seed/mia-sunset2/116/84" alt="">
+            </div>
+          </div>
+          <div class="contrib-time">15 mins ago</div>
+        </div>
+      </div>
+
+      <!-- AI auto action -->
+      <div class="contrib-item ai-item">
+        <div class="contrib-av-icon" style="background:rgba(192,132,252,0.1)">✦</div>
+        <div class="contrib-content">
+          <div class="contrib-header">
+            <span class="contrib-name" style="color:rgba(192,132,252,0.82)">AI Butler</span>
+            <span class="contrib-tag ai-tag">自動調整</span>
+          </div>
+          <div class="contrib-body">音樂節奏已自動對齊 Jake 的轉場時間點</div>
+          <div class="contrib-time">20 mins ago</div>
+        </div>
+      </div>
+
+      <!-- Jake's contribution -->
+      <div class="contrib-item">
+        <div class="contrib-av">
+          <img src="https://i.pravatar.cc/68?img=11" alt="">
+        </div>
+        <div class="contrib-content">
+          <div class="contrib-header">
+            <span class="contrib-name">Jake</span>
+            <span class="contrib-tag added">加了字幕</span>
+          </div>
+          <div class="contrib-body">「一起去看日落吧」＋ 音效嗶嗶</div>
+          <div class="contrib-time">25 mins ago</div>
+        </div>
+      </div>
+
       <div style="height:16px"></div>
     </div>
 
@@ -1017,14 +1173,19 @@ function toggleConsent(){
 
 // ── Constellation data — Yuki at center ──
 const NODES=[
-  {id:'yuki',   label:'Yuki',    note:'You',           icon:'Yv', color:'#4ADE80', x:195, y:195, r:36, center:true},
+  {id:'yuki',   label:'Yuki',    note:'You',           icon:'Yv', color:'#4ADE80', x:195, y:195, r:36, center:true,
+   photo:'faces/yuki.png'},
   {id:'eva',    label:'Mom',     note:'Mei · Online',  icon:'M',  color:'#C084FC', x: 88, y:120, r:27,
+   photo:'faces/mei.png',
    status:['◎ Mom','◈ AI Butler']},
-  {id:'wei',    label:'Dad',     note:'Kenji',           icon:'K',  color:'#60A5FA', x:302, y:120, r:25,
+  {id:'wei',    label:'Dad',     note:'Kenji',         icon:'K',  color:'#60A5FA', x:302, y:120, r:25,
+   photo:'faces/kanji.png',
    status:['◎ Dad']},
-  {id:'grace',  label:'Grandma', note:'Hana',         icon:'✦',  color:'#FFC364', x: 80, y:308, r:22,
+  {id:'grace',  label:'Grandma', note:'Hana',          icon:'✦',  color:'#FFC364', x: 80, y:308, r:22,
+   photo:'faces/grandma.png',
    status:['✦ Grandma','○ Healthy']},
-  {id:'ethan',  label:'Hiro',   note:'Brother',       icon:'Hi', color:'#FB923C', x:310, y:308, r:22,
+  {id:'ethan',  label:'Hiro',   note:'Brother',        icon:'Hi', color:'#FB923C', x:310, y:308, r:22,
+   photo:'faces/hiro.png',
    status:['◎ Brother']},
 ];
 const EDGES=[
@@ -1188,7 +1349,10 @@ function buildConstellation(){
   ccChipTxt.textContent='Join →';ccG.appendChild(ccChipTxt);
   svg.appendChild(ccG);
 
-  // ── Family nodes ──
+  // ── Family nodes (top layer — always above edges and CC) ──
+  const nodesLayer=document.createElementNS('http://www.w3.org/2000/svg','g');
+  svg.appendChild(nodesLayer);
+
   NODES.forEach(n=>{
     const g=document.createElementNS('http://www.w3.org/2000/svg','g');
 
@@ -1198,21 +1362,40 @@ function buildConstellation(){
     glow.setAttribute('stroke-width','1');glow.setAttribute('opacity','0.1');
     g.appendChild(glow);
 
+    // ── Photo avatar ──
+    if(n.photo){
+      const clipId='clip-node-'+n.id;
+      const cp=document.createElementNS('http://www.w3.org/2000/svg','clipPath');
+      cp.setAttribute('id',clipId);
+      const clipCirc=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      clipCirc.setAttribute('cx',n.x);clipCirc.setAttribute('cy',n.y);clipCirc.setAttribute('r',n.r-0.5);
+      cp.appendChild(clipCirc);defs.appendChild(cp);
+      const phImg=document.createElementNS('http://www.w3.org/2000/svg','image');
+      phImg.setAttribute('href',n.photo);
+      phImg.setAttribute('x',n.x-n.r);phImg.setAttribute('y',n.y-n.r);
+      phImg.setAttribute('width',n.r*2);phImg.setAttribute('height',n.r*2);
+      phImg.setAttribute('clip-path','url(#'+clipId+')');
+      phImg.setAttribute('preserveAspectRatio','xMidYMid slice');
+      g.appendChild(phImg);
+    }
+
     const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
     c.setAttribute('cx',n.x);c.setAttribute('cy',n.y);c.setAttribute('r',n.r);
-    c.setAttribute('fill',n.center?n.color+'1a': currentTheme==='light'?'rgba(10,10,20,0.04)':'rgba(255,255,255,0.04)');
+    c.setAttribute('fill',n.photo?'none':n.center?n.color+'1a':currentTheme==='light'?'rgba(10,10,20,0.04)':'rgba(255,255,255,0.04)');
     c.setAttribute('stroke',n.color);
     c.setAttribute('stroke-width',n.center?'2':'1');
     c.setAttribute('stroke-opacity',n.center?'0.55':'0.25');
     g.appendChild(c);
 
-    const t=document.createElementNS('http://www.w3.org/2000/svg','text');
-    t.setAttribute('x',n.x);t.setAttribute('y',n.y+1);
-    t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','middle');
-    t.setAttribute('fill',n.color);t.setAttribute('opacity','0.75');
-    t.setAttribute('font-size',n.center?'14':n.id==='ethan'?'9':'12');
-    t.setAttribute('font-family','Inter,sans-serif');t.setAttribute('font-weight','700');
-    t.textContent=n.icon;g.appendChild(t);
+    if(!n.photo){
+      const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('x',n.x);t.setAttribute('y',n.y+1);
+      t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','middle');
+      t.setAttribute('fill',n.color);t.setAttribute('opacity','0.75');
+      t.setAttribute('font-size',n.center?'14':n.id==='ethan'?'9':'12');
+      t.setAttribute('font-family','Inter,sans-serif');t.setAttribute('font-weight','700');
+      t.textContent=n.icon;g.appendChild(t);
+    }
 
     const lbl=document.createElementNS('http://www.w3.org/2000/svg','text');
     lbl.setAttribute('x',n.x);lbl.setAttribute('y',n.y+n.r+13);
@@ -1281,7 +1464,7 @@ function buildConstellation(){
       fa.setAttribute('keySplines','0.45 0 0.55 1;0.45 0 0.55 1');
       g.appendChild(fa);
     }
-    svg.appendChild(g);
+    nodesLayer.appendChild(g);
   });
 }
 

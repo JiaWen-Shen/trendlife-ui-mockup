@@ -1169,16 +1169,21 @@ function switchButlerTab(tab){
 
 const NODES=[
   {id:'grandma', label:'Grandma', note:'Mom',           icon:'✦',  color:'#FFC364', x:195, y:105, r:28, screen:1, alert:true,
+   photo:'faces/grandma.png',
    chips:['Health Monitoring','Scam Blocked'],
    status:['Health', 'Scam Blocked']},
-  {id:'eva',     label:'Mei',     note:'You',           icon:'M',  color:'#C084FC', x:195, y:225, r:36, center:true},
-  {id:'wei',     label:'Kenji',     note:'Husband',       icon:'K',  color:'#60A5FA', x:322, y:215, r:22, screen:5, alert:false,
+  {id:'eva',     label:'Mei',     note:'You',           icon:'M',  color:'#C084FC', x:195, y:225, r:36, center:true,
+   photo:'faces/mei.png'},
+  {id:'wei',     label:'Kenji',   note:'Husband',       icon:'K',  color:'#60A5FA', x:322, y:215, r:22, screen:5, alert:false,
+   photo:'faces/kanji.png',
    chips:['2FA Active','Devices OK'],
    status:['Secure', 'Devices OK']},
   {id:'yuki',    label:'Yuki',    note:'Granddaughter', icon:'Yv', color:'#4ADE80', x: 90, y:335, r:20, screen:4, alert:true,
+   photo:'faces/yuki.png',
    chips:['Growth +15%','Link Blocked'],
    status:['Growth +15%', 'Link Blocked']},
   {id:'ethan',   label:'Hiro',   note:'Son',           icon:'Hi', color:'#FB923C', x:298, y:335, r:20, screen:6, alert:true,
+   photo:'faces/hiro.png',
    chips:['Screen Time Alert','Browsing Safe'],
    status:['Screen Alert']},
 ];
@@ -1268,7 +1273,10 @@ function buildConstellation(){
     dot.appendChild(am);svg.appendChild(dot);
   });
 
-  // ── Nodes ──
+  // ── Nodes (top layer — always above edges) ──
+  const nodesLayer=document.createElementNS('http://www.w3.org/2000/svg','g');
+  svg.appendChild(nodesLayer);
+
   NODES.forEach(n=>{
     const g=document.createElementNS('http://www.w3.org/2000/svg','g');
     g.style.cursor='default';
@@ -1279,22 +1287,41 @@ function buildConstellation(){
     glow.setAttribute('stroke-width','1');glow.setAttribute('opacity','0.12');
     g.appendChild(glow);
 
+    // ── Photo avatar ──
+    if(n.photo){
+      const clipId='clip-node-'+n.id;
+      const cp=document.createElementNS('http://www.w3.org/2000/svg','clipPath');
+      cp.setAttribute('id',clipId);
+      const clipCirc=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      clipCirc.setAttribute('cx',n.x);clipCirc.setAttribute('cy',n.y);clipCirc.setAttribute('r',n.r-0.5);
+      cp.appendChild(clipCirc);defs.appendChild(cp);
+      const phImg=document.createElementNS('http://www.w3.org/2000/svg','image');
+      phImg.setAttribute('href',n.photo);
+      phImg.setAttribute('x',n.x-n.r);phImg.setAttribute('y',n.y-n.r);
+      phImg.setAttribute('width',n.r*2);phImg.setAttribute('height',n.r*2);
+      phImg.setAttribute('clip-path','url(#'+clipId+')');
+      phImg.setAttribute('preserveAspectRatio','xMidYMid slice');
+      g.appendChild(phImg);
+    }
+
     const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
     c.setAttribute('cx',n.x);c.setAttribute('cy',n.y);c.setAttribute('r',n.r);
-    c.setAttribute('fill',n.center?n.color+'1a': currentTheme==='light'?'rgba(10,10,20,0.04)':'rgba(255,255,255,0.04)');
+    c.setAttribute('fill',n.photo?'none':n.center?n.color+'1a':currentTheme==='light'?'rgba(10,10,20,0.04)':'rgba(255,255,255,0.04)');
     c.setAttribute('stroke',n.color);
     c.setAttribute('stroke-width',n.center?'2':'1');
     c.setAttribute('stroke-opacity',n.center?'0.55':'0.28');
     g.appendChild(c);
 
-    const t=document.createElementNS('http://www.w3.org/2000/svg','text');
-    t.setAttribute('x',n.x);t.setAttribute('y',n.y+1);
-    t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','middle');
-    t.setAttribute('fill',n.color);t.setAttribute('opacity','0.75');
-    t.setAttribute('font-size',n.center?'16':n.id==='yuki'||n.id==='ethan'?'10':'12');
-    t.setAttribute('font-family','Inter,sans-serif');t.setAttribute('font-weight','700');
-    t.textContent=n.icon;
-    g.appendChild(t);
+    if(!n.photo){
+      const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('x',n.x);t.setAttribute('y',n.y+1);
+      t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','middle');
+      t.setAttribute('fill',n.color);t.setAttribute('opacity','0.75');
+      t.setAttribute('font-size',n.center?'16':n.id==='yuki'||n.id==='ethan'?'10':'12');
+      t.setAttribute('font-family','Inter,sans-serif');t.setAttribute('font-weight','700');
+      t.textContent=n.icon;
+      g.appendChild(t);
+    }
 
     const lbl=document.createElementNS('http://www.w3.org/2000/svg','text');
     lbl.setAttribute('x',n.x);lbl.setAttribute('y',n.y+n.r+14);
@@ -1469,7 +1496,7 @@ function buildConstellation(){
       g.appendChild(fa);
     }
 
-    svg.appendChild(g);
+    nodesLayer.appendChild(g);
   });
 }
 
@@ -1589,8 +1616,14 @@ const EVA_HTML=`
 // ── Relationship Peek ──
 function showPeek(n){
   const av=document.getElementById('peek-av');
-  av.textContent=n.icon;
-  av.style.cssText='color:'+n.color+';border-color:'+n.color+'55;background:'+n.color+'1a';
+  if(n.photo){
+    av.innerHTML='<img src="'+n.photo+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block">';
+    av.style.cssText='border-color:'+n.color+'66;background:none;overflow:hidden;padding:0';
+  } else {
+    av.innerHTML='';
+    av.textContent=n.icon;
+    av.style.cssText='color:'+n.color+';border-color:'+n.color+'55;background:'+n.color+'1a';
+  }
   document.getElementById('peek-name').textContent=n.label;
   document.getElementById('peek-role').textContent=n.note;
   document.getElementById('peek-chips').innerHTML=(n.chips||[]).map(c=>
