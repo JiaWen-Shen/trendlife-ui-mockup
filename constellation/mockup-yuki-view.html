@@ -395,6 +395,88 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
   will-change:clip-path,opacity;border-radius:inherit}
 .screen-entering{animation:screenIn 0.3s cubic-bezier(0.2,0,0.2,1) both}
 @keyframes screenIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── AI Orb FAB ── */
+#ai-orb{position:absolute;bottom:96px;right:16px;width:44px;height:44px;border-radius:50%;
+  background:radial-gradient(circle at 38% 35%,rgba(216,180,254,0.95),rgba(147,51,234,0.75));
+  box-shadow:0 0 0 0 rgba(192,132,252,0.5),0 4px 18px rgba(147,51,234,0.45);
+  cursor:pointer;z-index:50;display:flex;align-items:center;justify-content:center;
+  animation:orbPulse 3s ease-in-out infinite;transition:transform 0.15s;}
+#ai-orb:active{transform:scale(0.92);}
+#ai-orb.hidden{display:none;}
+.orb-icon{font-size:19px;color:rgba(255,255,255,0.95);user-select:none;}
+@keyframes orbPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(192,132,252,0.45),0 4px 18px rgba(147,51,234,0.4);}
+  50%{box-shadow:0 0 0 9px rgba(192,132,252,0),0 4px 28px rgba(147,51,234,0.65);}
+}
+.phone.sheet-open .screen.active{transform:scale(0.92) translateY(-18px);border-radius:20px;
+  transition:transform 0.35s cubic-bezier(0.2,0,0,1);}
+#ai-sheet-dim{position:absolute;inset:0;background:rgba(0,0,0,0.4);z-index:55;
+  opacity:0;pointer-events:none;transition:opacity 0.3s;}
+#ai-sheet-dim.visible{opacity:1;pointer-events:auto;}
+#ai-sheet{position:absolute;left:0;right:0;bottom:0;height:68%;z-index:60;
+  background:rgba(12,12,18,0.97);backdrop-filter:blur(20px);
+  border-top:1px solid rgba(192,132,252,0.18);border-radius:24px 24px 0 0;
+  display:flex;flex-direction:column;
+  transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.2,0,0,1);}
+#ai-sheet.visible{transform:translateY(0);}
+.sheet-handle{width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,0.15);
+  margin:12px auto 0;flex-shrink:0;}
+#ai-sheet-head{display:flex;align-items:center;gap:12px;padding:14px 20px 10px;flex-shrink:0;
+  border-bottom:1px solid rgba(255,255,255,0.05);}
+.sheet-orb-mini{width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  background:radial-gradient(circle at 38% 35%,rgba(216,180,254,0.9),rgba(147,51,234,0.65));
+  display:flex;align-items:center;justify-content:center;font-size:14px;color:white;}
+.sheet-title{font-size:15px;font-weight:700;color:rgba(255,255,255,0.88);}
+.sheet-subtitle{font-size:11.5px;color:rgba(255,255,255,0.38);margin-top:1px;}
+#ai-sheet-body{flex:1;overflow-y:auto;padding:12px 20px;}
+.sheet-action{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;
+  border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.03);
+  color:rgba(255,255,255,0.65);font-size:13px;font-weight:500;cursor:pointer;
+  margin-bottom:8px;transition:background 0.15s;}
+.sheet-action:active{background:rgba(255,255,255,0.07);}
+.sheet-action-icon{font-size:15px;width:22px;text-align:center;flex-shrink:0;}
+#ai-sheet-input-wrap{display:flex;align-items:center;gap:8px;padding:10px 16px 20px;
+  border-top:1px solid rgba(255,255,255,0.05);flex-shrink:0;}
+.sheet-input{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+  border-radius:20px;padding:9px 16px;font-size:13px;color:rgba(255,255,255,0.7);
+  font-family:'Inter',sans-serif;outline:none;}
+.sheet-send{width:32px;height:32px;border-radius:50%;background:rgba(192,132,252,0.15);
+  border:1px solid rgba(192,132,252,0.3);color:#C084FC;font-size:16px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+/* ── Notif list ── */
+#notif-wrap{position:absolute;top:8px;left:14px;right:14px;z-index:10;}
+#notif-expand{display:flex;flex-direction:column;gap:4px;
+  max-height:122px;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+#notif-expand::-webkit-scrollbar{display:none;}
+#notif-fade{position:absolute;bottom:0;left:0;right:0;height:52px;
+  background:linear-gradient(transparent 0%,rgba(14,14,20,0.82) 55%,rgba(14,14,20,0.97) 100%);
+  pointer-events:none;z-index:20;
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;}
+#notif-fade::after{content:'↓  more';font-size:9.5px;font-weight:600;
+  color:rgba(255,255,255,0.38);letter-spacing:0.8px;font-family:'Inter',sans-serif;}
+.notif-row{display:flex;align-items:center;gap:9px;padding:7px 11px 7px 10px;
+  border-radius:11px;background:rgba(14,14,22,0.52);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.07);cursor:pointer;transition:background 0.15s;}
+.notif-row:active{background:rgba(255,255,255,0.09);}
+.notif-icon{font-size:12px;width:16px;text-align:center;flex-shrink:0;}
+.notif-body{flex:1;font-size:12px;font-weight:500;color:rgba(255,255,255,0.72);letter-spacing:-0.1px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.notif-time{font-size:10px;color:rgba(255,255,255,0.22);flex-shrink:0;}
+.notif-dismiss{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.3);font-size:7px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-left:2px;}
+body.light #ai-orb{background:radial-gradient(circle at 38% 35%,rgba(192,132,252,0.9),rgba(109,40,217,0.7));}
+body.light #ai-sheet{background:rgba(250,250,254,0.98);border-top-color:rgba(147,51,234,0.2);}
+body.light .sheet-title{color:rgba(10,10,20,0.9);}body.light .sheet-subtitle{color:rgba(10,10,20,0.42);}
+body.light .sheet-action{border-color:rgba(10,10,20,0.07);color:rgba(10,10,20,0.65);}
+body.light .sheet-input{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.75);}
+body.light #notif-fade{background:linear-gradient(transparent 0%,rgba(235,235,245,0.85) 55%,rgba(235,235,245,0.97) 100%);}
+body.light #notif-fade::after{color:rgba(10,10,20,0.32);}
+body.light .notif-row{background:rgba(240,240,250,0.78);border-color:rgba(10,10,20,0.08);}
+body.light .notif-body{color:rgba(10,10,20,0.7);}
+body.light .notif-time{color:rgba(10,10,20,0.3);}
+body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.35);}
 </style>
 </head>
 <body>
@@ -414,6 +496,47 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
     </div>
     <div class="const-area">
       <svg class="const-svg" id="const-svg" viewBox="0 0 390 420" preserveAspectRatio="xMidYMid meet"></svg>
+      <div id="notif-wrap">
+        <div id="notif-expand">
+          <div class="notif-row" id="notif-crew" onclick="goTo(7)">
+            <span class="notif-icon" style="color:#4ADE80">✅</span>
+            <span class="notif-body">Mom approved CrewCreate — tap to join now!</span>
+            <span class="notif-time">Just now</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-crew')">✕</div>
+          </div>
+          <div class="notif-row" id="notif-phish" onclick="goTo(6)">
+            <span class="notif-icon" style="color:#C084FC">🛡</span>
+            <span class="notif-body">AI Butler blocked a phishing link — kept you safe</span>
+            <span class="notif-time">Yesterday</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-phish')">✕</div>
+          </div>
+          <div class="notif-row" id="notif-screen" onclick="goTo(6)">
+            <span class="notif-icon" style="color:#FFB84D">⏰</span>
+            <span class="notif-body">Screen time: 2h remaining today</span>
+            <span class="notif-time">Today</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-screen')">✕</div>
+          </div>
+          <div class="notif-row" id="notif-grandma" onclick="goTo(6)">
+            <span class="notif-icon" style="color:#FFC364">💬</span>
+            <span class="notif-body">Grandma sent you a voice message</span>
+            <span class="notif-time">1h ago</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-grandma')">✕</div>
+          </div>
+          <div class="notif-row" id="notif-hiro" onclick="goTo(6)">
+            <span class="notif-icon" style="color:#FB923C">🎮</span>
+            <span class="notif-body">Hiro challenged you to a game — accept?</span>
+            <span class="notif-time">2h ago</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-hiro')">✕</div>
+          </div>
+          <div class="notif-row" id="notif-streak" onclick="goTo(6)">
+            <span class="notif-icon" style="color:#FCD34D">📚</span>
+            <span class="notif-body">Learning streak: 5 days! Critical thinking +15%</span>
+            <span class="notif-time">Today</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-streak')">✕</div>
+          </div>
+        </div>
+        <div id="notif-fade"></div>
+      </div>
     </div>
     <div class="tab-bar">
       <div class="tab-item active"><div class="tab-icon">✦</div><div class="tab-label">Home</div></div>
@@ -846,13 +969,40 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
   <!-- Zoom overlay -->
   <div id="zoom-overlay"></div>
 
+  <!-- ── AI Orb FAB ── -->
+  <div id="ai-orb" onclick="toggleAISheet()">
+    <span class="orb-icon">◈</span>
+  </div>
+  <div id="ai-sheet-dim" onclick="closeAISheet()"></div>
+  <div id="ai-sheet">
+    <div class="sheet-handle"></div>
+    <div id="ai-sheet-head">
+      <div class="sheet-orb-mini">◈</div>
+      <div>
+        <div class="sheet-title" id="sheet-title">AI Butler</div>
+        <div class="sheet-subtitle" id="sheet-subtitle">Always here for you</div>
+      </div>
+    </div>
+    <div id="ai-sheet-body"></div>
+    <div id="ai-sheet-input-wrap">
+      <input class="sheet-input" placeholder="Ask AI Butler anything…" readonly>
+      <div class="sheet-send">↑</div>
+    </div>
+  </div>
+
 </div>
 
 <script>
 // ── Navigation ──
+let _currentScreen=0;
+let _aiSheetOpen=false;
 function goTo(n){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('s'+n).classList.add('active');
+  _currentScreen=n;
+  const orb=document.getElementById('ai-orb');
+  if(orb) orb.classList.toggle('hidden', n===6);
+  if(n===6 && _aiSheetOpen) closeAISheet();
 }
 
 // ── Consent toggle ──
@@ -894,44 +1044,34 @@ function buildConstellation(){
   svg.innerHTML='';
   const nm=Object.fromEntries(NODES.map(n=>[n.id,n]));
 
-  // ── AI Butler Arc ──
+  // ── SVG Defs ──
+  const defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
+  const arcGrad=document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
+  arcGrad.setAttribute('id','arc-bg-grad');arcGrad.setAttribute('gradientUnits','userSpaceOnUse');
+  arcGrad.setAttribute('x1','195');arcGrad.setAttribute('y1','18');
+  arcGrad.setAttribute('x2','195');arcGrad.setAttribute('y2','100');
+  const ag1=document.createElementNS('http://www.w3.org/2000/svg','stop');
+  ag1.setAttribute('offset','0%');ag1.setAttribute('stop-color','#4ADE80');
+  ag1.setAttribute('stop-opacity',currentTheme==='light'?'0.12':'0.18');
+  const ag2=document.createElementNS('http://www.w3.org/2000/svg','stop');
+  ag2.setAttribute('offset','100%');ag2.setAttribute('stop-color','#4ADE80');
+  ag2.setAttribute('stop-opacity','0');
+  arcGrad.appendChild(ag1);arcGrad.appendChild(ag2);defs.appendChild(arcGrad);
+  svg.appendChild(defs);
+
+  // ── Guardian Arc (visual frame for notifications) ──
   const arcG=document.createElementNS('http://www.w3.org/2000/svg','g');
   const arcBg=document.createElementNS('http://www.w3.org/2000/svg','path');
-  arcBg.setAttribute('d','M 28 80 C 28 18 362 18 362 80 Z');
-  arcBg.setAttribute('fill','rgba(74,222,128,0.04)');
+  arcBg.setAttribute('d','M 0 100 L 28 80 C 28 18 362 18 362 80 L 390 100 Z');
+  arcBg.setAttribute('fill','url(#arc-bg-grad)');arcBg.setAttribute('stroke','none');
   arcG.appendChild(arcBg);
   const arcLine=document.createElementNS('http://www.w3.org/2000/svg','path');
   arcLine.setAttribute('d','M 28 80 C 28 18 362 18 362 80');
   arcLine.setAttribute('fill','none');
-  arcLine.setAttribute('stroke','rgba(74,222,128,0.5)');
-  arcLine.setAttribute('stroke-width','1.5');
-  arcLine.setAttribute('stroke-dasharray','3 5');
+  arcLine.setAttribute('stroke',currentTheme==='light'?'rgba(74,222,128,0.35)':'rgba(74,222,128,0.45)');
+  arcLine.setAttribute('stroke-width','1');
+  arcLine.setAttribute('stroke-dasharray','3 6');
   arcG.appendChild(arcLine);
-  const arcBase=document.createElementNS('http://www.w3.org/2000/svg','line');
-  arcBase.setAttribute('x1','28');arcBase.setAttribute('y1','80');
-  arcBase.setAttribute('x2','362');arcBase.setAttribute('y2','80');
-  arcBase.setAttribute('stroke','rgba(74,222,128,0.18)');arcBase.setAttribute('stroke-width','1');
-  arcG.appendChild(arcBase);
-  const arcSym=document.createElementNS('http://www.w3.org/2000/svg','text');
-  arcSym.setAttribute('x','195');arcSym.setAttribute('y','36');
-  arcSym.setAttribute('text-anchor','middle');arcSym.setAttribute('dominant-baseline','middle');
-  arcSym.setAttribute('fill','#4ADE80');arcSym.setAttribute('font-size','14');
-  arcSym.setAttribute('font-family','Inter,sans-serif');arcSym.setAttribute('font-weight','700');
-  arcSym.textContent='◈';
-  const anim1=document.createElementNS('http://www.w3.org/2000/svg','animate');
-  anim1.setAttribute('attributeName','opacity');anim1.setAttribute('values','1;0.35;1');
-  anim1.setAttribute('dur','3.5s');anim1.setAttribute('repeatCount','indefinite');
-  arcSym.appendChild(anim1);arcG.appendChild(arcSym);
-  const arcLbl=document.createElementNS('http://www.w3.org/2000/svg','text');
-  arcLbl.setAttribute('x','195');arcLbl.setAttribute('y','55');
-  arcLbl.setAttribute('text-anchor','middle');
-  arcLbl.setAttribute('fill','rgba(74,222,128,0.58)');arcLbl.setAttribute('font-size','9');
-  arcLbl.setAttribute('font-family','Inter,sans-serif');arcLbl.setAttribute('font-weight','600');
-  arcLbl.setAttribute('letter-spacing','1.2');
-  arcLbl.textContent='AI BUTLER · TAP TO CHAT ›';
-  arcG.appendChild(arcLbl);
-  arcG.style.cursor='pointer';
-  arcG.onclick=()=>goTo(6);
   svg.appendChild(arcG);
 
   // ── Edges ──
@@ -1199,6 +1339,53 @@ window.addEventListener('message',e=>{
   if(e.data.type==='setTheme') setTheme(e.data.theme);
   if(e.data.type==='goTo') goTo(e.data.screen);
 });
+
+function dismissNotif(id){
+  const el=document.getElementById(id);
+  if(el){el.style.opacity='0';el.style.transform='translateX(8px)';
+    el.style.transition='opacity 0.2s,transform 0.2s';
+    setTimeout(()=>el.style.display='none',200);}
+}
+
+const AI_CTX={
+  0:{title:'Hi Yuki ✦', hint:'Learning streak 5 days · 6 updates',
+     actions:['Start today\'s AI learning session','Join CrewCreate workspace','Message Grandma']},
+  1:{title:'CrewCreate',hint:'Age verification step',
+     actions:['Continue sign-up','Ask AI for help']},
+  2:{title:'Your Interests',hint:'Tell us what you love',
+     actions:['Pick suggested topics','Ask AI what suits you']},
+  3:{title:'Your Goals',hint:'What do you want to create?',
+     actions:['Explore goal ideas','See what others your age make']},
+  4:{title:'Parental Consent',hint:'Mom needs to approve',
+     actions:['Send reminder to Mom','Preview what you\'ll create']},
+  5:{title:'Waiting…',hint:'Mom is reviewing your request',
+     actions:['Send a nudge to Mom','Preview CrewCreate features']},
+  6:{title:'AI Butler',hint:'Always here for you',actions:[]},
+  7:{title:'Joining CrewCreate',hint:'Setting up your account…',actions:[]},
+  8:{title:'CrewCreate',hint:'Your creative workspace',
+     actions:['Start your first post','Explore trending creators','Share with family']},
+};
+function toggleAISheet(){_aiSheetOpen?closeAISheet():openAISheet();}
+function openAISheet(){
+  const ctx=AI_CTX[_currentScreen]||{title:'AI Butler',hint:'Always here for you',actions:[]};
+  document.getElementById('sheet-title').textContent=ctx.title;
+  document.getElementById('sheet-subtitle').textContent=ctx.hint;
+  const body=document.getElementById('ai-sheet-body');
+  const icons=['✦','◈','→','💡','🎯','✨'];
+  body.innerHTML=ctx.actions.map((a,i)=>
+    `<div class="sheet-action"><span class="sheet-action-icon">${icons[i]||'→'}</span>${a}</div>`
+  ).join('');
+  document.getElementById('ai-sheet').classList.add('visible');
+  document.getElementById('ai-sheet-dim').classList.add('visible');
+  document.querySelector('.phone').classList.add('sheet-open');
+  _aiSheetOpen=true;
+}
+function closeAISheet(){
+  document.getElementById('ai-sheet').classList.remove('visible');
+  document.getElementById('ai-sheet-dim').classList.remove('visible');
+  document.querySelector('.phone').classList.remove('sheet-open');
+  _aiSheetOpen=false;
+}
 
 buildConstellation();
 </script>
