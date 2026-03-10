@@ -149,7 +149,7 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 .cc-checkbox-row.checked .cc-checkbox-text{color:rgba(255,255,255,0.6)}
 
 /* ─────────────────────────────
-   S5 · Waiting for Eva
+   S5 · Waiting for Mei
    ───────────────────────────── */
 .waiting-body{flex:1;display:flex;flex-direction:column;align-items:center;
   justify-content:center;padding:28px 24px;gap:28px}
@@ -571,7 +571,7 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
 
       <div class="tl-banner">
         <div class="tl-banner-logo">T</div>
-        <div class="tl-banner-text">透過 <strong>TrendLife AI Butler</strong>，批准請求會直接傳送給媽媽 Eva，不需要傳統電子郵件</div>
+        <div class="tl-banner-text">透過 <strong>TrendLife AI Butler</strong>，批准請求會直接傳送給媽媽 Mei，不需要傳統電子郵件</div>
       </div>
 
       <div class="cc-consent-box">
@@ -600,7 +600,7 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
   </div>
 
   <!-- ══════════════════════════════
-       S5 · Waiting for Eva's Approval
+       S5 · Waiting for Mei's Approval
        ══════════════════════════════ -->
   <div class="screen" id="s5">
     <div class="status-bar">
@@ -618,7 +618,7 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
           <div class="waiting-av">E</div>
         </div>
         <div style="text-align:center">
-          <div style="font-size:17px;font-weight:700;color:rgba(255,255,255,0.85)">媽媽 Eva</div>
+          <div style="font-size:17px;font-weight:700;color:rgba(255,255,255,0.85)">媽媽 Mei</div>
           <div style="font-size:12px;color:rgba(255,255,255,0.32);margin-top:3px">透過 TrendLife AI Butler</div>
         </div>
       </div>
@@ -681,7 +681,7 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
       </div>
       <div class="butler-msg">
         <div class="butler-av" style="width:30px;height:30px;font-size:13px">◈</div>
-        <div class="butler-bubble ai">媽媽 Eva 今天下午有會議，但 6 點後應該有空。要我幫你安排提醒她幫你確認 CrewCreate 嗎？✦</div>
+        <div class="butler-bubble ai">媽媽 Mei 今天下午有會議，但 6 點後應該有空。要我幫你安排提醒她幫你確認 CrewCreate 嗎？✦</div>
       </div>
     </div>
     <div class="butler-quick">
@@ -868,13 +868,13 @@ function toggleConsent(){
 // ── Constellation data — Yuki at center ──
 const NODES=[
   {id:'yuki',   label:'Yuki',    note:'You',           icon:'Yv', color:'#4ADE80', x:195, y:195, r:36, center:true},
-  {id:'eva',    label:'Mom',     note:'Eva · Online',  icon:'E',  color:'#C084FC', x: 88, y:120, r:27,
+  {id:'eva',    label:'Mom',     note:'Mei · Online',  icon:'M',  color:'#C084FC', x: 88, y:120, r:27,
    status:['◎ Mom','◈ AI Butler']},
-  {id:'wei',    label:'Dad',     note:'Wei',           icon:'W',  color:'#60A5FA', x:302, y:120, r:25,
+  {id:'wei',    label:'Dad',     note:'Kenji',           icon:'K',  color:'#60A5FA', x:302, y:120, r:25,
    status:['◎ Dad']},
-  {id:'grace',  label:'Grandma', note:'Grace',         icon:'✦',  color:'#FFC364', x: 80, y:308, r:22,
+  {id:'grace',  label:'Grandma', note:'Hana',         icon:'✦',  color:'#FFC364', x: 80, y:308, r:22,
    status:['✦ Grandma','○ Healthy']},
-  {id:'ethan',  label:'Ethan',   note:'Brother',       icon:'Et', color:'#FB923C', x:310, y:308, r:22,
+  {id:'ethan',  label:'Hiro',   note:'Brother',       icon:'Hi', color:'#FB923C', x:310, y:308, r:22,
    status:['◎ Brother']},
 ];
 const EDGES=[
