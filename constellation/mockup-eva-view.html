@@ -372,6 +372,50 @@ body.light .sheet-action{background:rgba(147,51,234,0.05);border-color:rgba(147,
 body.light .sheet-input{background:rgba(10,10,20,0.04);border-color:rgba(147,51,234,0.15);color:rgba(10,10,20,0.45);}
 body.light .sheet-send{background:rgba(147,51,234,0.1);border-color:rgba(147,51,234,0.25);color:#9333EA;}
 
+/* ── S4 Yuki Creative Report ── */
+.yuki-work-card{display:flex;border-radius:14px;overflow:hidden;margin-bottom:10px;
+  border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);}
+.yuki-work-card.featured{flex-direction:column;border:1px solid rgba(0,188,212,0.18);}
+.ywc-thumb{flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.yuki-work-card.featured .ywc-thumb{height:96px;width:100%;}
+.yuki-work-card:not(.featured) .ywc-thumb{width:72px;min-height:80px;}
+.ywc-thumb-icon{font-size:30px;position:relative;z-index:1;}
+.ywc-info{padding:11px 14px;display:flex;flex-direction:column;justify-content:center;}
+.ywc-tag{font-size:9px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;
+  color:rgba(255,255,255,0.3);margin-bottom:4px;}
+.ywc-title{font-size:13px;font-weight:700;color:rgba(255,255,255,0.85);
+  margin-bottom:2px;letter-spacing:-0.1px;line-height:1.35;}
+.ywc-meta{font-size:11px;color:rgba(255,255,255,0.28);margin-bottom:5px;}
+.ywc-feedback{font-size:11.5px;color:rgba(255,255,255,0.4);font-style:italic;line-height:1.5;}
+.skill-bars-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);
+  border-radius:14px;padding:14px 16px;margin-bottom:14px;}
+.skill-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:9px;}
+.skill-bar-row:last-child{margin-bottom:0;}
+.skill-name{font-size:11.5px;color:rgba(255,255,255,0.45);width:100px;flex-shrink:0;}
+.skill-bar-wrap{flex:1;height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;}
+.skill-bar-fill{height:100%;border-radius:3px;}
+.skill-delta{font-size:10.5px;font-weight:700;width:30px;text-align:right;flex-shrink:0;}
+.protection-compact{display:flex;align-items:center;gap:12px;border-radius:12px;padding:11px 14px;
+  background:rgba(74,222,128,0.04);border:1px solid rgba(74,222,128,0.14);margin-bottom:10px;}
+.pc-icon{font-size:16px;flex-shrink:0;}
+.pc-compact-text{flex:1;}
+.pc-compact-title{font-size:12.5px;font-weight:600;color:rgba(255,255,255,0.72);margin-bottom:1px;}
+.pc-compact-detail{font-size:11px;color:rgba(255,255,255,0.32);}
+.pc-compact-badge{font-size:10px;padding:2px 8px;border-radius:6px;font-weight:600;flex-shrink:0;
+  color:#F87171;background:rgba(248,113,113,0.1);}
+body.light .yuki-work-card{border-color:rgba(10,10,20,0.08);background:rgba(10,10,20,0.02);}
+body.light .yuki-work-card.featured{border-color:rgba(0,147,167,0.2);}
+body.light .ywc-tag{color:rgba(10,10,20,0.3);}
+body.light .ywc-title{color:rgba(10,10,20,0.85);}
+body.light .ywc-meta{color:rgba(10,10,20,0.3);}
+body.light .ywc-feedback{color:rgba(10,10,20,0.42);}
+body.light .skill-bars-card{background:rgba(10,10,20,0.02);border-color:rgba(10,10,20,0.07);}
+body.light .skill-name{color:rgba(10,10,20,0.5);}
+body.light .skill-bar-wrap{background:rgba(10,10,20,0.08);}
+body.light .protection-compact{background:rgba(22,163,74,0.04);border-color:rgba(22,163,74,0.18);}
+body.light .pc-compact-title{color:rgba(10,10,20,0.72);}
+body.light .pc-compact-detail{color:rgba(10,10,20,0.35);}
+
 /* ── S10 AI Task Execution ── */
 .task-exec-body{flex:1;overflow-y:auto;padding:20px;}
 .task-context-card{background:rgba(192,132,252,0.06);border:1px solid rgba(192,132,252,0.16);
@@ -738,64 +782,84 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     </div>
     <div class="protect-body">
       <div class="protect-hero">
-        <img src="faces/yuki.png" style="width:68px;height:68px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 12px;border:2px solid rgba(74,222,128,0.28)">
+        <img src="faces/yuki.png" style="width:68px;height:68px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 12px;border:2px solid rgba(0,188,212,0.28)">
         <div class="protect-name">Yuki</div>
         <div class="protect-role">Granddaughter · Age 14</div>
         <div class="protect-status-row">
           <div class="pstat">
-            <div class="pstat-val" style="color:rgba(255,255,255,0.75)">2</div>
-            <div class="pstat-lbl">Projects today</div>
+            <div class="pstat-val" style="color:rgba(255,255,255,0.8)">2</div>
+            <div class="pstat-lbl">Works today</div>
           </div>
           <div class="pstat">
-            <div class="pstat-val" style="color:#4ADE80">+15%</div>
-            <div class="pstat-lbl">Critical thinking</div>
+            <div class="pstat-val" style="color:#00BCD4">+15%</div>
+            <div class="pstat-lbl">Growth</div>
           </div>
           <div class="pstat">
-            <div class="pstat-val" style="color:#F87171">3</div>
-            <div class="pstat-lbl">Threats blocked</div>
+            <div class="pstat-val" style="color:rgba(255,255,255,0.6)">45m</div>
+            <div class="pstat-lbl">Learning</div>
           </div>
         </div>
       </div>
 
-      <!-- ── Block 1: Protection ── -->
-      <div class="report-section-lbl">🛡 Protection Overview</div>
-      <div class="protect-card warn">
-        <div class="pc-eyebrow" style="color:#F87171">— Latest Block · Yesterday 4:23 PM</div>
-        <div class="pc-text" style="font-size:13px">Phishing link blocked <span style="color:rgba(255,255,255,0.35);font-size:11px">— secure-bank-verify.xyz</span></div>
-        <div style="display:flex;gap:6px;margin-top:8px">
-          <span class="ev-badge" style="color:#F87171;background:rgba(248,113,113,0.1)">High Risk · Blocked</span>
+      <!-- ── Today's Creations ── -->
+      <div class="report-section-lbl">✦ Today's Creations</div>
+
+      <div class="yuki-work-card featured">
+        <div class="ywc-thumb" style="background:linear-gradient(135deg,#0097A7 0%,#7B61FF 100%);">
+          <div class="ywc-thumb-icon">🎨</div>
         </div>
-      </div>
-      <div class="protect-card safe-card">
-        <div class="pc-eyebrow" style="color:#4ADE80">✓ This Week</div>
-        <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
-          <span class="ev-badge" style="color:#4ADE80;background:rgba(74,222,128,0.1)">3 Blocked · 0 Incidents</span>
-          <span class="ev-badge" style="color:#4ADE80;background:rgba(74,222,128,0.1)">Browsing Safe</span>
+        <div class="ywc-info">
+          <div class="ywc-tag">Design · 1h 20min</div>
+          <div class="ywc-title">Summer Vibes — Lookbook Cover</div>
+          <div class="ywc-feedback">"Strong composition. Try a contrasting accent color next time."</div>
         </div>
       </div>
 
-      <!-- ── Block 2: Growth ── -->
-      <div class="report-section-lbl">✦ Growth Today</div>
-      <div class="protect-card">
-        <div class="pc-eyebrow" style="color:rgba(255,255,255,0.42)">— AI-Guided Learning · 45 min</div>
-        <div class="pc-text" style="font-size:13px">Photosynthesis · Socratic dialogue</div>
-        <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
-          <span class="ev-badge" style="color:#4ADE80;background:rgba(74,222,128,0.08)">Critical Thinking ↑ · 3 Insights</span>
+      <div class="yuki-work-card">
+        <div class="ywc-thumb" style="background:linear-gradient(135deg,#00796B 0%,#00BCD4 100%);">
+          <div class="ywc-thumb-icon">✍️</div>
+        </div>
+        <div class="ywc-info">
+          <div class="ywc-tag">Writing · 45min</div>
+          <div class="ywc-title">History Reimagined — Short Story</div>
+          <div class="ywc-feedback">"Strong voice. Try a plot twist next time."</div>
         </div>
       </div>
-      <div class="protect-card" style="background:rgba(74,222,128,0.04);border:1px solid rgba(74,222,128,0.13)">
-        <div class="pc-eyebrow" style="color:rgba(255,255,255,0.42)">— Creative Writing · Today</div>
-        <div class="pc-text" style="font-size:13px">Short story — history topic reimagined</div>
-        <div class="pc-detail" style="margin-top:5px;font-style:italic">"Strong voice. Try a plot twist next time."</div>
-        <div style="display:flex;gap:6px;margin-top:7px">
-          <span class="ev-badge" style="color:#4ADE80;background:rgba(74,222,128,0.08)">Creativity ↑</span>
+
+      <!-- ── Skill Growth ── -->
+      <div class="report-section-lbl">↑ Skill Growth · This Week</div>
+      <div class="skill-bars-card">
+        <div class="skill-bar-row">
+          <div class="skill-name">Critical Thinking</div>
+          <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:73%;background:#00BCD4"></div></div>
+          <div class="skill-delta" style="color:#00BCD4">+15%</div>
         </div>
+        <div class="skill-bar-row">
+          <div class="skill-name">Creativity</div>
+          <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:81%;background:#7B61FF"></div></div>
+          <div class="skill-delta" style="color:#7B61FF">+8%</div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-name">Writing</div>
+          <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:62%;background:#4ADE80"></div></div>
+          <div class="skill-delta" style="color:#4ADE80">+5%</div>
+        </div>
+      </div>
+
+      <!-- ── Protection (compact) ── -->
+      <div class="report-section-lbl">🛡 Protection</div>
+      <div class="protection-compact">
+        <span class="pc-icon">✓</span>
+        <div class="pc-compact-text">
+          <div class="pc-compact-title">All clear this week</div>
+          <div class="pc-compact-detail">3 threats blocked · 0 incidents · Browsing safe</div>
+        </div>
+        <span class="pc-compact-badge">1 phishing</span>
       </div>
 
       <div class="actions" style="margin-top:4px">
         <button class="abtn hi">Send Yuki a learning challenge</button>
-        <button class="abtn">Adjust protection rules</button>
-        <button class="abtn">View full block history</button>
+        <button class="abtn">View Yuki's showcase</button>
       </div>
     </div>
   </div>
