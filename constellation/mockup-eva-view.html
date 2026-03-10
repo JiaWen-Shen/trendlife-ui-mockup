@@ -342,7 +342,7 @@ body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.0
 .sheet-orb-mini{width:32px;height:32px;border-radius:50%;flex-shrink:0;
   background:rgba(18,12,24,0.82);border:1px solid rgba(255,255,255,0.1);
   display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.orb-logo-mini{width:16px;height:16px;object-fit:contain;display:block;pointer-events:none;}
+.orb-logo-mini{width:32px;height:32px;object-fit:cover;display:block;pointer-events:none;}
 .sheet-title{font-size:15px;font-weight:800;color:rgba(255,255,255,0.9);
   font-family:'Inter',sans-serif;letter-spacing:-0.2px;}
 .sheet-subtitle{font-size:11px;color:rgba(255,255,255,0.38);font-family:'Inter',sans-serif;margin-top:1px;}
@@ -371,6 +371,55 @@ body.light .sheet-title{color:rgba(10,10,20,0.9);}body.light .sheet-subtitle{col
 body.light .sheet-action{background:rgba(147,51,234,0.05);border-color:rgba(147,51,234,0.14);color:rgba(10,10,20,0.72);}
 body.light .sheet-input{background:rgba(10,10,20,0.04);border-color:rgba(147,51,234,0.15);color:rgba(10,10,20,0.45);}
 body.light .sheet-send{background:rgba(147,51,234,0.1);border-color:rgba(147,51,234,0.25);color:#9333EA;}
+
+/* ── S10 AI Task Execution ── */
+.task-exec-body{flex:1;overflow-y:auto;padding:20px;}
+.task-context-card{background:rgba(192,132,252,0.06);border:1px solid rgba(192,132,252,0.16);
+  border-radius:12px;padding:12px 14px;margin-bottom:22px;display:flex;gap:10px;align-items:flex-start;}
+.task-context-icon{color:#C084FC;font-size:15px;flex-shrink:0;margin-top:1px;}
+.task-context-text{font-size:12.5px;color:rgba(255,255,255,0.52);line-height:1.7;}
+.task-steps{margin-bottom:20px;}
+.task-step{display:flex;align-items:flex-start;gap:12px;margin-bottom:4px;position:relative;}
+.task-step:not(:last-child)::after{content:'';position:absolute;left:11px;top:28px;width:1px;
+  height:14px;background:rgba(255,255,255,0.1);}
+.task-step-dot{width:24px;height:24px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-top:2px;}
+.task-step-dot.done{background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.28);color:#4ADE80;}
+.task-step-dot.active{background:rgba(192,132,252,0.12);border:1px solid rgba(192,132,252,0.35);
+  color:#C084FC;animation:dotPulse 1.5s ease-in-out infinite;}
+@keyframes dotPulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
+.task-step-content{padding:3px 0 16px;}
+.task-step-label{font-size:13px;font-weight:600;color:rgba(255,255,255,0.82);margin-bottom:2px;}
+.task-step-detail{font-size:11.5px;color:rgba(255,255,255,0.35);}
+.task-result-card{background:rgba(74,222,128,0.05);border:1px solid rgba(74,222,128,0.2);
+  border-radius:14px;padding:16px;margin-bottom:12px;}
+.task-result-eyebrow{font-size:9.5px;font-weight:700;letter-spacing:0.7px;text-transform:uppercase;
+  color:#4ADE80;margin-bottom:10px;}
+.task-result-title{font-size:17px;font-weight:800;color:rgba(255,255,255,0.9);
+  margin-bottom:2px;letter-spacing:-0.3px;}
+.task-result-sub{font-size:12px;color:rgba(255,255,255,0.38);margin-bottom:14px;}
+.task-result-rows{display:flex;flex-direction:column;gap:8px;}
+.task-result-row{display:flex;justify-content:space-between;font-size:12px;}
+.task-result-row .lbl{color:rgba(255,255,255,0.35);}
+.task-result-row .val{color:rgba(255,255,255,0.75);font-weight:500;}
+.task-notif-row{display:flex;align-items:center;gap:10px;padding:10px 12px;
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);
+  border-radius:11px;margin-bottom:16px;}
+.task-notif-av{width:32px;height:32px;border-radius:50%;overflow:hidden;flex-shrink:0;}
+.task-notif-av img{width:100%;height:100%;object-fit:cover;}
+.task-notif-text{flex:1;font-size:12px;color:rgba(255,255,255,0.52);line-height:1.5;}
+.task-notif-check{color:#4ADE80;font-size:14px;font-weight:700;flex-shrink:0;}
+body.light .task-context-card{background:rgba(147,51,234,0.05);border-color:rgba(147,51,234,0.14);}
+body.light .task-context-text{color:rgba(10,10,20,0.52);}
+body.light .task-step-label{color:rgba(10,10,20,0.82);}
+body.light .task-step-detail{color:rgba(10,10,20,0.35);}
+body.light .task-result-card{background:rgba(22,163,74,0.05);border-color:rgba(22,163,74,0.2);}
+body.light .task-result-title{color:rgba(10,10,20,0.9);}
+body.light .task-result-sub{color:rgba(10,10,20,0.38);}
+body.light .task-result-row .lbl{color:rgba(10,10,20,0.35);}
+body.light .task-result-row .val{color:rgba(10,10,20,0.75);}
+body.light .task-notif-row{background:rgba(10,10,20,0.03);border-color:rgba(10,10,20,0.08);}
+body.light .task-notif-text{color:rgba(10,10,20,0.52);}
 
 /* ── Zoom Overlay ── */
 #zoom-overlay{
@@ -1102,6 +1151,78 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     </div>
   </div>
 
+  <!-- ══════════════════════════════
+       SCREEN 10 · AI Booking Task
+       ══════════════════════════════ -->
+  <div class="screen" id="s10">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="screen-header">
+      <div class="back-btn" onclick="goTo(1)">←</div>
+      <div class="screen-title">AI Butler Working</div>
+      <img class="screen-logo" src="logo-mark.png" alt="">
+    </div>
+    <div class="task-exec-body">
+
+      <div class="task-context-card">
+        <span class="task-context-icon">◈</span>
+        <div class="task-context-text">Booking cardiology follow-up for <strong style="color:rgba(255,255,255,0.75)">Grandma (Hana Chen, 68)</strong> — BP 145/92, follow-up recommended within 2 weeks.</div>
+      </div>
+
+      <div class="task-steps">
+        <div class="task-step">
+          <div class="task-step-dot done">✓</div>
+          <div class="task-step-content">
+            <div class="task-step-label">Checked available slots</div>
+            <div class="task-step-detail">NTU Hospital · Cardiology · 4 openings found</div>
+          </div>
+        </div>
+        <div class="task-step">
+          <div class="task-step-dot done">✓</div>
+          <div class="task-step-content">
+            <div class="task-step-label">Matched Grandma's schedule</div>
+            <div class="task-step-detail">Nov 14 afternoon — no conflicts detected</div>
+          </div>
+        </div>
+        <div class="task-step">
+          <div class="task-step-dot done">✓</div>
+          <div class="task-step-content">
+            <div class="task-step-label">Booking confirmed</div>
+            <div class="task-step-detail">Dr. Li Wei · Nov 14 · 2:30 PM</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-result-card">
+        <div class="task-result-eyebrow">✓ Booking Confirmed</div>
+        <div class="task-result-title">Cardiology Follow-up</div>
+        <div class="task-result-sub">NTU Hospital · Dept of Cardiology</div>
+        <div class="task-result-rows">
+          <div class="task-result-row"><span class="lbl">Date</span><span class="val">November 14, 2025</span></div>
+          <div class="task-result-row"><span class="lbl">Time</span><span class="val">2:30 PM</span></div>
+          <div class="task-result-row"><span class="lbl">Doctor</span><span class="val">Dr. Li Wei, MD</span></div>
+          <div class="task-result-row"><span class="lbl">Patient</span><span class="val">Hana Chen</span></div>
+          <div class="task-result-row"><span class="lbl">Ref No.</span><span class="val">#TL-4821</span></div>
+        </div>
+      </div>
+
+      <div class="task-notif-row">
+        <div class="task-notif-av"><img src="faces/grandma.png" alt="Grandma"></div>
+        <div class="task-notif-text">Grandma notified — date, time &amp; address sent to her device</div>
+        <span class="task-notif-check">✓</span>
+      </div>
+
+      <div class="actions">
+        <button class="abtn hi">Set day-before reminder</button>
+        <button class="abtn">Add to family calendar</button>
+        <button class="abtn" onclick="goTo(1)">Back to health report</button>
+      </div>
+
+    </div>
+  </div>
+
   <!-- Zoom transition overlay -->
   <div id="zoom-overlay"></div>
 
@@ -1121,7 +1242,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     </div>
     <div id="ai-sheet-body"></div>
     <div id="ai-sheet-input-wrap">
-      <input class="sheet-input" placeholder="Ask AI Butler anything…" readonly>
+      <input class="sheet-input" placeholder="Ask AI Butler anything…">
       <div class="sheet-send">↑</div>
     </div>
   </div>
@@ -1628,7 +1749,7 @@ const EVA_HTML=`
     <tr><td>Bone Density</td><td>Normal</td><td><span class="tag ok">Normal</span></td></tr>
   </table>
   <div class="actions">
-    <button class="abtn hi">Book cardiology follow-up — this week</button>
+    <button class="abtn hi" onclick="goTo(10)">Book cardiology follow-up — this week</button>
     <button class="abtn">Review medication for blood pressure</button>
     <button class="abtn">Export to family health record</button>
   </div>
@@ -1699,7 +1820,11 @@ function openAISheet(){
   document.getElementById('sheet-subtitle').textContent=ctx.hint;
   const body=document.getElementById('ai-sheet-body');
   body.innerHTML=`<div class="sheet-section">Quick Actions</div>`+
-    ctx.actions.map(a=>`<button class="sheet-action">${a}</button>`).join('');
+    ctx.actions.map((a,i)=>{
+      if(_currentScreen===1&&i===0)
+        return `<button class="sheet-action" onclick="closeAISheet();goTo(10)">${a}</button>`;
+      return `<button class="sheet-action">${a}</button>`;
+    }).join('');
   document.getElementById('ai-sheet').classList.add('visible');
   document.getElementById('ai-sheet-dim').classList.add('visible');
   document.querySelector('.phone').classList.add('sheet-open');
