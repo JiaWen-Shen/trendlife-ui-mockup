@@ -1057,6 +1057,10 @@ function buildConstellation(){
   ag2.setAttribute('offset','100%');ag2.setAttribute('stop-color','#4ADE80');
   ag2.setAttribute('stop-opacity','0');
   arcGrad.appendChild(ag1);arcGrad.appendChild(ag2);defs.appendChild(arcGrad);
+  const glowFilter=document.createElementNS('http://www.w3.org/2000/svg','filter');
+  glowFilter.setAttribute('id','edge-glow');glowFilter.setAttribute('color-interpolation-filters','sRGB');
+  const feBlur=document.createElementNS('http://www.w3.org/2000/svg','feGaussianBlur');
+  feBlur.setAttribute('stdDeviation','3.5');glowFilter.appendChild(feBlur);defs.appendChild(glowFilter);
   svg.appendChild(defs);
 
   // ── Guardian Arc (visual frame for notifications) ──
@@ -1075,14 +1079,43 @@ function buildConstellation(){
   svg.appendChild(arcG);
 
   // ── Edges ──
-  EDGES.forEach(e=>{
+  EDGES.forEach((e,i)=>{
     const a=nm[e.a],b=nm[e.b];
+    const isL=currentTheme==='light';
+    // Per-edge color gradient
+    const grad=document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
+    grad.setAttribute('id',`eg${i}`);grad.setAttribute('gradientUnits','userSpaceOnUse');
+    grad.setAttribute('x1',a.x);grad.setAttribute('y1',a.y);
+    grad.setAttribute('x2',b.x);grad.setAttribute('y2',b.y);
+    [[a.color,'0%'],[b.color,'100%']].forEach(([col,off])=>{
+      const s=document.createElementNS('http://www.w3.org/2000/svg','stop');
+      s.setAttribute('offset',off);s.setAttribute('stop-color',col);
+      s.setAttribute('stop-opacity',isL?'0.55':'0.62');grad.appendChild(s);
+    });
+    defs.appendChild(grad);
+    // Glow layer
+    const gl=document.createElementNS('http://www.w3.org/2000/svg','line');
+    gl.setAttribute('x1',a.x);gl.setAttribute('y1',a.y);
+    gl.setAttribute('x2',b.x);gl.setAttribute('y2',b.y);
+    gl.setAttribute('stroke',`url(#eg${i})`);
+    gl.setAttribute('stroke-width',e.w*12);
+    gl.setAttribute('opacity',isL?'0.14':'0.2');
+    gl.setAttribute('filter','url(#edge-glow)');
+    svg.appendChild(gl);
+    // Main line
     const line=document.createElementNS('http://www.w3.org/2000/svg','line');
     line.setAttribute('x1',a.x);line.setAttribute('y1',a.y);
     line.setAttribute('x2',b.x);line.setAttribute('y2',b.y);
-    line.setAttribute('stroke', currentTheme==='light'?`rgba(10,10,20,${e.w*0.08})`:`rgba(255,255,255,${e.w*0.08})`);
-    line.setAttribute('stroke-width',e.w*2.2);
+    line.setAttribute('stroke',`url(#eg${i})`);
+    line.setAttribute('stroke-width',e.w*3.5);
     svg.appendChild(line);
+    // Flow particle
+    const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    dot.setAttribute('r','2.8');dot.setAttribute('fill',b.color);dot.setAttribute('opacity','0.88');
+    const am=document.createElementNS('http://www.w3.org/2000/svg','animateMotion');
+    am.setAttribute('dur',(2.8+i*0.65)+'s');am.setAttribute('repeatCount','indefinite');
+    am.setAttribute('path',`M ${a.x} ${a.y} L ${b.x} ${b.y}`);
+    dot.appendChild(am);svg.appendChild(dot);
   });
 
   // ── CrewCreate discovery node ──
