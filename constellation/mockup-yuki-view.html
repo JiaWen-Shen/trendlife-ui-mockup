@@ -1551,6 +1551,16 @@ function buildConstellation(){
   ccChipTxt.textContent='Join →';ccG.appendChild(ccChipTxt);
   svg.appendChild(ccG);
 
+  // ── Showcase satellite connector (CC → SC, behind nodesLayer) ──
+  const SC={x:242, y:388, r:13};
+  const scConn=document.createElementNS('http://www.w3.org/2000/svg','line');
+  scConn.setAttribute('x1',CC.x); scConn.setAttribute('y1',CC.y);
+  scConn.setAttribute('x2',SC.x); scConn.setAttribute('y2',SC.y);
+  scConn.setAttribute('stroke','rgba(0,188,212,0.22)');
+  scConn.setAttribute('stroke-width','1');
+  scConn.setAttribute('stroke-dasharray','2 3.5');
+  svg.appendChild(scConn);
+
   // ── Family nodes (top layer — always above edges and CC) ──
   const nodesLayer=document.createElementNS('http://www.w3.org/2000/svg','g');
   svg.appendChild(nodesLayer);
@@ -1668,6 +1678,69 @@ function buildConstellation(){
     }
     nodesLayer.appendChild(g);
   });
+
+  // ── Showcase satellite node ──
+  const isLsc=currentTheme==='light';
+  const scG=document.createElementNS('http://www.w3.org/2000/svg','g');
+  scG.style.cursor='pointer';
+  scG.onclick=()=>goTo(9);
+
+  // Pulse glow
+  const scGlow=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  scGlow.setAttribute('cx',SC.x);scGlow.setAttribute('cy',SC.y);scGlow.setAttribute('r',SC.r+6);
+  scGlow.setAttribute('fill','none');scGlow.setAttribute('stroke','#00BCD4');
+  scGlow.setAttribute('stroke-width','1');scGlow.setAttribute('opacity','0.2');
+  const sg1=document.createElementNS('http://www.w3.org/2000/svg','animate');
+  sg1.setAttribute('attributeName','r');sg1.setAttribute('values',`${SC.r+3};${SC.r+11};${SC.r+3}`);
+  sg1.setAttribute('dur','3.4s');sg1.setAttribute('repeatCount','indefinite');
+  const sg2=document.createElementNS('http://www.w3.org/2000/svg','animate');
+  sg2.setAttribute('attributeName','opacity');sg2.setAttribute('values','0.25;0;0.25');
+  sg2.setAttribute('dur','3.4s');sg2.setAttribute('repeatCount','indefinite');
+  scGlow.appendChild(sg1);scGlow.appendChild(sg2);scG.appendChild(scGlow);
+
+  // Circle
+  const scCirc=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  scCirc.setAttribute('cx',SC.x);scCirc.setAttribute('cy',SC.y);scCirc.setAttribute('r',SC.r);
+  scCirc.setAttribute('fill',isLsc?'rgba(0,188,212,0.07)':'rgba(0,188,212,0.1)');
+  scCirc.setAttribute('stroke','#00BCD4');scCirc.setAttribute('stroke-width','1');
+  scCirc.setAttribute('stroke-opacity','0.5');
+  scG.appendChild(scCirc);
+
+  // Inner ✦ icon
+  const scIcon=document.createElementNS('http://www.w3.org/2000/svg','text');
+  scIcon.setAttribute('x',SC.x);scIcon.setAttribute('y',SC.y+0.5);
+  scIcon.setAttribute('text-anchor','middle');scIcon.setAttribute('dominant-baseline','middle');
+  scIcon.setAttribute('fill','#00BCD4');scIcon.setAttribute('opacity','0.82');
+  scIcon.setAttribute('font-size','11');scIcon.setAttribute('font-family','Inter,sans-serif');
+  scIcon.setAttribute('font-weight','800');scIcon.textContent='✦';
+  scG.appendChild(scIcon);
+
+  // Label
+  const scLbl=document.createElementNS('http://www.w3.org/2000/svg','text');
+  scLbl.setAttribute('x',SC.x);scLbl.setAttribute('y',SC.y+SC.r+12);
+  scLbl.setAttribute('text-anchor','middle');
+  scLbl.setAttribute('fill',isLsc?'rgba(0,130,150,0.72)':'rgba(0,188,212,0.68)');
+  scLbl.setAttribute('font-size','9');scLbl.setAttribute('font-family','Inter,sans-serif');
+  scLbl.setAttribute('font-weight','700');scLbl.setAttribute('letter-spacing','0.1');
+  scLbl.textContent='Showcase';scG.appendChild(scLbl);
+
+  // "Family View" chip
+  const scCW=54,scCH=13,scCX=SC.x-scCW/2,scCY=SC.y+SC.r+22;
+  const scChip=document.createElementNS('http://www.w3.org/2000/svg','rect');
+  scChip.setAttribute('x',scCX);scChip.setAttribute('y',scCY);
+  scChip.setAttribute('width',scCW);scChip.setAttribute('height',scCH);
+  scChip.setAttribute('rx','6.5');
+  scChip.setAttribute('fill','rgba(0,188,212,0.1)');
+  scChip.setAttribute('stroke','rgba(0,188,212,0.35)');scChip.setAttribute('stroke-width','0.7');
+  scG.appendChild(scChip);
+  const scCTxt=document.createElementNS('http://www.w3.org/2000/svg','text');
+  scCTxt.setAttribute('x',SC.x);scCTxt.setAttribute('y',scCY+scCH/2+0.5);
+  scCTxt.setAttribute('text-anchor','middle');scCTxt.setAttribute('dominant-baseline','middle');
+  scCTxt.setAttribute('fill','#00BCD4');scCTxt.setAttribute('font-size','7');
+  scCTxt.setAttribute('font-weight','700');scCTxt.setAttribute('font-family','Inter,sans-serif');
+  scCTxt.textContent='Family View';scG.appendChild(scCTxt);
+
+  nodesLayer.appendChild(scG);
 }
 
 // ── Joining screen animation + auto-advance ──
