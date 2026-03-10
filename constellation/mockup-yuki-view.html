@@ -1237,7 +1237,7 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
       <span class="status-icons">●●● Wi-Fi ▮</span>
     </div>
     <div class="showcase-header">
-      <div class="back-btn" onclick="goTo(8)">←</div>
+      <div class="back-btn" onclick="goTo(_prevScreen)">←</div>
       <div class="showcase-title">My Creative Space</div>
       <div class="showcase-fam-badge">Family View</div>
     </div>
@@ -1353,10 +1353,12 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
 <script>
 // ── Navigation ──
 let _currentScreen=0;
+let _prevScreen=0;
 let _aiSheetOpen=false;
 function goTo(n){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('s'+n).classList.add('active');
+  _prevScreen=_currentScreen;
   _currentScreen=n;
   const orb=document.getElementById('ai-orb');
   if(orb) orb.classList.toggle('hidden', n===6);
