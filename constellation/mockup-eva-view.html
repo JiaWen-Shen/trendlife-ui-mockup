@@ -24,6 +24,9 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
   cursor:pointer;font-size:15px;color:rgba(255,255,255,0.45);flex-shrink:0}
 .screen-header{padding:0 20px 14px;display:flex;align-items:center;gap:12px;flex-shrink:0}
 .screen-title{font-size:17px;font-weight:700;color:rgba(255,255,255,0.8);letter-spacing:-0.2px}
+.screen-logo{height:15px;width:auto;margin-left:auto;opacity:0.32;object-fit:contain;
+  display:block;pointer-events:none;flex-shrink:0;}
+body.light .screen-logo{opacity:0.22;filter:invert(1);}
 
 /* ─────────────────────────────
    SCREEN 0 — Constellation
@@ -36,23 +39,29 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 .const-svg{position:absolute;inset:0;width:100%;height:100%}
 
 /* ── AI Notification List (inside arc) ── */
-#notif-wrap{position:absolute;top:8px;left:14px;right:14px;z-index:10;}
-#notif-expand{display:flex;flex-direction:column;gap:4px;
-  max-height:122px;overflow-y:auto;-webkit-overflow-scrolling:touch;
+#notif-wrap{position:absolute;top:8px;left:14px;right:14px;z-index:10;
+  background:rgba(10,10,18,0.82);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  border:1px solid rgba(255,255,255,0.1);border-radius:16px;overflow:hidden;}
+#notif-panel-header{display:flex;align-items:center;justify-content:space-between;
+  padding:8px 12px 6px;border-bottom:1px solid rgba(255,255,255,0.06);}
+#notif-panel-label{font-size:9.5px;font-weight:700;color:rgba(255,255,255,0.3);
+  letter-spacing:0.8px;text-transform:uppercase;}
+#notif-expand{display:flex;flex-direction:column;
+  max-height:118px;overflow-y:auto;-webkit-overflow-scrolling:touch;
   scrollbar-width:none;}
 #notif-expand::-webkit-scrollbar{display:none;}
 /* real element fade — avoids stacking context issues with ::after */
-#notif-fade{position:absolute;bottom:0;left:0;right:0;height:52px;
-  background:linear-gradient(transparent 0%,rgba(14,14,20,0.82) 55%,rgba(14,14,20,0.97) 100%);
+#notif-fade{position:absolute;bottom:0;left:0;right:0;height:44px;
+  background:linear-gradient(transparent 0%,rgba(10,10,18,0.82) 55%,rgba(10,10,18,0.97) 100%);
   pointer-events:none;z-index:20;
-  display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;}
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;}
 #notif-fade::after{content:'↓  more';font-size:9.5px;font-weight:600;
   color:rgba(255,255,255,0.38);letter-spacing:0.8px;font-family:'Inter',sans-serif;}
-.notif-row{display:flex;align-items:center;gap:9px;padding:7px 11px 7px 10px;
-  border-radius:11px;background:rgba(14,14,22,0.52);backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,0.07);cursor:pointer;
-  transition:background 0.15s;}
-.notif-row:active{background:rgba(255,255,255,0.09);}
+.notif-row{display:flex;align-items:center;gap:9px;padding:7px 12px;
+  background:transparent;border-bottom:1px solid rgba(255,255,255,0.04);
+  cursor:pointer;transition:background 0.15s;}
+.notif-row:last-child{border-bottom:none;}
+.notif-row:active{background:rgba(255,255,255,0.06);}
 .notif-icon{font-size:12px;width:16px;text-align:center;flex-shrink:0;}
 .notif-body{flex:1;font-size:12px;font-weight:500;color:rgba(255,255,255,0.72);letter-spacing:-0.1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .notif-time{font-size:10px;color:rgba(255,255,255,0.22);flex-shrink:0;}
@@ -281,9 +290,12 @@ body.light .msg-av.ai{background:rgba(33,150,243,0.08);border-color:rgba(33,150,
 body.light .msg-av.eva{background:rgba(147,51,234,0.08);border-color:rgba(147,51,234,0.2);color:#9333EA}
 body.light .chat-send{background:rgba(147,51,234,0.09);border-color:rgba(147,51,234,0.2);color:#9333EA}
 body.light .chat-send.ai-send{background:rgba(33,150,243,0.1);border-color:rgba(33,150,243,0.22);color:#2196F3}
+body.light #notif-wrap{background:rgba(236,236,248,0.88);border-color:rgba(10,10,20,0.1);}
+body.light #notif-panel-header{border-bottom-color:rgba(10,10,20,0.07);}
+body.light #notif-panel-label{color:rgba(10,10,20,0.35);}
 body.light #notif-fade{background:linear-gradient(transparent 0%,rgba(232,232,244,0.85) 55%,rgba(232,232,244,0.97) 100%);}
 body.light #notif-fade::after{color:rgba(10,10,20,0.32);}
-body.light .notif-row{background:rgba(240,240,250,0.78);border-color:rgba(10,10,20,0.08);}
+body.light .notif-row{background:transparent;border-bottom-color:rgba(10,10,20,0.07);}
 body.light .notif-body{color:rgba(10,10,20,0.7);}
 body.light .notif-time{color:rgba(10,10,20,0.3);}
 body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.35);}
@@ -302,7 +314,7 @@ body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.0
   animation:orbPulse 3s ease-in-out infinite;transition:transform 0.15s;}
 #ai-orb:active{transform:scale(0.92);}
 #ai-orb.hidden{display:none;}
-.orb-logo{height:26px;width:auto;display:block;pointer-events:none;}
+.orb-logo{width:22px;height:22px;object-fit:contain;display:block;pointer-events:none;}
 @keyframes orbPulse{
   0%,100%{box-shadow:0 0 0 0 rgba(180,20,40,0.2),0 4px 18px rgba(0,0,0,0.45);}
   50%{box-shadow:0 0 0 8px rgba(180,20,40,0),0 4px 24px rgba(0,0,0,0.6);}
@@ -330,7 +342,7 @@ body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.0
 .sheet-orb-mini{width:32px;height:32px;border-radius:50%;flex-shrink:0;
   background:rgba(18,12,24,0.82);border:1px solid rgba(255,255,255,0.1);
   display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.orb-logo-mini{height:20px;width:auto;display:block;pointer-events:none;}
+.orb-logo-mini{width:16px;height:16px;object-fit:contain;display:block;pointer-events:none;}
 .sheet-title{font-size:15px;font-weight:800;color:rgba(255,255,255,0.9);
   font-family:'Inter',sans-serif;letter-spacing:-0.2px;}
 .sheet-subtitle{font-size:11px;color:rgba(255,255,255,0.38);font-family:'Inter',sans-serif;margin-top:1px;}
@@ -425,6 +437,9 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="const-area">
       <svg class="const-svg" id="const-svg" viewBox="0 0 390 480" xmlns="http://www.w3.org/2000/svg"></svg>
       <div id="notif-wrap">
+        <div id="notif-panel-header">
+          <span id="notif-panel-label">Updates</span>
+        </div>
         <div id="notif-expand">
           <div class="notif-row" id="notif-health" onclick="goTo(1)">
             <span class="notif-icon" style="color:#FF7875">⚠</span>
@@ -508,6 +523,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="zoomBack()">←</div>
       <div class="screen-title">Grandma's Health Report</div>
+      <img class="screen-logo" src="logo-mark.png" alt="">
     </div>
     <div class="lens-body" id="health-body"></div>
   </div>
@@ -523,6 +539,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="screen-title">Family Events</div>
+      <img class="screen-logo" src="logo-mark.png" alt="">
     </div>
     <div class="events-scroll">
 
@@ -668,6 +685,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="zoomBack()">←</div>
       <div class="screen-title">Yuki's Report</div>
+      <img class="screen-logo" src="logo-mark.png" alt="">
     </div>
     <div class="protect-body">
       <div class="protect-hero">
@@ -744,6 +762,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="screen-title">Protection Report</div>
+      <img class="screen-logo" src="logo-mark.png" alt="">
     </div>
     <div class="protect-body">
       <div class="protect-hero">
@@ -791,6 +810,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="zoomBack()">←</div>
       <div class="screen-title">Protection Report</div>
+      <img class="screen-logo" src="logo-mark.png" alt="">
     </div>
     <div class="protect-body">
       <div class="protect-hero">
@@ -993,6 +1013,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="screen-title">Scam Call Blocked</div>
+      <img class="screen-logo" src="logo-mark.png" alt="">
     </div>
     <div class="protect-body">
       <div class="protect-hero">
@@ -1042,6 +1063,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="screen-title">Phishing Link Blocked</div>
+      <img class="screen-logo" src="logo-mark.png" alt="">
     </div>
     <div class="protect-body">
       <div class="protect-hero">
