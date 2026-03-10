@@ -1108,26 +1108,34 @@ function buildConstellation(){
   arcG.style.cursor='pointer';
   arcG.onclick=()=>goTo(7);
 
+  // Vertical fade gradient: top opaque → bottom transparent
+  const arcGrad=document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
+  arcGrad.setAttribute('id','arc-bg-grad');arcGrad.setAttribute('gradientUnits','userSpaceOnUse');
+  arcGrad.setAttribute('x1','195');arcGrad.setAttribute('y1','22');
+  arcGrad.setAttribute('x2','195');arcGrad.setAttribute('y2','100');
+  const ag1=document.createElementNS('http://www.w3.org/2000/svg','stop');
+  ag1.setAttribute('offset','0%');ag1.setAttribute('stop-color','#64B5F6');
+  ag1.setAttribute('stop-opacity',currentTheme==='light'?'0.14':'0.22');
+  const ag2=document.createElementNS('http://www.w3.org/2000/svg','stop');
+  ag2.setAttribute('offset','100%');ag2.setAttribute('stop-color','#64B5F6');
+  ag2.setAttribute('stop-opacity','0');
+  arcGrad.appendChild(ag1);arcGrad.appendChild(ag2);defs.appendChild(arcGrad);
+
+  // Arc fill — extended to y=100 so the fade completes before the hard edge
   const arcBg=document.createElementNS('http://www.w3.org/2000/svg','path');
-  arcBg.setAttribute('d','M 30 82 C 30 20 360 20 360 82 Z');
-  arcBg.setAttribute('fill','rgba(100,181,246,0.07)');
+  arcBg.setAttribute('d','M 0 100 L 30 82 C 30 20 360 20 360 82 L 390 100 Z');
+  arcBg.setAttribute('fill','url(#arc-bg-grad)');
   arcBg.setAttribute('stroke','none');
   arcG.appendChild(arcBg);
 
+  // Dashed top curve — no base line (hard edge removed)
   const arcBorder=document.createElementNS('http://www.w3.org/2000/svg','path');
   arcBorder.setAttribute('d','M 30 82 C 30 20 360 20 360 82');
   arcBorder.setAttribute('fill','none');
-  arcBorder.setAttribute('stroke','rgba(100,181,246,0.65)');
+  arcBorder.setAttribute('stroke','rgba(100,181,246,0.55)');
   arcBorder.setAttribute('stroke-width','1.5');
   arcBorder.setAttribute('stroke-dasharray','3 5');
   arcG.appendChild(arcBorder);
-
-  const arcBase=document.createElementNS('http://www.w3.org/2000/svg','line');
-  arcBase.setAttribute('x1','30'); arcBase.setAttribute('y1','82');
-  arcBase.setAttribute('x2','360'); arcBase.setAttribute('y2','82');
-  arcBase.setAttribute('stroke','rgba(100,181,246,0.3)');
-  arcBase.setAttribute('stroke-width','1');
-  arcG.appendChild(arcBase);
 
   const arcSym=document.createElementNS('http://www.w3.org/2000/svg','text');
   arcSym.setAttribute('x','195'); arcSym.setAttribute('y','38');
