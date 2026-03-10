@@ -35,16 +35,30 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 .const-area{flex:1;position:relative;overflow:hidden}
 .const-svg{position:absolute;inset:0;width:100%;height:100%}
 
-.alerts-stack{position:absolute;top:12px;right:16px;z-index:10;
-  display:flex;flex-direction:column;gap:5px;align-items:flex-end}
-.alert-row{display:flex;align-items:center;gap:5px}
-.alert-pill{background:rgba(255,120,120,0.12);border:1px solid rgba(255,120,120,0.3);
-  color:rgba(255,120,120,0.9);font-size:10.5px;font-weight:600;
-  padding:4px 10px;border-radius:20px;cursor:pointer;letter-spacing:0.2px;white-space:nowrap}
-.alert-x{width:17px;height:17px;border-radius:50%;
-  background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);
-  color:rgba(255,255,255,0.45);font-size:8px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700}
+/* ── AI Notification List (inside arc) ── */
+#notif-wrap{position:absolute;top:8px;left:14px;right:14px;z-index:10;}
+#notif-expand{display:flex;flex-direction:column;gap:4px;
+  max-height:122px;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;}
+#notif-expand::-webkit-scrollbar{display:none;}
+/* real element fade — avoids stacking context issues with ::after */
+#notif-fade{position:absolute;bottom:0;left:0;right:0;height:52px;
+  background:linear-gradient(transparent 0%,rgba(14,14,20,0.82) 55%,rgba(14,14,20,0.97) 100%);
+  pointer-events:none;z-index:20;
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;}
+#notif-fade::after{content:'↓  more';font-size:9.5px;font-weight:600;
+  color:rgba(255,255,255,0.38);letter-spacing:0.8px;font-family:'Inter',sans-serif;}
+.notif-row{display:flex;align-items:center;gap:9px;padding:7px 11px 7px 10px;
+  border-radius:11px;background:rgba(14,14,22,0.52);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.07);cursor:pointer;
+  transition:background 0.15s;}
+.notif-row:active{background:rgba(255,255,255,0.09);}
+.notif-icon{font-size:12px;width:16px;text-align:center;flex-shrink:0;}
+.notif-body{flex:1;font-size:12px;font-weight:500;color:rgba(255,255,255,0.72);letter-spacing:-0.1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.notif-time{font-size:10px;color:rgba(255,255,255,0.22);flex-shrink:0;}
+.notif-dismiss{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.3);font-size:7px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-left:2px;}
 
 .tab-bar{height:82px;display:flex;align-items:flex-start;justify-content:space-around;
   padding:10px 0 0;border-top:1px solid rgba(255,255,255,0.05);flex-shrink:0}
@@ -267,6 +281,12 @@ body.light .msg-av.ai{background:rgba(33,150,243,0.08);border-color:rgba(33,150,
 body.light .msg-av.eva{background:rgba(147,51,234,0.08);border-color:rgba(147,51,234,0.2);color:#9333EA}
 body.light .chat-send{background:rgba(147,51,234,0.09);border-color:rgba(147,51,234,0.2);color:#9333EA}
 body.light .chat-send.ai-send{background:rgba(33,150,243,0.1);border-color:rgba(33,150,243,0.22);color:#2196F3}
+body.light #notif-fade{background:linear-gradient(transparent 0%,rgba(232,232,244,0.85) 55%,rgba(232,232,244,0.97) 100%);}
+body.light #notif-fade::after{color:rgba(10,10,20,0.32);}
+body.light .notif-row{background:rgba(240,240,250,0.78);border-color:rgba(10,10,20,0.08);}
+body.light .notif-body{color:rgba(10,10,20,0.7);}
+body.light .notif-time{color:rgba(10,10,20,0.3);}
+body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.35);}
 body.light .rel-peek{background:rgba(248,248,252,0.97);border-color:rgba(10,10,20,0.1)}
 body.light .rel-peek-name{color:rgba(10,10,20,0.92)}
 body.light .rel-peek-role{color:rgba(10,10,20,0.52)}
@@ -401,19 +421,46 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     </div>
     <div class="const-area">
       <svg class="const-svg" id="const-svg" viewBox="0 0 390 480" xmlns="http://www.w3.org/2000/svg"></svg>
-      <div class="alerts-stack">
-        <div class="alert-row" id="alert-health">
-          <div class="alert-pill" onclick="goTo(1)">⚠ Grandma's health report</div>
-          <div class="alert-x" onclick="dismissAlert('alert-health')">✕</div>
+      <div id="notif-wrap">
+        <div id="notif-expand">
+          <div class="notif-row" id="notif-health" onclick="goTo(1)">
+            <span class="notif-icon" style="color:#FF7875">⚠</span>
+            <span class="notif-body">Grandma's BP elevated — cardiology follow-up suggested</span>
+            <span class="notif-time">8:45 AM</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-health')">✕</div>
+          </div>
+          <div class="notif-row" id="notif-scam" onclick="goTo(8)">
+            <span class="notif-icon" style="color:#C084FC">🛡</span>
+            <span class="notif-body">Scam call blocked — Grandma's device</span>
+            <span class="notif-time">9:12 AM</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-scam')">✕</div>
+          </div>
+          <div class="notif-row" id="notif-hiro" onclick="goTo(6)">
+            <span class="notif-icon" style="color:#FFB84D">⏰</span>
+            <span class="notif-body">Hiro: screen time 3.5h past midnight — limit reached</span>
+            <span class="notif-time">Yesterday</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-hiro')">✕</div>
+          </div>
+          <div class="notif-row" id="notif-phish" onclick="goTo(9)">
+            <span class="notif-icon" style="color:#C084FC">🔒</span>
+            <span class="notif-body">Phishing link blocked — Yuki</span>
+            <span class="notif-time">Yesterday</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-phish')">✕</div>
+          </div>
+          <div class="notif-row" id="notif-kenji" onclick="goTo(5)">
+            <span class="notif-icon" style="color:#64B5F6">🔑</span>
+            <span class="notif-body">Kenji: new device login verified — MacBook Pro · 2FA</span>
+            <span class="notif-time">2 days ago</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-kenji')">✕</div>
+          </div>
+          <div class="notif-row" id="notif-yuki-growth" onclick="goTo(4)">
+            <span class="notif-icon" style="color:#FCD34D">✦</span>
+            <span class="notif-body">Yuki: critical thinking +15% — learning session complete</span>
+            <span class="notif-time">Today</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-yuki-growth')">✕</div>
+          </div>
         </div>
-        <div class="alert-row" id="alert-scam">
-          <div class="alert-pill" onclick="goTo(8)">Scam call — Grandma</div>
-          <div class="alert-x" onclick="dismissAlert('alert-scam')">✕</div>
-        </div>
-        <div class="alert-row" id="alert-phish">
-          <div class="alert-pill" onclick="goTo(9)">Phishing link — Yuki</div>
-          <div class="alert-x" onclick="dismissAlert('alert-phish')">✕</div>
-        </div>
+        <div id="notif-fade"></div>
       </div>
       <div class="rel-peek" id="rel-peek">
         <div class="rel-peek-head">
@@ -1068,7 +1115,7 @@ function goTo(n){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('s'+n).classList.add('active');
   _currentScreen=n;
-  // Hide orb on AI Butler screen; close sheet if open
+  // Hide orb only on AI Butler screen (has its own full UI)
   const orb=document.getElementById('ai-orb');
   if(orb) orb.classList.toggle('hidden', n===7);
   if(n===7 && _aiSheetOpen) closeAISheet();
@@ -1079,6 +1126,12 @@ function goTo(n){
       t.classList.toggle('active', map[i]===n);
     });
   });
+}
+function dismissNotif(id){
+  const el=document.getElementById(id);
+  if(el){el.style.opacity='0';el.style.transform='translateX(8px)';
+    el.style.transition='opacity 0.2s,transform 0.2s';
+    setTimeout(()=>el.style.display='none',200);}
 }
 function dismissAlert(id){
   const el=document.getElementById(id);
@@ -1149,61 +1202,30 @@ function buildConstellation(){
   feBlur.setAttribute('stdDeviation','3.5');glowFilter.appendChild(feBlur);defs.appendChild(glowFilter);
   svg.appendChild(defs);
 
-  // ── Guardian Arc ──
+  // ── Guardian Arc (visual frame for AI notifications) ──
   const arcG=document.createElementNS('http://www.w3.org/2000/svg','g');
-  arcG.style.cursor='pointer';
-  arcG.onclick=()=>goTo(7);
-
-  // Vertical fade gradient: top opaque → bottom transparent
   const arcGrad=document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
   arcGrad.setAttribute('id','arc-bg-grad');arcGrad.setAttribute('gradientUnits','userSpaceOnUse');
   arcGrad.setAttribute('x1','195');arcGrad.setAttribute('y1','22');
-  arcGrad.setAttribute('x2','195');arcGrad.setAttribute('y2','100');
+  arcGrad.setAttribute('x2','195');arcGrad.setAttribute('y2','105');
   const ag1=document.createElementNS('http://www.w3.org/2000/svg','stop');
   ag1.setAttribute('offset','0%');ag1.setAttribute('stop-color','#64B5F6');
-  ag1.setAttribute('stop-opacity',currentTheme==='light'?'0.14':'0.22');
+  ag1.setAttribute('stop-opacity',currentTheme==='light'?'0.12':'0.18');
   const ag2=document.createElementNS('http://www.w3.org/2000/svg','stop');
   ag2.setAttribute('offset','100%');ag2.setAttribute('stop-color','#64B5F6');
   ag2.setAttribute('stop-opacity','0');
   arcGrad.appendChild(ag1);arcGrad.appendChild(ag2);defs.appendChild(arcGrad);
-
-  // Arc fill — extended to y=100 so the fade completes before the hard edge
   const arcBg=document.createElementNS('http://www.w3.org/2000/svg','path');
-  arcBg.setAttribute('d','M 0 100 L 30 82 C 30 20 360 20 360 82 L 390 100 Z');
-  arcBg.setAttribute('fill','url(#arc-bg-grad)');
-  arcBg.setAttribute('stroke','none');
+  arcBg.setAttribute('d','M 0 105 L 30 82 C 30 20 360 20 360 82 L 390 105 Z');
+  arcBg.setAttribute('fill','url(#arc-bg-grad)');arcBg.setAttribute('stroke','none');
   arcG.appendChild(arcBg);
-
-  // Dashed top curve — no base line (hard edge removed)
   const arcBorder=document.createElementNS('http://www.w3.org/2000/svg','path');
   arcBorder.setAttribute('d','M 30 82 C 30 20 360 20 360 82');
   arcBorder.setAttribute('fill','none');
-  arcBorder.setAttribute('stroke','rgba(100,181,246,0.55)');
-  arcBorder.setAttribute('stroke-width','1.5');
-  arcBorder.setAttribute('stroke-dasharray','3 5');
+  arcBorder.setAttribute('stroke',currentTheme==='light'?'rgba(100,181,246,0.35)':'rgba(100,181,246,0.45)');
+  arcBorder.setAttribute('stroke-width','1');
+  arcBorder.setAttribute('stroke-dasharray','3 6');
   arcG.appendChild(arcBorder);
-
-  const arcSym=document.createElementNS('http://www.w3.org/2000/svg','text');
-  arcSym.setAttribute('x','195'); arcSym.setAttribute('y','38');
-  arcSym.setAttribute('text-anchor','middle'); arcSym.setAttribute('dominant-baseline','middle');
-  arcSym.setAttribute('fill','#64B5F6'); arcSym.setAttribute('font-size','16');
-  arcSym.setAttribute('font-family','Inter,sans-serif'); arcSym.setAttribute('font-weight','700');
-  arcSym.textContent='◈';
-  const arcSymAnim=document.createElementNS('http://www.w3.org/2000/svg','animate');
-  arcSymAnim.setAttribute('attributeName','opacity');
-  arcSymAnim.setAttribute('values','1;0.4;1');
-  arcSymAnim.setAttribute('dur','3.5s'); arcSymAnim.setAttribute('repeatCount','indefinite');
-  arcSym.appendChild(arcSymAnim);
-  arcG.appendChild(arcSym);
-
-  const arcLbl=document.createElementNS('http://www.w3.org/2000/svg','text');
-  arcLbl.setAttribute('x','195'); arcLbl.setAttribute('y','57');
-  arcLbl.setAttribute('text-anchor','middle');
-  arcLbl.setAttribute('fill','rgba(100,181,246,0.7)'); arcLbl.setAttribute('font-size','9');
-  arcLbl.setAttribute('font-family','Inter,sans-serif'); arcLbl.setAttribute('font-weight','600');
-  arcLbl.setAttribute('letter-spacing','1.2');
-  arcLbl.textContent='AI BUTLER · 3 ACTIONS TODAY ›';
-  arcG.appendChild(arcLbl);
   svg.appendChild(arcG);
 
   // ── Edges ──
