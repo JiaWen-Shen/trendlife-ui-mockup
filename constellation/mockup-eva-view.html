@@ -158,7 +158,7 @@ body.light .report-section-lbl{color:rgba(10,10,20,0.35);border-bottom-color:rgb
 
 /* ─────────────────────────────
    SCREEN 3 — Chat with Grandma
-   SCREEN 7 — AI Butler Chat
+   SCREEN 7 — Kaleidoscope Chat
    ───────────────────────────── */
 .chat-header-av{width:34px;height:34px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
@@ -281,7 +281,7 @@ body.light .bubble-time{color:rgba(10,10,20,0.52)}
 body.light .chat-input-bar{border-top-color:rgba(10,10,20,0.08)}
 body.light .chat-input{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.55)}
 body.light .chat-mic{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.55)}
-/* AI Butler light mode */
+/* Kaleidoscope light mode */
 body.light .chat-header-av.ai{background:rgba(100,181,246,0.1);border-color:rgba(100,181,246,0.25);color:#2196F3}
 body.light .chat-header-status.ai-status{color:rgba(33,150,243,0.65)}
 body.light .bubble.ai-msg{background:rgba(33,150,243,0.07);border-color:rgba(33,150,243,0.15);color:rgba(10,10,20,0.78)}
@@ -307,14 +307,17 @@ body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.0
 
 /* ── AI Orb FAB ── */
 #ai-orb{position:absolute;bottom:96px;right:16px;width:44px;height:44px;border-radius:50%;
-  background:rgba(18,12,24,0.88);border:1px solid rgba(255,255,255,0.1);
-  backdrop-filter:blur(10px);overflow:hidden;
+  background-color:rgba(18,12,24,0.88);
+  background-image:url('kaleidoscope-icon.png');background-repeat:no-repeat;
+  background-position:center center;background-size:75%;
+  border:1px solid rgba(255,255,255,0.1);
+  backdrop-filter:blur(10px);
   box-shadow:0 0 0 0 rgba(180,20,40,0.25),0 4px 18px rgba(0,0,0,0.5);
-  cursor:pointer;z-index:50;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:50;
   animation:orbPulse 3s ease-in-out infinite;transition:transform 0.15s;}
 #ai-orb:active{transform:scale(0.92);}
 #ai-orb.hidden{display:none;}
-.orb-logo{width:44px;height:44px;object-fit:cover;display:block;pointer-events:none;}
+.orb-logo{width:44px;height:44px;object-fit:cover;object-position:center;display:block;pointer-events:none;}
 @keyframes orbPulse{
   0%,100%{box-shadow:0 0 0 0 rgba(180,20,40,0.2),0 4px 18px rgba(0,0,0,0.45);}
   50%{box-shadow:0 0 0 8px rgba(180,20,40,0),0 4px 24px rgba(0,0,0,0.6);}
@@ -342,7 +345,7 @@ body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.0
 .sheet-orb-mini{width:32px;height:32px;border-radius:50%;flex-shrink:0;
   background:rgba(18,12,24,0.82);border:1px solid rgba(255,255,255,0.1);
   display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.orb-logo-mini{width:32px;height:32px;object-fit:cover;display:block;pointer-events:none;}
+.orb-logo-mini{width:20px;height:20px;object-fit:contain;display:block;pointer-events:none;}
 .sheet-title{font-size:15px;font-weight:800;color:rgba(255,255,255,0.9);
   font-family:'Inter',sans-serif;letter-spacing:-0.2px;}
 .sheet-subtitle{font-size:11px;color:rgba(255,255,255,0.38);font-family:'Inter',sans-serif;margin-top:1px;}
@@ -364,7 +367,7 @@ body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.0
   background:rgba(192,132,252,0.2);border:1px solid rgba(192,132,252,0.35);
   color:#C084FC;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
 /* light overrides */
-body.light #ai-orb{background:rgba(255,255,255,0.92);border-color:rgba(10,10,20,0.12);}
+body.light #ai-orb{background-color:rgba(255,255,255,0.92);border-color:rgba(10,10,20,0.12);}
 body.light .sheet-orb-mini{background:rgba(255,255,255,0.9);border-color:rgba(10,10,20,0.1);}
 body.light #ai-sheet{background:rgba(250,250,254,0.98);border-top-color:rgba(147,51,234,0.2);}
 body.light .sheet-title{color:rgba(10,10,20,0.9);}body.light .sheet-subtitle{color:rgba(10,10,20,0.42);}
@@ -476,7 +479,7 @@ body.light .task-notif-text{color:rgba(10,10,20,0.52);}
 .screen-entering{animation:screenIn 0.3s cubic-bezier(0.2,0,0.2,1) both}
 @keyframes screenIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── AI Butler Tab Bar ── */
+/* ── Kaleidoscope Tab Bar ── */
 .butler-tab-bar{display:flex;padding:0 20px;border-bottom:1px solid rgba(255,255,255,0.07);flex-shrink:0}
 .butler-tab{flex:1;text-align:center;padding:9px 0 8px;font-size:11px;font-weight:700;letter-spacing:0.6px;
   font-family:'Inter',sans-serif;color:rgba(255,255,255,0.35);cursor:pointer;position:relative;
@@ -509,11 +512,222 @@ body.light .hist-who{color:rgba(10,10,20,0.42)}
 body.light .hist-text{color:rgba(10,10,20,0.78)}
 body.light .hist-time{color:rgba(10,10,20,0.35)}
 
+/* ── S4 Yuki Redesign (B+C Hybrid) ── */
+.yuki-identity{font-size:11px;color:rgba(0,188,212,0.72);letter-spacing:0.3px;margin-top:3px;}
+.yuki-week-stats{display:flex;align-items:center;justify-content:center;gap:5px;
+  font-size:11px;color:rgba(255,255,255,0.38);margin-top:7px;flex-wrap:wrap;}
+.yuki-week-stats .yw-accent{color:#00BCD4;font-weight:600;}
+.yuki-featured{border-radius:16px;overflow:hidden;
+  border:1px solid rgba(0,188,212,0.22);background:rgba(0,188,212,0.03);margin-bottom:10px;}
+.yuki-featured-header{padding:14px 16px 10px;}
+.yf-tag{font-size:9px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;
+  color:rgba(0,188,212,0.65);margin-bottom:5px;}
+.yf-title{font-size:17px;font-weight:800;color:rgba(255,255,255,0.9);
+  letter-spacing:-0.3px;margin-bottom:4px;}
+.yf-sub{font-size:11.5px;color:rgba(255,255,255,0.38);line-height:1.5;}
+.yuki-wave{display:flex;align-items:flex-end;gap:2.5px;height:38px;
+  padding:0 16px 8px;overflow:hidden;}
+.yw-bar{flex:1;border-radius:2px 2px 0 0;background:rgba(0,188,212,0.32);min-height:3px;}
+.spark-block{padding:10px 16px 12px;border-top:1px solid rgba(0,188,212,0.1);
+  background:rgba(0,0,0,0.15);}
+.spark-label{font-size:9px;font-weight:700;letter-spacing:0.7px;text-transform:uppercase;
+  color:#00BCD4;margin-bottom:8px;}
+.spark-row{display:flex;align-items:flex-start;gap:7px;}
+.spark-side{flex:1;padding:8px 10px;border-radius:10px;font-size:11.5px;line-height:1.5;}
+.spark-side.ai-side{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);
+  color:rgba(255,255,255,0.42);}
+.spark-side.yuki-side{background:rgba(0,188,212,0.08);border:1px solid rgba(0,188,212,0.2);
+  color:rgba(0,220,240,0.85);}
+.spark-who{display:block;font-size:8.5px;font-weight:700;letter-spacing:0.5px;
+  text-transform:uppercase;opacity:0.5;margin-bottom:3px;}
+.spark-arrow-col{display:flex;align-items:center;padding-top:20px;
+  color:rgba(0,188,212,0.45);font-size:14px;flex-shrink:0;}
+.contrib-bar-wrap{padding:10px 16px 14px;border-top:1px solid rgba(255,255,255,0.05);}
+.contrib-labels{display:flex;justify-content:space-between;
+  font-size:9.5px;color:rgba(255,255,255,0.3);margin-bottom:6px;}
+.contrib-bar-track{display:flex;height:6px;border-radius:3px;overflow:hidden;}
+.contrib-human-fill{background:linear-gradient(90deg,#00BCD4 0%,#7B61FF 100%);border-radius:3px 0 0 3px;}
+.contrib-ai-fill{background:rgba(255,255,255,0.1);}
+.yuki-feed-row{display:flex;gap:10px;margin-bottom:12px;}
+.yuki-feed-card{flex:1;border-radius:14px;overflow:hidden;
+  border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);}
+.yfc-thumb{height:62px;display:flex;align-items:center;justify-content:center;font-size:22px;}
+.yfc-body{padding:9px 11px 11px;}
+.yfc-tag{font-size:9px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;
+  color:rgba(255,255,255,0.3);margin-bottom:3px;}
+.yfc-title{font-size:12.5px;font-weight:700;color:rgba(255,255,255,0.82);
+  margin-bottom:5px;line-height:1.3;letter-spacing:-0.1px;}
+.yfc-spark{font-size:10.5px;color:rgba(255,255,255,0.38);line-height:1.45;margin-bottom:6px;}
+.yfc-ratio{font-size:9px;font-weight:700;letter-spacing:0.3px;
+  color:rgba(0,188,212,0.65);background:rgba(0,188,212,0.08);
+  border-radius:6px;padding:2px 7px;display:inline-block;}
+.expert-view{border-radius:14px;padding:14px 16px;margin-bottom:12px;
+  background:rgba(123,97,255,0.06);border:1px solid rgba(123,97,255,0.15);}
+.expert-label{font-size:9px;font-weight:700;letter-spacing:0.7px;text-transform:uppercase;
+  color:rgba(123,97,255,0.72);margin-bottom:7px;}
+.expert-text{font-size:12.5px;color:rgba(255,255,255,0.6);line-height:1.65;font-style:italic;}
+/* light overrides */
+body.light .yuki-identity{color:rgba(0,130,150,0.72);}
+body.light .yuki-week-stats{color:rgba(10,10,20,0.38);}
+body.light .yuki-week-stats .yw-accent{color:rgba(0,130,150,0.9);}
+body.light .yuki-featured{background:rgba(0,147,167,0.03);border-color:rgba(0,147,167,0.2);}
+body.light .yf-tag{color:rgba(0,130,150,0.65);}
+body.light .yf-title{color:rgba(10,10,20,0.9);}
+body.light .yf-sub{color:rgba(10,10,20,0.38);}
+body.light .yw-bar{background:rgba(0,147,167,0.28);}
+body.light .spark-block{background:rgba(0,0,0,0.03);}
+body.light .spark-side.ai-side{background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.07);color:rgba(10,10,20,0.42);}
+body.light .spark-side.yuki-side{background:rgba(0,147,167,0.07);border-color:rgba(0,147,167,0.18);color:rgba(0,110,130,0.9);}
+body.light .spark-arrow-col{color:rgba(0,147,167,0.45);}
+body.light .contrib-labels{color:rgba(10,10,20,0.3);}
+body.light .contrib-ai-fill{background:rgba(10,10,20,0.08);}
+body.light .yuki-feed-card{border-color:rgba(10,10,20,0.08);background:rgba(10,10,20,0.02);}
+body.light .yfc-tag{color:rgba(10,10,20,0.3);}
+body.light .yfc-title{color:rgba(10,10,20,0.82);}
+body.light .yfc-spark{color:rgba(10,10,20,0.38);}
+body.light .yfc-ratio{color:rgba(0,120,140,0.65);background:rgba(0,120,140,0.07);}
+body.light .expert-view{background:rgba(100,50,220,0.04);border-color:rgba(100,50,220,0.14);}
+body.light .expert-label{color:rgba(100,50,220,0.65);}
+body.light .expert-text{color:rgba(10,10,20,0.6);}
+
+/* ── STAGE MODE: contrast & size for presentation ── */
+/* Primary text */
+.data-tbl td,.ev-text,.pc-text{color:rgba(255,255,255,0.88)}
+.bubble.them{color:rgba(255,255,255,0.92)}
+.abtn{color:rgba(255,255,255,0.88)}
+.hist-text{color:rgba(255,255,255,0.88);font-size:13.5px}
+/* Secondary text */
+.ev-who,.data-tbl th,.eva-eyebrow,.tab-label,.pstat-lbl,
+.protect-role,.report-section-lbl,.pc-eyebrow,.greeting{color:rgba(255,255,255,0.72)}
+.chat-header-status.online{color:rgba(74,222,128,0.85)}
+.chat-header-status.ai-status{color:rgba(100,181,246,0.82)}
+.hist-who,.hist-day{color:rgba(255,255,255,0.65)}
+/* Tertiary — floor for smallest text */
+.ev-time,.bubble-time,.pc-detail,.notif-time,.hist-time{color:rgba(255,255,255,0.60)}
+/* Font size floor */
+.tab-label{font-size:12px}
+.ev-who,.data-tbl th,.report-section-lbl,.pc-eyebrow,.pstat-lbl,.eva-eyebrow,.hist-day{font-size:12px}
+.ev-time,.bubble-time,.notif-time,.ev-badge,.tag{font-size:12px}
+/* Body text */
+.ev-text,.pc-text,.data-tbl td{font-size:14.5px}
+.pc-detail{font-size:13px}
+.bubble.them,.bubble.me,.bubble.ai-msg{font-size:15px}
+.protect-role,.abtn{font-size:14px}
+.notif-body{color:rgba(255,255,255,0.88);font-size:13.5px}
+/* Yuki redesign */
+.yf-sub,.ywc-feedback{color:rgba(255,255,255,0.65);font-size:13px}
+.yfc-spark{color:rgba(255,255,255,0.65);font-size:12px}
+.expert-text{color:rgba(255,255,255,0.80);font-size:14px}
+.spark-side.ai-side{color:rgba(255,255,255,0.65);font-size:13px}
+.spark-side.yuki-side{font-size:13px}
+.yuki-week-stats{color:rgba(255,255,255,0.68);font-size:13px}
+.yuki-identity{color:rgba(0,188,212,0.82);font-size:13px}
+.yf-title{font-size:19px}
+.pc-compact-detail{color:rgba(255,255,255,0.70);font-size:13px}
+/* Sheet */
+.sheet-subtitle{color:rgba(255,255,255,0.65);font-size:13px}
+.sheet-action{color:rgba(255,255,255,0.82);font-size:14px}
+
+/* ── Alert notification row ── */
+.notif-row.notif-alert{
+  background:rgba(255,59,48,0.14);
+  border-bottom-color:rgba(255,59,48,0.25);
+  box-shadow:inset 3px 0 0 #FF3B30;
+}
+.notif-row.notif-alert .notif-body{color:#FF8A84;font-weight:600;}
+.notif-row.notif-alert .notif-icon{font-size:14px;}
+
+/* ── Health Alert popup ── */
+#alert-backdrop{
+  position:absolute;inset:0;z-index:9990;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter:blur(3px);
+  border-radius:inherit;
+  display:flex;align-items:center;justify-content:center;
+  animation:alertFadeIn 0.25s ease both;
+}
+@keyframes alertFadeIn{from{opacity:0}to{opacity:1}}
+#alert-card{
+  width:272px;
+  background:linear-gradient(155deg,rgba(28,8,12,0.98) 0%,rgba(22,6,10,0.98) 100%);
+  border:1px solid rgba(255,59,48,0.35);
+  border-radius:18px;
+  padding:22px 20px 18px;
+  box-shadow:0 0 0 1px rgba(255,59,48,0.12),0 24px 48px rgba(0,0,0,0.7),0 0 40px rgba(255,40,40,0.15);
+  animation:alertSlideUp 0.32s cubic-bezier(0.34,1.56,0.64,1) both;
+  position:relative;
+}
+@keyframes alertSlideUp{from{opacity:0;transform:translateY(24px) scale(0.94)}to{opacity:1;transform:none}}
+#alert-dismiss-btn{
+  position:absolute;top:12px;right:12px;
+  width:22px;height:22px;border-radius:50%;
+  background:rgba(255,255,255,0.08);border:none;
+  color:rgba(255,255,255,0.45);font-size:11px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  line-height:1;
+}
+#alert-dismiss-btn:active{background:rgba(255,255,255,0.15);}
+#alert-header{display:flex;align-items:center;gap:9px;margin-bottom:14px;}
+#alert-pulse{
+  width:10px;height:10px;border-radius:50%;background:#FF3B30;flex-shrink:0;
+  box-shadow:0 0 0 0 rgba(255,59,48,0.5);
+  animation:alertPulse 1.6s ease-in-out infinite;
+}
+@keyframes alertPulse{
+  0%{box-shadow:0 0 0 0 rgba(255,59,48,0.55)}
+  70%{box-shadow:0 0 0 8px rgba(255,59,48,0)}
+  100%{box-shadow:0 0 0 0 rgba(255,59,48,0)}
+}
+#alert-label{
+  font-size:9.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:#FF5C52;
+}
+#alert-message{
+  font-size:14.5px;font-weight:600;color:#fff;
+  line-height:1.45;margin-bottom:6px;
+}
+#alert-detail{
+  font-size:12px;color:rgba(255,255,255,0.50);line-height:1.5;margin-bottom:18px;
+}
+#alert-actions{display:flex;gap:9px;}
+#alert-btn-dismiss{
+  flex:1;padding:9px 0;border-radius:10px;
+  background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.55);font-size:13px;font-weight:500;cursor:pointer;
+}
+#alert-btn-dismiss:active{background:rgba(255,255,255,0.12);}
+#alert-btn-view{
+  flex:2;padding:9px 0;border-radius:10px;
+  background:linear-gradient(135deg,#FF3B30,#C0392B);border:none;
+  color:#fff;font-size:13px;font-weight:700;cursor:pointer;
+  box-shadow:0 4px 14px rgba(255,59,48,0.4);
+}
+#alert-btn-view:active{filter:brightness(0.88);}
+
 </style>
 </head>
 <body>
 
 <div class="phone">
+
+  <!-- ══════════════════════════════
+       HEALTH ALERT POPUP (page-load)
+       ══════════════════════════════ -->
+  <div id="alert-backdrop">
+    <div id="alert-card">
+      <button id="alert-dismiss-btn" onclick="dismissHealthAlert()">✕</button>
+      <div id="alert-header">
+        <div id="alert-pulse"></div>
+        <div id="alert-label">Health Alert</div>
+      </div>
+      <div id="alert-message">Grandma's blood pressure is elevated</div>
+      <div id="alert-detail">Cardiology follow-up has been suggested. Eva, your attention is needed.</div>
+      <div id="alert-actions">
+        <button id="alert-btn-dismiss" onclick="dismissHealthAlert()">Dismiss</button>
+        <button id="alert-btn-view" onclick="dismissHealthAlert();goTo(1)">View Report →</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ══════════════════════════════
        SCREEN 0 · Constellation
@@ -534,8 +748,8 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
           <span id="notif-panel-label">Updates</span>
         </div>
         <div id="notif-expand">
-          <div class="notif-row" id="notif-health" onclick="goTo(1)">
-            <span class="notif-icon" style="color:#FF7875">⚠</span>
+          <div class="notif-row notif-alert" id="notif-health" onclick="goTo(1)">
+            <span class="notif-icon" style="color:#FF5555">⚠</span>
             <span class="notif-body">Grandma's BP elevated — cardiology follow-up suggested</span>
             <span class="notif-time">8:45 AM</span>
             <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-health')">✕</div>
@@ -600,7 +814,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
       </div>
       <div class="tab-item" onclick="goTo(7)">
         <span class="tab-icon">◈</span>
-        <span class="tab-label">AI Butler</span>
+        <span class="tab-label">Kaleidoscope</span>
       </div>
     </div>
   </div>
@@ -616,7 +830,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="zoomBack()">←</div>
       <div class="screen-title">Grandma's Health Report</div>
-      <img class="screen-logo" src="logo-mark.png" alt="">
+      <img class="screen-logo" src="logo-mark-only.png" alt="">
     </div>
     <div class="lens-body" id="health-body"></div>
   </div>
@@ -632,7 +846,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="screen-title">Family Events</div>
-      <img class="screen-logo" src="logo-mark.png" alt="">
+      <img class="screen-logo" src="logo-mark-only.png" alt="">
     </div>
     <div class="events-scroll">
 
@@ -640,7 +854,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
         <div class="ev-dot health" style="font-size:12px;font-weight:800">H</div>
         <div class="ev-body">
           <div class="ev-who">Grandma</div>
-          <div class="ev-text">Blood pressure elevated at 145/92, HbA1c needs monitoring. AI Butler recommends cardiology follow-up.</div>
+          <div class="ev-text">Blood pressure elevated at 145/92, HbA1c needs monitoring. Kaleidoscope recommends cardiology follow-up.</div>
           <div class="ev-foot">
             <span class="ev-badge red">Health Alert</span>
             <span class="ev-time">Today 8:45 AM</span>
@@ -652,7 +866,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
         <div class="ev-dot shield" style="font-size:11px;font-weight:800">✓</div>
         <div class="ev-body">
           <div class="ev-who">Yuki · Granddaughter</div>
-          <div class="ev-text">AI Butler blocked a phishing link — disguised as a bank login page before it could load.</div>
+          <div class="ev-text">Kaleidoscope blocked a phishing link — disguised as a bank login page before it could load.</div>
           <div class="ev-foot">
             <span class="ev-badge purple">Blocked</span>
             <span class="ev-time">Yesterday 4:23 PM</span>
@@ -696,7 +910,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
       </div>
       <div class="tab-item" onclick="goTo(7)">
         <span class="tab-icon">◈</span>
-        <span class="tab-label">AI Butler</span>
+        <span class="tab-label">Kaleidoscope</span>
       </div>
     </div>
   </div>
@@ -768,7 +982,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
   </div>
 
   <!-- ══════════════════════════════
-       SCREEN 4 · Yuki — Growth + Protection
+       SCREEN 4 · Yuki — Collaborative Portfolio
        ══════════════════════════════ -->
   <div class="screen" id="s4">
     <div class="status-bar">
@@ -778,88 +992,115 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="zoomBack()">←</div>
       <div class="screen-title">Yuki's Report</div>
-      <img class="screen-logo" src="logo-mark.png" alt="">
+      <img class="screen-logo" src="logo-mark-only.png" alt="">
     </div>
     <div class="protect-body">
+
+      <!-- Hero -->
       <div class="protect-hero">
-        <img src="faces/yuki.png" style="width:68px;height:68px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 12px;border:2px solid rgba(0,188,212,0.28)">
+        <img src="faces/yuki.png" style="width:68px;height:68px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 10px;border:2px solid rgba(0,188,212,0.28)">
         <div class="protect-name">Yuki</div>
         <div class="protect-role">Granddaughter · Age 14</div>
-        <div class="protect-status-row">
-          <div class="pstat">
-            <div class="pstat-val" style="color:rgba(255,255,255,0.8)">2</div>
-            <div class="pstat-lbl">Works today</div>
+        <div class="yuki-identity">跨媒體創意總監 · Week 12</div>
+        <div class="yuki-week-stats">
+          <span>3 Works</span><span>·</span>
+          <span>6h co-creating</span><span>·</span>
+          <span class="yw-accent">+15% Critical Thinking</span>
+        </div>
+      </div>
+
+      <!-- Featured: Music -->
+      <div class="report-section-lbl">✦ Featured Work</div>
+      <div class="yuki-featured">
+        <div class="yuki-featured-header">
+          <div class="yf-tag">Music · 2h 10min</div>
+          <div class="yf-title">Cyberpunk Lullaby</div>
+          <div class="yf-sub">情緒由 Yuki 定義 · 旋律架構由 AI 生成</div>
+        </div>
+        <div class="yuki-wave">
+          <div class="yw-bar" style="height:12px"></div>
+          <div class="yw-bar" style="height:20px"></div>
+          <div class="yw-bar" style="height:28px"></div>
+          <div class="yw-bar" style="height:16px"></div>
+          <div class="yw-bar" style="height:32px"></div>
+          <div class="yw-bar" style="height:22px"></div>
+          <div class="yw-bar" style="height:18px"></div>
+          <div class="yw-bar" style="height:34px"></div>
+          <div class="yw-bar" style="height:14px"></div>
+          <div class="yw-bar" style="height:26px"></div>
+          <div class="yw-bar" style="height:30px"></div>
+          <div class="yw-bar" style="height:20px"></div>
+          <div class="yw-bar" style="height:36px"></div>
+          <div class="yw-bar" style="height:18px"></div>
+          <div class="yw-bar" style="height:24px"></div>
+          <div class="yw-bar" style="height:32px"></div>
+          <div class="yw-bar" style="height:14px"></div>
+          <div class="yw-bar" style="height:28px"></div>
+          <div class="yw-bar" style="height:22px"></div>
+          <div class="yw-bar" style="height:16px"></div>
+          <div class="yw-bar" style="height:30px"></div>
+          <div class="yw-bar" style="height:24px"></div>
+          <div class="yw-bar" style="height:10px"></div>
+        </div>
+        <div class="spark-block">
+          <div class="spark-label">✦ Spark Moment</div>
+          <div class="spark-row">
+            <div class="spark-side ai-side">
+              <span class="spark-who">AI suggested</span>
+              普通 EDM 節拍
+            </div>
+            <div class="spark-arrow-col">→</div>
+            <div class="spark-side yuki-side">
+              <span class="spark-who">Yuki changed to</span>
+              Lo-fi + Cyberpunk 質感
+            </div>
           </div>
-          <div class="pstat">
-            <div class="pstat-val" style="color:#00BCD4">+15%</div>
-            <div class="pstat-lbl">Growth</div>
+        </div>
+        <div class="contrib-bar-wrap">
+          <div class="contrib-labels">
+            <span>Yuki 主導創意</span>
+            <span>AI 執行技術</span>
           </div>
-          <div class="pstat">
-            <div class="pstat-val" style="color:rgba(255,255,255,0.6)">45m</div>
-            <div class="pstat-lbl">Learning</div>
+          <div class="contrib-bar-track">
+            <div class="contrib-human-fill" style="width:65%"></div>
+            <div class="contrib-ai-fill" style="width:35%"></div>
           </div>
         </div>
       </div>
 
-      <!-- ── Today's Creations ── -->
-      <div class="report-section-lbl">✦ Today's Creations</div>
-
-      <div class="yuki-work-card featured">
-        <div class="ywc-thumb" style="background:linear-gradient(135deg,#0097A7 0%,#7B61FF 100%);">
-          <div class="ywc-thumb-icon">🎨</div>
+      <!-- Feed Row: IG + Vibe Coding -->
+      <div class="report-section-lbl">↑ This Week's Works</div>
+      <div class="yuki-feed-row">
+        <div class="yuki-feed-card">
+          <div class="yfc-thumb" style="background:linear-gradient(135deg,#C2185B 0%,#FF7043 100%)">📸</div>
+          <div class="yfc-body">
+            <div class="yfc-tag">IG Post</div>
+            <div class="yfc-title">城市夜景 Series</div>
+            <div class="yfc-spark">AI 生版面 → Yuki 改文案 &amp; 調色</div>
+            <span class="yfc-ratio">Y 70 · AI 30</span>
+          </div>
         </div>
-        <div class="ywc-info">
-          <div class="ywc-tag">Design · 1h 20min</div>
-          <div class="ywc-title">Summer Vibes — Lookbook Cover</div>
-          <div class="ywc-feedback">"Strong composition. Try a contrasting accent color next time."</div>
-        </div>
-      </div>
-
-      <div class="yuki-work-card">
-        <div class="ywc-thumb" style="background:linear-gradient(135deg,#00796B 0%,#00BCD4 100%);">
-          <div class="ywc-thumb-icon">✍️</div>
-        </div>
-        <div class="ywc-info">
-          <div class="ywc-tag">Writing · 45min</div>
-          <div class="ywc-title">History Reimagined — Short Story</div>
-          <div class="ywc-feedback">"Strong voice. Try a plot twist next time."</div>
+        <div class="yuki-feed-card">
+          <div class="yfc-thumb" style="background:linear-gradient(135deg,#1565C0 0%,#00BCD4 100%)">💻</div>
+          <div class="yfc-body">
+            <div class="yfc-tag">Vibe Coding</div>
+            <div class="yfc-title">Todo + Mood App</div>
+            <div class="yfc-spark">Yuki 發現邏輯漏洞，引導 AI 修復</div>
+            <span class="yfc-ratio">Y 60 · AI 40</span>
+          </div>
         </div>
       </div>
 
-      <!-- ── Skill Growth ── -->
-      <div class="report-section-lbl">↑ Skill Growth · This Week</div>
-      <div class="skill-bars-card">
-        <div class="skill-bar-row">
-          <div class="skill-name">Critical Thinking</div>
-          <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:73%;background:#00BCD4"></div></div>
-          <div class="skill-delta" style="color:#00BCD4">+15%</div>
-        </div>
-        <div class="skill-bar-row">
-          <div class="skill-name">Creativity</div>
-          <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:81%;background:#7B61FF"></div></div>
-          <div class="skill-delta" style="color:#7B61FF">+8%</div>
-        </div>
-        <div class="skill-bar-row">
-          <div class="skill-name">Writing</div>
-          <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:62%;background:#4ADE80"></div></div>
-          <div class="skill-delta" style="color:#4ADE80">+5%</div>
-        </div>
+      <!-- Expert View -->
+      <div class="expert-view">
+        <div class="expert-label">Expert View</div>
+        <div class="expert-text">"Yuki 本週在跨媒體敘事上展現了極佳的連貫性，風格引導能力超出同齡水平。"</div>
       </div>
 
-      <!-- ── Protection (compact) ── -->
-      <div class="report-section-lbl">🛡 Protection</div>
-      <div class="protection-compact">
-        <span class="pc-icon">✓</span>
-        <div class="pc-compact-text">
-          <div class="pc-compact-title">All clear this week</div>
-          <div class="pc-compact-detail">3 threats blocked · 0 incidents · Browsing safe</div>
-        </div>
-        <span class="pc-compact-badge">1 phishing</span>
-      </div>
-
+      <!-- Actions -->
       <div class="actions" style="margin-top:4px">
-        <button class="abtn hi">Send Yuki a learning challenge</button>
-        <button class="abtn">View Yuki's showcase</button>
+        <button class="abtn hi">Send Yuki a learning challenge →</button>
+        <button class="abtn">View Yuki's full showcase</button>
       </div>
     </div>
   </div>
@@ -875,7 +1116,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="screen-title">Protection Report</div>
-      <img class="screen-logo" src="logo-mark.png" alt="">
+      <img class="screen-logo" src="logo-mark-only.png" alt="">
     </div>
     <div class="protect-body">
       <div class="protect-hero">
@@ -923,7 +1164,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="zoomBack()">←</div>
       <div class="screen-title">Protection Report</div>
-      <img class="screen-logo" src="logo-mark.png" alt="">
+      <img class="screen-logo" src="logo-mark-only.png" alt="">
     </div>
     <div class="protect-body">
       <div class="protect-hero">
@@ -962,7 +1203,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
   </div>
 
   <!-- ══════════════════════════════
-       SCREEN 7 · AI Butler Chat
+       SCREEN 7 · Kaleidoscope Chat
        ══════════════════════════════ -->
   <div class="screen" id="s7">
     <div class="status-bar">
@@ -973,7 +1214,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="chat-header-av ai">◈</div>
       <div class="chat-header-info">
-        <div class="chat-header-name">AI Butler</div>
+        <div class="chat-header-name">Kaleidoscope</div>
         <div class="chat-header-status ai-status">● Always active</div>
       </div>
     </div>
@@ -1109,7 +1350,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
 
     <div class="chat-input-bar" id="butler-chat-input">
       <div class="chat-mic"><svg width="14" height="17" viewBox="0 0 14 20" fill="currentColor"><rect x="4" y="0" width="6" height="11" rx="3"/><path d="M1 9a6 6 0 0012 0" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><line x1="7" y1="15" x2="7" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="18" x2="10" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <input class="chat-input" placeholder="Ask AI Butler…" readonly>
+      <input class="chat-input" placeholder="Ask Kaleidoscope…" readonly>
       <div class="chat-send ai-send">↑</div>
     </div>
   </div>
@@ -1126,7 +1367,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="screen-title">Scam Call Blocked</div>
-      <img class="screen-logo" src="logo-mark.png" alt="">
+      <img class="screen-logo" src="logo-mark-only.png" alt="">
     </div>
     <div class="protect-body">
       <div class="protect-hero">
@@ -1154,7 +1395,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
         <div class="pc-detail">Community database: 847 scam reports · Category: impersonating bank representative</div>
       </div>
       <div class="protect-card blue-card">
-        <div class="pc-eyebrow" style="color:#64B5F6">◈ AI Butler Action</div>
+        <div class="pc-eyebrow" style="color:#64B5F6">◈ Kaleidoscope Action</div>
         <div class="pc-text">Call automatically blocked before reaching Grandma. Incident logged and alert sent to you.</div>
       </div>
       <div class="actions" style="margin-top:4px">
@@ -1176,7 +1417,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="screen-title">Phishing Link Blocked</div>
-      <img class="screen-logo" src="logo-mark.png" alt="">
+      <img class="screen-logo" src="logo-mark-only.png" alt="">
     </div>
     <div class="protect-body">
       <div class="protect-hero">
@@ -1204,7 +1445,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
         <div class="pc-detail">SSL certificate mismatch · domain registered 3 days ago · added to global block list</div>
       </div>
       <div class="protect-card blue-card">
-        <div class="pc-eyebrow" style="color:#64B5F6">◈ AI Butler Action</div>
+        <div class="pc-eyebrow" style="color:#64B5F6">◈ Kaleidoscope Action</div>
         <div class="pc-text">Page blocked before loading — Yuki's credentials and data remain safe. Site reported to safe-browsing network.</div>
       </div>
       <div class="actions" style="margin-top:4px">
@@ -1225,8 +1466,8 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     </div>
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(1)">←</div>
-      <div class="screen-title">AI Butler Working</div>
-      <img class="screen-logo" src="logo-mark.png" alt="">
+      <div class="screen-title">Kaleidoscope Working</div>
+      <img class="screen-logo" src="logo-mark-only.png" alt="">
     </div>
     <div class="task-exec-body">
 
@@ -1291,22 +1532,20 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
   <div id="zoom-overlay"></div>
 
   <!-- ── AI Orb FAB ── -->
-  <div id="ai-orb" onclick="toggleAISheet()">
-    <img class="orb-logo" src="logo-mark.png" alt="">
-  </div>
+  <div id="ai-orb" onclick="toggleAISheet()"></div>
   <div id="ai-sheet-dim" onclick="closeAISheet()"></div>
   <div id="ai-sheet">
     <div class="sheet-handle"></div>
     <div id="ai-sheet-head">
-      <div class="sheet-orb-mini"><img class="orb-logo-mini" src="logo-mark.png" alt=""></div>
+      <div class="sheet-orb-mini"><img class="orb-logo-mini" src="kaleidoscope-icon.png" alt=""></div>
       <div>
-        <div class="sheet-title" id="sheet-title">AI Butler</div>
+        <div class="sheet-title" id="sheet-title">Kaleidoscope</div>
         <div class="sheet-subtitle" id="sheet-subtitle">Always watching, always ready</div>
       </div>
     </div>
     <div id="ai-sheet-body"></div>
     <div id="ai-sheet-input-wrap">
-      <input class="sheet-input" placeholder="Ask AI Butler anything…">
+      <input class="sheet-input" placeholder="Ask Kaleidoscope anything…">
       <div class="sheet-send">↑</div>
     </div>
   </div>
@@ -1321,7 +1560,7 @@ function goTo(n){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('s'+n).classList.add('active');
   _currentScreen=n;
-  // Hide orb only on AI Butler screen (has its own full UI)
+  // Hide orb only on Kaleidoscope screen (has its own full UI)
   const orb=document.getElementById('ai-orb');
   if(orb) orb.classList.toggle('hidden', n===7);
   if(n===7 && _aiSheetOpen) closeAISheet();
@@ -1855,7 +2094,7 @@ window.addEventListener('message',e=>{
   if(e.data.type==='goTo') goTo(e.data.screen);
 });
 
-// ── AI Butler Pull Tab — context data ──
+// ── Kaleidoscope Pull Tab — context data ──
 const AI_CTX={
   0:{title:'Family Overview',   hint:'3 actions pending today',
      actions:['Book cardiology follow-up for Grandma','Set Hiro\'s 10 PM screen limit','Review Yuki\'s blocked links this week']},
@@ -1879,7 +2118,7 @@ const AI_CTX={
 
 function toggleAISheet(){_aiSheetOpen?closeAISheet():openAISheet();}
 function openAISheet(){
-  const ctx=AI_CTX[_currentScreen]||{title:'AI Butler',hint:'How can I help?',actions:[]};
+  const ctx=AI_CTX[_currentScreen]||{title:'Kaleidoscope',hint:'How can I help?',actions:[]};
   document.getElementById('sheet-title').textContent=ctx.title;
   document.getElementById('sheet-subtitle').textContent=ctx.hint;
   const body=document.getElementById('ai-sheet-body');
@@ -1887,6 +2126,8 @@ function openAISheet(){
     ctx.actions.map((a,i)=>{
       if(_currentScreen===1&&i===0)
         return `<button class="sheet-action" onclick="closeAISheet();goTo(10)">${a}</button>`;
+      if(_currentScreen===0&&i===0)
+        return `<button class="sheet-action" onclick="closeAISheet();goTo(1)">${a}</button>`;
       return `<button class="sheet-action">${a}</button>`;
     }).join('');
   document.getElementById('ai-sheet').classList.add('visible');
@@ -1899,6 +2140,14 @@ function closeAISheet(){
   document.getElementById('ai-sheet-dim').classList.remove('visible');
   document.querySelector('.phone').classList.remove('sheet-open');
   _aiSheetOpen=false;
+}
+
+function dismissHealthAlert(){
+  const el=document.getElementById('alert-backdrop');
+  if(!el)return;
+  el.style.transition='opacity 0.3s ease';
+  el.style.opacity='0';
+  setTimeout(()=>el.remove(),320);
 }
 
 // Reset read-state on every page load so nodes always start as unread
