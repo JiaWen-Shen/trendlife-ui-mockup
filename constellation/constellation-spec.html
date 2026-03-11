@@ -703,12 +703,13 @@
       <button class="snav-item" onclick="evaGoTo(1)"><span class="snav-icon">🏥</span><span class="snav-name" data-i18n="sc-eva-1-name">Grandma's Health Report</span><span class="snav-num">1</span></button>
       <button class="snav-item" onclick="evaGoTo(2)"><span class="snav-icon">📋</span><span class="snav-name" data-i18n="sc-eva-2-name">Family Events</span><span class="snav-num">2</span></button>
       <button class="snav-item" onclick="evaGoTo(3)"><span class="snav-icon">💬</span><span class="snav-name" data-i18n="sc-eva-3-name">Chat with Grandma</span><span class="snav-num">3</span></button>
-      <button class="snav-item" onclick="evaGoTo(4)"><span class="snav-icon">🛡</span><span class="snav-name" data-i18n="sc-eva-4-name">Yuki — Protection</span><span class="snav-num">4</span></button>
+      <button class="snav-item" onclick="evaGoTo(4)"><span class="snav-icon">✦</span><span class="snav-name" data-i18n="sc-eva-4-name">Yuki — Portfolio</span><span class="snav-num">4</span></button>
       <button class="snav-item" onclick="evaGoTo(5)"><span class="snav-icon">🔒</span><span class="snav-name" data-i18n="sc-eva-5-name">Kenji — Protection</span><span class="snav-num">5</span></button>
       <button class="snav-item" onclick="evaGoTo(6)"><span class="snav-icon">📱</span><span class="snav-name" data-i18n="sc-eva-6-name">Hiro — Protection</span><span class="snav-num">6</span></button>
       <button class="snav-item" onclick="evaGoTo(7)"><span class="snav-icon">◈</span><span class="snav-name" data-i18n="sc-eva-7-name">Kaleidoscope</span><span class="snav-num">7</span></button>
       <button class="snav-item" onclick="evaGoTo(8)"><span class="snav-icon">📵</span><span class="snav-name" data-i18n="sc-eva-8-name">Scam Call — Grandma</span><span class="snav-num">8</span></button>
       <button class="snav-item" onclick="evaGoTo(9)"><span class="snav-icon">🚫</span><span class="snav-name" data-i18n="sc-eva-9-name">Phishing Link — Yuki</span><span class="snav-num">9</span></button>
+      <button class="snav-item" onclick="evaGoTo(10)"><span class="snav-icon">◈</span><span class="snav-name" data-i18n="sc-eva-10-name">AI Booking Task</span><span class="snav-num">10</span></button>
     </div>
   </div>
 
@@ -719,7 +720,7 @@
   <div class="section-divider" style="margin-bottom:48px;"></div>
   <div class="section-header">
     <div class="section-title" data-i18n="screens-eva-title">Screens &amp; Flows</div>
-    <div class="section-sub" data-i18n="screens-eva-sub">10 screens · Mei's family constellation view</div>
+    <div class="section-sub" data-i18n="screens-eva-sub">11 screens · Mei's family constellation view</div>
   </div>
   <div class="screen-cards">
 
@@ -729,11 +730,12 @@
         <div class="sc-name" data-i18n="sc-eva-0-name">Constellation Home</div>
       </div>
       <div class="sc-body">
-        <div class="sc-desc" data-i18n="sc-eva-0-desc">Mei at center, Grandma above with ⚠ pulse ring, Kenji / Yuki / Hiro as orbiting nodes. Three stacked alert pills (health report, scam call, phishing link) in the top right — each dismissible. AI Companion Arc above navigates to Kaleidoscope chat.</div>
+        <div class="sc-desc" data-i18n="sc-eva-0-desc">Mei at center, Grandma above with ⚠ pulse ring. Notification panel in the top-right surfaces urgent updates — the Grandma health alert is highlighted in red and triggers a dismissible popup on load. Kaleidoscope FAB at bottom-right; tapping opens the action sheet. First sheet action links directly to Grandma's Health Report.</div>
         <div class="sc-tags">
           <span class="sc-tag tag-purple">Entry point</span>
-          <span class="sc-tag tag-red">Alert pills</span>
-          <span class="sc-tag tag-blue">AI Companion Arc</span>
+          <span class="sc-tag tag-red">Health alert popup</span>
+          <span class="sc-tag tag-blue">Kaleidoscope FAB</span>
+          <span class="sc-tag tag-amber">Notification panel</span>
         </div>
       </div>
     </div>
@@ -786,14 +788,15 @@
     <div class="sc" onclick="evaGoTo(4);scrollToPhone('evaIframe')">
       <div class="sc-head">
         <div class="sc-num" style="background:var(--green)" style="color:#080E12">4</div>
-        <div class="sc-name" data-i18n="sc-eva-4-name">Yuki — Protection</div>
+        <div class="sc-name" data-i18n="sc-eva-4-name">Yuki — Collaborative Portfolio</div>
       </div>
       <div class="sc-body">
-        <div class="sc-desc" data-i18n="sc-eva-4-desc">Yuki's protection report: 3 threats blocked, 0 incidents, 14 days protected. Latest block card shows the phishing link intercept (bit.ly/secure-bank-verify → fake bank page). This week's status: browsing safe, usage normal.</div>
+        <div class="sc-desc" data-i18n="sc-eva-4-desc">Yuki's weekly creative output as a human–AI co-creation record. Featured work: Cyberpunk Lullaby (music, 2h 10min) with waveform visual and Spark Moment breakdown. Contribution bar shows Yuki 65% / AI 35%. Feed row: City Nightscape IG post and Vibe Coding Todo+Mood app. Expert View quote at bottom. Two action buttons: send a learning challenge, view full showcase.</div>
         <div class="sc-tags">
-          <span class="sc-tag tag-green">Protection</span>
-          <span class="sc-tag tag-purple">Phishing blocked</span>
-          <span class="sc-tag tag-muted">Usage normal</span>
+          <span class="sc-tag tag-blue">Creative portfolio</span>
+          <span class="sc-tag tag-purple">Human–AI co-creation</span>
+          <span class="sc-tag tag-green">Learning growth</span>
+          <span class="sc-tag tag-amber">Expert view</span>
         </div>
       </div>
     </div>
@@ -869,6 +872,21 @@
           <span class="sc-tag tag-purple">Phishing blocked</span>
           <span class="sc-tag tag-green">No data exposed</span>
           <span class="sc-tag tag-blue">Kaleidoscope</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(10);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--blue)">10</div>
+        <div class="sc-name" data-i18n="sc-eva-10-name">AI Booking Task</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-10-desc">Kaleidoscope executes the cardiology booking autonomously. Step-by-step task tracker: hospital search → slot matching → appointment confirmed (Dr. Li Wei, Nov 14, 2:30 PM). Booking confirmation card with date, time and location. Grandma notified automatically via the family network.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-blue">Kaleidoscope</span>
+          <span class="sc-tag tag-green">Task complete</span>
+          <span class="sc-tag tag-amber">Auto-notify</span>
         </div>
       </div>
     </div>
@@ -1218,17 +1236,17 @@ const dict = {
   'sc-eva-1-name': { en: "Grandma's Health Report",  zh: '奶奶的健康報告' },
   'sc-eva-2-name': { en: 'Family Events',            zh: '家庭事件' },
   'sc-eva-3-name': { en: 'Chat with Grandma',        zh: '與奶奶的對話' },
-  'sc-eva-4-name': { en: 'Yuki — Protection',        zh: 'Yuki — 保護報告' },
+  'sc-eva-4-name': { en: 'Yuki — Collaborative Portfolio', zh: 'Yuki — 創作作品集' },
   'sc-eva-5-name': { en: 'Kenji — Protection',         zh: 'Kenji — 保護報告' },
   'sc-eva-6-name': { en: 'Hiro — Protection',       zh: 'Hiro — 保護報告' },
-  'sc-eva-7-name': { en: 'Kaleidoscope',                zh: 'AI 管家' },
+  'sc-eva-7-name': { en: 'Kaleidoscope',                zh: 'Kaleidoscope' },
   'sc-eva-8-name': { en: 'Scam Call — Grandma',      zh: '詐騙電話 — 奶奶' },
   'sc-eva-9-name': { en: 'Phishing Link — Yuki',     zh: '釣魚連結 — Yuki' },
 
   /* Mei screen descs */
   'sc-eva-0-desc': {
-    en: "Mei at center, Grandma above with ⚠ pulse ring, Kenji / Yuki / Hiro as orbiting nodes. Three stacked alert pills (health report, scam call, phishing link) in the top right — each dismissible. AI Companion Arc above navigates to Kaleidoscope chat.",
-    zh: "Mei 居中，奶奶在上方帶有 ⚠ 脈衝環，Kenji / Yuki / Hiro 為環繞節點。右上角三個堆疊提醒標籤（健康報告、詐騙電話、釣魚連結）——每個均可關閉。頂部 AI 陪伴穹頂可導航到 AI 管家對話。"
+    en: "Mei at center, Grandma above with ⚠ pulse ring. Notification panel in the top-right surfaces urgent updates — the Grandma health alert row is highlighted in red. On page load, a dismissible health alert popup appears over the constellation with a pulsing red dot, message, and 'View Report →' CTA. Kaleidoscope FAB at bottom-right; first sheet action links directly to Grandma's Health Report.",
+    zh: "Mei 居中，奶奶在上方帶有 ⚠ 脈衝環。右上角通知面板顯示緊急更新——奶奶健康警報列以紅色 Highlight 標示。頁面載入時彈出可關閉的健康警報卡片，含脈動紅點、訊息與『查看報告→』按鈕。右下角 Kaleidoscope FAB；第一個快速操作直接連結奶奶健康報告。"
   },
   'sc-eva-1-desc': {
     en: "Annual checkup results viewed from Mei's perspective. AI summary with cardiology follow-up recommendation; marker table (BP ⚠ 145/92, HbA1c Watch, others Normal). Three action buttons: book follow-up, review medication, export to family record.",
@@ -1243,8 +1261,8 @@ const dict = {
     zh: "Mei 與奶奶之間的直接訊息串。五則訊息涵蓋健康報告結果——奶奶詢問健檢，Mei 確認 145/92 的疑慮，Mei 建議心臟科，奶奶同意前往。"
   },
   'sc-eva-4-desc': {
-    en: "Yuki's protection report: 3 threats blocked, 0 incidents, 14 days protected. Latest block card shows the phishing link intercept (bit.ly/secure-bank-verify → fake bank page). This week's status: browsing safe, usage normal.",
-    zh: "Yuki 的保護報告：已封鎖 3 次威脅、0 起事件、14 天受保護。最新封鎖卡片顯示釣魚連結攔截（bit.ly/secure-bank-verify → 假銀行頁面）。本週狀態：瀏覽安全、使用正常。"
+    en: "Yuki's weekly creative output as a human–AI co-creation record. Featured work: Cyberpunk Lullaby (music, 2h 10min) with waveform visual, Spark Moment breakdown (AI suggested generic EDM → Yuki changed to Lo-fi + Cyberpunk texture), and contribution bar (Yuki 65% / AI 35%). Feed row: City Nightscape IG post and Vibe Coding Todo+Mood app. Expert View quote at bottom.",
+    zh: "Yuki 每週創意產出的人機共創紀錄。精選作品：《賽博龐克搖籃曲》（音樂，2小時10分）附波形視覺與 Spark Moment 對比（AI 建議普通 EDM → Yuki 改為 Lo-fi + 賽博龐克質感），貢獻比例條（Yuki 65% / AI 35%）。動態列：城市夜景 IG 貼文、Vibe Coding Todo+Mood App。底部專家觀點引言。"
   },
   'sc-eva-5-desc': {
     en: "Kenji's device security report. Recent new device login verified via two-factor authentication; work device confirmed secure. No anomalies detected this week.",
@@ -1267,9 +1285,15 @@ const dict = {
     zh: "Yuki 設備上被攔截釣魚連結的事件詳情。網站：secure-bank-login.xyz，冒充國泰銀行，SSL 憑證不符，網域僅 3 天。頁面在載入前被封鎖——無資料外洩。已回報至安全瀏覽網絡。三個操作按鈕：傳訊給 Yuki、回報網站、調整瀏覽設定。"
   },
 
+  'sc-eva-10-name': { en: 'AI Booking Task', zh: 'AI 預約任務' },
+  'sc-eva-10-desc': {
+    en: "Kaleidoscope executes the cardiology booking autonomously. Step-by-step task tracker shows: hospital search (NTU Hospital, 4 openings found) → slot matching (Nov 14 afternoon, no conflicts) → appointment confirmed (Dr. Li Wei, Nov 14, 2:30 PM). Booking confirmation card with location details. Grandma notified automatically.",
+    zh: "Kaleidoscope 自主執行心臟科門診預約。逐步任務追蹤器顯示：搜尋醫院（台大醫院，找到 4 個空缺）→ 配對時段（11 月 14 日下午，無衝突）→ 預約確認（李偉醫師，11 月 14 日下午 2:30）。含地點資訊的預約確認卡。奶奶自動收到通知。"
+  },
+
   /* Mei screens section */
   'screens-eva-title': { en: 'Screens & Flows',                        zh: '畫面與流程' },
-  'screens-eva-sub':   { en: "10 screens · Mei's family constellation view", zh: '10 個畫面 · Mei 家庭星座圖視角' },
+  'screens-eva-sub':   { en: "11 screens · Mei's family constellation view", zh: '11 個畫面 · Mei 家庭星座圖視角' },
 
   /* Yuki nav tab */
   'tab-yuki': { en: "Yuki's View", zh: 'Yuki 創作視角' },
