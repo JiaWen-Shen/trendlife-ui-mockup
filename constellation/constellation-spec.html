@@ -397,15 +397,12 @@
   </div>
   <div class="nav-right">
     <nav class="nav-view-tabs">
-      <a class="nav-vtab" id="tab-btn-grace"
-         onclick="switchView('grace');return false;" href="#"
-         data-i18n="tab-grace">Hana's View</a>
       <a class="nav-vtab nav-vtab-active" id="tab-btn-eva"
          onclick="switchView('eva');return false;" href="#"
          data-i18n="tab-eva">Mei's View</a>
       <a class="nav-vtab" id="tab-btn-yuki"
          onclick="switchView('yuki');return false;" href="#"
-         data-i18n="tab-yuki">Yuki's View</a>
+         data-i18n="tab-yuki">Yuki's Creative Space</a>
     </nav>
     <div class="theme-toggle">
       <button class="theme-btn active" id="btn-dark"  onclick="setTheme('dark')">Dark</button>
@@ -419,9 +416,6 @@
 </nav>
 
 
-<!-- ══════════════════════════════════════════════════
-     HANA'S VIEW
-     ══════════════════════════════════════════════════ -->
 <div id="view-grace" style="display:none">
 
 <section class="hero">
@@ -1107,86 +1101,8 @@
 const dict = {
   'nav-product':  { en: 'TrendLife Kaleidoscope', zh: 'TrendLife AI 管家' },
   'nav-subtitle': { en: 'Constellation Spec',  zh: '星座圖規格' },
-  'tab-grace':    { en: "Hana's View",        zh: 'Hana 個人視角' },
   'tab-eva':      { en: "Mei's View",          zh: 'Mei 連結視角' },
   'snav-hint':    { en: 'Click screens to interact, or use the list to jump to a specific screen.', zh: '點擊畫面互動，或點擊選單查看個別畫面' },
-
-  /* Hana hero */
-  'hero-grace-kicker':   { en: 'Interactive Prototype',      zh: '互動原型' },
-  'hero-grace-title':    {
-    en: "Hana's<br><span class='accent'>Constellation</span><br><span class='accent2' style='font-size:38px;'>Member's View</span>",
-    zh: "Hana 的<br><span class='accent'>星座圖</span><br><span class='accent2' style='font-size:38px;'>會員視角</span>"
-  },
-  'hero-grace-sub': {
-    en: "A personal digital space where every member sees herself at the heart of her family network. The AI Companion Arc stays close, quietly available; family nodes reflect connection and care. Tapping navigates to health data, voice, and relationship depth.",
-    zh: "一個以自我為中心的數位空間，讓每位成員看到自己處於家庭網絡的核心。AI 陪伴穹頂靜靜陪伴，隨時可以協助；家庭節點反映關係與關愛。點擊可深入健康資料、語音功能與家人互動。"
-  },
-  'persona-grace-name': { en: 'Hana Chen · 68 years old',             zh: '陳奶奶 · 68 歲' },
-  'persona-grace-meta': { en: 'Retired homemaker · Taipei · Grandma in the Chen family', zh: '退休家庭主婦 · 台北 · 陳家奶奶' },
-  'ptag-grace-1': { en: 'Senior member',     zh: '年長用戶' },
-  'ptag-grace-2': { en: 'Tech-light',        zh: '輕度數位' },
-  'ptag-grace-3': { en: 'Health-conscious',  zh: '重視健康' },
-  'ptag-grace-4': { en: 'Fraud-vulnerable',  zh: '詐騙高風險' },
-  'ptag-grace-5': { en: 'Family-connected',  zh: '家庭核心' },
-  'principles-grace-eyebrow': { en: 'Design Principles', zh: '設計原則' },
-  'p-grace-1': {
-    en: "<strong>Self at center</strong> — Hana sees herself at the heart of her family network, surrounded by her loved ones. The design reinforces her agency and equal standing within the constellation.",
-    zh: "<strong>自我為中心</strong> — Hana 看到自己處於家庭網絡的核心，被家人所圍繞。設計強化她在星座圖中的主體感與平等地位。"
-  },
-  'p-grace-2': {
-    en: "<strong>AI Companion Arc as ambient presence</strong> — The AI arc at the top conveys care without intruding. It's always present, quietly available — tapping reveals the AI's actions for the day.",
-    zh: "<strong>AI 陪伴穹頂作為環境陪伴</strong> — 頂部的 AI 穹頂傳遞關懷感而不打擾。始終存在，靜靜等候——點擊可查看 AI 今日行動。"
-  },
-  'p-grace-3': {
-    en: "<strong>Relational depth on tap</strong> — Each family node is a doorway: voice messages, shared memories, or live health updates. Navigating is exploratory, not task-driven.",
-    zh: "<strong>一鍵深入關係</strong> — 每個家庭節點都是入口：語音訊息、共同回憶或即時健康更新。導航是探索性的，而非任務驅動的。"
-  },
-  'p-grace-4': {
-    en: "<strong>Health as context, not alarm</strong> — The health report is accessible but presented calmly. Data is shown with context and AI recommendations, never as raw numbers without meaning.",
-    zh: "<strong>健康作為脈絡而非警報</strong> — 健康報告易於取得，但呈現方式平靜。資料附有背景說明和 AI 建議，而非毫無意義的原始數字。"
-  },
-  'p-grace-5': {
-    en: "<strong>Voice as primary input</strong> — For seniors, voice is more natural than tapping. The Your Voice screen allows hands-free navigation and messaging.",
-    zh: "<strong>語音為主要輸入</strong> — 對年長用戶而言，語音比點擊更自然。「你的聲音」頁面支援免持手機的導航與傳訊。"
-  },
-
-  /* Hana screen names */
-  'sc-grace-0-name': { en: 'Constellation Home',  zh: '星座圖首頁' },
-  'sc-grace-1-name': { en: 'AI Ripple',           zh: 'AI 漣漪' },
-  'sc-grace-2-name': { en: 'Health Report',       zh: '健康報告' },
-  'sc-grace-3-name': { en: 'Your Voice',          zh: '你的聲音' },
-  'sc-grace-4-name': { en: 'Your World',          zh: '你的世界' },
-  'sc-grace-5-name': { en: 'Chat with Mei',       zh: '與 Mei 的對話' },
-
-  /* Hana screen descs */
-  'sc-grace-0-desc': {
-    en: "Hana at center, family nodes orbit around her. AI Companion Arc spans the top, always ready to assist. Each node pulses with live status. Tapping a node navigates to that relationship's depth screen.",
-    zh: "Hana 居中，家庭節點在其周圍運行。AI 陪伴穹頂橫跨頂部，隨時可以協助。每個節點隨即時狀態跳動。點擊節點進入該關係的深度頁面。"
-  },
-  'sc-grace-1-desc': {
-    en: "Triggered by tapping the AI Companion Arc. Shows the Kaleidoscope's recent activity across the family network as an animated ripple event chain — health checks, blocked calls, and family updates.",
-    zh: "點擊 AI 陪伴穹頂觸發。以動態漣漪事件鏈呈現 AI 管家近期的家庭網絡活動——健康檢查、攔截電話和家庭更新。"
-  },
-  'sc-grace-2-desc': {
-    en: "Annual checkup results for Hana. AI summary at top; marker table below (Blood Pressure ⚠ Elevated, HbA1c Watch, ECG/Bone Density Normal). Three AI-recommended action buttons including cardiology follow-up.",
-    zh: "Hana 的年度健康檢查結果。頂部 AI 摘要；下方指標表格（血壓 ⚠ 偏高、HbA1c 注意、心電圖/骨密度正常）。三個 AI 建議操作按鈕，包含心臟科追蹤。"
-  },
-  'sc-grace-3-desc': {
-    en: "Voice-first navigation screen for seniors. Large microphone interface with AI listening state. Hana can speak naturally to navigate the app, send messages, or ask the Kaleidoscope for help.",
-    zh: "為年長用戶設計的語音優先導航頁面。大型麥克風介面顯示 AI 聆聽狀態。Hana 可自然說話來導航 APP、傳送訊息或請求 AI 管家協助。"
-  },
-  'sc-grace-4-desc': {
-    en: "A curated life snapshot for Hana — upcoming appointments, family-shared memories, today's weather, and a gentle AI suggestion for the day. Designed to feel warm and personal, not utilitarian.",
-    zh: "Hana 的精選生活快照——即將到來的預約、家庭共享回憶、今日天氣，以及 AI 的溫和日常建議。設計感覺溫暖而個人化，而非功能性的。"
-  },
-  'sc-grace-5-desc': {
-    en: "Messaging thread between Hana and Mei. Hana sees messages on the left; Mei on the right. A conversation about the recent health report — Hana asking about her results, Mei responding with care and next steps.",
-    zh: "Hana 與 Mei 之間的訊息串。Hana 的訊息在左，Mei 在右。關於近期健康報告的對話——Hana 詢問結果，Mei 帶著關心回應並提供後續步驟。"
-  },
-
-  /* Hana screens section */
-  'screens-grace-title': { en: 'Screens & Flows',                      zh: '畫面與流程' },
-  'screens-grace-sub':   { en: '6 screens · Hana\'s personal constellation view', zh: '6 個畫面 · Hana 個人星座圖視角' },
 
   /* Mei hero */
   'hero-eva-kicker':   { en: 'Interactive Prototype',      zh: '互動原型' },
@@ -1296,7 +1212,7 @@ const dict = {
   'screens-eva-sub':   { en: "11 screens · Mei's family constellation view", zh: '11 個畫面 · Mei 家庭星座圖視角' },
 
   /* Yuki nav tab */
-  'tab-yuki': { en: "Yuki's View", zh: 'Yuki 創作視角' },
+  'tab-yuki': { en: "Yuki's Creative Space", zh: 'Yuki 創作展示空間' },
 
   /* Yuki hero */
   'hero-yuki-kicker': { en: 'Interactive Prototype', zh: '互動原型' },
@@ -1408,22 +1324,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ── VIEW SWITCHER ── */
 function switchView(view) {
-  document.getElementById('view-grace').style.display = view === 'grace' ? '' : 'none';
   document.getElementById('view-eva').style.display   = view === 'eva'   ? '' : 'none';
   document.getElementById('view-yuki').style.display  = view === 'yuki'  ? '' : 'none';
-  document.getElementById('tab-btn-grace').classList.toggle('nav-vtab-active', view === 'grace');
   document.getElementById('tab-btn-eva').classList.toggle('nav-vtab-active',   view === 'eva');
   document.getElementById('tab-btn-yuki').classList.toggle('nav-vtab-active',  view === 'yuki');
   window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-/* ── GRACE SCREEN NAVIGATOR ── */
-function graceGoTo(n) {
-  const iframe = document.getElementById('graceIframe');
-  if (iframe?.contentWindow) iframe.contentWindow.postMessage({type:'goTo', screen:n}, '*');
-  document.querySelectorAll('#screenNavGrace .snav-item').forEach((b, i) => {
-    b.classList.toggle('snav-active', i === n);
-  });
 }
 
 /* ── EVA SCREEN NAVIGATOR ── */
@@ -1452,7 +1357,7 @@ function scrollToPhone(iframeId) {
 /* ── THEME SWITCHER ── */
 function setTheme(t) {
   document.body.classList.toggle('light', t === 'light');
-  ['graceIframe','evaIframe','yukiIframe'].forEach(id => {
+  ['evaIframe','yukiIframe'].forEach(id => {
     const f = document.getElementById(id);
     if (f?.contentWindow) f.contentWindow.postMessage({type:'setTheme', theme:t}, '*');
   });

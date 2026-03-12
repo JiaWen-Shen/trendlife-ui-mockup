@@ -423,6 +423,7 @@ body.light .tl-notify-time{color:rgba(10,10,20,0.3)}
 .contrib-tag.draft{background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.25);color:#4ADE80}
 .contrib-tag.added{background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.2);color:#60A5FA}
 .contrib-tag.ai-tag{background:rgba(192,132,252,0.12);border:1px solid rgba(192,132,252,0.2);color:#C084FC}
+.contrib-tag.director{background:rgba(0,188,212,0.12);border:1px solid rgba(0,188,212,0.28);color:#00BCD4}
 .contrib-body{font-size:11.5px;color:rgba(255,255,255,0.42);line-height:1.4}
 .contrib-thumb-row{display:flex;gap:6px;margin-top:8px}
 .contrib-thumb-item{width:58px;height:42px;border-radius:8px;overflow:hidden;
@@ -432,6 +433,42 @@ body.light .tl-notify-time{color:rgba(10,10,20,0.3)}
   border:1.5px dashed rgba(74,222,128,0.35);display:flex;align-items:center;
   justify-content:center;font-size:16px;color:rgba(74,222,128,0.5);cursor:pointer}
 .contrib-time{font-size:10px;color:rgba(255,255,255,0.2);margin-top:4px}
+.contrib-tag.kept{background:rgba(74,222,128,0.07);border:1px solid rgba(74,222,128,0.18);color:rgba(74,222,128,0.65)}
+
+/* ── Authorship strip ── */
+.cc-ws-authorship{margin:8px 16px 0;padding:9px 14px;border-radius:12px;
+  background:rgba(74,222,128,0.03);border:1px solid rgba(74,222,128,0.1);
+  display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.cc-ws-auth-label{font-size:9.5px;font-weight:700;color:rgba(74,222,128,0.55);
+  letter-spacing:0.8px;text-transform:uppercase;margin-right:2px}
+.cc-ws-auth-stat{font-size:11px;font-weight:600;color:rgba(255,255,255,0.5)}
+.cc-ws-auth-sep{font-size:10px;color:rgba(255,255,255,0.14)}
+
+/* ── Private badge in header ── */
+.cc-ws-private{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.28);letter-spacing:0.2px}
+
+/* ── Socratic AI card ── */
+.ai-guide-card.socratic{flex-direction:column;gap:10px}
+.ai-guide-card.socratic .ai-guide-top{display:flex;align-items:flex-start;gap:10px}
+.ai-guide-q{font-size:12.5px;font-weight:600;color:rgba(192,132,252,0.75);
+  line-height:1.55;font-style:italic;padding-left:2px}
+.ai-guide-choices{display:flex;gap:6px;flex-wrap:wrap}
+.ai-guide-choice{font-size:11px;font-weight:600;padding:6px 12px;border-radius:20px;
+  cursor:pointer;font-family:'Inter',sans-serif;transition:opacity 0.15s}
+.ai-guide-choice.intent{background:rgba(74,222,128,0.08);
+  border:1px solid rgba(74,222,128,0.22);color:rgba(74,222,128,0.8)}
+.ai-guide-choice.rethink{background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.09);color:rgba(255,255,255,0.35)}
+
+/* ── Privacy footer ── */
+.privacy-footer{margin:4px 16px 16px;padding:10px 14px;border-radius:12px;
+  background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);
+  display:flex;align-items:center;gap:8px}
+.privacy-footer-icon{font-size:13px;color:rgba(255,255,255,0.18)}
+.privacy-footer-text{flex:1;font-size:11px;color:rgba(255,255,255,0.22);line-height:1.4}
+.privacy-footer-link{font-size:11px;font-weight:600;color:rgba(0,188,212,0.5);flex-shrink:0;cursor:pointer}
 
 /* Light mode — new screens */
 body.light .butler-bubble.ai{background:rgba(22,163,74,0.06);border-color:rgba(22,163,74,0.18);color:rgba(10,10,20,0.72)}
@@ -483,6 +520,18 @@ body.light .contrib-name{color:rgba(10,10,20,0.72)}
 body.light .contrib-body{color:rgba(10,10,20,0.42)}
 body.light .contrib-time{color:rgba(10,10,20,0.25)}
 body.light .contrib-thumb-add{border-color:rgba(74,222,128,0.3);color:rgba(40,160,80,0.5)}
+body.light .cc-ws-authorship{background:rgba(40,160,80,0.03);border-color:rgba(40,160,80,0.12)}
+body.light .cc-ws-auth-label{color:rgba(22,100,60,0.55)}
+body.light .cc-ws-auth-stat{color:rgba(10,10,20,0.5)}
+body.light .cc-ws-auth-sep{color:rgba(10,10,20,0.14)}
+body.light .cc-ws-private{background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.3)}
+body.light .ai-guide-q{color:rgba(100,50,180,0.65)}
+body.light .ai-guide-choice.intent{background:rgba(22,163,74,0.07);border-color:rgba(22,163,74,0.2);color:rgba(22,100,60,0.8)}
+body.light .ai-guide-choice.rethink{background:rgba(10,10,20,0.03);border-color:rgba(10,10,20,0.09);color:rgba(10,10,20,0.38)}
+body.light .privacy-footer{background:rgba(10,10,20,0.02);border-color:rgba(10,10,20,0.06)}
+body.light .privacy-footer-icon{color:rgba(10,10,20,0.2)}
+body.light .privacy-footer-text{color:rgba(10,10,20,0.28)}
+body.light .privacy-footer-link{color:rgba(0,130,150,0.55)}
 
 /* ─────────────────────────────
    S9 · Family Showcase
@@ -534,6 +583,20 @@ body.light .contrib-thumb-add{border-color:rgba(74,222,128,0.3);color:rgba(40,16
 .work-pill{display:inline-block;font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:6px}
 .work-pill.shared{background:rgba(0,188,212,0.1);color:rgba(0,188,212,0.75)}
 .work-pill.draft{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.32)}
+.work-pill.private{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.22)}
+
+/* Showcase credit + report toggle */
+.showcase-credit{display:inline-flex;align-items:center;gap:5px;margin-top:6px}
+.showcase-credit-badge{background:rgba(0,188,212,0.06);border:1px solid rgba(0,188,212,0.15);
+  border-radius:20px;padding:3px 9px;font-size:10px;font-weight:700;color:rgba(0,188,212,0.62)}
+.showcase-report-toggle{display:flex;align-items:center;gap:8px;margin-top:8px;
+  padding:9px 12px;border-radius:10px;background:rgba(192,132,252,0.04);
+  border:1px solid rgba(192,132,252,0.1)}
+.srt-icon{font-size:12px;color:rgba(192,132,252,0.5);flex-shrink:0}
+.srt-text{flex:1;font-size:11px;color:rgba(255,255,255,0.38);line-height:1.4}
+.srt-toggle{font-size:10px;font-weight:700;color:rgba(255,255,255,0.22);flex-shrink:0;
+  padding:3px 8px;border-radius:10px;background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);cursor:pointer}
 
 .showcase-share-btn{width:100%;height:46px;border-radius:13px;
   border:1.5px solid rgba(0,188,212,0.22);background:rgba(0,188,212,0.05);
@@ -579,20 +642,24 @@ body.light .fst-text{color:rgba(10,10,20,0.55)}
 @keyframes screenIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── AI Orb FAB ── */
+@property --orb-angle{syntax:'<angle>';inherits:false;initial-value:0deg}
 #ai-orb{position:absolute;bottom:96px;right:16px;width:44px;height:44px;border-radius:50%;
-  background-color:rgba(18,12,24,0.88);
-  background-image:url('kaleidoscope-icon.png');background-repeat:no-repeat;
-  background-position:center center;background-size:75%;
-  border:1px solid rgba(255,255,255,0.1);
-  backdrop-filter:blur(10px);
-  box-shadow:0 0 0 0 rgba(180,20,40,0.25),0 4px 18px rgba(0,0,0,0.5);
-  cursor:pointer;z-index:50;
-  animation:orbPulse 3s ease-in-out infinite;transition:transform 0.15s;}
+  cursor:pointer;z-index:50;overflow:visible;
+  background:
+    radial-gradient(circle at center,rgba(14,14,20,0.93) 18px,transparent 18.5px),
+    conic-gradient(from var(--orb-angle),rgba(192,132,252,0.9) 0%,rgba(0,188,212,0.85) 30%,rgba(192,132,252,0.15) 65%,rgba(192,132,252,0.9) 100%);
+  animation:orbGradientSpin 5s linear infinite,orbPulseOut 2.5s ease-in-out infinite;
+  transition:transform 0.15s;}
+#ai-orb::before{content:'';position:absolute;inset:2.5px;border-radius:50%;
+  background:rgba(14,14,20,0.92) url('kaleidoscope-icon.png') center/80% no-repeat;}
 #ai-orb:active{transform:scale(0.92);}
 #ai-orb.hidden{display:none;}
 .orb-logo{width:44px;height:44px;object-fit:cover;display:block;pointer-events:none;}
-@keyframes orbPulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(180,20,40,0.2),0 4px 18px rgba(0,0,0,0.45);}
+@keyframes orbGradientSpin{to{--orb-angle:360deg}}
+@keyframes orbPulseOut{
+  0%,100%{box-shadow:0 0 0 0 rgba(192,132,252,0.45),0 4px 18px rgba(0,0,0,0.5);}
+  60%{box-shadow:0 0 0 7px rgba(192,132,252,0),0 4px 24px rgba(0,0,0,0.6);}
+}
   50%{box-shadow:0 0 0 8px rgba(180,20,40,0),0 4px 24px rgba(0,0,0,0.6);}
 }
 .phone.sheet-open .screen.active{transform:scale(0.92) translateY(-18px);border-radius:20px;
@@ -661,7 +728,11 @@ body.light .fst-text{color:rgba(10,10,20,0.55)}
 .notif-dismiss{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.06);
   border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.3);font-size:7px;font-weight:700;
   display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-left:2px;}
-body.light #ai-orb{background-color:rgba(240,238,248,0.92);border-color:rgba(0,0,0,0.1);}
+body.light #ai-orb{
+  background:
+    radial-gradient(circle at center,rgba(240,238,248,0.95) 18px,transparent 18.5px),
+    conic-gradient(from var(--orb-angle),rgba(124,58,237,0.75) 0%,rgba(0,150,170,0.7) 30%,rgba(124,58,237,0.1) 65%,rgba(124,58,237,0.75) 100%);}
+body.light #ai-orb::before{background:rgba(240,238,248,0.94) url('kaleidoscope-icon.png') center/80% no-repeat;}
 body.light .sheet-orb-mini{background:rgba(240,238,248,0.92);border-color:rgba(0,0,0,0.1);}
 body.light #ai-sheet{background:rgba(250,250,254,0.98);border-top-color:rgba(147,51,234,0.2);}
 body.light .sheet-title{color:rgba(10,10,20,0.9);}body.light .sheet-subtitle{color:rgba(10,10,20,0.42);}
@@ -745,19 +816,7 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
             <span class="notif-time">Just now</span>
             <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-crew')">✕</div>
           </div>
-          <div class="notif-row" id="notif-phish" onclick="goTo(6)">
-            <span class="notif-icon" style="color:#C084FC">🛡</span>
-            <span class="notif-body">Kaleidoscope blocked a phishing link — kept you safe</span>
-            <span class="notif-time">Yesterday</span>
-            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-phish')">✕</div>
-          </div>
-          <div class="notif-row" id="notif-screen" onclick="goTo(6)">
-            <span class="notif-icon" style="color:#FFB84D">⏰</span>
-            <span class="notif-body">Screen time: 2h remaining today</span>
-            <span class="notif-time">Today</span>
-            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-screen')">✕</div>
-          </div>
-          <div class="notif-row" id="notif-grandma" onclick="goTo(6)">
+<div class="notif-row" id="notif-grandma" onclick="goTo(6)">
             <span class="notif-icon" style="color:#FFC364">💬</span>
             <span class="notif-body">Grandma sent you a voice message</span>
             <span class="notif-time">1h ago</span>
@@ -770,8 +829,8 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
             <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-hiro')">✕</div>
           </div>
           <div class="notif-row" id="notif-streak" onclick="goTo(6)">
-            <span class="notif-icon" style="color:#FCD34D">📚</span>
-            <span class="notif-body">Learning streak: 5 days! Critical thinking +15%</span>
+            <span class="notif-icon" style="color:#FCD34D">✦</span>
+            <span class="notif-body">5 days in — Kaleidoscope asks: what do you want to make next?</span>
             <span class="notif-time">Today</span>
             <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-streak')">✕</div>
           </div>
@@ -1113,68 +1172,88 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
         <div class="back-btn" onclick="goTo(0)">←</div>
         <div class="cc-ws-logo">CrewCreate</div>
       </div>
-      <div class="cc-ws-badge">Collab 🎬</div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="cc-ws-private">🔒 Private</div>
+        <div class="cc-ws-badge">Collab 🎬</div>
+      </div>
     </div>
     <div class="cc-ws-body">
 
       <!-- Collab project banner -->
       <div class="collab-banner">
         <div style="display:flex;align-items:center;justify-content:space-between">
-          <div class="collab-project-name">🎬 Summer Vibes</div>
+          <div class="collab-project-name">🏮 文化祭 2024</div>
           <div style="font-size:10.5px;font-weight:600;color:rgba(74,222,128,0.8)">
             <span class="collab-live-dot"></span>Live · 3 collaborating
           </div>
         </div>
-        <div class="collab-meta">Collab with friends · 4 edits today</div>
+        <div class="collab-meta">TikTok collab · Hana &amp; Ren · 8 edits today</div>
         <div class="collab-members">
           <img class="collab-av" src="faces/yuki.png" alt="Yuki" title="Yuki (you)">
-          <img class="collab-av" src="https://i.pravatar.cc/52?img=5" alt="Mia" title="Mia">
-          <img class="collab-av" src="https://i.pravatar.cc/52?img=11" alt="Jake" title="Jake">
-          <div class="collab-av-more">+1</div>
+          <img class="collab-av" src="https://i.pravatar.cc/52?img=23" alt="Hana" title="Hana">
+          <img class="collab-av" src="https://i.pravatar.cc/52?img=57" alt="Ren" title="Ren">
           <div style="flex:1"></div>
-          <div style="font-size:10.5px;color:rgba(255,255,255,0.25)">Joined 3 mins ago</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.22)">posting to TikTok</div>
         </div>
+      </div>
+
+      <!-- Authorship strip -->
+      <div class="cc-ws-authorship">
+        <span class="cc-ws-auth-label">Your voice</span>
+        <span class="cc-ws-auth-stat">68%</span>
+        <span class="cc-ws-auth-sep">·</span>
+        <span class="cc-ws-auth-stat">8 decisions</span>
+        <span class="cc-ws-auth-sep">·</span>
+        <span class="cc-ws-auth-stat">3 redirections</span>
+        <span class="cc-ws-auth-sep">·</span>
+        <span class="cc-ws-auth-stat">4 questions answered</span>
       </div>
 
       <!-- Shared canvas card -->
       <div class="collab-canvas-card">
         <div class="canvas-preview">
-          <img src="https://picsum.photos/seed/summer-vibes-collab/780/272" alt="">
+          <img src="img-canvas.jpg" alt="">
           <div class="canvas-overlay"></div>
           <!-- Live editing cursors -->
           <div class="cursor-badge" style="top:9px;left:10px">
             <div class="cursor-dot" style="background:#60A5FA"></div>
-            <span class="cursor-label">Mia is editing…</span>
+            <span class="cursor-label">Hana is adding filter…</span>
           </div>
           <div class="cursor-badge" style="top:9px;right:10px">
             <div class="cursor-dot" style="background:#FB923C"></div>
-            <span class="cursor-label">Jake added subtitles</span>
+            <span class="cursor-label">Ren added countdown</span>
           </div>
           <div class="canvas-title-overlay">
-            <div class="canvas-title-text">Summer Vibes 2024 ☀️</div>
-            <div class="canvas-title-sub">Video · 00:45 · v3 · 4 clips</div>
+            <div class="canvas-title-text">文化祭 2024 🏮</div>
+            <div class="canvas-title-sub">Vertical · 00:52 · v4 · 6 clips</div>
           </div>
         </div>
         <div class="canvas-footer">
-          <span class="canvas-meta">🎬 4 clips &nbsp;·&nbsp; 2 transitions &nbsp;·&nbsp; 1 filter</span>
+          <span class="canvas-meta">🎬 6 clips &nbsp;·&nbsp; 3 transitions &nbsp;·&nbsp; BGM: YOASOBI</span>
           <button class="canvas-edit-btn">✎ Continue editing</button>
         </div>
       </div>
 
-      <!-- AI guidance card -->
-      <div class="ai-guide-card">
-        <div class="ai-guide-icon">✦</div>
-        <div class="ai-guide-text">
-          <div class="ai-guide-title">Kaleidoscope suggests</div>
-          <div class="ai-guide-body">Add a fade transition between clips 2 and 3 — flows naturally with Mia's color grade!</div>
+      <!-- AI Socratic card -->
+      <div class="ai-guide-card socratic">
+        <div class="ai-guide-top">
+          <div class="ai-guide-icon">✦</div>
+          <div class="ai-guide-text">
+            <div class="ai-guide-title">Kaleidoscope noticed</div>
+            <div class="ai-guide-body">Hana's filter and Ren's countdown are both beautiful. But your first clip — the handwritten 「文化祭」banner going up, no crowd, no effects — had a completely different feeling.</div>
+          </div>
         </div>
-        <button class="ai-guide-apply">Apply</button>
+        <div class="ai-guide-q">"This is starting to look like every other school festival TikTok. Was that always the goal — or was there a different story you wanted to tell?"</div>
+        <div class="ai-guide-choices">
+          <button class="ai-guide-choice intent">That's our story — keep the quiet opening</button>
+          <button class="ai-guide-choice rethink">The trending look is fine — keep going</button>
+        </div>
       </div>
 
       <!-- Contribution feed -->
       <div class="cc-ws-section" style="margin-top:6px">Contributions</div>
 
-      <!-- Yuki's draft attempt -->
+      <!-- Yuki — Director's choice -->
       <div class="contrib-item yuki-item">
         <div class="contrib-av">
           <img src="faces/yuki.png" alt="">
@@ -1182,67 +1261,68 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
         <div class="contrib-content">
           <div class="contrib-header">
             <span class="contrib-name">Yuki (you)</span>
-            <span class="contrib-tag draft">Draft</span>
+            <span class="contrib-tag director">Director's choice</span>
           </div>
-          <div class="contrib-body">Added title card — "Summer 2024 ☀️"</div>
+          <div class="contrib-body">Opening clip: 「文化祭」banner being hung — close-up, handwritten kanji, no crowd. Wanted to start with something quiet.</div>
           <div class="contrib-thumb-row">
             <div class="contrib-thumb-item">
-              <img src="https://picsum.photos/seed/yuki-title-card/116/84" alt="">
+              <img src="img-yuki-thumb.jpg" alt="">
             </div>
             <div class="contrib-thumb-add">＋</div>
           </div>
-          <div class="contrib-time">Just now · 3 mins ago</div>
+          <div class="contrib-time">Just now</div>
         </div>
       </div>
 
-      <!-- Mia's contribution -->
+      <!-- Hana's contribution -->
       <div class="contrib-item">
         <div class="contrib-av">
-          <img src="https://i.pravatar.cc/68?img=5" alt="">
+          <img src="https://i.pravatar.cc/68?img=23" alt="">
         </div>
         <div class="contrib-content">
           <div class="contrib-header">
-            <span class="contrib-name">Mia</span>
-            <span class="contrib-tag added">Added clip</span>
+            <span class="contrib-name">Hana</span>
+            <span class="contrib-tag added">Added BGM + filter</span>
           </div>
-          <div class="contrib-body">Beach sunset montage — 00:22, gorgeous tones 🌅</div>
+          <div class="contrib-body">YOASOBI track + golden hour film filter — "これ絶対バズる！✨"</div>
           <div class="contrib-thumb-row">
             <div class="contrib-thumb-item">
-              <img src="https://picsum.photos/seed/mia-beach1/116/84" alt="">
+              <img src="img-hana-thumb1.jpg" alt="">
             </div>
             <div class="contrib-thumb-item">
-              <img src="https://picsum.photos/seed/mia-sunset2/116/84" alt="">
+              <img src="img-hana-thumb2.jpg" alt="">
             </div>
           </div>
-          <div class="contrib-time">15 mins ago</div>
+          <div class="contrib-time">12 mins ago</div>
         </div>
       </div>
 
-      <!-- AI auto action -->
+      <!-- Kaleidoscope noticed (Yuki kept) -->
       <div class="contrib-item ai-item">
         <div class="contrib-av-icon" style="background:rgba(192,132,252,0.1)">✦</div>
         <div class="contrib-content">
           <div class="contrib-header">
             <span class="contrib-name" style="color:rgba(192,132,252,0.82)">Kaleidoscope</span>
-            <span class="contrib-tag ai-tag">Auto-adjusted</span>
+            <span class="contrib-tag ai-tag">Noticed</span>
+            <span class="contrib-tag kept">Yuki kept ✓</span>
           </div>
-          <div class="contrib-body">Music beats auto-synced to Jake's transitions</div>
-          <div class="contrib-time">20 mins ago</div>
+          <div class="contrib-body">Hana's filter and Ren's text overlays are layering up — noticed the visual weight is shifting from intimate to loud</div>
+          <div class="contrib-time">18 mins ago</div>
         </div>
       </div>
 
-      <!-- Jake's contribution -->
+      <!-- Ren's contribution -->
       <div class="contrib-item">
         <div class="contrib-av">
-          <img src="https://i.pravatar.cc/68?img=11" alt="">
+          <img src="https://i.pravatar.cc/68?img=57" alt="">
         </div>
         <div class="contrib-content">
           <div class="contrib-header">
-            <span class="contrib-name">Jake</span>
-            <span class="contrib-tag added">Added subtitle</span>
+            <span class="contrib-name">Ren</span>
+            <span class="contrib-tag added">Added text</span>
           </div>
-          <div class="contrib-body">"Let's go watch the sunset" + sound effect</div>
-          <div class="contrib-time">25 mins ago</div>
+          <div class="contrib-body">「文化祭 Day 1 🏮」countdown overlay + confetti burst effect</div>
+          <div class="contrib-time">22 mins ago</div>
         </div>
       </div>
 
@@ -1254,13 +1334,18 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
           <img class="fst-av" src="faces/kanji.png" alt="Dad">
         </div>
         <div style="flex:1">
-          <div class="fst-label">Shared with family</div>
-          <div class="fst-text">3 family members can see your work</div>
+          <div class="fst-label">My Creative Space</div>
+          <div class="fst-text">Share your work with family when you're ready</div>
         </div>
         <div class="fst-arrow">›</div>
       </div>
 
-      <div style="height:16px"></div>
+      <!-- Privacy footer -->
+      <div class="privacy-footer">
+        <span class="privacy-footer-icon">🔒</span>
+        <span class="privacy-footer-text">Only you and your crew can see this work</span>
+        <span class="privacy-footer-link" onclick="goTo(9)">Share when ready →</span>
+      </div>
     </div>
 
     <!-- Bottom nav -->
@@ -1284,7 +1369,7 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
   </div>
 
   <!-- ══════════════════════════════
-       S9 · My Creative Space (Family View)
+       S9 · My Creative Space (Showcase)
        ══════════════════════════════ -->
   <div class="screen" id="s9">
     <div class="status-bar">
@@ -1294,28 +1379,35 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
     <div class="showcase-header">
       <div class="back-btn" onclick="goTo(_prevScreen)">←</div>
       <div class="showcase-title">My Creative Space</div>
-      <div class="showcase-fam-badge">Family View</div>
     </div>
     <div class="showcase-body">
 
       <!-- Featured work -->
       <div class="showcase-hero">
-        <img class="showcase-hero-thumb" src="https://picsum.photos/seed/summer-vibes-collab/780/440" alt="">
+        <img class="showcase-hero-thumb" src="img-showcase-hero.jpg" alt="">
         <div class="showcase-hero-info">
-          <div class="showcase-hero-title">🎬 Summer Vibes</div>
-          <div class="showcase-hero-meta">Video · 00:45 · Collab with Mia & Jake · 4 clips</div>
+          <div class="showcase-hero-title">🏮 文化祭 2024</div>
+          <div class="showcase-hero-meta">Vertical · 00:52 · TikTok · Collab with Hana &amp; Ren · 6 clips</div>
           <div class="showcase-hero-tags">
             <span style="font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:7px;
               background:rgba(74,222,128,0.1);color:#4ADE80">✓ Shared with family</span>
             <span style="font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:7px;
               background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.32)">In progress</span>
           </div>
+          <div class="showcase-credit">
+            <span class="showcase-credit-badge">✦ Directed by Yuki · 68% · 3 refusals</span>
+          </div>
+          <div class="showcase-report-toggle">
+            <span class="srt-icon">✦</span>
+            <span class="srt-text">Include in Kaleidoscope report to Mom</span>
+            <span class="srt-toggle">○ Off</span>
+          </div>
         </div>
       </div>
 
       <!-- Who can see this -->
-      <div class="showcase-section">Family can see this</div>
-      <div class="family-sees-card" onclick="goTo(9)">
+      <div class="showcase-section">Shared with</div>
+      <div class="family-sees-card">
         <div class="fam-see-avs">
           <img class="fam-see-av" src="faces/mei.png" alt="Mom">
           <img class="fam-see-av" src="faces/grandma.png" alt="Grandma">
@@ -1334,21 +1426,21 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
           <img class="reaction-av" src="faces/mei.png" alt="">
           <div class="reaction-bubble">
             <div class="reaction-who">Mom · just now</div>
-            <div class="reaction-text">Love this! 🌅 Can't wait to see the final version</div>
+            <div class="reaction-text">The opening shot is so beautiful 🥺 Was the handwritten sign your idea?</div>
           </div>
         </div>
         <div class="reaction-item">
           <img class="reaction-av" src="faces/grandma.png" alt="">
           <div class="reaction-bubble">
-            <div class="reaction-who">Grandma · 10 mins ago</div>
-            <div class="reaction-text">❤️ So beautiful. Reminds me of our beach trip last year~</div>
+            <div class="reaction-who">Grandma · 8 mins ago</div>
+            <div class="reaction-text">❤️ 懷念啊～ 我們以前的文化祭也是這樣呢</div>
           </div>
         </div>
         <div class="reaction-item">
           <img class="reaction-av" src="faces/kanji.png" alt="">
           <div class="reaction-bubble">
-            <div class="reaction-who">Dad · 22 mins ago</div>
-            <div class="reaction-text">Great work Yuki 👍 The music fits really well!</div>
+            <div class="reaction-who">Dad · 20 mins ago</div>
+            <div class="reaction-text">Really nice work Yuki 👍 Love how you started with the banner!</div>
           </div>
         </div>
       </div>
@@ -1357,24 +1449,24 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
       <div class="showcase-section">More of my work</div>
       <div class="works-grid">
         <div class="work-card">
-          <img class="work-thumb" src="https://picsum.photos/seed/yuki-fashion1/280/210" alt="">
+          <img class="work-thumb" src="img-spring-festival.jpg" alt="">
           <div class="work-info">
-            <div class="work-title">Spring Lookbook</div>
-            <div class="work-meta">Fashion & Style · Solo</div>
+            <div class="work-title">春祭り · Cinematic Edit</div>
+            <div class="work-meta">Video · Solo</div>
             <span class="work-pill shared">Shared</span>
           </div>
         </div>
         <div class="work-card">
-          <img class="work-thumb" src="https://picsum.photos/seed/yuki-beat3/280/210" alt="">
+          <img class="work-thumb" src="img-voice-loop.jpg" alt="">
           <div class="work-info">
-            <div class="work-title">Beat Sketch #3</div>
-            <div class="work-meta">Music & Audio · Solo</div>
-            <span class="work-pill draft">Draft</span>
+            <div class="work-title">Voice Loop #2</div>
+            <div class="work-meta">Music · Solo</div>
+            <span class="work-pill private">🔒 Private</span>
           </div>
         </div>
       </div>
 
-      <button class="showcase-share-btn">＋ Share more with family</button>
+      <button class="showcase-share-btn">＋ Add to my showcase</button>
       <div style="height:16px"></div>
     </div>
   </div>
