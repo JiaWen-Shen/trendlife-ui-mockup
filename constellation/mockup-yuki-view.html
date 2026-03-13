@@ -43,7 +43,7 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 .tab-item.active .tab-label{color:#4ADE80}
 
 /* ─────────────────────────────
-   CrewCreate shared styles
+   Bloom shared styles
    ───────────────────────────── */
 .cc-progress{display:flex;gap:6px;padding:16px 24px 0;flex-shrink:0}
 .cc-prog-seg{height:3px;flex:1;border-radius:2px;background:rgba(255,255,255,0.1)}
@@ -276,7 +276,7 @@ body.light .tl-notify-time{color:rgba(10,10,20,0.3)}
   display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer}
 
 /* ─────────────────────────────
-   S7 · Joining CrewCreate
+   S7 · Joining Bloom
    ───────────────────────────── */
 .joining-body{flex:1;display:flex;flex-direction:column;align-items:center;
   justify-content:center;padding:36px 28px;gap:24px}
@@ -301,7 +301,7 @@ body.light .tl-notify-time{color:rgba(10,10,20,0.3)}
 .joining-step.done .joining-step-icon{background:#00BCD4;border-color:#00BCD4;color:white}
 
 /* ─────────────────────────────
-   S8 · CrewCreate Workspace
+   S8 · Bloom Workspace
    ───────────────────────────── */
 .cc-ws-header{padding:12px 20px 10px;display:flex;align-items:center;
   justify-content:space-between;border-bottom:1px solid rgba(0,188,212,0.1);flex-shrink:0}
@@ -886,7 +886,7 @@ body.light .sharing-share-btn{background:rgba(0,130,150,0.07);border-color:rgba(
         <div id="notif-expand">
           <div class="notif-row" id="notif-crew" onclick="goTo(7)">
             <span class="notif-icon" style="color:#4ADE80">✅</span>
-            <span class="notif-body">Mom approved CrewCreate — tap to join now!</span>
+            <span class="notif-body">Mom approved Bloom — tap to join now!</span>
             <span class="notif-time">Just now</span>
             <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-crew')">✕</div>
           </div>
@@ -914,7 +914,7 @@ body.light .sharing-share-btn{background:rgba(0,130,150,0.07);border-color:rgba(
     </div>
     <div class="tab-bar">
       <div class="tab-item active"><div class="tab-icon">✦</div><div class="tab-label">Home</div></div>
-      <div class="tab-item" onclick="launchCrewCreate()">
+      <div class="tab-item" onclick="launchBloom()">
         <div class="tab-icon" style="font-size:22px;font-weight:900;color:rgba(255,255,255,0.5);line-height:1">+</div>
         <div class="tab-label">Create</div>
       </div>
@@ -929,7 +929,7 @@ body.light .sharing-share-btn{background:rgba(0,130,150,0.07);border-color:rgba(
   </div>
 
   <!-- ══════════════════════════════
-       S1 · CrewCreate — Age Verification
+       S1 · Bloom — Age Verification
        ══════════════════════════════ -->
   <div class="screen" id="s1">
     <div class="status-bar">
@@ -939,9 +939,9 @@ body.light .sharing-share-btn{background:rgba(0,130,150,0.07);border-color:rgba(
     <div style="flex:1;display:flex;flex-direction:column;align-items:center;
                 justify-content:center;padding:28px 24px;overflow-y:auto">
       <div class="cc-icon-wrap" style="flex-direction:column;gap:0">
-        <span style="font-size:22px;font-weight:900;color:white;letter-spacing:-1px;line-height:1">CC</span>
+        <span style="font-size:22px;font-weight:900;color:white;letter-spacing:-1px;line-height:1">B</span>
       </div>
-      <div class="cc-title">Welcome to CrewCreate</div>
+      <div class="cc-title">Welcome to Bloom</div>
       <div class="cc-sub">We need to verify your age to give you the right creative experience and keep you safe. We'll never share your personal info.</div>
       <div style="width:100%;margin-bottom:24px">
         <div class="cc-field-label">What's your date of birth?</div>
@@ -960,7 +960,7 @@ body.light .sharing-share-btn{background:rgba(0,130,150,0.07);border-color:rgba(
   </div>
 
   <!-- ══════════════════════════════
-       S2 · CrewCreate — Interests
+       S2 · Bloom — Interests
        ══════════════════════════════ -->
   <div class="screen" id="s2">
     <div class="status-bar">
@@ -1009,7 +1009,7 @@ body.light .sharing-share-btn{background:rgba(0,130,150,0.07);border-color:rgba(
   </div>
 
   <!-- ══════════════════════════════
-       S3 · CrewCreate — Goals
+       S3 · Bloom — Goals
        ══════════════════════════════ -->
   <div class="screen" id="s3">
     <div class="status-bar">
@@ -1050,7 +1050,7 @@ body.light .sharing-share-btn{background:rgba(0,130,150,0.07);border-color:rgba(
   </div>
 
   <!-- ══════════════════════════════
-       S4 · CrewCreate — Parental Consent
+       S4 · Bloom — Parental Consent
        ══════════════════════════════ -->
   <div class="screen" id="s4">
     <div class="status-bar">
@@ -1136,7 +1136,7 @@ body.light .sharing-share-btn{background:rgba(0,130,150,0.07);border-color:rgba(
           <div class="tl-notify-logo">T</div>
           <div style="flex:1">
             <div class="tl-notify-app">TrendLife · Kaleidoscope</div>
-            <div class="tl-notify-msg">Yuki wants to join CrewCreate — approval needed</div>
+            <div class="tl-notify-msg">Yuki wants to join Bloom — approval needed</div>
           </div>
         </div>
         <div class="tl-notify-footer">
@@ -1178,7 +1178,7 @@ body.light .sharing-share-btn{background:rgba(0,130,150,0.07);border-color:rgba(
       </div>
       <div class="butler-msg">
         <div class="butler-av" style="width:30px;height:30px;font-size:13px">◈</div>
-        <div class="butler-bubble ai">Mom (Mei) has meetings this afternoon but should be free after 6 PM. Want me to remind her about CrewCreate? ✦</div>
+        <div class="butler-bubble ai">Mom (Mei) has meetings this afternoon but should be free after 6 PM. Want me to remind her about Bloom? ✦</div>
       </div>
     </div>
     <div class="butler-quick">
@@ -1194,7 +1194,7 @@ body.light .sharing-share-btn{background:rgba(0,130,150,0.07);border-color:rgba(
   </div>
 
   <!-- ══════════════════════════════
-       S7 · Joining CrewCreate (3s auto-advance)
+       S7 · Joining Bloom (3s auto-advance)
        ══════════════════════════════ -->
   <div class="screen" id="s7">
     <div class="status-bar">
@@ -1202,9 +1202,9 @@ body.light .sharing-share-btn{background:rgba(0,130,150,0.07);border-color:rgba(
       <span class="status-icons">●●● Wi-Fi ▮</span>
     </div>
     <div class="joining-body">
-      <div class="joining-logo-wrap"><span style="font-size:26px;font-weight:900;color:white;letter-spacing:-1.5px">CC</span></div>
+      <div class="joining-logo-wrap"><span style="font-size:26px;font-weight:900;color:white;letter-spacing:-1.5px">B</span></div>
       <div style="text-align:center">
-        <div class="joining-title">Joining CrewCreate</div>
+        <div class="joining-title">Joining Bloom</div>
         <div class="joining-sub">Loading your creative space…</div>
       </div>
       <div style="width:100%">
@@ -1234,7 +1234,7 @@ body.light .sharing-share-btn{background:rgba(0,130,150,0.07);border-color:rgba(
   </div>
 
   <!-- ══════════════════════════════
-       S8 · CrewCreate Collab Workspace
+       S8 · Bloom Collab Workspace
        ══════════════════════════════ -->
   <div class="screen" id="s8">
     <div class="status-bar">
@@ -1244,7 +1244,7 @@ body.light .sharing-share-btn{background:rgba(0,130,150,0.07);border-color:rgba(
     <div class="cc-ws-header">
       <div style="display:flex;align-items:center;gap:10px">
         <div class="back-btn" onclick="goTo(0)">←</div>
-        <div class="cc-ws-logo">CrewCreate</div>
+        <div class="cc-ws-logo">Bloom</div>
       </div>
       <div style="display:flex;align-items:center;gap:6px">
         <div class="cc-ws-private">🔒 Private</div>
@@ -1553,7 +1553,7 @@ body.light .sharing-share-btn{background:rgba(0,130,150,0.07);border-color:rgba(
           <img class="reaction-av" src="faces/grandma.png" alt="">
           <div class="reaction-bubble">
             <div class="reaction-who">Grandma · 8 mins ago</div>
-            <div class="reaction-text">❤️ 懷念啊～ 我們以前的文化祭也是這樣呢</div>
+            <div class="reaction-text">❤️ 懐かしいな〜 昔の文化祭もこんな感じだったわよ</div>
           </div>
         </div>
         <div class="reaction-item">
@@ -1664,7 +1664,7 @@ const EDGES=[
   {a:'yuki', b:'ethan', w:0.65},
   {a:'eva',  b:'wei',   w:0.5},
 ];
-// CrewCreate discovery node (below Yuki)
+// Bloom discovery node (below Yuki)
 const CC={x:195, y:368, r:19, color:'#00BCD4'};
 
 let currentTheme='dark';
@@ -1748,10 +1748,10 @@ function buildConstellation(){
     dot.appendChild(am);svg.appendChild(dot);
   });
 
-  // ── CrewCreate discovery node ──
+  // ── Bloom discovery node ──
   const ccG=document.createElementNS('http://www.w3.org/2000/svg','g');
   ccG.style.cursor='pointer';
-  ccG.onclick=()=>launchCrewCreate();
+  ccG.onclick=()=>launchBloom();
 
   // Dashed connector from Yuki to CC
   const yukiBot=195+36+4; // y=235
@@ -1799,7 +1799,7 @@ function buildConstellation(){
   ccName.setAttribute('fill',currentTheme==='light'?'rgba(0,130,150,0.8)':'rgba(0,188,212,0.72)');
   ccName.setAttribute('font-size','9.5');ccName.setAttribute('font-family','Inter,sans-serif');
   ccName.setAttribute('font-weight','700');ccName.setAttribute('letter-spacing','0.2');
-  ccName.textContent='CrewCreate';ccG.appendChild(ccName);
+  ccName.textContent='Bloom';ccG.appendChild(ccName);
 
   // "Join →" chip
   const chipW=52, chipH=14, chipX=CC.x-chipW/2, chipY=CC.y+CC.r+26;
@@ -2047,8 +2047,8 @@ function startJoining(){
   setTimeout(()=>goTo(8), 3000);
 }
 
-// ── Zoom-launch from CC node into CrewCreate ──
-function launchCrewCreate(){
+// ── Zoom-launch from CC node into Bloom ──
+function launchBloom(){
   const svg=document.getElementById('const-svg');
   const phone=document.querySelector('.phone');
   const sr=svg.getBoundingClientRect();
@@ -2107,8 +2107,8 @@ function dismissNotif(id){
 
 const AI_CTX={
   0:{title:'Hi Yuki ✦', hint:'Learning streak 5 days · 6 updates',
-     actions:['Start today\'s AI learning session','Join CrewCreate workspace','Message Grandma']},
-  1:{title:'CrewCreate',hint:'Age verification step',
+     actions:['Start today\'s AI learning session','Join Bloom workspace','Message Grandma']},
+  1:{title:'Bloom',hint:'Age verification step',
      actions:['Continue sign-up','Ask AI for help']},
   2:{title:'Your Interests',hint:'Tell us what you love',
      actions:['Pick suggested topics','Ask AI what suits you']},
@@ -2117,10 +2117,10 @@ const AI_CTX={
   4:{title:'Parental Consent',hint:'Mom needs to approve',
      actions:['Send reminder to Mom','Preview what you\'ll create']},
   5:{title:'Waiting…',hint:'Mom is reviewing your request',
-     actions:['Send a nudge to Mom','Preview CrewCreate features']},
+     actions:['Send a nudge to Mom','Preview Bloom features']},
   6:{title:'Kaleidoscope',hint:'Always here for you',actions:[]},
-  7:{title:'Joining CrewCreate',hint:'Setting up your account…',actions:[]},
-  8:{title:'CrewCreate',hint:'Your creative workspace',
+  7:{title:'Joining Bloom',hint:'Setting up your account…',actions:[]},
+  8:{title:'Bloom',hint:'Your creative workspace',
      actions:['Start your first post','Explore trending creators','Share with family']},
 };
 function toggleAISheet(){_aiSheetOpen?closeAISheet():openAISheet();}
