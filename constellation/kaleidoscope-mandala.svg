@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
+  <defs>
+    <radialGradient id="mandala-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#FFC364" stop-opacity="0.4"/>
+      <stop offset="60%"  stop-color="#EB8C78" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#EB8C78" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background glow -->
+  <circle cx="40" cy="40" r="38" fill="url(#mandala-glow)"/>
+
+  <!-- Outer coral petals -->
+  <ellipse cx="40" cy="12" rx="5" ry="12" fill="#EB8C7855" transform="rotate(0   40 40)"/>
+  <ellipse cx="40" cy="12" rx="5" ry="12" fill="#EB8C7855" transform="rotate(45  40 40)"/>
+  <ellipse cx="40" cy="12" rx="5" ry="12" fill="#EB8C7855" transform="rotate(90  40 40)"/>
+  <ellipse cx="40" cy="12" rx="5" ry="12" fill="#EB8C7855" transform="rotate(135 40 40)"/>
+  <ellipse cx="40" cy="12" rx="5" ry="12" fill="#EB8C7855" transform="rotate(180 40 40)"/>
+  <ellipse cx="40" cy="12" rx="5" ry="12" fill="#EB8C7855" transform="rotate(225 40 40)"/>
+  <ellipse cx="40" cy="12" rx="5" ry="12" fill="#EB8C7855" transform="rotate(270 40 40)"/>
+  <ellipse cx="40" cy="12" rx="5" ry="12" fill="#EB8C7855" transform="rotate(315 40 40)"/>
+
+  <!-- Mid amber petals -->
+  <ellipse cx="40" cy="18" rx="4" ry="9" fill="#FFC36455" transform="rotate(22.5  40 40)"/>
+  <ellipse cx="40" cy="18" rx="4" ry="9" fill="#FFC36455" transform="rotate(67.5  40 40)"/>
+  <ellipse cx="40" cy="18" rx="4" ry="9" fill="#FFC36455" transform="rotate(112.5 40 40)"/>
+  <ellipse cx="40" cy="18" rx="4" ry="9" fill="#FFC36455" transform="rotate(157.5 40 40)"/>
+  <ellipse cx="40" cy="18" rx="4" ry="9" fill="#FFC36455" transform="rotate(202.5 40 40)"/>
+  <ellipse cx="40" cy="18" rx="4" ry="9" fill="#FFC36455" transform="rotate(247.5 40 40)"/>
+  <ellipse cx="40" cy="18" rx="4" ry="9" fill="#FFC36455" transform="rotate(292.5 40 40)"/>
+  <ellipse cx="40" cy="18" rx="4" ry="9" fill="#FFC36455" transform="rotate(337.5 40 40)"/>
+
+  <!-- Inner gold petals -->
+  <ellipse cx="40" cy="25" rx="3" ry="7" fill="#DCB97855" transform="rotate(0   40 40)"/>
+  <ellipse cx="40" cy="25" rx="3" ry="7" fill="#DCB97855" transform="rotate(60  40 40)"/>
+  <ellipse cx="40" cy="25" rx="3" ry="7" fill="#DCB97855" transform="rotate(120 40 40)"/>
+  <ellipse cx="40" cy="25" rx="3" ry="7" fill="#DCB97855" transform="rotate(180 40 40)"/>
+  <ellipse cx="40" cy="25" rx="3" ry="7" fill="#DCB97855" transform="rotate(240 40 40)"/>
+  <ellipse cx="40" cy="25" rx="3" ry="7" fill="#DCB97855" transform="rotate(300 40 40)"/>
+
+  <!-- Leaf accents -->
+  <ellipse cx="40" cy="8" rx="2.5" ry="5" fill="#78BE8233" transform="rotate(22.5  40 40)"/>
+  <ellipse cx="40" cy="8" rx="2.5" ry="5" fill="#78BE8233" transform="rotate(67.5  40 40)"/>
+  <ellipse cx="40" cy="8" rx="2.5" ry="5" fill="#78BE8233" transform="rotate(112.5 40 40)"/>
+  <ellipse cx="40" cy="8" rx="2.5" ry="5" fill="#78BE8233" transform="rotate(157.5 40 40)"/>
+  <ellipse cx="40" cy="8" rx="2.5" ry="5" fill="#78BE8233" transform="rotate(202.5 40 40)"/>
+  <ellipse cx="40" cy="8" rx="2.5" ry="5" fill="#78BE8233" transform="rotate(247.5 40 40)"/>
+  <ellipse cx="40" cy="8" rx="2.5" ry="5" fill="#78BE8233" transform="rotate(292.5 40 40)"/>
+  <ellipse cx="40" cy="8" rx="2.5" ry="5" fill="#78BE8233" transform="rotate(337.5 40 40)"/>
+
+  <!-- Delicate rings -->
+  <circle cx="40" cy="40" r="16" fill="none" stroke="#DCB97822" stroke-width="0.5"/>
+  <circle cx="40" cy="40" r="24" fill="none" stroke="#EB8C7818" stroke-width="0.5"/>
+
+  <!-- Center glow -->
+  <circle cx="40" cy="40" r="6" fill="#FFC36433"/>
+  <circle cx="40" cy="40" r="3" fill="#FFF5E6cc"/>
+</svg>

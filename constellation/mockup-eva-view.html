@@ -24,6 +24,9 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
   cursor:pointer;font-size:15px;color:rgba(255,255,255,0.45);flex-shrink:0}
 .screen-header{padding:0 20px 14px;display:flex;align-items:center;gap:12px;flex-shrink:0}
 .screen-title{font-size:17px;font-weight:700;color:rgba(255,255,255,0.8);letter-spacing:-0.2px}
+.screen-logo{height:36px;width:auto;margin-left:auto;opacity:0.68;object-fit:contain;
+  display:block;pointer-events:none;flex-shrink:0;}
+body.light .screen-logo{opacity:0.45;filter:invert(1);}
 
 /* ─────────────────────────────
    SCREEN 0 — Constellation
@@ -36,23 +39,29 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 .const-svg{position:absolute;inset:0;width:100%;height:100%}
 
 /* ── AI Notification List (inside arc) ── */
-#notif-wrap{position:absolute;top:8px;left:14px;right:14px;z-index:10;}
-#notif-expand{display:flex;flex-direction:column;gap:4px;
-  max-height:122px;overflow-y:auto;-webkit-overflow-scrolling:touch;
+#notif-wrap{position:absolute;top:8px;left:14px;right:14px;z-index:10;
+  background:rgba(10,10,18,0.82);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  border:1px solid rgba(255,255,255,0.1);border-radius:16px;overflow:hidden;}
+#notif-panel-header{display:flex;align-items:center;justify-content:space-between;
+  padding:8px 12px 6px;border-bottom:1px solid rgba(255,255,255,0.06);}
+#notif-panel-label{font-size:9.5px;font-weight:700;color:rgba(255,255,255,0.3);
+  letter-spacing:0.8px;text-transform:uppercase;}
+#notif-expand{display:flex;flex-direction:column;
+  max-height:118px;overflow-y:auto;-webkit-overflow-scrolling:touch;
   scrollbar-width:none;}
 #notif-expand::-webkit-scrollbar{display:none;}
 /* real element fade — avoids stacking context issues with ::after */
-#notif-fade{position:absolute;bottom:0;left:0;right:0;height:52px;
-  background:linear-gradient(transparent 0%,rgba(14,14,20,0.82) 55%,rgba(14,14,20,0.97) 100%);
+#notif-fade{position:absolute;bottom:0;left:0;right:0;height:44px;
+  background:linear-gradient(transparent 0%,rgba(10,10,18,0.82) 55%,rgba(10,10,18,0.97) 100%);
   pointer-events:none;z-index:20;
-  display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;}
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;}
 #notif-fade::after{content:'↓  more';font-size:9.5px;font-weight:600;
   color:rgba(255,255,255,0.38);letter-spacing:0.8px;font-family:'Inter',sans-serif;}
-.notif-row{display:flex;align-items:center;gap:9px;padding:7px 11px 7px 10px;
-  border-radius:11px;background:rgba(14,14,22,0.52);backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,0.07);cursor:pointer;
-  transition:background 0.15s;}
-.notif-row:active{background:rgba(255,255,255,0.09);}
+.notif-row{display:flex;align-items:center;gap:9px;padding:7px 12px;
+  background:transparent;border-bottom:1px solid rgba(255,255,255,0.04);
+  cursor:pointer;transition:background 0.15s;}
+.notif-row:last-child{border-bottom:none;}
+.notif-row:active{background:rgba(255,255,255,0.06);}
 .notif-icon{font-size:12px;width:16px;text-align:center;flex-shrink:0;}
 .notif-body{flex:1;font-size:12px;font-weight:500;color:rgba(255,255,255,0.72);letter-spacing:-0.1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .notif-time{font-size:10px;color:rgba(255,255,255,0.22);flex-shrink:0;}
@@ -116,6 +125,8 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 .ev-badge.purple{color:#C084FC;background:rgba(192,132,252,0.1)}
 .ev-badge.amber{color:#FFB84D;background:rgba(255,184,77,0.1)}
 .ev-badge.blue{color:#64B5F6;background:rgba(100,181,246,0.1)}
+.ev-dot.summary{background:rgba(74,222,128,0.08);border-color:rgba(74,222,128,0.22)}
+.ev-badge.green{color:#4ADE80;background:rgba(74,222,128,0.1)}
 .ev-time{font-size:10px;color:rgba(255,255,255,0.2)}
 
 /* ─────────────────────────────
@@ -149,13 +160,13 @@ body.light .report-section-lbl{color:rgba(10,10,20,0.35);border-bottom-color:rgb
 
 /* ─────────────────────────────
    SCREEN 3 — Chat with Grandma
-   SCREEN 7 — AI Butler Chat
+   SCREEN 7 — Kaleidoscope Chat
    ───────────────────────────── */
 .chat-header-av{width:34px;height:34px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   font-size:13px;font-weight:700;flex-shrink:0}
 .chat-header-av.grandma{background:rgba(255,195,100,0.12);border:1px solid rgba(255,195,100,0.3);color:#FFC364}
-.chat-header-av.ai{background:rgba(100,181,246,0.12);border:1px solid rgba(100,181,246,0.3);color:#64B5F6}
+.chat-header-av.ai{background:rgba(100,181,246,0.12);border:1px solid rgba(100,181,246,0.3);color:transparent;background-image:url('kaleidoscope-mandala.svg');background-size:75%;background-position:center;background-repeat:no-repeat}
 .chat-header-info{flex:1}
 .chat-header-name{font-size:16px;font-weight:700;color:rgba(255,255,255,0.85)}
 .chat-header-status{font-size:11px;margin-top:1px}
@@ -170,7 +181,7 @@ body.light .report-section-lbl{color:rgba(10,10,20,0.35);border-bottom-color:rgb
   font-size:11px;font-weight:700}
 .msg-av.grandma{background:rgba(255,195,100,0.1);border:1px solid rgba(255,195,100,0.22);color:#FFC364}
 .msg-av.eva{background:rgba(192,132,252,0.12);border:1px solid rgba(192,132,252,0.25);color:#C084FC}
-.msg-av.ai{background:rgba(100,181,246,0.1);border:1px solid rgba(100,181,246,0.22);color:#64B5F6;font-size:10px}
+.msg-av.ai{background:rgba(100,181,246,0.1);border:1px solid rgba(100,181,246,0.22);color:transparent;font-size:10px;background-image:url('kaleidoscope-mandala.svg');background-size:75%;background-position:center;background-repeat:no-repeat}
 .bubble{padding:11px 14px;border-radius:18px;max-width:262px;line-height:1.55}
 .bubble.them{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.07);
   border-bottom-left-radius:5px;font-size:13.5px;color:rgba(255,255,255,0.75)}
@@ -272,18 +283,21 @@ body.light .bubble-time{color:rgba(10,10,20,0.52)}
 body.light .chat-input-bar{border-top-color:rgba(10,10,20,0.08)}
 body.light .chat-input{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.55)}
 body.light .chat-mic{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.55)}
-/* AI Butler light mode */
-body.light .chat-header-av.ai{background:rgba(100,181,246,0.1);border-color:rgba(100,181,246,0.25);color:#2196F3}
+/* Kaleidoscope light mode */
+body.light .chat-header-av.ai{background:rgba(100,181,246,0.1);border-color:rgba(100,181,246,0.25);color:transparent}
 body.light .chat-header-status.ai-status{color:rgba(33,150,243,0.65)}
 body.light .bubble.ai-msg{background:rgba(33,150,243,0.07);border-color:rgba(33,150,243,0.15);color:rgba(10,10,20,0.78)}
 body.light .bubble.me{background:rgba(147,51,234,0.07);border-color:rgba(147,51,234,0.15);color:rgba(10,10,20,0.78)}
-body.light .msg-av.ai{background:rgba(33,150,243,0.08);border-color:rgba(33,150,243,0.2);color:#2196F3}
+body.light .msg-av.ai{background:rgba(33,150,243,0.08);border-color:rgba(33,150,243,0.2);color:transparent}
 body.light .msg-av.eva{background:rgba(147,51,234,0.08);border-color:rgba(147,51,234,0.2);color:#9333EA}
 body.light .chat-send{background:rgba(147,51,234,0.09);border-color:rgba(147,51,234,0.2);color:#9333EA}
 body.light .chat-send.ai-send{background:rgba(33,150,243,0.1);border-color:rgba(33,150,243,0.22);color:#2196F3}
+body.light #notif-wrap{background:rgba(236,236,248,0.88);border-color:rgba(10,10,20,0.1);}
+body.light #notif-panel-header{border-bottom-color:rgba(10,10,20,0.07);}
+body.light #notif-panel-label{color:rgba(10,10,20,0.35);}
 body.light #notif-fade{background:linear-gradient(transparent 0%,rgba(232,232,244,0.85) 55%,rgba(232,232,244,0.97) 100%);}
 body.light #notif-fade::after{color:rgba(10,10,20,0.32);}
-body.light .notif-row{background:rgba(240,240,250,0.78);border-color:rgba(10,10,20,0.08);}
+body.light .notif-row{background:transparent;border-bottom-color:rgba(10,10,20,0.07);}
 body.light .notif-body{color:rgba(10,10,20,0.7);}
 body.light .notif-time{color:rgba(10,10,20,0.3);}
 body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.35);}
@@ -293,18 +307,26 @@ body.light .rel-peek-role{color:rgba(10,10,20,0.52)}
 body.light .rel-peek-x{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.5)}
 body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.04);color:rgba(10,10,20,0.7)}
 
-/* ── AI Orb FAB (Option A) ── */
+/* ── AI Orb FAB ── */
+@property --orb-angle{syntax:'<angle>';inherits:false;initial-value:0deg}
 #ai-orb{position:absolute;bottom:96px;right:16px;width:44px;height:44px;border-radius:50%;
-  background:radial-gradient(circle at 38% 35%,rgba(216,180,254,0.95),rgba(147,51,234,0.75));
-  box-shadow:0 0 0 0 rgba(192,132,252,0.5),0 4px 18px rgba(147,51,234,0.45);
-  cursor:pointer;z-index:50;display:flex;align-items:center;justify-content:center;
-  animation:orbPulse 3s ease-in-out infinite;transition:transform 0.15s;}
+  cursor:pointer;z-index:50;overflow:visible;
+  background:
+    radial-gradient(circle at center,rgba(14,14,20,0.93) 18px,transparent 18.5px),
+    conic-gradient(from var(--orb-angle),rgba(192,132,252,0.9) 0%,rgba(0,188,212,0.85) 30%,rgba(192,132,252,0.15) 65%,rgba(192,132,252,0.9) 100%);
+  animation:orbGradientSpin 5s linear infinite,orbPulseOut 2.5s ease-in-out infinite;
+  transition:transform 0.15s;}
+#ai-orb::before{content:'';position:absolute;inset:2.5px;border-radius:50%;
+  background:rgba(14,14,20,0.92) url('kaleidoscope-mandala.svg') center/80% no-repeat;}
 #ai-orb:active{transform:scale(0.92);}
 #ai-orb.hidden{display:none;}
-.orb-icon{font-size:19px;color:rgba(255,255,255,0.95);user-select:none;}
-@keyframes orbPulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(192,132,252,0.45),0 4px 18px rgba(147,51,234,0.4);}
-  50%{box-shadow:0 0 0 9px rgba(192,132,252,0),0 4px 28px rgba(147,51,234,0.65);}
+.orb-logo{width:44px;height:44px;object-fit:cover;display:block;pointer-events:none;}
+@keyframes orbGradientSpin{to{--orb-angle:360deg}}
+@keyframes orbPulseOut{
+  0%,100%{box-shadow:0 0 0 0 rgba(192,132,252,0.45),0 4px 18px rgba(0,0,0,0.5);}
+  60%{box-shadow:0 0 0 7px rgba(192,132,252,0),0 4px 24px rgba(0,0,0,0.6);}
+}
+  50%{box-shadow:0 0 0 8px rgba(180,20,40,0),0 4px 24px rgba(0,0,0,0.6);}
 }
 /* Screen scale-down while sheet is open */
 .phone.sheet-open .screen.active{
@@ -327,8 +349,9 @@ body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.0
 #ai-sheet-head{padding:14px 20px 14px;border-bottom:1px solid rgba(255,255,255,0.07);
   flex-shrink:0;display:flex;align-items:center;gap:12px;}
 .sheet-orb-mini{width:32px;height:32px;border-radius:50%;flex-shrink:0;
-  background:radial-gradient(circle at 38% 35%,rgba(216,180,254,0.85),rgba(147,51,234,0.65));
-  display:flex;align-items:center;justify-content:center;font-size:14px;color:white;}
+  background:rgba(18,12,24,0.82);border:1px solid rgba(255,255,255,0.1);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.orb-logo-mini{width:20px;height:20px;object-fit:contain;display:block;pointer-events:none;}
 .sheet-title{font-size:15px;font-weight:800;color:rgba(255,255,255,0.9);
   font-family:'Inter',sans-serif;letter-spacing:-0.2px;}
 .sheet-subtitle{font-size:11px;color:rgba(255,255,255,0.38);font-family:'Inter',sans-serif;margin-top:1px;}
@@ -350,12 +373,110 @@ body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.0
   background:rgba(192,132,252,0.2);border:1px solid rgba(192,132,252,0.35);
   color:#C084FC;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
 /* light overrides */
-body.light #ai-orb{background:radial-gradient(circle at 38% 35%,rgba(192,132,252,0.9),rgba(109,40,217,0.7));}
+body.light #ai-orb{
+  background:
+    radial-gradient(circle at center,rgba(240,238,248,0.95) 18px,transparent 18.5px),
+    conic-gradient(from var(--orb-angle),rgba(124,58,237,0.75) 0%,rgba(0,150,170,0.7) 30%,rgba(124,58,237,0.1) 65%,rgba(124,58,237,0.75) 100%);}
+body.light #ai-orb::before{background:rgba(240,238,248,0.94) url('kaleidoscope-mandala.svg') center/80% no-repeat;}
+body.light .sheet-orb-mini{background:rgba(255,255,255,0.9);border-color:rgba(10,10,20,0.1);}
 body.light #ai-sheet{background:rgba(250,250,254,0.98);border-top-color:rgba(147,51,234,0.2);}
 body.light .sheet-title{color:rgba(10,10,20,0.9);}body.light .sheet-subtitle{color:rgba(10,10,20,0.42);}
 body.light .sheet-action{background:rgba(147,51,234,0.05);border-color:rgba(147,51,234,0.14);color:rgba(10,10,20,0.72);}
 body.light .sheet-input{background:rgba(10,10,20,0.04);border-color:rgba(147,51,234,0.15);color:rgba(10,10,20,0.45);}
 body.light .sheet-send{background:rgba(147,51,234,0.1);border-color:rgba(147,51,234,0.25);color:#9333EA;}
+
+/* ── S4 Yuki Creative Report ── */
+.yuki-work-card{display:flex;border-radius:14px;overflow:hidden;margin-bottom:10px;
+  border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);}
+.yuki-work-card.featured{flex-direction:column;border:1px solid rgba(192,132,252,0.18);}
+.ywc-thumb{flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.yuki-work-card.featured .ywc-thumb{height:96px;width:100%;}
+.yuki-work-card:not(.featured) .ywc-thumb{width:72px;min-height:80px;}
+.ywc-thumb-icon{font-size:30px;position:relative;z-index:1;}
+.ywc-info{padding:11px 14px;display:flex;flex-direction:column;justify-content:center;}
+.ywc-tag{font-size:9px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;
+  color:rgba(255,255,255,0.3);margin-bottom:4px;}
+.ywc-title{font-size:13px;font-weight:700;color:rgba(255,255,255,0.85);
+  margin-bottom:2px;letter-spacing:-0.1px;line-height:1.35;}
+.ywc-meta{font-size:11px;color:rgba(255,255,255,0.28);margin-bottom:5px;}
+.ywc-feedback{font-size:11.5px;color:rgba(255,255,255,0.4);font-style:italic;line-height:1.5;}
+.skill-bars-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);
+  border-radius:14px;padding:14px 16px;margin-bottom:14px;}
+.skill-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:9px;}
+.skill-bar-row:last-child{margin-bottom:0;}
+.skill-name{font-size:11.5px;color:rgba(255,255,255,0.45);width:100px;flex-shrink:0;}
+.skill-bar-wrap{flex:1;height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;}
+.skill-bar-fill{height:100%;border-radius:3px;}
+.skill-delta{font-size:10.5px;font-weight:700;width:30px;text-align:right;flex-shrink:0;}
+.protection-compact{display:flex;align-items:center;gap:12px;border-radius:12px;padding:11px 14px;
+  background:rgba(74,222,128,0.04);border:1px solid rgba(74,222,128,0.14);margin-bottom:10px;}
+.pc-icon{font-size:16px;flex-shrink:0;}
+.pc-compact-text{flex:1;}
+.pc-compact-title{font-size:12.5px;font-weight:600;color:rgba(255,255,255,0.72);margin-bottom:1px;}
+.pc-compact-detail{font-size:11px;color:rgba(255,255,255,0.32);}
+.pc-compact-badge{font-size:10px;padding:2px 8px;border-radius:6px;font-weight:600;flex-shrink:0;
+  color:#F87171;background:rgba(248,113,113,0.1);}
+body.light .yuki-work-card{border-color:rgba(10,10,20,0.08);background:rgba(10,10,20,0.02);}
+body.light .yuki-work-card.featured{border-color:rgba(155,93,229,0.2);}
+body.light .ywc-tag{color:rgba(10,10,20,0.3);}
+body.light .ywc-title{color:rgba(10,10,20,0.85);}
+body.light .ywc-meta{color:rgba(10,10,20,0.3);}
+body.light .ywc-feedback{color:rgba(10,10,20,0.42);}
+body.light .skill-bars-card{background:rgba(10,10,20,0.02);border-color:rgba(10,10,20,0.07);}
+body.light .skill-name{color:rgba(10,10,20,0.5);}
+body.light .skill-bar-wrap{background:rgba(10,10,20,0.08);}
+body.light .protection-compact{background:rgba(22,163,74,0.04);border-color:rgba(22,163,74,0.18);}
+body.light .pc-compact-title{color:rgba(10,10,20,0.72);}
+body.light .pc-compact-detail{color:rgba(10,10,20,0.35);}
+
+/* ── S10 AI Task Execution ── */
+.task-exec-body{flex:1;overflow-y:auto;padding:20px;}
+.task-context-card{background:rgba(192,132,252,0.06);border:1px solid rgba(192,132,252,0.16);
+  border-radius:12px;padding:12px 14px;margin-bottom:22px;display:flex;gap:10px;align-items:flex-start;}
+.task-context-icon{color:#C084FC;font-size:15px;flex-shrink:0;margin-top:1px;}
+.task-context-text{font-size:12.5px;color:rgba(255,255,255,0.52);line-height:1.7;}
+.task-steps{margin-bottom:20px;}
+.task-step{display:flex;align-items:flex-start;gap:12px;margin-bottom:4px;position:relative;}
+.task-step:not(:last-child)::after{content:'';position:absolute;left:11px;top:28px;width:1px;
+  height:14px;background:rgba(255,255,255,0.1);}
+.task-step-dot{width:24px;height:24px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-top:2px;}
+.task-step-dot.done{background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.28);color:#4ADE80;}
+.task-step-dot.active{background:rgba(192,132,252,0.12);border:1px solid rgba(192,132,252,0.35);
+  color:#C084FC;animation:dotPulse 1.5s ease-in-out infinite;}
+@keyframes dotPulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
+.task-step-content{padding:3px 0 16px;}
+.task-step-label{font-size:13px;font-weight:600;color:rgba(255,255,255,0.82);margin-bottom:2px;}
+.task-step-detail{font-size:11.5px;color:rgba(255,255,255,0.35);}
+.task-result-card{background:rgba(74,222,128,0.05);border:1px solid rgba(74,222,128,0.2);
+  border-radius:14px;padding:16px;margin-bottom:12px;}
+.task-result-eyebrow{font-size:9.5px;font-weight:700;letter-spacing:0.7px;text-transform:uppercase;
+  color:#4ADE80;margin-bottom:10px;}
+.task-result-title{font-size:17px;font-weight:800;color:rgba(255,255,255,0.9);
+  margin-bottom:2px;letter-spacing:-0.3px;}
+.task-result-sub{font-size:12px;color:rgba(255,255,255,0.38);margin-bottom:14px;}
+.task-result-rows{display:flex;flex-direction:column;gap:8px;}
+.task-result-row{display:flex;justify-content:space-between;font-size:12px;}
+.task-result-row .lbl{color:rgba(255,255,255,0.35);}
+.task-result-row .val{color:rgba(255,255,255,0.75);font-weight:500;}
+.task-notif-row{display:flex;align-items:center;gap:10px;padding:10px 12px;
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);
+  border-radius:11px;margin-bottom:16px;}
+.task-notif-av{width:32px;height:32px;border-radius:50%;overflow:hidden;flex-shrink:0;}
+.task-notif-av img{width:100%;height:100%;object-fit:cover;}
+.task-notif-text{flex:1;font-size:12px;color:rgba(255,255,255,0.52);line-height:1.5;}
+.task-notif-check{color:#4ADE80;font-size:14px;font-weight:700;flex-shrink:0;}
+body.light .task-context-card{background:rgba(147,51,234,0.05);border-color:rgba(147,51,234,0.14);}
+body.light .task-context-text{color:rgba(10,10,20,0.52);}
+body.light .task-step-label{color:rgba(10,10,20,0.82);}
+body.light .task-step-detail{color:rgba(10,10,20,0.35);}
+body.light .task-result-card{background:rgba(22,163,74,0.05);border-color:rgba(22,163,74,0.2);}
+body.light .task-result-title{color:rgba(10,10,20,0.9);}
+body.light .task-result-sub{color:rgba(10,10,20,0.38);}
+body.light .task-result-row .lbl{color:rgba(10,10,20,0.35);}
+body.light .task-result-row .val{color:rgba(10,10,20,0.75);}
+body.light .task-notif-row{background:rgba(10,10,20,0.03);border-color:rgba(10,10,20,0.08);}
+body.light .task-notif-text{color:rgba(10,10,20,0.52);}
 
 /* ── Zoom Overlay ── */
 #zoom-overlay{
@@ -368,7 +489,7 @@ body.light .sheet-send{background:rgba(147,51,234,0.1);border-color:rgba(147,51,
 .screen-entering{animation:screenIn 0.3s cubic-bezier(0.2,0,0.2,1) both}
 @keyframes screenIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── AI Butler Tab Bar ── */
+/* ── Kaleidoscope Tab Bar ── */
 .butler-tab-bar{display:flex;padding:0 20px;border-bottom:1px solid rgba(255,255,255,0.07);flex-shrink:0}
 .butler-tab{flex:1;text-align:center;padding:9px 0 8px;font-size:11px;font-weight:700;letter-spacing:0.6px;
   font-family:'Inter',sans-serif;color:rgba(255,255,255,0.35);cursor:pointer;position:relative;
@@ -401,11 +522,333 @@ body.light .hist-who{color:rgba(10,10,20,0.42)}
 body.light .hist-text{color:rgba(10,10,20,0.78)}
 body.light .hist-time{color:rgba(10,10,20,0.35)}
 
+/* ── S4 Yuki Redesign (B+C Hybrid) ── */
+.yuki-identity{font-size:11px;color:rgba(192,132,252,0.72);letter-spacing:0.3px;margin-top:3px;}
+.yuki-week-stats{display:flex;align-items:center;justify-content:center;gap:5px;
+  font-size:11px;color:rgba(255,255,255,0.38);margin-top:7px;flex-wrap:wrap;}
+.yuki-week-stats .yw-accent{color:#C084FC;font-weight:600;}
+.yuki-featured{border-radius:16px;overflow:hidden;
+  border:1px solid rgba(192,132,252,0.22);background:rgba(192,132,252,0.03);margin-bottom:10px;}
+.yuki-featured-header{padding:14px 16px 10px;}
+.yf-tag{font-size:9px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;
+  color:rgba(192,132,252,0.65);margin-bottom:5px;}
+.yf-title{font-size:17px;font-weight:800;color:rgba(255,255,255,0.9);
+  letter-spacing:-0.3px;margin-bottom:4px;}
+.yf-sub{font-size:11.5px;color:rgba(255,255,255,0.38);line-height:1.5;}
+.yuki-wave{display:flex;align-items:flex-end;gap:2.5px;height:38px;
+  padding:0 16px 8px;overflow:hidden;}
+.yw-bar{flex:1;border-radius:2px 2px 0 0;background:rgba(192,132,252,0.32);min-height:3px;}
+.spark-block{padding:10px 16px 12px;border-top:1px solid rgba(192,132,252,0.1);
+  background:rgba(0,0,0,0.15);}
+.spark-label{font-size:9px;font-weight:700;letter-spacing:0.7px;text-transform:uppercase;
+  color:#C084FC;margin-bottom:8px;}
+.spark-row{display:flex;align-items:flex-start;gap:7px;}
+.spark-side{flex:1;padding:8px 10px;border-radius:10px;font-size:11.5px;line-height:1.5;}
+.spark-side.ai-side{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);
+  color:rgba(255,255,255,0.42);}
+.spark-side.yuki-side{background:rgba(74,222,128,0.07);border:1px solid rgba(74,222,128,0.22);
+  color:rgba(74,222,128,0.9);}
+.spark-who{display:block;font-size:8.5px;font-weight:700;letter-spacing:0.5px;
+  text-transform:uppercase;opacity:0.5;margin-bottom:3px;}
+.spark-arrow-col{display:flex;align-items:center;padding-top:20px;
+  color:rgba(192,132,252,0.45);font-size:14px;flex-shrink:0;}
+.contrib-bar-wrap{padding:10px 16px 14px;border-top:1px solid rgba(255,255,255,0.05);}
+.contrib-labels{display:flex;justify-content:space-between;
+  font-size:9.5px;color:rgba(255,255,255,0.3);margin-bottom:6px;}
+.contrib-bar-track{display:flex;height:6px;border-radius:3px;overflow:hidden;}
+.contrib-human-fill{background:linear-gradient(90deg,#4ADE80 0%,#C084FC 100%);border-radius:3px 0 0 3px;}
+.contrib-ai-fill{background:rgba(255,255,255,0.1);}
+.yuki-feed-row{display:flex;gap:10px;margin-bottom:12px;}
+.yuki-feed-card{flex:1;border-radius:14px;overflow:hidden;
+  border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);}
+.yfc-thumb{height:62px;display:flex;align-items:center;justify-content:center;font-size:22px;}
+.yfc-body{padding:9px 11px 11px;}
+.yfc-tag{font-size:9px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;
+  color:rgba(255,255,255,0.3);margin-bottom:3px;}
+.yfc-title{font-size:12.5px;font-weight:700;color:rgba(255,255,255,0.82);
+  margin-bottom:5px;line-height:1.3;letter-spacing:-0.1px;}
+.yfc-spark{font-size:10.5px;color:rgba(255,255,255,0.38);line-height:1.45;margin-bottom:6px;}
+.yfc-ratio{font-size:9px;font-weight:700;letter-spacing:0.3px;
+  color:rgba(192,132,252,0.65);background:rgba(192,132,252,0.08);
+  border-radius:6px;padding:2px 7px;display:inline-block;}
+.expert-view{border-radius:14px;padding:14px 16px;margin-bottom:12px;
+  background:rgba(123,97,255,0.06);border:1px solid rgba(123,97,255,0.15);}
+.expert-label{font-size:9px;font-weight:700;letter-spacing:0.7px;text-transform:uppercase;
+  color:rgba(123,97,255,0.72);margin-bottom:7px;}
+.expert-text{font-size:12.5px;color:rgba(255,255,255,0.6);line-height:1.65;font-style:italic;}
+/* light overrides */
+body.light .yuki-identity{color:rgba(155,93,229,0.72);}
+body.light .yuki-week-stats{color:rgba(10,10,20,0.38);}
+body.light .yuki-week-stats .yw-accent{color:rgba(155,93,229,0.9);}
+body.light .yuki-featured{background:rgba(192,132,252,0.03);border-color:rgba(192,132,252,0.2);}
+body.light .yf-tag{color:rgba(155,93,229,0.65);}
+body.light .yf-title{color:rgba(10,10,20,0.9);}
+body.light .yf-sub{color:rgba(10,10,20,0.38);}
+body.light .yw-bar{background:rgba(192,132,252,0.28);}
+body.light .spark-block{background:rgba(0,0,0,0.03);}
+body.light .spark-side.ai-side{background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.07);color:rgba(10,10,20,0.42);}
+body.light .spark-side.yuki-side{background:rgba(74,222,128,0.06);border-color:rgba(74,222,128,0.2);color:rgba(30,130,70,0.9);}
+body.light .spark-arrow-col{color:rgba(155,93,229,0.45);}
+body.light .contrib-labels{color:rgba(10,10,20,0.3);}
+body.light .contrib-ai-fill{background:rgba(10,10,20,0.08);}
+body.light .yuki-feed-card{border-color:rgba(10,10,20,0.08);background:rgba(10,10,20,0.02);}
+body.light .yfc-tag{color:rgba(10,10,20,0.3);}
+body.light .yfc-title{color:rgba(10,10,20,0.82);}
+body.light .yfc-spark{color:rgba(10,10,20,0.38);}
+body.light .yfc-ratio{color:rgba(0,120,140,0.65);background:rgba(0,120,140,0.07);}
+body.light .expert-view{background:rgba(100,50,220,0.04);border-color:rgba(100,50,220,0.14);}
+body.light .expert-label{color:rgba(100,50,220,0.65);}
+body.light .expert-text{color:rgba(10,10,20,0.6);}
+
+/* ── S4 Clip Timeline ── */
+.yuki-privacy-note{display:flex;align-items:center;gap:6px;margin:0 16px 12px;padding:7px 12px;
+  border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);}
+.yuki-privacy-note span{font-size:10.5px;color:rgba(255,255,255,0.25)}
+.yuki-clip-track{display:flex;gap:3px;padding:0 16px 10px;height:40px;align-items:stretch}
+.yuki-clip-seg{border-radius:4px;flex:1;display:flex;align-items:center;justify-content:center;
+  font-size:8px;font-weight:700;letter-spacing:0.3px}
+.yuki-clip-seg.clip-yuki{background:rgba(74,222,128,0.15);border:1px solid rgba(74,222,128,0.3);color:rgba(74,222,128,0.75)}
+.yuki-clip-seg.clip-yuki.director{background:rgba(74,222,128,0.28);border-color:rgba(74,222,128,0.55);color:rgba(74,222,128,0.95)}
+.yuki-clip-seg.clip-hana{background:rgba(244,114,182,0.1);border:1px solid rgba(244,114,182,0.25);color:rgba(244,114,182,0.55)}
+.yuki-clip-seg.clip-ren{background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.2);color:rgba(251,146,60,0.5)}
+.clip-track-legend{display:flex;gap:10px;padding:0 16px 10px;justify-content:flex-end}
+.clip-legend-item{display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.22)}
+.clip-legend-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+body.light .yuki-privacy-note{background:rgba(10,10,20,0.02);border-color:rgba(10,10,20,0.07);}
+body.light .yuki-privacy-note span{color:rgba(10,10,20,0.3)}
+
+/* ── STAGE MODE: contrast & size for presentation ── */
+/* Primary text */
+.data-tbl td,.ev-text,.pc-text{color:rgba(255,255,255,0.88)}
+.bubble.them{color:rgba(255,255,255,0.92)}
+.abtn{color:rgba(255,255,255,0.88)}
+.hist-text{color:rgba(255,255,255,0.88);font-size:13.5px}
+/* Secondary text */
+.ev-who,.data-tbl th,.eva-eyebrow,.tab-label,.pstat-lbl,
+.protect-role,.report-section-lbl,.pc-eyebrow,.greeting{color:rgba(255,255,255,0.72)}
+.chat-header-status.online{color:rgba(74,222,128,0.85)}
+.chat-header-status.ai-status{color:rgba(100,181,246,0.82)}
+.hist-who,.hist-day{color:rgba(255,255,255,0.65)}
+/* Tertiary — floor for smallest text */
+.ev-time,.bubble-time,.pc-detail,.notif-time,.hist-time{color:rgba(255,255,255,0.60)}
+/* Font size floor */
+.tab-label{font-size:12px}
+.ev-who,.data-tbl th,.report-section-lbl,.pc-eyebrow,.pstat-lbl,.eva-eyebrow,.hist-day{font-size:12px}
+.ev-time,.bubble-time,.notif-time,.ev-badge,.tag{font-size:12px}
+/* Body text */
+.ev-text,.pc-text,.data-tbl td{font-size:14.5px}
+.pc-detail{font-size:13px}
+.bubble.them,.bubble.me,.bubble.ai-msg{font-size:15px}
+.protect-role,.abtn{font-size:14px}
+.notif-body{color:rgba(255,255,255,0.88);font-size:13.5px}
+/* Yuki redesign */
+.yf-sub,.ywc-feedback{color:rgba(255,255,255,0.65);font-size:13px}
+.yfc-spark{color:rgba(255,255,255,0.65);font-size:12px}
+.expert-text{color:rgba(255,255,255,0.80);font-size:14px}
+.spark-side.ai-side{color:rgba(255,255,255,0.65);font-size:13px}
+.spark-side.yuki-side{font-size:13px}
+.yuki-week-stats{color:rgba(255,255,255,0.68);font-size:13px}
+.yuki-identity{color:rgba(192,132,252,0.82);font-size:13px}
+.yf-title{font-size:19px}
+.pc-compact-detail{color:rgba(255,255,255,0.70);font-size:13px}
+/* Sheet */
+.sheet-subtitle{color:rgba(255,255,255,0.65);font-size:13px}
+.sheet-action{color:rgba(255,255,255,0.82);font-size:14px}
+
+/* ── S11 Showcase ── */
+.sc-summary{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:12px;
+  background:rgba(192,132,252,0.06);border:1px solid rgba(192,132,252,0.14);margin-bottom:14px;}
+.sc-summary-text{font-size:11px;color:rgba(255,255,255,0.42);flex:1;line-height:1.4;}
+.sc-summary-count{font-size:11px;font-weight:700;color:rgba(192,132,252,0.7);}
+.sc-video-thumb{height:104px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#1a0530 0%,#3d0d6b 60%,#1a0530 100%);position:relative;}
+.sc-play-btn{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.15);
+  display:flex;align-items:center;justify-content:center;font-size:18px;color:white;}
+.sc-video-meta{position:absolute;bottom:8px;right:10px;font-size:9px;color:rgba(255,255,255,0.4);}
+.sc-video-badge{position:absolute;bottom:8px;left:10px;font-size:8.5px;font-weight:700;
+  color:rgba(192,132,252,0.9);background:rgba(192,132,252,0.18);border-radius:7px;padding:2px 8px;}
+.sc-video-footer{padding:9px 0 12px;display:flex;align-items:center;justify-content:space-between;}
+.sc-video-date{font-size:9px;color:rgba(255,255,255,0.25);}
+.sc-reaction{border-radius:14px;background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.08);margin-bottom:12px;}
+.sc-reaction-label{font-size:9px;font-weight:700;letter-spacing:0.7px;text-transform:uppercase;
+  color:rgba(255,255,255,0.25);padding:10px 14px 6px;}
+.sc-reaction-row{display:flex;gap:6px;padding:0 12px 12px;}
+.sc-reaction-btn{flex:1;padding:9px 6px;border-radius:10px;border:none;cursor:pointer;
+  font-size:11.5px;font-weight:600;text-align:center;
+  background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);}
+.sc-reaction-btn.hi{background:rgba(192,132,252,0.14);color:rgba(192,132,252,0.9);}
+/* ── S12 Growth ── */
+.gr-period-row{display:flex;gap:6px;margin-bottom:14px;}
+.gr-period-btn{flex:1;padding:7px 0;border-radius:20px;border:1px solid rgba(255,255,255,0.1);
+  font-size:11px;font-weight:600;color:rgba(255,255,255,0.35);cursor:pointer;
+  text-align:center;background:transparent;}
+.gr-period-btn.active{background:rgba(192,132,252,0.15);border-color:rgba(192,132,252,0.4);
+  color:rgba(192,132,252,0.9);}
+.gr-kpi-row{display:flex;gap:8px;margin-bottom:14px;}
+.gr-kpi{flex:1;padding:11px 8px;border-radius:14px;background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.07);text-align:center;}
+.gr-kpi-val{font-size:18px;font-weight:800;letter-spacing:-0.5px;
+  color:rgba(255,255,255,0.9);line-height:1;}
+.gr-kpi-delta{font-size:8px;font-weight:700;color:#4ADE80;margin-top:2px;}
+.gr-kpi-lbl{font-size:8px;color:rgba(255,255,255,0.28);margin-top:3px;line-height:1.3;}
+.gr-chart-card{border-radius:16px;background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.06);padding:14px 12px 6px;margin-bottom:14px;}
+.gr-chart-title{font-size:9px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;
+  color:rgba(192,132,252,0.6);margin-bottom:10px;}
+.gr-chart-grid{stroke:rgba(255,255,255,0.05);stroke-width:1;}
+.gr-chart-axis-lbl{font-size:8px;fill:rgba(255,255,255,0.2);}
+.gr-ms-list{margin-bottom:14px;}
+.gr-ms-row{display:flex;gap:12px;padding:10px 0;
+  border-bottom:1px solid rgba(255,255,255,0.05);}
+.gr-ms-row:last-child{border-bottom:none;}
+.gr-ms-left{display:flex;flex-direction:column;align-items:center;width:28px;
+  flex-shrink:0;padding-top:2px;gap:3px;}
+.gr-ms-week{font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.22);
+  letter-spacing:0.3px;text-align:center;}
+.gr-ms-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.gr-ms-dot.highlight{background:#C084FC;box-shadow:0 0 8px rgba(192,132,252,0.5);}
+.gr-ms-dot.green{background:#4ADE80;box-shadow:0 0 6px rgba(74,222,128,0.4);}
+.gr-ms-dot.dim{background:rgba(255,255,255,0.18);}
+.gr-ms-content{flex:1;}
+.gr-ms-tag{font-size:8px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;
+  color:rgba(192,132,252,0.55);margin-bottom:2px;}
+.gr-ms-title{font-size:12px;font-weight:700;color:rgba(255,255,255,0.82);
+  letter-spacing:-0.1px;margin-bottom:2px;line-height:1.35;}
+.gr-ms-body{font-size:10.5px;color:rgba(255,255,255,0.35);line-height:1.5;}
+.gr-skill-list{margin-bottom:14px;}
+.gr-skill-row{margin-bottom:10px;}
+.gr-skill-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;}
+.gr-skill-name{font-size:12px;font-weight:600;color:rgba(255,255,255,0.68);}
+.gr-skill-vals{font-size:9.5px;color:rgba(255,255,255,0.28);}
+.gr-skill-delta{font-size:9.5px;font-weight:700;color:#4ADE80;margin-left:4px;}
+.gr-skill-track{height:5px;border-radius:3px;background:rgba(255,255,255,0.07);overflow:hidden;}
+.gr-skill-fill{height:100%;border-radius:3px;}
+/* light overrides — Showcase */
+body.light .sc-summary{background:rgba(155,93,229,0.04);border-color:rgba(155,93,229,0.12);}
+body.light .sc-summary-text{color:rgba(10,10,20,0.42);}
+body.light .sc-summary-count{color:rgba(155,93,229,0.7);}
+body.light .sc-reaction{background:rgba(10,10,20,0.02);border-color:rgba(10,10,20,0.07);}
+body.light .sc-reaction-label{color:rgba(10,10,20,0.28);}
+body.light .sc-reaction-btn{background:rgba(10,10,20,0.04);color:rgba(10,10,20,0.5);}
+body.light .sc-reaction-btn.hi{background:rgba(155,93,229,0.1);color:rgba(155,93,229,0.88);}
+/* light overrides — Growth */
+body.light .gr-period-btn{border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.35);}
+body.light .gr-period-btn.active{background:rgba(155,93,229,0.1);border-color:rgba(155,93,229,0.35);color:rgba(155,93,229,0.85);}
+body.light .gr-kpi{background:rgba(10,10,20,0.02);border-color:rgba(10,10,20,0.07);}
+body.light .gr-kpi-val{color:rgba(10,10,20,0.85);}
+body.light .gr-kpi-lbl{color:rgba(10,10,20,0.28);}
+body.light .gr-chart-card{background:rgba(10,10,20,0.02);border-color:rgba(10,10,20,0.07);}
+body.light .gr-chart-grid{stroke:rgba(10,10,20,0.05);}
+body.light .gr-chart-axis-lbl{fill:rgba(10,10,20,0.22);}
+body.light .gr-ms-row{border-bottom-color:rgba(10,10,20,0.05);}
+body.light .gr-ms-week{color:rgba(10,10,20,0.22);}
+body.light .gr-ms-tag{color:rgba(155,93,229,0.55);}
+body.light .gr-ms-title{color:rgba(10,10,20,0.82);}
+body.light .gr-ms-body{color:rgba(10,10,20,0.38);}
+body.light .gr-skill-name{color:rgba(10,10,20,0.65);}
+body.light .gr-skill-vals{color:rgba(10,10,20,0.28);}
+body.light .gr-skill-track{background:rgba(10,10,20,0.06);}
+/* ── Alert notification row ── */
+.notif-row.notif-alert{
+  background:rgba(255,59,48,0.14);
+  border-bottom-color:rgba(255,59,48,0.25);
+  box-shadow:inset 3px 0 0 #FF3B30;
+}
+.notif-row.notif-alert .notif-body{color:#FF8A84;font-weight:600;}
+.notif-row.notif-alert .notif-icon{font-size:14px;}
+
+/* ── Health Alert popup ── */
+#alert-backdrop{
+  position:absolute;inset:0;z-index:9990;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter:blur(3px);
+  border-radius:inherit;
+  display:flex;align-items:center;justify-content:center;
+  animation:alertFadeIn 0.25s ease both;
+}
+@keyframes alertFadeIn{from{opacity:0}to{opacity:1}}
+#alert-card{
+  width:272px;
+  background:linear-gradient(155deg,rgba(28,8,12,0.98) 0%,rgba(22,6,10,0.98) 100%);
+  border:1px solid rgba(255,59,48,0.35);
+  border-radius:18px;
+  padding:22px 20px 18px;
+  box-shadow:0 0 0 1px rgba(255,59,48,0.12),0 24px 48px rgba(0,0,0,0.7),0 0 40px rgba(255,40,40,0.15);
+  animation:alertSlideUp 0.32s cubic-bezier(0.34,1.56,0.64,1) both;
+  position:relative;
+}
+@keyframes alertSlideUp{from{opacity:0;transform:translateY(24px) scale(0.94)}to{opacity:1;transform:none}}
+#alert-dismiss-btn{
+  position:absolute;top:12px;right:12px;
+  width:22px;height:22px;border-radius:50%;
+  background:rgba(255,255,255,0.08);border:none;
+  color:rgba(255,255,255,0.45);font-size:11px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  line-height:1;
+}
+#alert-dismiss-btn:active{background:rgba(255,255,255,0.15);}
+#alert-header{display:flex;align-items:center;gap:9px;margin-bottom:14px;}
+#alert-pulse{
+  width:10px;height:10px;border-radius:50%;background:#FF3B30;flex-shrink:0;
+  box-shadow:0 0 0 0 rgba(255,59,48,0.5);
+  animation:alertPulse 1.6s ease-in-out infinite;
+}
+@keyframes alertPulse{
+  0%{box-shadow:0 0 0 0 rgba(255,59,48,0.55)}
+  70%{box-shadow:0 0 0 8px rgba(255,59,48,0)}
+  100%{box-shadow:0 0 0 0 rgba(255,59,48,0)}
+}
+#alert-label{
+  font-size:9.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:#FF5C52;
+}
+#alert-message{
+  font-size:14.5px;font-weight:600;color:#fff;
+  line-height:1.45;margin-bottom:6px;
+}
+#alert-detail{
+  font-size:12px;color:rgba(255,255,255,0.50);line-height:1.5;margin-bottom:18px;
+}
+#alert-actions{display:flex;gap:9px;}
+#alert-btn-dismiss{
+  flex:1;padding:9px 0;border-radius:10px;
+  background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.55);font-size:13px;font-weight:500;cursor:pointer;
+}
+#alert-btn-dismiss:active{background:rgba(255,255,255,0.12);}
+#alert-btn-view{
+  flex:2;padding:9px 0;border-radius:10px;
+  background:linear-gradient(135deg,#FF3B30,#C0392B);border:none;
+  color:#fff;font-size:13px;font-weight:700;cursor:pointer;
+  box-shadow:0 4px 14px rgba(255,59,48,0.4);
+}
+#alert-btn-view:active{filter:brightness(0.88);}
+
 </style>
 </head>
 <body>
 
 <div class="phone">
+
+  <!-- ══════════════════════════════
+       HEALTH ALERT POPUP (page-load)
+       ══════════════════════════════ -->
+  <div id="alert-backdrop">
+    <div id="alert-card">
+      <button id="alert-dismiss-btn" onclick="dismissHealthAlert()">✕</button>
+      <div id="alert-header">
+        <div id="alert-pulse"></div>
+        <div id="alert-label">⌚ &nbsp;Wearable Alert</div>
+      </div>
+      <div id="alert-message">Grandma's blood pressure is critically high</div>
+      <div id="alert-detail">Apple Watch detected <strong style="color:#FF8A84">168/112 mmHg</strong> at 9:38 AM — Stage 2 Hypertension. Immediate attention required.</div>
+      <div id="alert-actions">
+        <button id="alert-btn-dismiss" onclick="dismissHealthAlert()">Dismiss</button>
+        <button id="alert-btn-view" onclick="dismissHealthAlert();goTo(1)">View Details →</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ══════════════════════════════
        SCREEN 0 · Constellation
@@ -417,15 +860,24 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     </div>
     <div class="const-header">
       <div class="greeting">Good morning</div>
-      <div class="greeting-name">Mei ◈</div>
+      <div class="greeting-name">Mei</div>
     </div>
     <div class="const-area">
       <svg class="const-svg" id="const-svg" viewBox="0 0 390 480" xmlns="http://www.w3.org/2000/svg"></svg>
       <div id="notif-wrap">
+        <div id="notif-panel-header">
+          <span id="notif-panel-label">Updates</span>
+        </div>
         <div id="notif-expand">
+          <div class="notif-row notif-alert" id="notif-bp-watch" onclick="goTo(1)">
+            <span class="notif-icon" style="color:#FF3B30">⌚</span>
+            <span class="notif-body">BP 168/112 mmHg — Grandma's wearable · Stage 2</span>
+            <span class="notif-time">9:38 AM</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-bp-watch')">✕</div>
+          </div>
           <div class="notif-row" id="notif-health" onclick="goTo(1)">
-            <span class="notif-icon" style="color:#FF7875">⚠</span>
-            <span class="notif-body">Grandma's BP elevated — cardiology follow-up suggested</span>
+            <span class="notif-icon" style="color:#FFB84D">🩺</span>
+            <span class="notif-body">Grandma's health check report — monthly summary ready</span>
             <span class="notif-time">8:45 AM</span>
             <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-health')">✕</div>
           </div>
@@ -487,10 +939,6 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
         <span class="tab-icon" style="font-size:15px;font-weight:700;letter-spacing:-0.5px">≡</span>
         <span class="tab-label">Events</span>
       </div>
-      <div class="tab-item" onclick="goTo(7)">
-        <span class="tab-icon">◈</span>
-        <span class="tab-label">AI Butler</span>
-      </div>
     </div>
   </div>
 
@@ -505,6 +953,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="zoomBack()">←</div>
       <div class="screen-title">Grandma's Health Report</div>
+      <img class="screen-logo" src="kaleidoscope-mandala.svg" alt="">
     </div>
     <div class="lens-body" id="health-body"></div>
   </div>
@@ -520,14 +969,39 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="screen-title">Family Events</div>
+      <img class="screen-logo" src="kaleidoscope-mandala.svg" alt="">
     </div>
     <div class="events-scroll">
+
+      <div class="event-item" style="cursor:pointer" onclick="goTo(13)">
+        <div class="ev-dot summary" style="font-size:13px;font-weight:800">✦</div>
+        <div class="ev-body">
+          <div class="ev-who">Daily Digest</div>
+          <div class="ev-text">2 threats blocked · 1 health alert · 1 usage warning. All family members are accounted for.</div>
+          <div class="ev-foot">
+            <span class="ev-badge green">Safety Report</span>
+            <span class="ev-time">Today 9:40 AM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-item" style="cursor:pointer" onclick="goTo(4)">
+        <div class="ev-dot shield" style="font-size:14px">✿</div>
+        <div class="ev-body">
+          <div class="ev-who">Yuki · Daughter</div>
+          <div class="ev-text">Check Yuki's growth record for today — creative direction +18%, 3 independent decisions made.</div>
+          <div class="ev-foot">
+            <span class="ev-badge purple">Growth Record</span>
+            <span class="ev-time">Today 9:15 AM</span>
+          </div>
+        </div>
+      </div>
 
       <div class="event-item">
         <div class="ev-dot health" style="font-size:12px;font-weight:800">H</div>
         <div class="ev-body">
           <div class="ev-who">Grandma</div>
-          <div class="ev-text">Blood pressure elevated at 145/92, HbA1c needs monitoring. AI Butler recommends cardiology follow-up.</div>
+          <div class="ev-text">Blood pressure elevated at 145/92, HbA1c needs monitoring. Kaleidoscope recommends cardiology follow-up.</div>
           <div class="ev-foot">
             <span class="ev-badge red">Health Alert</span>
             <span class="ev-time">Today 8:45 AM</span>
@@ -538,8 +1012,8 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
       <div class="event-item">
         <div class="ev-dot shield" style="font-size:11px;font-weight:800">✓</div>
         <div class="ev-body">
-          <div class="ev-who">Yuki · Granddaughter</div>
-          <div class="ev-text">AI Butler blocked a phishing link — disguised as a bank login page before it could load.</div>
+          <div class="ev-who">Yuki · Daughter</div>
+          <div class="ev-text">Kaleidoscope blocked a phishing link — disguised as a bank login page before it could load.</div>
           <div class="ev-foot">
             <span class="ev-badge purple">Blocked</span>
             <span class="ev-time">Yesterday 4:23 PM</span>
@@ -580,10 +1054,6 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
       <div class="tab-item active" onclick="goTo(2)">
         <span class="tab-icon" style="font-size:15px;font-weight:700;letter-spacing:-0.5px">≡</span>
         <span class="tab-label">Events</span>
-      </div>
-      <div class="tab-item" onclick="goTo(7)">
-        <span class="tab-icon">◈</span>
-        <span class="tab-label">AI Butler</span>
       </div>
     </div>
   </div>
@@ -655,7 +1125,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
   </div>
 
   <!-- ══════════════════════════════
-       SCREEN 4 · Yuki — Growth + Protection
+       SCREEN 4 · Yuki — Collaborative Portfolio
        ══════════════════════════════ -->
   <div class="screen" id="s4">
     <div class="status-bar">
@@ -665,71 +1135,113 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="zoomBack()">←</div>
       <div class="screen-title">Yuki's Report</div>
+      <img class="screen-logo" src="bloom-icon.svg" alt="">
     </div>
     <div class="protect-body">
+
+      <!-- Hero -->
       <div class="protect-hero">
-        <div class="protect-av" style="color:#4ADE80;border-color:rgba(74,222,128,0.3)">Yv</div>
+        <img src="faces/yuki.png" style="width:68px;height:68px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 10px;border:2px solid rgba(192,132,252,0.35)">
         <div class="protect-name">Yuki</div>
-        <div class="protect-role">Granddaughter · Age 14</div>
-        <div class="protect-status-row">
-          <div class="pstat">
-            <div class="pstat-val" style="color:#FCD34D">2</div>
-            <div class="pstat-lbl">Projects today</div>
+        <div class="protect-role">Daughter · Age 14</div>
+        <div class="yuki-identity">Visual Storyteller · Week 12</div>
+        <div class="yuki-week-stats">
+          <span>1 Collab</span><span>·</span>
+          <span>8h creating</span><span>·</span>
+          <span class="yw-accent">+18% Creative Direction</span>
+        </div>
+      </div>
+
+      <!-- Privacy note -->
+      <div class="yuki-privacy-note">
+        <span>🔒</span>
+        <span>Content is private — showing growth signals &amp; creative decisions only</span>
+      </div>
+
+      <!-- Featured: 文化祭 TikTok Collab -->
+      <div class="report-section-lbl">✦ Featured This Week</div>
+      <div class="yuki-featured">
+        <div class="yuki-featured-header">
+          <div class="yf-tag">TikTok Video · Bloom Collab · 8h 20min</div>
+          <div class="yf-title">文化祭 2024 🏮</div>
+          <div class="yf-sub">Direction by Yuki · Crew: Hana &amp; Ren · 6 clips · 00:52</div>
+        </div>
+
+        <!-- Clip timeline (behaviour signal, no content) -->
+        <div class="yuki-clip-track">
+          <div class="yuki-clip-seg clip-yuki director">Dir.</div>
+          <div class="yuki-clip-seg clip-hana">H</div>
+          <div class="yuki-clip-seg clip-yuki">Y</div>
+          <div class="yuki-clip-seg clip-ren">R</div>
+          <div class="yuki-clip-seg clip-hana">H</div>
+          <div class="yuki-clip-seg clip-ren">R</div>
+        </div>
+        <div class="clip-track-legend">
+          <div class="clip-legend-item"><div class="clip-legend-dot" style="background:rgba(74,222,128,0.7)"></div>Yuki</div>
+          <div class="clip-legend-item"><div class="clip-legend-dot" style="background:rgba(244,114,182,0.6)"></div>Hana</div>
+          <div class="clip-legend-item"><div class="clip-legend-dot" style="background:rgba(251,146,60,0.55)"></div>Ren</div>
+        </div>
+
+        <div class="spark-block">
+          <div class="spark-label">✦ Bloom Guided</div>
+          <div class="spark-row">
+            <div class="spark-side ai-side">
+              <span class="spark-who">Two paths offered</span>
+              A: banner close-up · B: crowd warming up
+            </div>
+            <div class="spark-arrow-col">→</div>
+            <div class="spark-side yuki-side">
+              <span class="spark-who">Yuki decided</span>
+              Chose A — intimate opening · Director's choice ✓
+            </div>
           </div>
-          <div class="pstat">
-            <div class="pstat-val" style="color:#4ADE80">+15%</div>
-            <div class="pstat-lbl">Critical thinking</div>
+        </div>
+        <div class="contrib-bar-wrap">
+          <div class="contrib-labels">
+            <span>Yuki's voice · 68%</span>
+            <span>Bloom guidance · 32%</span>
           </div>
-          <div class="pstat">
-            <div class="pstat-val" style="color:#C084FC">3</div>
-            <div class="pstat-lbl">Threats blocked</div>
+          <div class="contrib-bar-track">
+            <div class="contrib-human-fill" style="width:68%"></div>
+            <div class="contrib-ai-fill" style="width:32%"></div>
           </div>
         </div>
       </div>
 
-      <!-- ── Block 1: Protection ── -->
-      <div class="report-section-lbl">🛡 Protection Overview</div>
-      <div class="protect-card warn">
-        <div class="pc-eyebrow" style="color:#C084FC">◈ Latest Block · Yesterday 4:23 PM</div>
-        <div class="pc-text" style="font-size:13px">Phishing link blocked <span style="color:rgba(255,255,255,0.35);font-size:11px">— secure-bank-verify.xyz</span></div>
-        <div style="display:flex;gap:6px;margin-top:8px">
-          <span class="ev-badge purple">Phishing</span>
-          <span class="ev-badge red">High Risk</span>
-          <span class="ev-badge" style="color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.05)">Blocked</span>
+      <!-- Feed Row: 春祭り + Voice Loop -->
+      <div class="report-section-lbl">↑ This Week's Works</div>
+      <div class="yuki-feed-row">
+        <div class="yuki-feed-card">
+          <div class="yfc-thumb" style="background:linear-gradient(135deg,#FF6B35 0%,#FFB347 100%)">🌸</div>
+          <div class="yfc-body">
+            <div class="yfc-tag">Photo Essay</div>
+            <div class="yfc-title">春祭り</div>
+            <div class="yfc-spark">Yuki selected &amp; sequenced all shots — AI captioned</div>
+            <span class="yfc-ratio">Y 82 · AI 18</span>
+          </div>
         </div>
-      </div>
-      <div class="protect-card safe-card">
-        <div class="pc-eyebrow" style="color:#4ADE80">✓ This Week</div>
-        <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
-          <span class="ev-badge" style="color:#C084FC;background:rgba(192,132,252,0.1)">3 Blocked</span>
-          <span class="ev-badge" style="color:#4ADE80;background:rgba(74,222,128,0.1)">0 Incidents</span>
-          <span class="ev-badge" style="color:#4ADE80;background:rgba(74,222,128,0.1)">Browsing Safe</span>
-        </div>
-      </div>
-
-      <!-- ── Block 2: Growth ── -->
-      <div class="report-section-lbl">✦ Growth Today</div>
-      <div class="protect-card" style="background:rgba(252,211,77,0.05);border:1px solid rgba(252,211,77,0.15)">
-        <div class="pc-eyebrow" style="color:#FCD34D">◈ AI-Guided Learning · 45 min</div>
-        <div class="pc-text" style="font-size:13px">Photosynthesis · Socratic dialogue</div>
-        <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
-          <span class="ev-badge" style="color:#FCD34D;background:rgba(252,211,77,0.1)">Critical Thinking ↑</span>
-          <span class="ev-badge" style="color:#FCD34D;background:rgba(252,211,77,0.1)">3 Insights</span>
-        </div>
-      </div>
-      <div class="protect-card" style="background:rgba(74,222,128,0.04);border:1px solid rgba(74,222,128,0.13)">
-        <div class="pc-eyebrow" style="color:#4ADE80">✦ Creative Writing · Today</div>
-        <div class="pc-text" style="font-size:13px">Short story — history topic reimagined</div>
-        <div class="pc-detail" style="margin-top:5px;font-style:italic">"Strong voice. Try a plot twist next time."</div>
-        <div style="display:flex;gap:6px;margin-top:7px">
-          <span class="ev-badge" style="color:#4ADE80;background:rgba(74,222,128,0.1)">Creativity ↑</span>
+        <div class="yuki-feed-card">
+          <div class="yfc-thumb" style="background:linear-gradient(135deg,#2D1B69 0%,#7C3AED 100%)">🎵</div>
+          <div class="yfc-body">
+            <div class="yfc-tag">Music</div>
+            <div class="yfc-title">Voice Loop #3</div>
+            <div class="yfc-spark" style="color:rgba(255,255,255,0.22)">🔒 Not shared with family</div>
+            <span class="yfc-ratio" style="color:rgba(255,255,255,0.18);background:rgba(255,255,255,0.04)">Private</span>
+          </div>
         </div>
       </div>
 
+      <!-- Kaleidoscope insight -->
+      <div class="expert-view">
+        <div class="expert-label">✦ Kaleidoscope Insight</div>
+        <div class="expert-text">"Bloom offered two opening directions. Yuki chose the quieter, more intimate shot over the crowd-energy option — and marked it as her Director's Choice. Across 8 decisions this week, she redirected AI suggestions 3 times. She's building a real creative voice."</div>
+      </div>
+
+      <!-- Actions -->
       <div class="actions" style="margin-top:4px">
-        <button class="abtn hi">Send Yuki a learning challenge</button>
-        <button class="abtn">Adjust protection rules</button>
-        <button class="abtn">View full block history</button>
+        <button class="abtn hi">Send Yuki a creative challenge →</button>
+        <button class="abtn" onclick="goTo(11)">View Yuki's Showcase →</button>
+        <button class="abtn" onclick="goTo(12)">Yuki's Growth Timeline →</button>
       </div>
     </div>
   </div>
@@ -745,6 +1257,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="screen-title">Protection Report</div>
+      <img class="screen-logo" src="kaleidoscope-mandala.svg" alt="">
     </div>
     <div class="protect-body">
       <div class="protect-hero">
@@ -792,6 +1305,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="zoomBack()">←</div>
       <div class="screen-title">Protection Report</div>
+      <img class="screen-logo" src="kaleidoscope-mandala.svg" alt="">
     </div>
     <div class="protect-body">
       <div class="protect-hero">
@@ -830,7 +1344,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
   </div>
 
   <!-- ══════════════════════════════
-       SCREEN 7 · AI Butler Chat
+       SCREEN 7 · Kaleidoscope Chat
        ══════════════════════════════ -->
   <div class="screen" id="s7">
     <div class="status-bar">
@@ -841,7 +1355,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="chat-header-av ai">◈</div>
       <div class="chat-header-info">
-        <div class="chat-header-name">AI Butler</div>
+        <div class="chat-header-name">Kaleidoscope</div>
         <div class="chat-header-status ai-status">● Always active</div>
       </div>
     </div>
@@ -977,7 +1491,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
 
     <div class="chat-input-bar" id="butler-chat-input">
       <div class="chat-mic"><svg width="14" height="17" viewBox="0 0 14 20" fill="currentColor"><rect x="4" y="0" width="6" height="11" rx="3"/><path d="M1 9a6 6 0 0012 0" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><line x1="7" y1="15" x2="7" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="18" x2="10" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <input class="chat-input" placeholder="Ask AI Butler…" readonly>
+      <input class="chat-input" placeholder="Ask Kaleidoscope…" readonly>
       <div class="chat-send ai-send">↑</div>
     </div>
   </div>
@@ -994,6 +1508,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="screen-title">Scam Call Blocked</div>
+      <img class="screen-logo" src="kaleidoscope-mandala.svg" alt="">
     </div>
     <div class="protect-body">
       <div class="protect-hero">
@@ -1021,7 +1536,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
         <div class="pc-detail">Community database: 847 scam reports · Category: impersonating bank representative</div>
       </div>
       <div class="protect-card blue-card">
-        <div class="pc-eyebrow" style="color:#64B5F6">◈ AI Butler Action</div>
+        <div class="pc-eyebrow" style="color:#64B5F6">◈ Kaleidoscope Action</div>
         <div class="pc-text">Call automatically blocked before reaching Grandma. Incident logged and alert sent to you.</div>
       </div>
       <div class="actions" style="margin-top:4px">
@@ -1043,6 +1558,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="screen-title">Phishing Link Blocked</div>
+      <img class="screen-logo" src="kaleidoscope-mandala.svg" alt="">
     </div>
     <div class="protect-body">
       <div class="protect-hero">
@@ -1070,7 +1586,7 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
         <div class="pc-detail">SSL certificate mismatch · domain registered 3 days ago · added to global block list</div>
       </div>
       <div class="protect-card blue-card">
-        <div class="pc-eyebrow" style="color:#64B5F6">◈ AI Butler Action</div>
+        <div class="pc-eyebrow" style="color:#64B5F6">◈ Kaleidoscope Action</div>
         <div class="pc-text">Page blocked before loading — Yuki's credentials and data remain safe. Site reported to safe-browsing network.</div>
       </div>
       <div class="actions" style="margin-top:4px">
@@ -1081,26 +1597,443 @@ body.light .hist-time{color:rgba(10,10,20,0.35)}
     </div>
   </div>
 
+  <!-- ══════════════════════════════
+       SCREEN 10 · AI Booking Task
+       ══════════════════════════════ -->
+  <div class="screen" id="s10">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="screen-header">
+      <div class="back-btn" onclick="goTo(1)">←</div>
+      <div class="screen-title">Kaleidoscope Working</div>
+      <img class="screen-logo" src="kaleidoscope-mandala.svg" alt="">
+    </div>
+    <div class="task-exec-body">
+
+      <div class="task-context-card">
+        <span class="task-context-icon">◈</span>
+        <div class="task-context-text">Booking cardiology follow-up for <strong style="color:rgba(255,255,255,0.75)">Grandma (Hana Chen, 68)</strong> — BP 145/92, follow-up recommended within 2 weeks.</div>
+      </div>
+
+      <div class="task-steps">
+        <div class="task-step">
+          <div class="task-step-dot done">✓</div>
+          <div class="task-step-content">
+            <div class="task-step-label">Checked available slots</div>
+            <div class="task-step-detail">NTU Hospital · Cardiology · 4 openings found</div>
+          </div>
+        </div>
+        <div class="task-step">
+          <div class="task-step-dot done">✓</div>
+          <div class="task-step-content">
+            <div class="task-step-label">Matched Grandma's schedule</div>
+            <div class="task-step-detail">Nov 14 afternoon — no conflicts detected</div>
+          </div>
+        </div>
+        <div class="task-step">
+          <div class="task-step-dot done">✓</div>
+          <div class="task-step-content">
+            <div class="task-step-label">Booking confirmed</div>
+            <div class="task-step-detail">Dr. Li Wei · Nov 14 · 2:30 PM</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task-result-card">
+        <div class="task-result-eyebrow">✓ Booking Confirmed</div>
+        <div class="task-result-title">Cardiology Follow-up</div>
+        <div class="task-result-sub">NTU Hospital · Dept of Cardiology</div>
+        <div class="task-result-rows">
+          <div class="task-result-row"><span class="lbl">Date</span><span class="val">November 14, 2025</span></div>
+          <div class="task-result-row"><span class="lbl">Time</span><span class="val">2:30 PM</span></div>
+          <div class="task-result-row"><span class="lbl">Doctor</span><span class="val">Dr. Li Wei, MD</span></div>
+          <div class="task-result-row"><span class="lbl">Patient</span><span class="val">Hana Chen</span></div>
+          <div class="task-result-row"><span class="lbl">Ref No.</span><span class="val">#TL-4821</span></div>
+        </div>
+      </div>
+
+      <div class="task-notif-row">
+        <div class="task-notif-av"><img src="faces/grandma.png" alt="Grandma"></div>
+        <div class="task-notif-text">Grandma notified — date, time &amp; address sent to her device</div>
+        <span class="task-notif-check">✓</span>
+      </div>
+
+      <div class="actions">
+        <button class="abtn hi">Set day-before reminder</button>
+        <button class="abtn">Add to family calendar</button>
+        <button class="abtn" onclick="goTo(1)">Back to health report</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SCREEN 11 · Yuki — Showcase
+       ══════════════════════════════ -->
+  <div class="screen" id="s11">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="screen-header">
+      <div class="back-btn" onclick="goTo(4)">←</div>
+      <div class="screen-title">Yuki's Showcase</div>
+      <img class="screen-logo" src="bloom-icon.svg" alt="">
+    </div>
+    <div class="protect-body">
+
+      <!-- Summary strip -->
+      <div class="sc-summary">
+        <span style="font-size:14px">🌸</span>
+        <span class="sc-summary-text">Works Yuki chose to share with family · made in Bloom</span>
+        <span class="sc-summary-count">2 shared</span>
+      </div>
+
+      <!-- Featured: 文化祭 -->
+      <div class="report-section-lbl">★ Featured</div>
+      <div class="yuki-featured">
+        <div class="yuki-featured-header">
+          <div class="yf-tag">TikTok Video · Bloom Collab · 00:52</div>
+          <div class="yf-title">文化祭 2024 🏮</div>
+          <div class="yf-sub">Directed by Yuki · with Hana &amp; Ren · 6 clips</div>
+        </div>
+        <div class="sc-video-thumb">
+          <div class="sc-play-btn">▶</div>
+          <span class="sc-video-meta">00:52</span>
+          <span class="sc-video-badge">Director's Choice ✓</span>
+        </div>
+        <div class="sc-video-footer">
+          <span class="sc-video-date">Shared with family · 2 days ago</span>
+          <span style="font-size:9px;font-weight:700;color:rgba(192,132,252,0.65);background:rgba(192,132,252,0.08);border-radius:8px;padding:2px 9px">Y 68 · AI 32</span>
+        </div>
+      </div>
+
+      <!-- Feed -->
+      <div class="report-section-lbl">↑ Also Shared</div>
+      <div class="yuki-feed-row">
+        <div class="yuki-feed-card">
+          <div class="yfc-thumb" style="background:linear-gradient(135deg,#FF6B35 0%,#FFB347 100%)">🌸</div>
+          <div class="yfc-body">
+            <div class="yfc-tag">Photo Essay</div>
+            <div class="yfc-title">春祭り</div>
+            <div class="yfc-spark">Yuki selected &amp; sequenced all shots — AI captioned</div>
+            <span class="yfc-ratio">Y 82 · AI 18</span>
+          </div>
+        </div>
+        <div class="yuki-feed-card" style="opacity:0.5">
+          <div class="yfc-thumb" style="background:linear-gradient(135deg,#1a0830 0%,#3b0d6b 100%)">🔒</div>
+          <div class="yfc-body">
+            <div class="yfc-tag">Music</div>
+            <div class="yfc-title">Voice Loop #3</div>
+            <div class="yfc-spark" style="color:rgba(255,255,255,0.22)">Not shared with family</div>
+            <span class="yfc-ratio" style="color:rgba(255,255,255,0.18);background:rgba(255,255,255,0.04)">Private</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reaction -->
+      <div class="sc-reaction">
+        <div class="sc-reaction-label">Tell Yuki what you think</div>
+        <div class="sc-reaction-row">
+          <div class="sc-reaction-btn hi">🎬 Amazing work!</div>
+          <div class="sc-reaction-btn">💬 Leave a note</div>
+        </div>
+      </div>
+
+      <!-- Privacy note -->
+      <div class="yuki-privacy-note">
+        <span>🔒</span>
+        <span>Yuki controls what's shared · she can change this anytime</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SCREEN 12 · Yuki — Growth Timeline
+       ══════════════════════════════ -->
+  <div class="screen" id="s12">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="screen-header">
+      <div class="back-btn" onclick="goTo(4)">←</div>
+      <div class="screen-title">Yuki's Growth</div>
+      <img class="screen-logo" src="bloom-icon.svg" alt="">
+    </div>
+    <div class="protect-body">
+
+      <!-- Period selector -->
+      <div class="gr-period-row">
+        <button class="gr-period-btn active">4 Weeks</button>
+        <button class="gr-period-btn">3 Months</button>
+        <button class="gr-period-btn">All Time</button>
+      </div>
+
+      <!-- KPIs -->
+      <div class="gr-kpi-row">
+        <div class="gr-kpi">
+          <div class="gr-kpi-val">+18%</div>
+          <div class="gr-kpi-delta">↑ this month</div>
+          <div class="gr-kpi-lbl">creative direction</div>
+        </div>
+        <div class="gr-kpi">
+          <div class="gr-kpi-val">8</div>
+          <div class="gr-kpi-delta">↑ 5 more than last</div>
+          <div class="gr-kpi-lbl">own decisions</div>
+        </div>
+        <div class="gr-kpi">
+          <div class="gr-kpi-val">3×</div>
+          <div class="gr-kpi-delta">↑ growing</div>
+          <div class="gr-kpi-lbl">redirected AI</div>
+        </div>
+      </div>
+
+      <!-- Chart: Creative Voice % over 4 weeks -->
+      <div class="gr-chart-card">
+        <div class="gr-chart-title">Creative Voice — Yuki's % in each work</div>
+        <svg width="100%" viewBox="0 0 274 100" overflow="visible">
+          <defs>
+            <linearGradient id="grFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#C084FC" stop-opacity="0.22"/>
+              <stop offset="100%" stop-color="#C084FC" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <!-- Grid lines -->
+          <line x1="20" y1="22" x2="254" y2="22" class="gr-chart-grid"/>
+          <line x1="20" y1="45" x2="254" y2="45" class="gr-chart-grid"/>
+          <line x1="20" y1="68" x2="254" y2="68" class="gr-chart-grid"/>
+          <!-- Y-axis labels -->
+          <text x="16" y="25" text-anchor="end" class="gr-chart-axis-lbl">70%</text>
+          <text x="16" y="48" text-anchor="end" class="gr-chart-axis-lbl">60%</text>
+          <text x="16" y="71" text-anchor="end" class="gr-chart-axis-lbl">50%</text>
+          <!-- Area fill under curve -->
+          <path d="M 20 64 C 59 64 59 57 98 57 C 137 57 137 43 176 43 C 215 43 215 26 254 26 L 254 80 L 20 80 Z"
+                fill="url(#grFill)"/>
+          <!-- Curve line -->
+          <path d="M 20 64 C 59 64 59 57 98 57 C 137 57 137 43 176 43 C 215 43 215 26 254 26"
+                fill="none" stroke="#C084FC" stroke-width="2" stroke-linecap="round"/>
+          <!-- Wk 9 dot (start) -->
+          <circle cx="20" cy="64" r="3.5" fill="#0E0E14" stroke="#C084FC" stroke-width="1.5"/>
+          <!-- Wk 10 dot -->
+          <circle cx="98" cy="57" r="3.5" fill="#0E0E14" stroke="#C084FC" stroke-width="1.5"/>
+          <!-- Wk 11 dot — Director's Choice (green highlight) -->
+          <circle cx="176" cy="43" r="5" fill="#4ADE80" stroke="#fff" stroke-width="1.5"/>
+          <text x="176" y="35" text-anchor="middle" style="font-size:7.5px;fill:#4ADE80;font-weight:700">Dir ✓</text>
+          <!-- Wk 12 dot — latest (featured) -->
+          <circle cx="254" cy="26" r="5.5" fill="#C084FC" stroke="#D8B4FE" stroke-width="2"/>
+          <!-- Current value badge -->
+          <rect x="237" y="10" width="34" height="13" rx="6" fill="rgba(192,132,252,0.2)"/>
+          <text x="254" y="20" text-anchor="middle" style="font-size:9px;font-weight:700;fill:#D8B4FE">68%</text>
+          <!-- Week labels -->
+          <text x="20"  y="96" text-anchor="middle" class="gr-chart-axis-lbl">Wk 9</text>
+          <text x="98"  y="96" text-anchor="middle" class="gr-chart-axis-lbl">Wk 10</text>
+          <text x="176" y="96" text-anchor="middle" class="gr-chart-axis-lbl">Wk 11</text>
+          <text x="254" y="96" text-anchor="middle" class="gr-chart-axis-lbl">Wk 12</text>
+        </svg>
+      </div>
+
+      <!-- Milestones -->
+      <div class="report-section-lbl">✦ Milestones</div>
+      <div class="gr-ms-list">
+        <div class="gr-ms-row">
+          <div class="gr-ms-left">
+            <span class="gr-ms-week">Wk 12</span>
+            <div class="gr-ms-dot green"></div>
+          </div>
+          <div class="gr-ms-content">
+            <div class="gr-ms-tag">Family Milestone</div>
+            <div class="gr-ms-title">Shared her work with you for the first time</div>
+            <div class="gr-ms-body">Chose to share 文化祭 &amp; 春祭り with family — her own decision.</div>
+          </div>
+        </div>
+        <div class="gr-ms-row">
+          <div class="gr-ms-left">
+            <span class="gr-ms-week">Wk 11</span>
+            <div class="gr-ms-dot highlight"></div>
+          </div>
+          <div class="gr-ms-content">
+            <div class="gr-ms-tag">Creative Direction</div>
+            <div class="gr-ms-title">First Director's Choice marked in Bloom ✓</div>
+            <div class="gr-ms-body">Chose the intimate opening over AI's crowd-energy suggestion. Held her vision.</div>
+          </div>
+        </div>
+        <div class="gr-ms-row">
+          <div class="gr-ms-left">
+            <span class="gr-ms-week">Wk 10</span>
+            <div class="gr-ms-dot highlight"></div>
+          </div>
+          <div class="gr-ms-content">
+            <div class="gr-ms-tag">Growing Independence</div>
+            <div class="gr-ms-title">First time she declined AI's suggestion</div>
+            <div class="gr-ms-body">Pushed back on Bloom's guidance and trusted her own instinct.</div>
+          </div>
+        </div>
+        <div class="gr-ms-row">
+          <div class="gr-ms-left">
+            <span class="gr-ms-week">Wk 9</span>
+            <div class="gr-ms-dot dim"></div>
+          </div>
+          <div class="gr-ms-content">
+            <div class="gr-ms-tag">Start</div>
+            <div class="gr-ms-title">Joined Bloom · first collab project</div>
+            <div class="gr-ms-body">Started 文化祭 with Hana &amp; Ren. Creative voice: 52%.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skill growth -->
+      <div class="report-section-lbl">↑ Skill Growth</div>
+      <div class="gr-skill-list">
+        <div class="gr-skill-row">
+          <div class="gr-skill-header">
+            <span class="gr-skill-name">Creative Direction</span>
+            <span><span class="gr-skill-vals">48% → 66%</span><span class="gr-skill-delta">+18%</span></span>
+          </div>
+          <div class="gr-skill-track">
+            <div class="gr-skill-fill" style="width:66%;background:linear-gradient(90deg,#4ADE80,#C084FC)"></div>
+          </div>
+        </div>
+        <div class="gr-skill-row">
+          <div class="gr-skill-header">
+            <span class="gr-skill-name">Collaboration</span>
+            <span><span class="gr-skill-vals">70% → 82%</span><span class="gr-skill-delta">+12%</span></span>
+          </div>
+          <div class="gr-skill-track">
+            <div class="gr-skill-fill" style="width:82%;background:linear-gradient(90deg,#4ADE80,#22C55E)"></div>
+          </div>
+        </div>
+        <div class="gr-skill-row">
+          <div class="gr-skill-header">
+            <span class="gr-skill-name">Autonomous Choices</span>
+            <span><span class="gr-skill-vals">40% → 68%</span><span class="gr-skill-delta">+28%</span></span>
+          </div>
+          <div class="gr-skill-track">
+            <div class="gr-skill-fill" style="width:68%;background:linear-gradient(90deg,#C084FC,#7C3AED)"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kaleidoscope Insight -->
+      <div class="expert-view">
+        <div class="expert-label">✦ Kaleidoscope Insight</div>
+        <div class="expert-text">"Yuki's creative voice is growing steadily week over week. The most meaningful signal: she's redirecting AI suggestions with more confidence each week. Young creators who develop this pattern tend to build strong, lasting creative identities. You're watching it happen."</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SCREEN 13 · Today's Safety Report
+       ══════════════════════════════ -->
+  <div class="screen" id="s13">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="screen-header">
+      <div class="back-btn" onclick="goTo(2)">←</div>
+      <div class="screen-title">Today's Safety Report</div>
+      <img class="screen-logo" src="kaleidoscope-mandala.svg" alt="">
+    </div>
+    <div class="protect-body">
+
+      <!-- Hero -->
+      <div class="protect-hero">
+        <div style="width:64px;height:64px;border-radius:20px;background:rgba(74,222,128,0.12);border:1.5px solid rgba(74,222,128,0.25);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:#4ADE80;margin:0 auto 12px">✓</div>
+        <div class="protect-name">Family Safe</div>
+        <div class="protect-role">Today 9:40 AM · 4 events monitored</div>
+        <div class="protect-status-row">
+          <div class="pstat">
+            <div class="pstat-val" style="color:#FF7875">2</div>
+            <div class="pstat-lbl">Blocked</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-val" style="color:#FF8A84">1</div>
+            <div class="pstat-lbl">Health Alert</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-val" style="color:#FFB84D">1</div>
+            <div class="pstat-lbl">Usage Warning</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Threats Blocked -->
+      <div class="report-section-lbl">🛡 Threats Blocked</div>
+
+      <div class="protect-card warn" style="cursor:pointer" onclick="goTo(8)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div class="pc-eyebrow" style="color:#FF7875">Scam Call · Grandma's device</div>
+          <span style="color:rgba(255,255,255,0.3);font-size:12px">→</span>
+        </div>
+        <div class="pc-text">+886-900-123-456 blocked before reaching Grandma — 847 community scam reports on file.</div>
+        <div class="pc-detail">Today 9:15 AM · Call intercepted · 0s ring time</div>
+      </div>
+
+      <div class="protect-card warn" style="cursor:pointer" onclick="goTo(9)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div class="pc-eyebrow" style="color:#C084FC">Phishing Link · Yuki's device</div>
+          <span style="color:rgba(255,255,255,0.3);font-size:12px">→</span>
+        </div>
+        <div class="pc-text">secure-bank-login.xyz blocked before loading — impersonated Cathay Bank. No data exposed.</div>
+        <div class="pc-detail">Yesterday 4:23 PM · High risk · Reported to safe-browsing network</div>
+      </div>
+
+      <!-- Health -->
+      <div class="report-section-lbl">❤ Health</div>
+
+      <div class="protect-card" style="background:rgba(255,120,120,0.07);border:1px solid rgba(255,120,120,0.2);cursor:pointer" onclick="goTo(1)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div class="pc-eyebrow" style="color:#FF7875">⌚ Wearable Alert · Grandma</div>
+          <span style="color:rgba(255,255,255,0.3);font-size:12px">→</span>
+        </div>
+        <div class="pc-text">BP 168/112 mmHg detected at 9:38 AM — Stage 2 Hypertension. Immediate attention required.</div>
+        <div class="pc-detail">Apple Watch · Cardiology follow-up recommended</div>
+      </div>
+
+      <!-- Usage -->
+      <div class="report-section-lbl">⏱ Usage</div>
+
+      <div class="protect-card amber-card" style="cursor:pointer" onclick="goTo(6)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div class="pc-eyebrow" style="color:#FFB84D">Screen Time · Hiro</div>
+          <span style="color:rgba(255,255,255,0.3);font-size:12px">→</span>
+        </div>
+        <div class="pc-text">3.5 hours of social media use after midnight — exceeded family safety limit.</div>
+        <div class="pc-detail">Yesterday 11:59 PM · Limit was 2h · Auto-notification sent</div>
+      </div>
+
+      <!-- Kaleidoscope Summary -->
+      <div class="expert-view">
+        <div class="expert-label">✦ Kaleidoscope Summary</div>
+        <div class="expert-text">"No data was exposed today. All digital threats were neutralized before reaching family members. Grandma's health reading is the one item that requires your direct attention — the rest of the family is safe and accounted for."</div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- Zoom transition overlay -->
   <div id="zoom-overlay"></div>
 
   <!-- ── AI Orb FAB ── -->
-  <div id="ai-orb" onclick="toggleAISheet()">
-    <span class="orb-icon">◈</span>
-  </div>
+  <div id="ai-orb" onclick="toggleAISheet()"></div>
   <div id="ai-sheet-dim" onclick="closeAISheet()"></div>
   <div id="ai-sheet">
     <div class="sheet-handle"></div>
     <div id="ai-sheet-head">
-      <div class="sheet-orb-mini">◈</div>
+      <div class="sheet-orb-mini"><img class="orb-logo-mini" src="kaleidoscope-mandala.svg" alt=""></div>
       <div>
-        <div class="sheet-title" id="sheet-title">AI Butler</div>
+        <div class="sheet-title" id="sheet-title">Kaleidoscope</div>
         <div class="sheet-subtitle" id="sheet-subtitle">Always watching, always ready</div>
       </div>
     </div>
     <div id="ai-sheet-body"></div>
     <div id="ai-sheet-input-wrap">
-      <input class="sheet-input" placeholder="Ask AI Butler anything…" readonly>
+      <input class="sheet-input" placeholder="Ask Kaleidoscope anything…">
       <div class="sheet-send">↑</div>
     </div>
   </div>
@@ -1115,7 +2048,7 @@ function goTo(n){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('s'+n).classList.add('active');
   _currentScreen=n;
-  // Hide orb only on AI Butler screen (has its own full UI)
+  // Hide orb only on Kaleidoscope screen (has its own full UI)
   const orb=document.getElementById('ai-orb');
   if(orb) orb.classList.toggle('hidden', n===7);
   if(n===7 && _aiSheetOpen) closeAISheet();
@@ -1169,16 +2102,21 @@ function switchButlerTab(tab){
 
 const NODES=[
   {id:'grandma', label:'Grandma', note:'Mom',           icon:'✦',  color:'#FFC364', x:195, y:105, r:28, screen:1, alert:true,
+   photo:'faces/grandma.png',
    chips:['Health Monitoring','Scam Blocked'],
    status:['Health', 'Scam Blocked']},
-  {id:'eva',     label:'Mei',     note:'You',           icon:'M',  color:'#C084FC', x:195, y:225, r:36, center:true},
-  {id:'wei',     label:'Kenji',     note:'Husband',       icon:'K',  color:'#60A5FA', x:322, y:215, r:22, screen:5, alert:false,
+  {id:'eva',     label:'Mei',     note:'You',           icon:'M',  color:'#C084FC', x:195, y:225, r:36, center:true,
+   photo:'faces/mei.png'},
+  {id:'wei',     label:'Kenji',   note:'Husband',       icon:'K',  color:'#60A5FA', x:322, y:215, r:22, screen:5, alert:false,
+   photo:'faces/kanji.png',
    chips:['2FA Active','Devices OK'],
    status:['Secure', 'Devices OK']},
-  {id:'yuki',    label:'Yuki',    note:'Granddaughter', icon:'Yv', color:'#4ADE80', x: 90, y:335, r:20, screen:4, alert:true,
+  {id:'yuki',    label:'Yuki',    note:'Daughter', icon:'Yv', color:'#4ADE80', x: 90, y:335, r:20, screen:4, alert:true,
+   photo:'faces/yuki.png',
    chips:['Growth +15%','Link Blocked'],
    status:['Growth +15%', 'Link Blocked']},
   {id:'ethan',   label:'Hiro',   note:'Son',           icon:'Hi', color:'#FB923C', x:298, y:335, r:20, screen:6, alert:true,
+   photo:'faces/hiro.png',
    chips:['Screen Time Alert','Browsing Safe'],
    status:['Screen Alert']},
 ];
@@ -1268,7 +2206,10 @@ function buildConstellation(){
     dot.appendChild(am);svg.appendChild(dot);
   });
 
-  // ── Nodes ──
+  // ── Nodes (top layer — always above edges) ──
+  const nodesLayer=document.createElementNS('http://www.w3.org/2000/svg','g');
+  svg.appendChild(nodesLayer);
+
   NODES.forEach(n=>{
     const g=document.createElementNS('http://www.w3.org/2000/svg','g');
     g.style.cursor='default';
@@ -1279,22 +2220,41 @@ function buildConstellation(){
     glow.setAttribute('stroke-width','1');glow.setAttribute('opacity','0.12');
     g.appendChild(glow);
 
+    // ── Photo avatar ──
+    if(n.photo){
+      const clipId='clip-node-'+n.id;
+      const cp=document.createElementNS('http://www.w3.org/2000/svg','clipPath');
+      cp.setAttribute('id',clipId);
+      const clipCirc=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      clipCirc.setAttribute('cx',n.x);clipCirc.setAttribute('cy',n.y);clipCirc.setAttribute('r',n.r-0.5);
+      cp.appendChild(clipCirc);defs.appendChild(cp);
+      const phImg=document.createElementNS('http://www.w3.org/2000/svg','image');
+      phImg.setAttribute('href',n.photo);
+      phImg.setAttribute('x',n.x-n.r);phImg.setAttribute('y',n.y-n.r);
+      phImg.setAttribute('width',n.r*2);phImg.setAttribute('height',n.r*2);
+      phImg.setAttribute('clip-path','url(#'+clipId+')');
+      phImg.setAttribute('preserveAspectRatio','xMidYMid slice');
+      g.appendChild(phImg);
+    }
+
     const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
     c.setAttribute('cx',n.x);c.setAttribute('cy',n.y);c.setAttribute('r',n.r);
-    c.setAttribute('fill',n.center?n.color+'1a': currentTheme==='light'?'rgba(10,10,20,0.04)':'rgba(255,255,255,0.04)');
+    c.setAttribute('fill',n.photo?'none':n.center?n.color+'1a':currentTheme==='light'?'rgba(10,10,20,0.04)':'rgba(255,255,255,0.04)');
     c.setAttribute('stroke',n.color);
     c.setAttribute('stroke-width',n.center?'2':'1');
     c.setAttribute('stroke-opacity',n.center?'0.55':'0.28');
     g.appendChild(c);
 
-    const t=document.createElementNS('http://www.w3.org/2000/svg','text');
-    t.setAttribute('x',n.x);t.setAttribute('y',n.y+1);
-    t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','middle');
-    t.setAttribute('fill',n.color);t.setAttribute('opacity','0.75');
-    t.setAttribute('font-size',n.center?'16':n.id==='yuki'||n.id==='ethan'?'10':'12');
-    t.setAttribute('font-family','Inter,sans-serif');t.setAttribute('font-weight','700');
-    t.textContent=n.icon;
-    g.appendChild(t);
+    if(!n.photo){
+      const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('x',n.x);t.setAttribute('y',n.y+1);
+      t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','middle');
+      t.setAttribute('fill',n.color);t.setAttribute('opacity','0.75');
+      t.setAttribute('font-size',n.center?'16':n.id==='yuki'||n.id==='ethan'?'10':'12');
+      t.setAttribute('font-family','Inter,sans-serif');t.setAttribute('font-weight','700');
+      t.textContent=n.icon;
+      g.appendChild(t);
+    }
 
     const lbl=document.createElementNS('http://www.w3.org/2000/svg','text');
     lbl.setAttribute('x',n.x);lbl.setAttribute('y',n.y+n.r+14);
@@ -1469,7 +2429,7 @@ function buildConstellation(){
       g.appendChild(fa);
     }
 
-    svg.appendChild(g);
+    nodesLayer.appendChild(g);
   });
 }
 
@@ -1580,7 +2540,7 @@ const EVA_HTML=`
     <tr><td>Bone Density</td><td>Normal</td><td><span class="tag ok">Normal</span></td></tr>
   </table>
   <div class="actions">
-    <button class="abtn hi">Book cardiology follow-up — this week</button>
+    <button class="abtn hi" onclick="goTo(10)">Book cardiology follow-up — this week</button>
     <button class="abtn">Review medication for blood pressure</button>
     <button class="abtn">Export to family health record</button>
   </div>
@@ -1589,8 +2549,14 @@ const EVA_HTML=`
 // ── Relationship Peek ──
 function showPeek(n){
   const av=document.getElementById('peek-av');
-  av.textContent=n.icon;
-  av.style.cssText='color:'+n.color+';border-color:'+n.color+'55;background:'+n.color+'1a';
+  if(n.photo){
+    av.innerHTML='<img src="'+n.photo+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block">';
+    av.style.cssText='border-color:'+n.color+'66;background:none;overflow:hidden;padding:0';
+  } else {
+    av.innerHTML='';
+    av.textContent=n.icon;
+    av.style.cssText='color:'+n.color+';border-color:'+n.color+'55;background:'+n.color+'1a';
+  }
   document.getElementById('peek-name').textContent=n.label;
   document.getElementById('peek-role').textContent=n.note;
   document.getElementById('peek-chips').innerHTML=(n.chips||[]).map(c=>
@@ -1616,7 +2582,7 @@ window.addEventListener('message',e=>{
   if(e.data.type==='goTo') goTo(e.data.screen);
 });
 
-// ── AI Butler Pull Tab — context data ──
+// ── Kaleidoscope Pull Tab — context data ──
 const AI_CTX={
   0:{title:'Family Overview',   hint:'3 actions pending today',
      actions:['Book cardiology follow-up for Grandma','Set Hiro\'s 10 PM screen limit','Review Yuki\'s blocked links this week']},
@@ -1640,12 +2606,18 @@ const AI_CTX={
 
 function toggleAISheet(){_aiSheetOpen?closeAISheet():openAISheet();}
 function openAISheet(){
-  const ctx=AI_CTX[_currentScreen]||{title:'AI Butler',hint:'How can I help?',actions:[]};
+  const ctx=AI_CTX[_currentScreen]||{title:'Kaleidoscope',hint:'How can I help?',actions:[]};
   document.getElementById('sheet-title').textContent=ctx.title;
   document.getElementById('sheet-subtitle').textContent=ctx.hint;
   const body=document.getElementById('ai-sheet-body');
   body.innerHTML=`<div class="sheet-section">Quick Actions</div>`+
-    ctx.actions.map(a=>`<button class="sheet-action">${a}</button>`).join('');
+    ctx.actions.map((a,i)=>{
+      if(_currentScreen===1&&i===0)
+        return `<button class="sheet-action" onclick="closeAISheet();goTo(10)">${a}</button>`;
+      if(_currentScreen===0&&i===0)
+        return `<button class="sheet-action" onclick="closeAISheet();goTo(1)">${a}</button>`;
+      return `<button class="sheet-action">${a}</button>`;
+    }).join('');
   document.getElementById('ai-sheet').classList.add('visible');
   document.getElementById('ai-sheet-dim').classList.add('visible');
   document.querySelector('.phone').classList.add('sheet-open');
@@ -1656,6 +2628,14 @@ function closeAISheet(){
   document.getElementById('ai-sheet-dim').classList.remove('visible');
   document.querySelector('.phone').classList.remove('sheet-open');
   _aiSheetOpen=false;
+}
+
+function dismissHealthAlert(){
+  const el=document.getElementById('alert-backdrop');
+  if(!el)return;
+  el.style.transition='opacity 0.3s ease';
+  el.style.opacity='0';
+  setTimeout(()=>el.remove(),320);
 }
 
 // Reset read-state on every page load so nodes always start as unread

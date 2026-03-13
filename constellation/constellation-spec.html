@@ -391,21 +391,18 @@
     <div class="nav-logo">
       <img src="../reference/logo-mark-only.png" alt="TrendLife">
     </div>
-    <span class="nav-product" data-i18n="nav-product">TrendLife AI Butler</span>
+    <span class="nav-product" data-i18n="nav-product">TrendLife Kaleidoscope</span>
     <div class="nav-pipe"></div>
     <span class="nav-subtitle" data-i18n="nav-subtitle">Constellation Spec</span>
   </div>
   <div class="nav-right">
     <nav class="nav-view-tabs">
-      <a class="nav-vtab" id="tab-btn-grace"
-         onclick="switchView('grace');return false;" href="#"
-         data-i18n="tab-grace">Hana's View</a>
       <a class="nav-vtab nav-vtab-active" id="tab-btn-eva"
          onclick="switchView('eva');return false;" href="#"
          data-i18n="tab-eva">Mei's View</a>
       <a class="nav-vtab" id="tab-btn-yuki"
          onclick="switchView('yuki');return false;" href="#"
-         data-i18n="tab-yuki">Yuki's View</a>
+         data-i18n="tab-yuki">Yuki's Creative Space</a>
     </nav>
     <div class="theme-toggle">
       <button class="theme-btn active" id="btn-dark"  onclick="setTheme('dark')">Dark</button>
@@ -419,9 +416,6 @@
 </nav>
 
 
-<!-- ══════════════════════════════════════════════════
-     HANA'S VIEW
-     ══════════════════════════════════════════════════ -->
 <div id="view-grace" style="display:none">
 
 <section class="hero">
@@ -540,9 +534,9 @@
         <div class="sc-name" data-i18n="sc-grace-1-name">AI Ripple</div>
       </div>
       <div class="sc-body">
-        <div class="sc-desc" data-i18n="sc-grace-1-desc">Triggered by tapping the AI Companion Arc. Shows the AI Butler's recent activity across the family network as an animated ripple event chain — health checks, blocked calls, and family updates.</div>
+        <div class="sc-desc" data-i18n="sc-grace-1-desc">Triggered by tapping the AI Companion Arc. Shows the Kaleidoscope's recent activity across the family network as an animated ripple event chain — health checks, blocked calls, and family updates.</div>
         <div class="sc-tags">
-          <span class="sc-tag tag-blue">AI Butler</span>
+          <span class="sc-tag tag-blue">Kaleidoscope</span>
           <span class="sc-tag tag-muted">Event chain</span>
           <span class="sc-tag tag-muted">Animation</span>
         </div>
@@ -570,11 +564,11 @@
         <div class="sc-name" data-i18n="sc-grace-3-name">Your Voice</div>
       </div>
       <div class="sc-body">
-        <div class="sc-desc" data-i18n="sc-grace-3-desc">Voice-first navigation screen for seniors. Large microphone interface with AI listening state. Hana can speak naturally to navigate the app, send messages, or ask the AI Butler for help.</div>
+        <div class="sc-desc" data-i18n="sc-grace-3-desc">Voice-first navigation screen for seniors. Large microphone interface with AI listening state. Hana can speak naturally to navigate the app, send messages, or ask the Kaleidoscope for help.</div>
         <div class="sc-tags">
           <span class="sc-tag tag-purple">Voice input</span>
           <span class="sc-tag tag-muted">Senior UX</span>
-          <span class="sc-tag tag-blue">AI Butler</span>
+          <span class="sc-tag tag-blue">Kaleidoscope</span>
         </div>
       </div>
     </div>
@@ -632,7 +626,7 @@
         Mei's<br><span class="accent">Family Network</span><br><span class="accent2" style="font-size:38px;">Connected View</span>
       </div>
       <p class="hero-sub" data-i18n="hero-eva-sub">
-        A family hub where Mei stays connected with everyone in her network. Alerts surface proactively at the top right; each member node opens their wellbeing and security updates; the AI Butler coordinates complex tasks through a dedicated chat.
+        A family hub where Mei stays connected with everyone in her network. Alerts surface proactively at the top right; each member node opens their wellbeing and security updates; the Kaleidoscope coordinates complex tasks through a dedicated chat.
       </p>
     </div>
 
@@ -672,7 +666,7 @@
         </div>
         <div class="principle">
           <div class="p-num">4</div>
-          <div class="p-text" data-i18n-html="p-eva-4"><strong>AI Companion Arc as action gateway</strong> — The arc navigates directly to AI Butler chat — the highest-frequency action for Mei as a coordinator. The arc is both a reassurance symbol and a shortcut.</div>
+          <div class="p-text" data-i18n-html="p-eva-4"><strong>AI Companion Arc as action gateway</strong> — The arc navigates directly to Kaleidoscope chat — the highest-frequency action for Mei as a coordinator. The arc is both a reassurance symbol and a shortcut.</div>
         </div>
         <div class="principle">
           <div class="p-num">5</div>
@@ -680,7 +674,7 @@
         </div>
         <div class="principle">
           <div class="p-num">6</div>
-          <div class="p-text" data-i18n-html="p-eva-6"><strong>Read-state lifecycle</strong> — Alert nodes have three states: unread (pulsing ring, circle clickable), read-active within 12h (circle dimmed, status chips become the entry point), and resolved (fully dimmed, ✓ badge). All past events collect in the AI Butler History tab.</div>
+          <div class="p-text" data-i18n-html="p-eva-6"><strong>Read-state lifecycle</strong> — Alert nodes have three states: unread (pulsing ring, circle clickable), read-active within 12h (circle dimmed, status chips become the entry point), and resolved (fully dimmed, ✓ badge). All past events collect in the Kaleidoscope History tab.</div>
         </div>
       </div>
     </div>
@@ -703,12 +697,15 @@
       <button class="snav-item" onclick="evaGoTo(1)"><span class="snav-icon">🏥</span><span class="snav-name" data-i18n="sc-eva-1-name">Grandma's Health Report</span><span class="snav-num">1</span></button>
       <button class="snav-item" onclick="evaGoTo(2)"><span class="snav-icon">📋</span><span class="snav-name" data-i18n="sc-eva-2-name">Family Events</span><span class="snav-num">2</span></button>
       <button class="snav-item" onclick="evaGoTo(3)"><span class="snav-icon">💬</span><span class="snav-name" data-i18n="sc-eva-3-name">Chat with Grandma</span><span class="snav-num">3</span></button>
-      <button class="snav-item" onclick="evaGoTo(4)"><span class="snav-icon">🛡</span><span class="snav-name" data-i18n="sc-eva-4-name">Yuki — Protection</span><span class="snav-num">4</span></button>
+      <button class="snav-item" onclick="evaGoTo(4)"><span class="snav-icon">✦</span><span class="snav-name" data-i18n="sc-eva-4-name">Yuki — Bloom Report</span><span class="snav-num">4</span></button>
       <button class="snav-item" onclick="evaGoTo(5)"><span class="snav-icon">🔒</span><span class="snav-name" data-i18n="sc-eva-5-name">Kenji — Protection</span><span class="snav-num">5</span></button>
       <button class="snav-item" onclick="evaGoTo(6)"><span class="snav-icon">📱</span><span class="snav-name" data-i18n="sc-eva-6-name">Hiro — Protection</span><span class="snav-num">6</span></button>
-      <button class="snav-item" onclick="evaGoTo(7)"><span class="snav-icon">◈</span><span class="snav-name" data-i18n="sc-eva-7-name">AI Butler</span><span class="snav-num">7</span></button>
+      <button class="snav-item" onclick="evaGoTo(7)"><span class="snav-icon">◈</span><span class="snav-name" data-i18n="sc-eva-7-name">Kaleidoscope</span><span class="snav-num">7</span></button>
       <button class="snav-item" onclick="evaGoTo(8)"><span class="snav-icon">📵</span><span class="snav-name" data-i18n="sc-eva-8-name">Scam Call — Grandma</span><span class="snav-num">8</span></button>
       <button class="snav-item" onclick="evaGoTo(9)"><span class="snav-icon">🚫</span><span class="snav-name" data-i18n="sc-eva-9-name">Phishing Link — Yuki</span><span class="snav-num">9</span></button>
+      <button class="snav-item" onclick="evaGoTo(10)"><span class="snav-icon">◈</span><span class="snav-name" data-i18n="sc-eva-10-name">AI Booking Task</span><span class="snav-num">10</span></button>
+      <button class="snav-item" onclick="evaGoTo(11)"><span class="snav-icon">🌸</span><span class="snav-name" data-i18n="sc-eva-11-name">Yuki — Showcase</span><span class="snav-num">11</span></button>
+      <button class="snav-item" onclick="evaGoTo(12)"><span class="snav-icon">↑</span><span class="snav-name" data-i18n="sc-eva-12-name">Yuki — Growth</span><span class="snav-num">12</span></button>
     </div>
   </div>
 
@@ -719,7 +716,7 @@
   <div class="section-divider" style="margin-bottom:48px;"></div>
   <div class="section-header">
     <div class="section-title" data-i18n="screens-eva-title">Screens &amp; Flows</div>
-    <div class="section-sub" data-i18n="screens-eva-sub">10 screens · Mei's family constellation view</div>
+    <div class="section-sub" data-i18n="screens-eva-sub">13 screens · Mei's family constellation view</div>
   </div>
   <div class="screen-cards">
 
@@ -729,11 +726,12 @@
         <div class="sc-name" data-i18n="sc-eva-0-name">Constellation Home</div>
       </div>
       <div class="sc-body">
-        <div class="sc-desc" data-i18n="sc-eva-0-desc">Mei at center, Grandma above with ⚠ pulse ring, Kenji / Yuki / Hiro as orbiting nodes. Three stacked alert pills (health report, scam call, phishing link) in the top right — each dismissible. AI Companion Arc above navigates to AI Butler chat.</div>
+        <div class="sc-desc" data-i18n="sc-eva-0-desc">Mei at center, Grandma above with ⚠ pulse ring. Notification panel in the top-right surfaces urgent updates — the Grandma health alert is highlighted in red and triggers a dismissible popup on load. Kaleidoscope FAB at bottom-right; tapping opens the action sheet. First sheet action links directly to Grandma's Health Report.</div>
         <div class="sc-tags">
           <span class="sc-tag tag-purple">Entry point</span>
-          <span class="sc-tag tag-red">Alert pills</span>
-          <span class="sc-tag tag-blue">AI Companion Arc</span>
+          <span class="sc-tag tag-red">Health alert popup</span>
+          <span class="sc-tag tag-blue">Kaleidoscope FAB</span>
+          <span class="sc-tag tag-amber">Notification panel</span>
         </div>
       </div>
     </div>
@@ -786,14 +784,15 @@
     <div class="sc" onclick="evaGoTo(4);scrollToPhone('evaIframe')">
       <div class="sc-head">
         <div class="sc-num" style="background:var(--green)" style="color:#080E12">4</div>
-        <div class="sc-name" data-i18n="sc-eva-4-name">Yuki — Protection</div>
+        <div class="sc-name" data-i18n="sc-eva-4-name">Yuki — Bloom Report</div>
       </div>
       <div class="sc-body">
-        <div class="sc-desc" data-i18n="sc-eva-4-desc">Yuki's protection report: 3 threats blocked, 0 incidents, 14 days protected. Latest block card shows the phishing link intercept (bit.ly/secure-bank-verify → fake bank page). This week's status: browsing safe, usage normal.</div>
+        <div class="sc-desc" data-i18n="sc-eva-4-desc">Yuki's creative week as a Bloom co-creation record. Hero: photo + "Visual Storyteller · Week 12" + stats (1 Collab, 8h creating, +18% Creative Direction). Featured: 文化祭 2024 TikTok Bloom Collab (00:52) — clip timeline (Yuki Dir., Hana, Ren), "Bloom Guided" spark showing AI offered two directions vs Yuki's Director's Choice (chose intimate opening). Authorship bar Yuki 68% / Bloom 32%. Feed: 春祭り photo essay + Voice Loop #3 (private). Kaleidoscope Insight quote. Three action buttons: creative challenge, View Showcase (→s11), Growth Timeline (→s12).</div>
         <div class="sc-tags">
-          <span class="sc-tag tag-green">Protection</span>
-          <span class="sc-tag tag-purple">Phishing blocked</span>
-          <span class="sc-tag tag-muted">Usage normal</span>
+          <span class="sc-tag tag-green">Bloom co-creation</span>
+          <span class="sc-tag" style="color:rgba(192,132,252,0.85);background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.2)">Director's Choice</span>
+          <span class="sc-tag tag-green">68% Yuki voice</span>
+          <span class="sc-tag tag-amber">Kaleidoscope insight</span>
         </div>
       </div>
     </div>
@@ -819,7 +818,7 @@
         <div class="sc-name" data-i18n="sc-eva-6-name">Hiro — Protection</div>
       </div>
       <div class="sc-body">
-        <div class="sc-desc" data-i18n="sc-eva-6-desc">Hiro's screen time and safety report. Usage alert: 3.5 hours of social media after midnight, exceeding the family's agreed limit. AI Butler action taken: social media paused after 10 PM starting tonight per family setting.</div>
+        <div class="sc-desc" data-i18n="sc-eva-6-desc">Hiro's screen time and safety report. Usage alert: 3.5 hours of social media after midnight, exceeding the family's agreed limit. Kaleidoscope action taken: social media paused after 10 PM starting tonight per family setting.</div>
         <div class="sc-tags">
           <span class="sc-tag tag-red">Usage alert</span>
           <span class="sc-tag tag-blue">AI suggestion</span>
@@ -831,12 +830,12 @@
     <div class="sc" onclick="evaGoTo(7);scrollToPhone('evaIframe')">
       <div class="sc-head">
         <div class="sc-num" style="background:var(--blue)">7</div>
-        <div class="sc-name" data-i18n="sc-eva-7-name">AI Butler</div>
+        <div class="sc-name" data-i18n="sc-eva-7-name">Kaleidoscope</div>
       </div>
       <div class="sc-body">
-        <div class="sc-desc" data-i18n="sc-eva-7-desc">Two-tab screen: Chat and History. Chat: Mei converses with AI Butler — books a cardiology appointment for Grandma, updates Hiro's screen time settings. History: chronological timeline of all alerts and AI actions across family members, grouped by day.</div>
+        <div class="sc-desc" data-i18n="sc-eva-7-desc">Two-tab screen: Chat and History. Chat: Mei converses with Kaleidoscope — books a cardiology appointment for Grandma, updates Hiro's screen time settings. History: chronological timeline of all alerts and AI actions across family members, grouped by day.</div>
         <div class="sc-tags">
-          <span class="sc-tag tag-blue">AI Butler</span>
+          <span class="sc-tag tag-blue">Kaleidoscope</span>
           <span class="sc-tag tag-purple">Chat + History</span>
           <span class="sc-tag tag-muted">Timeline</span>
         </div>
@@ -853,7 +852,7 @@
         <div class="sc-tags">
           <span class="sc-tag tag-red">Scam blocked</span>
           <span class="sc-tag tag-amber">Grandma</span>
-          <span class="sc-tag tag-blue">AI Butler</span>
+          <span class="sc-tag tag-blue">Kaleidoscope</span>
         </div>
       </div>
     </div>
@@ -868,7 +867,52 @@
         <div class="sc-tags">
           <span class="sc-tag tag-purple">Phishing blocked</span>
           <span class="sc-tag tag-green">No data exposed</span>
-          <span class="sc-tag tag-blue">AI Butler</span>
+          <span class="sc-tag tag-blue">Kaleidoscope</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(10);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--blue)">10</div>
+        <div class="sc-name" data-i18n="sc-eva-10-name">AI Booking Task</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-10-desc">Kaleidoscope executes the cardiology booking autonomously. Step-by-step task tracker: hospital search → slot matching → appointment confirmed (Dr. Li Wei, Nov 14, 2:30 PM). Booking confirmation card with date, time and location. Grandma notified automatically via the family network.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-blue">Kaleidoscope</span>
+          <span class="sc-tag tag-green">Task complete</span>
+          <span class="sc-tag tag-amber">Auto-notify</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(11);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:rgba(192,132,252,0.7)">11</div>
+        <div class="sc-name" data-i18n="sc-eva-11-name">Yuki — Showcase</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-11-desc">Works Yuki chose to share with family via Bloom. Summary strip: "2 shared." Featured: 文化祭 2024 TikTok video with mock player (00:52), Director's Choice badge, Y68/AI32 ratio. Feed: 春祭り photo essay (shared, Y82/AI18) + Voice Loop #3 (private, locked). Reaction row: "Amazing work!" + "Leave a note". Privacy footer: Yuki controls what's shared.</div>
+        <div class="sc-tags">
+          <span class="sc-tag" style="color:rgba(192,132,252,0.85);background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.2)">Bloom</span>
+          <span class="sc-tag tag-green">Family share</span>
+          <span class="sc-tag tag-purple">Privacy control</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(12);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--green)">12</div>
+        <div class="sc-name" data-i18n="sc-eva-12-name">Yuki — Growth Timeline</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-12-desc">Period selector (4 Weeks / 3 Months / All Time). KPI row: +18% creative direction, 8 own decisions, 3× redirected AI. SVG line chart: Creative Voice % over Wk9–12 (52%→55%→61%→68%), gradient area fill, Wk11 green "Dir ✓" dot, Wk12 labeled badge. Milestones: shared with family (Wk12), Director's Choice (Wk11), first AI refusal (Wk10), joined Bloom (Wk9). Skill bars: Creative Direction +18%, Collaboration +12%, Autonomous Choices +28%. Kaleidoscope Insight: "You're watching it happen."</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-green">Growth chart</span>
+          <span class="sc-tag tag-purple">Milestones</span>
+          <span class="sc-tag tag-blue">Skill progress</span>
         </div>
       </div>
     </div>
@@ -896,7 +940,7 @@
         Yuki's<br><span class="accent">Constellation</span><br><span class="accent2" style="font-size:38px;">Creator's View</span>
       </div>
       <p class="hero-sub" data-i18n="hero-yuki-sub">
-        A young creator's personal world — Yuki at center, family around her, and a gateway to CrewCreate built right into the constellation. TrendLife bridges Yuki's creative ambitions with the family's trust layer, making parental involvement feel natural rather than restrictive.
+        A young creator's personal world — Yuki at center, family around her, and a gateway to Bloom built right into the constellation. TrendLife bridges Yuki's creative ambitions with the family's trust layer, making parental involvement feel natural rather than restrictive.
       </p>
     </div>
 
@@ -928,11 +972,11 @@
         </div>
         <div class="principle">
           <div class="p-num">2</div>
-          <div class="p-text" data-i18n-html="p-yuki-2"><strong>CrewCreate as a constellation node</strong> — Third-party creative platforms appear as discoverable nodes below Yuki, connected by a dashed line. Tapping triggers a teal zoom launch transition into the app's onboarding flow.</div>
+          <div class="p-text" data-i18n-html="p-yuki-2"><strong>Bloom as a constellation node</strong> — Bloom appears as a discoverable node below Yuki, connected by a dashed purple line. Tapping triggers a zoom launch transition into Bloom's onboarding flow. The Bloom icon uses a purple double-ring mandala — a sister icon to Kaleidoscope.</div>
         </div>
         <div class="principle">
           <div class="p-num">3</div>
-          <div class="p-text" data-i18n-html="p-yuki-3"><strong>Parental approval without friction</strong> — When an under-18 gate is hit, TrendLife routes the consent request directly to Mei via AI Butler — no email, no separate app. Yuki sees a waiting screen with real-time delivery confirmation.</div>
+          <div class="p-text" data-i18n-html="p-yuki-3"><strong>Parental approval without friction</strong> — When an under-18 gate is hit, TrendLife routes the consent request directly to Mei via Kaleidoscope — no email, no separate app. Yuki sees a waiting screen with real-time delivery confirmation.</div>
         </div>
         <div class="principle">
           <div class="p-num">4</div>
@@ -940,7 +984,7 @@
         </div>
         <div class="principle">
           <div class="p-num">5</div>
-          <div class="p-text" data-i18n-html="p-yuki-5"><strong>AI Butler as Yuki's ally</strong> — The AI Companion Arc uses Yuki's color (green) and language. It's her helper, not a parental watchdog embedded in her view.</div>
+          <div class="p-text" data-i18n-html="p-yuki-5"><strong>Kaleidoscope as Yuki's ally</strong> — The AI Companion Arc uses Yuki's color (green) and language. It's her helper, not a parental watchdog embedded in her view.</div>
         </div>
       </div>
     </div>
@@ -960,11 +1004,15 @@
     <div class="screen-nav" id="screenNavYuki">
       <div class="snav-instruction" data-i18n="snav-hint">Click screens to interact, or use the list to jump to a specific screen.</div>
       <button class="snav-item snav-active" onclick="yukiGoTo(0)"><span class="snav-icon">✦</span><span class="snav-name" data-i18n="sc-yuki-0-name">Constellation Home</span><span class="snav-num">0</span></button>
-      <button class="snav-item" onclick="yukiGoTo(1)"><span class="snav-icon">🛡</span><span class="snav-name" data-i18n="sc-yuki-1-name">CrewCreate — Age Verify</span><span class="snav-num">1</span></button>
+      <button class="snav-item" onclick="yukiGoTo(1)"><span class="snav-icon">🛡</span><span class="snav-name" data-i18n="sc-yuki-1-name">Bloom — Age Verify</span><span class="snav-num">1</span></button>
       <button class="snav-item" onclick="yukiGoTo(2)"><span class="snav-icon">🎨</span><span class="snav-name" data-i18n="sc-yuki-2-name">Interests</span><span class="snav-num">2</span></button>
       <button class="snav-item" onclick="yukiGoTo(3)"><span class="snav-icon">🎯</span><span class="snav-name" data-i18n="sc-yuki-3-name">Goals</span><span class="snav-num">3</span></button>
       <button class="snav-item" onclick="yukiGoTo(4)"><span class="snav-icon">👨‍👩‍👧</span><span class="snav-name" data-i18n="sc-yuki-4-name">Parental Consent</span><span class="snav-num">4</span></button>
       <button class="snav-item" onclick="yukiGoTo(5)"><span class="snav-icon">⏳</span><span class="snav-name" data-i18n="sc-yuki-5-name">Waiting for Approval</span><span class="snav-num">5</span></button>
+      <button class="snav-item" onclick="yukiGoTo(6)"><span class="snav-icon">◈</span><span class="snav-name" data-i18n="sc-yuki-6-name">AI Chat</span><span class="snav-num">6</span></button>
+      <button class="snav-item" onclick="yukiGoTo(7)"><span class="snav-icon">🌸</span><span class="snav-name" data-i18n="sc-yuki-7-name">Joining Bloom</span><span class="snav-num">7</span></button>
+      <button class="snav-item" onclick="yukiGoTo(8)"><span class="snav-icon">🎬</span><span class="snav-name" data-i18n="sc-yuki-8-name">Bloom Workspace</span><span class="snav-num">8</span></button>
+      <button class="snav-item" onclick="yukiGoTo(9)"><span class="snav-icon">✨</span><span class="snav-name" data-i18n="sc-yuki-9-name">My Creative Space</span><span class="snav-num">9</span></button>
     </div>
   </div>
 
@@ -975,7 +1023,7 @@
   <div class="section-divider" style="margin-bottom:48px;"></div>
   <div class="section-header">
     <div class="section-title" data-i18n="screens-yuki-title">Screens &amp; Flows</div>
-    <div class="section-sub" data-i18n="screens-yuki-sub">6 screens · Yuki's creator constellation view</div>
+    <div class="section-sub" data-i18n="screens-yuki-sub">10 screens · Yuki's creator constellation view</div>
   </div>
   <div class="screen-cards">
 
@@ -985,24 +1033,24 @@
         <div class="sc-name" data-i18n="sc-yuki-0-name">Constellation Home</div>
       </div>
       <div class="sc-body">
-        <div class="sc-desc" data-i18n="sc-yuki-0-desc">Yuki at center with a "creator" badge. Family members orbit around her. AI Companion Arc spans the top in green. A CrewCreate node glows below with a pulsing teal ring and "Join →" chip — tapping launches the onboarding flow with a zoom transition.</div>
+        <div class="sc-desc" data-i18n="sc-yuki-0-desc">Yuki at center with a "creator" badge. Family members orbit around her. AI Companion Arc spans the top in green. A Bloom node glows below with a pulsing purple ring and "Join →" chip — tapping launches the onboarding flow with a zoom transition. The Bloom icon (purple double-ring mandala) renders inside the node circle via SVG image.</div>
         <div class="sc-tags">
           <span class="sc-tag tag-green">Creator</span>
           <span class="sc-tag tag-blue">Constellation</span>
-          <span class="sc-tag" style="color:rgba(0,188,212,0.85);background:rgba(0,188,212,0.1);border-color:rgba(0,188,212,0.2)">CrewCreate</span>
+          <span class="sc-tag" style="color:rgba(192,132,252,0.85);background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.2)">Bloom</span>
         </div>
       </div>
     </div>
 
     <div class="sc" onclick="yukiGoTo(1);scrollToPhone('yukiIframe')">
       <div class="sc-head">
-        <div class="sc-num" style="background:rgba(0,188,212,0.7)">1</div>
-        <div class="sc-name" data-i18n="sc-yuki-1-name">CrewCreate — Age Verify</div>
+        <div class="sc-num" style="background:rgba(192,132,252,0.7)">1</div>
+        <div class="sc-name" data-i18n="sc-yuki-1-name">Bloom — Age Verify</div>
       </div>
       <div class="sc-body">
-        <div class="sc-desc" data-i18n="sc-yuki-1-desc">Welcome screen for CrewCreate. Teal shield icon, birth date fields (Yuki enters 2008), privacy notice. No progress bar — this is the gate step before onboarding begins. Teal CTA "繼續 →" proceeds to interest selection.</div>
+        <div class="sc-desc" data-i18n="sc-yuki-1-desc">Welcome screen for Bloom. Teal shield icon, birth date fields (Yuki enters 2008), privacy notice. No progress bar — this is the gate step before onboarding begins. Teal CTA "繼續 →" proceeds to interest selection.</div>
         <div class="sc-tags">
-          <span class="sc-tag" style="color:rgba(0,188,212,0.85);background:rgba(0,188,212,0.1);border-color:rgba(0,188,212,0.2)">CrewCreate</span>
+          <span class="sc-tag" style="color:rgba(192,132,252,0.85);background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.2)">Bloom</span>
           <span class="sc-tag tag-blue">Age gate</span>
         </div>
       </div>
@@ -1010,13 +1058,13 @@
 
     <div class="sc" onclick="yukiGoTo(2);scrollToPhone('yukiIframe')">
       <div class="sc-head">
-        <div class="sc-num" style="background:rgba(0,188,212,0.7)">2</div>
+        <div class="sc-num" style="background:rgba(192,132,252,0.7)">2</div>
         <div class="sc-name" data-i18n="sc-yuki-2-name">Interests</div>
       </div>
       <div class="sc-body">
         <div class="sc-desc" data-i18n="sc-yuki-2-desc">Step 1 of 3. "你喜歡創作什麼內容？" — 6 category cards in a 2-column grid: Fashion &amp; Style and Art &amp; Design pre-selected (teal highlight). Pink sparkle icon as section header. "繼續 →" advances to goals.</div>
         <div class="sc-tags">
-          <span class="sc-tag" style="color:rgba(0,188,212,0.85);background:rgba(0,188,212,0.1);border-color:rgba(0,188,212,0.2)">CrewCreate</span>
+          <span class="sc-tag" style="color:rgba(192,132,252,0.85);background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.2)">Bloom</span>
           <span class="sc-tag tag-amber">Onboarding 1/3</span>
         </div>
       </div>
@@ -1042,7 +1090,7 @@
         <div class="sc-name" data-i18n="sc-yuki-4-name">Parental Consent</div>
       </div>
       <div class="sc-body">
-        <div class="sc-desc" data-i18n="sc-yuki-4-desc">Step 3 of 3. Under-18 gate. TrendLife green banner explains the request goes via AI Butler directly to Mom Mei — no email. Parent permissions listed (summary only, time limits, safety alerts). Checkbox consent + "開始創作 →" sends the request.</div>
+        <div class="sc-desc" data-i18n="sc-yuki-4-desc">Step 3 of 3. Under-18 gate. TrendLife green banner explains the request goes via Kaleidoscope directly to Mom Mei — no email. Parent permissions listed (summary only, time limits, safety alerts). Checkbox consent + "開始創作 →" sends the request.</div>
         <div class="sc-tags">
           <span class="sc-tag tag-green">TrendLife integration</span>
           <span class="sc-tag tag-amber">Onboarding 3/3</span>
@@ -1057,11 +1105,70 @@
         <div class="sc-name" data-i18n="sc-yuki-5-name">Waiting for Approval</div>
       </div>
       <div class="sc-body">
-        <div class="sc-desc" data-i18n="sc-yuki-5-desc">Mei's purple avatar with pulsing rings. Animated loading dots. "等待批准中..." with reassuring copy. A TrendLife notification card at the bottom confirms delivery — "Yuki 想加入 CrewCreate，需要你的批准 →" with a green "已送達" badge.</div>
+        <div class="sc-desc" data-i18n="sc-yuki-5-desc">Mei's purple avatar with pulsing rings. Animated loading dots. "等待批准中..." with reassuring copy. A TrendLife notification card at the bottom confirms delivery — "Yuki 想加入 Bloom，需要你的批准 →" with a green "已送達" badge.</div>
         <div class="sc-tags">
           <span class="sc-tag tag-purple">Waiting</span>
           <span class="sc-tag tag-green">Delivered</span>
-          <span class="sc-tag tag-blue">AI Butler</span>
+          <span class="sc-tag tag-blue">Kaleidoscope</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="yukiGoTo(6);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--purple)">6</div>
+        <div class="sc-name" data-i18n="sc-yuki-6-name">AI Chat</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-6-desc">Kaleidoscope chat in Yuki's context. Green AI avatar (Yuki's color). Messages include: Grandma voice message nudge, Bloom workspace guidance. AI acts as Yuki's ally — not a parental watchdog.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-green">Yuki's AI</span>
+          <span class="sc-tag tag-blue">Kaleidoscope</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="yukiGoTo(7);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:rgba(192,132,252,0.7)">7</div>
+        <div class="sc-name" data-i18n="sc-yuki-7-name">Joining Bloom</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-7-desc">3-second auto-advance joining screen after Mei approves. Bloom icon (purple double-ring mandala), "Joining Bloom" title, animated progress. Transitions directly into the workspace.</div>
+        <div class="sc-tags">
+          <span class="sc-tag" style="color:rgba(192,132,252,0.85);background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.2)">Bloom</span>
+          <span class="sc-tag tag-green">Auto-advance</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="yukiGoTo(8);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:rgba(192,132,252,0.7)">8</div>
+        <div class="sc-name" data-i18n="sc-yuki-8-name">Bloom Workspace</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-8-desc">Active 文化祭 2024 Bloom collab workspace. Canvas preview with crew (Yuki + Hana + Ren). Authorship strip: 68% Yuki voice, 8 decisions / 3 redirections / 4 Q answered. Creative Direction Thread: 4-exchange AI dialogue with Director's Choice ✓ marked. Socratic AI panel with "Opening feeling?" question. Sharing card: family hasn't seen this yet → links to s9.</div>
+        <div class="sc-tags">
+          <span class="sc-tag" style="color:rgba(192,132,252,0.85);background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.2)">Bloom</span>
+          <span class="sc-tag tag-green">Director's Choice</span>
+          <span class="sc-tag tag-purple">Creative thread</span>
+          <span class="sc-tag tag-amber">Sharing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="yukiGoTo(9);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:rgba(192,132,252,0.7)">9</div>
+        <div class="sc-name" data-i18n="sc-yuki-9-name">My Creative Space</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-9-desc">Yuki's personal showcase page after sharing 文化祭. Family reaction feed: Grandma (Japanese text, nostalgic), Mom heart reaction, Dad reaction. Project privacy badge: "Bloom Collab · Shared with family." Social share CTA at bottom.</div>
+        <div class="sc-tags">
+          <span class="sc-tag" style="color:rgba(192,132,252,0.85);background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.2)">Bloom</span>
+          <span class="sc-tag tag-green">Family reactions</span>
+          <span class="sc-tag tag-amber">Showcase</span>
         </div>
       </div>
     </div>
@@ -1074,7 +1181,7 @@
 
 <!-- ── FOOTER ── -->
 <footer class="footer">
-  <div class="footer-left" data-i18n="footer-text">TrendLife AI Butler · Constellation Design Spec · March 2026</div>
+  <div class="footer-left" data-i18n="footer-text">TrendLife Kaleidoscope · Constellation Design Spec · March 2026</div>
   <div class="footer-right">
     <div class="footer-logo">
       <img src="../reference/logo-mark-only.png" alt="">
@@ -1087,88 +1194,10 @@
 <script>
 /* ── i18n DICTIONARY ── */
 const dict = {
-  'nav-product':  { en: 'TrendLife AI Butler', zh: 'TrendLife AI 管家' },
+  'nav-product':  { en: 'TrendLife Kaleidoscope', zh: 'TrendLife AI 管家' },
   'nav-subtitle': { en: 'Constellation Spec',  zh: '星座圖規格' },
-  'tab-grace':    { en: "Hana's View",        zh: 'Hana 個人視角' },
   'tab-eva':      { en: "Mei's View",          zh: 'Mei 連結視角' },
   'snav-hint':    { en: 'Click screens to interact, or use the list to jump to a specific screen.', zh: '點擊畫面互動，或點擊選單查看個別畫面' },
-
-  /* Hana hero */
-  'hero-grace-kicker':   { en: 'Interactive Prototype',      zh: '互動原型' },
-  'hero-grace-title':    {
-    en: "Hana's<br><span class='accent'>Constellation</span><br><span class='accent2' style='font-size:38px;'>Member's View</span>",
-    zh: "Hana 的<br><span class='accent'>星座圖</span><br><span class='accent2' style='font-size:38px;'>會員視角</span>"
-  },
-  'hero-grace-sub': {
-    en: "A personal digital space where every member sees herself at the heart of her family network. The AI Companion Arc stays close, quietly available; family nodes reflect connection and care. Tapping navigates to health data, voice, and relationship depth.",
-    zh: "一個以自我為中心的數位空間，讓每位成員看到自己處於家庭網絡的核心。AI 陪伴穹頂靜靜陪伴，隨時可以協助；家庭節點反映關係與關愛。點擊可深入健康資料、語音功能與家人互動。"
-  },
-  'persona-grace-name': { en: 'Hana Chen · 68 years old',             zh: '陳奶奶 · 68 歲' },
-  'persona-grace-meta': { en: 'Retired homemaker · Taipei · Grandma in the Chen family', zh: '退休家庭主婦 · 台北 · 陳家奶奶' },
-  'ptag-grace-1': { en: 'Senior member',     zh: '年長用戶' },
-  'ptag-grace-2': { en: 'Tech-light',        zh: '輕度數位' },
-  'ptag-grace-3': { en: 'Health-conscious',  zh: '重視健康' },
-  'ptag-grace-4': { en: 'Fraud-vulnerable',  zh: '詐騙高風險' },
-  'ptag-grace-5': { en: 'Family-connected',  zh: '家庭核心' },
-  'principles-grace-eyebrow': { en: 'Design Principles', zh: '設計原則' },
-  'p-grace-1': {
-    en: "<strong>Self at center</strong> — Hana sees herself at the heart of her family network, surrounded by her loved ones. The design reinforces her agency and equal standing within the constellation.",
-    zh: "<strong>自我為中心</strong> — Hana 看到自己處於家庭網絡的核心，被家人所圍繞。設計強化她在星座圖中的主體感與平等地位。"
-  },
-  'p-grace-2': {
-    en: "<strong>AI Companion Arc as ambient presence</strong> — The AI arc at the top conveys care without intruding. It's always present, quietly available — tapping reveals the AI's actions for the day.",
-    zh: "<strong>AI 陪伴穹頂作為環境陪伴</strong> — 頂部的 AI 穹頂傳遞關懷感而不打擾。始終存在，靜靜等候——點擊可查看 AI 今日行動。"
-  },
-  'p-grace-3': {
-    en: "<strong>Relational depth on tap</strong> — Each family node is a doorway: voice messages, shared memories, or live health updates. Navigating is exploratory, not task-driven.",
-    zh: "<strong>一鍵深入關係</strong> — 每個家庭節點都是入口：語音訊息、共同回憶或即時健康更新。導航是探索性的，而非任務驅動的。"
-  },
-  'p-grace-4': {
-    en: "<strong>Health as context, not alarm</strong> — The health report is accessible but presented calmly. Data is shown with context and AI recommendations, never as raw numbers without meaning.",
-    zh: "<strong>健康作為脈絡而非警報</strong> — 健康報告易於取得，但呈現方式平靜。資料附有背景說明和 AI 建議，而非毫無意義的原始數字。"
-  },
-  'p-grace-5': {
-    en: "<strong>Voice as primary input</strong> — For seniors, voice is more natural than tapping. The Your Voice screen allows hands-free navigation and messaging.",
-    zh: "<strong>語音為主要輸入</strong> — 對年長用戶而言，語音比點擊更自然。「你的聲音」頁面支援免持手機的導航與傳訊。"
-  },
-
-  /* Hana screen names */
-  'sc-grace-0-name': { en: 'Constellation Home',  zh: '星座圖首頁' },
-  'sc-grace-1-name': { en: 'AI Ripple',           zh: 'AI 漣漪' },
-  'sc-grace-2-name': { en: 'Health Report',       zh: '健康報告' },
-  'sc-grace-3-name': { en: 'Your Voice',          zh: '你的聲音' },
-  'sc-grace-4-name': { en: 'Your World',          zh: '你的世界' },
-  'sc-grace-5-name': { en: 'Chat with Mei',       zh: '與 Mei 的對話' },
-
-  /* Hana screen descs */
-  'sc-grace-0-desc': {
-    en: "Hana at center, family nodes orbit around her. AI Companion Arc spans the top, always ready to assist. Each node pulses with live status. Tapping a node navigates to that relationship's depth screen.",
-    zh: "Hana 居中，家庭節點在其周圍運行。AI 陪伴穹頂橫跨頂部，隨時可以協助。每個節點隨即時狀態跳動。點擊節點進入該關係的深度頁面。"
-  },
-  'sc-grace-1-desc': {
-    en: "Triggered by tapping the AI Companion Arc. Shows the AI Butler's recent activity across the family network as an animated ripple event chain — health checks, blocked calls, and family updates.",
-    zh: "點擊 AI 陪伴穹頂觸發。以動態漣漪事件鏈呈現 AI 管家近期的家庭網絡活動——健康檢查、攔截電話和家庭更新。"
-  },
-  'sc-grace-2-desc': {
-    en: "Annual checkup results for Hana. AI summary at top; marker table below (Blood Pressure ⚠ Elevated, HbA1c Watch, ECG/Bone Density Normal). Three AI-recommended action buttons including cardiology follow-up.",
-    zh: "Hana 的年度健康檢查結果。頂部 AI 摘要；下方指標表格（血壓 ⚠ 偏高、HbA1c 注意、心電圖/骨密度正常）。三個 AI 建議操作按鈕，包含心臟科追蹤。"
-  },
-  'sc-grace-3-desc': {
-    en: "Voice-first navigation screen for seniors. Large microphone interface with AI listening state. Hana can speak naturally to navigate the app, send messages, or ask the AI Butler for help.",
-    zh: "為年長用戶設計的語音優先導航頁面。大型麥克風介面顯示 AI 聆聽狀態。Hana 可自然說話來導航 APP、傳送訊息或請求 AI 管家協助。"
-  },
-  'sc-grace-4-desc': {
-    en: "A curated life snapshot for Hana — upcoming appointments, family-shared memories, today's weather, and a gentle AI suggestion for the day. Designed to feel warm and personal, not utilitarian.",
-    zh: "Hana 的精選生活快照——即將到來的預約、家庭共享回憶、今日天氣，以及 AI 的溫和日常建議。設計感覺溫暖而個人化，而非功能性的。"
-  },
-  'sc-grace-5-desc': {
-    en: "Messaging thread between Hana and Mei. Hana sees messages on the left; Mei on the right. A conversation about the recent health report — Hana asking about her results, Mei responding with care and next steps.",
-    zh: "Hana 與 Mei 之間的訊息串。Hana 的訊息在左，Mei 在右。關於近期健康報告的對話——Hana 詢問結果，Mei 帶著關心回應並提供後續步驟。"
-  },
-
-  /* Hana screens section */
-  'screens-grace-title': { en: 'Screens & Flows',                      zh: '畫面與流程' },
-  'screens-grace-sub':   { en: '6 screens · Hana\'s personal constellation view', zh: '6 個畫面 · Hana 個人星座圖視角' },
 
   /* Mei hero */
   'hero-eva-kicker':   { en: 'Interactive Prototype',      zh: '互動原型' },
@@ -1177,7 +1206,7 @@ const dict = {
     zh: "Mei 的<br><span class='accent'>家庭網絡</span><br><span class='accent2' style='font-size:38px;'>連結視角</span>"
   },
   'hero-eva-sub': {
-    en: "A family hub where Mei stays connected with everyone in her network. Alerts surface proactively at the top right; each member node opens their wellbeing and security updates; the AI Butler coordinates complex tasks through a dedicated chat.",
+    en: "A family hub where Mei stays connected with everyone in her network. Alerts surface proactively at the top right; each member node opens their wellbeing and security updates; the Kaleidoscope coordinates complex tasks through a dedicated chat.",
     zh: "以家庭為核心的連結中樞，Mei 與網絡中每位成員保持聯繫。右上角主動顯示提醒；每個成員節點通往其健康與安全動態；AI 管家透過專屬對話協調複雜任務。"
   },
   'persona-eva-name': { en: 'Mei Chen · 45 years old',                  zh: 'Mei 陳 · 45 歲' },
@@ -1201,7 +1230,7 @@ const dict = {
     zh: "<strong>個別成員深度</strong> — 點擊任何家庭節點可查看該成員的健康與安全動態。任何成員的最新動態距離都不超過一次點擊。"
   },
   'p-eva-4': {
-    en: "<strong>AI Companion Arc as action gateway</strong> — The arc navigates directly to AI Butler chat — the highest-frequency action for Mei as a coordinator. The arc is both a reassurance symbol and a shortcut.",
+    en: "<strong>AI Companion Arc as action gateway</strong> — The arc navigates directly to Kaleidoscope chat — the highest-frequency action for Mei as a coordinator. The arc is both a reassurance symbol and a shortcut.",
     zh: "<strong>AI 陪伴穹頂作為行動入口</strong> — 穹頂直接導航到 AI 管家對話——這是 Mei 作為協調者最頻繁的操作。穹頂既是安心符號，也是快捷方式。"
   },
   'p-eva-5': {
@@ -1209,7 +1238,7 @@ const dict = {
     zh: "<strong>事件作為家庭共同時間軸</strong> — 中間分頁顯示按時間排列的全家庭活動記錄，讓每位成員無需逐一開啟個人頁面即可一覽所有動態。"
   },
   'p-eva-6': {
-    en: "<strong>Read-state lifecycle</strong> — Alert nodes have three states: unread (pulsing ring, circle clickable), read-active within 12h (circle dimmed, status chips become the entry point), and resolved (fully dimmed, ✓ badge). All past events collect in the AI Butler History tab.",
+    en: "<strong>Read-state lifecycle</strong> — Alert nodes have three states: unread (pulsing ring, circle clickable), read-active within 12h (circle dimmed, status chips become the entry point), and resolved (fully dimmed, ✓ badge). All past events collect in the Kaleidoscope History tab.",
     zh: "<strong>已讀狀態週期</strong> — 警報節點有三種狀態：未讀（脈衝環，圓圈可點擊）、12小時內已讀（圓圈淡化，狀態膠囊成為入口）、已解決（完全淡化，✓ 徽章）。所有過往事件收錄於 AI 管家的歷史分頁。"
   },
 
@@ -1218,17 +1247,17 @@ const dict = {
   'sc-eva-1-name': { en: "Grandma's Health Report",  zh: '奶奶的健康報告' },
   'sc-eva-2-name': { en: 'Family Events',            zh: '家庭事件' },
   'sc-eva-3-name': { en: 'Chat with Grandma',        zh: '與奶奶的對話' },
-  'sc-eva-4-name': { en: 'Yuki — Protection',        zh: 'Yuki — 保護報告' },
+  'sc-eva-4-name': { en: 'Yuki — Bloom Report', zh: 'Yuki — Bloom 成果報告' },
   'sc-eva-5-name': { en: 'Kenji — Protection',         zh: 'Kenji — 保護報告' },
   'sc-eva-6-name': { en: 'Hiro — Protection',       zh: 'Hiro — 保護報告' },
-  'sc-eva-7-name': { en: 'AI Butler',                zh: 'AI 管家' },
+  'sc-eva-7-name': { en: 'Kaleidoscope',                zh: 'Kaleidoscope' },
   'sc-eva-8-name': { en: 'Scam Call — Grandma',      zh: '詐騙電話 — 奶奶' },
   'sc-eva-9-name': { en: 'Phishing Link — Yuki',     zh: '釣魚連結 — Yuki' },
 
   /* Mei screen descs */
   'sc-eva-0-desc': {
-    en: "Mei at center, Grandma above with ⚠ pulse ring, Kenji / Yuki / Hiro as orbiting nodes. Three stacked alert pills (health report, scam call, phishing link) in the top right — each dismissible. AI Companion Arc above navigates to AI Butler chat.",
-    zh: "Mei 居中，奶奶在上方帶有 ⚠ 脈衝環，Kenji / Yuki / Hiro 為環繞節點。右上角三個堆疊提醒標籤（健康報告、詐騙電話、釣魚連結）——每個均可關閉。頂部 AI 陪伴穹頂可導航到 AI 管家對話。"
+    en: "Mei at center, Grandma above with ⚠ pulse ring. Notification panel in the top-right surfaces urgent updates — the Grandma health alert row is highlighted in red. On page load, a dismissible health alert popup appears over the constellation with a pulsing red dot, message, and 'View Report →' CTA. Kaleidoscope FAB at bottom-right; first sheet action links directly to Grandma's Health Report.",
+    zh: "Mei 居中，奶奶在上方帶有 ⚠ 脈衝環。右上角通知面板顯示緊急更新——奶奶健康警報列以紅色 Highlight 標示。頁面載入時彈出可關閉的健康警報卡片，含脈動紅點、訊息與『查看報告→』按鈕。右下角 Kaleidoscope FAB；第一個快速操作直接連結奶奶健康報告。"
   },
   'sc-eva-1-desc': {
     en: "Annual checkup results viewed from Mei's perspective. AI summary with cardiology follow-up recommendation; marker table (BP ⚠ 145/92, HbA1c Watch, others Normal). Three action buttons: book follow-up, review medication, export to family record.",
@@ -1243,19 +1272,19 @@ const dict = {
     zh: "Mei 與奶奶之間的直接訊息串。五則訊息涵蓋健康報告結果——奶奶詢問健檢，Mei 確認 145/92 的疑慮，Mei 建議心臟科，奶奶同意前往。"
   },
   'sc-eva-4-desc': {
-    en: "Yuki's protection report: 3 threats blocked, 0 incidents, 14 days protected. Latest block card shows the phishing link intercept (bit.ly/secure-bank-verify → fake bank page). This week's status: browsing safe, usage normal.",
-    zh: "Yuki 的保護報告：已封鎖 3 次威脅、0 起事件、14 天受保護。最新封鎖卡片顯示釣魚連結攔截（bit.ly/secure-bank-verify → 假銀行頁面）。本週狀態：瀏覽安全、使用正常。"
+    en: "Yuki's creative week as a Bloom co-creation record. Hero: Yuki photo, 'Visual Storyteller · Week 12', stats (1 Collab, 8h creating, +18% Creative Direction). Featured: 文化祭 2024 TikTok Bloom Collab — clip timeline (Dir. Yuki, Hana, Ren), 'Bloom Guided' spark (AI offered two directions → Yuki's Director's Choice: chose intimate opening). Authorship bar Yuki 68% / Bloom 32%. Feed: 春祭り (Y82/AI18) + Voice Loop #3 (private). Kaleidoscope Insight. Three buttons: creative challenge, View Showcase (→s11), Growth Timeline (→s12).",
+    zh: "Yuki 這週的 Bloom 共創紀錄。英雄區：Yuki 照片、「視覺說故事者 · 第 12 週」、統計數據（1 次協作、8 小時創作、創意方向 +18%）。精選：文化祭 2024 TikTok Bloom 協作——剪輯時間軸（導演 Yuki、Hana、Ren），「Bloom 引導」對比（AI 提供兩個方向 → Yuki 導演選擇：選擇親密開場）。作者條 Yuki 68% / Bloom 32%。動態列：春祭り（Y82/AI18）+ 人聲循環 #3（私密）。Kaleidoscope 洞察。三個按鈕：創作挑戰、查看展示（→s11）、成長時間軸（→s12）。"
   },
   'sc-eva-5-desc': {
     en: "Kenji's device security report. Recent new device login verified via two-factor authentication; work device confirmed secure. No anomalies detected this week.",
     zh: "Kenji 的設備安全報告。近期新設備登入已透過雙重驗證確認；工作設備已確認安全。本週未檢測到異常。"
   },
   'sc-eva-6-desc': {
-    en: "Hiro's screen time and safety report. Usage alert: 3.5 hours of social media after midnight, exceeding the family's agreed limit. AI Butler action taken: social media paused after 10 PM starting tonight per family setting.",
+    en: "Hiro's screen time and safety report. Usage alert: 3.5 hours of social media after midnight, exceeding the family's agreed limit. Kaleidoscope action taken: social media paused after 10 PM starting tonight per family setting.",
     zh: "Hiro 的螢幕時間與安全報告。使用提醒：午夜後社群媒體使用 3.5 小時，超出家庭共識限制。AI 管家已採取行動：依家庭設定，從今晚起晚上 10 點後暫停社群媒體。"
   },
   'sc-eva-7-desc': {
-    en: "Two-tab screen: Chat and History. Chat: Mei converses with AI Butler — books a cardiology appointment for Grandma, updates Hiro's screen time settings. History: chronological timeline of all alerts and AI actions across family members, grouped by day.",
+    en: "Two-tab screen: Chat and History. Chat: Mei converses with Kaleidoscope — books a cardiology appointment for Grandma, updates Hiro's screen time settings. History: chronological timeline of all alerts and AI actions across family members, grouped by day.",
     zh: "雙分頁畫面：對話與歷史。對話：Mei 與 AI 管家互動——為奶奶預約心臟科門診、更新 Hiro 的螢幕時間設定。歷史：按時間排列的家庭成員警報與 AI 行動紀錄，依日期分組。"
   },
   'sc-eva-8-desc': {
@@ -1267,12 +1296,30 @@ const dict = {
     zh: "Yuki 設備上被攔截釣魚連結的事件詳情。網站：secure-bank-login.xyz，冒充國泰銀行，SSL 憑證不符，網域僅 3 天。頁面在載入前被封鎖——無資料外洩。已回報至安全瀏覽網絡。三個操作按鈕：傳訊給 Yuki、回報網站、調整瀏覽設定。"
   },
 
+  'sc-eva-10-name': { en: 'AI Booking Task', zh: 'AI 預約任務' },
+  'sc-eva-10-desc': {
+    en: "Kaleidoscope executes the cardiology booking autonomously. Step-by-step task tracker shows: hospital search (NTU Hospital, 4 openings found) → slot matching (Nov 14 afternoon, no conflicts) → appointment confirmed (Dr. Li Wei, Nov 14, 2:30 PM). Booking confirmation card with location details. Grandma notified automatically.",
+    zh: "Kaleidoscope 自主執行心臟科門診預約。逐步任務追蹤器顯示：搜尋醫院（台大醫院，找到 4 個空缺）→ 配對時段（11 月 14 日下午，無衝突）→ 預約確認（李偉醫師，11 月 14 日下午 2:30）。含地點資訊的預約確認卡。奶奶自動收到通知。"
+  },
+
+  'sc-eva-11-name': { en: 'Yuki — Showcase', zh: 'Yuki — 作品展示' },
+  'sc-eva-11-desc': {
+    en: "Works Yuki chose to share with family via Bloom. Summary strip: 2 shared. Featured: 文化祭 2024 TikTok video with mock player, Director's Choice badge, Y68/AI32 ratio. Feed: 春祭り photo essay (Y82/AI18) + Voice Loop #3 (private, locked). Reaction row: Amazing work! + Leave a note. Privacy footer: Yuki controls what's shared.",
+    zh: "Yuki 透過 Bloom 選擇分享給家人的作品。摘要條：2 件已分享。精選：文化祭 2024 TikTok 影片含模擬播放器、導演選擇徽章、Y68/AI32 比例。動態列：春祭り 攝影短文（Y82/AI18）+ 人聲循環 #3（私密，已鎖定）。反應列：太棒了！+ 留言。隱私說明：Yuki 控制分享內容。"
+  },
+
+  'sc-eva-12-name': { en: 'Yuki — Growth Timeline', zh: 'Yuki — 成長時間軸' },
+  'sc-eva-12-desc': {
+    en: "Period selector (4 Weeks active). KPI row: +18% creative direction, 8 own decisions, 3× redirected AI. SVG line chart — Creative Voice % over Wk9–12 (52→55→61→68%), gradient fill, Wk11 green Director's Choice dot, Wk12 labeled badge. Milestone list: shared with family (Wk12), Director's Choice (Wk11), first AI refusal (Wk10), joined Bloom (Wk9). Skill bars: Creative Direction +18%, Collaboration +12%, Autonomous Choices +28%. Kaleidoscope Insight: 'You're watching it happen.'",
+    zh: "時間段選擇器（4 週啟用中）。KPI 列：創意方向 +18%、8 次自主決定、3 次引導 AI。SVG 折線圖——第 9-12 週創意聲音比例（52→55→61→68%），漸層填充，第 11 週綠色導演選擇圓點，第 12 週標籤徽章。里程碑列表：與家人分享（第 12 週）、導演選擇（第 11 週）、首次拒絕 AI（第 10 週）、加入 Bloom（第 9 週）。技能條：創意方向 +18%、協作 +12%、自主選擇 +28%。AI 洞察：「你正在見證這一切。」"
+  },
+
   /* Mei screens section */
   'screens-eva-title': { en: 'Screens & Flows',                        zh: '畫面與流程' },
-  'screens-eva-sub':   { en: "10 screens · Mei's family constellation view", zh: '10 個畫面 · Mei 家庭星座圖視角' },
+  'screens-eva-sub':   { en: "13 screens · Mei's family constellation view", zh: '13 個畫面 · Mei 家庭星座圖視角' },
 
   /* Yuki nav tab */
-  'tab-yuki': { en: "Yuki's View", zh: 'Yuki 創作視角' },
+  'tab-yuki': { en: "Yuki's Creative Space", zh: 'Yuki 創作展示空間' },
 
   /* Yuki hero */
   'hero-yuki-kicker': { en: 'Interactive Prototype', zh: '互動原型' },
@@ -1281,8 +1328,8 @@ const dict = {
     zh: "Yuki 的<br><span class='accent'>星座圖</span><br><span class='accent2' style='font-size:38px;'>創作者視角</span>"
   },
   'hero-yuki-sub': {
-    en: "A young creator's personal world — Yuki at center, family around her, and a gateway to CrewCreate built right into the constellation. TrendLife bridges Yuki's creative ambitions with the family's trust layer, making parental involvement feel natural rather than restrictive.",
-    zh: "年輕創作者的個人世界——Yuki 居中，家人環繞，CrewCreate 入口直接整合在星座圖中。TrendLife 將 Yuki 的創作抱負與家庭信任層連結，讓家長的參與感覺自然而非限制。"
+    en: "A young creator's personal world — Yuki at center, family around her, and a gateway to Bloom built right into the constellation. TrendLife bridges Yuki's creative ambitions with the family's trust layer, making parental involvement feel natural rather than restrictive.",
+    zh: "年輕創作者的個人世界——Yuki 居中，家人環繞，Bloom 入口直接整合在星座圖中。TrendLife 將 Yuki 的創作抱負與家庭信任層連結，讓家長的參與感覺自然而非限制。"
   },
   'persona-yuki-name': { en: 'Yuki Chen · 16 years old', zh: '陳 Yuki · 16 歲' },
   'persona-yuki-meta': { en: 'High school student · Taipei · Mei & Kenji\'s daughter, Hiro\'s sister', zh: '高中生 · 台北 · Mei 與 Kenji 的女兒，Hiro 的姐姐' },
@@ -1297,25 +1344,25 @@ const dict = {
     zh: "<strong>創作者居中</strong> — Yuki 將自己視為自己世界的主角。星座圖反映她的創作身份與連結，而非由家長管理的視角。"
   },
   'p-yuki-2': {
-    en: "<strong>CrewCreate as a constellation node</strong> — Third-party creative platforms appear as discoverable nodes below Yuki, connected by a dashed line. Tapping triggers a teal zoom launch transition into the app's onboarding flow.",
-    zh: "<strong>CrewCreate 作為星座節點</strong> — 第三方創作平台以可探索節點形式顯示在 Yuki 下方，以虛線相連。點擊觸發青藍色縮放過渡進入應用程式的引導流程。"
+    en: "<strong>Bloom as a constellation node</strong> — Bloom appears as a discoverable node below Yuki, connected by a dashed purple line. Tapping triggers a zoom launch transition into Bloom's onboarding flow. The Bloom icon uses a purple double-ring mandala — a sister icon to Kaleidoscope.",
+    zh: "<strong>Bloom 作為星座節點</strong> — Bloom 以可探索節點形式顯示在 Yuki 下方，以紫色虛線相連。點擊觸發縮放過渡進入 Bloom 的引導流程。Bloom 圖示使用紫色雙環曼陀羅——Kaleidoscope 的姊妹圖示。"
   },
   'p-yuki-3': {
-    en: "<strong>Parental approval without friction</strong> — When an under-18 gate is hit, TrendLife routes the consent request directly to Mei via AI Butler — no email, no separate app. Yuki sees a waiting screen with real-time delivery confirmation.",
-    zh: "<strong>無摩擦的家長批准</strong> — 當遇到未滿 18 歲的限制時，TrendLife 透過 AI Butler 直接將同意請求傳送給 Mei，無需電子郵件或另開應用程式。Yuki 看到等待畫面，並即時確認送達。"
+    en: "<strong>Parental approval without friction</strong> — When an under-18 gate is hit, TrendLife routes the consent request directly to Mei via Kaleidoscope — no email, no separate app. Yuki sees a waiting screen with real-time delivery confirmation.",
+    zh: "<strong>無摩擦的家長批准</strong> — 當遇到未滿 18 歲的限制時，TrendLife 透過 Kaleidoscope 直接將同意請求傳送給 Mei，無需電子郵件或另開應用程式。Yuki 看到等待畫面，並即時確認送達。"
   },
   'p-yuki-4': {
     en: "<strong>Transparency, not surveillance</strong> — The consent screen tells Yuki exactly what parents can see (activity summary, time limits, safety alerts) and what they can't (full content detail). Trust is built through clarity.",
     zh: "<strong>透明，而非監控</strong> — 同意畫面明確告訴 Yuki 家長能看到什麼（活動摘要、時間限制、安全提醒）以及不能看到什麼（完整內容細節）。信任透過清晰建立。"
   },
   'p-yuki-5': {
-    en: "<strong>AI Butler as Yuki's ally</strong> — The AI Companion Arc uses Yuki's color (green) and language. It's her helper, not a parental watchdog embedded in her view.",
-    zh: "<strong>AI Butler 作為 Yuki 的夥伴</strong> — AI 陪伴穹頂使用 Yuki 的顏色（綠色）和語言。它是她的助手，而非嵌入她視角中的家長監控工具。"
+    en: "<strong>Kaleidoscope as Yuki's ally</strong> — The AI Companion Arc uses Yuki's color (green) and language. It's her helper, not a parental watchdog embedded in her view.",
+    zh: "<strong>Kaleidoscope 作為 Yuki 的夥伴</strong> — AI 陪伴穹頂使用 Yuki 的顏色（綠色）和語言。它是她的助手，而非嵌入她視角中的家長監控工具。"
   },
 
   /* Yuki screen names */
   'sc-yuki-0-name': { en: 'Constellation Home',        zh: '星座圖首頁' },
-  'sc-yuki-1-name': { en: 'CrewCreate — Age Verify',   zh: 'CrewCreate · 年齡驗證' },
+  'sc-yuki-1-name': { en: 'Bloom — Age Verify',   zh: 'Bloom · 年齡驗證' },
   'sc-yuki-2-name': { en: 'Interests',                 zh: '創作興趣' },
   'sc-yuki-3-name': { en: 'Goals',                     zh: '創作目標' },
   'sc-yuki-4-name': { en: 'Parental Consent',          zh: '家長批准' },
@@ -1323,12 +1370,12 @@ const dict = {
 
   /* Yuki screen descs */
   'sc-yuki-0-desc': {
-    en: "Yuki at center with a 'creator' badge. Family members orbit around her. AI Companion Arc spans the top in green. A CrewCreate node glows below with a pulsing teal ring and 'Join →' chip — tapping launches the onboarding flow with a zoom transition.",
-    zh: "Yuki 居中，帶有「creator」徽章。家庭成員在其周圍運行。AI 陪伴穹頂以綠色橫跨頂部。CrewCreate 節點在下方發光，帶有跳動的青藍色圓環和「Join →」標籤——點擊以縮放過渡啟動引導流程。"
+    en: "Yuki at center with a 'creator' badge. Family members orbit around her. AI Companion Arc spans the top in green. A Bloom node glows below with a pulsing teal ring and 'Join →' chip — tapping launches the onboarding flow with a zoom transition.",
+    zh: "Yuki 居中，帶有「creator」徽章。家庭成員在其周圍運行。AI 陪伴穹頂以綠色橫跨頂部。Bloom 節點在下方發光，帶有跳動的青藍色圓環和「Join →」標籤——點擊以縮放過渡啟動引導流程。"
   },
   'sc-yuki-1-desc': {
-    en: "Welcome screen for CrewCreate. Teal shield icon, birth date fields (Yuki enters 2008), privacy notice. No progress bar — this is the gate step before onboarding begins. Teal CTA '繼續 →' proceeds to interest selection.",
-    zh: "CrewCreate 歡迎畫面。青藍色盾牌圖示、出生日期欄位（Yuki 輸入 2008）、隱私聲明。無進度條——這是引導開始前的驗證步驟。青藍色 CTA「繼續 →」進入興趣選擇。"
+    en: "Welcome screen for Bloom. Teal shield icon, birth date fields (Yuki enters 2008), privacy notice. No progress bar — this is the gate step before onboarding begins. Teal CTA '繼續 →' proceeds to interest selection.",
+    zh: "Bloom 歡迎畫面。青藍色盾牌圖示、出生日期欄位（Yuki 輸入 2008）、隱私聲明。無進度條——這是引導開始前的驗證步驟。青藍色 CTA「繼續 →」進入興趣選擇。"
   },
   'sc-yuki-2-desc': {
     en: "Step 1 of 3. 你喜歡創作什麼內容？ — 6 category cards in a 2-column grid: Fashion & Style and Art & Design pre-selected (teal highlight). Pink sparkle icon as section header. 繼續 → advances to goals.",
@@ -1339,20 +1386,44 @@ const dict = {
     zh: "第 2 步，共 3 步。你想達成什麼目標？——4 個目標列：Jump on trends faster（預先選取，粉紅色）、與朋友創作內容、獲得創意靈感、增加追蹤者。底部有返回與繼續按鈕。"
   },
   'sc-yuki-4-desc': {
-    en: "Step 3 of 3. Under-18 gate. TrendLife green banner explains the request goes via AI Butler directly to Mom Mei — no email. Parent permissions listed (summary only, time limits, safety alerts). Checkbox consent + 開始創作 → sends the request.",
-    zh: "第 3 步，共 3 步。未滿 18 歲驗證。TrendLife 綠色橫幅說明請求透過 AI Butler 直接傳送給媽媽 Mei，無需電子郵件。列出家長權限（僅摘要、時間限制、安全提醒）。勾選同意 + 「開始創作 →」傳送請求。"
+    en: "Step 3 of 3. Under-18 gate. TrendLife green banner explains the request goes via Kaleidoscope directly to Mom Mei — no email. Parent permissions listed (summary only, time limits, safety alerts). Checkbox consent + 開始創作 → sends the request.",
+    zh: "第 3 步，共 3 步。未滿 18 歲驗證。TrendLife 綠色橫幅說明請求透過 Kaleidoscope 直接傳送給媽媽 Mei，無需電子郵件。列出家長權限（僅摘要、時間限制、安全提醒）。勾選同意 + 「開始創作 →」傳送請求。"
   },
   'sc-yuki-5-desc': {
-    en: "Mei's purple avatar with pulsing rings. Animated loading dots. 等待批准中... with reassuring copy. A TrendLife notification card at the bottom confirms delivery — 'Yuki 想加入 CrewCreate，需要你的批准 →' with a green 已送達 badge.",
-    zh: "Mei 的紫色頭像帶有跳動圓環。動態載入圓點。「等待批准中...」附有安撫說明。底部 TrendLife 通知卡確認送達——「Yuki 想加入 CrewCreate，需要你的批准 →」附有綠色「已送達」徽章。"
+    en: "Mei's purple avatar with pulsing rings. Animated loading dots. 等待批准中... with reassuring copy. A TrendLife notification card at the bottom confirms delivery — 'Yuki 想加入 Bloom，需要你的批准 →' with a green 已送達 badge.",
+    zh: "Mei 的紫色頭像帶有跳動圓環。動態載入圓點。「等待批准中...」附有安撫說明。底部 TrendLife 通知卡確認送達——「Yuki 想加入 Bloom，需要你的批准 →」附有綠色「已送達」徽章。"
+  },
+
+  'sc-yuki-6-name': { en: 'AI Chat', zh: 'AI 對話' },
+  'sc-yuki-6-desc': {
+    en: "Kaleidoscope chat in Yuki's context. Green AI avatar. Messages include Grandma voice message nudge and Bloom workspace guidance. Acts as Yuki's ally — not a parental watchdog.",
+    zh: "Yuki 語境下的 Kaleidoscope 對話。綠色 AI 頭像。訊息包含奶奶語音訊息提醒與 Bloom 工作空間引導。作為 Yuki 的夥伴，而非家長監控工具。"
+  },
+
+  'sc-yuki-7-name': { en: 'Joining Bloom', zh: '加入 Bloom' },
+  'sc-yuki-7-desc': {
+    en: "3-second auto-advance joining screen after approval. Bloom icon (purple double-ring mandala), 'Joining Bloom' title, animated progress. Transitions directly into the workspace.",
+    zh: "批准後 3 秒自動跳轉的加入畫面。Bloom 圖示（紫色雙環曼陀羅）、「加入 Bloom」標題、動態進度條。直接過渡至工作空間。"
+  },
+
+  'sc-yuki-8-name': { en: 'Bloom Workspace', zh: 'Bloom 工作空間' },
+  'sc-yuki-8-desc': {
+    en: "Active 文化祭 2024 Bloom collab workspace. Canvas preview with crew (Yuki + Hana + Ren). Authorship: 68% Yuki voice, 8 decisions / 3 redirections / 4 Q answered. Creative Direction Thread: 4-exchange AI dialogue with Director's Choice ✓. Socratic AI panel. Sharing card: family hasn't seen this yet → links to showcase.",
+    zh: "進行中的文化祭 2024 Bloom 協作工作空間。含小組成員（Yuki + Hana + Ren）的畫布預覽。作者比例：Yuki 聲音 68%，8 次決定 / 3 次引導 / 4 題已答。創作方向討論串：4 次 AI 對話，含導演選擇 ✓ 標記。蘇格拉底式 AI 面板。分享卡：家人尚未看到 → 連結至展示頁。"
+  },
+
+  'sc-yuki-9-name': { en: 'My Creative Space', zh: '我的創作空間' },
+  'sc-yuki-9-desc': {
+    en: "Yuki's personal showcase page after sharing 文化祭. Family reaction feed: Grandma (Japanese nostalgic text), Mom heart reaction, Dad reaction. Project badge: 'Bloom Collab · Shared with family.' Social share CTA at bottom.",
+    zh: "分享文化祭後的 Yuki 個人展示頁。家人反應動態：奶奶（日文懷念留言）、媽媽愛心反應、爸爸反應。專案徽章：「Bloom 協作 · 已與家人分享」。底部社群分享按鈕。"
   },
 
   /* Yuki screens section */
   'screens-yuki-title': { en: 'Screens & Flows',                         zh: '畫面與流程' },
-  'screens-yuki-sub':   { en: "6 screens · Yuki's creator constellation view", zh: '6 個畫面 · Yuki 創作者星座圖視角' },
+  'screens-yuki-sub':   { en: "10 screens · Yuki's creator constellation view", zh: '10 個畫面 · Yuki 創作者星座圖視角' },
 
   /* Footer */
-  'footer-text':  { en: 'TrendLife AI Butler · Constellation Design Spec · March 2026', zh: 'TrendLife AI 管家 · 星座圖設計規格 · 2026 年 3 月' },
+  'footer-text':  { en: 'TrendLife Kaleidoscope · Constellation Design Spec · March 2026', zh: 'TrendLife AI 管家 · 星座圖設計規格 · 2026 年 3 月' },
   'footer-brand': { en: 'TrendLife', zh: 'TrendLife' },
 };
 
@@ -1384,22 +1455,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ── VIEW SWITCHER ── */
 function switchView(view) {
-  document.getElementById('view-grace').style.display = view === 'grace' ? '' : 'none';
   document.getElementById('view-eva').style.display   = view === 'eva'   ? '' : 'none';
   document.getElementById('view-yuki').style.display  = view === 'yuki'  ? '' : 'none';
-  document.getElementById('tab-btn-grace').classList.toggle('nav-vtab-active', view === 'grace');
   document.getElementById('tab-btn-eva').classList.toggle('nav-vtab-active',   view === 'eva');
   document.getElementById('tab-btn-yuki').classList.toggle('nav-vtab-active',  view === 'yuki');
   window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-/* ── GRACE SCREEN NAVIGATOR ── */
-function graceGoTo(n) {
-  const iframe = document.getElementById('graceIframe');
-  if (iframe?.contentWindow) iframe.contentWindow.postMessage({type:'goTo', screen:n}, '*');
-  document.querySelectorAll('#screenNavGrace .snav-item').forEach((b, i) => {
-    b.classList.toggle('snav-active', i === n);
-  });
 }
 
 /* ── EVA SCREEN NAVIGATOR ── */
@@ -1428,7 +1488,7 @@ function scrollToPhone(iframeId) {
 /* ── THEME SWITCHER ── */
 function setTheme(t) {
   document.body.classList.toggle('light', t === 'light');
-  ['graceIframe','evaIframe','yukiIframe'].forEach(id => {
+  ['evaIframe','yukiIframe'].forEach(id => {
     const f = document.getElementById(id);
     if (f?.contentWindow) f.contentWindow.postMessage({type:'setTheme', theme:t}, '*');
   });

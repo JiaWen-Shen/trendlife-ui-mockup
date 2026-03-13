@@ -43,17 +43,17 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 .tab-item.active .tab-label{color:#4ADE80}
 
 /* ─────────────────────────────
-   CrewCreate shared styles
+   Bloom shared styles
    ───────────────────────────── */
 .cc-progress{display:flex;gap:6px;padding:16px 24px 0;flex-shrink:0}
 .cc-prog-seg{height:3px;flex:1;border-radius:2px;background:rgba(255,255,255,0.1)}
-.cc-prog-seg.done{background:#00BCD4}
-.cc-prog-seg.active{background:linear-gradient(90deg,#00BCD4,#29B6CF)}
+.cc-prog-seg.done{background:#C084FC}
+.cc-prog-seg.active{background:linear-gradient(90deg,#C084FC,#29B6CF)}
 
 .cc-body{flex:1;overflow-y:auto;padding:24px}
 
 .cc-icon-wrap{width:72px;height:72px;border-radius:20px;
-  background:linear-gradient(135deg,#00BCD4,#00838F);
+  background:url('bloom-icon.svg') center/78% no-repeat, linear-gradient(135deg,#1e0842,#2a0f5c);
   display:flex;align-items:center;justify-content:center;
   font-size:32px;margin:0 auto 20px;flex-shrink:0}
 .cc-title{font-size:22px;font-weight:800;color:rgba(255,255,255,0.92);
@@ -68,11 +68,11 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
   background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);
   display:flex;align-items:center;justify-content:center;
   font-size:13px;font-weight:600;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif}
-.cc-date-field.filled{color:rgba(255,255,255,0.75);border-color:rgba(0,188,212,0.35)}
+.cc-date-field.filled{color:rgba(255,255,255,0.75);border-color:rgba(192,132,252,0.35)}
 
 /* Buttons */
 .cc-btn{width:100%;height:54px;border-radius:16px;border:none;
-  background:linear-gradient(135deg,#00BCD4,#00ACC1);
+  background:linear-gradient(135deg,#C084FC,#9B5DE5);
   color:white;font-size:16px;font-weight:700;letter-spacing:-0.1px;
   cursor:pointer;font-family:'Inter',sans-serif;
   display:flex;align-items:center;justify-content:center;gap:6px}
@@ -100,11 +100,11 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 .interest-card{padding:14px 12px 12px;border-radius:14px;
   background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.08);
   cursor:pointer;transition:all 0.15s}
-.interest-card.selected{background:rgba(0,188,212,0.1);border-color:rgba(0,188,212,0.6)}
+.interest-card.selected{background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.6)}
 .interest-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;
   justify-content:center;font-size:11px;font-weight:800;margin-bottom:8px;letter-spacing:0.3px;flex-shrink:0}
 .interest-name{font-size:12.5px;font-weight:600;color:rgba(255,255,255,0.6)}
-.interest-card.selected .interest-name{color:#00BCD4}
+.interest-card.selected .interest-name{color:#C084FC}
 
 /* ─────────────────────────────
    S3 · Goals
@@ -139,12 +139,12 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
   background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
   border-radius:14px;padding:14px;margin-bottom:18px;cursor:pointer;
   transition:border-color 0.15s}
-.cc-checkbox-row.checked{border-color:rgba(0,188,212,0.4)}
+.cc-checkbox-row.checked{border-color:rgba(192,132,252,0.4)}
 .cc-checkbox{width:20px;height:20px;border-radius:6px;
   border:1.5px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.04);
   flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;
   font-size:11px;transition:all 0.15s}
-.cc-checkbox.checked{background:#00BCD4;border-color:#00BCD4;color:white}
+.cc-checkbox.checked{background:#C084FC;border-color:#C084FC;color:white}
 .cc-checkbox-text{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.65}
 .cc-checkbox-row.checked .cc-checkbox-text{color:rgba(255,255,255,0.6)}
 
@@ -164,7 +164,7 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
   display:flex;align-items:center;justify-content:center;
   font-size:26px;font-weight:800;color:#C084FC;letter-spacing:-1px}
 .waiting-dots{display:flex;gap:7px;align-items:center}
-.waiting-dot{width:6px;height:6px;border-radius:50%;background:rgba(0,188,212,0.6);
+.waiting-dot{width:6px;height:6px;border-radius:50%;background:rgba(192,132,252,0.6);
   animation:wdot 1.4s ease-in-out infinite}
 .waiting-dot:nth-child(2){animation-delay:0.2s}
 .waiting-dot:nth-child(3){animation-delay:0.4s}
@@ -205,16 +205,16 @@ body.light .cc-title{color:rgba(10,10,20,0.92)}
 body.light .cc-sub{color:rgba(10,10,20,0.45)}
 body.light .cc-field-label{color:rgba(10,10,20,0.75)}
 body.light .cc-date-field{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.32)}
-body.light .cc-date-field.filled{color:rgba(10,10,20,0.8);border-color:rgba(0,188,212,0.4)}
+body.light .cc-date-field.filled{color:rgba(10,10,20,0.8);border-color:rgba(192,132,252,0.4)}
 body.light .cc-info-card{background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.07)}
 body.light .cc-info-label{color:rgba(10,10,20,0.65)}
 body.light .cc-info-text{color:rgba(10,10,20,0.38)}
 body.light .cc-section-title{color:rgba(10,10,20,0.92)}
 body.light .cc-section-sub{color:rgba(10,10,20,0.45)}
 body.light .interest-card{background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.08)}
-body.light .interest-card.selected{background:rgba(0,188,212,0.07);border-color:rgba(0,150,170,0.55)}
+body.light .interest-card.selected{background:rgba(192,132,252,0.07);border-color:rgba(155,93,229,0.55)}
 body.light .interest-name{color:rgba(10,10,20,0.62)}
-body.light .interest-card.selected .interest-name{color:#007B8A}
+body.light .interest-card.selected .interest-name{color:#9B5DE5}
 body.light .goal-item{background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.08)}
 body.light .goal-item.selected{background:rgba(255,45,135,0.06);border-color:rgba(255,45,135,0.45)}
 body.light .goal-name{color:rgba(10,10,20,0.62)}
@@ -225,7 +225,7 @@ body.light .cc-consent-box{background:rgba(10,10,20,0.04);border-color:rgba(10,1
 body.light .cc-consent-title{color:rgba(10,10,20,0.65)}
 body.light .cc-consent-item{color:rgba(10,10,20,0.45)}
 body.light .cc-checkbox-row{background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.08)}
-body.light .cc-checkbox-row.checked{border-color:rgba(0,150,170,0.4)}
+body.light .cc-checkbox-row.checked{border-color:rgba(155,93,229,0.4)}
 body.light .cc-checkbox{border-color:rgba(10,10,20,0.18);background:rgba(10,10,20,0.04)}
 body.light .cc-checkbox-text{color:rgba(10,10,20,0.45)}
 body.light .cc-checkbox-row.checked .cc-checkbox-text{color:rgba(10,10,20,0.65)}
@@ -240,14 +240,15 @@ body.light .tl-notify-footer{border-top-color:rgba(10,10,20,0.06)}
 body.light .tl-notify-time{color:rgba(10,10,20,0.3)}
 
 /* ─────────────────────────────
-   S6 · AI Butler Chat
+   S6 · Kaleidoscope Chat
    ───────────────────────────── */
 .butler-header{padding:12px 20px 10px;display:flex;align-items:center;gap:12px;
   border-bottom:1px solid rgba(255,255,255,0.05);flex-shrink:0}
 .butler-av{width:40px;height:40px;border-radius:50%;
   background:rgba(74,222,128,0.1);border:1.5px solid rgba(74,222,128,0.35);
   display:flex;align-items:center;justify-content:center;
-  font-size:17px;color:#4ADE80;font-weight:800;flex-shrink:0}
+  font-size:17px;color:transparent;font-weight:800;flex-shrink:0;
+  background-image:url('kaleidoscope-mandala.svg');background-size:72%;background-position:center;background-repeat:no-repeat}
 .butler-title{font-size:15px;font-weight:700;color:rgba(255,255,255,0.88)}
 .butler-subtitle{font-size:11px;color:rgba(74,222,128,0.55);margin-top:1px;font-weight:500}
 .butler-msgs{flex:1;overflow-y:auto;padding:14px 18px;display:flex;flex-direction:column;gap:12px}
@@ -275,44 +276,44 @@ body.light .tl-notify-time{color:rgba(10,10,20,0.3)}
   display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer}
 
 /* ─────────────────────────────
-   S7 · Joining CrewCreate
+   S7 · Joining Bloom
    ───────────────────────────── */
 .joining-body{flex:1;display:flex;flex-direction:column;align-items:center;
   justify-content:center;padding:36px 28px;gap:24px}
 .joining-logo-wrap{width:88px;height:88px;border-radius:26px;
-  background:linear-gradient(135deg,#00BCD4,#00838F);
+  background:url('bloom-icon.svg') center/78% no-repeat, linear-gradient(135deg,#1e0842,#2a0f5c);
   display:flex;align-items:center;justify-content:center;font-size:38px;
-  box-shadow:0 12px 40px rgba(0,188,212,0.25)}
+  box-shadow:0 12px 40px rgba(192,132,252,0.25)}
 .joining-title{font-size:22px;font-weight:800;color:rgba(255,255,255,0.9);
   text-align:center;letter-spacing:-0.3px}
 .joining-sub{font-size:13px;color:rgba(255,255,255,0.38);text-align:center;line-height:1.7}
 .joining-prog-track{width:100%;height:4px;border-radius:2px;
   background:rgba(255,255,255,0.08);overflow:hidden}
 .joining-prog-bar{height:100%;border-radius:2px;width:0;
-  background:linear-gradient(90deg,#00BCD4,#00E5FF)}
+  background:linear-gradient(90deg,#C084FC,#00E5FF)}
 .joining-steps{display:flex;flex-direction:column;gap:9px;width:100%}
 .joining-step{display:flex;align-items:center;gap:10px;
   font-size:12.5px;color:rgba(255,255,255,0.35);transition:color 0.4s}
-.joining-step.done{color:rgba(0,188,212,0.75)}
+.joining-step.done{color:rgba(192,132,252,0.75)}
 .joining-step-icon{width:18px;height:18px;border-radius:50%;
   border:1.5px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;
   font-size:9px;flex-shrink:0;transition:all 0.4s}
-.joining-step.done .joining-step-icon{background:#00BCD4;border-color:#00BCD4;color:white}
+.joining-step.done .joining-step-icon{background:#C084FC;border-color:#C084FC;color:white}
 
 /* ─────────────────────────────
-   S8 · CrewCreate Workspace
+   S8 · Bloom Workspace
    ───────────────────────────── */
 .cc-ws-header{padding:12px 20px 10px;display:flex;align-items:center;
-  justify-content:space-between;border-bottom:1px solid rgba(0,188,212,0.1);flex-shrink:0}
-.cc-ws-logo{font-size:17px;font-weight:900;color:#00BCD4;letter-spacing:-0.3px}
+  justify-content:space-between;border-bottom:1px solid rgba(192,132,252,0.1);flex-shrink:0}
+.cc-ws-logo{font-size:17px;font-weight:900;color:#C084FC;letter-spacing:-0.3px}
 .cc-ws-badge{font-size:10px;font-weight:700;background:rgba(255,45,135,0.15);
   border:1px solid rgba(255,45,135,0.3);color:#FF5BA7;padding:3px 9px;border-radius:20px}
 .cc-ws-body{flex:1;overflow-y:auto}
 .cc-ws-hero{margin:14px 16px;padding:18px 20px;border-radius:18px;cursor:pointer;
-  background:linear-gradient(135deg,rgba(0,188,212,0.12),rgba(255,45,135,0.06));
-  border:1px solid rgba(0,188,212,0.2);display:flex;align-items:center;gap:14px}
+  background:linear-gradient(135deg,rgba(192,132,252,0.12),rgba(255,45,135,0.06));
+  border:1px solid rgba(192,132,252,0.2);display:flex;align-items:center;gap:14px}
 .cc-ws-hero-icon{width:52px;height:52px;border-radius:16px;flex-shrink:0;
-  background:linear-gradient(135deg,#00BCD4,#FF2D87);
+  background:linear-gradient(135deg,#C084FC,#FF2D87);
   display:flex;align-items:center;justify-content:center;font-size:22px}
 .cc-ws-hero-text{flex:1}
 .cc-ws-hero-title{font-size:15px;font-weight:800;color:rgba(255,255,255,0.9);margin-bottom:3px}
@@ -323,7 +324,7 @@ body.light .tl-notify-time{color:rgba(10,10,20,0.3)}
 .cc-ws-tab{padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600;
   border:1.5px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.38);
   background:transparent;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s}
-.cc-ws-tab.active{background:rgba(0,188,212,0.1);border-color:rgba(0,188,212,0.4);color:#00BCD4}
+.cc-ws-tab.active{background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.4);color:#C084FC}
 .trend-row{display:flex;gap:10px;padding:0 16px 4px;overflow-x:auto;scrollbar-width:none}
 .trend-row::-webkit-scrollbar{display:none}
 .trend-card{flex-shrink:0;width:132px;border-radius:16px;overflow:hidden;
@@ -344,19 +345,131 @@ body.light .tl-notify-time{color:rgba(10,10,20,0.3)}
 .cc-ws-post-name{font-size:12px;font-weight:700;color:rgba(255,255,255,0.7)}
 .cc-ws-post-sub{font-size:11.5px;color:rgba(255,255,255,0.32);margin-top:2px}
 .cc-ws-post-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:12px;
-  background:rgba(0,188,212,0.1);border:1px solid rgba(0,188,212,0.25);color:#00BCD4}
-.cc-ws-bottomnav{height:72px;border-top:1px solid rgba(0,188,212,0.1);
+  background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.25);color:#C084FC}
+.cc-ws-bottomnav{height:72px;border-top:1px solid rgba(192,132,252,0.1);
   display:flex;align-items:flex-start;justify-content:space-around;
   padding:10px 0 0;flex-shrink:0}
 .cc-ws-tab-item{display:flex;flex-direction:column;align-items:center;gap:4px;
   cursor:pointer;padding:2px 16px;opacity:0.38}
 .cc-ws-tab-item.active{opacity:1}
 .cc-ws-tab-icon{font-size:19px}
-.cc-ws-tab-label{font-size:9.5px;color:rgba(0,188,212,0.7);letter-spacing:0.3px;font-weight:600}
+.cc-ws-tab-label{font-size:9.5px;color:rgba(192,132,252,0.7);letter-spacing:0.3px;font-weight:600}
 .cc-ws-create-btn{width:48px;height:48px;border-radius:16px;margin-top:-6px;
-  background:linear-gradient(135deg,#00BCD4,#00ACC1);
+  background:linear-gradient(135deg,#C084FC,#9B5DE5);
   display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;
-  box-shadow:0 4px 18px rgba(0,188,212,0.35)}
+  box-shadow:0 4px 18px rgba(192,132,252,0.35)}
+
+/* ─────────────────────────────
+   S8 · Collab Workspace styles
+   ───────────────────────────── */
+.collab-banner{margin:12px 16px 0;padding:14px 16px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(192,132,252,0.08),rgba(192,132,252,0.06));
+  border:1px solid rgba(192,132,252,0.15);display:flex;flex-direction:column;gap:6px}
+.collab-project-name{font-size:16px;font-weight:800;color:rgba(255,255,255,0.88);letter-spacing:-0.3px}
+.collab-meta{font-size:11px;color:rgba(255,255,255,0.35)}
+.collab-live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:#4ADE80;margin-right:4px;vertical-align:middle;animation:livePulse 1.4s infinite}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+.collab-members{display:flex;align-items:center;gap:0}
+.collab-av{width:26px;height:26px;border-radius:50%;border:2px solid rgba(14,14,20,0.85);
+  object-fit:cover;margin-right:-6px;flex-shrink:0}
+.collab-av-more{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,0.08);
+  border:1.5px solid rgba(255,255,255,0.12);font-size:10px;font-weight:700;
+  color:rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;margin-left:12px;flex-shrink:0}
+.collab-canvas-card{margin:10px 16px 0;border-radius:18px;overflow:hidden;
+  border:1px solid rgba(192,132,252,0.18);background:rgba(255,255,255,0.03)}
+.canvas-preview{position:relative;height:136px;overflow:hidden}
+.canvas-preview img{width:100%;height:100%;object-fit:cover}
+.canvas-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(14,14,20,0.7) 0%,transparent 55%)}
+.cursor-badge{position:absolute;display:flex;align-items:center;gap:5px;
+  background:rgba(14,14,20,0.78);border:1px solid rgba(255,255,255,0.1);
+  border-radius:20px;padding:3px 8px;backdrop-filter:blur(6px)}
+.cursor-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.cursor-label{font-size:10px;font-weight:600;color:rgba(255,255,255,0.7)}
+.canvas-title-overlay{position:absolute;bottom:10px;left:12px;right:12px}
+.canvas-title-text{font-size:13px;font-weight:700;color:rgba(255,255,255,0.88)}
+.canvas-title-sub{font-size:10.5px;color:rgba(255,255,255,0.38);margin-top:2px}
+.canvas-footer{display:flex;align-items:center;justify-content:space-between;padding:10px 14px}
+.canvas-meta{font-size:11px;color:rgba(255,255,255,0.3)}
+.canvas-edit-btn{font-size:11px;font-weight:700;color:#C084FC;
+  background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.25);
+  border-radius:20px;padding:5px 12px;cursor:pointer;font-family:'Inter',sans-serif}
+.ai-guide-card{margin:8px 16px 4px;padding:12px 14px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(192,132,252,0.1),rgba(99,102,241,0.08));
+  border:1px solid rgba(192,132,252,0.2);display:flex;align-items:flex-start;gap:10px}
+.ai-guide-icon{width:30px;height:30px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,#7C3AED,#4F46E5);
+  display:flex;align-items:center;justify-content:center;font-size:13px;color:white}
+.ai-guide-text{flex:1}
+.ai-guide-title{font-size:10.5px;font-weight:700;color:rgba(192,132,252,0.8);
+  text-transform:uppercase;letter-spacing:0.6px;margin-bottom:3px}
+.ai-guide-body{font-size:12px;color:rgba(255,255,255,0.58);line-height:1.5}
+.ai-guide-apply{font-size:11px;font-weight:700;color:#C084FC;
+  background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.25);
+  border-radius:20px;padding:5px 10px;cursor:pointer;font-family:'Inter',sans-serif;
+  flex-shrink:0;align-self:center}
+.contrib-item{margin:0 16px 8px;padding:12px 14px;border-radius:14px;
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);
+  display:flex;gap:10px}
+.contrib-item.yuki-item{border-color:rgba(74,222,128,0.15);background:rgba(74,222,128,0.04)}
+.contrib-item.ai-item{border-color:rgba(192,132,252,0.12);background:rgba(192,132,252,0.04)}
+.contrib-av{width:34px;height:34px;border-radius:50%;flex-shrink:0;overflow:hidden}
+.contrib-av img{width:100%;height:100%;object-fit:cover}
+.contrib-av-icon{width:34px;height:34px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:14px}
+.contrib-content{flex:1;min-width:0}
+.contrib-header{display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.contrib-name{font-size:12px;font-weight:700;color:rgba(255,255,255,0.72)}
+.contrib-tag{font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:10px}
+.contrib-tag.draft{background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.25);color:#4ADE80}
+.contrib-tag.added{background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.2);color:#60A5FA}
+.contrib-tag.ai-tag{background:rgba(192,132,252,0.12);border:1px solid rgba(192,132,252,0.2);color:#C084FC}
+.contrib-tag.director{background:rgba(192,132,252,0.12);border:1px solid rgba(192,132,252,0.28);color:#C084FC}
+.contrib-body{font-size:11.5px;color:rgba(255,255,255,0.42);line-height:1.4}
+.contrib-thumb-row{display:flex;gap:6px;margin-top:8px}
+.contrib-thumb-item{width:58px;height:42px;border-radius:8px;overflow:hidden;
+  background:rgba(255,255,255,0.06);flex-shrink:0}
+.contrib-thumb-item img{width:100%;height:100%;object-fit:cover}
+.contrib-thumb-add{width:42px;height:42px;border-radius:8px;
+  border:1.5px dashed rgba(74,222,128,0.35);display:flex;align-items:center;
+  justify-content:center;font-size:16px;color:rgba(74,222,128,0.5);cursor:pointer}
+.contrib-time{font-size:10px;color:rgba(255,255,255,0.2);margin-top:4px}
+.contrib-tag.kept{background:rgba(74,222,128,0.07);border:1px solid rgba(74,222,128,0.18);color:rgba(74,222,128,0.65)}
+
+/* ── Authorship strip ── */
+.cc-ws-authorship{margin:8px 16px 0;padding:9px 14px;border-radius:12px;
+  background:rgba(74,222,128,0.03);border:1px solid rgba(74,222,128,0.1);
+  display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.cc-ws-auth-label{font-size:9.5px;font-weight:700;color:rgba(74,222,128,0.55);
+  letter-spacing:0.8px;text-transform:uppercase;margin-right:2px}
+.cc-ws-auth-stat{font-size:11px;font-weight:600;color:rgba(255,255,255,0.5)}
+.cc-ws-auth-sep{font-size:10px;color:rgba(255,255,255,0.14)}
+
+/* ── Private badge in header ── */
+.cc-ws-private{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.28);letter-spacing:0.2px}
+
+/* ── Socratic AI card ── */
+.ai-guide-card.socratic{flex-direction:column;gap:10px}
+.ai-guide-card.socratic .ai-guide-top{display:flex;align-items:flex-start;gap:10px}
+.ai-guide-q{font-size:12.5px;font-weight:600;color:rgba(192,132,252,0.75);
+  line-height:1.55;font-style:italic;padding-left:2px}
+.ai-guide-choices{display:flex;gap:6px;flex-wrap:wrap}
+.ai-guide-choice{font-size:11px;font-weight:600;padding:6px 12px;border-radius:20px;
+  cursor:pointer;font-family:'Inter',sans-serif;transition:opacity 0.15s}
+.ai-guide-choice.intent{background:rgba(74,222,128,0.08);
+  border:1px solid rgba(74,222,128,0.22);color:rgba(74,222,128,0.8)}
+.ai-guide-choice.rethink{background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.09);color:rgba(255,255,255,0.35)}
+
+/* ── Privacy footer ── */
+.privacy-footer{margin:4px 16px 16px;padding:10px 14px;border-radius:12px;
+  background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);
+  display:flex;align-items:center;gap:8px}
+.privacy-footer-icon{font-size:13px;color:rgba(255,255,255,0.18)}
+.privacy-footer-text{flex:1;font-size:11px;color:rgba(255,255,255,0.22);line-height:1.4}
+.privacy-footer-link{font-size:11px;font-weight:600;color:rgba(192,132,252,0.5);flex-shrink:0;cursor:pointer}
 
 /* Light mode — new screens */
 body.light .butler-bubble.ai{background:rgba(22,163,74,0.06);border-color:rgba(22,163,74,0.18);color:rgba(10,10,20,0.72)}
@@ -373,13 +486,13 @@ body.light .joining-sub{color:rgba(10,10,20,0.45)}
 body.light .joining-prog-track{background:rgba(10,10,20,0.08)}
 body.light .joining-step{color:rgba(10,10,20,0.38)}
 body.light .joining-step-icon{border-color:rgba(10,10,20,0.12)}
-body.light .cc-ws-logo{color:#007B8A}
-body.light .cc-ws-hero{background:linear-gradient(135deg,rgba(0,150,170,0.08),rgba(255,45,135,0.04));border-color:rgba(0,150,170,0.2)}
+body.light .cc-ws-logo{color:#9B5DE5}
+body.light .cc-ws-hero{background:linear-gradient(135deg,rgba(155,93,229,0.08),rgba(255,45,135,0.04));border-color:rgba(155,93,229,0.2)}
 body.light .cc-ws-hero-title{color:rgba(10,10,20,0.9)}
 body.light .cc-ws-hero-sub{color:rgba(10,10,20,0.4)}
 body.light .cc-ws-section{color:rgba(10,10,20,0.3)}
 body.light .cc-ws-tab{border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.4)}
-body.light .cc-ws-tab.active{background:rgba(0,150,170,0.08);border-color:rgba(0,150,170,0.4);color:#007B8A}
+body.light .cc-ws-tab.active{background:rgba(155,93,229,0.08);border-color:rgba(155,93,229,0.4);color:#9B5DE5}
 body.light .trend-card{background:rgba(10,10,20,0.03);border-color:rgba(10,10,20,0.07)}
 body.light .trend-thumb{background:rgba(10,10,20,0.02)}
 body.light .trend-name{color:rgba(10,10,20,0.72)}
@@ -387,8 +500,141 @@ body.light .trend-heat{color:rgba(10,10,20,0.3)}
 body.light .cc-ws-post{background:rgba(10,10,20,0.03);border-color:rgba(10,10,20,0.07)}
 body.light .cc-ws-post-name{color:rgba(10,10,20,0.72)}
 body.light .cc-ws-post-sub{color:rgba(10,10,20,0.38)}
-body.light .cc-ws-bottomnav{border-top-color:rgba(0,150,170,0.12)}
-body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
+body.light .cc-ws-bottomnav{border-top-color:rgba(155,93,229,0.12)}
+body.light .cc-ws-tab-label{color:rgba(155,93,229,0.75)}
+body.light .collab-banner{background:linear-gradient(135deg,rgba(155,93,229,0.07),rgba(150,80,220,0.04));border-color:rgba(155,93,229,0.15)}
+body.light .collab-project-name{color:rgba(10,10,20,0.9)}
+body.light .collab-meta{color:rgba(10,10,20,0.38)}
+body.light .collab-av-more{background:rgba(10,10,20,0.06);border-color:rgba(10,10,20,0.12);color:rgba(10,10,20,0.4)}
+body.light .collab-canvas-card{border-color:rgba(155,93,229,0.18);background:rgba(10,10,20,0.02)}
+body.light .cursor-badge{background:rgba(255,255,255,0.82);border-color:rgba(10,10,20,0.1)}
+body.light .cursor-label{color:rgba(10,10,20,0.7)}
+body.light .canvas-title-text{color:rgba(255,255,255,0.92)}
+body.light .canvas-meta{color:rgba(10,10,20,0.35)}
+body.light .canvas-edit-btn{color:#9B5DE5;background:rgba(155,93,229,0.08);border-color:rgba(155,93,229,0.25)}
+body.light .ai-guide-body{color:rgba(10,10,20,0.55)}
+body.light .ai-guide-apply{color:#7C3AED;background:rgba(124,58,237,0.06);border-color:rgba(124,58,237,0.2)}
+body.light .contrib-item{background:rgba(10,10,20,0.02);border-color:rgba(10,10,20,0.07)}
+body.light .contrib-item.yuki-item{background:rgba(74,222,128,0.03);border-color:rgba(74,222,128,0.12)}
+body.light .contrib-item.ai-item{background:rgba(150,80,220,0.03);border-color:rgba(150,80,220,0.1)}
+body.light .contrib-name{color:rgba(10,10,20,0.72)}
+body.light .contrib-body{color:rgba(10,10,20,0.42)}
+body.light .contrib-time{color:rgba(10,10,20,0.25)}
+body.light .contrib-thumb-add{border-color:rgba(74,222,128,0.3);color:rgba(40,160,80,0.5)}
+body.light .cc-ws-authorship{background:rgba(40,160,80,0.03);border-color:rgba(40,160,80,0.12)}
+body.light .cc-ws-auth-label{color:rgba(22,100,60,0.55)}
+body.light .cc-ws-auth-stat{color:rgba(10,10,20,0.5)}
+body.light .cc-ws-auth-sep{color:rgba(10,10,20,0.14)}
+body.light .cc-ws-private{background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.3)}
+body.light .ai-guide-q{color:rgba(100,50,180,0.65)}
+body.light .ai-guide-choice.intent{background:rgba(22,163,74,0.07);border-color:rgba(22,163,74,0.2);color:rgba(22,100,60,0.8)}
+body.light .ai-guide-choice.rethink{background:rgba(10,10,20,0.03);border-color:rgba(10,10,20,0.09);color:rgba(10,10,20,0.38)}
+body.light .privacy-footer{background:rgba(10,10,20,0.02);border-color:rgba(10,10,20,0.06)}
+body.light .privacy-footer-icon{color:rgba(10,10,20,0.2)}
+body.light .privacy-footer-text{color:rgba(10,10,20,0.28)}
+body.light .privacy-footer-link{color:rgba(155,93,229,0.55)}
+
+/* ─────────────────────────────
+   S9 · Family Showcase
+   ───────────────────────────── */
+.showcase-header{display:flex;align-items:center;gap:10px;padding:6px 20px 12px;flex-shrink:0}
+.showcase-title{font-size:17px;font-weight:800;color:rgba(255,255,255,0.88);letter-spacing:-0.3px;flex:1}
+.showcase-fam-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;
+  background:rgba(192,132,252,0.1);color:rgba(192,132,252,0.8);border:1px solid rgba(192,132,252,0.18);
+  letter-spacing:0.3px;white-space:nowrap}
+.showcase-body{flex:1;overflow-y:auto;padding:4px 20px 20px}
+
+.showcase-hero{border-radius:16px;overflow:hidden;background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);margin-bottom:18px}
+.showcase-hero-thumb{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.showcase-hero-info{padding:12px 14px 14px}
+.showcase-hero-title{font-size:15px;font-weight:700;color:rgba(255,255,255,0.88);margin-bottom:4px}
+.showcase-hero-meta{font-size:11.5px;color:rgba(255,255,255,0.3);margin-bottom:10px;line-height:1.5}
+.showcase-hero-tags{display:flex;gap:6px;flex-wrap:wrap}
+
+.showcase-section{font-size:10.5px;font-weight:700;color:rgba(255,255,255,0.28);
+  letter-spacing:0.7px;text-transform:uppercase;margin:0 0 10px}
+
+.family-sees-card{display:flex;align-items:center;gap:-4px;
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);
+  border-radius:13px;padding:11px 14px;margin-bottom:18px;gap:10px}
+.fam-see-avs{display:flex}
+.fam-see-av{width:30px;height:30px;border-radius:50%;object-fit:cover;
+  border:2px solid rgba(14,14,20,0.8);margin-left:-6px}
+.fam-see-avs .fam-see-av:first-child{margin-left:0}
+.fam-see-text{flex:1;font-size:12px;color:rgba(255,255,255,0.48);line-height:1.5}
+.fam-see-arrow{font-size:13px;color:rgba(255,255,255,0.2)}
+
+.reaction-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.reaction-item{display:flex;align-items:flex-start;gap:9px}
+.reaction-av{width:28px;height:28px;border-radius:50%;object-fit:cover;flex-shrink:0;margin-top:2px}
+.reaction-bubble{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);
+  border-radius:4px 12px 12px 12px;padding:8px 12px;flex:1}
+.reaction-who{font-size:10px;font-weight:600;color:rgba(255,255,255,0.35);margin-bottom:4px}
+.reaction-text{font-size:12.5px;color:rgba(255,255,255,0.75);line-height:1.5}
+
+.works-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.work-card{border-radius:12px;overflow:hidden;background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.07);cursor:pointer}
+.work-thumb{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.work-info{padding:8px 10px 10px}
+.work-title{font-size:12.5px;font-weight:700;color:rgba(255,255,255,0.82);margin-bottom:2px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.work-meta{font-size:10.5px;color:rgba(255,255,255,0.3);margin-bottom:5px}
+.work-pill{display:inline-block;font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:6px}
+.work-pill.shared{background:rgba(192,132,252,0.1);color:rgba(192,132,252,0.75)}
+.work-pill.draft{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.32)}
+.work-pill.private{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.22)}
+
+/* Showcase credit + report toggle */
+.showcase-credit{display:inline-flex;align-items:center;gap:5px;margin-top:6px}
+.showcase-credit-badge{background:rgba(192,132,252,0.06);border:1px solid rgba(192,132,252,0.15);
+  border-radius:20px;padding:3px 9px;font-size:10px;font-weight:700;color:rgba(192,132,252,0.62)}
+.showcase-report-toggle{display:flex;align-items:center;gap:8px;margin-top:8px;
+  padding:9px 12px;border-radius:10px;background:rgba(192,132,252,0.04);
+  border:1px solid rgba(192,132,252,0.1)}
+.srt-icon{font-size:12px;color:rgba(192,132,252,0.5);flex-shrink:0}
+.srt-text{flex:1;font-size:11px;color:rgba(255,255,255,0.38);line-height:1.4}
+.srt-toggle{font-size:10px;font-weight:700;color:rgba(255,255,255,0.22);flex-shrink:0;
+  padding:3px 8px;border-radius:10px;background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);cursor:pointer}
+
+.showcase-share-btn{width:100%;height:46px;border-radius:13px;
+  border:1.5px solid rgba(192,132,252,0.22);background:rgba(192,132,252,0.05);
+  color:rgba(192,132,252,0.75);font-size:13.5px;font-weight:600;
+  cursor:pointer;font-family:'Inter',sans-serif;
+  display:flex;align-items:center;justify-content:center;gap:7px}
+
+/* S8 family share teaser card */
+.family-share-teaser{display:flex;align-items:center;gap:10px;
+  background:rgba(192,132,252,0.04);border:1px solid rgba(192,132,252,0.14);
+  border-radius:13px;padding:11px 14px;margin-bottom:4px;cursor:pointer;
+  transition:background 0.15s}
+.family-share-teaser:active{background:rgba(192,132,252,0.09)}
+.fst-avs{display:flex}
+.fst-av{width:24px;height:24px;border-radius:50%;object-fit:cover;
+  border:1.5px solid rgba(14,14,20,0.9);margin-left:-5px}
+.fst-avs .fst-av:first-child{margin-left:0}
+.fst-text{flex:1;font-size:12px;color:rgba(255,255,255,0.55)}
+.fst-label{font-size:10.5px;font-weight:700;color:rgba(192,132,252,0.75)}
+.fst-arrow{font-size:13px;color:rgba(192,132,252,0.45)}
+
+body.light .showcase-title{color:rgba(10,10,20,0.9)}
+body.light .showcase-fam-badge{background:rgba(155,93,229,0.08);color:#9B5DE5;border-color:rgba(155,93,229,0.2)}
+body.light .showcase-hero{background:rgba(10,10,20,0.03);border-color:rgba(10,10,20,0.08)}
+body.light .showcase-hero-title{color:rgba(10,10,20,0.88)}
+body.light .showcase-hero-meta{color:rgba(10,10,20,0.35)}
+body.light .showcase-section{color:rgba(10,10,20,0.28)}
+body.light .family-sees-card{background:rgba(10,10,20,0.02);border-color:rgba(10,10,20,0.07)}
+body.light .fam-see-text{color:rgba(10,10,20,0.48)}
+body.light .reaction-bubble{background:rgba(10,10,20,0.03);border-color:rgba(10,10,20,0.07)}
+body.light .reaction-who{color:rgba(10,10,20,0.35)}
+body.light .reaction-text{color:rgba(10,10,20,0.72)}
+body.light .work-card{background:rgba(10,10,20,0.03);border-color:rgba(10,10,20,0.07)}
+body.light .work-title{color:rgba(10,10,20,0.82)}
+body.light .work-meta{color:rgba(10,10,20,0.35)}
+body.light .family-share-teaser{background:rgba(155,93,229,0.04);border-color:rgba(155,93,229,0.14)}
+body.light .fst-text{color:rgba(10,10,20,0.55)}
 
 /* ── Zoom overlay ── */
 #zoom-overlay{position:absolute;inset:0;z-index:90;pointer-events:none;opacity:0;
@@ -397,17 +643,25 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
 @keyframes screenIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── AI Orb FAB ── */
+@property --orb-angle{syntax:'<angle>';inherits:false;initial-value:0deg}
 #ai-orb{position:absolute;bottom:96px;right:16px;width:44px;height:44px;border-radius:50%;
-  background:radial-gradient(circle at 38% 35%,rgba(216,180,254,0.95),rgba(147,51,234,0.75));
-  box-shadow:0 0 0 0 rgba(192,132,252,0.5),0 4px 18px rgba(147,51,234,0.45);
-  cursor:pointer;z-index:50;display:flex;align-items:center;justify-content:center;
-  animation:orbPulse 3s ease-in-out infinite;transition:transform 0.15s;}
+  cursor:pointer;z-index:50;overflow:visible;
+  background:
+    radial-gradient(circle at center,rgba(14,14,20,0.93) 18px,transparent 18.5px),
+    conic-gradient(from var(--orb-angle),rgba(192,132,252,0.9) 0%,rgba(0,188,212,0.85) 30%,rgba(192,132,252,0.15) 65%,rgba(192,132,252,0.9) 100%);
+  animation:orbGradientSpin 5s linear infinite,orbPulseOut 2.5s ease-in-out infinite;
+  transition:transform 0.15s;}
+#ai-orb::before{content:'';position:absolute;inset:2.5px;border-radius:50%;
+  background:rgba(14,14,20,0.92) url('kaleidoscope-mandala.svg') center/80% no-repeat;}
 #ai-orb:active{transform:scale(0.92);}
 #ai-orb.hidden{display:none;}
-.orb-icon{font-size:19px;color:rgba(255,255,255,0.95);user-select:none;}
-@keyframes orbPulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(192,132,252,0.45),0 4px 18px rgba(147,51,234,0.4);}
-  50%{box-shadow:0 0 0 9px rgba(192,132,252,0),0 4px 28px rgba(147,51,234,0.65);}
+.orb-logo{width:44px;height:44px;object-fit:cover;display:block;pointer-events:none;}
+@keyframes orbGradientSpin{to{--orb-angle:360deg}}
+@keyframes orbPulseOut{
+  0%,100%{box-shadow:0 0 0 0 rgba(192,132,252,0.45),0 4px 18px rgba(0,0,0,0.5);}
+  60%{box-shadow:0 0 0 7px rgba(192,132,252,0),0 4px 24px rgba(0,0,0,0.6);}
+}
+  50%{box-shadow:0 0 0 8px rgba(180,20,40,0),0 4px 24px rgba(0,0,0,0.6);}
 }
 .phone.sheet-open .screen.active{transform:scale(0.92) translateY(-18px);border-radius:20px;
   transition:transform 0.35s cubic-bezier(0.2,0,0,1);}
@@ -425,8 +679,10 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
 #ai-sheet-head{display:flex;align-items:center;gap:12px;padding:14px 20px 10px;flex-shrink:0;
   border-bottom:1px solid rgba(255,255,255,0.05);}
 .sheet-orb-mini{width:32px;height:32px;border-radius:50%;flex-shrink:0;
-  background:radial-gradient(circle at 38% 35%,rgba(216,180,254,0.9),rgba(147,51,234,0.65));
-  display:flex;align-items:center;justify-content:center;font-size:14px;color:white;}
+  background:rgba(18,12,24,0.88);border:1px solid rgba(255,255,255,0.1);
+  backdrop-filter:blur(10px);
+  display:flex;align-items:center;justify-content:center;}
+.orb-logo-mini{width:16px;height:16px;object-fit:contain;display:block;pointer-events:none;}
 .sheet-title{font-size:15px;font-weight:700;color:rgba(255,255,255,0.88);}
 .sheet-subtitle{font-size:11.5px;color:rgba(255,255,255,0.38);margin-top:1px;}
 #ai-sheet-body{flex:1;overflow-y:auto;padding:12px 20px;}
@@ -445,20 +701,27 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
   border:1px solid rgba(192,132,252,0.3);color:#C084FC;font-size:16px;
   display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
 /* ── Notif list ── */
-#notif-wrap{position:absolute;top:8px;left:14px;right:14px;z-index:10;}
-#notif-expand{display:flex;flex-direction:column;gap:4px;
-  max-height:122px;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+#notif-wrap{position:absolute;top:8px;left:14px;right:14px;z-index:10;
+  background:rgba(10,10,18,0.82);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  border:1px solid rgba(255,255,255,0.1);border-radius:16px;overflow:hidden;}
+#notif-panel-header{display:flex;align-items:center;justify-content:space-between;
+  padding:8px 12px 6px;border-bottom:1px solid rgba(255,255,255,0.06);}
+#notif-panel-label{font-size:9.5px;font-weight:700;color:rgba(255,255,255,0.3);
+  letter-spacing:0.8px;text-transform:uppercase;}
+#notif-expand{display:flex;flex-direction:column;
+  max-height:118px;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
 #notif-expand::-webkit-scrollbar{display:none;}
-#notif-fade{position:absolute;bottom:0;left:0;right:0;height:52px;
-  background:linear-gradient(transparent 0%,rgba(14,14,20,0.82) 55%,rgba(14,14,20,0.97) 100%);
+#notif-fade{position:absolute;bottom:0;left:0;right:0;height:44px;
+  background:linear-gradient(transparent 0%,rgba(10,10,18,0.82) 55%,rgba(10,10,18,0.97) 100%);
   pointer-events:none;z-index:20;
-  display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;}
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;}
 #notif-fade::after{content:'↓  more';font-size:9.5px;font-weight:600;
   color:rgba(255,255,255,0.38);letter-spacing:0.8px;font-family:'Inter',sans-serif;}
-.notif-row{display:flex;align-items:center;gap:9px;padding:7px 11px 7px 10px;
-  border-radius:11px;background:rgba(14,14,22,0.52);backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,0.07);cursor:pointer;transition:background 0.15s;}
-.notif-row:active{background:rgba(255,255,255,0.09);}
+.notif-row{display:flex;align-items:center;gap:9px;padding:7px 12px;
+  background:transparent;border-bottom:1px solid rgba(255,255,255,0.04);
+  cursor:pointer;transition:background 0.15s;}
+.notif-row:last-child{border-bottom:none;}
+.notif-row:active{background:rgba(255,255,255,0.06);}
 .notif-icon{font-size:12px;width:16px;text-align:center;flex-shrink:0;}
 .notif-body{flex:1;font-size:12px;font-weight:500;color:rgba(255,255,255,0.72);letter-spacing:-0.1px;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -466,17 +729,137 @@ body.light .cc-ws-tab-label{color:rgba(0,130,150,0.75)}
 .notif-dismiss{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.06);
   border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.3);font-size:7px;font-weight:700;
   display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-left:2px;}
-body.light #ai-orb{background:radial-gradient(circle at 38% 35%,rgba(192,132,252,0.9),rgba(109,40,217,0.7));}
+body.light #ai-orb{
+  background:
+    radial-gradient(circle at center,rgba(240,238,248,0.95) 18px,transparent 18.5px),
+    conic-gradient(from var(--orb-angle),rgba(124,58,237,0.75) 0%,rgba(155,93,229,0.7) 30%,rgba(124,58,237,0.1) 65%,rgba(124,58,237,0.75) 100%);}
+body.light #ai-orb::before{background:rgba(240,238,248,0.94) url('kaleidoscope-mandala.svg') center/80% no-repeat;}
+body.light .sheet-orb-mini{background:rgba(240,238,248,0.92);border-color:rgba(0,0,0,0.1);}
 body.light #ai-sheet{background:rgba(250,250,254,0.98);border-top-color:rgba(147,51,234,0.2);}
 body.light .sheet-title{color:rgba(10,10,20,0.9);}body.light .sheet-subtitle{color:rgba(10,10,20,0.42);}
 body.light .sheet-action{border-color:rgba(10,10,20,0.07);color:rgba(10,10,20,0.65);}
 body.light .sheet-input{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.75);}
+body.light #notif-wrap{background:rgba(236,236,248,0.88);border-color:rgba(10,10,20,0.1);}
+body.light #notif-panel-header{border-bottom-color:rgba(10,10,20,0.07);}
+body.light #notif-panel-label{color:rgba(10,10,20,0.35);}
 body.light #notif-fade{background:linear-gradient(transparent 0%,rgba(235,235,245,0.85) 55%,rgba(235,235,245,0.97) 100%);}
 body.light #notif-fade::after{color:rgba(10,10,20,0.32);}
-body.light .notif-row{background:rgba(240,240,250,0.78);border-color:rgba(10,10,20,0.08);}
+body.light .notif-row{background:transparent;border-bottom-color:rgba(10,10,20,0.07);}
 body.light .notif-body{color:rgba(10,10,20,0.7);}
 body.light .notif-time{color:rgba(10,10,20,0.3);}
 body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.35);}
+
+/* ── STAGE MODE: contrast & size for presentation ── */
+/* Primary text */
+.butler-bubble.ai{color:rgba(255,255,255,0.88);font-size:14.5px}
+.butler-bubble.user{color:rgba(255,255,255,0.92);font-size:14.5px}
+.tl-notify-msg{color:rgba(255,255,255,0.88);font-size:14px}
+.canvas-title-text{color:rgba(255,255,255,0.92);font-size:14px}
+.reaction-text,.work-title{font-size:14px}
+/* Secondary text */
+.greeting{color:rgba(255,255,255,0.72);font-size:13px}
+.tab-label{color:rgba(255,255,255,0.75);font-size:12px}
+.butler-subtitle{font-size:13px}
+.cc-sub,.waiting-sub,.joining-sub{color:rgba(255,255,255,0.68);font-size:14px}
+.tl-notify-app{color:rgba(255,255,255,0.65);font-size:12px}
+.tl-banner-text{font-size:13px}
+.cc-ws-hero-sub{color:rgba(255,255,255,0.65);font-size:13px}
+.ai-guide-body{color:rgba(255,255,255,0.78);font-size:13px}
+.contrib-body{color:rgba(255,255,255,0.72);font-size:13px}
+.contrib-name{font-size:13.5px}
+.fam-see-text{color:rgba(255,255,255,0.72);font-size:13px}
+/* Tertiary — floor */
+.tl-notify-time{color:rgba(255,255,255,0.58);font-size:11.5px}
+.notif-time{color:rgba(255,255,255,0.58);font-size:11.5px}
+.contrib-time{color:rgba(255,255,255,0.58);font-size:11.5px}
+.canvas-title-sub{color:rgba(255,255,255,0.68);font-size:12.5px}
+.canvas-meta{color:rgba(255,255,255,0.65);font-size:12.5px}
+.showcase-hero-meta{color:rgba(255,255,255,0.68);font-size:13px}
+.showcase-section{color:rgba(255,255,255,0.65);font-size:12px}
+.reaction-who{color:rgba(255,255,255,0.65);font-size:12px}
+.work-meta{color:rgba(255,255,255,0.65);font-size:12px}
+.cc-ws-section{color:rgba(255,255,255,0.65);font-size:12.5px}
+.trend-heat{color:rgba(255,255,255,0.62);font-size:11px}
+.trend-name{font-size:13px}
+/* Notification */
+.notif-body{color:rgba(255,255,255,0.88);font-size:13.5px}
+/* Sheet */
+.sheet-subtitle{color:rgba(255,255,255,0.65);font-size:13px}
+.sheet-action{color:rgba(255,255,255,0.82);font-size:14px}
+
+/* ── Enhanced authorship ── */
+.auth-top-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.auth-pct{font-size:13px;font-weight:700;color:rgba(74,222,128,0.85)}
+.auth-ratio-bar{height:4px;border-radius:2px;overflow:hidden;display:flex;margin-bottom:6px}
+.auth-bar-human{width:68%;background:linear-gradient(90deg,rgba(74,222,128,0.72),rgba(74,222,128,0.45))}
+.auth-bar-ai{flex:1;background:rgba(192,132,252,0.2)}
+.auth-stats-row{display:flex;flex-wrap:wrap;gap:4px}
+body.light .auth-pct{color:rgba(22,100,60,0.8)}
+body.light .auth-bar-human{background:linear-gradient(90deg,rgba(22,163,74,0.6),rgba(22,163,74,0.4))}
+body.light .auth-bar-ai{background:rgba(124,58,237,0.15)}
+
+/* ── Creative Direction Thread ── */
+.direction-thread{margin:10px 16px 0;padding:11px 13px;border-radius:14px;
+  background:rgba(192,132,252,0.04);border:1px solid rgba(192,132,252,0.1)}
+.dt-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.dt-label{font-size:10px;font-weight:700;color:rgba(192,132,252,0.7);letter-spacing:0.04em}
+.dt-count{font-size:9.5px;font-weight:600;color:rgba(255,255,255,0.2)}
+.dt-body{display:flex;flex-direction:column}
+.dt-entry{display:flex;gap:8px;padding:5px 0;position:relative}
+.dt-entry:not(:last-child)::after{content:'';position:absolute;left:5px;top:18px;
+  width:1px;bottom:-5px;background:rgba(255,255,255,0.07)}
+.dt-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.dt-ai .dt-dot{background:rgba(192,132,252,0.35);border:1px solid rgba(192,132,252,0.5)}
+.dt-yuki .dt-dot{background:rgba(74,222,128,0.3);border:1px solid rgba(74,222,128,0.5)}
+.dt-content{flex:1}
+.dt-who{font-size:9px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase}
+.dt-ai .dt-who{color:rgba(192,132,252,0.7)}
+.dt-yuki .dt-who{color:rgba(74,222,128,0.7)}
+.dt-text{font-size:11.5px;color:rgba(255,255,255,0.52);line-height:1.45;margin-top:1px}
+.dt-kept{display:inline-block;margin-top:4px;font-size:9.5px;font-weight:700;
+  color:#C084FC;background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.2);
+  padding:1px 7px;border-radius:6px}
+body.light .direction-thread{background:rgba(124,58,237,0.03);border-color:rgba(124,58,237,0.09)}
+body.light .dt-label{color:rgba(124,58,237,0.6)}
+body.light .dt-count{color:rgba(10,10,20,0.22)}
+body.light .dt-entry::after{background:rgba(10,10,20,0.07)}
+body.light .dt-ai .dt-dot{background:rgba(124,58,237,0.2);border-color:rgba(124,58,237,0.35)}
+body.light .dt-yuki .dt-dot{background:rgba(22,163,74,0.2);border-color:rgba(22,163,74,0.35)}
+body.light .dt-ai .dt-who{color:rgba(124,58,237,0.6)}
+body.light .dt-yuki .dt-who{color:rgba(22,100,60,0.6)}
+body.light .dt-text{color:rgba(10,10,20,0.45)}
+body.light .dt-kept{color:#0097A7;background:rgba(0,151,167,0.08);border-color:rgba(0,151,167,0.18)}
+
+/* ── Sharing card ── */
+.sharing-card{margin:10px 16px 0;border-radius:14px;overflow:hidden;
+  border:1px solid rgba(192,132,252,0.12);background:rgba(192,132,252,0.03)}
+.sharing-card-header{display:flex;align-items:center;justify-content:space-between;
+  padding:9px 13px 7px;border-bottom:1px solid rgba(192,132,252,0.09)}
+.sharing-card-title{font-size:10px;font-weight:700;color:rgba(192,132,252,0.6);letter-spacing:0.05em}
+.sharing-private-badge{font-size:9.5px;font-weight:600;color:rgba(255,255,255,0.28);
+  background:rgba(255,255,255,0.05);padding:2px 8px;border-radius:20px;
+  border:1px solid rgba(255,255,255,0.08)}
+.sharing-row{display:flex;align-items:center;gap:10px;padding:10px 13px;
+  cursor:pointer;transition:background 0.15s}
+.sharing-row:active{background:rgba(192,132,252,0.06)}
+.sharing-row-avs{display:flex}
+.sharing-row-av{width:26px;height:26px;border-radius:50%;object-fit:cover;
+  border:2px solid rgba(14,14,20,0.9);margin-left:-7px}
+.sharing-row-avs .sharing-row-av:first-child{margin-left:0}
+.sharing-row-info{flex:1}
+.sharing-row-label{font-size:11.5px;font-weight:600;color:rgba(255,255,255,0.62)}
+.sharing-row-sub{font-size:10px;color:rgba(255,255,255,0.28);margin-top:1px}
+.sharing-share-btn{font-size:10.5px;font-weight:700;padding:5px 11px;border-radius:20px;
+  background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.25);
+  color:rgba(192,132,252,0.8);cursor:pointer;white-space:nowrap;font-family:inherit}
+body.light .sharing-card{border-color:rgba(155,93,229,0.14);background:rgba(155,93,229,0.02)}
+body.light .sharing-card-header{border-bottom-color:rgba(155,93,229,0.1)}
+body.light .sharing-card-title{color:rgba(0,110,130,0.65)}
+body.light .sharing-private-badge{color:rgba(10,10,20,0.35);background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.09)}
+body.light .sharing-row-label{color:rgba(10,10,20,0.62)}
+body.light .sharing-row-sub{color:rgba(10,10,20,0.3)}
+body.light .sharing-share-btn{background:rgba(155,93,229,0.07);border-color:rgba(155,93,229,0.2);color:rgba(0,110,130,0.75)}
+
 </style>
 </head>
 <body>
@@ -497,29 +880,20 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
     <div class="const-area">
       <svg class="const-svg" id="const-svg" viewBox="0 0 390 420" preserveAspectRatio="xMidYMid meet"></svg>
       <div id="notif-wrap">
+        <div id="notif-panel-header">
+          <span id="notif-panel-label">Updates</span>
+        </div>
         <div id="notif-expand">
           <div class="notif-row" id="notif-crew" onclick="goTo(7)">
             <span class="notif-icon" style="color:#4ADE80">✅</span>
-            <span class="notif-body">Mom approved CrewCreate — tap to join now!</span>
+            <span class="notif-body">Mom approved Bloom — tap to join now!</span>
             <span class="notif-time">Just now</span>
             <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-crew')">✕</div>
           </div>
-          <div class="notif-row" id="notif-phish" onclick="goTo(6)">
-            <span class="notif-icon" style="color:#C084FC">🛡</span>
-            <span class="notif-body">AI Butler blocked a phishing link — kept you safe</span>
-            <span class="notif-time">Yesterday</span>
-            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-phish')">✕</div>
-          </div>
-          <div class="notif-row" id="notif-screen" onclick="goTo(6)">
-            <span class="notif-icon" style="color:#FFB84D">⏰</span>
-            <span class="notif-body">Screen time: 2h remaining today</span>
-            <span class="notif-time">Today</span>
-            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-screen')">✕</div>
-          </div>
-          <div class="notif-row" id="notif-grandma" onclick="goTo(6)">
-            <span class="notif-icon" style="color:#FFC364">💬</span>
-            <span class="notif-body">Grandma sent you a voice message</span>
-            <span class="notif-time">1h ago</span>
+          <div class="notif-row" id="notif-grandma">
+            <span class="notif-icon" style="color:#FFC364">🎂</span>
+            <span class="notif-body">Grandma's resting — not feeling well · birthday cake is all set</span>
+            <span class="notif-time">Just now</span>
             <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-grandma')">✕</div>
           </div>
           <div class="notif-row" id="notif-hiro" onclick="goTo(6)">
@@ -529,8 +903,8 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
             <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-hiro')">✕</div>
           </div>
           <div class="notif-row" id="notif-streak" onclick="goTo(6)">
-            <span class="notif-icon" style="color:#FCD34D">📚</span>
-            <span class="notif-body">Learning streak: 5 days! Critical thinking +15%</span>
+            <span class="notif-icon" style="color:#FCD34D">✦</span>
+            <span class="notif-body">5 days in — Kaleidoscope asks: what do you want to make next?</span>
             <span class="notif-time">Today</span>
             <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-streak')">✕</div>
           </div>
@@ -539,23 +913,16 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
       </div>
     </div>
     <div class="tab-bar">
-      <div class="tab-item active"><div class="tab-icon">✦</div><div class="tab-label">Home</div></div>
-      <div class="tab-item" onclick="launchCrewCreate()">
-        <div class="tab-icon" style="font-size:22px;font-weight:900;color:rgba(255,255,255,0.5);line-height:1">+</div>
-        <div class="tab-label">Create</div>
-      </div>
-      <div class="tab-item" onclick="goTo(6)"><div class="tab-icon">◈</div><div class="tab-label">AI</div></div>
-      <div class="tab-item">
-        <div class="tab-icon" style="font-size:18px;line-height:1">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div class="tab-label">Me</div>
+      <div class="tab-item active"><div class="tab-icon">✦</div><div class="tab-label">Family</div></div>
+      <div class="tab-item" onclick="launchBloom()">
+        <div class="tab-icon"><img src="bloom-icon.svg" style="width:22px;height:22px;opacity:0.55;display:block"></div>
+        <div class="tab-label">Bloom</div>
       </div>
     </div>
   </div>
 
   <!-- ══════════════════════════════
-       S1 · CrewCreate — Age Verification
+       S1 · Bloom — Age Verification
        ══════════════════════════════ -->
   <div class="screen" id="s1">
     <div class="status-bar">
@@ -565,28 +932,28 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
     <div style="flex:1;display:flex;flex-direction:column;align-items:center;
                 justify-content:center;padding:28px 24px;overflow-y:auto">
       <div class="cc-icon-wrap" style="flex-direction:column;gap:0">
-        <span style="font-size:22px;font-weight:900;color:white;letter-spacing:-1px;line-height:1">CC</span>
+        <span style="font-size:22px;font-weight:900;color:transparent;letter-spacing:-1px;line-height:1">B</span>
       </div>
-      <div class="cc-title">歡迎來到 CrewCreate</div>
-      <div class="cc-sub">我們需要驗證你的年齡，以提供適合的創作體驗並確保你的安全。我們絕不會分享你的個人資訊。</div>
+      <div class="cc-title">Welcome to Bloom</div>
+      <div class="cc-sub">We need to verify your age to give you the right creative experience and keep you safe. We'll never share your personal info.</div>
       <div style="width:100%;margin-bottom:24px">
-        <div class="cc-field-label">你的出生日期是？</div>
+        <div class="cc-field-label">What's your date of birth?</div>
         <div class="cc-date-row">
           <div class="cc-date-field">MM</div>
           <div class="cc-date-field">DD</div>
           <div class="cc-date-field filled" style="flex:1.4">2008</div>
         </div>
       </div>
-      <button class="cc-btn" onclick="goTo(2)">繼續 →</button>
+      <button class="cc-btn" onclick="goTo(2)">Continue →</button>
       <div class="cc-info-card" style="width:100%">
-        <div class="cc-info-label">為什麼我們需要這個資訊</div>
-        <div class="cc-info-text">年齡驗證幫助我們提供適當的內容，啟用家長控制，並遵守旨在保護你的隱私法規。</div>
+        <div class="cc-info-label">Why we need this</div>
+        <div class="cc-info-text">Age verification helps us provide appropriate content, enable parental controls, and comply with privacy laws designed to protect you.</div>
       </div>
     </div>
   </div>
 
   <!-- ══════════════════════════════
-       S2 · CrewCreate — Interests
+       S2 · Bloom — Interests
        ══════════════════════════════ -->
   <div class="screen" id="s2">
     <div class="status-bar">
@@ -601,9 +968,9 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
     <div class="cc-body">
       <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
         <span style="font-size:18px;color:#FF5BA7">✦</span>
-        <div class="cc-section-title">你喜歡創作什麼內容？</div>
+        <div class="cc-section-title">What do you love creating?</div>
       </div>
-      <div class="cc-section-sub">選擇你最感興趣的領域，我們會推薦適合你的創意靈感和趨勢</div>
+      <div class="cc-section-sub">Pick your interests and we'll tailor inspiration and trends just for you</div>
       <div class="interest-grid">
         <div class="interest-card selected">
           <div class="interest-icon" style="background:rgba(255,45,135,0.18);color:#FF5BA7">FA</div>
@@ -614,7 +981,7 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
           <div class="interest-name">Gaming</div>
         </div>
         <div class="interest-card selected">
-          <div class="interest-icon" style="background:rgba(0,188,212,0.18);color:#00BCD4">AR</div>
+          <div class="interest-icon" style="background:rgba(192,132,252,0.18);color:#C084FC">AR</div>
           <div class="interest-name">Art &amp; Design</div>
         </div>
         <div class="interest-card">
@@ -630,12 +997,12 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
           <div class="interest-name">Sports &amp; Fitness</div>
         </div>
       </div>
-      <button class="cc-btn" onclick="goTo(3)">繼續 →</button>
+      <button class="cc-btn" onclick="goTo(3)">Continue →</button>
     </div>
   </div>
 
   <!-- ══════════════════════════════
-       S3 · CrewCreate — Goals
+       S3 · Bloom — Goals
        ══════════════════════════════ -->
   <div class="screen" id="s3">
     <div class="status-bar">
@@ -648,8 +1015,8 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
       <div class="cc-prog-seg active"></div>
     </div>
     <div class="cc-body">
-      <div class="cc-section-title" style="margin-bottom:6px">你想達成什麼目標？</div>
-      <div class="cc-section-sub">告訴我們你想怎麼成長，我們會幫你實現</div>
+      <div class="cc-section-title" style="margin-bottom:6px">What are your goals?</div>
+      <div class="cc-section-sub">Tell us how you want to grow and we'll help you get there</div>
       <div class="goal-list">
         <div class="goal-item selected">
           <span class="goal-icon" style="font-size:13px;font-weight:800;color:#FF5BA7">◎</span>
@@ -669,14 +1036,14 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
         </div>
       </div>
       <div class="cc-btn-row">
-        <button class="cc-btn-secondary" onclick="goTo(2)">返回</button>
-        <button class="cc-btn" onclick="goTo(4)">繼續 →</button>
+        <button class="cc-btn-secondary" onclick="goTo(2)">Back</button>
+        <button class="cc-btn" onclick="goTo(4)">Continue →</button>
       </div>
     </div>
   </div>
 
   <!-- ══════════════════════════════
-       S4 · CrewCreate — Parental Consent
+       S4 · Bloom — Parental Consent
        ══════════════════════════════ -->
   <div class="screen" id="s4">
     <div class="status-bar">
@@ -689,35 +1056,35 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
       <div class="cc-prog-seg done"></div>
     </div>
     <div class="cc-body">
-      <div class="cc-section-title" style="margin-bottom:6px">最後一步...</div>
-      <div class="cc-section-sub" style="margin-bottom:14px">因為你未滿 18 歲，需要家長批准你的帳號。這能確保你在安全的環境中創作內容。</div>
+      <div class="cc-section-title" style="margin-bottom:6px">One last step…</div>
+      <div class="cc-section-sub" style="margin-bottom:14px">Because you're under 18, a parent needs to approve your account. This keeps your creative space safe.</div>
 
       <div class="tl-banner">
         <div class="tl-banner-logo">T</div>
-        <div class="tl-banner-text">透過 <strong>TrendLife AI Butler</strong>，批准請求會直接傳送給媽媽 Mei，不需要傳統電子郵件</div>
+        <div class="tl-banner-text">Via <strong>TrendLife Kaleidoscope</strong>, the approval request goes directly to Mom (Mei) — no email needed</div>
       </div>
 
       <div class="cc-consent-box">
-        <div class="cc-consent-title">家長可以：</div>
+        <div class="cc-consent-title">Parents can:</div>
         <div class="cc-consent-item">
-          <span class="cc-consent-check">✓</span>查看內容創作活動摘要（不包含完整內容細節）
+          <span class="cc-consent-check">✓</span>View a summary of your content activity (not full details)
         </div>
         <div class="cc-consent-item">
-          <span class="cc-consent-check">✓</span>設定使用時間限制和內容過濾器
+          <span class="cc-consent-check">✓</span>Set screen time limits and content filters
         </div>
         <div class="cc-consent-item">
-          <span class="cc-consent-check">✓</span>在偵測到不當內容時收到安全提醒
+          <span class="cc-consent-check">✓</span>Receive safety alerts when inappropriate content is detected
         </div>
       </div>
 
       <div class="cc-checkbox-row checked" id="consent-row" onclick="toggleConsent()">
         <div class="cc-checkbox checked" id="consent-box">✓</div>
-        <div class="cc-checkbox-text">我了解家長或監護人將透過 TrendLife 收到通知以批准我的帳號，並可以查看活動摘要</div>
+        <div class="cc-checkbox-text">I understand that a parent or guardian will be notified via TrendLife to approve my account and can view activity summaries</div>
       </div>
 
       <div class="cc-btn-row">
-        <button class="cc-btn-secondary" onclick="goTo(3)">返回</button>
-        <button class="cc-btn" id="start-btn" onclick="goTo(5)">開始創作 →</button>
+        <button class="cc-btn-secondary" onclick="goTo(3)">Back</button>
+        <button class="cc-btn" id="start-btn" onclick="goTo(5)">Start Creating →</button>
       </div>
     </div>
   </div>
@@ -734,15 +1101,15 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
 
       <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
         <div style="font-size:11px;color:rgba(255,255,255,0.28);letter-spacing:0.6px;
-                    text-transform:uppercase">批准請求已傳送給</div>
+                    text-transform:uppercase">Approval request sent to</div>
         <div class="waiting-av-wrap">
           <div class="waiting-ring"></div>
           <div class="waiting-ring"></div>
           <div class="waiting-av">E</div>
         </div>
         <div style="text-align:center">
-          <div style="font-size:17px;font-weight:700;color:rgba(255,255,255,0.85)">媽媽 Mei</div>
-          <div style="font-size:12px;color:rgba(255,255,255,0.32);margin-top:3px">透過 TrendLife AI Butler</div>
+          <div style="font-size:17px;font-weight:700;color:rgba(255,255,255,0.85)">Mom · Mei</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.32);margin-top:3px">via TrendLife Kaleidoscope</div>
         </div>
       </div>
 
@@ -753,21 +1120,21 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
       </div>
 
       <div style="text-align:center">
-        <div class="waiting-title">等待批准中...</div>
-        <div class="waiting-sub">媽媽會在 TrendLife 上看到你的請求<br>通常幾分鐘內就會批准 ✦</div>
+        <div class="waiting-title">Waiting for approval…</div>
+        <div class="waiting-sub">Mom will see your request on TrendLife<br>Usually approved within a few minutes ✦</div>
       </div>
 
       <div class="tl-notify-card">
         <div class="tl-notify-row">
           <div class="tl-notify-logo">T</div>
           <div style="flex:1">
-            <div class="tl-notify-app">TrendLife · AI Butler</div>
-            <div class="tl-notify-msg">Yuki 想加入 CrewCreate 創作平台，需要你的批准</div>
+            <div class="tl-notify-app">TrendLife · Kaleidoscope</div>
+            <div class="tl-notify-msg">Yuki wants to join Bloom — approval needed</div>
           </div>
         </div>
         <div class="tl-notify-footer">
-          <div class="tl-notify-time">剛剛傳送 · 已送達</div>
-          <div class="tl-notify-badge">✓ 已送達</div>
+          <div class="tl-notify-time">Just sent · Delivered</div>
+          <div class="tl-notify-badge">✓ Delivered</div>
         </div>
       </div>
 
@@ -775,7 +1142,7 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
   </div>
 
   <!-- ══════════════════════════════
-       S6 · AI Butler Chat
+       S6 · Kaleidoscope Chat
        ══════════════════════════════ -->
   <div class="screen" id="s6">
     <div class="status-bar">
@@ -786,41 +1153,41 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="butler-av">◈</div>
       <div>
-        <div class="butler-title">AI Butler</div>
-        <div class="butler-subtitle">● 線上 · 隨時幫你</div>
+        <div class="butler-title">Kaleidoscope</div>
+        <div class="butler-subtitle">● Online · Here for you</div>
       </div>
     </div>
     <div class="butler-msgs">
       <div class="butler-msg">
         <div class="butler-av" style="width:30px;height:30px;font-size:13px">◈</div>
-        <div class="butler-bubble ai">嗨 Yuki！我是你的 AI Butler。今天想做什麼創作？🎨</div>
+        <div class="butler-bubble ai">Hey Yuki! I'm your Kaleidoscope. What are you making today? 🎨</div>
       </div>
       <div class="butler-msg">
         <div class="butler-av" style="width:30px;height:30px;font-size:13px">◈</div>
-        <div class="butler-bubble ai">你之前選了 <strong style="color:#00BCD4">Fashion & Style</strong> 和 <strong style="color:#FF5BA7">Art & Design</strong>，我找到 3 個今天很熱的趨勢！</div>
+        <div class="butler-bubble ai">You picked <strong style="color:#00BCD4">Fashion & Style</strong> and <strong style="color:#FF5BA7">Art & Design</strong> — I found 3 trends blowing up right now!</div>
       </div>
       <div class="butler-msg me">
-        <div class="butler-bubble user">幫我看一下媽媽最近忙不忙 😅</div>
+        <div class="butler-bubble user">Can you check if Mom's free soon? 😅</div>
       </div>
       <div class="butler-msg">
         <div class="butler-av" style="width:30px;height:30px;font-size:13px">◈</div>
-        <div class="butler-bubble ai">媽媽 Mei 今天下午有會議，但 6 點後應該有空。要我幫你安排提醒她幫你確認 CrewCreate 嗎？✦</div>
+        <div class="butler-bubble ai">Mom (Mei) has meetings this afternoon but should be free after 6 PM. Want me to remind her about Bloom? ✦</div>
       </div>
     </div>
     <div class="butler-quick">
-      <div class="butler-chip" onclick="goTo(8)">打開創作工具</div>
-      <div class="butler-chip">今日趨勢</div>
-      <div class="butler-chip">家人動態</div>
-      <div class="butler-chip">安全提醒</div>
+      <div class="butler-chip" onclick="goTo(8)">Open creator tools</div>
+      <div class="butler-chip">Today's trends</div>
+      <div class="butler-chip">Family feed</div>
+      <div class="butler-chip">Safety alerts</div>
     </div>
     <div class="butler-bar">
-      <div class="butler-input">輸入訊息...</div>
+      <div class="butler-input">Message…</div>
       <div class="butler-send">↑</div>
     </div>
   </div>
 
   <!-- ══════════════════════════════
-       S7 · Joining CrewCreate (3s auto-advance)
+       S7 · Joining Bloom (3s auto-advance)
        ══════════════════════════════ -->
   <div class="screen" id="s7">
     <div class="status-bar">
@@ -828,10 +1195,10 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
       <span class="status-icons">●●● Wi-Fi ▮</span>
     </div>
     <div class="joining-body">
-      <div class="joining-logo-wrap"><span style="font-size:26px;font-weight:900;color:white;letter-spacing:-1.5px">CC</span></div>
+      <div class="joining-logo-wrap"><span style="font-size:26px;font-weight:900;color:transparent;letter-spacing:-1.5px">B</span></div>
       <div style="text-align:center">
-        <div class="joining-title">進入 CrewCreate</div>
-        <div class="joining-sub">正在載入你的創作空間…</div>
+        <div class="joining-title">Joining Bloom</div>
+        <div class="joining-sub">Loading your creative space…</div>
       </div>
       <div style="width:100%">
         <div class="joining-prog-track">
@@ -841,26 +1208,26 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
       <div class="joining-steps">
         <div class="joining-step done" id="jstep0">
           <div class="joining-step-icon">✓</div>
-          <span>驗證身份</span>
+          <span>Verifying identity</span>
         </div>
         <div class="joining-step" id="jstep1">
           <div class="joining-step-icon"></div>
-          <span>載入你的興趣偏好</span>
+          <span>Loading your interests</span>
         </div>
         <div class="joining-step" id="jstep2">
           <div class="joining-step-icon"></div>
-          <span>準備趨勢推薦</span>
+          <span>Preparing trend picks</span>
         </div>
         <div class="joining-step" id="jstep3">
           <div class="joining-step-icon"></div>
-          <span>開啟創作空間</span>
+          <span>Opening creative space</span>
         </div>
       </div>
     </div>
   </div>
 
   <!-- ══════════════════════════════
-       S8 · CrewCreate Creation Workspace
+       S8 · Bloom Collab Workspace
        ══════════════════════════════ -->
   <div class="screen" id="s8">
     <div class="status-bar">
@@ -870,78 +1237,226 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
     <div class="cc-ws-header">
       <div style="display:flex;align-items:center;gap:10px">
         <div class="back-btn" onclick="goTo(0)">←</div>
-        <div class="cc-ws-logo">CrewCreate</div>
+        <div class="cc-ws-logo">Bloom</div>
       </div>
-      <div class="cc-ws-badge">Yuki 🎨</div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="cc-ws-private">🔒 Private</div>
+        <div class="cc-ws-badge">Collab 🎬</div>
+      </div>
     </div>
     <div class="cc-ws-body">
-      <!-- Hero create -->
-      <div class="cc-ws-hero">
-        <div class="cc-ws-hero-icon" style="font-size:26px;font-weight:900;color:white;letter-spacing:-1px;font-family:'Inter',sans-serif">+</div>
-        <div class="cc-ws-hero-text">
-          <div class="cc-ws-hero-title">開始創作</div>
-          <div class="cc-ws-hero-sub">上傳影片・圖片・短貼文</div>
-        </div>
-        <div style="font-size:20px;color:rgba(255,255,255,0.25)">›</div>
-      </div>
 
-      <!-- Tabs -->
-      <div class="cc-ws-tabs">
-        <button class="cc-ws-tab active">趨勢</button>
-        <button class="cc-ws-tab">我的貼文</button>
-        <button class="cc-ws-tab">Crew</button>
-      </div>
-
-      <!-- Trending cards -->
-      <div class="cc-ws-section">今日熱門趨勢</div>
-      <div class="trend-row">
-        <div class="trend-card">
-          <img src="https://picsum.photos/seed/yuki-fashion/264/180" alt="" style="width:100%;height:90px;object-fit:cover;display:block">
-          <div class="trend-info">
-            <div class="trend-tag">FASHION</div>
-            <div class="trend-name">Y2K 復古格紋穿搭</div>
-            <div class="trend-heat">↑ 12.4K 影片</div>
+      <!-- Collab project banner -->
+      <div class="collab-banner">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="collab-project-name">🏮 文化祭 2024</div>
+          <div style="font-size:10.5px;font-weight:600;color:rgba(74,222,128,0.8)">
+            <span class="collab-live-dot"></span>Live · 3 collaborating
           </div>
         </div>
-        <div class="trend-card">
-          <img src="https://picsum.photos/seed/yuki-art/264/180" alt="" style="width:100%;height:90px;object-fit:cover;display:block">
-          <div class="trend-info">
-            <div class="trend-tag">ART</div>
-            <div class="trend-name">霓虹油畫塗鴉挑戰</div>
-            <div class="trend-heat">↑ 8.7K 影片</div>
-          </div>
-        </div>
-        <div class="trend-card">
-          <img src="https://picsum.photos/seed/yuki-street/264/180" alt="" style="width:100%;height:90px;object-fit:cover;display:block">
-          <div class="trend-info">
-            <div class="trend-tag">STYLE</div>
-            <div class="trend-name">Streetwear Mix &amp; Match</div>
-            <div class="trend-heat">↑ 6.1K 影片</div>
-          </div>
+        <div class="collab-meta">TikTok collab · Hana &amp; Ren · 8 edits today</div>
+        <div class="collab-members">
+          <img class="collab-av" src="faces/yuki.png" alt="Yuki" title="Yuki (you)">
+          <img class="collab-av" src="https://i.pravatar.cc/52?img=23" alt="Hana" title="Hana">
+          <img class="collab-av" src="https://i.pravatar.cc/52?img=57" alt="Ren" title="Ren">
+          <div style="flex:1"></div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.22)">posting to TikTok</div>
         </div>
       </div>
 
-      <!-- For you -->
-      <div class="cc-ws-section" style="margin-top:14px">為你推薦</div>
-      <div class="cc-ws-post">
-        <div class="cc-ws-post-av" style="overflow:hidden;padding:0">
-          <img src="https://picsum.photos/seed/post-fashion1/72/72" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
+      <!-- Authorship strip -->
+      <div class="cc-ws-authorship">
+        <div class="auth-top-row">
+          <span class="cc-ws-auth-label">Your voice</span>
+          <span class="auth-pct">68%</span>
         </div>
-        <div class="cc-ws-post-text">
-          <div class="cc-ws-post-name">Fashion Challenge #2024</div>
-          <div class="cc-ws-post-sub">正在熱傳 · 適合你的風格</div>
+        <div class="auth-ratio-bar">
+          <div class="auth-bar-human"></div>
+          <div class="auth-bar-ai"></div>
         </div>
-        <div class="cc-ws-post-badge">參加</div>
+        <div class="auth-stats-row">
+          <span class="cc-ws-auth-stat">8 decisions</span>
+          <span class="cc-ws-auth-sep">·</span>
+          <span class="cc-ws-auth-stat">3 redirections</span>
+          <span class="cc-ws-auth-sep">·</span>
+          <span class="cc-ws-auth-stat">4 Q answered</span>
+        </div>
       </div>
-      <div class="cc-ws-post">
-        <div class="cc-ws-post-av" style="overflow:hidden;padding:0;border-color:rgba(74,222,128,0.2)">
-          <img src="https://picsum.photos/seed/post-art2/72/72" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">
+
+      <!-- Shared canvas card -->
+      <div class="collab-canvas-card">
+        <div class="canvas-preview">
+          <img src="img-canvas.jpg" alt="">
+          <div class="canvas-overlay"></div>
+          <!-- Live editing cursors -->
+          <div class="cursor-badge" style="top:9px;left:10px">
+            <div class="cursor-dot" style="background:#60A5FA"></div>
+            <span class="cursor-label">Hana is adding filter…</span>
+          </div>
+          <div class="cursor-badge" style="top:9px;right:10px">
+            <div class="cursor-dot" style="background:#FB923C"></div>
+            <span class="cursor-label">Ren added countdown</span>
+          </div>
+          <div class="canvas-title-overlay">
+            <div class="canvas-title-text">文化祭 2024 🏮</div>
+            <div class="canvas-title-sub">Vertical · 00:52 · v4 · 6 clips</div>
+          </div>
         </div>
-        <div class="cc-ws-post-text">
-          <div class="cc-ws-post-name">Art Collab with @mia</div>
-          <div class="cc-ws-post-sub">你的 Crew 邀請你合作</div>
+        <div class="canvas-footer">
+          <span class="canvas-meta">🎬 6 clips &nbsp;·&nbsp; 3 transitions &nbsp;·&nbsp; BGM: YOASOBI</span>
+          <button class="canvas-edit-btn">✎ Continue editing</button>
         </div>
-        <div class="cc-ws-post-badge" style="color:#4ADE80;background:rgba(74,222,128,0.08);border-color:rgba(74,222,128,0.25)">查看</div>
+      </div>
+
+      <!-- Creative Direction Thread -->
+      <div class="direction-thread">
+        <div class="dt-header">
+          <span class="dt-label">✦ Creative Direction</span>
+          <span class="dt-count">4 exchanges</span>
+        </div>
+        <div class="dt-body">
+          <div class="dt-entry dt-ai">
+            <div class="dt-dot"></div>
+            <div class="dt-content">
+              <span class="dt-who">Kaleidoscope</span>
+              <div class="dt-text">Opening feeling — quiet before chaos, or energy from the start?</div>
+            </div>
+          </div>
+          <div class="dt-entry dt-yuki">
+            <div class="dt-dot"></div>
+            <div class="dt-content">
+              <span class="dt-who">Yuki</span>
+              <div class="dt-text">quiet first. like the calm before everything gets loud.</div>
+            </div>
+          </div>
+          <div class="dt-entry dt-ai">
+            <div class="dt-dot"></div>
+            <div class="dt-content">
+              <span class="dt-who">Kaleidoscope</span>
+              <div class="dt-text">A: banner close-up, empty corridor. B: crowd already warming up. Both fit — which feeling matters more?</div>
+            </div>
+          </div>
+          <div class="dt-entry dt-yuki">
+            <div class="dt-dot"></div>
+            <div class="dt-content">
+              <span class="dt-who">Yuki</span>
+              <div class="dt-text">A. Keep it intimate. Hana and Ren can bring the energy later — I want the opening to feel like we're seeing it first.</div>
+              <span class="dt-kept">→ Director's choice ✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Socratic card -->
+      <div class="ai-guide-card socratic">
+        <div class="ai-guide-top">
+          <div class="ai-guide-icon">✦</div>
+          <div class="ai-guide-text">
+            <div class="ai-guide-title">Kaleidoscope noticed</div>
+            <div class="ai-guide-body">Hana's filter and Ren's countdown are both beautiful. But your first clip — the handwritten 「文化祭」banner going up, no crowd, no effects — had a completely different feeling.</div>
+          </div>
+        </div>
+        <div class="ai-guide-q">"This is starting to look like every other school festival TikTok. Was that always the goal — or was there a different story you wanted to tell?"</div>
+        <div class="ai-guide-choices">
+          <button class="ai-guide-choice intent">That's our story — keep the quiet opening</button>
+          <button class="ai-guide-choice rethink">The trending look is fine — keep going</button>
+        </div>
+      </div>
+
+      <!-- Contribution feed -->
+      <div class="cc-ws-section" style="margin-top:6px">Contributions</div>
+
+      <!-- Yuki — Director's choice -->
+      <div class="contrib-item yuki-item">
+        <div class="contrib-av">
+          <img src="faces/yuki.png" alt="">
+        </div>
+        <div class="contrib-content">
+          <div class="contrib-header">
+            <span class="contrib-name">Yuki (you)</span>
+            <span class="contrib-tag director">Director's choice</span>
+          </div>
+          <div class="contrib-body">Opening clip: 「文化祭」banner being hung — close-up, handwritten kanji, no crowd. Wanted to start with something quiet.</div>
+          <div class="contrib-thumb-row">
+            <div class="contrib-thumb-item">
+              <img src="img-yuki-thumb.jpg" alt="">
+            </div>
+            <div class="contrib-thumb-add">＋</div>
+          </div>
+          <div class="contrib-time">Just now</div>
+        </div>
+      </div>
+
+      <!-- Hana's contribution -->
+      <div class="contrib-item">
+        <div class="contrib-av">
+          <img src="https://i.pravatar.cc/68?img=23" alt="">
+        </div>
+        <div class="contrib-content">
+          <div class="contrib-header">
+            <span class="contrib-name">Hana</span>
+            <span class="contrib-tag added">Added BGM + filter</span>
+          </div>
+          <div class="contrib-body">YOASOBI track + golden hour film filter — "これ絶対バズる！✨"</div>
+          <div class="contrib-thumb-row">
+            <div class="contrib-thumb-item">
+              <img src="img-hana-thumb1.jpg" alt="">
+            </div>
+            <div class="contrib-thumb-item">
+              <img src="img-hana-thumb2.jpg" alt="">
+            </div>
+          </div>
+          <div class="contrib-time">12 mins ago</div>
+        </div>
+      </div>
+
+      <!-- Kaleidoscope noticed (Yuki kept) -->
+      <div class="contrib-item ai-item">
+        <div class="contrib-av-icon" style="background:rgba(192,132,252,0.1)">✦</div>
+        <div class="contrib-content">
+          <div class="contrib-header">
+            <span class="contrib-name" style="color:rgba(192,132,252,0.82)">Kaleidoscope</span>
+            <span class="contrib-tag ai-tag">Noticed</span>
+            <span class="contrib-tag kept">Yuki kept ✓</span>
+          </div>
+          <div class="contrib-body">Hana's filter and Ren's text overlays are layering up — noticed the visual weight is shifting from intimate to loud</div>
+          <div class="contrib-time">18 mins ago</div>
+        </div>
+      </div>
+
+      <!-- Ren's contribution -->
+      <div class="contrib-item">
+        <div class="contrib-av">
+          <img src="https://i.pravatar.cc/68?img=57" alt="">
+        </div>
+        <div class="contrib-content">
+          <div class="contrib-header">
+            <span class="contrib-name">Ren</span>
+            <span class="contrib-tag added">Added text</span>
+          </div>
+          <div class="contrib-body">「文化祭 Day 1 🏮」countdown overlay + confetti burst effect</div>
+          <div class="contrib-time">22 mins ago</div>
+        </div>
+      </div>
+
+      <!-- Sharing card -->
+      <div class="sharing-card">
+        <div class="sharing-card-header">
+          <span class="sharing-card-title">SHARING</span>
+          <span class="sharing-private-badge">🔒 Private · Crew only</span>
+        </div>
+        <div class="sharing-row" onclick="goTo(9)">
+          <div class="sharing-row-avs">
+            <img class="sharing-row-av" src="faces/mei.png" alt="Mom">
+            <img class="sharing-row-av" src="faces/grandma.png" alt="Grandma">
+            <img class="sharing-row-av" src="faces/kanji.png" alt="Dad">
+          </div>
+          <div class="sharing-row-info">
+            <div class="sharing-row-label">Family hasn't seen this yet</div>
+            <div class="sharing-row-sub">Mom · Grandma · Dad</div>
+          </div>
+          <button class="sharing-share-btn" onclick="event.stopPropagation();goTo(9)">Share →</button>
+        </div>
       </div>
       <div style="height:16px"></div>
     </div>
@@ -952,17 +1467,120 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
         <div class="cc-ws-tab-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.45"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
         </div>
-        <div class="cc-ws-tab-label">首頁</div>
+        <div class="cc-ws-tab-label">Home</div>
       </div>
       <div class="cc-ws-tab-item active">
         <div class="cc-ws-create-btn">+</div>
       </div>
-      <div class="cc-ws-tab-item">
+      <div class="cc-ws-tab-item" onclick="goTo(9)">
         <div class="cc-ws-tab-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(0,188,212,0.5)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(192,132,252,0.5)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
         </div>
-        <div class="cc-ws-tab-label">我的</div>
+        <div class="cc-ws-tab-label">Mine</div>
       </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       S9 · My Creative Space (Showcase)
+       ══════════════════════════════ -->
+  <div class="screen" id="s9">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="showcase-header">
+      <div class="back-btn" onclick="goTo(_prevScreen)">←</div>
+      <div class="showcase-title">My Creative Space</div>
+    </div>
+    <div class="showcase-body">
+
+      <!-- Featured work -->
+      <div class="showcase-hero">
+        <img class="showcase-hero-thumb" src="img-showcase-hero.jpg" alt="">
+        <div class="showcase-hero-info">
+          <div class="showcase-hero-title">🏮 文化祭 2024</div>
+          <div class="showcase-hero-meta">Vertical · 00:52 · TikTok · Collab with Hana &amp; Ren · 6 clips</div>
+          <div class="showcase-hero-tags">
+            <span style="font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:7px;
+              background:rgba(74,222,128,0.1);color:#4ADE80">✓ Shared with family</span>
+            <span style="font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:7px;
+              background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.32)">In progress</span>
+          </div>
+          <div class="showcase-credit">
+            <span class="showcase-credit-badge">✦ Directed by Yuki · 68% · 3 refusals</span>
+          </div>
+          <div class="showcase-report-toggle">
+            <span class="srt-icon">✦</span>
+            <span class="srt-text">Include in Kaleidoscope report to Mom</span>
+            <span class="srt-toggle">○ Off</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Who can see this -->
+      <div class="showcase-section">Shared with</div>
+      <div class="family-sees-card">
+        <div class="fam-see-avs">
+          <img class="fam-see-av" src="faces/mei.png" alt="Mom">
+          <img class="fam-see-av" src="faces/grandma.png" alt="Grandma">
+          <img class="fam-see-av" src="faces/kanji.png" alt="Dad">
+        </div>
+        <div class="fam-see-text">Mom, Grandma, Dad<br>
+          <span style="color:rgba(192,132,252,0.7);font-size:11px;font-weight:600">3 viewed · 1 not yet seen</span>
+        </div>
+        <div class="fam-see-arrow">›</div>
+      </div>
+
+      <!-- Reactions -->
+      <div class="showcase-section">Reactions</div>
+      <div class="reaction-list">
+        <div class="reaction-item">
+          <img class="reaction-av" src="faces/mei.png" alt="">
+          <div class="reaction-bubble">
+            <div class="reaction-who">Mom · just now</div>
+            <div class="reaction-text">The opening shot is so beautiful 🥺 Was the handwritten sign your idea?</div>
+          </div>
+        </div>
+        <div class="reaction-item">
+          <img class="reaction-av" src="faces/grandma.png" alt="">
+          <div class="reaction-bubble">
+            <div class="reaction-who">Grandma · 8 mins ago</div>
+            <div class="reaction-text">❤️ 懐かしいな〜 昔の文化祭もこんな感じだったわよ</div>
+          </div>
+        </div>
+        <div class="reaction-item">
+          <img class="reaction-av" src="faces/kanji.png" alt="">
+          <div class="reaction-bubble">
+            <div class="reaction-who">Dad · 20 mins ago</div>
+            <div class="reaction-text">Really nice work Yuki 👍 Love how you started with the banner!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- More works -->
+      <div class="showcase-section">More of my work</div>
+      <div class="works-grid">
+        <div class="work-card">
+          <img class="work-thumb" src="img-spring-festival.jpg" alt="">
+          <div class="work-info">
+            <div class="work-title">春祭り · Cinematic Edit</div>
+            <div class="work-meta">Video · Solo</div>
+            <span class="work-pill shared">Shared</span>
+          </div>
+        </div>
+        <div class="work-card">
+          <img class="work-thumb" src="img-voice-loop.jpg" alt="">
+          <div class="work-info">
+            <div class="work-title">Voice Loop #2</div>
+            <div class="work-meta">Music · Solo</div>
+            <span class="work-pill private">🔒 Private</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="showcase-share-btn">＋ Add to my showcase</button>
+      <div style="height:16px"></div>
     </div>
   </div>
 
@@ -970,22 +1588,20 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
   <div id="zoom-overlay"></div>
 
   <!-- ── AI Orb FAB ── -->
-  <div id="ai-orb" onclick="toggleAISheet()">
-    <span class="orb-icon">◈</span>
-  </div>
+  <div id="ai-orb" onclick="toggleAISheet()"></div>
   <div id="ai-sheet-dim" onclick="closeAISheet()"></div>
   <div id="ai-sheet">
     <div class="sheet-handle"></div>
     <div id="ai-sheet-head">
-      <div class="sheet-orb-mini">◈</div>
+      <div class="sheet-orb-mini"><img class="orb-logo-mini" src="kaleidoscope-mandala.svg" alt=""></div>
       <div>
-        <div class="sheet-title" id="sheet-title">AI Butler</div>
+        <div class="sheet-title" id="sheet-title">Kaleidoscope</div>
         <div class="sheet-subtitle" id="sheet-subtitle">Always here for you</div>
       </div>
     </div>
     <div id="ai-sheet-body"></div>
     <div id="ai-sheet-input-wrap">
-      <input class="sheet-input" placeholder="Ask AI Butler anything…" readonly>
+      <input class="sheet-input" placeholder="Ask Kaleidoscope anything…" readonly>
       <div class="sheet-send">↑</div>
     </div>
   </div>
@@ -995,10 +1611,12 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
 <script>
 // ── Navigation ──
 let _currentScreen=0;
+let _prevScreen=0;
 let _aiSheetOpen=false;
 function goTo(n){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('s'+n).classList.add('active');
+  _prevScreen=_currentScreen;
   _currentScreen=n;
   const orb=document.getElementById('ai-orb');
   if(orb) orb.classList.toggle('hidden', n===6);
@@ -1017,14 +1635,19 @@ function toggleConsent(){
 
 // ── Constellation data — Yuki at center ──
 const NODES=[
-  {id:'yuki',   label:'Yuki',    note:'You',           icon:'Yv', color:'#4ADE80', x:195, y:195, r:36, center:true},
+  {id:'yuki',   label:'Yuki',    note:'You',           icon:'Yv', color:'#4ADE80', x:195, y:195, r:36, center:true,
+   photo:'faces/yuki.png'},
   {id:'eva',    label:'Mom',     note:'Mei · Online',  icon:'M',  color:'#C084FC', x: 88, y:120, r:27,
-   status:['◎ Mom','◈ AI Butler']},
-  {id:'wei',    label:'Dad',     note:'Kenji',           icon:'K',  color:'#60A5FA', x:302, y:120, r:25,
+   photo:'faces/mei.png',
+   status:['◎ Mom','◈ Kaleidoscope']},
+  {id:'wei',    label:'Dad',     note:'Kenji',         icon:'K',  color:'#60A5FA', x:302, y:120, r:25,
+   photo:'faces/kanji.png',
    status:['◎ Dad']},
-  {id:'grace',  label:'Grandma', note:'Hana',         icon:'✦',  color:'#FFC364', x: 80, y:308, r:22,
+  {id:'grace',  label:'Grandma', note:'Hana',          icon:'✦',  color:'#FFC364', x: 80, y:308, r:22,
+   photo:'faces/grandma.png',
    status:['✦ Grandma','○ Healthy']},
-  {id:'ethan',  label:'Hiro',   note:'Brother',       icon:'Hi', color:'#FB923C', x:310, y:308, r:22,
+  {id:'ethan',  label:'Hiro',   note:'Brother',        icon:'Hi', color:'#FB923C', x:310, y:308, r:22,
+   photo:'faces/hiro.png',
    status:['◎ Brother']},
 ];
 const EDGES=[
@@ -1034,8 +1657,8 @@ const EDGES=[
   {a:'yuki', b:'ethan', w:0.65},
   {a:'eva',  b:'wei',   w:0.5},
 ];
-// CrewCreate discovery node (below Yuki)
-const CC={x:195, y:368, r:19, color:'#00BCD4'};
+// Bloom discovery node (below Yuki)
+const CC={x:195, y:368, r:19, color:'#C084FC'};
 
 let currentTheme='dark';
 
@@ -1118,10 +1741,10 @@ function buildConstellation(){
     dot.appendChild(am);svg.appendChild(dot);
   });
 
-  // ── CrewCreate discovery node ──
+  // ── Bloom discovery node ──
   const ccG=document.createElementNS('http://www.w3.org/2000/svg','g');
   ccG.style.cursor='pointer';
-  ccG.onclick=()=>launchCrewCreate();
+  ccG.onclick=()=>launchBloom();
 
   // Dashed connector from Yuki to CC
   const yukiBot=195+36+4; // y=235
@@ -1129,14 +1752,14 @@ function buildConstellation(){
   const ccConn=document.createElementNS('http://www.w3.org/2000/svg','line');
   ccConn.setAttribute('x1','195');ccConn.setAttribute('y1',yukiBot);
   ccConn.setAttribute('x2','195');ccConn.setAttribute('y2',ccTop);
-  ccConn.setAttribute('stroke','rgba(0,188,212,0.3)');ccConn.setAttribute('stroke-width','1');
+  ccConn.setAttribute('stroke','rgba(192,132,252,0.3)');ccConn.setAttribute('stroke-width','1');
   ccConn.setAttribute('stroke-dasharray','3 4');
   svg.appendChild(ccConn);
 
   // Pulsing glow
   const ccGlow=document.createElementNS('http://www.w3.org/2000/svg','circle');
   ccGlow.setAttribute('cx',CC.x);ccGlow.setAttribute('cy',CC.y);ccGlow.setAttribute('r',CC.r+8);
-  ccGlow.setAttribute('fill','none');ccGlow.setAttribute('stroke','#00BCD4');
+  ccGlow.setAttribute('fill','none');ccGlow.setAttribute('stroke','#C084FC');
   ccGlow.setAttribute('stroke-width','1.2');ccGlow.setAttribute('opacity','0.3');
   const cg1=document.createElementNS('http://www.w3.org/2000/svg','animate');
   cg1.setAttribute('attributeName','r');cg1.setAttribute('values',`${CC.r+5};${CC.r+18};${CC.r+5}`);
@@ -1149,27 +1772,27 @@ function buildConstellation(){
   // Circle
   const ccCirc=document.createElementNS('http://www.w3.org/2000/svg','circle');
   ccCirc.setAttribute('cx',CC.x);ccCirc.setAttribute('cy',CC.y);ccCirc.setAttribute('r',CC.r);
-  ccCirc.setAttribute('fill',currentTheme==='light'?'rgba(0,188,212,0.08)':'rgba(0,188,212,0.1)');
-  ccCirc.setAttribute('stroke','#00BCD4');ccCirc.setAttribute('stroke-width','1.5');
+  ccCirc.setAttribute('fill',currentTheme==='light'?'rgba(192,132,252,0.08)':'rgba(192,132,252,0.1)');
+  ccCirc.setAttribute('stroke','#C084FC');ccCirc.setAttribute('stroke-width','1.5');
   ccCirc.setAttribute('stroke-opacity','0.6');
   ccG.appendChild(ccCirc);
 
-  // CC label inside circle
-  const ccTxt=document.createElementNS('http://www.w3.org/2000/svg','text');
-  ccTxt.setAttribute('x',CC.x);ccTxt.setAttribute('y',CC.y+1);
-  ccTxt.setAttribute('text-anchor','middle');ccTxt.setAttribute('dominant-baseline','middle');
-  ccTxt.setAttribute('fill','#00BCD4');ccTxt.setAttribute('font-size','11');
-  ccTxt.setAttribute('font-weight','800');ccTxt.setAttribute('font-family','Inter,sans-serif');
-  ccTxt.textContent='CC';ccG.appendChild(ccTxt);
+  // Bloom icon inside circle
+  const ccImg=document.createElementNS('http://www.w3.org/2000/svg','image');
+  ccImg.setAttribute('href','bloom-icon.svg');
+  const iSize=CC.r*1.7;
+  ccImg.setAttribute('x',CC.x-iSize/2);ccImg.setAttribute('y',CC.y-iSize/2);
+  ccImg.setAttribute('width',iSize);ccImg.setAttribute('height',iSize);
+  ccG.appendChild(ccImg);
 
   // Name below
   const ccName=document.createElementNS('http://www.w3.org/2000/svg','text');
   ccName.setAttribute('x',CC.x);ccName.setAttribute('y',CC.y+CC.r+13);
   ccName.setAttribute('text-anchor','middle');
-  ccName.setAttribute('fill',currentTheme==='light'?'rgba(0,130,150,0.8)':'rgba(0,188,212,0.72)');
+  ccName.setAttribute('fill',currentTheme==='light'?'rgba(155,93,229,0.8)':'rgba(192,132,252,0.72)');
   ccName.setAttribute('font-size','9.5');ccName.setAttribute('font-family','Inter,sans-serif');
   ccName.setAttribute('font-weight','700');ccName.setAttribute('letter-spacing','0.2');
-  ccName.textContent='CrewCreate';ccG.appendChild(ccName);
+  ccName.textContent='Bloom';ccG.appendChild(ccName);
 
   // "Join →" chip
   const chipW=52, chipH=14, chipX=CC.x-chipW/2, chipY=CC.y+CC.r+26;
@@ -1177,18 +1800,31 @@ function buildConstellation(){
   ccChip.setAttribute('x',chipX);ccChip.setAttribute('y',chipY);
   ccChip.setAttribute('width',chipW);ccChip.setAttribute('height',chipH);
   ccChip.setAttribute('rx','7');
-  ccChip.setAttribute('fill','rgba(0,188,212,0.14)');
-  ccChip.setAttribute('stroke','rgba(0,188,212,0.48)');ccChip.setAttribute('stroke-width','0.8');
+  ccChip.setAttribute('fill','rgba(192,132,252,0.14)');
+  ccChip.setAttribute('stroke','rgba(192,132,252,0.48)');ccChip.setAttribute('stroke-width','0.8');
   ccG.appendChild(ccChip);
   const ccChipTxt=document.createElementNS('http://www.w3.org/2000/svg','text');
   ccChipTxt.setAttribute('x',CC.x);ccChipTxt.setAttribute('y',chipY+chipH/2+0.5);
   ccChipTxt.setAttribute('text-anchor','middle');ccChipTxt.setAttribute('dominant-baseline','middle');
-  ccChipTxt.setAttribute('fill','#00BCD4');ccChipTxt.setAttribute('font-size','7.5');
+  ccChipTxt.setAttribute('fill','#C084FC');ccChipTxt.setAttribute('font-size','7.5');
   ccChipTxt.setAttribute('font-weight','700');ccChipTxt.setAttribute('font-family','Inter,sans-serif');
   ccChipTxt.textContent='Join →';ccG.appendChild(ccChipTxt);
   svg.appendChild(ccG);
 
-  // ── Family nodes ──
+  // ── Showcase satellite connector (CC → SC, behind nodesLayer) ──
+  const SC={x:242, y:388, r:13};
+  const scConn=document.createElementNS('http://www.w3.org/2000/svg','line');
+  scConn.setAttribute('x1',CC.x); scConn.setAttribute('y1',CC.y);
+  scConn.setAttribute('x2',SC.x); scConn.setAttribute('y2',SC.y);
+  scConn.setAttribute('stroke','rgba(192,132,252,0.22)');
+  scConn.setAttribute('stroke-width','1');
+  scConn.setAttribute('stroke-dasharray','2 3.5');
+  svg.appendChild(scConn);
+
+  // ── Family nodes (top layer — always above edges and CC) ──
+  const nodesLayer=document.createElementNS('http://www.w3.org/2000/svg','g');
+  svg.appendChild(nodesLayer);
+
   NODES.forEach(n=>{
     const g=document.createElementNS('http://www.w3.org/2000/svg','g');
 
@@ -1198,21 +1834,40 @@ function buildConstellation(){
     glow.setAttribute('stroke-width','1');glow.setAttribute('opacity','0.1');
     g.appendChild(glow);
 
+    // ── Photo avatar ──
+    if(n.photo){
+      const clipId='clip-node-'+n.id;
+      const cp=document.createElementNS('http://www.w3.org/2000/svg','clipPath');
+      cp.setAttribute('id',clipId);
+      const clipCirc=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      clipCirc.setAttribute('cx',n.x);clipCirc.setAttribute('cy',n.y);clipCirc.setAttribute('r',n.r-0.5);
+      cp.appendChild(clipCirc);defs.appendChild(cp);
+      const phImg=document.createElementNS('http://www.w3.org/2000/svg','image');
+      phImg.setAttribute('href',n.photo);
+      phImg.setAttribute('x',n.x-n.r);phImg.setAttribute('y',n.y-n.r);
+      phImg.setAttribute('width',n.r*2);phImg.setAttribute('height',n.r*2);
+      phImg.setAttribute('clip-path','url(#'+clipId+')');
+      phImg.setAttribute('preserveAspectRatio','xMidYMid slice');
+      g.appendChild(phImg);
+    }
+
     const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
     c.setAttribute('cx',n.x);c.setAttribute('cy',n.y);c.setAttribute('r',n.r);
-    c.setAttribute('fill',n.center?n.color+'1a': currentTheme==='light'?'rgba(10,10,20,0.04)':'rgba(255,255,255,0.04)');
+    c.setAttribute('fill',n.photo?'none':n.center?n.color+'1a':currentTheme==='light'?'rgba(10,10,20,0.04)':'rgba(255,255,255,0.04)');
     c.setAttribute('stroke',n.color);
     c.setAttribute('stroke-width',n.center?'2':'1');
     c.setAttribute('stroke-opacity',n.center?'0.55':'0.25');
     g.appendChild(c);
 
-    const t=document.createElementNS('http://www.w3.org/2000/svg','text');
-    t.setAttribute('x',n.x);t.setAttribute('y',n.y+1);
-    t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','middle');
-    t.setAttribute('fill',n.color);t.setAttribute('opacity','0.75');
-    t.setAttribute('font-size',n.center?'14':n.id==='ethan'?'9':'12');
-    t.setAttribute('font-family','Inter,sans-serif');t.setAttribute('font-weight','700');
-    t.textContent=n.icon;g.appendChild(t);
+    if(!n.photo){
+      const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('x',n.x);t.setAttribute('y',n.y+1);
+      t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','middle');
+      t.setAttribute('fill',n.color);t.setAttribute('opacity','0.75');
+      t.setAttribute('font-size',n.center?'14':n.id==='ethan'?'9':'12');
+      t.setAttribute('font-family','Inter,sans-serif');t.setAttribute('font-weight','700');
+      t.textContent=n.icon;g.appendChild(t);
+    }
 
     const lbl=document.createElementNS('http://www.w3.org/2000/svg','text');
     lbl.setAttribute('x',n.x);lbl.setAttribute('y',n.y+n.r+13);
@@ -1281,8 +1936,71 @@ function buildConstellation(){
       fa.setAttribute('keySplines','0.45 0 0.55 1;0.45 0 0.55 1');
       g.appendChild(fa);
     }
-    svg.appendChild(g);
+    nodesLayer.appendChild(g);
   });
+
+  // ── Showcase satellite node ──
+  const isLsc=currentTheme==='light';
+  const scG=document.createElementNS('http://www.w3.org/2000/svg','g');
+  scG.style.cursor='pointer';
+  scG.onclick=()=>goTo(9);
+
+  // Pulse glow
+  const scGlow=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  scGlow.setAttribute('cx',SC.x);scGlow.setAttribute('cy',SC.y);scGlow.setAttribute('r',SC.r+6);
+  scGlow.setAttribute('fill','none');scGlow.setAttribute('stroke','#C084FC');
+  scGlow.setAttribute('stroke-width','1');scGlow.setAttribute('opacity','0.2');
+  const sg1=document.createElementNS('http://www.w3.org/2000/svg','animate');
+  sg1.setAttribute('attributeName','r');sg1.setAttribute('values',`${SC.r+3};${SC.r+11};${SC.r+3}`);
+  sg1.setAttribute('dur','3.4s');sg1.setAttribute('repeatCount','indefinite');
+  const sg2=document.createElementNS('http://www.w3.org/2000/svg','animate');
+  sg2.setAttribute('attributeName','opacity');sg2.setAttribute('values','0.25;0;0.25');
+  sg2.setAttribute('dur','3.4s');sg2.setAttribute('repeatCount','indefinite');
+  scGlow.appendChild(sg1);scGlow.appendChild(sg2);scG.appendChild(scGlow);
+
+  // Circle
+  const scCirc=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  scCirc.setAttribute('cx',SC.x);scCirc.setAttribute('cy',SC.y);scCirc.setAttribute('r',SC.r);
+  scCirc.setAttribute('fill',isLsc?'rgba(192,132,252,0.07)':'rgba(192,132,252,0.1)');
+  scCirc.setAttribute('stroke','#C084FC');scCirc.setAttribute('stroke-width','1');
+  scCirc.setAttribute('stroke-opacity','0.5');
+  scG.appendChild(scCirc);
+
+  // Inner ✦ icon
+  const scIcon=document.createElementNS('http://www.w3.org/2000/svg','text');
+  scIcon.setAttribute('x',SC.x);scIcon.setAttribute('y',SC.y+0.5);
+  scIcon.setAttribute('text-anchor','middle');scIcon.setAttribute('dominant-baseline','middle');
+  scIcon.setAttribute('fill','#C084FC');scIcon.setAttribute('opacity','0.82');
+  scIcon.setAttribute('font-size','11');scIcon.setAttribute('font-family','Inter,sans-serif');
+  scIcon.setAttribute('font-weight','800');scIcon.textContent='✦';
+  scG.appendChild(scIcon);
+
+  // Label
+  const scLbl=document.createElementNS('http://www.w3.org/2000/svg','text');
+  scLbl.setAttribute('x',SC.x);scLbl.setAttribute('y',SC.y+SC.r+12);
+  scLbl.setAttribute('text-anchor','middle');
+  scLbl.setAttribute('fill',isLsc?'rgba(155,93,229,0.72)':'rgba(192,132,252,0.68)');
+  scLbl.setAttribute('font-size','9');scLbl.setAttribute('font-family','Inter,sans-serif');
+  scLbl.setAttribute('font-weight','700');scLbl.setAttribute('letter-spacing','0.1');
+  scLbl.textContent='Showcase';scG.appendChild(scLbl);
+
+  // "Family View" chip
+  const scCW=54,scCH=13,scCX=SC.x-scCW/2,scCY=SC.y+SC.r+22;
+  const scChip=document.createElementNS('http://www.w3.org/2000/svg','rect');
+  scChip.setAttribute('x',scCX);scChip.setAttribute('y',scCY);
+  scChip.setAttribute('width',scCW);scChip.setAttribute('height',scCH);
+  scChip.setAttribute('rx','6.5');
+  scChip.setAttribute('fill','rgba(192,132,252,0.1)');
+  scChip.setAttribute('stroke','rgba(192,132,252,0.35)');scChip.setAttribute('stroke-width','0.7');
+  scG.appendChild(scChip);
+  const scCTxt=document.createElementNS('http://www.w3.org/2000/svg','text');
+  scCTxt.setAttribute('x',SC.x);scCTxt.setAttribute('y',scCY+scCH/2+0.5);
+  scCTxt.setAttribute('text-anchor','middle');scCTxt.setAttribute('dominant-baseline','middle');
+  scCTxt.setAttribute('fill','#C084FC');scCTxt.setAttribute('font-size','7');
+  scCTxt.setAttribute('font-weight','700');scCTxt.setAttribute('font-family','Inter,sans-serif');
+  scCTxt.textContent='Family View';scG.appendChild(scCTxt);
+
+  nodesLayer.appendChild(scG);
 }
 
 // ── Joining screen animation + auto-advance ──
@@ -1322,8 +2040,8 @@ function startJoining(){
   setTimeout(()=>goTo(8), 3000);
 }
 
-// ── Zoom-launch from CC node into CrewCreate ──
-function launchCrewCreate(){
+// ── Zoom-launch from CC node into Bloom ──
+function launchBloom(){
   const svg=document.getElementById('const-svg');
   const phone=document.querySelector('.phone');
   const sr=svg.getBoundingClientRect();
@@ -1339,7 +2057,7 @@ function launchCrewCreate(){
   const rSmall=(CC.r*scale)+'px';
 
   const ov=document.getElementById('zoom-overlay');
-  ov.style.background='#00BCD4';
+  ov.style.background='#C084FC';
   ov.style.opacity='0';
   ov.style.clipPath=`circle(${rSmall} at ${cx} ${cy})`;
   ov.style.transition='none';
@@ -1382,8 +2100,8 @@ function dismissNotif(id){
 
 const AI_CTX={
   0:{title:'Hi Yuki ✦', hint:'Learning streak 5 days · 6 updates',
-     actions:['Start today\'s AI learning session','Join CrewCreate workspace','Message Grandma']},
-  1:{title:'CrewCreate',hint:'Age verification step',
+     actions:['Start today\'s AI learning session','Join Bloom workspace','Message Grandma']},
+  1:{title:'Bloom',hint:'Age verification step',
      actions:['Continue sign-up','Ask AI for help']},
   2:{title:'Your Interests',hint:'Tell us what you love',
      actions:['Pick suggested topics','Ask AI what suits you']},
@@ -1392,15 +2110,15 @@ const AI_CTX={
   4:{title:'Parental Consent',hint:'Mom needs to approve',
      actions:['Send reminder to Mom','Preview what you\'ll create']},
   5:{title:'Waiting…',hint:'Mom is reviewing your request',
-     actions:['Send a nudge to Mom','Preview CrewCreate features']},
-  6:{title:'AI Butler',hint:'Always here for you',actions:[]},
-  7:{title:'Joining CrewCreate',hint:'Setting up your account…',actions:[]},
-  8:{title:'CrewCreate',hint:'Your creative workspace',
+     actions:['Send a nudge to Mom','Preview Bloom features']},
+  6:{title:'Kaleidoscope',hint:'Always here for you',actions:[]},
+  7:{title:'Joining Bloom',hint:'Setting up your account…',actions:[]},
+  8:{title:'Bloom',hint:'Your creative workspace',
      actions:['Start your first post','Explore trending creators','Share with family']},
 };
 function toggleAISheet(){_aiSheetOpen?closeAISheet():openAISheet();}
 function openAISheet(){
-  const ctx=AI_CTX[_currentScreen]||{title:'AI Butler',hint:'Always here for you',actions:[]};
+  const ctx=AI_CTX[_currentScreen]||{title:'Kaleidoscope',hint:'Always here for you',actions:[]};
   document.getElementById('sheet-title').textContent=ctx.title;
   document.getElementById('sheet-subtitle').textContent=ctx.hint;
   const body=document.getElementById('ai-sheet-body');

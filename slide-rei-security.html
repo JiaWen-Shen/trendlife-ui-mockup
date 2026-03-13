@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>REI Security Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  width:1920px;height:1080px;overflow:hidden;
+  background:#07040F;
+  font-family:'Inter',sans-serif;
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* subtle background grain */
+body::before{
+  content:'';position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(80,30,120,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(30,80,160,0.10) 0%, transparent 60%);
+  pointer-events:none;
+}
+
+.slide{
+  width:1760px;height:980px;
+  display:grid;
+  grid-template-rows:auto 1fr;
+  gap:0;
+  position:relative;
+}
+
+/* ── Header ── */
+.header{
+  padding:56px 0 40px;
+  display:flex;flex-direction:column;gap:10px;
+}
+.eyebrow{
+  font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:rgba(180,120,255,0.65);
+}
+.title{
+  font-size:46px;font-weight:800;letter-spacing:-1px;color:#fff;line-height:1.1;
+}
+.title em{
+  font-style:normal;
+  background:linear-gradient(90deg,#C084FC,#818CF8);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.subtitle{
+  font-size:18px;font-weight:400;color:rgba(255,255,255,0.40);margin-top:4px;
+}
+
+/* ── Main diagram area ── */
+.diagram{
+  display:grid;
+  grid-template-columns:280px 1fr 280px;
+  grid-template-rows:1fr auto;
+  gap:0;
+  align-items:start;
+  padding-bottom:48px;
+}
+
+/* ── Actor cards (left & right) ── */
+.actor{
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  padding-top:40px;
+}
+.actor-avatar{
+  width:80px;height:80px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:32px;
+  position:relative;
+}
+.actor-avatar.yuki{
+  background:linear-gradient(135deg,rgba(0,188,212,0.25),rgba(0,188,212,0.08));
+  border:1.5px solid rgba(0,188,212,0.35);
+}
+.actor-avatar.eva{
+  background:linear-gradient(135deg,rgba(255,195,100,0.25),rgba(255,195,100,0.08));
+  border:1.5px solid rgba(255,195,100,0.35);
+}
+.actor-name{
+  font-size:18px;font-weight:700;color:rgba(255,255,255,0.90);
+}
+.actor-role{
+  font-size:12.5px;color:rgba(255,255,255,0.38);letter-spacing:0.3px;
+}
+
+/* Data tags flowing from Yuki */
+.data-tags{
+  display:flex;flex-direction:column;gap:8px;margin-top:20px;width:100%;
+}
+.dtag{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 14px;border-radius:8px;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);
+  font-size:12.5px;color:rgba(255,255,255,0.60);
+}
+.dtag .dot{
+  width:6px;height:6px;border-radius:50%;flex-shrink:0;
+}
+.dtag.sensitive .dot{background:#FF5C52;box-shadow:0 0 5px rgba(255,92,82,0.7);}
+.dtag.sensitive{border-color:rgba(255,92,82,0.2);color:rgba(255,130,120,0.80);}
+
+/* What Eva sees */
+.eva-sees{
+  display:flex;flex-direction:column;gap:8px;margin-top:20px;width:100%;
+}
+.sees-item{
+  display:flex;align-items:center;gap:9px;
+  padding:8px 14px;border-radius:8px;
+  font-size:12.5px;
+}
+.sees-item.allowed{
+  background:rgba(74,222,128,0.07);border:1px solid rgba(74,222,128,0.18);
+  color:rgba(200,255,220,0.82);
+}
+.sees-item.blocked{
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);
+  color:rgba(255,255,255,0.28);text-decoration:line-through;
+  text-decoration-color:rgba(255,80,80,0.5);
+}
+.sees-icon{font-size:13px;flex-shrink:0;}
+
+/* ── Center REI engine ── */
+.rei-engine{
+  display:flex;flex-direction:column;align-items:center;
+  gap:0;
+  padding:0 48px;
+  position:relative;
+}
+
+/* arrow lines */
+.flow-row{
+  display:flex;align-items:center;width:100%;gap:0;
+  margin-top:36px;
+}
+.flow-arrow{
+  flex:1;height:2px;
+  background:linear-gradient(90deg,rgba(255,255,255,0.15),rgba(255,255,255,0.08));
+  position:relative;
+}
+.flow-arrow::after{
+  content:'';position:absolute;right:-1px;top:50%;transform:translateY(-50%);
+  border:5px solid transparent;
+  border-left:7px solid rgba(255,255,255,0.25);
+}
+.flow-arrow.outgoing{
+  background:linear-gradient(90deg,rgba(74,222,128,0.30),rgba(74,222,128,0.10));
+}
+.flow-arrow.outgoing::after{
+  border-left-color:rgba(74,222,128,0.55);
+}
+.flow-arrow.blocked-line{
+  background:linear-gradient(90deg,rgba(255,80,80,0.25),rgba(255,80,80,0.08));
+}
+
+.flow-label{
+  font-size:10.5px;font-weight:600;letter-spacing:0.5px;
+  color:rgba(255,255,255,0.28);
+  white-space:nowrap;padding:0 12px;
+  text-transform:uppercase;
+}
+.flow-label.green{color:rgba(74,222,128,0.65);}
+
+/* REI processing box */
+.rei-box{
+  width:100%;
+  background:linear-gradient(155deg,rgba(28,12,48,0.95),rgba(18,8,36,0.95));
+  border:1px solid rgba(180,120,255,0.25);
+  border-radius:20px;
+  padding:28px 32px;
+  box-shadow:0 0 0 1px rgba(180,120,255,0.08), 0 32px 64px rgba(0,0,0,0.5), 0 0 80px rgba(100,50,180,0.12);
+  position:relative;overflow:hidden;
+}
+.rei-box::before{
+  content:'';position:absolute;inset:0;border-radius:20px;
+  background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(180,120,255,0.08) 0%,transparent 60%);
+  pointer-events:none;
+}
+.rei-logo-row{
+  display:flex;align-items:center;gap:10px;margin-bottom:24px;
+}
+.rei-dot{
+  width:10px;height:10px;border-radius:50%;background:#C084FC;
+  box-shadow:0 0 10px rgba(192,132,252,0.8);
+}
+.rei-label{
+  font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(192,132,252,0.70);
+}
+
+/* 3 processing steps */
+.steps{display:flex;flex-direction:column;gap:14px;}
+.step{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:14px 16px;border-radius:12px;
+}
+.step-num{
+  width:26px;height:26px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;flex-shrink:0;margin-top:1px;
+}
+.step:nth-child(1){background:rgba(255,92,82,0.08);border:1px solid rgba(255,92,82,0.20);}
+.step:nth-child(1) .step-num{background:rgba(255,92,82,0.20);color:#FF7B6B;}
+.step:nth-child(2){background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.18);}
+.step:nth-child(2) .step-num{background:rgba(251,191,36,0.18);color:#FBC350;}
+.step:nth-child(3){background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.18);}
+.step:nth-child(3) .step-num{background:rgba(74,222,128,0.18);color:#5BE891;}
+.step-body{}
+.step-title{font-size:14px;font-weight:700;color:rgba(255,255,255,0.90);margin-bottom:3px;}
+.step-desc{font-size:12px;color:rgba(255,255,255,0.46);line-height:1.5;}
+
+/* ── Memory vaults ── */
+.vaults-row{
+  grid-column:1 / -1;
+  display:flex;align-items:center;justify-content:center;gap:0;
+  padding-top:28px;
+  border-top:1px solid rgba(255,255,255,0.06);
+  margin-top:8px;
+}
+.vault-label{
+  font-size:10.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,0.25);
+  margin-right:32px;
+  white-space:nowrap;
+}
+.vaults{display:flex;gap:12px;}
+.vault{
+  display:flex;align-items:center;gap:8px;
+  padding:9px 16px;border-radius:10px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.09);
+}
+.vault-icon{font-size:14px;}
+.vault-name{font-size:12.5px;color:rgba(255,255,255,0.50);font-weight:500;}
+.vault-badge{
+  font-size:9.5px;font-weight:700;letter-spacing:0.5px;
+  color:rgba(255,255,255,0.22);
+  background:rgba(255,255,255,0.06);
+  border-radius:4px;padding:2px 6px;
+}
+
+.vault-divider{
+  font-size:18px;color:rgba(255,80,80,0.35);
+  margin:0 18px;font-weight:300;
+}
+
+.no-leak{
+  display:flex;align-items:center;gap:8px;
+  margin-left:32px;
+  font-size:12px;color:rgba(255,80,80,0.55);font-weight:600;
+}
+.no-leak-icon{
+  width:22px;height:22px;border-radius:50%;
+  background:rgba(255,80,80,0.12);border:1px solid rgba(255,80,80,0.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;
+}
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="eyebrow">REI · Privacy Architecture</div>
+    <div class="title">What does Eva <em>actually</em> see?</div>
+    <div class="subtitle">Three principles that keep family trust intact — without sacrificing safety</div>
+  </div>
+
+  <!-- Diagram -->
+  <div class="diagram">
+
+    <!-- LEFT: Yuki -->
+    <div class="actor">
+      <div class="actor-avatar yuki">🎵</div>
+      <div class="actor-name">Yuki</div>
+      <div class="actor-role">Daughter · Age 14</div>
+      <div class="data-tags">
+        <div class="dtag sensitive"><span class="dot"></span>Raw conversation</div>
+        <div class="dtag sensitive"><span class="dot"></span>Location data</div>
+        <div class="dtag sensitive"><span class="dot"></span>Health & mood signals</div>
+        <div class="dtag sensitive"><span class="dot"></span>Personal identifiers</div>
+      </div>
+    </div>
+
+    <!-- CENTER: REI engine -->
+    <div class="rei-engine">
+      <!-- incoming arrow -->
+      <div class="flow-row" style="margin-top:52px;">
+        <div class="flow-arrow"></div>
+        <div class="flow-label">sends to REI</div>
+        <div style="width:0"></div>
+      </div>
+
+      <!-- REI box -->
+      <div class="rei-box" style="margin-top:16px;">
+        <div class="rei-logo-row">
+          <div class="rei-dot"></div>
+          <div class="rei-label">REI Processing Layer</div>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-title">Desensitization</div>
+              <div class="step-desc">Names, locations, health data and identifiers are stripped before any AI model processes the input.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <div class="step-title">Individual Privacy Filter</div>
+              <div class="step-desc">Parents receive AI-curated summaries only. Full conversations, raw messages, and context stay private to the child.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <div class="step-title">Isolated Family Memory</div>
+              <div class="step-desc">Each member's long-term memory is independently vaulted — no cross-member access, no external exposure.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- outgoing arrow -->
+      <div class="flow-row" style="margin-top:16px;">
+        <div style="width:0"></div>
+        <div class="flow-label green">summary only →</div>
+        <div class="flow-arrow outgoing"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Eva -->
+    <div class="actor">
+      <div class="actor-avatar eva">👩</div>
+      <div class="actor-name">Eva</div>
+      <div class="actor-role">Mom · Caregiver</div>
+      <div class="eva-sees">
+        <div class="sees-item allowed"><span class="sees-icon">✓</span>"Yuki: +15% critical thinking this week"</div>
+        <div class="sees-item allowed"><span class="sees-icon">✓</span>Creative output summary</div>
+        <div class="sees-item allowed"><span class="sees-icon">✓</span>Safety alerts (if triggered)</div>
+        <div class="sees-item blocked"><span class="sees-icon">✗</span>Full conversation log</div>
+        <div class="sees-item blocked"><span class="sees-icon">✗</span>Raw location & health data</div>
+      </div>
+    </div>
+
+    <!-- BOTTOM: Memory vaults -->
+    <div class="vaults-row">
+      <div class="vault-label">③ Isolated Vaults</div>
+      <div class="vaults">
+        <div class="vault">
+          <div class="vault-icon">🔒</div>
+          <div class="vault-name">Yuki</div>
+          <div class="vault-badge">private</div>
+        </div>
+        <div class="vault-divider">|</div>
+        <div class="vault">
+          <div class="vault-icon">🔒</div>
+          <div class="vault-name">Eva</div>
+          <div class="vault-badge">private</div>
+        </div>
+        <div class="vault-divider">|</div>
+        <div class="vault">
+          <div class="vault-icon">🔒</div>
+          <div class="vault-name">Grandma</div>
+          <div class="vault-badge">private</div>
+        </div>
+        <div class="vault-divider">|</div>
+        <div class="vault">
+          <div class="vault-icon">🔒</div>
+          <div class="vault-name">Kenji</div>
+          <div class="vault-badge">private</div>
+        </div>
+      </div>
+      <div class="no-leak">
+        <div class="no-leak-icon">✗</div>
+        No external access
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
