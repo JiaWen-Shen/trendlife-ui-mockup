@@ -53,7 +53,7 @@ body{background:#111118;display:flex;justify-content:center;align-items:center;m
 .cc-body{flex:1;overflow-y:auto;padding:24px}
 
 .cc-icon-wrap{width:72px;height:72px;border-radius:20px;
-  background:linear-gradient(135deg,#00BCD4,#00838F);
+  background:url('bloom-icon.svg') center/78% no-repeat, linear-gradient(135deg,#1e0842,#2a0f5c);
   display:flex;align-items:center;justify-content:center;
   font-size:32px;margin:0 auto 20px;flex-shrink:0}
 .cc-title{font-size:22px;font-weight:800;color:rgba(255,255,255,0.92);
@@ -281,9 +281,9 @@ body.light .tl-notify-time{color:rgba(10,10,20,0.3)}
 .joining-body{flex:1;display:flex;flex-direction:column;align-items:center;
   justify-content:center;padding:36px 28px;gap:24px}
 .joining-logo-wrap{width:88px;height:88px;border-radius:26px;
-  background:linear-gradient(135deg,#00BCD4,#00838F);
+  background:url('bloom-icon.svg') center/78% no-repeat, linear-gradient(135deg,#1e0842,#2a0f5c);
   display:flex;align-items:center;justify-content:center;font-size:38px;
-  box-shadow:0 12px 40px rgba(0,188,212,0.25)}
+  box-shadow:0 12px 40px rgba(192,132,252,0.25)}
 .joining-title{font-size:22px;font-weight:800;color:rgba(255,255,255,0.9);
   text-align:center;letter-spacing:-0.3px}
 .joining-sub{font-size:13px;color:rgba(255,255,255,0.38);text-align:center;line-height:1.7}
@@ -939,7 +939,7 @@ body.light .sharing-share-btn{background:rgba(0,130,150,0.07);border-color:rgba(
     <div style="flex:1;display:flex;flex-direction:column;align-items:center;
                 justify-content:center;padding:28px 24px;overflow-y:auto">
       <div class="cc-icon-wrap" style="flex-direction:column;gap:0">
-        <span style="font-size:22px;font-weight:900;color:white;letter-spacing:-1px;line-height:1">B</span>
+        <span style="font-size:22px;font-weight:900;color:transparent;letter-spacing:-1px;line-height:1">B</span>
       </div>
       <div class="cc-title">Welcome to Bloom</div>
       <div class="cc-sub">We need to verify your age to give you the right creative experience and keep you safe. We'll never share your personal info.</div>
@@ -1202,7 +1202,7 @@ body.light .sharing-share-btn{background:rgba(0,130,150,0.07);border-color:rgba(
       <span class="status-icons">●●● Wi-Fi ▮</span>
     </div>
     <div class="joining-body">
-      <div class="joining-logo-wrap"><span style="font-size:26px;font-weight:900;color:white;letter-spacing:-1.5px">B</span></div>
+      <div class="joining-logo-wrap"><span style="font-size:26px;font-weight:900;color:transparent;letter-spacing:-1.5px">B</span></div>
       <div style="text-align:center">
         <div class="joining-title">Joining Bloom</div>
         <div class="joining-sub">Loading your creative space…</div>
@@ -1665,7 +1665,7 @@ const EDGES=[
   {a:'eva',  b:'wei',   w:0.5},
 ];
 // Bloom discovery node (below Yuki)
-const CC={x:195, y:368, r:19, color:'#00BCD4'};
+const CC={x:195, y:368, r:19, color:'#C084FC'};
 
 let currentTheme='dark';
 
@@ -1759,14 +1759,14 @@ function buildConstellation(){
   const ccConn=document.createElementNS('http://www.w3.org/2000/svg','line');
   ccConn.setAttribute('x1','195');ccConn.setAttribute('y1',yukiBot);
   ccConn.setAttribute('x2','195');ccConn.setAttribute('y2',ccTop);
-  ccConn.setAttribute('stroke','rgba(0,188,212,0.3)');ccConn.setAttribute('stroke-width','1');
+  ccConn.setAttribute('stroke','rgba(192,132,252,0.3)');ccConn.setAttribute('stroke-width','1');
   ccConn.setAttribute('stroke-dasharray','3 4');
   svg.appendChild(ccConn);
 
   // Pulsing glow
   const ccGlow=document.createElementNS('http://www.w3.org/2000/svg','circle');
   ccGlow.setAttribute('cx',CC.x);ccGlow.setAttribute('cy',CC.y);ccGlow.setAttribute('r',CC.r+8);
-  ccGlow.setAttribute('fill','none');ccGlow.setAttribute('stroke','#00BCD4');
+  ccGlow.setAttribute('fill','none');ccGlow.setAttribute('stroke','#C084FC');
   ccGlow.setAttribute('stroke-width','1.2');ccGlow.setAttribute('opacity','0.3');
   const cg1=document.createElementNS('http://www.w3.org/2000/svg','animate');
   cg1.setAttribute('attributeName','r');cg1.setAttribute('values',`${CC.r+5};${CC.r+18};${CC.r+5}`);
@@ -1779,24 +1779,24 @@ function buildConstellation(){
   // Circle
   const ccCirc=document.createElementNS('http://www.w3.org/2000/svg','circle');
   ccCirc.setAttribute('cx',CC.x);ccCirc.setAttribute('cy',CC.y);ccCirc.setAttribute('r',CC.r);
-  ccCirc.setAttribute('fill',currentTheme==='light'?'rgba(0,188,212,0.08)':'rgba(0,188,212,0.1)');
-  ccCirc.setAttribute('stroke','#00BCD4');ccCirc.setAttribute('stroke-width','1.5');
+  ccCirc.setAttribute('fill',currentTheme==='light'?'rgba(192,132,252,0.08)':'rgba(192,132,252,0.1)');
+  ccCirc.setAttribute('stroke','#C084FC');ccCirc.setAttribute('stroke-width','1.5');
   ccCirc.setAttribute('stroke-opacity','0.6');
   ccG.appendChild(ccCirc);
 
-  // CC label inside circle
-  const ccTxt=document.createElementNS('http://www.w3.org/2000/svg','text');
-  ccTxt.setAttribute('x',CC.x);ccTxt.setAttribute('y',CC.y+1);
-  ccTxt.setAttribute('text-anchor','middle');ccTxt.setAttribute('dominant-baseline','middle');
-  ccTxt.setAttribute('fill','#00BCD4');ccTxt.setAttribute('font-size','11');
-  ccTxt.setAttribute('font-weight','800');ccTxt.setAttribute('font-family','Inter,sans-serif');
-  ccTxt.textContent='CC';ccG.appendChild(ccTxt);
+  // Bloom icon inside circle
+  const ccImg=document.createElementNS('http://www.w3.org/2000/svg','image');
+  ccImg.setAttribute('href','bloom-icon.svg');
+  const iSize=CC.r*1.7;
+  ccImg.setAttribute('x',CC.x-iSize/2);ccImg.setAttribute('y',CC.y-iSize/2);
+  ccImg.setAttribute('width',iSize);ccImg.setAttribute('height',iSize);
+  ccG.appendChild(ccImg);
 
   // Name below
   const ccName=document.createElementNS('http://www.w3.org/2000/svg','text');
   ccName.setAttribute('x',CC.x);ccName.setAttribute('y',CC.y+CC.r+13);
   ccName.setAttribute('text-anchor','middle');
-  ccName.setAttribute('fill',currentTheme==='light'?'rgba(0,130,150,0.8)':'rgba(0,188,212,0.72)');
+  ccName.setAttribute('fill',currentTheme==='light'?'rgba(155,93,229,0.8)':'rgba(192,132,252,0.72)');
   ccName.setAttribute('font-size','9.5');ccName.setAttribute('font-family','Inter,sans-serif');
   ccName.setAttribute('font-weight','700');ccName.setAttribute('letter-spacing','0.2');
   ccName.textContent='Bloom';ccG.appendChild(ccName);
@@ -1807,13 +1807,13 @@ function buildConstellation(){
   ccChip.setAttribute('x',chipX);ccChip.setAttribute('y',chipY);
   ccChip.setAttribute('width',chipW);ccChip.setAttribute('height',chipH);
   ccChip.setAttribute('rx','7');
-  ccChip.setAttribute('fill','rgba(0,188,212,0.14)');
-  ccChip.setAttribute('stroke','rgba(0,188,212,0.48)');ccChip.setAttribute('stroke-width','0.8');
+  ccChip.setAttribute('fill','rgba(192,132,252,0.14)');
+  ccChip.setAttribute('stroke','rgba(192,132,252,0.48)');ccChip.setAttribute('stroke-width','0.8');
   ccG.appendChild(ccChip);
   const ccChipTxt=document.createElementNS('http://www.w3.org/2000/svg','text');
   ccChipTxt.setAttribute('x',CC.x);ccChipTxt.setAttribute('y',chipY+chipH/2+0.5);
   ccChipTxt.setAttribute('text-anchor','middle');ccChipTxt.setAttribute('dominant-baseline','middle');
-  ccChipTxt.setAttribute('fill','#00BCD4');ccChipTxt.setAttribute('font-size','7.5');
+  ccChipTxt.setAttribute('fill','#C084FC');ccChipTxt.setAttribute('font-size','7.5');
   ccChipTxt.setAttribute('font-weight','700');ccChipTxt.setAttribute('font-family','Inter,sans-serif');
   ccChipTxt.textContent='Join →';ccG.appendChild(ccChipTxt);
   svg.appendChild(ccG);
@@ -1823,7 +1823,7 @@ function buildConstellation(){
   const scConn=document.createElementNS('http://www.w3.org/2000/svg','line');
   scConn.setAttribute('x1',CC.x); scConn.setAttribute('y1',CC.y);
   scConn.setAttribute('x2',SC.x); scConn.setAttribute('y2',SC.y);
-  scConn.setAttribute('stroke','rgba(0,188,212,0.22)');
+  scConn.setAttribute('stroke','rgba(192,132,252,0.22)');
   scConn.setAttribute('stroke-width','1');
   scConn.setAttribute('stroke-dasharray','2 3.5');
   svg.appendChild(scConn);
