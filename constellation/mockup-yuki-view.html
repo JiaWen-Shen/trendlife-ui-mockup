@@ -787,6 +787,79 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
 .sheet-subtitle{color:rgba(255,255,255,0.65);font-size:13px}
 .sheet-action{color:rgba(255,255,255,0.82);font-size:14px}
 
+/* ── Enhanced authorship ── */
+.auth-top-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.auth-pct{font-size:13px;font-weight:700;color:rgba(74,222,128,0.85)}
+.auth-ratio-bar{height:4px;border-radius:2px;overflow:hidden;display:flex;margin-bottom:6px}
+.auth-bar-human{width:68%;background:linear-gradient(90deg,rgba(74,222,128,0.72),rgba(74,222,128,0.45))}
+.auth-bar-ai{flex:1;background:rgba(192,132,252,0.2)}
+.auth-stats-row{display:flex;flex-wrap:wrap;gap:4px}
+body.light .auth-pct{color:rgba(22,100,60,0.8)}
+body.light .auth-bar-human{background:linear-gradient(90deg,rgba(22,163,74,0.6),rgba(22,163,74,0.4))}
+body.light .auth-bar-ai{background:rgba(124,58,237,0.15)}
+
+/* ── Creative Direction Thread ── */
+.direction-thread{margin:10px 16px 0;padding:11px 13px;border-radius:14px;
+  background:rgba(192,132,252,0.04);border:1px solid rgba(192,132,252,0.1)}
+.dt-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.dt-label{font-size:10px;font-weight:700;color:rgba(192,132,252,0.7);letter-spacing:0.04em}
+.dt-count{font-size:9.5px;font-weight:600;color:rgba(255,255,255,0.2)}
+.dt-body{display:flex;flex-direction:column}
+.dt-entry{display:flex;gap:8px;padding:5px 0;position:relative}
+.dt-entry:not(:last-child)::after{content:'';position:absolute;left:5px;top:18px;
+  width:1px;bottom:-5px;background:rgba(255,255,255,0.07)}
+.dt-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.dt-ai .dt-dot{background:rgba(192,132,252,0.35);border:1px solid rgba(192,132,252,0.5)}
+.dt-yuki .dt-dot{background:rgba(74,222,128,0.3);border:1px solid rgba(74,222,128,0.5)}
+.dt-content{flex:1}
+.dt-who{font-size:9px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase}
+.dt-ai .dt-who{color:rgba(192,132,252,0.7)}
+.dt-yuki .dt-who{color:rgba(74,222,128,0.7)}
+.dt-text{font-size:11.5px;color:rgba(255,255,255,0.52);line-height:1.45;margin-top:1px}
+.dt-kept{display:inline-block;margin-top:4px;font-size:9.5px;font-weight:700;
+  color:#00BCD4;background:rgba(0,188,212,0.1);border:1px solid rgba(0,188,212,0.2);
+  padding:1px 7px;border-radius:6px}
+body.light .direction-thread{background:rgba(124,58,237,0.03);border-color:rgba(124,58,237,0.09)}
+body.light .dt-label{color:rgba(124,58,237,0.6)}
+body.light .dt-count{color:rgba(10,10,20,0.22)}
+body.light .dt-entry::after{background:rgba(10,10,20,0.07)}
+body.light .dt-ai .dt-dot{background:rgba(124,58,237,0.2);border-color:rgba(124,58,237,0.35)}
+body.light .dt-yuki .dt-dot{background:rgba(22,163,74,0.2);border-color:rgba(22,163,74,0.35)}
+body.light .dt-ai .dt-who{color:rgba(124,58,237,0.6)}
+body.light .dt-yuki .dt-who{color:rgba(22,100,60,0.6)}
+body.light .dt-text{color:rgba(10,10,20,0.45)}
+body.light .dt-kept{color:#0097A7;background:rgba(0,151,167,0.08);border-color:rgba(0,151,167,0.18)}
+
+/* ── Sharing card ── */
+.sharing-card{margin:10px 16px 0;border-radius:14px;overflow:hidden;
+  border:1px solid rgba(0,188,212,0.12);background:rgba(0,188,212,0.03)}
+.sharing-card-header{display:flex;align-items:center;justify-content:space-between;
+  padding:9px 13px 7px;border-bottom:1px solid rgba(0,188,212,0.09)}
+.sharing-card-title{font-size:10px;font-weight:700;color:rgba(0,188,212,0.6);letter-spacing:0.05em}
+.sharing-private-badge{font-size:9.5px;font-weight:600;color:rgba(255,255,255,0.28);
+  background:rgba(255,255,255,0.05);padding:2px 8px;border-radius:20px;
+  border:1px solid rgba(255,255,255,0.08)}
+.sharing-row{display:flex;align-items:center;gap:10px;padding:10px 13px;
+  cursor:pointer;transition:background 0.15s}
+.sharing-row:active{background:rgba(0,188,212,0.06)}
+.sharing-row-avs{display:flex}
+.sharing-row-av{width:26px;height:26px;border-radius:50%;object-fit:cover;
+  border:2px solid rgba(14,14,20,0.9);margin-left:-7px}
+.sharing-row-avs .sharing-row-av:first-child{margin-left:0}
+.sharing-row-info{flex:1}
+.sharing-row-label{font-size:11.5px;font-weight:600;color:rgba(255,255,255,0.62)}
+.sharing-row-sub{font-size:10px;color:rgba(255,255,255,0.28);margin-top:1px}
+.sharing-share-btn{font-size:10.5px;font-weight:700;padding:5px 11px;border-radius:20px;
+  background:rgba(0,188,212,0.1);border:1px solid rgba(0,188,212,0.25);
+  color:rgba(0,188,212,0.8);cursor:pointer;white-space:nowrap;font-family:inherit}
+body.light .sharing-card{border-color:rgba(0,130,150,0.14);background:rgba(0,130,150,0.02)}
+body.light .sharing-card-header{border-bottom-color:rgba(0,130,150,0.1)}
+body.light .sharing-card-title{color:rgba(0,110,130,0.65)}
+body.light .sharing-private-badge{color:rgba(10,10,20,0.35);background:rgba(10,10,20,0.04);border-color:rgba(10,10,20,0.09)}
+body.light .sharing-row-label{color:rgba(10,10,20,0.62)}
+body.light .sharing-row-sub{color:rgba(10,10,20,0.3)}
+body.light .sharing-share-btn{background:rgba(0,130,150,0.07);border-color:rgba(0,130,150,0.2);color:rgba(0,110,130,0.75)}
+
 </style>
 </head>
 <body>
@@ -1200,14 +1273,21 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
 
       <!-- Authorship strip -->
       <div class="cc-ws-authorship">
-        <span class="cc-ws-auth-label">Your voice</span>
-        <span class="cc-ws-auth-stat">68%</span>
-        <span class="cc-ws-auth-sep">·</span>
-        <span class="cc-ws-auth-stat">8 decisions</span>
-        <span class="cc-ws-auth-sep">·</span>
-        <span class="cc-ws-auth-stat">3 redirections</span>
-        <span class="cc-ws-auth-sep">·</span>
-        <span class="cc-ws-auth-stat">4 questions answered</span>
+        <div class="auth-top-row">
+          <span class="cc-ws-auth-label">Your voice</span>
+          <span class="auth-pct">68%</span>
+        </div>
+        <div class="auth-ratio-bar">
+          <div class="auth-bar-human"></div>
+          <div class="auth-bar-ai"></div>
+        </div>
+        <div class="auth-stats-row">
+          <span class="cc-ws-auth-stat">8 decisions</span>
+          <span class="cc-ws-auth-sep">·</span>
+          <span class="cc-ws-auth-stat">3 redirections</span>
+          <span class="cc-ws-auth-sep">·</span>
+          <span class="cc-ws-auth-stat">4 Q answered</span>
+        </div>
       </div>
 
       <!-- Shared canvas card -->
@@ -1232,6 +1312,45 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
         <div class="canvas-footer">
           <span class="canvas-meta">🎬 6 clips &nbsp;·&nbsp; 3 transitions &nbsp;·&nbsp; BGM: YOASOBI</span>
           <button class="canvas-edit-btn">✎ Continue editing</button>
+        </div>
+      </div>
+
+      <!-- Creative Direction Thread -->
+      <div class="direction-thread">
+        <div class="dt-header">
+          <span class="dt-label">✦ Creative Direction</span>
+          <span class="dt-count">4 exchanges</span>
+        </div>
+        <div class="dt-body">
+          <div class="dt-entry dt-ai">
+            <div class="dt-dot"></div>
+            <div class="dt-content">
+              <span class="dt-who">Kaleidoscope</span>
+              <div class="dt-text">Opening feeling — quiet before chaos, or energy from the start?</div>
+            </div>
+          </div>
+          <div class="dt-entry dt-yuki">
+            <div class="dt-dot"></div>
+            <div class="dt-content">
+              <span class="dt-who">Yuki</span>
+              <div class="dt-text">quiet first. like the calm before everything gets loud.</div>
+            </div>
+          </div>
+          <div class="dt-entry dt-ai">
+            <div class="dt-dot"></div>
+            <div class="dt-content">
+              <span class="dt-who">Kaleidoscope</span>
+              <div class="dt-text">A: banner close-up, empty corridor. B: crowd already warming up. Both fit — which feeling matters more?</div>
+            </div>
+          </div>
+          <div class="dt-entry dt-yuki">
+            <div class="dt-dot"></div>
+            <div class="dt-content">
+              <span class="dt-who">Yuki</span>
+              <div class="dt-text">A. Keep it intimate. Hana and Ren can bring the energy later — I want the opening to feel like we're seeing it first.</div>
+              <span class="dt-kept">→ Director's choice ✓</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1327,26 +1446,26 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
         </div>
       </div>
 
-      <!-- Family share teaser -->
-      <div class="family-share-teaser" onclick="goTo(9)" style="margin-top:10px">
-        <div class="fst-avs">
-          <img class="fst-av" src="faces/mei.png" alt="Mom">
-          <img class="fst-av" src="faces/grandma.png" alt="Grandma">
-          <img class="fst-av" src="faces/kanji.png" alt="Dad">
+      <!-- Sharing card -->
+      <div class="sharing-card">
+        <div class="sharing-card-header">
+          <span class="sharing-card-title">SHARING</span>
+          <span class="sharing-private-badge">🔒 Private · Crew only</span>
         </div>
-        <div style="flex:1">
-          <div class="fst-label">My Creative Space</div>
-          <div class="fst-text">Share your work with family when you're ready</div>
+        <div class="sharing-row" onclick="goTo(9)">
+          <div class="sharing-row-avs">
+            <img class="sharing-row-av" src="faces/mei.png" alt="Mom">
+            <img class="sharing-row-av" src="faces/grandma.png" alt="Grandma">
+            <img class="sharing-row-av" src="faces/kanji.png" alt="Dad">
+          </div>
+          <div class="sharing-row-info">
+            <div class="sharing-row-label">Family hasn't seen this yet</div>
+            <div class="sharing-row-sub">Mom · Grandma · Dad</div>
+          </div>
+          <button class="sharing-share-btn" onclick="event.stopPropagation();goTo(9)">Share →</button>
         </div>
-        <div class="fst-arrow">›</div>
       </div>
-
-      <!-- Privacy footer -->
-      <div class="privacy-footer">
-        <span class="privacy-footer-icon">🔒</span>
-        <span class="privacy-footer-text">Only you and your crew can see this work</span>
-        <span class="privacy-footer-link" onclick="goTo(9)">Share when ready →</span>
-      </div>
+      <div style="height:16px"></div>
     </div>
 
     <!-- Bottom nav -->
