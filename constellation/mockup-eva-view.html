@@ -164,7 +164,7 @@ body.light .report-section-lbl{color:rgba(10,10,20,0.35);border-bottom-color:rgb
   display:flex;align-items:center;justify-content:center;
   font-size:13px;font-weight:700;flex-shrink:0}
 .chat-header-av.grandma{background:rgba(255,195,100,0.12);border:1px solid rgba(255,195,100,0.3);color:#FFC364}
-.chat-header-av.ai{background:rgba(100,181,246,0.12);border:1px solid rgba(100,181,246,0.3);color:#64B5F6}
+.chat-header-av.ai{background:rgba(100,181,246,0.12);border:1px solid rgba(100,181,246,0.3);color:transparent;background-image:url('kaleidoscope-mandala.svg');background-size:75%;background-position:center;background-repeat:no-repeat}
 .chat-header-info{flex:1}
 .chat-header-name{font-size:16px;font-weight:700;color:rgba(255,255,255,0.85)}
 .chat-header-status{font-size:11px;margin-top:1px}
@@ -179,7 +179,7 @@ body.light .report-section-lbl{color:rgba(10,10,20,0.35);border-bottom-color:rgb
   font-size:11px;font-weight:700}
 .msg-av.grandma{background:rgba(255,195,100,0.1);border:1px solid rgba(255,195,100,0.22);color:#FFC364}
 .msg-av.eva{background:rgba(192,132,252,0.12);border:1px solid rgba(192,132,252,0.25);color:#C084FC}
-.msg-av.ai{background:rgba(100,181,246,0.1);border:1px solid rgba(100,181,246,0.22);color:#64B5F6;font-size:10px}
+.msg-av.ai{background:rgba(100,181,246,0.1);border:1px solid rgba(100,181,246,0.22);color:transparent;font-size:10px;background-image:url('kaleidoscope-mandala.svg');background-size:75%;background-position:center;background-repeat:no-repeat}
 .bubble{padding:11px 14px;border-radius:18px;max-width:262px;line-height:1.55}
 .bubble.them{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.07);
   border-bottom-left-radius:5px;font-size:13.5px;color:rgba(255,255,255,0.75)}
@@ -282,11 +282,11 @@ body.light .chat-input-bar{border-top-color:rgba(10,10,20,0.08)}
 body.light .chat-input{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.55)}
 body.light .chat-mic{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.55)}
 /* Kaleidoscope light mode */
-body.light .chat-header-av.ai{background:rgba(100,181,246,0.1);border-color:rgba(100,181,246,0.25);color:#2196F3}
+body.light .chat-header-av.ai{background:rgba(100,181,246,0.1);border-color:rgba(100,181,246,0.25);color:transparent}
 body.light .chat-header-status.ai-status{color:rgba(33,150,243,0.65)}
 body.light .bubble.ai-msg{background:rgba(33,150,243,0.07);border-color:rgba(33,150,243,0.15);color:rgba(10,10,20,0.78)}
 body.light .bubble.me{background:rgba(147,51,234,0.07);border-color:rgba(147,51,234,0.15);color:rgba(10,10,20,0.78)}
-body.light .msg-av.ai{background:rgba(33,150,243,0.08);border-color:rgba(33,150,243,0.2);color:#2196F3}
+body.light .msg-av.ai{background:rgba(33,150,243,0.08);border-color:rgba(33,150,243,0.2);color:transparent}
 body.light .msg-av.eva{background:rgba(147,51,234,0.08);border-color:rgba(147,51,234,0.2);color:#9333EA}
 body.light .chat-send{background:rgba(147,51,234,0.09);border-color:rgba(147,51,234,0.2);color:#9333EA}
 body.light .chat-send.ai-send{background:rgba(33,150,243,0.1);border-color:rgba(33,150,243,0.22);color:#2196F3}
@@ -315,7 +315,7 @@ body.light .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.0
   animation:orbGradientSpin 5s linear infinite,orbPulseOut 2.5s ease-in-out infinite;
   transition:transform 0.15s;}
 #ai-orb::before{content:'';position:absolute;inset:2.5px;border-radius:50%;
-  background:rgba(14,14,20,0.92) url('kaleidoscope-icon.png') center/80% no-repeat;}
+  background:rgba(14,14,20,0.92) url('kaleidoscope-mandala.svg') center/80% no-repeat;}
 #ai-orb:active{transform:scale(0.92);}
 #ai-orb.hidden{display:none;}
 .orb-logo{width:44px;height:44px;object-fit:cover;display:block;pointer-events:none;}
@@ -375,7 +375,7 @@ body.light #ai-orb{
   background:
     radial-gradient(circle at center,rgba(240,238,248,0.95) 18px,transparent 18.5px),
     conic-gradient(from var(--orb-angle),rgba(124,58,237,0.75) 0%,rgba(0,150,170,0.7) 30%,rgba(124,58,237,0.1) 65%,rgba(124,58,237,0.75) 100%);}
-body.light #ai-orb::before{background:rgba(240,238,248,0.94) url('kaleidoscope-icon.png') center/80% no-repeat;}
+body.light #ai-orb::before{background:rgba(240,238,248,0.94) url('kaleidoscope-mandala.svg') center/80% no-repeat;}
 body.light .sheet-orb-mini{background:rgba(255,255,255,0.9);border-color:rgba(10,10,20,0.1);}
 body.light #ai-sheet{background:rgba(250,250,254,0.98);border-top-color:rgba(147,51,234,0.2);}
 body.light .sheet-title{color:rgba(10,10,20,0.9);}body.light .sheet-subtitle{color:rgba(10,10,20,0.42);}
@@ -855,7 +855,7 @@ body.light .yuki-privacy-note span{color:rgba(10,10,20,0.3)}
     <div class="screen-header">
       <div class="back-btn" onclick="zoomBack()">←</div>
       <div class="screen-title">Grandma's Health Report</div>
-      <img class="screen-logo" src="logo-mark-only.png" alt="">
+      <img class="screen-logo" src="kaleidoscope-mandala.svg" alt="">
     </div>
     <div class="lens-body" id="health-body"></div>
   </div>
@@ -871,7 +871,7 @@ body.light .yuki-privacy-note span{color:rgba(10,10,20,0.3)}
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="screen-title">Family Events</div>
-      <img class="screen-logo" src="logo-mark-only.png" alt="">
+      <img class="screen-logo" src="kaleidoscope-mandala.svg" alt="">
     </div>
     <div class="events-scroll">
 
@@ -1017,7 +1017,7 @@ body.light .yuki-privacy-note span{color:rgba(10,10,20,0.3)}
     <div class="screen-header">
       <div class="back-btn" onclick="zoomBack()">←</div>
       <div class="screen-title">Yuki's Report</div>
-      <img class="screen-logo" src="logo-mark-only.png" alt="">
+      <img class="screen-logo" src="kaleidoscope-mandala.svg" alt="">
     </div>
     <div class="protect-body">
 
@@ -1138,7 +1138,7 @@ body.light .yuki-privacy-note span{color:rgba(10,10,20,0.3)}
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="screen-title">Protection Report</div>
-      <img class="screen-logo" src="logo-mark-only.png" alt="">
+      <img class="screen-logo" src="kaleidoscope-mandala.svg" alt="">
     </div>
     <div class="protect-body">
       <div class="protect-hero">
@@ -1186,7 +1186,7 @@ body.light .yuki-privacy-note span{color:rgba(10,10,20,0.3)}
     <div class="screen-header">
       <div class="back-btn" onclick="zoomBack()">←</div>
       <div class="screen-title">Protection Report</div>
-      <img class="screen-logo" src="logo-mark-only.png" alt="">
+      <img class="screen-logo" src="kaleidoscope-mandala.svg" alt="">
     </div>
     <div class="protect-body">
       <div class="protect-hero">
@@ -1389,7 +1389,7 @@ body.light .yuki-privacy-note span{color:rgba(10,10,20,0.3)}
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="screen-title">Scam Call Blocked</div>
-      <img class="screen-logo" src="logo-mark-only.png" alt="">
+      <img class="screen-logo" src="kaleidoscope-mandala.svg" alt="">
     </div>
     <div class="protect-body">
       <div class="protect-hero">
@@ -1439,7 +1439,7 @@ body.light .yuki-privacy-note span{color:rgba(10,10,20,0.3)}
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(0)">←</div>
       <div class="screen-title">Phishing Link Blocked</div>
-      <img class="screen-logo" src="logo-mark-only.png" alt="">
+      <img class="screen-logo" src="kaleidoscope-mandala.svg" alt="">
     </div>
     <div class="protect-body">
       <div class="protect-hero">
@@ -1489,7 +1489,7 @@ body.light .yuki-privacy-note span{color:rgba(10,10,20,0.3)}
     <div class="screen-header">
       <div class="back-btn" onclick="goTo(1)">←</div>
       <div class="screen-title">Kaleidoscope Working</div>
-      <img class="screen-logo" src="logo-mark-only.png" alt="">
+      <img class="screen-logo" src="kaleidoscope-mandala.svg" alt="">
     </div>
     <div class="task-exec-body">
 
@@ -1559,7 +1559,7 @@ body.light .yuki-privacy-note span{color:rgba(10,10,20,0.3)}
   <div id="ai-sheet">
     <div class="sheet-handle"></div>
     <div id="ai-sheet-head">
-      <div class="sheet-orb-mini"><img class="orb-logo-mini" src="kaleidoscope-icon.png" alt=""></div>
+      <div class="sheet-orb-mini"><img class="orb-logo-mini" src="kaleidoscope-mandala.svg" alt=""></div>
       <div>
         <div class="sheet-title" id="sheet-title">Kaleidoscope</div>
         <div class="sheet-subtitle" id="sheet-subtitle">Always watching, always ready</div>

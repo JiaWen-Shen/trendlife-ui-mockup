@@ -247,7 +247,8 @@ body.light .tl-notify-time{color:rgba(10,10,20,0.3)}
 .butler-av{width:40px;height:40px;border-radius:50%;
   background:rgba(74,222,128,0.1);border:1.5px solid rgba(74,222,128,0.35);
   display:flex;align-items:center;justify-content:center;
-  font-size:17px;color:#4ADE80;font-weight:800;flex-shrink:0}
+  font-size:17px;color:transparent;font-weight:800;flex-shrink:0;
+  background-image:url('kaleidoscope-mandala.svg');background-size:72%;background-position:center;background-repeat:no-repeat}
 .butler-title{font-size:15px;font-weight:700;color:rgba(255,255,255,0.88)}
 .butler-subtitle{font-size:11px;color:rgba(74,222,128,0.55);margin-top:1px;font-weight:500}
 .butler-msgs{flex:1;overflow-y:auto;padding:14px 18px;display:flex;flex-direction:column;gap:12px}
@@ -651,7 +652,7 @@ body.light .fst-text{color:rgba(10,10,20,0.55)}
   animation:orbGradientSpin 5s linear infinite,orbPulseOut 2.5s ease-in-out infinite;
   transition:transform 0.15s;}
 #ai-orb::before{content:'';position:absolute;inset:2.5px;border-radius:50%;
-  background:rgba(14,14,20,0.92) url('kaleidoscope-icon.png') center/80% no-repeat;}
+  background:rgba(14,14,20,0.92) url('kaleidoscope-mandala.svg') center/80% no-repeat;}
 #ai-orb:active{transform:scale(0.92);}
 #ai-orb.hidden{display:none;}
 .orb-logo{width:44px;height:44px;object-fit:cover;display:block;pointer-events:none;}
@@ -732,7 +733,7 @@ body.light #ai-orb{
   background:
     radial-gradient(circle at center,rgba(240,238,248,0.95) 18px,transparent 18.5px),
     conic-gradient(from var(--orb-angle),rgba(124,58,237,0.75) 0%,rgba(0,150,170,0.7) 30%,rgba(124,58,237,0.1) 65%,rgba(124,58,237,0.75) 100%);}
-body.light #ai-orb::before{background:rgba(240,238,248,0.94) url('kaleidoscope-icon.png') center/80% no-repeat;}
+body.light #ai-orb::before{background:rgba(240,238,248,0.94) url('kaleidoscope-mandala.svg') center/80% no-repeat;}
 body.light .sheet-orb-mini{background:rgba(240,238,248,0.92);border-color:rgba(0,0,0,0.1);}
 body.light #ai-sheet{background:rgba(250,250,254,0.98);border-top-color:rgba(147,51,234,0.2);}
 body.light .sheet-title{color:rgba(10,10,20,0.9);}body.light .sheet-subtitle{color:rgba(10,10,20,0.42);}
@@ -1480,7 +1481,7 @@ body.light .notif-dismiss{background:rgba(10,10,20,0.05);border-color:rgba(10,10
   <div id="ai-sheet">
     <div class="sheet-handle"></div>
     <div id="ai-sheet-head">
-      <div class="sheet-orb-mini"><img class="orb-logo-mini" src="kaleidoscope-icon.png" alt=""></div>
+      <div class="sheet-orb-mini"><img class="orb-logo-mini" src="kaleidoscope-mandala.svg" alt=""></div>
       <div>
         <div class="sheet-title" id="sheet-title">Kaleidoscope</div>
         <div class="sheet-subtitle" id="sheet-subtitle">Always here for you</div>
