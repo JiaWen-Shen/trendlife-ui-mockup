@@ -125,6 +125,8 @@ body.light .screen-logo{opacity:0.45;filter:invert(1);}
 .ev-badge.purple{color:#C084FC;background:rgba(192,132,252,0.1)}
 .ev-badge.amber{color:#FFB84D;background:rgba(255,184,77,0.1)}
 .ev-badge.blue{color:#64B5F6;background:rgba(100,181,246,0.1)}
+.ev-dot.summary{background:rgba(74,222,128,0.08);border-color:rgba(74,222,128,0.22)}
+.ev-badge.green{color:#4ADE80;background:rgba(74,222,128,0.1)}
 .ev-time{font-size:10px;color:rgba(255,255,255,0.2)}
 
 /* ─────────────────────────────
@@ -970,6 +972,30 @@ body.light .gr-skill-track{background:rgba(10,10,20,0.06);}
       <img class="screen-logo" src="kaleidoscope-mandala.svg" alt="">
     </div>
     <div class="events-scroll">
+
+      <div class="event-item">
+        <div class="ev-dot summary" style="font-size:13px;font-weight:800">✦</div>
+        <div class="ev-body">
+          <div class="ev-who">Daily Digest</div>
+          <div class="ev-text">2 threats blocked · 1 health alert · 1 usage warning. All family members are accounted for.</div>
+          <div class="ev-foot">
+            <span class="ev-badge green">Safety Report</span>
+            <span class="ev-time">Today 9:40 AM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-item" style="cursor:pointer" onclick="goTo(4)">
+        <div class="ev-dot shield" style="font-size:14px">✿</div>
+        <div class="ev-body">
+          <div class="ev-who">Yuki · Daughter</div>
+          <div class="ev-text">Check Yuki's growth record for today — creative direction +18%, 3 independent decisions made.</div>
+          <div class="ev-foot">
+            <span class="ev-badge purple">Growth Record</span>
+            <span class="ev-time">Today 9:15 AM</span>
+          </div>
+        </div>
+      </div>
 
       <div class="event-item">
         <div class="ev-dot health" style="font-size:12px;font-weight:800">H</div>
