@@ -837,13 +837,13 @@ body.light .gr-skill-track{background:rgba(10,10,20,0.06);}
       <button id="alert-dismiss-btn" onclick="dismissHealthAlert()">✕</button>
       <div id="alert-header">
         <div id="alert-pulse"></div>
-        <div id="alert-label">Health Alert</div>
+        <div id="alert-label">⌚ &nbsp;Wearable Alert</div>
       </div>
-      <div id="alert-message">Grandma's blood pressure is elevated</div>
-      <div id="alert-detail">Cardiology follow-up has been suggested. Eva, your attention is needed.</div>
+      <div id="alert-message">Grandma's blood pressure is critically high</div>
+      <div id="alert-detail">Apple Watch detected <strong style="color:#FF8A84">168/112 mmHg</strong> at 9:38 AM — Stage 2 Hypertension. Immediate attention required.</div>
       <div id="alert-actions">
         <button id="alert-btn-dismiss" onclick="dismissHealthAlert()">Dismiss</button>
-        <button id="alert-btn-view" onclick="dismissHealthAlert();goTo(1)">View Report →</button>
+        <button id="alert-btn-view" onclick="dismissHealthAlert();goTo(1)">View Details →</button>
       </div>
     </div>
   </div>
@@ -867,9 +867,15 @@ body.light .gr-skill-track{background:rgba(10,10,20,0.06);}
           <span id="notif-panel-label">Updates</span>
         </div>
         <div id="notif-expand">
-          <div class="notif-row notif-alert" id="notif-health" onclick="goTo(1)">
-            <span class="notif-icon" style="color:#FF5555">⚠</span>
-            <span class="notif-body">Grandma's BP elevated — cardiology follow-up suggested</span>
+          <div class="notif-row notif-alert" id="notif-bp-watch" onclick="goTo(1)">
+            <span class="notif-icon" style="color:#FF3B30">⌚</span>
+            <span class="notif-body">BP 168/112 mmHg — Grandma's wearable · Stage 2</span>
+            <span class="notif-time">9:38 AM</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-bp-watch')">✕</div>
+          </div>
+          <div class="notif-row" id="notif-health" onclick="goTo(1)">
+            <span class="notif-icon" style="color:#FFB84D">🩺</span>
+            <span class="notif-body">Grandma's health check report — monthly summary ready</span>
             <span class="notif-time">8:45 AM</span>
             <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-health')">✕</div>
           </div>
