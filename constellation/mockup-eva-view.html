@@ -973,7 +973,7 @@ body.light .gr-skill-track{background:rgba(10,10,20,0.06);}
     </div>
     <div class="events-scroll">
 
-      <div class="event-item">
+      <div class="event-item" style="cursor:pointer" onclick="goTo(13)">
         <div class="ev-dot summary" style="font-size:13px;font-weight:800">✦</div>
         <div class="ev-body">
           <div class="ev-who">Daily Digest</div>
@@ -1921,6 +1921,96 @@ body.light .gr-skill-track{background:rgba(10,10,20,0.06);}
       <div class="expert-view">
         <div class="expert-label">✦ Kaleidoscope Insight</div>
         <div class="expert-text">"Yuki's creative voice is growing steadily week over week. The most meaningful signal: she's redirecting AI suggestions with more confidence each week. Young creators who develop this pattern tend to build strong, lasting creative identities. You're watching it happen."</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SCREEN 13 · Today's Safety Report
+       ══════════════════════════════ -->
+  <div class="screen" id="s13">
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+    <div class="screen-header">
+      <div class="back-btn" onclick="goTo(2)">←</div>
+      <div class="screen-title">Today's Safety Report</div>
+      <img class="screen-logo" src="kaleidoscope-mandala.svg" alt="">
+    </div>
+    <div class="protect-body">
+
+      <!-- Hero -->
+      <div class="protect-hero">
+        <div style="width:64px;height:64px;border-radius:20px;background:rgba(74,222,128,0.12);border:1.5px solid rgba(74,222,128,0.25);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:#4ADE80;margin:0 auto 12px">✓</div>
+        <div class="protect-name">Family Safe</div>
+        <div class="protect-role">Today 9:40 AM · 4 events monitored</div>
+        <div class="protect-status-row">
+          <div class="pstat">
+            <div class="pstat-val" style="color:#FF7875">2</div>
+            <div class="pstat-lbl">Blocked</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-val" style="color:#FF8A84">1</div>
+            <div class="pstat-lbl">Health Alert</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-val" style="color:#FFB84D">1</div>
+            <div class="pstat-lbl">Usage Warning</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Threats Blocked -->
+      <div class="report-section-lbl">🛡 Threats Blocked</div>
+
+      <div class="protect-card warn" style="cursor:pointer" onclick="goTo(8)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div class="pc-eyebrow" style="color:#FF7875">Scam Call · Grandma's device</div>
+          <span style="color:rgba(255,255,255,0.3);font-size:12px">→</span>
+        </div>
+        <div class="pc-text">+886-900-123-456 blocked before reaching Grandma — 847 community scam reports on file.</div>
+        <div class="pc-detail">Today 9:15 AM · Call intercepted · 0s ring time</div>
+      </div>
+
+      <div class="protect-card warn" style="cursor:pointer" onclick="goTo(9)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div class="pc-eyebrow" style="color:#C084FC">Phishing Link · Yuki's device</div>
+          <span style="color:rgba(255,255,255,0.3);font-size:12px">→</span>
+        </div>
+        <div class="pc-text">secure-bank-login.xyz blocked before loading — impersonated Cathay Bank. No data exposed.</div>
+        <div class="pc-detail">Yesterday 4:23 PM · High risk · Reported to safe-browsing network</div>
+      </div>
+
+      <!-- Health -->
+      <div class="report-section-lbl">❤ Health</div>
+
+      <div class="protect-card" style="background:rgba(255,120,120,0.07);border:1px solid rgba(255,120,120,0.2);cursor:pointer" onclick="goTo(1)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div class="pc-eyebrow" style="color:#FF7875">⌚ Wearable Alert · Grandma</div>
+          <span style="color:rgba(255,255,255,0.3);font-size:12px">→</span>
+        </div>
+        <div class="pc-text">BP 168/112 mmHg detected at 9:38 AM — Stage 2 Hypertension. Immediate attention required.</div>
+        <div class="pc-detail">Apple Watch · Cardiology follow-up recommended</div>
+      </div>
+
+      <!-- Usage -->
+      <div class="report-section-lbl">⏱ Usage</div>
+
+      <div class="protect-card amber-card" style="cursor:pointer" onclick="goTo(6)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div class="pc-eyebrow" style="color:#FFB84D">Screen Time · Hiro</div>
+          <span style="color:rgba(255,255,255,0.3);font-size:12px">→</span>
+        </div>
+        <div class="pc-text">3.5 hours of social media use after midnight — exceeded family safety limit.</div>
+        <div class="pc-detail">Yesterday 11:59 PM · Limit was 2h · Auto-notification sent</div>
+      </div>
+
+      <!-- Kaleidoscope Summary -->
+      <div class="expert-view">
+        <div class="expert-label">✦ Kaleidoscope Summary</div>
+        <div class="expert-text">"No data was exposed today. All digital threats were neutralized before reaching family members. Grandma's health reading is the one item that requires your direct attention — the rest of the family is safe and accounted for."</div>
       </div>
 
     </div>
