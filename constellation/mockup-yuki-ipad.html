@@ -476,541 +476,542 @@ body {
   border-radius: 50%;
 }
 
-/* ─── THREE PANEL LAYOUT (V1) ─── */
-.three-panel {
+/* ─── EDITOR TOOLBAR (V1) ─── */
+.editor-toolbar {
+  height: 52px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.et-back {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; cursor: pointer; color: var(--text2);
+  flex-shrink: 0;
+}
+.et-fname {
+  font: 500 14px/1 var(--font);
+  color: var(--text);
+  padding: 5px 8px;
+  border-radius: 6px;
+  cursor: text;
+}
+.et-fname:hover { background: var(--surface2); }
+.et-divider {
+  width: 1px; height: 18px;
+  background: var(--border2);
+  margin: 0 2px;
+  align-self: center;
+  flex-shrink: 0;
+}
+.et-spacer { flex: 1; }
+.et-tool-group {
+  display: flex;
+  gap: 1px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 3px;
+}
+.et-tool-btn {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; cursor: pointer; color: var(--text2);
+  transition: all .12s;
+}
+.et-tool-btn:hover { background: var(--surface3); color: var(--text); }
+.et-tool-btn.active-tool { background: var(--accent-dim); color: var(--accent); }
+.et-collab {
+  display: flex; align-items: center;
+  margin: 0 4px;
+}
+.et-cav {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  font: 700 9px/1 var(--font);
+  margin-left: -6px;
+}
+.et-cav:first-child { margin-left: 0; }
+.et-btn {
+  padding: 7px 14px;
+  border-radius: 8px;
+  font: 600 13px/1 var(--font);
+  cursor: pointer; border: none;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.et-btn-share {
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  color: var(--text2);
+}
+.et-btn-share:hover { background: var(--surface3); }
+.et-btn-export { background: var(--accent); color: #fff; }
+.et-btn-export:hover { background: #a855f7; }
+
+/* ─── EDITOR BODY (3-col) ─── */
+.editor-body {
   flex: 1;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 280px 1fr 360px;
-  grid-template-rows: 1fr;
+  grid-template-columns: 232px 1fr 312px;
 }
 
-/* Left sidebar */
-.panel-left {
+/* ─── ASSET PANEL (left) ─── */
+.asset-panel {
   background: var(--surface);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
-.panel-left-hd {
-  padding: 16px 16px 12px;
-  border-bottom: 1px solid var(--border);
-}
-.panel-left-hd h3 {
-  font: 600 14px/1 var(--font);
-  color: var(--text);
-  margin-bottom: 10px;
-}
-.sidebar-search {
+.asset-tabs {
   display: flex;
-  align-items: center;
-  gap: 6px;
+  border-bottom: 1px solid var(--border);
   background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 7px 10px;
+  flex-shrink: 0;
 }
-.sidebar-search span { font-size: 12px; color: var(--text3); }
-.sidebar-search input {
-  background: none;
-  border: none;
-  outline: none;
-  font: 400 13px/1 var(--font);
-  color: var(--text);
-  width: 100%;
-}
-.sidebar-search input::placeholder { color: var(--text3); }
-
-.proj-list {
+.at-tab {
   flex: 1;
-  overflow-y: auto;
-  padding: 8px;
-}
-.proj-list::-webkit-scrollbar { width: 3px; }
-.proj-list::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
-
-.pl-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 10px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background .15s;
-  margin-bottom: 2px;
-}
-.pl-item:hover { background: var(--surface2); }
-.pl-item.active { background: var(--accent-dim); }
-.pl-item.active .pl-title { color: var(--accent); }
-
-.pl-thumb {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-}
-.pl-info { flex: 1; min-width: 0; }
-.pl-title {
-  font: 600 13px/1.2 var(--font);
-  color: var(--text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.pl-meta {
-  font: 400 11px/1 var(--font);
-  color: var(--text3);
-  margin-top: 2px;
-}
-.pl-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--green);
-  flex-shrink: 0;
-}
-
-.sidebar-new-btn {
-  margin: 10px;
-  padding: 10px;
-  border-radius: 12px;
-  background: var(--accent-dim);
-  border: 1px dashed rgba(192,132,252,0.3);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  transition: background .15s;
-}
-.sidebar-new-btn:hover { background: rgba(192,132,252,0.18); }
-.sidebar-new-btn span:first-child {
-  font-size: 16px;
-  color: var(--accent);
-}
-.sidebar-new-btn span:last-child {
-  font: 600 13px/1 var(--font);
-  color: var(--accent);
-}
-
-/* Center panel */
-.panel-center {
-  background: var(--bg);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  border-right: 1px solid var(--border);
-}
-.panel-center-hd {
-  padding: 18px 20px 14px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  background: var(--surface);
-}
-.center-hd-thumb {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-}
-.center-hd-info { flex: 1; }
-.center-hd-type {
+  padding: 10px 2px;
   font: 500 10px/1 var(--font);
   color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  margin-bottom: 4px;
-}
-.center-hd-title {
-  font: 700 17px/1.2 var(--font);
-  color: var(--text);
-  letter-spacing: -.02em;
-  margin-bottom: 6px;
-}
-.center-hd-meta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.center-hd-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font: 500 11px/1 var(--font);
-  padding: 3px 8px;
-  border-radius: 100px;
-}
-.center-hd-updated {
-  font: 400 11px/1 var(--font);
-  color: var(--text3);
-}
-.center-hd-actions { display: flex; gap: 6px; }
-.center-btn {
-  padding: 8px 16px;
-  border-radius: 100px;
-  font: 600 13px/1 var(--font);
+  text-align: center;
   cursor: pointer;
+  border-bottom: 2px solid transparent;
   transition: all .15s;
   white-space: nowrap;
 }
-.center-btn-primary {
-  background: var(--accent);
-  color: #fff;
-  border: none;
-}
-.center-btn-primary:hover { background: #a855f7; }
-.center-btn-ghost {
-  background: var(--surface2);
-  color: var(--text2);
-  border: 1px solid var(--border2);
-}
-.center-btn-ghost:hover { background: var(--surface3); }
-
-/* Authorship hero */
-.auth-hero {
-  padding: 20px;
+.at-tab.active {
+  color: var(--accent);
+  border-color: var(--accent);
   background: var(--surface);
-  border-bottom: 1px solid var(--border);
 }
-.auth-hero-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-.auth-hero-pct {
-  font: 800 40px/1 var(--font);
-  letter-spacing: -.04em;
-}
-.auth-hero-pct.human { color: var(--green); }
-.auth-hero-label {
-  flex: 1;
-}
-.auth-hero-label-main {
-  font: 700 13px/1 var(--font);
-  color: var(--text);
-  margin-bottom: 2px;
-}
-.auth-hero-label-sub {
-  font: 400 12px/1.3 var(--font);
-  color: var(--text3);
-}
-.auth-hero-bar-wrap {
-  height: 8px;
-  background: var(--surface3);
-  border-radius: 100px;
-  overflow: hidden;
-  position: relative;
-}
-.auth-hero-bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--green), #22C55E);
-  border-radius: 100px;
-  position: relative;
-}
-.auth-hero-bar::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 20px;
-  height: 100%;
-  background: rgba(0,188,212,0.7);
-}
-.auth-hero-legend {
-  display: flex;
-  gap: 16px;
-  margin-top: 8px;
-}
-.auth-legend-item {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font: 400 11px/1 var(--font);
-  color: var(--text3);
-}
-.auth-legend-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-}
-
-/* Center scrollable content */
-.center-scroll {
+.asset-scroll {
   flex: 1;
   overflow-y: auto;
-  padding: 16px 20px;
+  padding: 10px;
 }
-.center-scroll::-webkit-scrollbar { width: 4px; }
-.center-scroll::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 4px; }
-
-/* ─── CONTRIB ITEMS ─── */
-.contrib-section-title {
-  font: 600 12px/1 var(--font);
+.asset-scroll::-webkit-scrollbar { width: 3px; }
+.asset-scroll::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
+.asset-section-label {
+  font: 500 9px/1 var(--font);
   color: var(--text3);
   text-transform: uppercase;
   letter-spacing: .08em;
-  margin-bottom: 10px;
-  margin-top: 20px;
+  margin: 12px 0 6px;
 }
-.contrib-section-title:first-child { margin-top: 0; }
-
-.contrib-item {
+.asset-section-label:first-child { margin-top: 0; }
+.clip-row {
   display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 10px 12px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  margin-bottom: 8px;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 7px;
+  border-radius: 9px;
   cursor: pointer;
-  transition: background .15s;
+  transition: background .12s;
+  margin-bottom: 3px;
 }
-.contrib-item:hover { background: var(--surface2); }
-
-.contrib-avatar {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+.clip-row:hover { background: var(--surface2); }
+.clip-row.active-clip { background: var(--accent-dim); }
+.clip-row.active-clip .clip-rname { color: var(--accent); }
+.clip-thumb-sm {
+  width: 52px; height: 29px;
+  border-radius: 5px;
   flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.clip-dur {
+  position: absolute;
+  bottom: 2px; right: 2px;
+  background: rgba(0,0,0,0.7);
+  font: 500 8px/1 var(--font); color: #fff;
+  padding: 1px 3px; border-radius: 3px;
+}
+.clip-rinfo { flex: 1; min-width: 0; }
+.clip-rname {
+  font: 500 12px/1.2 var(--font);
+  color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+.clip-rmeta { font: 400 10px/1 var(--font); color: var(--text3); }
+
+/* ─── CANVAS PANEL (center) ─── */
+.canvas-panel {
+  background: #0b0b0d;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border);
+  overflow: hidden;
+}
+.canvas-area {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  font: 600 12px/1 var(--font);
-}
-.contrib-avatar.green-av {
-  background: linear-gradient(135deg, var(--green), #22C55E);
-  color: #000;
-}
-.contrib-avatar.ai-av {
-  background: radial-gradient(circle at 35% 35%, rgba(0,188,212,0.9), rgba(0,188,212,0.3));
-  border: 1px solid rgba(0,188,212,0.4);
-  color: #fff;
-  font-size: 13px;
-}
-.contrib-avatar.amber-av {
-  background: linear-gradient(135deg, #F59E0B, #FCD34D);
-  color: #000;
-}
-.contrib-avatar.sky-av {
-  background: linear-gradient(135deg, #0EA5E9, #38BDF8);
-  color: #fff;
-}
-
-.contrib-body { flex: 1; min-width: 0; }
-.contrib-name-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 3px;
-}
-.contrib-name {
-  font: 600 13px/1 var(--font);
-  color: var(--text);
-}
-.contrib-role {
-  font: 400 11px/1 var(--font);
-  color: var(--text3);
-  background: var(--surface2);
-  border-radius: 100px;
-  padding: 2px 7px;
-}
-.contrib-detail {
-  font: 400 12px/1.4 var(--font);
-  color: var(--text2);
-}
-.contrib-time {
-  font: 400 11px/1 var(--font);
-  color: var(--text3);
-  white-space: nowrap;
-  align-self: flex-start;
-  padding-top: 1px;
-}
-
-/* ─── RIGHT PANEL — CREATIVE DIRECTION ─── */
-.panel-right {
-  background: var(--surface);
-  display: flex;
-  flex-direction: column;
+  background: #0b0b0d;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 22px 22px;
+  position: relative;
   overflow: hidden;
+  padding: 22px 22px 16px 40px;
 }
-.panel-right-hd {
-  padding: 14px 16px;
+.canvas-rulers-h {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 18px;
+  background: rgba(18,18,22,0.9);
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
-  gap: 10px;
+  padding: 0 24px 0 40px;
+  gap: 0;
+  z-index: 2;
 }
-.direction-orb {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, rgba(0,188,212,0.9), rgba(0,188,212,0.3));
-  border: 1px solid rgba(0,188,212,0.4);
-  flex-shrink: 0;
-}
-.panel-right-hd h3 {
-  font: 600 14px/1 var(--font);
-  color: var(--text);
-}
-.panel-right-hd-sub {
-  font: 400 12px/1 var(--font);
+.ruler-mark {
+  flex: 1;
+  font: 400 9px/1 var(--font);
   color: var(--text3);
 }
-
-/* Direction thread */
-.direction-thread {
-  flex: 1;
-  overflow-y: auto;
-  padding: 12px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.canvas-rulers-v {
+  position: absolute;
+  top: 18px; left: 0; bottom: 0;
+  width: 18px;
+  background: rgba(18,18,22,0.9);
+  border-right: 1px solid var(--border);
+  z-index: 2;
 }
-.direction-thread::-webkit-scrollbar { width: 3px; }
-.direction-thread::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
-
-.thread-msg {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+.video-frame {
+  width: 100%;
+  max-width: 496px;
+  aspect-ratio: 16/9;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 20px 60px rgba(0,0,0,0.7);
+  position: relative;
+  overflow: hidden;
+  background: #111;
+  cursor: default;
 }
-.thread-meta {
+.video-frame.selected {
+  box-shadow: 0 0 0 2px var(--accent), 0 20px 60px rgba(0,0,0,0.7);
+}
+.vf-scene {
+  width: 100%; height: 100%;
+  background: linear-gradient(160deg, #0f2412 0%, #1a4d24 45%, #0a2010 100%);
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.vf-lights {
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 60%;
+  background:
+    radial-gradient(ellipse 55% 55% at 25% 40%, rgba(255,200,80,0.28), transparent),
+    radial-gradient(ellipse 40% 40% at 72% 35%, rgba(200,80,255,0.22), transparent),
+    radial-gradient(ellipse 50% 45% at 50% 20%, rgba(80,200,255,0.15), transparent);
+}
+.vf-crowd {
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 50%;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.55));
+}
+.vf-center-text {
+  position: relative; z-index: 2; text-align: center;
+}
+.vf-title {
+  font: 700 20px/1.2 var(--font);
+  color: rgba(255,255,255,0.95);
+  letter-spacing: -.01em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+.vf-sub {
+  font: 400 11px/1.4 var(--font);
+  color: rgba(255,255,255,0.55);
+  margin-top: 4px;
+}
+.vf-timecode {
+  position: absolute; top: 7px; left: 8px;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(4px);
+  font: 600 10px/1 var(--font);
+  color: rgba(255,255,255,0.8);
+  padding: 3px 6px; border-radius: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.vf-corner-badge {
+  position: absolute; bottom: 7px; right: 7px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 5px;
+  padding: 3px 7px;
+  display: flex; align-items: center; gap: 4px;
+}
+.vf-cb-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
+.vf-cb-text { font: 500 9px/1 var(--font); color: rgba(255,255,255,0.65); }
+.vf-handle {
+  position: absolute;
+  width: 8px; height: 8px;
+  border-radius: 2px;
+  background: #fff;
+  border: 1.5px solid var(--accent);
+  z-index: 10;
+}
+.vf-handle.tl { top:-4px; left:-4px; cursor: nwse-resize; }
+.vf-handle.tr { top:-4px; right:-4px; cursor: nesw-resize; }
+.vf-handle.bl { bottom:-4px; left:-4px; cursor: nesw-resize; }
+.vf-handle.br { bottom:-4px; right:-4px; cursor: nwse-resize; }
+
+/* Authorship strip (condensed) */
+.canvas-authstrip {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 5px 16px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
+  flex-shrink: 0;
 }
-.thread-sender {
-  font: 600 12px/1 var(--font);
-  color: var(--text2);
+.auth-strip-label { font: 500 9px/1 var(--font); color: var(--text3); white-space: nowrap; text-transform: uppercase; letter-spacing: .07em; }
+.auth-strip-bar { flex: 1; height: 4px; background: var(--surface3); border-radius: 100px; overflow: hidden; }
+.auth-strip-fill { height: 100%; background: linear-gradient(90deg, var(--green) 68%, var(--ai) 68%); width: 100%; border-radius: 100px; }
+.auth-strip-pct { font: 700 11px/1 var(--font); color: var(--green); white-space: nowrap; }
+.auth-strip-ai { font: 400 10px/1 var(--font); color: var(--text3); white-space: nowrap; }
+
+/* Playback bar */
+.playback-bar {
+  height: 42px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center;
+  padding: 0 14px; gap: 9px;
+  flex-shrink: 0;
 }
-.thread-time {
-  font: 400 11px/1 var(--font);
-  color: var(--text3);
+.pb-btn {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; cursor: pointer; flex-shrink: 0;
+  transition: all .12s;
 }
-.thread-bubble {
-  padding: 10px 12px;
-  border-radius: 12px;
-  font: 400 13px/1.5 var(--font);
-  color: var(--text);
-  max-width: 100%;
+.pb-btn.primary { background: var(--accent); border: none; color: #fff; font-size: 12px; }
+.pb-btn.ghost { background: transparent; border: 1px solid var(--border2); color: var(--text3); }
+.pb-btn.ghost:hover { background: var(--surface2); color: var(--text); }
+.pb-time { font: 500 11px/1 var(--font); color: var(--text2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.pb-scrubber { flex: 1; height: 3px; background: var(--surface3); border-radius: 100px; position: relative; cursor: pointer; }
+.pb-progress { width: 38%; height: 100%; background: var(--accent); border-radius: 100px; }
+.pb-head {
+  position: absolute; top: 50%; left: 38%;
+  transform: translate(-50%, -50%);
+  width: 11px; height: 11px;
+  border-radius: 50%; background: #fff;
+  box-shadow: 0 0 0 2px var(--accent);
 }
-.thread-bubble.user-bubble {
+.pb-vol { font-size: 13px; color: var(--text3); cursor: pointer; }
+
+/* Timeline */
+.timeline {
+  height: 118px;
+  background: var(--surface);
+  border-top: 1px solid var(--border2);
+  display: flex; flex-direction: column;
+  flex-shrink: 0; overflow: hidden;
+}
+.timeline-header {
+  height: 22px;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; flex-shrink: 0;
+}
+.tl-corner {
+  width: 60px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: flex-end;
+  padding-right: 6px;
+  border-right: 1px solid var(--border);
+  height: 100%;
+}
+.tl-corner-lbl { font: 500 8px/1 var(--font); color: var(--text3); text-transform: uppercase; letter-spacing: .06em; }
+.tl-ruler-marks { flex: 1; position: relative; overflow: hidden; }
+.tl-tick {
+  position: absolute; top: 0; bottom: 0;
+  width: 1px; background: var(--border2);
+  display: flex; align-items: flex-end; padding-bottom: 2px;
+}
+.tl-tick-label { font: 400 8px/1 var(--font); color: var(--text3); margin-left: 2px; white-space: nowrap; }
+.tl-playhead-line {
+  position: absolute; top: 0; bottom: 0;
+  width: 1.5px; background: var(--accent);
+  left: 38%; z-index: 5;
+}
+.tl-playhead-line::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 6px solid var(--accent);
+}
+.timeline-tracks { flex: 1; overflow-y: hidden; }
+.tl-track {
+  height: 32px;
+  display: flex; align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+.tl-track:last-child { border-bottom: none; }
+.tl-track-label {
+  width: 60px; flex-shrink: 0;
+  font: 500 9px/1 var(--font); color: var(--text3);
+  text-transform: uppercase; letter-spacing: .06em;
+  padding: 0 6px 0 8px;
+  border-right: 1px solid var(--border);
+  height: 100%;
+  display: flex; align-items: center; justify-content: flex-end;
+  text-align: right;
+}
+.tl-clips-row {
+  flex: 1; height: 100%;
+  position: relative; overflow: hidden;
+}
+.tl-clips-row::before {
+  content: '';
+  position: absolute; top: 0; bottom: 0; left: 38%;
+  width: 1.5px; background: rgba(192,132,252,0.4); z-index: 5;
+}
+.tl-clip {
+  position: absolute; top: 4px; bottom: 4px;
+  border-radius: 4px;
+  display: flex; align-items: center;
+  padding: 0 5px;
+  font: 500 9px/1 var(--font); color: rgba(255,255,255,0.9);
+  overflow: hidden; white-space: nowrap;
+  cursor: pointer; transition: filter .12s; user-select: none;
+}
+.tl-clip:hover { filter: brightness(1.15); }
+.tl-clip.sel { box-shadow: 0 0 0 1.5px rgba(255,255,255,0.8); }
+.tl-clip::after {
+  content: '';
+  position: absolute; right: 0; top: 0; bottom: 0; width: 4px;
+  cursor: ew-resize; background: rgba(255,255,255,0.2);
+  border-radius: 0 4px 4px 0;
+}
+
+/* ─── CHAT PANEL (right, NotebookLM style) ─── */
+.chat-panel {
+  background: var(--surface);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.chat-panel-hd {
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.chat-panel-hd-row {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 3px;
+}
+.chat-panel-orb {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(0,188,212,0.9), rgba(0,188,212,0.3));
+  border: 1px solid rgba(0,188,212,0.4); flex-shrink: 0;
+}
+.chat-panel-title { font: 700 14px/1 var(--font); color: var(--text); }
+.chat-panel-sub { font: 400 11px/1.4 var(--font); color: var(--text3); }
+.chat-panel-ctx {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 5px 10px; margin-top: 8px;
+  font: 400 11px/1 var(--font); color: var(--text2);
+}
+.chat-msgs {
+  flex: 1; overflow-y: auto;
+  padding: 12px 14px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.chat-msgs::-webkit-scrollbar { width: 3px; }
+.chat-msgs::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
+.cm-msg { display: flex; flex-direction: column; gap: 3px; }
+.cm-sender { font: 600 10px/1 var(--font); color: var(--text3); text-transform: uppercase; letter-spacing: .04em; }
+.cm-bubble {
+  padding: 9px 11px; border-radius: 10px;
+  font: 400 12.5px/1.5 var(--font); color: var(--text);
+}
+.cm-bubble.user {
   background: var(--accent-dim);
   border: 1px solid rgba(192,132,252,0.15);
-  align-self: flex-end;
-  max-width: 90%;
+  align-self: flex-end; max-width: 92%;
 }
-.thread-bubble.ai-bubble {
-  background: var(--ai-dim);
-  border: 1px solid rgba(0,188,212,0.15);
-}
-.thread-bubble strong { color: var(--ai); }
-.thread-bubble em { color: var(--accent2); font-style: normal; font-weight: 600; }
-
-/* AI guide card (Socratic) */
-.ai-guide-card {
-  background: linear-gradient(135deg, var(--ai-dim), rgba(0,188,212,0.05));
+.cm-bubble.ai { background: var(--surface2); border: 1px solid var(--border2); }
+.cm-bubble.ai strong { color: var(--ai); }
+.cm-bubble.ai em { color: var(--accent2); font-style: normal; font-weight: 600; }
+.ai-notice-card {
+  background: linear-gradient(135deg, var(--ai-dim), rgba(0,188,212,0.04));
   border: 1px solid rgba(0,188,212,0.2);
-  border-radius: 14px;
-  padding: 12px 14px;
+  border-radius: 12px; padding: 11px 13px;
 }
-.ai-guide-hd {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-.ai-guide-orb {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
+.ai-notice-hd { display: flex; align-items: center; gap: 7px; margin-bottom: 7px; }
+.ai-notice-orb {
+  width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0;
   background: radial-gradient(circle at 35% 35%, rgba(0,188,212,0.9), rgba(0,188,212,0.3));
   border: 1px solid rgba(0,188,212,0.4);
-  flex-shrink: 0;
 }
-.ai-guide-title {
-  font: 600 12px/1 var(--font);
-  color: var(--ai);
-}
-.ai-guide-body {
-  font: 400 13px/1.5 var(--font);
-  color: var(--text);
-  margin-bottom: 10px;
-}
-.ai-guide-body strong { color: var(--ai); }
-.ai-guide-prompts {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.ai-prompt-chip {
-  padding: 7px 10px;
+.ai-notice-title { font: 600 11px/1 var(--font); color: var(--ai); }
+.ai-notice-body { font: 400 12px/1.5 var(--font); color: var(--text); margin-bottom: 9px; }
+.ai-notice-body strong { color: var(--ai); }
+.ai-notice-body em { color: var(--accent2); font-style: normal; font-weight: 600; }
+.ai-notice-chips { display: flex; flex-direction: column; gap: 5px; }
+.ai-notice-chip {
+  padding: 6px 9px;
   background: var(--surface);
   border: 1px solid rgba(0,188,212,0.2);
-  border-radius: 10px;
-  font: 400 12px/1.4 var(--font);
-  color: var(--text2);
-  cursor: pointer;
-  transition: all .15s;
+  border-radius: 8px;
+  font: 400 11.5px/1.3 var(--font); color: var(--text2);
+  cursor: pointer; transition: all .12s;
 }
-.ai-prompt-chip:hover {
-  background: var(--ai-dim);
-  color: var(--ai);
-  border-color: rgba(0,188,212,0.4);
-}
-.ai-prompt-chip::before {
-  content: '→ ';
-  color: var(--ai);
-  font-weight: 600;
-}
+.ai-notice-chip:hover { background: var(--ai-dim); color: var(--ai); border-color: rgba(0,188,212,0.4); }
+.ai-notice-chip::before { content: '→ '; color: var(--ai); font-weight: 600; }
 
 /* Chat input */
 .chat-input-area {
-  padding: 12px 14px;
+  padding: 10px 12px;
   border-top: 1px solid var(--border);
-  display: flex;
-  gap: 8px;
-  align-items: flex-end;
+  display: flex; gap: 7px; align-items: flex-end;
+  flex-shrink: 0;
 }
 .chat-input-box {
   flex: 1;
   background: var(--surface2);
   border: 1px solid var(--border2);
-  border-radius: 12px;
-  padding: 9px 12px;
-  font: 400 13px/1.4 var(--font);
-  color: var(--text);
-  outline: none;
-  resize: none;
-  min-height: 38px;
-  max-height: 80px;
-  overflow-y: auto;
+  border-radius: 10px;
+  padding: 8px 11px;
+  font: 400 13px/1.4 var(--font); color: var(--text);
+  outline: none; resize: none;
+  min-height: 36px; max-height: 72px; overflow-y: auto;
 }
 .chat-input-box::placeholder { color: var(--text3); }
 .chat-send-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: var(--accent);
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  cursor: pointer;
-  flex-shrink: 0;
+  width: 34px; height: 34px; border-radius: 9px;
+  background: var(--accent); border: none;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; cursor: pointer; flex-shrink: 0;
   transition: background .15s;
 }
 .chat-send-btn:hover { background: #a855f7; }
@@ -1220,10 +1221,10 @@ body {
 
 
 <!-- ═══════════════════════════════════════════════════════════
-     V1: THREE-PANEL WORKSPACE
+     V1: EDITOR WORKSPACE (Canva / NotebookLM style)
 ═══════════════════════════════════════════════════════════ -->
 <div class="scene" id="scene-v1">
-  <div class="scene-label">iPad Pro 11" · Landscape · Workspace</div>
+  <div class="scene-label">iPad Pro 11" · Landscape · Editor Workspace</div>
   <div class="device" id="device-v1">
 
     <!-- Status bar -->
@@ -1236,273 +1237,331 @@ body {
       </div>
     </div>
 
-    <!-- App header (workspace mode) -->
-    <div class="app-header">
-      <div class="bloom-logo-wrap">
-        <div class="bloom-logo-icon">🌸</div>
-        <span class="bloom-logo-text">Bloom</span>
+    <!-- Editor toolbar (Canva-style) -->
+    <div class="editor-toolbar">
+      <div class="et-back">←</div>
+      <div class="bloom-logo-icon" style="width:24px;height:24px;border-radius:6px;font-size:12px;flex-shrink:0;">🌸</div>
+      <span class="et-fname">Cultural Festival 2024</span>
+      <div class="et-divider"></div>
+
+      <!-- Undo / Redo -->
+      <div class="et-tool-group">
+        <button class="et-tool-btn" title="Undo">↩</button>
+        <button class="et-tool-btn" title="Redo">↪</button>
       </div>
-      <div style="width:1px;height:20px;background:var(--border2);margin:0 8px;"></div>
-      <span style="font:500 14px/1 var(--font);color:var(--text2);">Workspace</span>
-      <div class="header-spacer"></div>
-      <button class="center-btn center-btn-ghost" style="font-size:13px;padding:7px 14px;">Share</button>
-      <div class="header-avatar">Y</div>
+
+      <!-- Edit tools -->
+      <div class="et-tool-group">
+        <button class="et-tool-btn active-tool" title="Select">▲</button>
+        <button class="et-tool-btn" title="Razor / Cut">✂</button>
+        <button class="et-tool-btn" title="Text overlay">T</button>
+        <button class="et-tool-btn" title="Transitions" style="font-size:10px;">⟿</button>
+      </div>
+
+      <!-- Zoom -->
+      <div class="et-tool-group" style="padding:4px 9px;gap:5px;">
+        <span style="font:400 12px/1 var(--font);color:var(--text3);">Fit</span>
+        <button class="et-tool-btn" style="font-size:14px;">−</button>
+        <button class="et-tool-btn" style="font-size:14px;">+</button>
+      </div>
+
+      <div class="et-spacer"></div>
+
+      <!-- Collaborator avatars -->
+      <div class="et-collab">
+        <div class="et-cav" style="background:linear-gradient(135deg,var(--green),#22C55E);color:#000;">Y</div>
+        <div class="et-cav" style="background:linear-gradient(135deg,#F59E0B,#FCD34D);color:#000;">H</div>
+        <div class="et-cav" style="background:linear-gradient(135deg,#0EA5E9,#38BDF8);color:#fff;">R</div>
+        <div class="et-cav" style="background:var(--ai-dim);border:1px solid rgba(0,188,212,0.4);color:var(--ai);font-size:9px;">✦</div>
+      </div>
+
+      <button class="et-btn et-btn-share">Share</button>
+      <button class="et-btn et-btn-export">Export</button>
     </div>
 
-    <!-- Three-panel grid (fills remaining height) -->
-    <div class="three-panel">
+    <!-- Editor body: Asset panel | Canvas | Chat panel -->
+    <div class="editor-body">
 
-      <!-- ── LEFT: Project list sidebar ── -->
-      <div class="panel-left">
-        <div class="panel-left-hd">
-          <h3>My Projects</h3>
-          <div class="sidebar-search">
-            <span>🔍</span>
-            <input type="text" placeholder="Search…">
-          </div>
+      <!-- ── LEFT: Asset browser ── -->
+      <div class="asset-panel">
+        <div class="asset-tabs">
+          <div class="at-tab active">Media</div>
+          <div class="at-tab">Audio</div>
+          <div class="at-tab">Text</div>
+          <div class="at-tab">Effects</div>
         </div>
 
-        <div class="proj-list">
+        <div class="asset-scroll">
 
-          <div class="pl-item">
-            <div class="pl-thumb grad-music" style="border-radius:8px;font-size:16px;">🎵</div>
-            <div class="pl-info">
-              <div class="pl-title">Sound Waves</div>
-              <div class="pl-meta">Music · H 72%</div>
+          <div class="asset-section-label">Project Clips</div>
+
+          <div class="clip-row active-clip">
+            <div class="clip-thumb-sm grad-video">🎬<span class="clip-dur">0:12</span></div>
+            <div class="clip-rinfo">
+              <div class="clip-rname">Opening crowd</div>
+              <div class="clip-rmeta">4K · 0:12</div>
             </div>
           </div>
 
-          <div class="pl-item">
-            <div class="pl-thumb grad-art" style="border-radius:8px;font-size:16px;">🎨</div>
-            <div class="pl-info">
-              <div class="pl-title">Sky Canvas</div>
-              <div class="pl-meta">Digital Art · H 65%</div>
+          <div class="clip-row">
+            <div class="clip-thumb-sm" style="background:linear-gradient(135deg,#1a3a2a,#2d6b44);">
+              👵<span class="clip-dur">0:04</span>
+            </div>
+            <div class="clip-rinfo">
+              <div class="clip-rname">Grandma watching</div>
+              <div class="clip-rmeta">4K · 0:04 · Anchor</div>
             </div>
           </div>
 
-          <div class="pl-item">
-            <div class="pl-thumb grad-story" style="border-radius:8px;font-size:16px;">📖</div>
-            <div class="pl-info">
-              <div class="pl-title">Tales of Valor</div>
-              <div class="pl-meta">Story · H 80%</div>
+          <div class="clip-row">
+            <div class="clip-thumb-sm" style="background:linear-gradient(135deg,#1a2040,#2d4490);">
+              🏮<span class="clip-dur">0:08</span>
+            </div>
+            <div class="clip-rinfo">
+              <div class="clip-rname">Lantern ceremony</div>
+              <div class="clip-rmeta">4K · 0:08</div>
             </div>
           </div>
 
-          <div class="pl-item active">
-            <div class="pl-thumb grad-video" style="border-radius:8px;font-size:16px;">🎬</div>
-            <div class="pl-info">
-              <div class="pl-title">Cultural Festival 2024</div>
-              <div class="pl-meta">Video · H 68%</div>
+          <div class="clip-row">
+            <div class="clip-thumb-sm" style="background:linear-gradient(135deg,#3a1a10,#7a3020);">
+              🥁<span class="clip-dur">0:16</span>
             </div>
-            <div class="pl-dot"></div>
-          </div>
-
-          <div class="pl-item">
-            <div class="pl-thumb grad-3d" style="border-radius:8px;font-size:16px;">🌿</div>
-            <div class="pl-info">
-              <div class="pl-title">Garden Dreams</div>
-              <div class="pl-meta">3D / Anim · H 55%</div>
+            <div class="clip-rinfo">
+              <div class="clip-rname">Drum performance</div>
+              <div class="clip-rmeta">4K · 0:16</div>
             </div>
           </div>
 
-        </div><!-- /proj-list -->
-
-        <div class="sidebar-new-btn">
-          <span>＋</span>
-          <span>New Project</span>
-        </div>
-
-      </div><!-- /panel-left -->
-
-
-      <!-- ── CENTER: Project detail ── -->
-      <div class="panel-center">
-
-        <!-- Project header -->
-        <div class="panel-center-hd">
-          <div class="center-hd-thumb grad-video" style="border-radius:10px;">🎬</div>
-          <div class="center-hd-info">
-            <div class="center-hd-type">Video Project</div>
-            <div class="center-hd-title">Cultural Festival 2024</div>
-            <div class="center-hd-meta">
-              <span class="center-hd-status status-active">● Active</span>
-              <span class="center-hd-updated">Updated 2h ago</span>
+          <div class="clip-row">
+            <div class="clip-thumb-sm" style="background:linear-gradient(135deg,#1a3a10,#3a7020);">
+              🎎<span class="clip-dur">0:07</span>
+            </div>
+            <div class="clip-rinfo">
+              <div class="clip-rname">Traditional dance</div>
+              <div class="clip-rmeta">4K · 0:07</div>
             </div>
           </div>
-          <div class="center-hd-actions">
-            <button class="center-btn center-btn-ghost">Preview</button>
-            <button class="center-btn center-btn-primary">Continue Editing</button>
-          </div>
-        </div>
 
-        <!-- Authorship hero -->
-        <div class="auth-hero">
-          <div class="auth-hero-row">
-            <div>
-              <div class="auth-hero-pct human">68%</div>
+          <div class="asset-section-label">AI Suggestions</div>
+
+          <div class="clip-row" style="opacity:0.8;">
+            <div class="clip-thumb-sm" style="background:var(--ai-dim);border:1px dashed rgba(0,188,212,0.35);">
+              <span style="font-size:11px;color:var(--ai);">✦</span>
+              <span class="clip-dur" style="background:rgba(0,188,212,0.55);">0:06</span>
             </div>
-            <div class="auth-hero-label">
-              <div class="auth-hero-label-main">YOUR VOICE</div>
-              <div class="auth-hero-label-sub">You shaped the creative direction. AI amplified it.</div>
-            </div>
-            <div style="text-align:right;">
-              <div style="font:800 28px/1 var(--font);letter-spacing:-.03em;color:var(--ai);">32%</div>
-              <div style="font:500 11px/1 var(--font);color:var(--text3);margin-top:2px;">AI ASSIST</div>
+            <div class="clip-rinfo">
+              <div class="clip-rname" style="color:var(--ai);">B-roll: crowd pan</div>
+              <div class="clip-rmeta">Kaleidoscope · Suggested</div>
             </div>
           </div>
-          <div class="auth-hero-bar-wrap">
-            <div class="auth-hero-bar" style="width:68%"></div>
-          </div>
-          <div class="auth-hero-legend">
-            <div class="auth-legend-item">
-              <div class="auth-legend-dot" style="background:var(--green)"></div>
-              Your creative choices
+
+          <div class="clip-row" style="opacity:0.8;">
+            <div class="clip-thumb-sm" style="background:var(--ai-dim);border:1px dashed rgba(0,188,212,0.35);">
+              <span style="font-size:11px;color:var(--ai);">✦</span>
+              <span class="clip-dur" style="background:rgba(0,188,212,0.55);">0:03</span>
             </div>
-            <div class="auth-legend-item">
-              <div class="auth-legend-dot" style="background:var(--ai)"></div>
-              Kaleidoscope AI
+            <div class="clip-rinfo">
+              <div class="clip-rname" style="color:var(--ai);">Close-up: candles</div>
+              <div class="clip-rmeta">Kaleidoscope · Suggested</div>
             </div>
           </div>
-        </div>
 
-        <!-- Contributors scroll -->
-        <div class="center-scroll">
+        </div><!-- /asset-scroll -->
+      </div><!-- /asset-panel -->
 
-          <div class="contrib-section-title">Contributors</div>
 
-          <div class="contrib-item">
-            <div class="contrib-avatar green-av">Y</div>
-            <div class="contrib-body">
-              <div class="contrib-name-row">
-                <span class="contrib-name">Yuki</span>
-                <span class="contrib-role">Director</span>
+      <!-- ── CENTER: Canvas + timeline ── -->
+      <div class="canvas-panel">
+
+        <!-- Canvas / preview area -->
+        <div class="canvas-area">
+          <!-- Horizontal ruler -->
+          <div class="canvas-rulers-h">
+            <span class="ruler-mark">0s</span>
+            <span class="ruler-mark">0:30</span>
+            <span class="ruler-mark">1:00</span>
+            <span class="ruler-mark">1:30</span>
+            <span class="ruler-mark">2:00</span>
+            <span class="ruler-mark">2:30</span>
+            <span class="ruler-mark">3:00</span>
+          </div>
+          <!-- Vertical ruler -->
+          <div class="canvas-rulers-v"></div>
+
+          <!-- Video frame (the canvas itself) -->
+          <div class="video-frame selected">
+            <div class="vf-scene">
+              <div class="vf-lights"></div>
+              <div class="vf-crowd"></div>
+              <div class="vf-center-text">
+                <div class="vf-title">文化祭 2024</div>
+                <div class="vf-sub">Cultural Festival · Opening Sequence</div>
               </div>
-              <div class="contrib-detail">Edited opening sequence, adjusted cultural motif transitions, finalized colour grading choices</div>
             </div>
-            <span class="contrib-time">2h ago</span>
+            <div class="vf-timecode">01:24:08</div>
+            <div class="vf-corner-badge">
+              <div class="vf-cb-dot"></div>
+              <span class="vf-cb-text">4K · 23.98fps</span>
+            </div>
+            <!-- Resize handles (selected state) -->
+            <div class="vf-handle tl"></div>
+            <div class="vf-handle tr"></div>
+            <div class="vf-handle bl"></div>
+            <div class="vf-handle br"></div>
+          </div>
+        </div><!-- /canvas-area -->
+
+        <!-- Authorship strip (condensed) -->
+        <div class="canvas-authstrip">
+          <span class="auth-strip-label">Your Voice</span>
+          <div class="auth-strip-bar"><div class="auth-strip-fill"></div></div>
+          <span class="auth-strip-pct">68%</span>
+          <span class="auth-strip-ai">· AI 32%</span>
+        </div>
+
+        <!-- Playback controls -->
+        <div class="playback-bar">
+          <button class="pb-btn ghost" title="Skip to start">⏮</button>
+          <button class="pb-btn ghost" title="Step back">◂</button>
+          <button class="pb-btn primary" title="Play">▶</button>
+          <button class="pb-btn ghost" title="Step forward">▸</button>
+          <span class="pb-time">1:24 / 3:24</span>
+          <div class="pb-scrubber">
+            <div class="pb-progress"></div>
+            <div class="pb-head"></div>
+          </div>
+          <span class="pb-vol">🔊</span>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline">
+          <!-- Ruler header -->
+          <div class="timeline-header">
+            <div class="tl-corner"><span class="tl-corner-lbl">Track</span></div>
+            <div class="tl-ruler-marks">
+              <div class="tl-tick" style="left:0%"><span class="tl-tick-label">0:00</span></div>
+              <div class="tl-tick" style="left:15%"><span class="tl-tick-label">0:30</span></div>
+              <div class="tl-tick" style="left:30%"><span class="tl-tick-label">1:00</span></div>
+              <div class="tl-tick" style="left:45%"><span class="tl-tick-label">1:30</span></div>
+              <div class="tl-tick" style="left:60%"><span class="tl-tick-label">2:00</span></div>
+              <div class="tl-tick" style="left:75%"><span class="tl-tick-label">2:30</span></div>
+              <div class="tl-tick" style="left:90%"><span class="tl-tick-label">3:00</span></div>
+              <div class="tl-playhead-line"></div>
+            </div>
           </div>
 
-          <div class="contrib-item">
-            <div class="contrib-avatar amber-av">H</div>
-            <div class="contrib-body">
-              <div class="contrib-name-row">
-                <span class="contrib-name">Hana</span>
-                <span class="contrib-role">BGM</span>
+          <!-- Tracks -->
+          <div class="timeline-tracks">
+
+            <!-- Video track -->
+            <div class="tl-track">
+              <div class="tl-track-label">Video</div>
+              <div class="tl-clips-row">
+                <div class="tl-clip sel" style="left:0%;width:18%;background:linear-gradient(90deg,#14532d,#16a34a);">Opening crowd</div>
+                <div class="tl-clip" style="left:18.5%;width:6%;background:linear-gradient(90deg,#1a3a2a,#2d6b44);">Grandma</div>
+                <div class="tl-clip" style="left:25%;width:12%;background:linear-gradient(90deg,#1a2040,#2d4490);">Lanterns</div>
+                <div class="tl-clip" style="left:37.5%;width:24%;background:linear-gradient(90deg,#3a1a10,#7a3020);">Drum performance</div>
+                <div class="tl-clip" style="left:62%;width:11%;background:linear-gradient(90deg,#1a3a10,#3a7020);">Dance</div>
               </div>
-              <div class="contrib-detail">Composed and layered the background music track with traditional instruments</div>
             </div>
-            <span class="contrib-time">5h ago</span>
-          </div>
 
-          <div class="contrib-item">
-            <div class="contrib-avatar ai-av">✦</div>
-            <div class="contrib-body">
-              <div class="contrib-name-row">
-                <span class="contrib-name">Kaleidoscope</span>
-                <span class="contrib-role">AI</span>
+            <!-- Audio track -->
+            <div class="tl-track">
+              <div class="tl-track-label">Audio</div>
+              <div class="tl-clips-row">
+                <div class="tl-clip" style="left:0%;width:72%;background:linear-gradient(90deg,rgba(245,158,11,0.75),rgba(252,211,77,0.55));color:rgba(0,0,0,0.75);">BGM — Hana (traditional instruments)</div>
+                <div class="tl-clip" style="left:73%;width:23%;background:rgba(245,158,11,0.35);color:rgba(255,255,255,0.6);">Fade out</div>
               </div>
-              <div class="contrib-detail">Generated 3 b-roll suggestions, proposed subtitle timing, enhanced colour balance in 2 scenes</div>
             </div>
-            <span class="contrib-time">3h ago</span>
-          </div>
 
-          <div class="contrib-item">
-            <div class="contrib-avatar sky-av">R</div>
-            <div class="contrib-body">
-              <div class="contrib-name-row">
-                <span class="contrib-name">Ren</span>
-                <span class="contrib-role">Text</span>
+            <!-- Caption track -->
+            <div class="tl-track">
+              <div class="tl-track-label">Caption</div>
+              <div class="tl-clips-row">
+                <div class="tl-clip" style="left:2%;width:10%;background:rgba(99,102,241,0.65);">文化祭 2024</div>
+                <div class="tl-clip" style="left:18.5%;width:9%;background:rgba(99,102,241,0.5);">おばあちゃん</div>
+                <div class="tl-clip" style="left:37.5%;width:16%;background:rgba(99,102,241,0.5);">Traditional drums</div>
               </div>
-              <div class="contrib-detail">Wrote bilingual captions and cultural context inserts for audience clarity</div>
             </div>
-            <span class="contrib-time">Yesterday</span>
+
+          </div><!-- /timeline-tracks -->
+        </div><!-- /timeline -->
+
+      </div><!-- /canvas-panel -->
+
+
+      <!-- ── RIGHT: AI Creative Direction (NotebookLM style) ── -->
+      <div class="chat-panel">
+
+        <div class="chat-panel-hd">
+          <div class="chat-panel-hd-row">
+            <div class="chat-panel-orb"></div>
+            <span class="chat-panel-title">Creative Direction</span>
           </div>
-
-        </div><!-- /center-scroll -->
-
-      </div><!-- /panel-center -->
-
-
-      <!-- ── RIGHT: Creative Direction ── -->
-      <div class="panel-right">
-
-        <div class="panel-right-hd">
-          <div class="direction-orb"></div>
-          <div>
-            <h3>Creative Direction</h3>
-            <div class="panel-right-hd-sub">Kaleidoscope · AI Guide</div>
+          <div class="chat-panel-sub">Kaleidoscope · guides your creative choices</div>
+          <div class="chat-panel-ctx">
+            <span>🎬</span>
+            <span>Opening crowd — selected</span>
           </div>
         </div>
 
-        <div class="direction-thread">
+        <div class="chat-msgs">
 
-          <div class="thread-msg">
-            <div class="thread-meta">
-              <span class="thread-sender" style="color:var(--green)">Yuki</span>
-              <span class="thread-time">Yesterday 8:12pm</span>
-            </div>
-            <div class="thread-bubble user-bubble">
+          <div class="cm-msg">
+            <span class="cm-sender" style="color:var(--green)">Yuki</span>
+            <div class="cm-bubble user">
               I want the opening to feel like walking into a festival — warm, a bit noisy, then suddenly the music drops and it gets emotional.
             </div>
           </div>
 
-          <div class="thread-msg">
-            <div class="thread-meta">
-              <span class="thread-sender" style="color:var(--ai)">Kaleidoscope</span>
-              <span class="thread-time">Yesterday 8:13pm</span>
-            </div>
-            <div class="thread-bubble ai-bubble">
-              That contrast — <strong>sensory overwhelm → emotional quiet</strong> — is a powerful structure. What's the specific <em>moment</em> you want the audience to feel that shift? Is it tied to a person, a sound, or a visual?
+          <div class="cm-msg">
+            <span class="cm-sender" style="color:var(--ai)">Kaleidoscope</span>
+            <div class="cm-bubble ai">
+              That contrast — <strong>sensory overwhelm → emotional quiet</strong> — is a powerful structure. What's the specific <em>moment</em> you want the audience to feel that shift?
             </div>
           </div>
 
-          <div class="thread-msg">
-            <div class="thread-meta">
-              <span class="thread-sender" style="color:var(--green)">Yuki</span>
-              <span class="thread-time">Yesterday 8:18pm</span>
-            </div>
-            <div class="thread-bubble user-bubble">
+          <div class="cm-msg">
+            <span class="cm-sender" style="color:var(--green)">Yuki</span>
+            <div class="cm-bubble user">
               There's a shot of my grandma watching from the side — that's the emotional anchor. Everything should lead to that.
             </div>
           </div>
 
-          <div class="thread-msg">
-            <div class="thread-meta">
-              <span class="thread-sender" style="color:var(--ai)">Kaleidoscope</span>
-              <span class="thread-time">Yesterday 8:19pm</span>
-            </div>
-            <div class="thread-bubble ai-bubble">
-              That's beautiful — and very clear. If her shot is the <em>emotional anchor</em>, the opening sequence should <strong>plant questions</strong> the audience doesn't realise they're asking until they see her face. How long is that shot in your current cut?
+          <div class="cm-msg">
+            <span class="cm-sender" style="color:var(--ai)">Kaleidoscope</span>
+            <div class="cm-bubble ai">
+              That's beautiful. If her shot is the <em>emotional anchor</em>, the opening should <strong>plant questions</strong> the audience doesn't realise they're asking until they see her face.
             </div>
           </div>
 
-          <!-- Socratic AI guide card -->
-          <div class="ai-guide-card">
-            <div class="ai-guide-hd">
-              <div class="ai-guide-orb"></div>
-              <span class="ai-guide-title">Kaleidoscope noticed something</span>
+          <!-- AI notice card (Socratic) -->
+          <div class="ai-notice-card">
+            <div class="ai-notice-hd">
+              <div class="ai-notice-orb"></div>
+              <span class="ai-notice-title">Kaleidoscope noticed something</span>
             </div>
-            <div class="ai-guide-body">
-              Your opening crowd sequence is <strong>12 seconds</strong> — longer than your anchor shot (4s). That ratio might dilute the emotional payoff. What feeling do you want the audience to carry <em>out</em> of the opening?
+            <div class="ai-notice-body">
+              Your opening crowd clip is <strong>12 seconds</strong> — 3× longer than the grandma anchor shot (4s). That ratio might dilute the emotional payoff.
             </div>
-            <div class="ai-guide-prompts">
-              <div class="ai-prompt-chip">The warmth of the crowd should linger</div>
-              <div class="ai-prompt-chip">The quiet moment should hit hardest</div>
-              <div class="ai-prompt-chip">Balance — both feelings equally</div>
+            <div class="ai-notice-chips">
+              <div class="ai-notice-chip">Trim crowd to 6s, extend anchor to 7s</div>
+              <div class="ai-notice-chip">Keep 12s — the warmth should linger</div>
+              <div class="ai-notice-chip">Let me re-examine the whole arc</div>
             </div>
           </div>
 
-        </div><!-- /direction-thread -->
+        </div><!-- /chat-msgs -->
 
-        <!-- Chat input -->
         <div class="chat-input-area">
           <textarea class="chat-input-box" placeholder="Share your creative direction…" rows="1"></textarea>
           <button class="chat-send-btn">↑</button>
         </div>
 
-      </div><!-- /panel-right -->
+      </div><!-- /chat-panel -->
 
-    </div><!-- /three-panel -->
+    </div><!-- /editor-body -->
 
   </div><!-- /device -->
 </div><!-- /scene-v1 -->
