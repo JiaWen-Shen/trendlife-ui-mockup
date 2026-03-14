@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>TrendLife — Yuki's View v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   RESET & FOUNDATIONS
+═══════════════════════════════════════════ */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#09090B;--surface:#18181B;--surface2:#27272A;--surface3:#3F3F46;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.1);
+  --text:#FAFAFA;--text2:#A1A1AA;--text3:#8A8A93;
+  /* Bloom (primary brand) */
+  --accent:#C084FC;--accent2:#D8B4FE;--accent-dim:rgba(192,132,252,0.1);
+  /* Kaleidoscope AI */
+  --ai:#00BCD4;--ai-dim:rgba(0,188,212,0.1);
+  /* Yuki voice */
+  --green:#4ADE80;--green-dim:rgba(74,222,128,0.08);
+  /* Status */
+  --coral:#F43F5E;--coral-dim:rgba(244,63,94,0.1);
+  --violet:#8B5CF6;--violet-dim:rgba(139,92,246,0.1);
+  --sky:#38BDF8;--sky-dim:rgba(56,189,248,0.08);
+  --amber:#FFB84D;--amber-dim:rgba(255,184,77,0.08);
+  --teal:#14B8A6;--teal-dim:rgba(20,184,166,0.08);
+  --radius:20px;--radius-sm:12px;--radius-xs:8px;
+  --font:'DM Sans',system-ui,-apple-system,sans-serif;
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+  --ease-spring:cubic-bezier(0.34,1.56,0.64,1);
+}
+[data-theme="light"]{
+  --bg:#F4F6F8;--surface:#FFFFFF;--surface2:#EEF2F6;--surface3:#DDE3EA;
+  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.13);
+  --text:#0F172A;--text2:#3E4C5E;--text3:#5A6A7E;
+  --accent:#9333EA;--accent2:#A855F7;--accent-dim:rgba(147,51,234,0.1);
+  --ai:#0097A7;--ai-dim:rgba(0,151,167,0.1);
+  --coral:#BE123C;--coral-dim:rgba(190,18,60,0.1);
+  --violet:#6D28D9;--violet-dim:rgba(109,40,217,0.1);
+  --sky:#0369A1;--sky-dim:rgba(3,105,161,0.08);
+  --green:#15803D;--green-dim:rgba(21,128,61,0.08);
+  --amber:#D97706;--amber-dim:rgba(217,119,6,0.08);
+  --teal:#0D7D74;--teal-dim:rgba(13,125,116,0.08);
+}
+[data-theme="light"] .device{box-shadow:0 0 0 1px rgba(0,0,0,0.1),0 40px 120px rgba(0,0,0,0.18)}
+[data-theme="light"] .bottom-nav-inner{background:rgba(255,255,255,0.72);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-color:rgba(0,0,0,0.1)}
+[data-theme="light"] .notif-wrap{background:rgba(236,236,248,0.9);border-color:rgba(0,0,0,0.08)}
+[data-theme="light"] .notif-row{border-bottom-color:rgba(0,0,0,0.05)}
+[data-theme="light"] .notif-body{color:rgba(15,23,42,0.75)}
+[data-theme="light"] .node-circle{fill:var(--surface)}
+[data-theme="light"] .conn-base{opacity:0.6}
+
+html{font-size:16px;-webkit-tap-highlight-color:transparent}
+body{background:#2a2a2a;font-family:var(--font);color:var(--text);-webkit-font-smoothing:antialiased;overflow:hidden;height:100dvh;display:flex;justify-content:center;align-items:center}
+button{font-family:inherit;border:none;background:none;cursor:pointer;color:inherit}
+
+/* ═══ THEME TOGGLE ═══ */
+.theme-toggle{position:fixed;top:20px;right:20px;z-index:1000;width:44px;height:44px;border-radius:50%;background:var(--surface);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;transition:all 0.3s var(--ease-out);box-shadow:0 4px 12px rgba(0,0,0,0.15)}
+.theme-toggle:hover{transform:scale(1.1)}
+
+/* ═══ DEVICE ═══ */
+.device{width:375px;height:100vh;background:var(--bg);border-radius:0;overflow:hidden;position:relative}
+
+/* ═══ STATUS BAR ═══ */
+.status-bar{position:absolute;top:0;left:0;right:0;height:54px;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 24px 0}
+.status-time{font-size:15px;font-weight:600;color:var(--text);letter-spacing:-0.3px}
+.status-icons{font-size:11px;color:var(--text3);letter-spacing:2px}
+.profile-btn{width:34px;height:34px;border-radius:50%;overflow:hidden;padding:0;border:1.5px solid var(--border2);flex-shrink:0;transition:all 0.25s var(--ease-out)}
+.profile-btn img{width:100%;height:100%;object-fit:cover;display:block}
+.profile-btn:active{transform:scale(0.9)}
+
+/* ═══ VIEW SYSTEM ═══ */
+.view{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;transform:translateX(20px);pointer-events:none;transition:opacity 0.35s var(--ease-out),transform 0.35s var(--ease-out);padding-top:54px}
+.view.active{opacity:1;transform:translateX(0);pointer-events:auto}
+.view.exit-left{opacity:0;transform:translateX(-20px)}
+.view-scroll{flex:1;overflow-y:scroll;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-bottom:96px;scrollbar-width:none}
+.view-scroll::-webkit-scrollbar{display:none}
+.back-btn{width:34px;height:34px;border-radius:50%;background:var(--surface);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--text2);cursor:pointer;flex-shrink:0;transition:all 0.2s}
+.back-btn:active{transform:scale(0.92);background:var(--surface2)}
+.sub-header{padding:0 20px 14px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.sub-title{font-size:17px;font-weight:700;color:var(--text);letter-spacing:-0.2px}
+
+/* ═══ BOTTOM NAV ═══ */
+.bottom-nav{position:absolute;bottom:0;left:0;right:0;z-index:100;padding:0 8px 10px;transition:opacity 0.3s,transform 0.3s var(--ease-out)}
+.bottom-nav.hidden{opacity:0;transform:translateY(20px);pointer-events:none}
+.bottom-nav-inner{display:flex;align-items:center;justify-content:space-around;background:rgba(24,24,27,0.55);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--border2);border-radius:100px;padding:8px 6px}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 20px;border-radius:100px;position:relative;transition:all 0.25s var(--ease-out)}
+.nav-item.active{background:var(--green-dim)}
+.nav-item.active.bloom-tab{background:var(--accent-dim)}
+.nav-icon{font-size:20px;transition:transform 0.25s var(--ease-spring)}
+.nav-item.active .nav-icon{transform:scale(1.12)}
+.nav-label{font-size:10px;font-weight:600;color:var(--text3);letter-spacing:0.3px;transition:color 0.2s}
+.nav-item.active .nav-label{color:var(--green)}
+.nav-item.active.bloom-tab .nav-label{color:var(--accent)}
+/* AI center button */
+.nav-ai{width:52px;height:52px;border-radius:50%;padding:0;background:rgba(0,188,212,0.18);justify-content:center;gap:0;position:relative;z-index:10;transition:transform 0.4s var(--ease-out),background 0.35s ease}
+.nav-ai.active{background:rgba(0,188,212,0.35)}
+.nav-ai .nav-label{display:none}
+.nav-ai:active{transform:scale(0.92)}
+.nav-ai__ring{position:absolute;inset:-8px;width:calc(100% + 16px);height:calc(100% + 16px);pointer-events:none;z-index:-1;opacity:0;animation:none}
+.nav-ai.active .nav-ai__ring{animation:navRingBreathe 3.2s var(--ease-out) infinite}
+@keyframes navRingBreathe{0%,100%{opacity:0;transform:scale(0.94)}40%{opacity:0.6;transform:scale(1)}70%{opacity:0.2;transform:scale(1.04)}}
+.nav-ai::before{content:'';position:absolute;inset:-6px;border-radius:50%;background:radial-gradient(circle,rgba(0,188,212,0.45) 0%,rgba(0,188,212,0.1) 50%,transparent 72%);opacity:0;z-index:-1;filter:blur(8px);animation:none}
+.nav-ai.active::before{animation:navAiBreathe 3.2s var(--ease-out) infinite}
+@keyframes navAiBreathe{0%,100%{opacity:0;transform:scale(0.85)}40%{opacity:0.6;transform:scale(1.05)}70%{opacity:0.2;transform:scale(1.12)}}
+.nav-ai.active{box-shadow:0 0 0 3px rgba(0,188,212,0.2),0 0 18px rgba(0,188,212,0.15)}
+.nav-ai-img{width:22px;height:22px;position:relative;z-index:2;opacity:0.75;filter:brightness(1.5)}
+.nav-ai.active .nav-ai-img{opacity:1}
+
+/* ═══ HOME — greeting ═══ */
+.home-header{padding:8px 20px 0}
+.home-greeting{font-size:13px;color:var(--text3);letter-spacing:0.2px}
+.home-title{font-size:26px;font-weight:800;letter-spacing:-0.7px;line-height:1.18;margin-top:4px}
+.home-title span{background:linear-gradient(135deg,var(--green),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ═══ HOME — constellation ═══ */
+.constellation{position:relative;height:300px;margin:16px 0 6px;display:flex;align-items:center;justify-content:center}
+.constellation svg{width:100%;height:100%}
+.node{cursor:pointer;transition:transform 0.3s var(--ease-spring);transform-origin:center center;transform-box:fill-box}
+.node:hover{transform:scale(1.1)}
+.node-ring{fill:none;stroke-width:1.5;opacity:0.25}
+.node-circle{stroke-width:1.5}
+.node-label{font-family:'DM Sans',sans-serif;font-weight:600;fill:var(--text2);font-size:10px}
+.center-ring{fill:none;stroke:var(--green);stroke-width:1;opacity:0.15;animation:centerPulse 4s ease-in-out infinite}
+@keyframes centerPulse{0%,100%{r:42;opacity:0.15}50%{r:48;opacity:0.08}}
+.conn{fill:none;stroke-linecap:round}
+.conn-base{stroke-width:2;opacity:0.45}
+.conn-flow{stroke-width:2.5;opacity:0.15;stroke-dasharray:4 8}
+
+/* ═══ HOME — notification section ═══ */
+.notif-section{padding:0 20px;margin-top:8px}
+.notif-section-lbl{font-size:10px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.notif-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}
+.notif-row{display:flex;align-items:center;gap:9px;padding:10px 12px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;position:relative}
+.notif-row:last-child{border-bottom:none}
+.notif-row:active{background:var(--surface2)}
+.notif-icon{font-size:14px;width:20px;text-align:center;flex-shrink:0}
+.notif-body{flex:1;font-size:12px;font-weight:500;color:var(--text2);letter-spacing:-0.1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.notif-time{font-size:10px;color:var(--text3);flex-shrink:0}
+.notif-dismiss{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid var(--border2);color:var(--text3);font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-left:2px}
+
+/* ═══ HOME — section header & bento ═══ */
+.section-hdr{padding:0 20px;margin-top:16px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.section-label{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.5px;text-transform:uppercase}
+.section-more{font-size:12px;font-weight:600;color:var(--accent)}
+.bento{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 20px}
+.bento-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;position:relative;overflow:hidden;transition:transform 0.25s var(--ease-out),border-color 0.25s}
+.bento-card:active{transform:scale(0.97)}
+.bento-card.wide{grid-column:span 2}
+.bento-icon{font-size:26px;margin-bottom:10px;display:block}
+.bento-title{font-size:14px;font-weight:700;color:var(--text);letter-spacing:-0.2px;margin-bottom:3px}
+.bento-desc{font-size:11.5px;color:var(--text3);line-height:1.5}
+.bento-badge{position:absolute;top:12px;right:12px;font-size:9px;font-weight:700;padding:3px 8px;border-radius:100px;letter-spacing:0.3px}
+.badge-safe{background:var(--green-dim);color:var(--green);border:1px solid rgba(74,222,128,0.18)}
+.badge-bloom{background:var(--accent-dim);color:var(--accent);border:1px solid rgba(192,132,252,0.18)}
+.badge-ai{background:var(--ai-dim);color:var(--ai);border:1px solid rgba(0,188,212,0.18)}
+.bento-card::before{content:'';position:absolute;top:-30px;right:-30px;width:80px;height:80px;border-radius:50%;opacity:0.07;pointer-events:none}
+.bento-card.family::before{background:var(--green)}
+.bento-card.bloom-c::before{background:var(--accent)}
+.bento-card.kaleido::before{background:var(--ai)}
+.bento-card.safety::before{background:var(--coral)}
+
+/* ═══ BLOOM onboarding shared ═══ */
+.cc-progress{display:flex;gap:6px;padding:16px 24px 0;flex-shrink:0}
+.cc-prog-seg{height:3px;flex:1;border-radius:2px;background:rgba(255,255,255,0.1)}
+[data-theme="light"] .cc-prog-seg{background:rgba(0,0,0,0.08)}
+.cc-prog-seg.done{background:#C084FC}
+.cc-prog-seg.active{background:linear-gradient(90deg,#C084FC,#29B6CF)}
+.cc-body{flex:1;overflow-y:auto;padding:24px}
+.cc-icon-wrap{width:72px;height:72px;border-radius:20px;background:url('bloom-icon.svg') center/78% no-repeat, linear-gradient(135deg,#1e0842,#2a0f5c);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;flex-shrink:0}
+.cc-title{font-size:22px;font-weight:800;color:var(--text);text-align:center;margin-bottom:10px;letter-spacing:-0.3px}
+.cc-sub{font-size:13px;color:var(--text3);text-align:center;line-height:1.7;margin-bottom:24px}
+.cc-field-label{font-size:14px;font-weight:700;color:var(--text2);margin-bottom:12px}
+.cc-date-row{display:flex;gap:10px;margin-bottom:24px}
+.cc-date-field{flex:1;height:52px;border-radius:14px;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--text3)}
+[data-theme="light"] .cc-date-field{background:rgba(0,0,0,0.04);border-color:rgba(0,0,0,0.1);color:rgba(0,0,0,0.3)}
+.cc-date-field.filled{color:var(--text2);border-color:rgba(192,132,252,0.35)}
+.cc-btn{width:100%;height:54px;border-radius:16px;border:none;background:linear-gradient(135deg,#C084FC,#9B5DE5);color:white;font-size:16px;font-weight:700;letter-spacing:-0.1px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.cc-btn:disabled,.cc-btn.inactive{opacity:0.38;cursor:default}
+.cc-btn-secondary{height:48px;padding:0 20px;border-radius:14px;background:var(--surface);border:1.5px solid var(--border2);color:var(--text2);font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
+.cc-btn-row{display:flex;gap:10px;margin-top:4px}
+.cc-btn-row .cc-btn{flex:1}
+.cc-info-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-top:16px}
+.cc-info-label{font-size:12px;font-weight:700;color:var(--text2);margin-bottom:5px}
+.cc-info-text{font-size:12px;color:var(--text3);line-height:1.7}
+.cc-section-title{font-size:20px;font-weight:800;color:var(--text);letter-spacing:-0.2px;margin-bottom:6px}
+.cc-section-sub{font-size:12.5px;color:var(--text3);line-height:1.6;margin-bottom:18px}
+
+/* ═══ INTEREST GRID ═══ */
+.interest-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.interest-card{padding:14px 12px 12px;border-radius:14px;background:var(--surface);border:1.5px solid var(--border);cursor:pointer;transition:all 0.15s}
+.interest-card.selected{background:var(--accent-dim);border-color:rgba(192,132,252,0.6)}
+.interest-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;margin-bottom:8px;letter-spacing:0.3px;flex-shrink:0}
+.interest-name{font-size:12.5px;font-weight:600;color:var(--text2)}
+.interest-card.selected .interest-name{color:var(--accent)}
+
+/* ═══ GOALS ═══ */
+.goal-list{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.goal-item{display:flex;align-items:center;gap:14px;padding:15px 16px;border-radius:14px;background:var(--surface);border:1.5px solid var(--border);cursor:pointer;transition:all 0.15s}
+.goal-item.selected{background:rgba(255,45,135,0.1);border-color:rgba(255,45,135,0.55)}
+.goal-icon{font-size:18px;flex-shrink:0;width:24px;text-align:center}
+.goal-name{font-size:14px;font-weight:600;color:var(--text2)}
+.goal-item.selected .goal-name{color:#FF5BA7}
+
+/* ═══ CONSENT ═══ */
+.tl-banner{background:var(--green-dim);border:1px solid rgba(74,222,128,0.22);border-radius:14px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:14px}
+.tl-banner-logo{width:26px;height:26px;border-radius:7px;background:#D71920;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:white;flex-shrink:0}
+.tl-banner-text{font-size:12px;color:rgba(74,222,128,0.8);line-height:1.6}
+[data-theme="light"] .tl-banner-text{color:rgba(22,163,74,0.85)}
+.cc-consent-box{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.cc-consent-title{font-size:12px;font-weight:700;color:var(--text2);margin-bottom:10px}
+.cc-consent-item{display:flex;align-items:flex-start;gap:9px;padding:4px 0;font-size:12px;color:var(--text3);line-height:1.55}
+.cc-consent-check{color:#FF5BA7;font-weight:700;flex-shrink:0}
+.cc-checkbox-row{display:flex;align-items:flex-start;gap:12px;background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:14px;margin-bottom:18px;cursor:pointer;transition:border-color 0.15s}
+.cc-checkbox-row.checked{border-color:rgba(192,132,252,0.4)}
+.cc-checkbox{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--border2);background:rgba(255,255,255,0.04);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all 0.15s}
+.cc-checkbox.checked{background:#C084FC;border-color:#C084FC;color:white}
+.cc-checkbox-text{font-size:12px;color:var(--text3);line-height:1.65}
+.cc-checkbox-row.checked .cc-checkbox-text{color:var(--text2)}
+
+/* ═══ WAITING ═══ */
+.waiting-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 24px;gap:28px}
+.waiting-av-wrap{position:relative;display:flex;align-items:center;justify-content:center}
+.waiting-ring{position:absolute;border-radius:50%;border:1.5px solid rgba(192,132,252,0.3);animation:wring 2.2s ease-out infinite}
+.waiting-ring:nth-child(1){width:112px;height:112px}
+.waiting-ring:nth-child(2){width:136px;height:136px;animation-delay:0.7s}
+@keyframes wring{0%{opacity:0.65;transform:scale(0.94)}100%{opacity:0;transform:scale(1.06)}}
+.waiting-av{width:80px;height:80px;border-radius:50%;position:relative;z-index:1;background:var(--accent-dim);border:2px solid rgba(192,132,252,0.35);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:var(--accent)}
+.waiting-dots{display:flex;gap:7px;align-items:center}
+.waiting-dot{width:6px;height:6px;border-radius:50%;background:rgba(192,132,252,0.6);animation:wdot 1.4s ease-in-out infinite}
+.waiting-dot:nth-child(2){animation-delay:0.2s}
+.waiting-dot:nth-child(3){animation-delay:0.4s}
+@keyframes wdot{0%,80%,100%{transform:scale(0.45);opacity:0.25}40%{transform:scale(1);opacity:1}}
+.waiting-title{font-size:20px;font-weight:800;color:var(--text);text-align:center;letter-spacing:-0.2px;margin-bottom:6px}
+.waiting-sub{font-size:13px;color:var(--text3);text-align:center;line-height:1.7}
+.tl-notify-card{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px}
+.tl-notify-row{display:flex;align-items:flex-start;gap:12px}
+.tl-notify-logo{width:36px;height:36px;border-radius:10px;background:#D71920;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:white;flex-shrink:0}
+.tl-notify-app{font-size:10.5px;color:var(--text3);letter-spacing:0.3px;margin-bottom:3px}
+.tl-notify-msg{font-size:13px;color:var(--text2);font-weight:500;line-height:1.5}
+.tl-notify-footer{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:10px;border-top:1px solid var(--border)}
+.tl-notify-time{font-size:10.5px;color:var(--text3)}
+.tl-notify-badge{font-size:10px;font-weight:700;color:rgba(74,222,128,0.85);background:var(--green-dim);border:1px solid rgba(74,222,128,0.2);padding:2px 9px;border-radius:20px}
+
+/* ═══ JOINING ═══ */
+.joining-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px 28px;gap:24px}
+.joining-logo-wrap{width:88px;height:88px;border-radius:26px;background:url('bloom-icon.svg') center/78% no-repeat, linear-gradient(135deg,#1e0842,#2a0f5c);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(192,132,252,0.25)}
+.joining-title{font-size:22px;font-weight:800;color:var(--text);text-align:center;letter-spacing:-0.3px}
+.joining-sub{font-size:13px;color:var(--text3);text-align:center;line-height:1.7}
+.joining-prog-track{width:100%;height:4px;border-radius:2px;background:rgba(255,255,255,0.08);overflow:hidden}
+[data-theme="light"] .joining-prog-track{background:rgba(0,0,0,0.08)}
+.joining-prog-bar{height:100%;border-radius:2px;width:0;background:linear-gradient(90deg,#C084FC,#00E5FF)}
+.joining-steps{display:flex;flex-direction:column;gap:9px;width:100%}
+.joining-step{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--text3);transition:color 0.4s}
+.joining-step.done{color:rgba(192,132,252,0.75)}
+.joining-step-icon{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0;transition:all 0.4s}
+.joining-step.done .joining-step-icon{background:#C084FC;border-color:#C084FC;color:white}
+
+/* ═══ KALEIDOSCOPE CHAT (teen version — green) ═══ */
+.butler-header{padding:12px 20px 10px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);flex-shrink:0}
+.butler-av{width:40px;height:40px;border-radius:50%;background:var(--green-dim);border:1.5px solid rgba(74,222,128,0.35);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;background-image:url('kaleidoscope-mandala.svg');background-size:72%;background-position:center;background-repeat:no-repeat}
+.butler-title{font-size:15px;font-weight:700;color:var(--text)}
+.butler-subtitle{font-size:11px;color:var(--green);margin-top:1px;font-weight:500}
+.butler-msgs{flex:1;overflow-y:auto;padding:14px 18px;display:flex;flex-direction:column;gap:12px}
+.butler-msg{display:flex;gap:9px;align-items:flex-end}
+.butler-msg.me{flex-direction:row-reverse}
+.butler-bubble{max-width:78%;padding:10px 14px;border-radius:16px;font-size:12.5px;line-height:1.55}
+.butler-bubble.ai{background:rgba(74,222,128,0.07);border:1px solid rgba(74,222,128,0.18);border-bottom-left-radius:4px;color:var(--text)}
+.butler-bubble.user{background:var(--surface);border:1px solid var(--border2);border-bottom-right-radius:4px;color:var(--text2)}
+.butler-quick{padding:0 18px 14px;display:flex;flex-wrap:wrap;gap:7px;flex-shrink:0}
+.butler-chip{padding:8px 14px;border-radius:20px;background:var(--green-dim);border:1px solid rgba(74,222,128,0.22);font-size:12px;font-weight:600;color:rgba(74,222,128,0.8);cursor:pointer;white-space:nowrap;transition:background 0.15s}
+.butler-chip:hover{background:rgba(74,222,128,0.12)}
+.butler-bar{display:flex;gap:10px;padding:12px 18px;border-top:1px solid var(--border);flex-shrink:0}
+.butler-input{flex:1;height:42px;border-radius:12px;background:var(--surface);border:1px solid var(--border2);font-size:13px;color:var(--text3);padding:0 14px;display:flex;align-items:center}
+.butler-send{width:42px;height:42px;border-radius:12px;flex-shrink:0;background:rgba(74,222,128,0.15);border:1px solid rgba(74,222,128,0.3);display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer}
+
+/* ═══ BLOOM WORKSPACE ═══ */
+.cc-ws-header{padding:12px 20px 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(192,132,252,0.1);flex-shrink:0}
+.cc-ws-logo{font-size:17px;font-weight:900;color:var(--accent);letter-spacing:-0.3px}
+.cc-ws-badge{font-size:10px;font-weight:700;background:rgba(255,45,135,0.15);border:1px solid rgba(255,45,135,0.3);color:#FF5BA7;padding:3px 9px;border-radius:20px}
+.cc-ws-body{flex:1;overflow-y:auto}
+.cc-ws-section{padding:6px 16px 8px;font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1px;text-transform:uppercase}
+.cc-ws-private{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;background:var(--surface2);border:1px solid var(--border2);color:var(--text3);letter-spacing:0.2px}
+
+/* collab project */
+.collab-banner{margin:12px 16px 0;padding:14px 16px;border-radius:16px;background:var(--accent-dim);border:1px solid rgba(192,132,252,0.15);display:flex;flex-direction:column;gap:6px}
+.collab-project-name{font-size:16px;font-weight:800;color:var(--text);letter-spacing:-0.3px}
+.collab-meta{font-size:11px;color:var(--text3)}
+.collab-live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:4px;vertical-align:middle;animation:livePulse 1.4s infinite}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+.collab-members{display:flex;align-items:center;gap:0}
+.collab-av{width:26px;height:26px;border-radius:50%;border:2px solid rgba(14,14,20,0.85);object-fit:cover;margin-right:-6px;flex-shrink:0}
+.collab-av-more{width:26px;height:26px;border-radius:50%;background:var(--surface2);border:1.5px solid var(--border2);font-size:10px;font-weight:700;color:var(--text3);display:flex;align-items:center;justify-content:center;margin-left:12px;flex-shrink:0}
+
+/* authorship */
+.cc-ws-authorship{margin:8px 16px 0;padding:9px 14px;border-radius:12px;background:rgba(74,222,128,0.03);border:1px solid rgba(74,222,128,0.1);display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.auth-top-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;width:100%}
+.cc-ws-auth-label{font-size:9.5px;font-weight:700;color:rgba(74,222,128,0.55);letter-spacing:0.8px;text-transform:uppercase;margin-right:2px}
+.auth-pct{font-size:13px;font-weight:700;color:rgba(74,222,128,0.85)}
+.auth-ratio-bar{height:4px;border-radius:2px;overflow:hidden;display:flex;margin-bottom:6px;width:100%}
+.auth-bar-human{width:68%;background:linear-gradient(90deg,rgba(74,222,128,0.72),rgba(74,222,128,0.45))}
+.auth-bar-ai{flex:1;background:rgba(192,132,252,0.2)}
+.auth-stats-row{display:flex;flex-wrap:wrap;gap:4px;width:100%}
+.cc-ws-auth-stat{font-size:11px;font-weight:600;color:var(--text3)}
+.cc-ws-auth-sep{font-size:10px;color:var(--border2)}
+
+/* canvas card */
+.collab-canvas-card{margin:10px 16px 0;border-radius:18px;overflow:hidden;border:1px solid rgba(192,132,252,0.18);background:var(--surface)}
+.canvas-preview{position:relative;height:136px;overflow:hidden;background:var(--surface2)}
+.canvas-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(14,14,20,0.7) 0%,transparent 55%)}
+.cursor-badge{position:absolute;display:flex;align-items:center;gap:5px;background:rgba(14,14,20,0.78);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:3px 8px;backdrop-filter:blur(6px)}
+.cursor-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.cursor-label{font-size:10px;font-weight:600;color:rgba(255,255,255,0.7)}
+.canvas-title-overlay{position:absolute;bottom:10px;left:12px;right:12px}
+.canvas-title-text{font-size:13px;font-weight:700;color:rgba(255,255,255,0.88)}
+.canvas-title-sub{font-size:10.5px;color:rgba(255,255,255,0.38);margin-top:2px}
+.canvas-footer{display:flex;align-items:center;justify-content:space-between;padding:10px 14px}
+.canvas-meta{font-size:11px;color:var(--text3)}
+.canvas-edit-btn{font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-dim);border:1px solid rgba(192,132,252,0.25);border-radius:20px;padding:5px 12px;cursor:pointer}
+
+/* creative direction thread */
+.direction-thread{margin:10px 16px 0;padding:11px 13px;border-radius:14px;background:var(--accent-dim);border:1px solid rgba(192,132,252,0.1)}
+.dt-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.dt-label{font-size:10px;font-weight:700;color:rgba(192,132,252,0.7);letter-spacing:0.04em}
+.dt-count{font-size:9.5px;font-weight:600;color:var(--text3)}
+.dt-body{display:flex;flex-direction:column}
+.dt-entry{display:flex;gap:8px;padding:5px 0;position:relative}
+.dt-entry:not(:last-child)::after{content:'';position:absolute;left:5px;top:18px;width:1px;bottom:-5px;background:rgba(255,255,255,0.07)}
+.dt-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.dt-ai .dt-dot{background:rgba(192,132,252,0.35);border:1px solid rgba(192,132,252,0.5)}
+.dt-yuki .dt-dot{background:rgba(74,222,128,0.3);border:1px solid rgba(74,222,128,0.5)}
+.dt-content{flex:1}
+.dt-who{font-size:9px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase}
+.dt-ai .dt-who{color:rgba(192,132,252,0.7)}
+.dt-yuki .dt-who{color:rgba(74,222,128,0.7)}
+.dt-text{font-size:11.5px;color:var(--text3);line-height:1.45;margin-top:1px}
+.dt-kept{display:inline-block;margin-top:4px;font-size:9.5px;font-weight:700;color:var(--accent);background:var(--accent-dim);border:1px solid rgba(192,132,252,0.2);padding:1px 7px;border-radius:6px}
+
+/* AI Socratic card */
+.ai-guide-card{margin:8px 16px 4px;padding:12px 14px;border-radius:14px;background:linear-gradient(135deg,var(--accent-dim),rgba(99,102,241,0.08));border:1px solid rgba(192,132,252,0.2);display:flex;align-items:flex-start;gap:10px}
+.ai-guide-card.socratic{flex-direction:column;gap:10px}
+.ai-guide-card.socratic .ai-guide-top{display:flex;align-items:flex-start;gap:10px}
+.ai-guide-icon{width:30px;height:30px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,#7C3AED,#4F46E5);display:flex;align-items:center;justify-content:center;font-size:13px;color:white}
+.ai-guide-text{flex:1}
+.ai-guide-title{font-size:10.5px;font-weight:700;color:rgba(192,132,252,0.8);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:3px}
+.ai-guide-body{font-size:12px;color:var(--text3);line-height:1.5}
+.ai-guide-q{font-size:12.5px;font-weight:600;color:rgba(192,132,252,0.75);line-height:1.55;font-style:italic;padding-left:2px}
+.ai-guide-choices{display:flex;gap:6px;flex-wrap:wrap}
+.ai-guide-choice{font-size:11px;font-weight:600;padding:6px 12px;border-radius:20px;cursor:pointer;transition:opacity 0.15s}
+.ai-guide-choice.intent{background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.22);color:rgba(74,222,128,0.8)}
+.ai-guide-choice.rethink{background:var(--surface2);border:1px solid var(--border);color:var(--text3)}
+
+/* contributions */
+.contrib-item{margin:0 16px 8px;padding:12px 14px;border-radius:14px;background:var(--surface);border:1px solid var(--border);display:flex;gap:10px}
+.contrib-item.yuki-item{border-color:rgba(74,222,128,0.15);background:rgba(74,222,128,0.04)}
+.contrib-item.ai-item{border-color:rgba(192,132,252,0.12);background:var(--accent-dim)}
+.contrib-av{width:34px;height:34px;border-radius:50%;flex-shrink:0;overflow:hidden}
+.contrib-av img{width:100%;height:100%;object-fit:cover}
+.contrib-av-icon{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px}
+.contrib-content{flex:1;min-width:0}
+.contrib-header{display:flex;align-items:center;gap:6px;margin-bottom:3px;flex-wrap:wrap}
+.contrib-name{font-size:12px;font-weight:700;color:var(--text2)}
+.contrib-tag{font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:10px}
+.contrib-tag.draft{background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.25);color:var(--green)}
+.contrib-tag.added{background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.2);color:#60A5FA}
+.contrib-tag.ai-tag{background:var(--accent-dim);border:1px solid rgba(192,132,252,0.2);color:var(--accent)}
+.contrib-tag.director{background:var(--accent-dim);border:1px solid rgba(192,132,252,0.28);color:var(--accent)}
+.contrib-tag.kept{background:rgba(74,222,128,0.07);border:1px solid rgba(74,222,128,0.18);color:rgba(74,222,128,0.65)}
+.contrib-body{font-size:11.5px;color:var(--text3);line-height:1.4}
+.contrib-thumb-row{display:flex;gap:6px;margin-top:8px}
+.contrib-thumb-item{width:58px;height:42px;border-radius:8px;overflow:hidden;background:var(--surface2);flex-shrink:0}
+.contrib-thumb-add{width:42px;height:42px;border-radius:8px;border:1.5px dashed rgba(74,222,128,0.35);display:flex;align-items:center;justify-content:center;font-size:16px;color:rgba(74,222,128,0.5);cursor:pointer}
+.contrib-time{font-size:10px;color:var(--text3);margin-top:4px}
+
+/* sharing */
+.sharing-card{margin:10px 16px 0;border-radius:14px;overflow:hidden;border:1px solid rgba(192,132,252,0.12);background:var(--accent-dim)}
+.sharing-card-header{display:flex;align-items:center;justify-content:space-between;padding:9px 13px 7px;border-bottom:1px solid rgba(192,132,252,0.09)}
+.sharing-card-title{font-size:10px;font-weight:700;color:rgba(192,132,252,0.6);letter-spacing:0.05em}
+.sharing-private-badge{font-size:9.5px;font-weight:600;color:var(--text3);background:var(--surface2);padding:2px 8px;border-radius:20px;border:1px solid var(--border2)}
+.sharing-row{display:flex;align-items:center;gap:10px;padding:10px 13px;cursor:pointer;transition:background 0.15s}
+.sharing-row:active{background:rgba(192,132,252,0.06)}
+.sharing-row-avs{display:flex}
+.sharing-row-av{width:26px;height:26px;border-radius:50%;object-fit:cover;border:2px solid rgba(14,14,20,0.9);margin-left:-7px}
+.sharing-row-avs .sharing-row-av:first-child{margin-left:0}
+.sharing-row-info{flex:1}
+.sharing-row-label{font-size:11.5px;font-weight:600;color:var(--text2)}
+.sharing-row-sub{font-size:10px;color:var(--text3);margin-top:1px}
+.sharing-share-btn{font-size:10.5px;font-weight:700;padding:5px 11px;border-radius:20px;background:var(--accent-dim);border:1px solid rgba(192,132,252,0.25);color:rgba(192,132,252,0.8);cursor:pointer;white-space:nowrap}
+
+/* Workspace bottom nav (inside Bloom workspace screen) */
+.cc-ws-bottomnav{height:72px;border-top:1px solid rgba(192,132,252,0.1);display:flex;align-items:flex-start;justify-content:space-around;padding:10px 0 0;flex-shrink:0}
+.cc-ws-tab-item{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:2px 16px;opacity:0.38}
+.cc-ws-tab-item.active{opacity:1}
+.cc-ws-tab-icon{font-size:19px}
+.cc-ws-tab-label{font-size:9.5px;color:rgba(192,132,252,0.7);letter-spacing:0.3px;font-weight:600}
+.cc-ws-create-btn{width:48px;height:48px;border-radius:16px;margin-top:-6px;background:linear-gradient(135deg,#C084FC,#9B5DE5);display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;box-shadow:0 4px 18px rgba(192,132,252,0.35)}
+
+/* privacy footer */
+.privacy-footer{margin:4px 16px 16px;padding:10px 14px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.privacy-footer-icon{font-size:13px;color:var(--text3)}
+.privacy-footer-text{flex:1;font-size:11px;color:var(--text3);line-height:1.4}
+.privacy-footer-link{font-size:11px;font-weight:600;color:rgba(192,132,252,0.5);flex-shrink:0;cursor:pointer}
+
+/* ═══ SHOWCASE ═══ */
+.showcase-header{display:flex;align-items:center;gap:10px;padding:6px 20px 12px;flex-shrink:0}
+.showcase-title{font-size:17px;font-weight:800;color:var(--text);letter-spacing:-0.3px;flex:1}
+.showcase-fam-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;background:var(--accent-dim);color:rgba(192,132,252,0.8);border:1px solid rgba(192,132,252,0.18);letter-spacing:0.3px;white-space:nowrap}
+.showcase-body{flex:1;overflow-y:auto;padding:4px 20px 20px}
+.showcase-hero{border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--border);margin-bottom:18px}
+.showcase-hero-thumb{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--surface2)}
+.showcase-hero-info{padding:14px}
+.showcase-hero-title{font-size:16px;font-weight:800;color:var(--text);margin-bottom:5px;letter-spacing:-0.2px}
+.showcase-hero-meta{font-size:11.5px;color:var(--text3);margin-bottom:10px}
+.showcase-hero-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.showcase-credit{margin-top:6px}
+.showcase-credit-badge{font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:8px;background:var(--green-dim);border:1px solid rgba(74,222,128,0.18);color:var(--green)}
+.showcase-report-toggle{display:flex;align-items:center;gap:7px;margin-top:10px;padding:8px 10px;border-radius:10px;background:var(--surface2);border:1px solid var(--border);cursor:pointer}
+.srt-icon{font-size:13px;color:var(--accent)}
+.srt-text{flex:1;font-size:11.5px;color:var(--text3)}
+.srt-toggle{font-size:11px;font-weight:700;color:var(--accent)}
+.showcase-section{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:0.8px;text-transform:uppercase;margin:12px 0 8px}
+.family-sees-card{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:var(--surface);border:1px solid var(--border);margin-bottom:10px}
+.fam-see-avs{display:flex}
+.fam-see-av{width:28px;height:28px;border-radius:50%;object-fit:cover;border:2px solid var(--bg);margin-left:-7px}
+.fam-see-avs .fam-see-av:first-child{margin-left:0}
+.fam-see-text{flex:1;font-size:12px;color:var(--text3);line-height:1.5}
+.fam-see-arrow{font-size:16px;color:var(--text3)}
+.reaction-list{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.reaction-item{display:flex;gap:10px;align-items:flex-start}
+.reaction-av{width:30px;height:30px;border-radius:50%;object-fit:cover;flex-shrink:0;margin-top:2px}
+.reaction-bubble{flex:1;padding:10px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--border)}
+.reaction-who{font-size:10.5px;font-weight:700;color:var(--text3);margin-bottom:3px}
+.reaction-text{font-size:12.5px;color:var(--text2);line-height:1.5}
+.works-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.work-card{border-radius:14px;overflow:hidden;background:var(--surface);border:1px solid var(--border);cursor:pointer}
+.work-thumb{width:100%;height:70px;object-fit:cover;background:var(--surface2);display:block}
+.work-info{padding:9px 10px}
+.work-title{font-size:12px;font-weight:700;color:var(--text2);margin-bottom:3px}
+.work-meta{font-size:10.5px;color:var(--text3)}
+.work-pill{display:inline-block;margin-top:5px;font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:6px}
+.work-pill.shared{background:var(--green-dim);color:var(--green);border:1px solid rgba(74,222,128,0.18)}
+.work-pill.private{background:var(--surface2);color:var(--text3);border:1px solid var(--border2)}
+.showcase-share-btn{width:100%;height:46px;border-radius:13px;border:1.5px solid rgba(192,132,252,0.22);background:var(--accent-dim);color:rgba(192,132,252,0.75);font-size:13.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px}
+.family-share-teaser{display:flex;align-items:center;gap:10px;background:var(--accent-dim);border:1px solid rgba(192,132,252,0.14);border-radius:13px;padding:11px 14px;margin-bottom:4px;cursor:pointer;transition:background 0.15s}
+.fst-avs{display:flex}
+.fst-av{width:24px;height:24px;border-radius:50%;object-fit:cover;border:1.5px solid var(--bg);margin-left:-5px}
+.fst-avs .fst-av:first-child{margin-left:0}
+.fst-text{flex:1;font-size:12px;color:var(--text3)}
+.fst-label{font-size:10.5px;font-weight:700;color:rgba(192,132,252,0.75)}
+.fst-arrow{font-size:13px;color:rgba(192,132,252,0.45)}
+
+/* ═══ EVENTS view ═══ */
+.events-header{padding:8px 20px 20px}
+.events-title{font-size:24px;font-weight:800;letter-spacing:-0.6px;color:var(--text)}
+.events-sub{font-size:13px;color:var(--text3);margin-top:4px}
+.date-sep{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.4px;padding:16px 20px 8px;text-transform:uppercase}
+.event-list{padding:0 20px;display:flex;flex-direction:column;gap:2px}
+.event-item{display:flex;gap:14px;padding:14px;border-radius:var(--radius);transition:background 0.2s;cursor:pointer}
+.event-item:active{background:var(--surface)}
+.ev-timeline{display:flex;flex-direction:column;align-items:center;width:36px;flex-shrink:0}
+.ev-dot{width:36px;height:36px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid var(--border2);background:var(--surface);flex-shrink:0}
+.ev-line{width:1px;flex:1;background:var(--border);margin-top:4px}
+.event-item:last-child .ev-line{display:none}
+.ev-content{flex:1;padding-top:2px}
+.ev-who{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:3px}
+.ev-msg{font-size:13.5px;font-weight:500;color:var(--text);line-height:1.5;letter-spacing:-0.1px}
+.ev-time{font-size:11px;color:var(--text3);margin-top:4px}
+.ev-tag{display:inline-block;font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:6px;margin-right:4px;margin-top:6px}
+.ev-tag.green{background:var(--green-dim);color:var(--green)}
+.ev-tag.bloom{background:var(--accent-dim);color:var(--accent)}
+.ev-tag.sky{background:var(--sky-dim);color:var(--sky)}
+.ev-tag.amber{background:var(--amber-dim);color:var(--amber)}
+</style>
+</head>
+
+<body>
+<button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">☾</button>
+
+<div class="device" id="device">
+
+  <!-- ──── Status Bar ──── -->
+  <div class="status-bar">
+    <span class="status-time">9:41</span>
+    <div style="display:flex;align-items:center;gap:8px">
+      <span class="status-icons">●●● Wi-Fi ▮</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       V0 · Yuki's Constellation Home
+       ══════════════════════════════ -->
+  <div class="view active" id="v0">
+    <div class="view-scroll">
+      <div class="home-header">
+        <div class="home-greeting">TrendLife · My World</div>
+        <div class="home-title">Hi, <span>Yuki</span></div>
+      </div>
+
+      <!-- Constellation SVG -->
+      <div class="constellation">
+        <svg id="const-svg" viewBox="0 0 375 300" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+
+      <!-- Notifications -->
+      <div class="notif-section">
+        <div class="notif-section-lbl">Updates</div>
+        <div class="notif-wrap">
+          <div class="notif-row" id="notif-crew" onclick="showView(7)">
+            <span class="notif-icon" style="color:var(--green)">✅</span>
+            <span class="notif-body">Mom approved Bloom — tap to join now!</span>
+            <span class="notif-time">Just now</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-crew')">✕</div>
+          </div>
+          <div class="notif-row" id="notif-grandma">
+            <span class="notif-icon" style="color:#FFC364">🎂</span>
+            <span class="notif-body">Grandma's resting — birthday cake is all set</span>
+            <span class="notif-time">Just now</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-grandma')">✕</div>
+          </div>
+          <div class="notif-row" id="notif-hiro">
+            <span class="notif-icon" style="color:#FB923C">🎮</span>
+            <span class="notif-body">Hiro challenged you to a game — accept?</span>
+            <span class="notif-time">2h ago</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-hiro')">✕</div>
+          </div>
+          <div class="notif-row" id="notif-streak" onclick="showView(6)">
+            <span class="notif-icon" style="color:#FCD34D">✦</span>
+            <span class="notif-body">5 days in — Kaleidoscope asks: what do you want to make next?</span>
+            <span class="notif-time">Today</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-streak')">✕</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions bento -->
+      <div class="section-hdr">
+        <span class="section-label">Quick Actions</span>
+      </div>
+      <div class="bento">
+        <div class="bento-card wide family" onclick="showView(6)" style="display:flex;align-items:center;gap:14px;padding:16px 18px">
+          <div style="width:44px;height:44px;border-radius:14px;background:var(--green-dim);border:1px solid rgba(74,222,128,0.2);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">✦</div>
+          <div style="flex:1">
+            <div class="bento-title">My Constellation</div>
+            <div class="bento-desc">Mom, Dad, Grandma, Hiro · all connected</div>
+          </div>
+          <span class="bento-badge badge-safe">Family</span>
+        </div>
+        <div class="bento-card bloom-c" onclick="launchBloom()">
+          <img src="bloom-icon.svg" style="width:32px;height:32px;opacity:0.88;margin-bottom:8px;display:block">
+          <div class="bento-title">Bloom</div>
+          <div class="bento-desc">文化祭 collab · 3 editing</div>
+          <span class="bento-badge badge-bloom">Live</span>
+        </div>
+        <div class="bento-card kaleido" onclick="showView(6)">
+          <span class="bento-icon">◈</span>
+          <div class="bento-title">Kaleidoscope</div>
+          <div class="bento-desc">Ask AI anything</div>
+          <span class="bento-badge badge-ai">Online</span>
+        </div>
+        <div class="bento-card" onclick="showView(9)" style="grid-column:span 2;display:flex;align-items:center;gap:14px;padding:16px 18px">
+          <div style="width:44px;height:44px;border-radius:14px;background:var(--accent-dim);border:1px solid rgba(192,132,252,0.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">✦</div>
+          <div style="flex:1">
+            <div class="bento-title">My Creative Space</div>
+            <div class="bento-desc">Showcase · 2 works · 3 family reactions</div>
+          </div>
+          <span class="bento-badge badge-bloom">Shared</span>
+        </div>
+      </div>
+      <div style="height:8px"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       V1 · Bloom — Age Verification
+       ══════════════════════════════ -->
+  <div class="view" id="v1">
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 24px;overflow-y:auto">
+      <div class="cc-icon-wrap"></div>
+      <div class="cc-title">Welcome to Bloom</div>
+      <div class="cc-sub">We need to verify your age to give you the right creative experience and keep you safe. We'll never share your personal info.</div>
+      <div style="width:100%;margin-bottom:24px">
+        <div class="cc-field-label">What's your date of birth?</div>
+        <div class="cc-date-row">
+          <div class="cc-date-field">MM</div>
+          <div class="cc-date-field">DD</div>
+          <div class="cc-date-field filled" style="flex:1.4">2008</div>
+        </div>
+      </div>
+      <button class="cc-btn" onclick="showView(2)">Continue →</button>
+      <div class="cc-info-card" style="width:100%">
+        <div class="cc-info-label">Why we need this</div>
+        <div class="cc-info-text">Age verification helps us provide appropriate content, enable parental controls, and comply with privacy laws designed to protect you.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       V2 · Bloom — Interests
+       ══════════════════════════════ -->
+  <div class="view" id="v2">
+    <div class="cc-progress">
+      <div class="cc-prog-seg done"></div>
+      <div class="cc-prog-seg active"></div>
+      <div class="cc-prog-seg"></div>
+    </div>
+    <div class="cc-body">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+        <span style="font-size:18px;color:#FF5BA7">✦</span>
+        <div class="cc-section-title">What do you love creating?</div>
+      </div>
+      <div class="cc-section-sub">Pick your interests and we'll tailor inspiration and trends just for you</div>
+      <div class="interest-grid">
+        <div class="interest-card selected">
+          <div class="interest-icon" style="background:rgba(255,45,135,0.18);color:#FF5BA7">FA</div>
+          <div class="interest-name">Fashion &amp; Style</div>
+        </div>
+        <div class="interest-card">
+          <div class="interest-icon" style="background:rgba(96,165,250,0.18);color:#60A5FA">GA</div>
+          <div class="interest-name">Gaming</div>
+        </div>
+        <div class="interest-card selected">
+          <div class="interest-icon" style="background:rgba(192,132,252,0.18);color:#C084FC">AR</div>
+          <div class="interest-name">Art &amp; Design</div>
+        </div>
+        <div class="interest-card">
+          <div class="interest-icon" style="background:rgba(192,132,252,0.18);color:#C084FC">MU</div>
+          <div class="interest-name">Music &amp; Dance</div>
+        </div>
+        <div class="interest-card">
+          <div class="interest-icon" style="background:rgba(255,195,100,0.18);color:#FFC364">FO</div>
+          <div class="interest-name">Food &amp; Cooking</div>
+        </div>
+        <div class="interest-card">
+          <div class="interest-icon" style="background:rgba(74,222,128,0.18);color:#4ADE80">SP</div>
+          <div class="interest-name">Sports &amp; Fitness</div>
+        </div>
+      </div>
+      <button class="cc-btn" onclick="showView(3)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       V3 · Bloom — Goals
+       ══════════════════════════════ -->
+  <div class="view" id="v3">
+    <div class="cc-progress">
+      <div class="cc-prog-seg done"></div>
+      <div class="cc-prog-seg done"></div>
+      <div class="cc-prog-seg active"></div>
+    </div>
+    <div class="cc-body">
+      <div class="cc-section-title" style="margin-bottom:6px">What are your goals?</div>
+      <div class="cc-section-sub">Tell us how you want to grow and we'll help you get there</div>
+      <div class="goal-list">
+        <div class="goal-item selected">
+          <span class="goal-icon" style="font-size:13px;font-weight:800;color:#FF5BA7">◎</span>
+          <div class="goal-name">Jump on trends faster</div>
+        </div>
+        <div class="goal-item">
+          <span class="goal-icon" style="font-size:13px;font-weight:800">⊙</span>
+          <div class="goal-name">Create content with friends</div>
+        </div>
+        <div class="goal-item">
+          <span class="goal-icon" style="font-size:14px">✦</span>
+          <div class="goal-name">Get creative ideas</div>
+        </div>
+        <div class="goal-item">
+          <span class="goal-icon" style="font-size:13px;font-weight:800">↗</span>
+          <div class="goal-name">Grow my following</div>
+        </div>
+      </div>
+      <div class="cc-btn-row">
+        <button class="cc-btn-secondary" onclick="showView(2)">Back</button>
+        <button class="cc-btn" onclick="showView(4)">Continue →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       V4 · Bloom — Parental Consent
+       ══════════════════════════════ -->
+  <div class="view" id="v4">
+    <div class="cc-progress">
+      <div class="cc-prog-seg done"></div>
+      <div class="cc-prog-seg done"></div>
+      <div class="cc-prog-seg done"></div>
+    </div>
+    <div class="cc-body">
+      <div class="cc-section-title" style="margin-bottom:6px">One last step…</div>
+      <div class="cc-section-sub" style="margin-bottom:14px">Because you're under 18, a parent needs to approve your account. This keeps your creative space safe.</div>
+
+      <div class="tl-banner">
+        <div class="tl-banner-logo">T</div>
+        <div class="tl-banner-text">Via <strong>TrendLife Kaleidoscope</strong>, the approval request goes directly to Mom (Mei) — no email needed</div>
+      </div>
+
+      <div class="cc-consent-box">
+        <div class="cc-consent-title">Parents can:</div>
+        <div class="cc-consent-item">
+          <span class="cc-consent-check">✓</span>View a summary of your content activity (not full details)
+        </div>
+        <div class="cc-consent-item">
+          <span class="cc-consent-check">✓</span>Set screen time limits and content filters
+        </div>
+        <div class="cc-consent-item">
+          <span class="cc-consent-check">✓</span>Receive safety alerts when inappropriate content is detected
+        </div>
+      </div>
+
+      <div class="cc-checkbox-row checked" id="consent-row" onclick="toggleConsent()">
+        <div class="cc-checkbox checked" id="consent-box">✓</div>
+        <div class="cc-checkbox-text">I understand that a parent or guardian will be notified via TrendLife to approve my account and can view activity summaries</div>
+      </div>
+
+      <div class="cc-btn-row">
+        <button class="cc-btn-secondary" onclick="showView(3)">Back</button>
+        <button class="cc-btn" id="start-btn" onclick="showView(5)">Start Creating →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       V5 · Waiting for Mei's Approval
+       ══════════════════════════════ -->
+  <div class="view" id="v5">
+    <div class="waiting-body">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+        <div style="font-size:11px;color:var(--text3);letter-spacing:0.6px;text-transform:uppercase">Approval request sent to</div>
+        <div class="waiting-av-wrap">
+          <div class="waiting-ring"></div>
+          <div class="waiting-ring"></div>
+          <div class="waiting-av">E</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:17px;font-weight:700;color:var(--text)">Mom · Mei</div>
+          <div style="font-size:12px;color:var(--text3);margin-top:3px">via TrendLife Kaleidoscope</div>
+        </div>
+      </div>
+
+      <div class="waiting-dots">
+        <div class="waiting-dot"></div>
+        <div class="waiting-dot"></div>
+        <div class="waiting-dot"></div>
+      </div>
+
+      <div style="text-align:center">
+        <div class="waiting-title">Waiting for approval…</div>
+        <div class="waiting-sub">Mom will see your request on TrendLife<br>Usually approved within a few minutes ✦</div>
+      </div>
+
+      <div class="tl-notify-card">
+        <div class="tl-notify-row">
+          <div class="tl-notify-logo">T</div>
+          <div style="flex:1">
+            <div class="tl-notify-app">TrendLife · Kaleidoscope</div>
+            <div class="tl-notify-msg">Yuki wants to join Bloom — approval needed</div>
+          </div>
+        </div>
+        <div class="tl-notify-footer">
+          <div class="tl-notify-time">Just sent · Delivered</div>
+          <div class="tl-notify-badge">✓ Delivered</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       V6 · Kaleidoscope Chat
+       ══════════════════════════════ -->
+  <div class="view" id="v6">
+    <div class="butler-header">
+      <div class="back-btn" onclick="showView(0)">←</div>
+      <div class="butler-av"></div>
+      <div>
+        <div class="butler-title">Kaleidoscope</div>
+        <div class="butler-subtitle">● Online · Here for you</div>
+      </div>
+    </div>
+    <div class="butler-msgs">
+      <div class="butler-msg">
+        <div class="butler-av" style="width:30px;height:30px;font-size:13px"></div>
+        <div class="butler-bubble ai">Hey Yuki! I'm your Kaleidoscope. What are you making today? 🎨</div>
+      </div>
+      <div class="butler-msg">
+        <div class="butler-av" style="width:30px;height:30px;font-size:13px"></div>
+        <div class="butler-bubble ai">You picked <strong style="color:var(--ai)">Fashion &amp; Style</strong> and <strong style="color:#FF5BA7">Art &amp; Design</strong> — I found 3 trends blowing up right now!</div>
+      </div>
+      <div class="butler-msg me">
+        <div class="butler-bubble user">Can you check if Mom's free soon? 😅</div>
+      </div>
+      <div class="butler-msg">
+        <div class="butler-av" style="width:30px;height:30px;font-size:13px"></div>
+        <div class="butler-bubble ai">Mom (Mei) has meetings this afternoon but should be free after 6 PM. Want me to remind her about Bloom? ✦</div>
+      </div>
+    </div>
+    <div class="butler-quick">
+      <div class="butler-chip" onclick="launchBloom()">Open creator tools</div>
+      <div class="butler-chip">Today's trends</div>
+      <div class="butler-chip">Family feed</div>
+      <div class="butler-chip">Safety alerts</div>
+    </div>
+    <div class="butler-bar">
+      <div class="butler-input">Message…</div>
+      <div class="butler-send">↑</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       V7 · Joining Bloom
+       ══════════════════════════════ -->
+  <div class="view" id="v7">
+    <div class="joining-body">
+      <div class="joining-logo-wrap"></div>
+      <div style="text-align:center">
+        <div class="joining-title">Joining Bloom</div>
+        <div class="joining-sub">Loading your creative space…</div>
+      </div>
+      <div style="width:100%">
+        <div class="joining-prog-track">
+          <div class="joining-prog-bar" id="joining-bar"></div>
+        </div>
+      </div>
+      <div class="joining-steps">
+        <div class="joining-step done" id="jstep0">
+          <div class="joining-step-icon">✓</div>
+          <span>Verifying identity</span>
+        </div>
+        <div class="joining-step" id="jstep1">
+          <div class="joining-step-icon"></div>
+          <span>Loading your interests</span>
+        </div>
+        <div class="joining-step" id="jstep2">
+          <div class="joining-step-icon"></div>
+          <span>Preparing trend picks</span>
+        </div>
+        <div class="joining-step" id="jstep3">
+          <div class="joining-step-icon"></div>
+          <span>Opening creative space</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       V8 · Bloom Collab Workspace
+       ══════════════════════════════ -->
+  <div class="view" id="v8">
+    <div class="cc-ws-header">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="back-btn" onclick="showView(0)">←</div>
+        <div class="cc-ws-logo">Bloom</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="cc-ws-private">🔒 Private</div>
+        <div class="cc-ws-badge">Collab 🎬</div>
+      </div>
+    </div>
+    <div class="cc-ws-body">
+
+      <!-- Collab project banner -->
+      <div class="collab-banner">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="collab-project-name">🏮 文化祭 2024</div>
+          <div style="font-size:10.5px;font-weight:600;color:var(--green)">
+            <span class="collab-live-dot"></span>Live · 3 collaborating
+          </div>
+        </div>
+        <div class="collab-meta">TikTok collab · Hana &amp; Ren · 8 edits today</div>
+        <div class="collab-members">
+          <img class="collab-av" src="faces/yuki.png" alt="Yuki">
+          <img class="collab-av" src="https://i.pravatar.cc/52?img=23" alt="Hana">
+          <img class="collab-av" src="https://i.pravatar.cc/52?img=57" alt="Ren">
+          <div style="flex:1"></div>
+          <div style="font-size:10px;color:var(--text3)">posting to TikTok</div>
+        </div>
+      </div>
+
+      <!-- Authorship strip -->
+      <div class="cc-ws-authorship">
+        <div class="auth-top-row">
+          <span class="cc-ws-auth-label">Your voice</span>
+          <span class="auth-pct">68%</span>
+        </div>
+        <div class="auth-ratio-bar">
+          <div class="auth-bar-human"></div>
+          <div class="auth-bar-ai"></div>
+        </div>
+        <div class="auth-stats-row">
+          <span class="cc-ws-auth-stat">8 decisions</span>
+          <span class="cc-ws-auth-sep">·</span>
+          <span class="cc-ws-auth-stat">3 redirections</span>
+          <span class="cc-ws-auth-sep">·</span>
+          <span class="cc-ws-auth-stat">4 Q answered</span>
+        </div>
+      </div>
+
+      <!-- Canvas card -->
+      <div class="collab-canvas-card">
+        <div class="canvas-preview">
+          <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(192,132,252,0.15),rgba(255,45,135,0.1));display:flex;align-items:center;justify-content:center;font-size:44px">🏮</div>
+          <div class="canvas-overlay"></div>
+          <div class="cursor-badge" style="top:9px;left:10px">
+            <div class="cursor-dot" style="background:#60A5FA"></div>
+            <span class="cursor-label">Hana is adding filter…</span>
+          </div>
+          <div class="cursor-badge" style="top:9px;right:10px">
+            <div class="cursor-dot" style="background:#FB923C"></div>
+            <span class="cursor-label">Ren added countdown</span>
+          </div>
+          <div class="canvas-title-overlay">
+            <div class="canvas-title-text">文化祭 2024 🏮</div>
+            <div class="canvas-title-sub">Vertical · 00:52 · v4 · 6 clips</div>
+          </div>
+        </div>
+        <div class="canvas-footer">
+          <span class="canvas-meta">🎬 6 clips &nbsp;·&nbsp; 3 transitions &nbsp;·&nbsp; BGM: YOASOBI</span>
+          <button class="canvas-edit-btn">✎ Continue editing</button>
+        </div>
+      </div>
+
+      <!-- Creative Direction Thread -->
+      <div class="direction-thread">
+        <div class="dt-header">
+          <span class="dt-label">✦ Creative Direction</span>
+          <span class="dt-count">4 exchanges</span>
+        </div>
+        <div class="dt-body">
+          <div class="dt-entry dt-ai">
+            <div class="dt-dot"></div>
+            <div class="dt-content">
+              <span class="dt-who">Kaleidoscope</span>
+              <div class="dt-text">Opening feeling — quiet before chaos, or energy from the start?</div>
+            </div>
+          </div>
+          <div class="dt-entry dt-yuki">
+            <div class="dt-dot"></div>
+            <div class="dt-content">
+              <span class="dt-who">Yuki</span>
+              <div class="dt-text">quiet first. like the calm before everything gets loud.</div>
+            </div>
+          </div>
+          <div class="dt-entry dt-ai">
+            <div class="dt-dot"></div>
+            <div class="dt-content">
+              <span class="dt-who">Kaleidoscope</span>
+              <div class="dt-text">A: banner close-up, empty corridor. B: crowd already warming up. Both fit — which feeling matters more?</div>
+            </div>
+          </div>
+          <div class="dt-entry dt-yuki">
+            <div class="dt-dot"></div>
+            <div class="dt-content">
+              <span class="dt-who">Yuki</span>
+              <div class="dt-text">A. Keep it intimate. I want the opening to feel like we're seeing it first.</div>
+              <span class="dt-kept">→ Director's choice ✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Socratic card -->
+      <div class="ai-guide-card socratic">
+        <div class="ai-guide-top">
+          <div class="ai-guide-icon">✦</div>
+          <div class="ai-guide-text">
+            <div class="ai-guide-title">Kaleidoscope noticed</div>
+            <div class="ai-guide-body">Hana's filter and Ren's countdown are both beautiful. But your first clip — the handwritten 「文化祭」banner, no crowd, no effects — had a completely different feeling.</div>
+          </div>
+        </div>
+        <div class="ai-guide-q">"This is starting to look like every other school festival TikTok. Was that always the goal — or was there a different story you wanted to tell?"</div>
+        <div class="ai-guide-choices">
+          <button class="ai-guide-choice intent">That's our story — keep the quiet opening</button>
+          <button class="ai-guide-choice rethink">The trending look is fine — keep going</button>
+        </div>
+      </div>
+
+      <!-- Contributions -->
+      <div class="cc-ws-section" style="margin-top:6px">Contributions</div>
+
+      <div class="contrib-item yuki-item">
+        <div class="contrib-av">
+          <img src="faces/yuki.png" alt="">
+        </div>
+        <div class="contrib-content">
+          <div class="contrib-header">
+            <span class="contrib-name">Yuki (you)</span>
+            <span class="contrib-tag director">Director's choice</span>
+          </div>
+          <div class="contrib-body">Opening clip: 「文化祭」banner being hung — close-up, handwritten kanji, no crowd. Wanted to start with something quiet.</div>
+          <div class="contrib-thumb-add" style="width:58px;height:42px">＋</div>
+          <div class="contrib-time">Just now</div>
+        </div>
+      </div>
+
+      <div class="contrib-item">
+        <div class="contrib-av">
+          <img src="https://i.pravatar.cc/68?img=23" alt="">
+        </div>
+        <div class="contrib-content">
+          <div class="contrib-header">
+            <span class="contrib-name">Hana</span>
+            <span class="contrib-tag added">Added BGM + filter</span>
+          </div>
+          <div class="contrib-body">YOASOBI track + golden hour film filter — "これ絶対バズる！✨"</div>
+          <div class="contrib-time">12 mins ago</div>
+        </div>
+      </div>
+
+      <div class="contrib-item ai-item">
+        <div class="contrib-av-icon" style="background:var(--accent-dim)">✦</div>
+        <div class="contrib-content">
+          <div class="contrib-header">
+            <span class="contrib-name" style="color:rgba(192,132,252,0.82)">Kaleidoscope</span>
+            <span class="contrib-tag ai-tag">Noticed</span>
+            <span class="contrib-tag kept">Yuki kept ✓</span>
+          </div>
+          <div class="contrib-body">Hana's filter and Ren's overlays are layering up — noticed the visual weight is shifting from intimate to loud</div>
+          <div class="contrib-time">18 mins ago</div>
+        </div>
+      </div>
+
+      <div class="contrib-item">
+        <div class="contrib-av">
+          <img src="https://i.pravatar.cc/68?img=57" alt="">
+        </div>
+        <div class="contrib-content">
+          <div class="contrib-header">
+            <span class="contrib-name">Ren</span>
+            <span class="contrib-tag added">Added text</span>
+          </div>
+          <div class="contrib-body">「文化祭 Day 1 🏮」countdown overlay + confetti burst effect</div>
+          <div class="contrib-time">22 mins ago</div>
+        </div>
+      </div>
+
+      <!-- Sharing card -->
+      <div class="sharing-card">
+        <div class="sharing-card-header">
+          <span class="sharing-card-title">SHARING</span>
+          <span class="sharing-private-badge">🔒 Private · Crew only</span>
+        </div>
+        <div class="sharing-row" onclick="showView(9)">
+          <div class="sharing-row-avs">
+            <img class="sharing-row-av" src="faces/mei.png" alt="Mom">
+            <img class="sharing-row-av" src="faces/grandma.png" alt="Grandma">
+            <img class="sharing-row-av" src="faces/kanji.png" alt="Dad">
+          </div>
+          <div class="sharing-row-info">
+            <div class="sharing-row-label">Family hasn't seen this yet</div>
+            <div class="sharing-row-sub">Mom · Grandma · Dad</div>
+          </div>
+          <button class="sharing-share-btn" onclick="event.stopPropagation();showView(9)">Share →</button>
+        </div>
+      </div>
+      <div style="height:16px"></div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       V9 · My Creative Space (Showcase)
+       ══════════════════════════════ -->
+  <div class="view" id="v9">
+    <div class="sub-header">
+      <button class="back-btn" onclick="showView(_prev)">←</button>
+      <span class="sub-title">My Creative Space</span>
+      <span class="showcase-fam-badge">Shared with Family</span>
+    </div>
+    <div class="showcase-body">
+
+      <!-- Featured work -->
+      <div class="showcase-hero">
+        <div class="showcase-hero-thumb" style="background:linear-gradient(135deg,rgba(192,132,252,0.2),rgba(255,45,135,0.12));display:flex;align-items:center;justify-content:center;font-size:52px">🏮</div>
+        <div class="showcase-hero-info">
+          <div class="showcase-hero-title">🏮 文化祭 2024</div>
+          <div class="showcase-hero-meta">Vertical · 00:52 · TikTok · Collab with Hana &amp; Ren · 6 clips</div>
+          <div class="showcase-hero-tags">
+            <span style="font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:7px;background:var(--green-dim);color:var(--green)">✓ Shared with family</span>
+            <span style="font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:7px;background:var(--surface2);color:var(--text3)">In progress</span>
+          </div>
+          <div class="showcase-credit">
+            <span class="showcase-credit-badge">✦ Directed by Yuki · 68% · 3 refusals</span>
+          </div>
+          <div class="showcase-report-toggle">
+            <span class="srt-icon">✦</span>
+            <span class="srt-text">Include in Kaleidoscope report to Mom</span>
+            <span class="srt-toggle">○ Off</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Who can see this -->
+      <div class="showcase-section">Shared with</div>
+      <div class="family-sees-card">
+        <div class="fam-see-avs">
+          <img class="fam-see-av" src="faces/mei.png" alt="Mom">
+          <img class="fam-see-av" src="faces/grandma.png" alt="Grandma">
+          <img class="fam-see-av" src="faces/kanji.png" alt="Dad">
+        </div>
+        <div class="fam-see-text">Mom, Grandma, Dad<br>
+          <span style="color:rgba(192,132,252,0.7);font-size:11px;font-weight:600">3 viewed · 1 not yet seen</span>
+        </div>
+        <div class="fam-see-arrow">›</div>
+      </div>
+
+      <!-- Reactions -->
+      <div class="showcase-section">Reactions</div>
+      <div class="reaction-list">
+        <div class="reaction-item">
+          <img class="reaction-av" src="faces/mei.png" alt="">
+          <div class="reaction-bubble">
+            <div class="reaction-who">Mom · just now</div>
+            <div class="reaction-text">The opening shot is so beautiful 🥺 Was the handwritten sign your idea?</div>
+          </div>
+        </div>
+        <div class="reaction-item">
+          <img class="reaction-av" src="faces/grandma.png" alt="">
+          <div class="reaction-bubble">
+            <div class="reaction-who">Grandma · 8 mins ago</div>
+            <div class="reaction-text">❤️ 懐かしいな〜 昔の文化祭もこんな感じだったわよ</div>
+          </div>
+        </div>
+        <div class="reaction-item">
+          <img class="reaction-av" src="faces/kanji.png" alt="">
+          <div class="reaction-bubble">
+            <div class="reaction-who">Dad · 20 mins ago</div>
+            <div class="reaction-text">Really nice work Yuki 👍 Love how you started with the banner!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- More works -->
+      <div class="showcase-section">More of my work</div>
+      <div class="works-grid">
+        <div class="work-card">
+          <div class="work-thumb" style="background:linear-gradient(135deg,rgba(96,165,250,0.2),rgba(192,132,252,0.1));display:flex;align-items:center;justify-content:center;font-size:28px">🌸</div>
+          <div class="work-info">
+            <div class="work-title">春祭り · Cinematic Edit</div>
+            <div class="work-meta">Video · Solo</div>
+            <span class="work-pill shared">Shared</span>
+          </div>
+        </div>
+        <div class="work-card">
+          <div class="work-thumb" style="background:linear-gradient(135deg,rgba(74,222,128,0.12),rgba(192,132,252,0.08));display:flex;align-items:center;justify-content:center;font-size:28px">🎵</div>
+          <div class="work-info">
+            <div class="work-title">Voice Loop #2</div>
+            <div class="work-meta">Music · Solo</div>
+            <span class="work-pill private">🔒 Private</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="showcase-share-btn">＋ Add to my showcase</button>
+      <div style="height:16px"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       Bottom Nav (floating pill)
+       ══════════════════════════════ -->
+  <nav class="bottom-nav" id="bottom-nav">
+    <div class="bottom-nav-inner">
+      <button class="nav-item active" id="nav-family" onclick="showView(0)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.85"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <span class="nav-label">Family</span>
+      </button>
+      <button class="nav-item nav-ai" id="nav-ai-btn" onclick="toggleAISheet()">
+        <img src="kaleidoscope-mandala.svg" class="nav-ai-img" alt="">
+        <svg class="nav-ai__ring" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="34" cy="34" r="32" stroke="var(--ai)" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.5"/>
+        </svg>
+      </button>
+      <button class="nav-item bloom-tab" id="nav-bloom" onclick="launchBloom()">
+        <img src="bloom-icon.svg" style="width:20px;height:20px;opacity:0.6;display:block" alt="">
+        <span class="nav-label">Bloom</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Zoom overlay -->
+  <div id="zoom-overlay" style="position:absolute;inset:0;z-index:90;pointer-events:none;opacity:0;will-change:clip-path,opacity;border-radius:inherit"></div>
+
+  <!-- AI Sheet -->
+  <div id="ai-sheet-dim" onclick="closeAISheet()" style="position:absolute;inset:0;background:rgba(0,0,0,0.4);z-index:55;opacity:0;pointer-events:none;transition:opacity 0.3s"></div>
+  <div id="ai-sheet" style="position:absolute;left:0;right:0;bottom:0;height:68%;z-index:60;background:rgba(12,12,18,0.97);backdrop-filter:blur(20px);border-top:1px solid rgba(192,132,252,0.18);border-radius:24px 24px 0 0;display:flex;flex-direction:column;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.2,0,0,1)">
+    <div style="width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,0.15);margin:12px auto 0;flex-shrink:0"></div>
+    <div id="ai-sheet-head" style="display:flex;align-items:center;gap:12px;padding:14px 20px 10px;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,0.05)">
+      <div style="width:32px;height:32px;border-radius:50%;background:rgba(18,12,24,0.88);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <img src="kaleidoscope-mandala.svg" style="width:16px;height:16px" alt="">
+      </div>
+      <div>
+        <div id="sheet-title" style="font-size:15px;font-weight:700;color:rgba(255,255,255,0.88)">Kaleidoscope</div>
+        <div id="sheet-subtitle" style="font-size:11.5px;color:rgba(255,255,255,0.38);margin-top:1px">Always here for you</div>
+      </div>
+    </div>
+    <div id="ai-sheet-body" style="flex:1;overflow-y:auto;padding:12px 20px"></div>
+    <div style="display:flex;align-items:center;gap:8px;padding:10px 16px 20px;border-top:1px solid rgba(255,255,255,0.05);flex-shrink:0">
+      <input style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:9px 16px;font-size:13px;color:rgba(255,255,255,0.7);font-family:var(--font);outline:none" placeholder="Ask Kaleidoscope anything…" readonly>
+      <div style="width:32px;height:32px;border-radius:50%;background:rgba(192,132,252,0.15);border:1px solid rgba(192,132,252,0.3);color:var(--accent);font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0">↑</div>
+    </div>
+  </div>
+
+</div><!-- .device -->
+
+<script>
+/* ── State ── */
+let _cur = 0;
+let _prev = 0;
+let _aiOpen = false;
+let _theme = 'dark';
+
+/* ── View switching ── */
+function showView(n) {
+  const views = document.querySelectorAll('.view');
+  views.forEach(v => { v.classList.remove('active', 'exit-left'); });
+  document.getElementById('v' + n).classList.add('active');
+  _prev = _cur;
+  _cur = n;
+  updateNav(n);
+}
+
+function updateNav(n) {
+  const nav = document.getElementById('bottom-nav');
+  // Hide nav during onboarding (1-5), joining (7), and Kaleidoscope (6)
+  if (n >= 1 && n <= 7) {
+    nav.classList.add('hidden');
+  } else {
+    nav.classList.remove('hidden');
+    // Update active states
+    const famBtn = document.getElementById('nav-family');
+    const bloomBtn = document.getElementById('nav-bloom');
+    famBtn.classList.toggle('active', n === 0);
+    bloomBtn.classList.toggle('active', n === 8 || n === 9);
+  }
+}
+
+/* ── Consent toggle ── */
+function toggleConsent() {
+  const row = document.getElementById('consent-row');
+  const box = document.getElementById('consent-box');
+  const btn = document.getElementById('start-btn');
+  const on = box.classList.toggle('checked');
+  row.classList.toggle('checked', on);
+  btn.classList.toggle('inactive', !on);
+}
+
+/* ── Notification dismiss ── */
+function dismissNotif(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.style.transition = 'opacity 0.2s, transform 0.2s';
+    el.style.opacity = '0';
+    el.style.transform = 'translateX(8px)';
+    setTimeout(() => el.style.display = 'none', 200);
+  }
+}
+
+/* ── Joining animation ── */
+function startJoining() {
+  const bar = document.getElementById('joining-bar');
+  const steps = [
+    document.getElementById('jstep0'),
+    document.getElementById('jstep1'),
+    document.getElementById('jstep2'),
+    document.getElementById('jstep3'),
+  ];
+  steps.forEach((s, i) => {
+    s.classList.toggle('done', i === 0);
+    s.querySelector('.joining-step-icon').textContent = i === 0 ? '✓' : '';
+  });
+  bar.style.transition = 'none';
+  bar.style.width = '0';
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    bar.style.transition = 'width 3s linear';
+    bar.style.width = '100%';
+  }));
+  [800, 1600, 2400].forEach((t, i) => {
+    setTimeout(() => {
+      steps[i + 1].classList.add('done');
+      steps[i + 1].querySelector('.joining-step-icon').textContent = '✓';
+    }, t);
+  });
+  setTimeout(() => showView(8), 3000);
+}
+
+/* ── Zoom launch into Bloom ── */
+function launchBloom() {
+  if (_cur === 8) return; // already in workspace
+  const svg = document.getElementById('const-svg');
+  const device = document.getElementById('device');
+  if (!svg || !device) { showView(7); startJoining(); return; }
+
+  // Find CC position in SVG coords
+  const ccX = 187, ccY = 262;
+  const sr = svg.getBoundingClientRect();
+  const dr = device.getBoundingClientRect();
+  const vbW = 375, vbH = 300;
+  const scale = Math.min(sr.width / vbW, sr.height / vbH);
+  const ox = (sr.width - vbW * scale) / 2;
+  const oy = (sr.height - vbH * scale) / 2;
+  const ax = (sr.left - dr.left) + ox + ccX * scale;
+  const ay = (sr.top - dr.top) + oy + ccY * scale;
+  const cx = (ax / device.offsetWidth * 100).toFixed(2) + '%';
+  const cy = (ay / device.offsetHeight * 100).toFixed(2) + '%';
+  const rSmall = (19 * scale) + 'px';
+
+  const ov = document.getElementById('zoom-overlay');
+  ov.style.background = '#C084FC';
+  ov.style.opacity = '0';
+  ov.style.clipPath = `circle(${rSmall} at ${cx} ${cy})`;
+  ov.style.transition = 'none';
+  ov.style.pointerEvents = 'auto';
+
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    ov.style.transition = 'clip-path 0.46s cubic-bezier(0.4,0,0.2,1), opacity 0.06s ease';
+    ov.style.opacity = '0.92';
+    ov.style.clipPath = `circle(200% at ${cx} ${cy})`;
+  }));
+
+  setTimeout(() => {
+    showView(7);
+    startJoining();
+    ov.style.transition = 'opacity 0.22s ease';
+    ov.style.opacity = '0';
+    setTimeout(() => { ov.style.pointerEvents = 'none'; }, 240);
+  }, 420);
+}
+
+/* ── AI Sheet ── */
+const AI_CTX = {
+  0: { title: 'Hi Yuki ✦', hint: 'Learning streak 5 days · 6 updates',
+       actions: ['Start today\'s AI learning session', 'Join Bloom workspace', 'Message Grandma'] },
+  1: { title: 'Bloom', hint: 'Age verification step', actions: ['Continue sign-up', 'Ask AI for help'] },
+  2: { title: 'Your Interests', hint: 'Tell us what you love', actions: ['Pick suggested topics', 'Ask AI what suits you'] },
+  3: { title: 'Your Goals', hint: 'What do you want to create?', actions: ['Explore goal ideas', 'See what others your age make'] },
+  4: { title: 'Parental Consent', hint: 'Mom needs to approve', actions: ['Send reminder to Mom', 'Preview what you\'ll create'] },
+  5: { title: 'Waiting…', hint: 'Mom is reviewing your request', actions: ['Send a nudge to Mom', 'Preview Bloom features'] },
+  6: { title: 'Kaleidoscope', hint: 'Always here for you', actions: [] },
+  7: { title: 'Joining Bloom', hint: 'Setting up your account…', actions: [] },
+  8: { title: 'Bloom', hint: 'Your creative workspace', actions: ['Start your first post', 'Explore trending creators', 'Share with family'] },
+  9: { title: 'My Creative Space', hint: 'Your showcase · 2 works', actions: ['Add new work', 'Share with family', 'Edit privacy settings'] },
+};
+
+function toggleAISheet() { _aiOpen ? closeAISheet() : openAISheet(); }
+
+function openAISheet() {
+  const ctx = AI_CTX[_cur] || { title: 'Kaleidoscope', hint: 'Always here for you', actions: [] };
+  document.getElementById('sheet-title').textContent = ctx.title;
+  document.getElementById('sheet-subtitle').textContent = ctx.hint;
+  const icons = ['✦', '◈', '→', '💡', '🎯', '✨'];
+  document.getElementById('ai-sheet-body').innerHTML = ctx.actions.map((a, i) =>
+    `<div style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.65);font-size:13px;font-weight:500;cursor:pointer;margin-bottom:8px"><span style="font-size:15px;width:22px;text-align:center;flex-shrink:0">${icons[i] || '→'}</span>${a}</div>`
+  ).join('');
+  document.getElementById('ai-sheet').style.transform = 'translateY(0)';
+  document.getElementById('ai-sheet-dim').style.opacity = '1';
+  document.getElementById('ai-sheet-dim').style.pointerEvents = 'auto';
+  _aiOpen = true;
+}
+
+function closeAISheet() {
+  document.getElementById('ai-sheet').style.transform = 'translateY(100%)';
+  document.getElementById('ai-sheet-dim').style.opacity = '0';
+  document.getElementById('ai-sheet-dim').style.pointerEvents = 'none';
+  _aiOpen = false;
+}
+
+/* ── Theme ── */
+function toggleTheme() {
+  _theme = _theme === 'dark' ? 'light' : 'dark';
+  const device = document.getElementById('device');
+  device.setAttribute('data-theme', _theme === 'light' ? 'light' : '');
+  document.getElementById('theme-toggle').textContent = _theme === 'dark' ? '☾' : '☀';
+  buildConstellation();
+}
+
+/* ── Constellation — Yuki at center ── */
+const NODES = [
+  { id: 'yuki',   label: 'Yuki',    note: 'You',           color: '#4ADE80', x: 187, y: 148, r: 34, center: true,  photo: 'faces/yuki.png' },
+  { id: 'eva',    label: 'Mom',     note: 'Mei · Online',  color: '#C084FC', x:  78, y:  78, r: 26,                 photo: 'faces/mei.png',     status: ['◎ Mom', '◈ Kaleidoscope'] },
+  { id: 'wei',    label: 'Dad',     note: 'Kenji',         color: '#60A5FA', x: 296, y:  78, r: 24,                 photo: 'faces/kanji.png',   status: ['◎ Dad'] },
+  { id: 'grace',  label: 'Grandma', note: 'Hana',          color: '#FFC364', x:  74, y: 232, r: 21,                 photo: 'faces/grandma.png', status: ['✦ Grandma', '○ Healthy'] },
+  { id: 'ethan',  label: 'Hiro',    note: 'Brother',       color: '#FB923C', x: 300, y: 232, r: 21,                 photo: 'faces/hiro.png',    status: ['◎ Brother'] },
+];
+const EDGES = [
+  { a: 'yuki', b: 'eva',   w: 0.85 },
+  { a: 'yuki', b: 'wei',   w: 0.70 },
+  { a: 'yuki', b: 'grace', w: 0.55 },
+  { a: 'yuki', b: 'ethan', w: 0.65 },
+  { a: 'eva',  b: 'wei',   w: 0.50 },
+];
+const CC = { x: 187, y: 262, r: 19, color: '#C084FC' };
+
+function buildConstellation() {
+  const svg = document.getElementById('const-svg');
+  svg.innerHTML = '';
+  const isL = document.getElementById('device').getAttribute('data-theme') === 'light';
+  const nm = Object.fromEntries(NODES.map(n => [n.id, n]));
+
+  /* Defs */
+  const defs = el('defs');
+  const gf = el('filter'); gf.setAttribute('id', 'eg'); gf.setAttribute('color-interpolation-filters', 'sRGB');
+  const fb = el('feGaussianBlur'); fb.setAttribute('stdDeviation', '3'); gf.appendChild(fb); defs.appendChild(gf);
+
+  /* Guardian arc */
+  const arcBg = el('path');
+  arcBg.setAttribute('d', 'M 0 80 L 22 62 C 22 14 352 14 352 62 L 375 80 Z');
+  arcBg.setAttribute('fill', isL ? 'rgba(74,222,128,0.08)' : 'rgba(74,222,128,0.12)');
+  svg.appendChild(arcBg);
+  const arcLine = el('path');
+  arcLine.setAttribute('d', 'M 22 62 C 22 14 352 14 352 62');
+  arcLine.setAttribute('fill', 'none');
+  arcLine.setAttribute('stroke', isL ? 'rgba(74,222,128,0.35)' : 'rgba(74,222,128,0.45)');
+  arcLine.setAttribute('stroke-width', '1');
+  arcLine.setAttribute('stroke-dasharray', '3 6');
+  svg.appendChild(arcLine);
+
+  /* Edges */
+  EDGES.forEach((e, i) => {
+    const a = nm[e.a], b = nm[e.b];
+    const grad = el('linearGradient');
+    grad.setAttribute('id', 'eg' + i); grad.setAttribute('gradientUnits', 'userSpaceOnUse');
+    grad.setAttribute('x1', a.x); grad.setAttribute('y1', a.y);
+    grad.setAttribute('x2', b.x); grad.setAttribute('y2', b.y);
+    [[a.color, '0%'], [b.color, '100%']].forEach(([col, off]) => {
+      const s = el('stop'); s.setAttribute('offset', off);
+      s.setAttribute('stop-color', col); s.setAttribute('stop-opacity', isL ? '0.5' : '0.6');
+      grad.appendChild(s);
+    });
+    defs.appendChild(grad);
+    /* Glow */
+    const gl = el('line');
+    ['x1','y1','x2','y2'].forEach((k,j) => gl.setAttribute(k, [a.x,a.y,b.x,b.y][j]));
+    gl.setAttribute('stroke', 'url(#eg' + i + ')'); gl.setAttribute('stroke-width', e.w * 10);
+    gl.setAttribute('opacity', isL ? '0.12' : '0.18'); gl.setAttribute('filter', 'url(#eg)');
+    svg.appendChild(gl);
+    /* Line */
+    const line = el('line');
+    ['x1','y1','x2','y2'].forEach((k,j) => line.setAttribute(k, [a.x,a.y,b.x,b.y][j]));
+    line.setAttribute('stroke', 'url(#eg' + i + ')'); line.setAttribute('stroke-width', e.w * 3);
+    svg.appendChild(line);
+    /* Flow particle */
+    const dot = el('circle'); dot.setAttribute('r', '2.5'); dot.setAttribute('fill', b.color); dot.setAttribute('opacity', '0.85');
+    const am = el('animateMotion'); am.setAttribute('dur', (2.8 + i * 0.6) + 's'); am.setAttribute('repeatCount', 'indefinite');
+    am.setAttribute('path', 'M ' + a.x + ' ' + a.y + ' L ' + b.x + ' ' + b.y);
+    dot.appendChild(am); svg.appendChild(dot);
+  });
+  svg.appendChild(defs);
+
+  /* Bloom discovery node */
+  const ccG = el('g'); ccG.style.cursor = 'pointer'; ccG.onclick = () => launchBloom();
+  /* Dashed connector Yuki → CC */
+  const ccConn = el('line');
+  ccConn.setAttribute('x1', '187'); ccConn.setAttribute('y1', String(NODES[0].y + NODES[0].r + 4));
+  ccConn.setAttribute('x2', '187'); ccConn.setAttribute('y2', String(CC.y - CC.r - 4));
+  ccConn.setAttribute('stroke', 'rgba(192,132,252,0.3)'); ccConn.setAttribute('stroke-width', '1');
+  ccConn.setAttribute('stroke-dasharray', '3 4');
+  svg.appendChild(ccConn);
+  /* Pulsing glow */
+  const ccGlow = el('circle');
+  ccGlow.setAttribute('cx', CC.x); ccGlow.setAttribute('cy', CC.y); ccGlow.setAttribute('r', CC.r + 8);
+  ccGlow.setAttribute('fill', 'none'); ccGlow.setAttribute('stroke', '#C084FC'); ccGlow.setAttribute('stroke-width', '1.2'); ccGlow.setAttribute('opacity', '0.3');
+  ['r', 'opacity'].forEach((attr, i) => {
+    const an = el('animate'); an.setAttribute('attributeName', attr);
+    an.setAttribute('values', i === 0 ? `${CC.r+5};${CC.r+18};${CC.r+5}` : '0.38;0;0.38');
+    an.setAttribute('dur', '2.6s'); an.setAttribute('repeatCount', 'indefinite');
+    ccGlow.appendChild(an);
+  });
+  ccG.appendChild(ccGlow);
+  /* Circle */
+  const ccCirc = el('circle');
+  ccCirc.setAttribute('cx', CC.x); ccCirc.setAttribute('cy', CC.y); ccCirc.setAttribute('r', CC.r);
+  ccCirc.setAttribute('fill', isL ? 'rgba(192,132,252,0.08)' : 'rgba(192,132,252,0.1)');
+  ccCirc.setAttribute('stroke', '#C084FC'); ccCirc.setAttribute('stroke-width', '1.5'); ccCirc.setAttribute('stroke-opacity', '0.6');
+  ccG.appendChild(ccCirc);
+  /* Bloom icon */
+  const ccImg = el('image'); ccImg.setAttribute('href', 'bloom-icon.svg');
+  const iSz = CC.r * 1.65;
+  ccImg.setAttribute('x', CC.x - iSz / 2); ccImg.setAttribute('y', CC.y - iSz / 2);
+  ccImg.setAttribute('width', iSz); ccImg.setAttribute('height', iSz);
+  ccG.appendChild(ccImg);
+  /* Label */
+  const ccName = el('text');
+  ccName.setAttribute('x', CC.x); ccName.setAttribute('y', CC.y + CC.r + 13);
+  ccName.setAttribute('text-anchor', 'middle');
+  ccName.setAttribute('fill', isL ? 'rgba(155,93,229,0.8)' : 'rgba(192,132,252,0.72)');
+  ccName.setAttribute('font-size', '9.5'); ccName.setAttribute('font-family', 'DM Sans,sans-serif'); ccName.setAttribute('font-weight', '700');
+  ccName.textContent = 'Bloom'; ccG.appendChild(ccName);
+  /* Join chip */
+  const cW = 52, cH = 14, cX = CC.x - cW / 2, cY = CC.y + CC.r + 26;
+  const chip = el('rect'); chip.setAttribute('x', cX); chip.setAttribute('y', cY);
+  chip.setAttribute('width', cW); chip.setAttribute('height', cH); chip.setAttribute('rx', '7');
+  chip.setAttribute('fill', 'rgba(192,132,252,0.14)'); chip.setAttribute('stroke', 'rgba(192,132,252,0.48)'); chip.setAttribute('stroke-width', '0.8');
+  ccG.appendChild(chip);
+  const cT = el('text'); cT.setAttribute('x', CC.x); cT.setAttribute('y', cY + cH / 2 + 0.5);
+  cT.setAttribute('text-anchor', 'middle'); cT.setAttribute('dominant-baseline', 'middle');
+  cT.setAttribute('fill', '#C084FC'); cT.setAttribute('font-size', '7.5'); cT.setAttribute('font-weight', '700'); cT.setAttribute('font-family', 'DM Sans,sans-serif');
+  cT.textContent = 'Join →'; ccG.appendChild(cT);
+  svg.appendChild(ccG);
+
+  /* Nodes layer */
+  const nodesLayer = el('g');
+  NODES.forEach(n => {
+    const g = el('g');
+    /* Photo clip */
+    if (n.photo) {
+      const clipId = 'clip-' + n.id;
+      const cp = el('clipPath'); cp.setAttribute('id', clipId);
+      const cc2 = el('circle'); cc2.setAttribute('cx', n.x); cc2.setAttribute('cy', n.y); cc2.setAttribute('r', n.r - 0.5);
+      cp.appendChild(cc2); defs.appendChild(cp);
+      const img = el('image'); img.setAttribute('href', n.photo);
+      img.setAttribute('x', n.x - n.r); img.setAttribute('y', n.y - n.r);
+      img.setAttribute('width', n.r * 2); img.setAttribute('height', n.r * 2);
+      img.setAttribute('clip-path', 'url(#' + clipId + ')'); img.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+      g.appendChild(img);
+    }
+    /* Ring */
+    const c = el('circle'); c.setAttribute('cx', n.x); c.setAttribute('cy', n.y); c.setAttribute('r', n.r);
+    c.setAttribute('fill', 'none'); c.setAttribute('stroke', n.color);
+    c.setAttribute('stroke-width', n.center ? '2' : '1'); c.setAttribute('stroke-opacity', n.center ? '0.55' : '0.25');
+    g.appendChild(c);
+    /* Label */
+    const lbl = el('text'); lbl.setAttribute('x', n.x); lbl.setAttribute('y', n.y + n.r + 13);
+    lbl.setAttribute('text-anchor', 'middle');
+    lbl.setAttribute('fill', isL ? 'rgba(10,10,20,0.5)' : 'rgba(255,255,255,0.45)');
+    lbl.setAttribute('font-size', '10'); lbl.setAttribute('font-family', 'DM Sans,sans-serif'); lbl.setAttribute('font-weight', '500');
+    lbl.textContent = n.label; g.appendChild(lbl);
+    /* Note */
+    const note = el('text'); note.setAttribute('x', n.x); note.setAttribute('y', n.y + n.r + 24);
+    note.setAttribute('text-anchor', 'middle');
+    note.setAttribute('fill', isL ? 'rgba(10,10,20,0.22)' : 'rgba(255,255,255,0.18)');
+    note.setAttribute('font-size', '8'); note.setAttribute('font-family', 'DM Sans,sans-serif');
+    note.textContent = n.note; g.appendChild(note);
+    /* Status chips */
+    if (!n.center && n.status) {
+      n.status.forEach((txt, si) => {
+        const chipY2 = n.y + n.r + 33 + si * 18;
+        const charW = [...txt].reduce((s, ch) => /\p{Emoji}/u.test(ch) ? s + 9 : s + 5.4, 0) + 12;
+        const chipW2 = Math.min(Math.max(charW, 30), 86);
+        const chipBg2 = el('rect');
+        chipBg2.setAttribute('x', n.x - chipW2 / 2); chipBg2.setAttribute('y', chipY2);
+        chipBg2.setAttribute('width', chipW2); chipBg2.setAttribute('height', '14'); chipBg2.setAttribute('rx', '7');
+        chipBg2.setAttribute('fill', n.color + (isL ? '18' : '15')); chipBg2.setAttribute('stroke', n.color + (isL ? '44' : '33')); chipBg2.setAttribute('stroke-width', '0.7');
+        g.appendChild(chipBg2);
+        const chipT2 = el('text'); chipT2.setAttribute('x', n.x); chipT2.setAttribute('y', chipY2 + 7.5);
+        chipT2.setAttribute('text-anchor', 'middle'); chipT2.setAttribute('dominant-baseline', 'middle');
+        chipT2.setAttribute('fill', n.color); chipT2.setAttribute('opacity', si === 0 ? '0.85' : '0.5');
+        chipT2.setAttribute('font-size', '7'); chipT2.setAttribute('font-family', 'DM Sans,sans-serif'); chipT2.setAttribute('font-weight', '700');
+        chipT2.textContent = txt; g.appendChild(chipT2);
+      });
+    }
+    /* Center badge */
+    if (n.center) {
+      const pill = el('rect');
+      pill.setAttribute('x', n.x + n.r + 4); pill.setAttribute('y', n.y - 9);
+      pill.setAttribute('width', '50'); pill.setAttribute('height', '17'); pill.setAttribute('rx', '8.5');
+      pill.setAttribute('fill', 'rgba(74,222,128,0.1)'); pill.setAttribute('stroke', 'rgba(74,222,128,0.22)'); pill.setAttribute('stroke-width', '0.8');
+      g.appendChild(pill);
+      const pt = el('text'); pt.setAttribute('x', n.x + n.r + 29); pt.setAttribute('y', n.y + 1);
+      pt.setAttribute('text-anchor', 'middle'); pt.setAttribute('dominant-baseline', 'middle');
+      pt.setAttribute('fill', 'rgba(74,222,128,0.65)'); pt.setAttribute('font-size', '8'); pt.setAttribute('font-family', 'DM Sans,sans-serif'); pt.setAttribute('font-weight', '600');
+      pt.textContent = 'creator'; g.appendChild(pt);
+    } else {
+      g.style.opacity = '0.72';
+      const fp = { eva: {d:4.8,b:0}, wei: {d:5.5,b:1.2}, grace: {d:6.1,b:2.3}, ethan: {d:5.8,b:3.1} };
+      const p = fp[n.id] || {d:5,b:0};
+      const fa = el('animateTransform'); fa.setAttribute('attributeName', 'transform'); fa.setAttribute('type', 'translate');
+      fa.setAttribute('values', '0,0;0,-2.5;0,0'); fa.setAttribute('dur', p.d + 's'); fa.setAttribute('begin', p.b + 's');
+      fa.setAttribute('repeatCount', 'indefinite'); fa.setAttribute('calcMode', 'spline');
+      fa.setAttribute('keyTimes', '0;0.5;1'); fa.setAttribute('keySplines', '0.45 0 0.55 1;0.45 0 0.55 1');
+      g.appendChild(fa);
+    }
+    nodesLayer.appendChild(g);
+  });
+  svg.appendChild(nodesLayer);
+}
+
+function el(tag) { return document.createElementNS('http://www.w3.org/2000/svg', tag); }
+
+/* ── Init ── */
+buildConstellation();
+</script>
+</body>
+</html>
