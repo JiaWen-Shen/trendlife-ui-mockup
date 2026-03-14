@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yuki — iPad View (Bloom)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─── */
+:root {
+  --bg:#09090B; --surface:#18181B; --surface2:#27272A; --surface3:#3F3F46;
+  --border:rgba(255,255,255,0.06); --border2:rgba(255,255,255,0.1);
+  --text:#FAFAFA; --text2:#A1A1AA; --text3:#8A8A93;
+  --accent:#C084FC; --accent2:#D8B4FE; --accent-dim:rgba(192,132,252,0.1);
+  --ai:#00BCD4; --ai-dim:rgba(0,188,212,0.1);
+  --green:#4ADE80; --green-dim:rgba(74,222,128,0.08);
+  --coral:#F43F5E; --sky:#38BDF8; --amber:#FFB84D;
+  --radius:20px; --radius-sm:12px;
+  --font:'DM Sans',system-ui,-apple-system,sans-serif;
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+}
+[data-theme="light"] {
+  --bg:#F4F4F5; --surface:#FFFFFF; --surface2:#F4F4F5; --surface3:#E4E4E7;
+  --border:rgba(0,0,0,0.07); --border2:rgba(0,0,0,0.12);
+  --text:#09090B; --text2:#52525B; --text3:#71717A;
+  --accent-dim:rgba(192,132,252,0.12);
+  --ai-dim:rgba(0,188,212,0.1);
+  --green-dim:rgba(74,222,128,0.1);
+}
+
+/* ─── GLOBAL RESET ─── */
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+body {
+  font-family: var(--font);
+  background: #000;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 24px 60px;
+  gap: 40px;
+}
+
+/* ─── VIEW SWITCHER ─── */
+.switcher {
+  display: flex;
+  gap: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 100px;
+  padding: 4px;
+  position: sticky;
+  top: 20px;
+  z-index: 100;
+}
+.sw-btn {
+  padding: 8px 20px;
+  border-radius: 100px;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,0.5);
+  font: 500 14px/1 var(--font);
+  cursor: pointer;
+  transition: all .2s var(--ease-out);
+}
+.sw-btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ─── SCENE / DEVICE ─── */
+.scene {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+.scene.visible { display: flex; }
+
+.scene-label {
+  color: rgba(255,255,255,0.4);
+  font: 400 12px/1 var(--font);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* iPad Pro 11" landscape device */
+.device {
+  width: 1194px;
+  height: 834px;
+  background: var(--bg);
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.12),
+    0 0 0 3px #1a1a1f,
+    0 0 0 4px rgba(255,255,255,0.06),
+    0 32px 80px rgba(0,0,0,0.7),
+    0 8px 24px rgba(0,0,0,0.5);
+}
+
+/* ─── STATUS BAR ─── */
+.status-bar {
+  height: 24px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  background: var(--surface);
+}
+.status-time {
+  font: 600 12px/1 var(--font);
+  color: var(--text2);
+}
+.status-icons {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.status-icons span {
+  font-size: 11px;
+  color: var(--text2);
+}
+
+/* ─── APP HEADER ─── */
+.app-header {
+  height: 60px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.bloom-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.bloom-logo-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #9333EA, #C084FC);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+.bloom-logo-text {
+  font: 700 18px/1 var(--font);
+  color: var(--text);
+  letter-spacing: -.02em;
+}
+.header-spacer { flex: 1; }
+.header-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  padding: 8px 14px;
+  width: 260px;
+}
+.header-search span { font-size: 14px; color: var(--text3); }
+.header-search input {
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font: 400 14px/1 var(--font);
+  width: 100%;
+}
+.header-search input::placeholder { color: var(--text3); }
+.header-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green), #22C55E);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 600 13px/1 var(--font);
+  color: #000;
+  flex-shrink: 0;
+}
+.header-icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ─── MAIN SCROLL AREA ─── */
+.app-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--bg);
+}
+.app-body::-webkit-scrollbar { width: 4px; }
+.app-body::-webkit-scrollbar-track { background: transparent; }
+.app-body::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 4px; }
+
+/* ─── HOME SECTION HEADERS ─── */
+.section-hd {
+  padding: 24px 24px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-hd h2 {
+  font: 600 18px/1.2 var(--font);
+  color: var(--text);
+  letter-spacing: -.02em;
+}
+.section-hd .badge {
+  background: var(--accent-dim);
+  color: var(--accent);
+  font: 600 11px/1 var(--font);
+  padding: 3px 8px;
+  border-radius: 100px;
+}
+.section-hd-spacer { flex: 1; }
+.see-all {
+  font: 500 13px/1 var(--font);
+  color: var(--accent);
+  cursor: pointer;
+}
+
+/* ─── PROJECT GRID ─── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 0 24px 16px;
+}
+
+.proj-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out);
+}
+.proj-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+/* Gradient thumbnails */
+.proj-thumb {
+  height: 110px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.proj-thumb-icon {
+  font-size: 36px;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+  position: relative;
+  z-index: 1;
+}
+.proj-thumb-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(8px);
+  border-radius: 100px;
+  padding: 3px 8px;
+  font: 600 10px/1 var(--font);
+  color: #fff;
+}
+.grad-music  { background: linear-gradient(135deg, #312e81, #7c3aed, #c026d3); }
+.grad-art    { background: linear-gradient(135deg, #0c4a6e, #0284c7, #06b6d4); }
+.grad-story  { background: linear-gradient(135deg, #7c2d12, #dc2626, #ea580c); }
+.grad-video  { background: linear-gradient(135deg, #14532d, #16a34a, #65a30d); }
+.grad-3d     { background: linear-gradient(135deg, #1e1b4b, #4338ca, #7c3aed); }
+.grad-new    { background: var(--surface2); border: 2px dashed var(--border2); }
+
+.proj-body {
+  padding: 12px 14px 14px;
+}
+.proj-type {
+  font: 500 10px/1 var(--font);
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 4px;
+}
+.proj-title {
+  font: 600 14px/1.3 var(--font);
+  color: var(--text);
+  letter-spacing: -.01em;
+  margin-bottom: 10px;
+}
+.proj-auth-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.auth-bar {
+  flex: 1;
+  height: 4px;
+  background: var(--surface3);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.auth-human {
+  height: 100%;
+  background: var(--green);
+  border-radius: 100px;
+}
+.auth-label {
+  font: 500 11px/1 var(--font);
+  color: var(--text3);
+  white-space: nowrap;
+}
+.proj-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font: 500 11px/1 var(--font);
+  padding: 3px 8px;
+  border-radius: 100px;
+}
+.status-active   { background: var(--green-dim); color: var(--green); }
+.status-draft    { background: rgba(251,191,36,0.1); color: #FBBF24; }
+.status-complete { background: var(--accent-dim); color: var(--accent); }
+
+/* New Project card */
+.proj-card-new {
+  background: var(--surface);
+  border: 2px dashed var(--border2);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 180px;
+  cursor: pointer;
+  transition: background .2s, border-color .2s;
+}
+.proj-card-new:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+}
+.new-plus {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  border: 1.5px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: var(--accent);
+  line-height: 1;
+}
+.new-label {
+  font: 600 14px/1.2 var(--font);
+  color: var(--accent);
+  letter-spacing: -.01em;
+}
+.new-sub {
+  font: 400 12px/1.4 var(--font);
+  color: var(--text3);
+  text-align: center;
+  max-width: 120px;
+}
+
+/* ─── COLLAB BANNER ─── */
+.collab-banner {
+  margin: 0 24px 20px;
+  background: linear-gradient(135deg, rgba(192,132,252,0.15), rgba(0,188,212,0.1));
+  border: 1px solid rgba(192,132,252,0.2);
+  border-radius: 16px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.collab-orb {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(0,188,212,0.9), rgba(0,188,212,0.3));
+  border: 1.5px solid rgba(0,188,212,0.5);
+  flex-shrink: 0;
+  position: relative;
+}
+.collab-orb::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), transparent);
+}
+.collab-text { flex: 1; }
+.collab-title {
+  font: 600 13px/1 var(--font);
+  color: var(--text);
+  margin-bottom: 3px;
+}
+.collab-sub {
+  font: 400 12px/1.4 var(--font);
+  color: var(--text2);
+}
+.collab-sub strong { color: var(--ai); }
+.collab-action {
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: var(--ai-dim);
+  border: 1px solid rgba(0,188,212,0.3);
+  color: var(--ai);
+  font: 600 12px/1 var(--font);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* ─── BOTTOM NAV (home view) ─── */
+.bottom-nav {
+  height: 60px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: stretch;
+  flex-shrink: 0;
+}
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  cursor: pointer;
+  position: relative;
+}
+.nav-icon { font-size: 20px; }
+.nav-label {
+  font: 500 10px/1 var(--font);
+  color: var(--text3);
+  letter-spacing: .02em;
+}
+.nav-item.active .nav-label { color: var(--accent); }
+.nav-item.active .nav-icon { filter: none; }
+.nav-active-dot {
+  position: absolute;
+  bottom: 6px;
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+/* ─── THREE PANEL LAYOUT (V1) ─── */
+.three-panel {
+  flex: 1;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 280px 1fr 360px;
+  grid-template-rows: 1fr;
+}
+
+/* Left sidebar */
+.panel-left {
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.panel-left-hd {
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.panel-left-hd h3 {
+  font: 600 14px/1 var(--font);
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.sidebar-search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 7px 10px;
+}
+.sidebar-search span { font-size: 12px; color: var(--text3); }
+.sidebar-search input {
+  background: none;
+  border: none;
+  outline: none;
+  font: 400 13px/1 var(--font);
+  color: var(--text);
+  width: 100%;
+}
+.sidebar-search input::placeholder { color: var(--text3); }
+
+.proj-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+.proj-list::-webkit-scrollbar { width: 3px; }
+.proj-list::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
+
+.pl-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background .15s;
+  margin-bottom: 2px;
+}
+.pl-item:hover { background: var(--surface2); }
+.pl-item.active { background: var(--accent-dim); }
+.pl-item.active .pl-title { color: var(--accent); }
+
+.pl-thumb {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+.pl-info { flex: 1; min-width: 0; }
+.pl-title {
+  font: 600 13px/1.2 var(--font);
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pl-meta {
+  font: 400 11px/1 var(--font);
+  color: var(--text3);
+  margin-top: 2px;
+}
+.pl-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+}
+
+.sidebar-new-btn {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 12px;
+  background: var(--accent-dim);
+  border: 1px dashed rgba(192,132,252,0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background .15s;
+}
+.sidebar-new-btn:hover { background: rgba(192,132,252,0.18); }
+.sidebar-new-btn span:first-child {
+  font-size: 16px;
+  color: var(--accent);
+}
+.sidebar-new-btn span:last-child {
+  font: 600 13px/1 var(--font);
+  color: var(--accent);
+}
+
+/* Center panel */
+.panel-center {
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-right: 1px solid var(--border);
+}
+.panel-center-hd {
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--surface);
+}
+.center-hd-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+.center-hd-info { flex: 1; }
+.center-hd-type {
+  font: 500 10px/1 var(--font);
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 4px;
+}
+.center-hd-title {
+  font: 700 17px/1.2 var(--font);
+  color: var(--text);
+  letter-spacing: -.02em;
+  margin-bottom: 6px;
+}
+.center-hd-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.center-hd-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font: 500 11px/1 var(--font);
+  padding: 3px 8px;
+  border-radius: 100px;
+}
+.center-hd-updated {
+  font: 400 11px/1 var(--font);
+  color: var(--text3);
+}
+.center-hd-actions { display: flex; gap: 6px; }
+.center-btn {
+  padding: 8px 16px;
+  border-radius: 100px;
+  font: 600 13px/1 var(--font);
+  cursor: pointer;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.center-btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+}
+.center-btn-primary:hover { background: #a855f7; }
+.center-btn-ghost {
+  background: var(--surface2);
+  color: var(--text2);
+  border: 1px solid var(--border2);
+}
+.center-btn-ghost:hover { background: var(--surface3); }
+
+/* Authorship hero */
+.auth-hero {
+  padding: 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.auth-hero-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.auth-hero-pct {
+  font: 800 40px/1 var(--font);
+  letter-spacing: -.04em;
+}
+.auth-hero-pct.human { color: var(--green); }
+.auth-hero-label {
+  flex: 1;
+}
+.auth-hero-label-main {
+  font: 700 13px/1 var(--font);
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.auth-hero-label-sub {
+  font: 400 12px/1.3 var(--font);
+  color: var(--text3);
+}
+.auth-hero-bar-wrap {
+  height: 8px;
+  background: var(--surface3);
+  border-radius: 100px;
+  overflow: hidden;
+  position: relative;
+}
+.auth-hero-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green), #22C55E);
+  border-radius: 100px;
+  position: relative;
+}
+.auth-hero-bar::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 20px;
+  height: 100%;
+  background: rgba(0,188,212,0.7);
+}
+.auth-hero-legend {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+.auth-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font: 400 11px/1 var(--font);
+  color: var(--text3);
+}
+.auth-legend-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+/* Center scrollable content */
+.center-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px;
+}
+.center-scroll::-webkit-scrollbar { width: 4px; }
+.center-scroll::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 4px; }
+
+/* ─── CONTRIB ITEMS ─── */
+.contrib-section-title {
+  font: 600 12px/1 var(--font);
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+.contrib-section-title:first-child { margin-top: 0; }
+
+.contrib-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background .15s;
+}
+.contrib-item:hover { background: var(--surface2); }
+
+.contrib-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 600 12px/1 var(--font);
+}
+.contrib-avatar.green-av {
+  background: linear-gradient(135deg, var(--green), #22C55E);
+  color: #000;
+}
+.contrib-avatar.ai-av {
+  background: radial-gradient(circle at 35% 35%, rgba(0,188,212,0.9), rgba(0,188,212,0.3));
+  border: 1px solid rgba(0,188,212,0.4);
+  color: #fff;
+  font-size: 13px;
+}
+.contrib-avatar.amber-av {
+  background: linear-gradient(135deg, #F59E0B, #FCD34D);
+  color: #000;
+}
+.contrib-avatar.sky-av {
+  background: linear-gradient(135deg, #0EA5E9, #38BDF8);
+  color: #fff;
+}
+
+.contrib-body { flex: 1; min-width: 0; }
+.contrib-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+.contrib-name {
+  font: 600 13px/1 var(--font);
+  color: var(--text);
+}
+.contrib-role {
+  font: 400 11px/1 var(--font);
+  color: var(--text3);
+  background: var(--surface2);
+  border-radius: 100px;
+  padding: 2px 7px;
+}
+.contrib-detail {
+  font: 400 12px/1.4 var(--font);
+  color: var(--text2);
+}
+.contrib-time {
+  font: 400 11px/1 var(--font);
+  color: var(--text3);
+  white-space: nowrap;
+  align-self: flex-start;
+  padding-top: 1px;
+}
+
+/* ─── RIGHT PANEL — CREATIVE DIRECTION ─── */
+.panel-right {
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.panel-right-hd {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.direction-orb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(0,188,212,0.9), rgba(0,188,212,0.3));
+  border: 1px solid rgba(0,188,212,0.4);
+  flex-shrink: 0;
+}
+.panel-right-hd h3 {
+  font: 600 14px/1 var(--font);
+  color: var(--text);
+}
+.panel-right-hd-sub {
+  font: 400 12px/1 var(--font);
+  color: var(--text3);
+}
+
+/* Direction thread */
+.direction-thread {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.direction-thread::-webkit-scrollbar { width: 3px; }
+.direction-thread::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
+
+.thread-msg {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.thread-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.thread-sender {
+  font: 600 12px/1 var(--font);
+  color: var(--text2);
+}
+.thread-time {
+  font: 400 11px/1 var(--font);
+  color: var(--text3);
+}
+.thread-bubble {
+  padding: 10px 12px;
+  border-radius: 12px;
+  font: 400 13px/1.5 var(--font);
+  color: var(--text);
+  max-width: 100%;
+}
+.thread-bubble.user-bubble {
+  background: var(--accent-dim);
+  border: 1px solid rgba(192,132,252,0.15);
+  align-self: flex-end;
+  max-width: 90%;
+}
+.thread-bubble.ai-bubble {
+  background: var(--ai-dim);
+  border: 1px solid rgba(0,188,212,0.15);
+}
+.thread-bubble strong { color: var(--ai); }
+.thread-bubble em { color: var(--accent2); font-style: normal; font-weight: 600; }
+
+/* AI guide card (Socratic) */
+.ai-guide-card {
+  background: linear-gradient(135deg, var(--ai-dim), rgba(0,188,212,0.05));
+  border: 1px solid rgba(0,188,212,0.2);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+.ai-guide-hd {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.ai-guide-orb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(0,188,212,0.9), rgba(0,188,212,0.3));
+  border: 1px solid rgba(0,188,212,0.4);
+  flex-shrink: 0;
+}
+.ai-guide-title {
+  font: 600 12px/1 var(--font);
+  color: var(--ai);
+}
+.ai-guide-body {
+  font: 400 13px/1.5 var(--font);
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.ai-guide-body strong { color: var(--ai); }
+.ai-guide-prompts {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ai-prompt-chip {
+  padding: 7px 10px;
+  background: var(--surface);
+  border: 1px solid rgba(0,188,212,0.2);
+  border-radius: 10px;
+  font: 400 12px/1.4 var(--font);
+  color: var(--text2);
+  cursor: pointer;
+  transition: all .15s;
+}
+.ai-prompt-chip:hover {
+  background: var(--ai-dim);
+  color: var(--ai);
+  border-color: rgba(0,188,212,0.4);
+}
+.ai-prompt-chip::before {
+  content: '→ ';
+  color: var(--ai);
+  font-weight: 600;
+}
+
+/* Chat input */
+.chat-input-area {
+  padding: 12px 14px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+.chat-input-box {
+  flex: 1;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  padding: 9px 12px;
+  font: 400 13px/1.4 var(--font);
+  color: var(--text);
+  outline: none;
+  resize: none;
+  min-height: 38px;
+  max-height: 80px;
+  overflow-y: auto;
+}
+.chat-input-box::placeholder { color: var(--text3); }
+.chat-send-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--accent);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background .15s;
+}
+.chat-send-btn:hover { background: #a855f7; }
+
+/* ─── THEME TOGGLE ─── */
+.theme-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 200;
+  transition: background .2s;
+}
+.theme-toggle:hover { background: rgba(255,255,255,0.18); }
+</style>
+</head>
+<body>
+
+<!-- View Switcher -->
+<div class="switcher">
+  <button class="sw-btn active" onclick="switchScene('v0',this)">Home — Projects Grid</button>
+  <button class="sw-btn" onclick="switchScene('v1',this)">Workspace — Three Panel</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     V0: PROJECT GRID HOME
+═══════════════════════════════════════════════════════════ -->
+<div class="scene visible" id="scene-v0">
+  <div class="scene-label">iPad Pro 11" · Landscape · Home</div>
+  <div class="device" id="device-v0">
+
+    <!-- Status bar -->
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <div class="status-icons">
+        <span>●●●●</span>
+        <span>WiFi</span>
+        <span>🔋</span>
+      </div>
+    </div>
+
+    <!-- App header -->
+    <div class="app-header">
+      <div class="bloom-logo-wrap">
+        <div class="bloom-logo-icon">🌸</div>
+        <span class="bloom-logo-text">Bloom</span>
+      </div>
+      <div class="header-spacer"></div>
+      <div class="header-search">
+        <span>🔍</span>
+        <input type="text" placeholder="Search projects…">
+      </div>
+      <div class="header-icon-btn">🔔</div>
+      <div class="header-avatar">Y</div>
+    </div>
+
+    <!-- Scrollable body -->
+    <div class="app-body">
+
+      <!-- Collab banner -->
+      <div style="padding:16px 24px 0;">
+        <div class="collab-banner">
+          <div class="collab-orb"></div>
+          <div class="collab-text">
+            <div class="collab-title">Kaleidoscope noticed something ✨</div>
+            <div class="collab-sub">Your <strong>Cultural Festival 2024</strong> video has strong visual flow — want to explore the opening sequence together?</div>
+          </div>
+          <div class="collab-action">Explore</div>
+        </div>
+      </div>
+
+      <!-- Projects section -->
+      <div class="section-hd">
+        <h2>My Projects</h2>
+        <span class="badge">5 active</span>
+        <div class="section-hd-spacer"></div>
+        <span class="see-all">See all</span>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- Card 1: Sound Waves -->
+        <div class="proj-card">
+          <div class="proj-thumb grad-music">
+            <span class="proj-thumb-icon">🎵</span>
+            <span class="proj-thumb-badge">In Progress</span>
+          </div>
+          <div class="proj-body">
+            <div class="proj-type">Music</div>
+            <div class="proj-title">Sound Waves</div>
+            <div class="proj-auth-row">
+              <div class="auth-bar"><div class="auth-human" style="width:72%"></div></div>
+              <span class="auth-label" style="color:var(--green)">H 72%</span>
+            </div>
+            <span class="proj-status status-active">● Active</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Sky Canvas -->
+        <div class="proj-card">
+          <div class="proj-thumb grad-art">
+            <span class="proj-thumb-icon">🎨</span>
+            <span class="proj-thumb-badge">Draft</span>
+          </div>
+          <div class="proj-body">
+            <div class="proj-type">Digital Art</div>
+            <div class="proj-title">Sky Canvas</div>
+            <div class="proj-auth-row">
+              <div class="auth-bar"><div class="auth-human" style="width:65%"></div></div>
+              <span class="auth-label" style="color:var(--green)">H 65%</span>
+            </div>
+            <span class="proj-status status-draft">● Draft</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Tales of Valor -->
+        <div class="proj-card">
+          <div class="proj-thumb grad-story">
+            <span class="proj-thumb-icon">📖</span>
+            <span class="proj-thumb-badge">Active</span>
+          </div>
+          <div class="proj-body">
+            <div class="proj-type">Story</div>
+            <div class="proj-title">Tales of Valor</div>
+            <div class="proj-auth-row">
+              <div class="auth-bar"><div class="auth-human" style="width:80%"></div></div>
+              <span class="auth-label" style="color:var(--green)">H 80%</span>
+            </div>
+            <span class="proj-status status-active">● Active</span>
+          </div>
+        </div>
+
+        <!-- Card 4: Cultural Festival 2024 (highlighted active) -->
+        <div class="proj-card" style="border-color:rgba(192,132,252,0.3);">
+          <div class="proj-thumb grad-video">
+            <span class="proj-thumb-icon">🎬</span>
+            <span class="proj-thumb-badge" style="background:rgba(192,132,252,0.7)">AI Active</span>
+          </div>
+          <div class="proj-body">
+            <div class="proj-type">Video</div>
+            <div class="proj-title">Cultural Festival 2024</div>
+            <div class="proj-auth-row">
+              <div class="auth-bar"><div class="auth-human" style="width:68%"></div></div>
+              <span class="auth-label" style="color:var(--green)">H 68%</span>
+            </div>
+            <span class="proj-status status-active">● Active</span>
+          </div>
+        </div>
+
+        <!-- Card 5: Garden Dreams -->
+        <div class="proj-card">
+          <div class="proj-thumb grad-3d">
+            <span class="proj-thumb-icon">🌿</span>
+            <span class="proj-thumb-badge">Draft</span>
+          </div>
+          <div class="proj-body">
+            <div class="proj-type">3D / Animation</div>
+            <div class="proj-title">Garden Dreams</div>
+            <div class="proj-auth-row">
+              <div class="auth-bar"><div class="auth-human" style="width:55%"></div></div>
+              <span class="auth-label" style="color:var(--green)">H 55%</span>
+            </div>
+            <span class="proj-status status-draft">● Draft</span>
+          </div>
+        </div>
+
+        <!-- New Project card -->
+        <div class="proj-card-new">
+          <div class="new-plus">+</div>
+          <div class="new-label">New Project</div>
+          <div class="new-sub">Start something creative with Bloom</div>
+        </div>
+
+      </div><!-- /projects-grid -->
+
+    </div><!-- /app-body -->
+
+    <!-- Bottom Nav -->
+    <div class="bottom-nav">
+      <div class="nav-item active">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-label">Home</span>
+        <div class="nav-active-dot"></div>
+      </div>
+      <div class="nav-item">
+        <span class="nav-icon">✨</span>
+        <span class="nav-label">Create</span>
+      </div>
+      <div class="nav-item">
+        <span class="nav-icon">👨‍👩‍👧</span>
+        <span class="nav-label">Family</span>
+      </div>
+    </div>
+
+  </div><!-- /device -->
+</div><!-- /scene-v0 -->
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     V1: THREE-PANEL WORKSPACE
+═══════════════════════════════════════════════════════════ -->
+<div class="scene" id="scene-v1">
+  <div class="scene-label">iPad Pro 11" · Landscape · Workspace</div>
+  <div class="device" id="device-v1">
+
+    <!-- Status bar -->
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <div class="status-icons">
+        <span>●●●●</span>
+        <span>WiFi</span>
+        <span>🔋</span>
+      </div>
+    </div>
+
+    <!-- App header (workspace mode) -->
+    <div class="app-header">
+      <div class="bloom-logo-wrap">
+        <div class="bloom-logo-icon">🌸</div>
+        <span class="bloom-logo-text">Bloom</span>
+      </div>
+      <div style="width:1px;height:20px;background:var(--border2);margin:0 8px;"></div>
+      <span style="font:500 14px/1 var(--font);color:var(--text2);">Workspace</span>
+      <div class="header-spacer"></div>
+      <button class="center-btn center-btn-ghost" style="font-size:13px;padding:7px 14px;">Share</button>
+      <div class="header-avatar">Y</div>
+    </div>
+
+    <!-- Three-panel grid (fills remaining height) -->
+    <div class="three-panel">
+
+      <!-- ── LEFT: Project list sidebar ── -->
+      <div class="panel-left">
+        <div class="panel-left-hd">
+          <h3>My Projects</h3>
+          <div class="sidebar-search">
+            <span>🔍</span>
+            <input type="text" placeholder="Search…">
+          </div>
+        </div>
+
+        <div class="proj-list">
+
+          <div class="pl-item">
+            <div class="pl-thumb grad-music" style="border-radius:8px;font-size:16px;">🎵</div>
+            <div class="pl-info">
+              <div class="pl-title">Sound Waves</div>
+              <div class="pl-meta">Music · H 72%</div>
+            </div>
+          </div>
+
+          <div class="pl-item">
+            <div class="pl-thumb grad-art" style="border-radius:8px;font-size:16px;">🎨</div>
+            <div class="pl-info">
+              <div class="pl-title">Sky Canvas</div>
+              <div class="pl-meta">Digital Art · H 65%</div>
+            </div>
+          </div>
+
+          <div class="pl-item">
+            <div class="pl-thumb grad-story" style="border-radius:8px;font-size:16px;">📖</div>
+            <div class="pl-info">
+              <div class="pl-title">Tales of Valor</div>
+              <div class="pl-meta">Story · H 80%</div>
+            </div>
+          </div>
+
+          <div class="pl-item active">
+            <div class="pl-thumb grad-video" style="border-radius:8px;font-size:16px;">🎬</div>
+            <div class="pl-info">
+              <div class="pl-title">Cultural Festival 2024</div>
+              <div class="pl-meta">Video · H 68%</div>
+            </div>
+            <div class="pl-dot"></div>
+          </div>
+
+          <div class="pl-item">
+            <div class="pl-thumb grad-3d" style="border-radius:8px;font-size:16px;">🌿</div>
+            <div class="pl-info">
+              <div class="pl-title">Garden Dreams</div>
+              <div class="pl-meta">3D / Anim · H 55%</div>
+            </div>
+          </div>
+
+        </div><!-- /proj-list -->
+
+        <div class="sidebar-new-btn">
+          <span>＋</span>
+          <span>New Project</span>
+        </div>
+
+      </div><!-- /panel-left -->
+
+
+      <!-- ── CENTER: Project detail ── -->
+      <div class="panel-center">
+
+        <!-- Project header -->
+        <div class="panel-center-hd">
+          <div class="center-hd-thumb grad-video" style="border-radius:10px;">🎬</div>
+          <div class="center-hd-info">
+            <div class="center-hd-type">Video Project</div>
+            <div class="center-hd-title">Cultural Festival 2024</div>
+            <div class="center-hd-meta">
+              <span class="center-hd-status status-active">● Active</span>
+              <span class="center-hd-updated">Updated 2h ago</span>
+            </div>
+          </div>
+          <div class="center-hd-actions">
+            <button class="center-btn center-btn-ghost">Preview</button>
+            <button class="center-btn center-btn-primary">Continue Editing</button>
+          </div>
+        </div>
+
+        <!-- Authorship hero -->
+        <div class="auth-hero">
+          <div class="auth-hero-row">
+            <div>
+              <div class="auth-hero-pct human">68%</div>
+            </div>
+            <div class="auth-hero-label">
+              <div class="auth-hero-label-main">YOUR VOICE</div>
+              <div class="auth-hero-label-sub">You shaped the creative direction. AI amplified it.</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font:800 28px/1 var(--font);letter-spacing:-.03em;color:var(--ai);">32%</div>
+              <div style="font:500 11px/1 var(--font);color:var(--text3);margin-top:2px;">AI ASSIST</div>
+            </div>
+          </div>
+          <div class="auth-hero-bar-wrap">
+            <div class="auth-hero-bar" style="width:68%"></div>
+          </div>
+          <div class="auth-hero-legend">
+            <div class="auth-legend-item">
+              <div class="auth-legend-dot" style="background:var(--green)"></div>
+              Your creative choices
+            </div>
+            <div class="auth-legend-item">
+              <div class="auth-legend-dot" style="background:var(--ai)"></div>
+              Kaleidoscope AI
+            </div>
+          </div>
+        </div>
+
+        <!-- Contributors scroll -->
+        <div class="center-scroll">
+
+          <div class="contrib-section-title">Contributors</div>
+
+          <div class="contrib-item">
+            <div class="contrib-avatar green-av">Y</div>
+            <div class="contrib-body">
+              <div class="contrib-name-row">
+                <span class="contrib-name">Yuki</span>
+                <span class="contrib-role">Director</span>
+              </div>
+              <div class="contrib-detail">Edited opening sequence, adjusted cultural motif transitions, finalized colour grading choices</div>
+            </div>
+            <span class="contrib-time">2h ago</span>
+          </div>
+
+          <div class="contrib-item">
+            <div class="contrib-avatar amber-av">H</div>
+            <div class="contrib-body">
+              <div class="contrib-name-row">
+                <span class="contrib-name">Hana</span>
+                <span class="contrib-role">BGM</span>
+              </div>
+              <div class="contrib-detail">Composed and layered the background music track with traditional instruments</div>
+            </div>
+            <span class="contrib-time">5h ago</span>
+          </div>
+
+          <div class="contrib-item">
+            <div class="contrib-avatar ai-av">✦</div>
+            <div class="contrib-body">
+              <div class="contrib-name-row">
+                <span class="contrib-name">Kaleidoscope</span>
+                <span class="contrib-role">AI</span>
+              </div>
+              <div class="contrib-detail">Generated 3 b-roll suggestions, proposed subtitle timing, enhanced colour balance in 2 scenes</div>
+            </div>
+            <span class="contrib-time">3h ago</span>
+          </div>
+
+          <div class="contrib-item">
+            <div class="contrib-avatar sky-av">R</div>
+            <div class="contrib-body">
+              <div class="contrib-name-row">
+                <span class="contrib-name">Ren</span>
+                <span class="contrib-role">Text</span>
+              </div>
+              <div class="contrib-detail">Wrote bilingual captions and cultural context inserts for audience clarity</div>
+            </div>
+            <span class="contrib-time">Yesterday</span>
+          </div>
+
+        </div><!-- /center-scroll -->
+
+      </div><!-- /panel-center -->
+
+
+      <!-- ── RIGHT: Creative Direction ── -->
+      <div class="panel-right">
+
+        <div class="panel-right-hd">
+          <div class="direction-orb"></div>
+          <div>
+            <h3>Creative Direction</h3>
+            <div class="panel-right-hd-sub">Kaleidoscope · AI Guide</div>
+          </div>
+        </div>
+
+        <div class="direction-thread">
+
+          <div class="thread-msg">
+            <div class="thread-meta">
+              <span class="thread-sender" style="color:var(--green)">Yuki</span>
+              <span class="thread-time">Yesterday 8:12pm</span>
+            </div>
+            <div class="thread-bubble user-bubble">
+              I want the opening to feel like walking into a festival — warm, a bit noisy, then suddenly the music drops and it gets emotional.
+            </div>
+          </div>
+
+          <div class="thread-msg">
+            <div class="thread-meta">
+              <span class="thread-sender" style="color:var(--ai)">Kaleidoscope</span>
+              <span class="thread-time">Yesterday 8:13pm</span>
+            </div>
+            <div class="thread-bubble ai-bubble">
+              That contrast — <strong>sensory overwhelm → emotional quiet</strong> — is a powerful structure. What's the specific <em>moment</em> you want the audience to feel that shift? Is it tied to a person, a sound, or a visual?
+            </div>
+          </div>
+
+          <div class="thread-msg">
+            <div class="thread-meta">
+              <span class="thread-sender" style="color:var(--green)">Yuki</span>
+              <span class="thread-time">Yesterday 8:18pm</span>
+            </div>
+            <div class="thread-bubble user-bubble">
+              There's a shot of my grandma watching from the side — that's the emotional anchor. Everything should lead to that.
+            </div>
+          </div>
+
+          <div class="thread-msg">
+            <div class="thread-meta">
+              <span class="thread-sender" style="color:var(--ai)">Kaleidoscope</span>
+              <span class="thread-time">Yesterday 8:19pm</span>
+            </div>
+            <div class="thread-bubble ai-bubble">
+              That's beautiful — and very clear. If her shot is the <em>emotional anchor</em>, the opening sequence should <strong>plant questions</strong> the audience doesn't realise they're asking until they see her face. How long is that shot in your current cut?
+            </div>
+          </div>
+
+          <!-- Socratic AI guide card -->
+          <div class="ai-guide-card">
+            <div class="ai-guide-hd">
+              <div class="ai-guide-orb"></div>
+              <span class="ai-guide-title">Kaleidoscope noticed something</span>
+            </div>
+            <div class="ai-guide-body">
+              Your opening crowd sequence is <strong>12 seconds</strong> — longer than your anchor shot (4s). That ratio might dilute the emotional payoff. What feeling do you want the audience to carry <em>out</em> of the opening?
+            </div>
+            <div class="ai-guide-prompts">
+              <div class="ai-prompt-chip">The warmth of the crowd should linger</div>
+              <div class="ai-prompt-chip">The quiet moment should hit hardest</div>
+              <div class="ai-prompt-chip">Balance — both feelings equally</div>
+            </div>
+          </div>
+
+        </div><!-- /direction-thread -->
+
+        <!-- Chat input -->
+        <div class="chat-input-area">
+          <textarea class="chat-input-box" placeholder="Share your creative direction…" rows="1"></textarea>
+          <button class="chat-send-btn">↑</button>
+        </div>
+
+      </div><!-- /panel-right -->
+
+    </div><!-- /three-panel -->
+
+  </div><!-- /device -->
+</div><!-- /scene-v1 -->
+
+
+<!-- Theme toggle -->
+<button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark">☀️</button>
+
+<script>
+function switchScene(id, btn) {
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('visible'));
+  document.querySelectorAll('.sw-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('scene-' + id).classList.add('visible');
+  btn.classList.add('active');
+}
+
+function toggleTheme() {
+  const devices = document.querySelectorAll('.device');
+  const btn = document.querySelector('.theme-toggle');
+  const isLight = document.body.getAttribute('data-theme') === 'light';
+  if (isLight) {
+    document.body.removeAttribute('data-theme');
+    devices.forEach(d => d.removeAttribute('data-theme'));
+    btn.textContent = '☀️';
+  } else {
+    document.body.setAttribute('data-theme', 'light');
+    devices.forEach(d => d.setAttribute('data-theme', 'light'));
+    btn.textContent = '🌙';
+  }
+}
+</script>
+</body>
+</html>
