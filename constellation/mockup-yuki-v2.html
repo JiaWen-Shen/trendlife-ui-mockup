@@ -132,8 +132,16 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 
 /* ═══ HOME — notification section ═══ */
 .notif-section{padding:0 20px;margin-top:8px}
-.notif-section-lbl{font-size:10px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
-.notif-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}
+.notif-section-lbl{font-size:10px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;-webkit-user-select:none;transition:margin 0.25s var(--ease-out)}
+.notif-section-lbl:active{opacity:0.7}
+.notif-lbl-left{display:flex;align-items:center;gap:7px}
+.notif-count-badge{font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:10px;background:var(--surface2);border:1px solid var(--border2);color:var(--text3);transition:background 0.2s,color 0.2s}
+.notif-section.has-green .notif-count-badge{background:var(--green-dim);border-color:rgba(74,222,128,0.2);color:var(--green)}
+.notif-chevron{font-size:14px;color:var(--text3);transition:transform 0.28s var(--ease-out);line-height:1}
+.notif-section.collapsed .notif-chevron{transform:rotate(-90deg)}
+.notif-section.collapsed .notif-section-lbl{margin-bottom:0;border-bottom-color:transparent}
+.notif-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;transition:height 0.3s var(--ease-out),opacity 0.25s ease}
+.notif-section.collapsed .notif-wrap{opacity:0}
 .notif-row{display:flex;align-items:center;gap:9px;padding:10px 12px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;position:relative}
 .notif-row:last-child{border-bottom:none}
 .notif-row:active{background:var(--surface2)}
@@ -505,9 +513,15 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
       </div>
 
       <!-- Notifications -->
-      <div class="notif-section">
-        <div class="notif-section-lbl">Updates</div>
-        <div class="notif-wrap">
+      <div class="notif-section has-green" id="yuki-notif-section">
+        <div class="notif-section-lbl" onclick="toggleNotif('yuki-notif-section')">
+          <div class="notif-lbl-left">
+            <span>Today's Updates</span>
+            <span class="notif-count-badge" id="yuki-notif-count">4</span>
+          </div>
+          <span class="notif-chevron">⌄</span>
+        </div>
+        <div class="notif-wrap" id="yuki-notif-wrap">
           <div class="notif-row" id="notif-crew" onclick="showView(7)">
             <span class="notif-icon" style="color:var(--green)">✅</span>
             <span class="notif-body">Mom approved Bloom — tap to join now!</span>
@@ -1249,11 +1263,43 @@ function toggleConsent() {
 /* ── Notification dismiss ── */
 function dismissNotif(id) {
   const el = document.getElementById(id);
-  if (el) {
-    el.style.transition = 'opacity 0.2s, transform 0.2s';
-    el.style.opacity = '0';
-    el.style.transform = 'translateX(8px)';
-    setTimeout(() => el.style.display = 'none', 200);
+  if (!el) return;
+  el.style.transition = 'opacity 0.2s,max-height 0.3s,padding 0.3s,border 0.3s';
+  el.style.opacity = '0'; el.style.maxHeight = '0'; el.style.padding = '0'; el.style.borderBottomWidth = '0';
+  setTimeout(() => {
+    el.remove();
+    updateNotifCount('yuki-notif-section', 'yuki-notif-count', 'yuki-notif-wrap');
+  }, 320);
+}
+
+function updateNotifCount(sectionId, countId, wrapId) {
+  const section = document.getElementById(sectionId);
+  const count = document.getElementById(countId);
+  const wrap = document.getElementById(wrapId);
+  if (!section || !count || !wrap) return;
+  const n = wrap.querySelectorAll('.notif-row').length;
+  count.textContent = n;
+  if (n === 0) { section.style.display = 'none'; return; }
+  if (!section.classList.contains('collapsed')) {
+    wrap.style.height = wrap.scrollHeight + 'px';
+    wrap.addEventListener('transitionend', () => { wrap.style.height = 'auto'; }, { once: true });
+  }
+}
+
+function toggleNotif(sectionId) {
+  const section = document.getElementById(sectionId);
+  const wrap = section.querySelector('.notif-wrap');
+  const isCollapsed = section.classList.contains('collapsed');
+  if (isCollapsed) {
+    section.classList.remove('collapsed');
+    wrap.style.height = wrap.scrollHeight + 'px';
+    wrap.addEventListener('transitionend', () => { wrap.style.height = 'auto'; }, { once: true });
+  } else {
+    wrap.style.height = wrap.scrollHeight + 'px';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      section.classList.add('collapsed');
+      wrap.style.height = '0';
+    }));
   }
 }
 
