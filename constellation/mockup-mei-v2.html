@@ -421,6 +421,31 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
       <!-- Constellation -->
       <div class="constellation fade-in stagger-1" id="constellationContainer"></div>
 
+      <!-- Notifications -->
+      <div class="notif-section fade-in">
+        <div class="notif-section-lbl">Notifications</div>
+        <div class="notif-wrap">
+          <div class="notif-row notif-alert" id="notif-bp" onclick="switchView(5)">
+            <span class="notif-icon" style="color:#FF3B30">⌚</span>
+            <span class="notif-body">BP 168/112 mmHg — Grandma's wearable · Stage 2</span>
+            <span class="notif-time">9:38 AM</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-bp')">✕</div>
+          </div>
+          <div class="notif-row" id="notif-grandma" onclick="switchView(8)">
+            <span class="notif-icon" style="color:#FFC364">🎂</span>
+            <span class="notif-body">Grandma's resting — not feeling well · birthday cake is all set</span>
+            <span class="notif-time">Just now</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-grandma')">✕</div>
+          </div>
+          <div class="notif-row" id="notif-health" onclick="switchView(5)">
+            <span class="notif-icon" style="color:#A0AEC0">🩺</span>
+            <span class="notif-body">Grandma's health check report — monthly summary ready</span>
+            <span class="notif-time">9:20 AM</span>
+            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-health')">✕</div>
+          </div>
+        </div>
+      </div>
+
       <!-- Bento Grid -->
       <div class="section-hdr fade-in stagger-2">
         <span class="section-label">Today's Overview</span>
@@ -449,31 +474,6 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
           <span class="bento-icon">📱</span>
           <div class="bento-title">Hiro — Screen</div>
           <div class="bento-desc">3.5h social after midnight</div>
-        </div>
-      </div>
-
-      <!-- Notifications -->
-      <div class="notif-section fade-in">
-        <div class="notif-section-lbl">Notifications</div>
-        <div class="notif-wrap">
-          <div class="notif-row notif-alert" id="notif-bp" onclick="switchView(5)">
-            <span class="notif-icon" style="color:#FF3B30">⌚</span>
-            <span class="notif-body">BP 168/112 mmHg — Grandma's wearable · Stage 2</span>
-            <span class="notif-time">9:38 AM</span>
-            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-bp')">✕</div>
-          </div>
-          <div class="notif-row" id="notif-grandma" onclick="switchView(8)">
-            <span class="notif-icon" style="color:#FFC364">🎂</span>
-            <span class="notif-body">Grandma's resting — not feeling well · birthday cake is all set</span>
-            <span class="notif-time">Just now</span>
-            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-grandma')">✕</div>
-          </div>
-          <div class="notif-row" id="notif-health" onclick="switchView(5)">
-            <span class="notif-icon" style="color:#A0AEC0">🩺</span>
-            <span class="notif-body">Grandma's health check report — monthly summary ready</span>
-            <span class="notif-time">9:20 AM</span>
-            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-health')">✕</div>
-          </div>
         </div>
       </div>
 
@@ -715,26 +715,104 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
       <img class="sub-logo" src="bloom-icon.svg" alt="Bloom">
     </div>
     <div class="protect-body">
+
+      <!-- Hero -->
       <div class="protect-hero">
         <div class="protect-av"><img src="faces/yuki.png" alt="Yuki"></div>
         <div class="protect-name">Yuki Chen · 16</div>
-        <div class="protect-role">Student · Creator · Taipei</div>
+        <div class="protect-role">Student · Creator · Taipei · Week 12</div>
         <div class="protect-status-row">
           <div class="pstat"><div class="pstat-val" style="color:var(--green)">+18%</div><div class="pstat-lbl">Creative Dir.</div></div>
           <div class="pstat"><div class="pstat-val" style="color:var(--accent)">68%</div><div class="pstat-lbl">Yuki Voice</div></div>
           <div class="pstat"><div class="pstat-val" style="color:var(--green)">8</div><div class="pstat-lbl">Own Decisions</div></div>
         </div>
       </div>
+
+      <!-- Parent highlight narrative -->
+      <div class="section-lbl">🌱 This Week's Growth Story</div>
+      <div style="background:linear-gradient(135deg,rgba(192,132,252,0.07),rgba(74,222,128,0.05));border:1px solid rgba(192,132,252,0.16);border-radius:var(--radius-sm);padding:16px;margin-bottom:10px">
+        <div style="font-size:13px;color:var(--text);line-height:1.75">
+          Yuki completed her biggest independent creative project yet — a 3-part TikTok series for the school culture festival. <strong style="color:var(--accent)">She directed all the transitions and pacing herself</strong>, only asking Bloom for one reference image. This is a meaningful shift from 4 weeks ago, when she relied on AI for about half her decisions.
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+          <span style="font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--green-dim);color:var(--green);border:1px solid rgba(74,222,128,0.2)">✓ Growing independence</span>
+          <span style="font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(192,132,252,0.2)">✦ Strong own voice</span>
+          <span style="font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--ai-dim);color:var(--ai);border:1px solid rgba(0,188,212,0.2)">AI used as tool, not crutch</span>
+        </div>
+      </div>
+
+      <!-- Featured Work -->
       <div class="section-lbl">✦ Featured Work</div>
       <div class="yuki-work-card featured">
         <div class="ywc-thumb"><span class="ywc-thumb-icon">🎨</span></div>
         <div class="ywc-info">
-          <div class="ywc-tag">Bloom · Week 12</div>
+          <div class="ywc-tag">Bloom · Week 12 · Director's Choice</div>
           <div class="ywc-title">文化祭 2024 — TikTok Series</div>
-          <div class="ywc-meta">3 videos · 12k views · Hana, Ren</div>
-          <div class="ywc-feedback">"Yuki directed all transitions independently — creative voice clearly developing."</div>
+          <div class="ywc-meta">3 videos · 12k views · with Hana, Ren</div>
+          <div class="ywc-feedback">"Yuki directed all transitions independently — her creative voice is clearly developing."</div>
         </div>
       </div>
+      <div class="yuki-work-card">
+        <div class="ywc-thumb" style="width:72px;min-height:76px"><span class="ywc-thumb-icon">✍️</span></div>
+        <div class="ywc-info">
+          <div class="ywc-tag">Visual Essay · Week 11</div>
+          <div class="ywc-title">Spring Memory — Photo Zine</div>
+          <div class="ywc-meta">12 pages · solo project</div>
+          <div class="ywc-feedback">AI provided 2 layout suggestions; Yuki used neither — designed entirely from scratch.</div>
+        </div>
+      </div>
+
+      <!-- AI-guided sessions -->
+      <div class="section-lbl">💡 AI-Guided Sessions This Week</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:4px">
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:13px 14px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <span style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.4px;text-transform:uppercase">Session 1 · Mon</span>
+            <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;background:var(--green-dim);color:var(--green)">Self-directed</span>
+          </div>
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">文化祭 TikTok — Opening Scene</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+            <div style="background:var(--ai-dim);border-radius:8px;padding:8px 10px">
+              <div style="font-size:9px;font-weight:700;color:var(--ai);letter-spacing:0.5px;margin-bottom:4px">BLOOM SUGGESTED</div>
+              <div style="font-size:11.5px;color:var(--text2);line-height:1.5">Use a slow zoom-in with ambient music for the opening</div>
+            </div>
+            <div style="background:var(--accent-dim);border-radius:8px;padding:8px 10px">
+              <div style="font-size:9px;font-weight:700;color:var(--accent);letter-spacing:0.5px;margin-bottom:4px">YUKI CHOSE</div>
+              <div style="font-size:11.5px;color:var(--text2);line-height:1.5">Jump-cut montage with her own soundtrack — more energetic</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:13px 14px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <span style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.4px;text-transform:uppercase">Session 2 · Wed</span>
+            <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;background:var(--accent-dim);color:var(--accent)">Adapted AI idea</span>
+          </div>
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Color Grading Style</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+            <div style="background:var(--ai-dim);border-radius:8px;padding:8px 10px">
+              <div style="font-size:9px;font-weight:700;color:var(--ai);letter-spacing:0.5px;margin-bottom:4px">BLOOM SUGGESTED</div>
+              <div style="font-size:11.5px;color:var(--text2);line-height:1.5">Warm golden tones for a nostalgic festival feel</div>
+            </div>
+            <div style="background:var(--accent-dim);border-radius:8px;padding:8px 10px">
+              <div style="font-size:9px;font-weight:700;color:var(--accent);letter-spacing:0.5px;margin-bottom:4px">YUKI CHOSE</div>
+              <div style="font-size:11.5px;color:var(--text2);line-height:1.5">Kept warm tones but added a film grain filter she found independently</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:13px 14px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <span style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.4px;text-transform:uppercase">Session 3 · Fri</span>
+            <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;background:var(--green-dim);color:var(--green)">Fully independent</span>
+          </div>
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px">Final Edit — Didn't open Bloom</div>
+          <div style="font-size:12.5px;color:var(--text3);line-height:1.55">Yuki completed the full final cut without opening Bloom once. She referenced her own notes from earlier sessions instead.</div>
+        </div>
+      </div>
+
+      <!-- Skill bars -->
       <div class="section-lbl">📊 Skill Progress</div>
       <div class="skill-bars-card">
         <div class="skill-bar-row">
@@ -753,21 +831,32 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
           <span class="skill-delta" style="color:var(--green)">68%</span>
         </div>
         <div class="skill-bar-row">
-          <span class="skill-name">Collab Skills</span>
-          <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:55%;background:var(--sky)"></div></div>
+          <span class="skill-name">Independent Decisions</span>
+          <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:62%;background:var(--sky)"></div></div>
+          <span class="skill-delta" style="color:var(--green)">+5</span>
+        </div>
+        <div class="skill-bar-row">
+          <span class="skill-name">Collaboration</span>
+          <div class="skill-bar-wrap"><div class="skill-bar-fill" style="width:55%;background:var(--teal)"></div></div>
           <span class="skill-delta" style="color:var(--green)">+7%</span>
         </div>
       </div>
+
+      <!-- Safety -->
       <div class="section-lbl">🛡 Safety</div>
       <div class="protect-card safe-card">
         <div class="pc-eyebrow" style="color:var(--green)">✓ Protection Active</div>
         <div class="pc-text">1 phishing link blocked today. All shared content reviewed. Privacy settings intact.</div>
+        <div class="pc-detail">Yuki was notified and chose not to open the link — good judgment.</div>
       </div>
+
+      <!-- Kaleidoscope summary -->
       <div class="section-lbl">🤖 Kaleidoscope Summary</div>
       <div class="expert-view">
-        <div class="expert-label"><img src="kaleidoscope-mandala.svg" style="width:14px;height:14px"> Kaleidoscope</div>
-        <div class="expert-text">Yuki's creative independence is growing steadily — her authorship score (68%) is above the peer benchmark for her age group. The 3 independent decisions today reflect genuine confidence. No intervention needed.</div>
+        <div class="expert-label"><img src="kaleidoscope-mandala.svg" style="width:14px;height:14px"> Kaleidoscope · Parent View</div>
+        <div class="expert-text">Yuki's relationship with Bloom is maturing in a healthy direction. Her authorship score (68%) is above the age-16 peer benchmark of 54%. What's most notable this week: she used AI as a reference point to push <em>against</em>, not just to follow — which is a sign of genuine creative confidence. No parental intervention recommended. Consider celebrating her independent final cut on Friday.</div>
       </div>
+
     </div>
   </div>
 
