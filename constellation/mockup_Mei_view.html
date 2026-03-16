@@ -18,8 +18,8 @@
   --surface:#18181B;
   --surface2:#27272A;
   --surface3:#3F3F46;
-  --border:var(--surface);
-  --border2:var(--border2);
+  --border:rgba(255,255,255,0.06);
+  --border2:rgba(255,255,255,0.10);
   --text:#FAFAFA;
   --text2:#A1A1AA;
   --text3:#8A8A93;
@@ -385,7 +385,8 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 /* ═══════════════════════════════════════════
    VIEW 0 — HOME
    ═══════════════════════════════════════════ */
-.home-header{padding:8px 20px 0}
+.home-header{padding:8px 20px 0;flex-shrink:0}
+.alert-banner{flex-shrink:0}
 .home-greeting-row{display:flex;align-items:center;gap:10px}
 .home-greeting{font-size:13px;color:var(--text3);letter-spacing:0.2px;flex:1}
 .settings-btn{
@@ -1108,6 +1109,7 @@ body{background:var(--bg);display:flex;justify-content:center;align-items:center
 
 .screen{position:absolute;inset:0;display:none;flex-direction:column;overflow:hidden}
 .screen.active{display:flex}
+#s0.screen{overflow-y:auto;padding-bottom:72px}
 
 .status-bar{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;flex-shrink:0}
 .status-time{font-size:15px;font-weight:600;color:rgba(255,255,255,0.7)}
@@ -1129,11 +1131,11 @@ body{background:var(--bg);display:flex;justify-content:center;align-items:center
 .greeting{font-size:12px;color:rgba(255,255,255,0.3);letter-spacing:0.3px;margin-bottom:1px}
 .greeting-name{font-size:26px;font-weight:800;color:rgba(255,255,255,0.85);letter-spacing:-0.5px}
 
-.const-area{flex:1;position:relative;overflow:hidden}
+.const-area{height:220px;flex-shrink:0;position:relative;overflow:hidden}
 .const-svg{position:absolute;inset:0;width:100%;height:100%}
 
 /* ── AI Notification List (inside arc) ── */
-#notif-wrap{position:absolute;top:8px;left:14px;right:14px;z-index:10;
+#notif-wrap{margin:8px 14px 0;z-index:10;
   background:rgba(10,10,18,0.82);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
   border:1px solid var(--border2);border-radius:16px;overflow:hidden;}
 #notif-panel-header{display:flex;align-items:center;justify-content:space-between;
@@ -1142,8 +1144,21 @@ body{background:var(--bg);display:flex;justify-content:center;align-items:center
   letter-spacing:0.8px;text-transform:uppercase;}
 #notif-expand{display:flex;flex-direction:column;
   max-height:118px;overflow-y:auto;-webkit-overflow-scrolling:touch;
-  scrollbar-width:none;}
+  scrollbar-width:none;
+  transition:max-height 0.3s ease,opacity 0.25s ease;}
 #notif-expand::-webkit-scrollbar{display:none;}
+#notif-panel-header{cursor:pointer;user-select:none}
+#notif-panel-toggle{font-size:16px;color:rgba(255,255,255,0.3);
+  transition:transform 0.25s ease;line-height:1;flex-shrink:0}
+#notif-wrap.collapsed #notif-panel-toggle{transform:rotate(-90deg)}
+#notif-wrap.collapsed #notif-expand{max-height:0!important;opacity:0;overflow:hidden}
+#notif-wrap.collapsed #notif-fade{display:none}
+/* S7 Kaleidoscope Chat — VD1.3 layout overrides */
+#s7 .chat-top{padding:10px 20px 14px}
+#s7 .chat-msgs{padding:12px 16px 160px}
+#s7 .chat-input-bar{position:absolute;bottom:72px;left:0;right:0;
+  padding:0 20px;z-index:10;pointer-events:none;
+  border-top:none;flex-shrink:unset;display:block;background:none}
 /* real element fade — avoids stacking context issues with ::after */
 #notif-fade{position:absolute;bottom:0;left:0;right:0;height:44px;
   background:linear-gradient(transparent 0%,rgba(10,10,18,0.82) 55%,rgba(10,10,18,0.97) 100%);
@@ -1400,84 +1415,6 @@ body{background:var(--bg);display:flex;justify-content:center;align-items:center
 [data-theme="light"] .rel-peek-role{color:rgba(10,10,20,0.52)}
 [data-theme="light"] .rel-peek-x{background:rgba(10,10,20,0.05);border-color:rgba(10,10,20,0.1);color:rgba(10,10,20,0.5)}
 [data-theme="light"] .rpa-btn{border-color:rgba(10,10,20,0.1);background:rgba(10,10,20,0.04);color:rgba(10,10,20,0.7)}
-
-/* ── AI Orb FAB ── */
-@property --orb-angle{syntax:'<angle>';inherits:false;initial-value:0deg}
-#ai-orb{position:absolute;bottom:96px;right:16px;width:44px;height:44px;border-radius:50%;
-  cursor:pointer;z-index:50;overflow:visible;
-  background:
-    radial-gradient(circle at center,rgba(14,14,20,0.93) 18px,transparent 18.5px),
-    conic-gradient(from var(--orb-angle),var(--violet-dim) 0%,rgba(0,188,212,0.85) 30%,var(--violet-dim) 65%,var(--violet-dim) 100%);
-  animation:orbGradientSpin 5s linear infinite,orbPulseOut 2.5s ease-in-out infinite;
-  transition:transform 0.15s;}
-#ai-orb::before{content:'';position:absolute;inset:2.5px;border-radius:50%;
-  background:rgba(14,14,20,0.92) url('kaleidoscope-mandala.svg') center/80% no-repeat;}
-#ai-orb:active{transform:scale(0.92);}
-#ai-orb.hidden{display:none;}
-.orb-logo{width:44px;height:44px;object-fit:cover;display:block;pointer-events:none;}
-@keyframes orbGradientSpin{to{--orb-angle:360deg}}
-@keyframes orbPulseOut{
-  0%,100%{box-shadow:0 0 0 0 var(--violet-dim),0 4px 18px rgba(0,0,0,0.5);}
-  60%{box-shadow:0 0 0 7px rgba(139,92,246,0),0 4px 24px rgba(0,0,0,0.6);}
-}
-  50%{box-shadow:0 0 0 8px rgba(180,20,40,0),0 4px 24px rgba(0,0,0,0.6);}
-}
-/* Screen scale-down while sheet is open */
-.phone.sheet-open .screen.active{
-  transform:scale(0.92) translateY(-18px);border-radius:20px;overflow:hidden;
-  transition:transform 0.35s cubic-bezier(0.2,0,0,1);}
-.screen{transition:transform 0.35s cubic-bezier(0.2,0,0,1);}
-/* Dim overlay */
-#ai-sheet-dim{position:absolute;inset:0;background:rgba(0,0,0,0);z-index:55;
-  pointer-events:none;transition:background 0.3s;border-radius:inherit;}
-#ai-sheet-dim.visible{background:rgba(0,0,0,0.45);pointer-events:auto;}
-/* Bottom Sheet */
-#ai-sheet{position:absolute;left:0;right:0;bottom:0;height:68%;
-  background:rgba(14,14,22,0.97);backdrop-filter:blur(24px);
-  border-radius:22px 22px 0 0;border-top:1px solid var(--violet-dim);
-  z-index:60;transform:translateY(100%);
-  transition:transform 0.35s cubic-bezier(0.2,0,0,1);display:flex;flex-direction:column;}
-#ai-sheet.visible{transform:translateY(0);}
-.sheet-handle{width:36px;height:4px;background:rgba(255,255,255,0.15);
-  border-radius:2px;margin:12px auto 0;flex-shrink:0;}
-#ai-sheet-head{padding:14px 20px 14px;border-bottom:1px solid var(--border);
-  flex-shrink:0;display:flex;align-items:center;gap:12px;}
-.sheet-orb-mini{width:32px;height:32px;border-radius:50%;flex-shrink:0;
-  background:rgba(18,12,24,0.82);border:1px solid var(--border2);
-  display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.orb-logo-mini{width:20px;height:20px;object-fit:contain;display:block;pointer-events:none;}
-.sheet-title{font-size:15px;font-weight:800;color:rgba(255,255,255,0.9);
-  font-family:var(--font);letter-spacing:-0.2px;}
-.sheet-subtitle{font-size:11px;color:rgba(255,255,255,0.38);font-family:var(--font);margin-top:1px;}
-#ai-sheet-body{flex:1;overflow-y:auto;padding:14px 20px 8px;}
-.sheet-section{font-size:9px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;
-  color:rgba(255,255,255,0.28);font-family:var(--font);margin-bottom:9px;}
-.sheet-action{width:100%;padding:11px 14px;margin-bottom:8px;border-radius:12px;
-  border:1px solid var(--violet-dim);background:rgba(139,92,246,0.07);
-  color:rgba(255,255,255,0.72);font-size:12.5px;font-weight:500;cursor:pointer;
-  font-family:var(--font);text-align:left;display:flex;align-items:center;
-  gap:9px;letter-spacing:-0.1px;}
-.sheet-action::before{content:'◈';color:var(--violet);font-size:11px;flex-shrink:0;}
-#ai-sheet-input-wrap{padding:10px 20px 28px;border-top:1px solid var(--border);
-  flex-shrink:0;display:flex;gap:10px;align-items:center;}
-.sheet-input{flex:1;background:var(--surface);border:1px solid var(--violet-dim);
-  border-radius:22px;padding:10px 16px;font-size:13px;color:rgba(255,255,255,0.42);
-  font-family:var(--font);outline:none;}
-.sheet-send{width:38px;height:38px;border-radius:50%;
-  background:var(--violet-dim);border:1px solid var(--violet-dim);
-  color:var(--violet);font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
-/* light overrides */
-[data-theme="light"] #ai-orb{
-  background:
-    radial-gradient(circle at center,rgba(240,238,248,0.95) 18px,transparent 18.5px),
-    conic-gradient(from var(--orb-angle),rgba(124,58,237,0.75) 0%,rgba(0,150,170,0.7) 30%,rgba(124,58,237,0.1) 65%,rgba(124,58,237,0.75) 100%);}
-[data-theme="light"] #ai-orb::before{background:rgba(240,238,248,0.94) url('kaleidoscope-mandala.svg') center/80% no-repeat;}
-[data-theme="light"] .sheet-orb-mini{background:rgba(255,255,255,0.9);border-color:rgba(10,10,20,0.1);}
-[data-theme="light"] #ai-sheet{background:rgba(250,250,254,0.98);border-top-color:rgba(147,51,234,0.2);}
-[data-theme="light"] .sheet-title{color:rgba(10,10,20,0.9);}[data-theme="light"] .sheet-subtitle{color:rgba(10,10,20,0.42);}
-[data-theme="light"] .sheet-action{background:rgba(147,51,234,0.05);border-color:rgba(147,51,234,0.14);color:rgba(10,10,20,0.72);}
-[data-theme="light"] .sheet-input{background:rgba(10,10,20,0.04);border-color:rgba(147,51,234,0.15);color:rgba(10,10,20,0.45);}
-[data-theme="light"] .sheet-send{background:rgba(147,51,234,0.1);border-color:rgba(147,51,234,0.25);color:#9333EA;}
 
 /* ── S4 Yuki Creative Report ── */
 .yuki-work-card{display:flex;border-radius:14px;overflow:hidden;margin-bottom:10px;
@@ -1852,72 +1789,6 @@ body{background:var(--bg);display:flex;justify-content:center;align-items:center
 .notif-row.notif-alert .notif-body{color:#FF8A84;font-weight:600;}
 .notif-row.notif-alert .notif-icon{font-size:14px;}
 
-/* ── Health Alert popup ── */
-#alert-backdrop{
-  position:absolute;inset:0;z-index:9990;
-  background:rgba(0,0,0,0.55);
-  backdrop-filter:blur(3px);
-  border-radius:inherit;
-  display:flex;align-items:center;justify-content:center;
-  animation:alertFadeIn 0.25s ease both;
-}
-@keyframes alertFadeIn{from{opacity:0}to{opacity:1}}
-#alert-card{
-  width:272px;
-  background:linear-gradient(155deg,rgba(28,8,12,0.98) 0%,rgba(22,6,10,0.98) 100%);
-  border:1px solid rgba(255,59,48,0.35);
-  border-radius:18px;
-  padding:22px 20px 18px;
-  box-shadow:0 0 0 1px rgba(255,59,48,0.12),0 24px 48px rgba(0,0,0,0.7),0 0 40px rgba(255,40,40,0.15);
-  animation:alertSlideUp 0.32s cubic-bezier(0.34,1.56,0.64,1) both;
-  position:relative;
-}
-@keyframes alertSlideUp{from{opacity:0;transform:translateY(24px) scale(0.94)}to{opacity:1;transform:none}}
-#alert-dismiss-btn{
-  position:absolute;top:12px;right:12px;
-  width:22px;height:22px;border-radius:50%;
-  background:var(--border);border:none;
-  color:rgba(255,255,255,0.45);font-size:11px;
-  cursor:pointer;display:flex;align-items:center;justify-content:center;
-  line-height:1;
-}
-#alert-dismiss-btn:active{background:rgba(255,255,255,0.15);}
-#alert-header{display:flex;align-items:center;gap:9px;margin-bottom:14px;}
-#alert-pulse{
-  width:10px;height:10px;border-radius:50%;background:#FF3B30;flex-shrink:0;
-  box-shadow:0 0 0 0 rgba(255,59,48,0.5);
-  animation:alertPulse 1.6s ease-in-out infinite;
-}
-@keyframes alertPulse{
-  0%{box-shadow:0 0 0 0 rgba(255,59,48,0.55)}
-  70%{box-shadow:0 0 0 8px rgba(255,59,48,0)}
-  100%{box-shadow:0 0 0 0 rgba(255,59,48,0)}
-}
-#alert-label{
-  font-size:9.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
-  color:#FF5C52;
-}
-#alert-message{
-  font-size:14.5px;font-weight:600;color:#fff;
-  line-height:1.45;margin-bottom:6px;
-}
-#alert-detail{
-  font-size:12px;color:rgba(255,255,255,0.50);line-height:1.5;margin-bottom:18px;
-}
-#alert-actions{display:flex;gap:9px;}
-#alert-btn-dismiss{
-  flex:1;padding:9px 0;border-radius:10px;
-  background:var(--border);border:1px solid var(--border2);
-  color:rgba(255,255,255,0.55);font-size:13px;font-weight:500;cursor:pointer;
-}
-#alert-btn-dismiss:active{background:rgba(255,255,255,0.12);}
-#alert-btn-view{
-  flex:2;padding:9px 0;border-radius:10px;
-  background:linear-gradient(135deg,#FF3B30,#C0392B);border:none;
-  color:#fff;font-size:13px;font-weight:700;cursor:pointer;
-  box-shadow:0 4px 14px rgba(255,59,48,0.4);
-}
-#alert-btn-view:active{filter:brightness(0.88);}
 
 </style>
 
@@ -1963,21 +1834,6 @@ body{background:var(--bg);display:flex;justify-content:center;align-items:center
     </span>
   </div>
 
-  <div id="alert-backdrop">
-    <div id="alert-card">
-      <button id="alert-dismiss-btn" onclick="dismissHealthAlert()">✕</button>
-      <div id="alert-header">
-        <div id="alert-pulse"></div>
-        <div id="alert-label">⌚ &nbsp;Wearable Alert</div>
-      </div>
-      <div id="alert-message">Grandma's blood pressure is critically high</div>
-      <div id="alert-detail">Apple Watch detected <strong style="color:#FF8A84">168/112 mmHg</strong> at 9:38 AM — Stage 2 Hypertension. Immediate attention required.</div>
-      <div id="alert-actions">
-        <button id="alert-btn-dismiss" onclick="dismissHealthAlert()">Dismiss</button>
-        <button id="alert-btn-view" onclick="dismissHealthAlert();switchView('s1')">View Details →</button>
-      </div>
-    </div>
-  </div>
 
   <!-- ══════════════════════════════
        SCREEN 0 · Constellation
@@ -1987,62 +1843,23 @@ body{background:var(--bg);display:flex;justify-content:center;align-items:center
       <span class="status-time">9:41</span>
       <span class="status-icons">●●● Wi-Fi ▮</span>
     </div>
-    <div class="const-header">
-      <div class="greeting">Good morning</div>
-      <div class="greeting-name">Mei</div>
+    <div class="home-header">
+      <div class="home-greeting-row">
+        <div class="profile-avatar"><img src="faces/mei.png" alt="Mei"></div>
+        <span class="home-greeting">Good morning, Mei</span>
+        <button class="settings-btn" onclick="switchView('s4')" title="Settings">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
+      </div>
+      <div class="home-title">Your <span>Family</span><br>at a Glance</div>
+    </div>
+    <div id="alertBanner" class="alert-banner alert-enter" onclick="switchView('s1')" style="margin-top:12px">
+      <span class="alert-dot"></span>
+      <div class="alert-text">⌚ BP 168/112 mmHg — Grandma's wearable · Stage 2 Hypertension</div>
+      <span class="alert-arrow">›</span>
     </div>
     <div class="const-area">
-      <svg class="const-svg" id="const-svg" viewBox="0 0 390 480" xmlns="http://www.w3.org/2000/svg"></svg>
-      <div id="notif-wrap">
-        <div id="notif-panel-header">
-          <span id="notif-panel-label">Updates</span>
-        </div>
-        <div id="notif-expand">
-          <div class="notif-row notif-alert" id="notif-bp-watch" onclick="switchView('s1')">
-            <span class="notif-icon" style="color:#FF3B30">⌚</span>
-            <span class="notif-body">BP 168/112 mmHg — Grandma's wearable · Stage 2</span>
-            <span class="notif-time">9:38 AM</span>
-            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-bp-watch')">✕</div>
-          </div>
-          <div class="notif-row" id="notif-health" onclick="switchView('s1')">
-            <span class="notif-icon" style="color:#FFB84D">🩺</span>
-            <span class="notif-body">Grandma's health check report — monthly summary ready</span>
-            <span class="notif-time">8:45 AM</span>
-            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-health')">✕</div>
-          </div>
-          <div class="notif-row" id="notif-scam" onclick="switchView('s8')">
-            <span class="notif-icon" style="color:var(--violet)">🛡</span>
-            <span class="notif-body">Scam call blocked — Grandma's device</span>
-            <span class="notif-time">9:12 AM</span>
-            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-scam')">✕</div>
-          </div>
-          <div class="notif-row" id="notif-hiro" onclick="switchView('s6')">
-            <span class="notif-icon" style="color:#FFB84D">⏰</span>
-            <span class="notif-body">Hiro: screen time 3.5h past midnight — limit reached</span>
-            <span class="notif-time">Yesterday</span>
-            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-hiro')">✕</div>
-          </div>
-          <div class="notif-row" id="notif-phish" onclick="switchView('s9')">
-            <span class="notif-icon" style="color:var(--violet)">🔒</span>
-            <span class="notif-body">Phishing link blocked — Yuki</span>
-            <span class="notif-time">Yesterday</span>
-            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-phish')">✕</div>
-          </div>
-          <div class="notif-row" id="notif-kenji" onclick="switchView('s5')">
-            <span class="notif-icon" style="color:var(--sky)">🔑</span>
-            <span class="notif-body">Kenji: new device login verified — MacBook Pro · 2FA</span>
-            <span class="notif-time">2 days ago</span>
-            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-kenji')">✕</div>
-          </div>
-          <div class="notif-row" id="notif-yuki-growth" onclick="switchView('s4')">
-            <span class="notif-icon" style="color:#FCD34D">✦</span>
-            <span class="notif-body">Yuki: critical thinking +15% — learning session complete</span>
-            <span class="notif-time">Today</span>
-            <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-yuki-growth')">✕</div>
-          </div>
-        </div>
-        <div id="notif-fade"></div>
-      </div>
+      <div id="constellationContainer" class="constellation" style="position:absolute;inset:0;width:100%;height:100%"></div>
       <div class="rel-peek" id="rel-peek">
         <div class="rel-peek-head">
           <div class="rel-peek-av" id="peek-av"></div>
@@ -2059,15 +1876,56 @@ body{background:var(--bg);display:flex;justify-content:center;align-items:center
         </div>
       </div>
     </div>
-    <div class="tab-bar">
-      <div class="tab-item active" onclick="switchView('s0')">
-        <span class="tab-icon">✦</span>
-        <span class="tab-label">Family</span>
+    <div id="notif-wrap">
+      <div id="notif-panel-header" onclick="toggleNotifPanel()">
+        <span id="notif-panel-label">Updates</span>
+        <span id="notif-panel-toggle">⌄</span>
       </div>
-      <div class="tab-item" onclick="switchView('s2')">
-        <span class="tab-icon" style="font-size:15px;font-weight:700;letter-spacing:-0.5px">≡</span>
-        <span class="tab-label">Events</span>
+      <div id="notif-expand">
+        <div class="notif-row notif-alert" id="notif-bp-watch" onclick="switchView('s1')">
+          <span class="notif-icon" style="color:#FF3B30">⌚</span>
+          <span class="notif-body">BP 168/112 mmHg — Grandma's wearable · Stage 2</span>
+          <span class="notif-time">9:38 AM</span>
+          <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-bp-watch')">✕</div>
+        </div>
+        <div class="notif-row" id="notif-health" onclick="switchView('s1')">
+          <span class="notif-icon" style="color:#FFB84D">🩺</span>
+          <span class="notif-body">Grandma's health check report — monthly summary ready</span>
+          <span class="notif-time">8:45 AM</span>
+          <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-health')">✕</div>
+        </div>
+        <div class="notif-row" id="notif-scam" onclick="switchView('s8')">
+          <span class="notif-icon" style="color:var(--violet)">🛡</span>
+          <span class="notif-body">Scam call blocked — Grandma's device</span>
+          <span class="notif-time">9:12 AM</span>
+          <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-scam')">✕</div>
+        </div>
+        <div class="notif-row" id="notif-hiro" onclick="switchView('s6')">
+          <span class="notif-icon" style="color:#FFB84D">⏰</span>
+          <span class="notif-body">Hiro: screen time 3.5h past midnight — limit reached</span>
+          <span class="notif-time">Yesterday</span>
+          <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-hiro')">✕</div>
+        </div>
+        <div class="notif-row" id="notif-phish" onclick="switchView('s9')">
+          <span class="notif-icon" style="color:var(--violet)">🔒</span>
+          <span class="notif-body">Phishing link blocked — Yuki</span>
+          <span class="notif-time">Yesterday</span>
+          <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-phish')">✕</div>
+        </div>
+        <div class="notif-row" id="notif-kenji" onclick="switchView('s5')">
+          <span class="notif-icon" style="color:var(--sky)">🔑</span>
+          <span class="notif-body">Kenji: new device login verified — MacBook Pro · 2FA</span>
+          <span class="notif-time">2 days ago</span>
+          <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-kenji')">✕</div>
+        </div>
+        <div class="notif-row" id="notif-yuki-growth" onclick="switchView('s4')">
+          <span class="notif-icon" style="color:#FCD34D">✦</span>
+          <span class="notif-body">Yuki: critical thinking +15% — learning session complete</span>
+          <span class="notif-time">Today</span>
+          <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-yuki-growth')">✕</div>
+        </div>
       </div>
+      <div id="notif-fade"></div>
     </div>
   </div>
 
@@ -2272,7 +2130,7 @@ body{background:var(--bg);display:flex;justify-content:center;align-items:center
       <div class="protect-hero">
         <img src="faces/yuki.png" style="width:68px;height:68px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 10px;border:2px solid var(--violet-dim)">
         <div class="protect-name">Yuki</div>
-        <div class="protect-role">Daughter · Age 14</div>
+        <div class="protect-role">Daughter · Age 16y</div>
         <div class="yuki-identity">Visual Storyteller · Week 12</div>
         <div class="yuki-week-stats">
           <span>1 Collab</span><span>·</span>
@@ -2480,148 +2338,92 @@ body{background:var(--bg);display:flex;justify-content:center;align-items:center
       <span class="status-time">9:41</span>
       <span class="status-icons">●●● Wi-Fi ▮</span>
     </div>
-    <div class="screen-header">
+
+    <!-- VD1.3-style chat header -->
+    <div class="chat-top">
       <div class="back-btn" onclick="switchView('s0')">←</div>
-      <div class="chat-header-av ai">◈</div>
-      <div class="chat-header-info">
-        <div class="chat-header-name">Kaleidoscope</div>
-        <div class="chat-header-status ai-status">● Always active</div>
+      <div class="chat-avatar">
+        <img src="kaleidoscope-mandala.svg" alt="Kaleidoscope" style="width:22px;height:22px;object-fit:contain">
+      </div>
+      <div class="chat-info">
+        <div class="chat-name">Kaleidoscope</div>
+        <div class="chat-status">Active now</div>
       </div>
     </div>
-    <div class="butler-tab-bar">
-      <div class="butler-tab active" onclick="switchButlerTab('chat')">Chat</div>
-      <div class="butler-tab" onclick="switchButlerTab('history')">History</div>
-    </div>
 
-    <!-- CHAT TAB -->
-    <div class="chat-messages" id="butler-chat">
+    <!-- VD1.3-style chat messages -->
+    <div class="chat-msgs" id="butler-chat">
 
-      <div class="msg-row">
-        <div class="msg-av ai">◈</div>
+      <div class="msg ai">
+        <div class="msg-av msg-av--ai">
+          <img src="kaleidoscope-mandala.svg" alt="" style="width:16px;height:16px;object-fit:contain">
+        </div>
         <div>
-          <div class="bubble ai-msg">Good morning, Mei. I've processed 3 updates since last night.</div>
-          <div class="bubble-time">9:32 AM</div>
+          <div class="msg-bubble">
+            Hi Mei. I've reviewed Grandma's health report — her blood pressure is 145/92, which is elevated. I'd recommend scheduling a cardiology follow-up. Want me to handle the booking?
+          </div>
+          <div class="msg-time">9:15 AM</div>
         </div>
       </div>
 
-      <div class="msg-row">
-        <div class="msg-av ai">◈</div>
+      <div class="msg me">
+        <div class="msg-av" style="border-color:rgba(249,115,22,0.3);overflow:hidden">
+          <img src="faces/mei.png" alt="Mei">
+        </div>
         <div>
-          <div class="bubble ai-msg">Grandma's blood pressure reading at 7:42 AM was 145/92 — I've flagged it for your review and prepared a cardiology referral draft.</div>
-          <div class="bubble-time">9:32 AM</div>
+          <div class="msg-bubble">Yes, please book the nearest available appointment at NTU Hospital.</div>
+          <div class="msg-time">9:16 AM</div>
         </div>
       </div>
 
-      <div class="msg-row me">
-        <div class="msg-av eva">E</div>
+      <div class="msg ai">
+        <div class="msg-av msg-av--ai">
+          <img src="kaleidoscope-mandala.svg" alt="" style="width:16px;height:16px;object-fit:contain">
+        </div>
         <div>
-          <div class="bubble me">Thanks. Go ahead and schedule the earliest available cardiology appointment for her.</div>
-          <div class="bubble-time">9:35 AM</div>
+          <div class="msg-bubble">
+            On it. Let me search for available slots.
+            <div class="ai-action-card">
+              <div class="ai-action-title">Booking Task</div>
+              <div class="ai-action-row"><span class="ai-action-dot done"></span><span class="ai-action-text">Searched NTU Hospital — 4 openings</span></div>
+              <div class="ai-action-row"><span class="ai-action-dot done"></span><span class="ai-action-text">Matched slot — Nov 14, no conflicts</span></div>
+              <div class="ai-action-row"><span class="ai-action-dot pending"></span><span class="ai-action-text">Confirming — Dr. Li Wei, 2:30 PM</span></div>
+            </div>
+          </div>
+          <div class="msg-time">9:17 AM</div>
         </div>
       </div>
 
-      <div class="msg-row">
-        <div class="msg-av ai">◈</div>
+      <div class="msg me">
+        <div class="msg-av" style="border-color:rgba(249,115,22,0.3);overflow:hidden">
+          <img src="faces/mei.png" alt="Mei">
+        </div>
         <div>
-          <div class="bubble ai-msg">Got it. I'll confirm the slot once booked and notify Grandma directly. Anything else?</div>
-          <div class="bubble-time">9:35 AM</div>
+          <div class="msg-bubble">Great. Can you also set Hiro's social media to pause after 10 PM?</div>
+          <div class="msg-time">9:18 AM</div>
         </div>
       </div>
 
-      <div class="msg-row me">
-        <div class="msg-av eva">E</div>
+      <div class="msg ai">
+        <div class="msg-av msg-av--ai">
+          <img src="kaleidoscope-mandala.svg" alt="" style="width:16px;height:16px;object-fit:contain">
+        </div>
         <div>
-          <div class="bubble me">Also set a late-night screen time limit for Hiro — no social media after 10 PM.</div>
-          <div class="bubble-time">9:36 AM</div>
-        </div>
-      </div>
-
-      <div class="msg-row">
-        <div class="msg-av ai">◈</div>
-        <div>
-          <div class="bubble ai-msg">Done. Social media restricted after 10 PM on Hiro's device starting tonight. I'll send him a heads-up message.</div>
-          <div class="bubble-time">9:36 AM</div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- HISTORY TAB -->
-    <div class="hist-scroll" id="butler-history" style="display:none">
-
-      <div class="hist-day">Today · Mar 9</div>
-
-      <div class="hist-item">
-        <div class="hist-dot" style="background:rgba(255,195,100,0.18);color:#FFC364;font-size:11px;font-weight:800">H</div>
-        <div class="hist-body">
-          <div class="hist-who">Grandma</div>
-          <div class="hist-text">Blood pressure 145/92 flagged — cardiology referral drafted and sent</div>
-          <div class="hist-time">9:32 AM · Health Monitoring</div>
-        </div>
-      </div>
-
-      <div class="hist-item">
-        <div class="hist-dot" style="background:rgba(255,195,100,0.18);color:#FFC364;font-size:11px;font-weight:800">✕</div>
-        <div class="hist-body">
-          <div class="hist-who">Grandma</div>
-          <div class="hist-text">Scam call blocked — caller posed as bank fraud dept, call terminated automatically</div>
-          <div class="hist-time">8:50 AM · Scam Protection</div>
-        </div>
-      </div>
-
-      <div class="hist-item">
-        <div class="hist-dot" style="background:var(--green);color:var(--green);font-size:11px;font-weight:800">✓</div>
-        <div class="hist-body">
-          <div class="hist-who">Yuki</div>
-          <div class="hist-text">Phishing link blocked — secure-bank-login.xyz intercepted before loading</div>
-          <div class="hist-time">8:15 AM · Safe Browsing</div>
-        </div>
-      </div>
-
-      <div class="hist-item">
-        <div class="hist-dot" style="background:rgba(251,146,60,0.18);color:#FB923C;font-size:11px;font-weight:800">S</div>
-        <div class="hist-body">
-          <div class="hist-who">Hiro</div>
-          <div class="hist-text">3 hrs screen time on social media — alert sent to Mei, 10 PM limit applied</div>
-          <div class="hist-time">7:00 AM · Screen Time</div>
-        </div>
-      </div>
-
-      <div class="hist-day">Yesterday · Mar 8</div>
-
-      <div class="hist-item">
-        <div class="hist-dot" style="background:rgba(255,195,100,0.18);color:#FFC364;font-size:11px;font-weight:800">✕</div>
-        <div class="hist-body">
-          <div class="hist-who">Grandma</div>
-          <div class="hist-text">Scam call blocked — unknown number impersonating Social Security office</div>
-          <div class="hist-time">7:23 PM · Scam Protection</div>
-        </div>
-      </div>
-
-      <div class="hist-item">
-        <div class="hist-dot" style="background:rgba(251,146,60,0.18);color:#FB923C;font-size:11px;font-weight:800">S</div>
-        <div class="hist-body">
-          <div class="hist-who">Hiro</div>
-          <div class="hist-text">Daily screen time limit reached — devices locked until 7 AM</div>
-          <div class="hist-time">10:05 PM · Screen Time</div>
-        </div>
-      </div>
-
-      <div class="hist-item">
-        <div class="hist-dot" style="background:rgba(96,165,250,0.18);color:var(--sky);font-size:11px;font-weight:800">L</div>
-        <div class="hist-body">
-          <div class="hist-who">Kenji</div>
-          <div class="hist-text">New device login verified — 2FA approved from iPhone 16 Pro</div>
-          <div class="hist-time">2:14 PM · Device Security</div>
+          <div class="msg-bubble">Done. Hiro's social media apps will pause at 10 PM daily, starting tonight. He can still use educational and messaging apps.</div>
+          <div class="msg-time">9:18 AM</div>
         </div>
       </div>
 
     </div>
 
+    <!-- VD1.3 animated-border input bar -->
     <div class="chat-input-bar" id="butler-chat-input">
-      <div class="chat-mic"><svg width="14" height="17" viewBox="0 0 14 20" fill="currentColor"><rect x="4" y="0" width="6" height="11" rx="3"/><path d="M1 9a6 6 0 0012 0" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><line x1="7" y1="15" x2="7" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="18" x2="10" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <input class="chat-input" placeholder="Ask Kaleidoscope…" readonly>
-      <div class="chat-send ai-send">↑</div>
+      <div class="chat-input-bar-inner">
+        <input class="chat-input" placeholder="Ask Kaleidoscope..." readonly>
+        <button class="chat-send-btn" style="background:linear-gradient(135deg,var(--violet),var(--accent));display:flex;align-items:center;justify-content:center">
+          <img src="kaleidoscope-mandala.svg" alt="" style="width:18px;height:18px;object-fit:contain;filter:brightness(0) invert(1)">
+        </button>
+      </div>
     </div>
   </div>
 
@@ -3148,25 +2950,6 @@ body{background:var(--bg);display:flex;justify-content:center;align-items:center
   <!-- Zoom transition overlay -->
   <div id="zoom-overlay"></div>
 
-  <!-- ── AI Orb FAB ── -->
-  <div id="ai-orb" onclick="toggleAISheet()"></div>
-  <div id="ai-sheet-dim" onclick="closeAISheet()"></div>
-  <div id="ai-sheet">
-    <div class="sheet-handle"></div>
-    <div id="ai-sheet-head">
-      <div class="sheet-orb-mini"><img class="orb-logo-mini" src="kaleidoscope-mandala.svg" alt=""></div>
-      <div>
-        <div class="sheet-title" id="sheet-title">Kaleidoscope</div>
-        <div class="sheet-subtitle" id="sheet-subtitle">Always watching, always ready</div>
-      </div>
-    </div>
-    <div id="ai-sheet-body"></div>
-    <div id="ai-sheet-input-wrap">
-      <input class="sheet-input" placeholder="Ask Kaleidoscope anything…">
-      <div class="sheet-send">↑</div>
-    </div>
-  </div>
-
 
   <!-- BOTTOM NAV PILL -->
   <!-- ═══════ BOTTOM NAV ═══════ -->
@@ -3186,10 +2969,7 @@ body{background:var(--bg);display:flex;justify-content:center;align-items:center
           </circle>
         </svg>
         <div class="nav-ai__orbit"></div>
-        <svg class="nav-ai__icon" viewBox="0 0 44 40" fill="none">
-          <path d="M43.075 10.005C42.475 7.428 41.282 5.008 39.432 3.116C31.066-5.452 19.837 5.26 17.055 15.788C15.375 21.535 14.745 28.371 18.395 33.593C13.248 33.563 6.161 32.311 4.142 26.939C2.792 21.296 9.4 17.412 14.178 16.303C14.374 15.543 14.599 14.76 14.866 14.02C-8.366 18.107-2.261 39.894 18.659 39.989C37.795 40.55 46.073 22.849 43.075 10.008V10.005ZM36.631 15.553C36.171 19.884 32.753 31.058 25.76 32.438C24.915 32.604 24.041 32.572 23.222 32.308C17.371 30.406 17.332 20.586 19.246 15.667C29.021 15.628 32.616 20.928 32.616 20.928C33.056 19.757 33.411 18.534 33.672 17.282C28.284 13.342 20.085 13.602 20.085 13.602C25.094 2.37 38.353 0.038 36.631 15.553Z" fill="white"/>
-        </svg>
-        <span class="nav-icon" style="display:none">◈</span>
+        <img class="nav-ai__icon" src="kaleidoscope-mandala.svg" alt="Kaleidoscope" style="object-fit:contain">
       </button>
       <button class="nav-item" id="nav-events" onclick="switchView('s2')">
         <span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
@@ -3282,6 +3062,9 @@ function dismissNotif(id){
   if(el){el.style.opacity='0';el.style.transform='translateX(8px)';
     el.style.transition='opacity 0.2s,transform 0.2s';
     setTimeout(()=>el.style.display='none',200);}
+}
+function toggleNotifPanel(){
+  document.getElementById('notif-wrap').classList.toggle('collapsed');
 }
 function dismissAlert(id){
   const el=document.getElementById(id);
@@ -3932,40 +3715,6 @@ const AI_CTX={
   9:{title:'Phishing Detail',   hint:'Yuki · Blocked yesterday 4:23 PM',
      actions:['Message Yuki about this threat','Tighten Yuki\'s browsing filter','Report site to network']},
 };
-
-function toggleAISheet(){_aiSheetOpen?closeAISheet():openAISheet();}
-function openAISheet(){
-  const ctx=AI_CTX[_currentScreen]||{title:'Kaleidoscope',hint:'How can I help?',actions:[]};
-  document.getElementById('sheet-title').textContent=ctx.title;
-  document.getElementById('sheet-subtitle').textContent=ctx.hint;
-  const body=document.getElementById('ai-sheet-body');
-  body.innerHTML=`<div class="sheet-section">Quick Actions</div>`+
-    ctx.actions.map((a,i)=>{
-      if(_currentScreen===1&&i===0)
-        return `<button class="sheet-action" onclick="closeAISheet();goTo(10)">${a}</button>`;
-      if(_currentScreen===0&&i===0)
-        return `<button class="sheet-action" onclick="closeAISheet();goTo(1)">${a}</button>`;
-      return `<button class="sheet-action">${a}</button>`;
-    }).join('');
-  document.getElementById('ai-sheet').classList.add('visible');
-  document.getElementById('ai-sheet-dim').classList.add('visible');
-  document.querySelector('.device').classList.add('sheet-open');
-  _aiSheetOpen=true;
-}
-function closeAISheet(){
-  document.getElementById('ai-sheet').classList.remove('visible');
-  document.getElementById('ai-sheet-dim').classList.remove('visible');
-  document.querySelector('.device').classList.remove('sheet-open');
-  _aiSheetOpen=false;
-}
-
-function dismissHealthAlert(){
-  const el=document.getElementById('alert-backdrop');
-  if(!el)return;
-  el.style.transition='opacity 0.3s ease';
-  el.style.opacity='0';
-  setTimeout(()=>el.remove(),320);
-}
 
 // Reset read-state on every page load so nodes always start as unread
 Object.keys(localStorage).filter(k=>k.startsWith('tl_read_')).forEach(k=>localStorage.removeItem(k));
