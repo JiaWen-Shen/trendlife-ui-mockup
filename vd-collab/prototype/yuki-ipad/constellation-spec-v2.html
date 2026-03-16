@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrendLife · Constellation — Design Spec v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #080E12;
+    --surface:  #111A20;
+    --surface2: #1C2B35;
+    --border:   rgba(255,255,255,0.07);
+    --border2:  rgba(255,255,255,0.12);
+    --red:      #D71920;
+    --red-dim:  rgba(215,25,32,0.14);
+    --navy:     #1C2B35;
+    --blue:     #64B5F6;
+    --blue-dim: rgba(100,181,246,0.13);
+    --purple:   #C084FC;
+    --amber:    #FFC364;
+    --green:    #4ADE80;
+    --text:     #ECF1F6;
+    --muted:    #6B8090;
+    --muted2:   #9BAFC0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+    min-height: 100vh;
+    transition: opacity 0.18s ease;
+  }
+  body.lang-switching { opacity: 0; }
+
+  body::before {
+    content: '';
+    position: fixed; top: -200px; right: -200px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(100,181,246,0.05) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed; bottom: -150px; left: -150px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(192,132,252,0.04) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── STICKY NAV ── */
+  .site-nav {
+    position: sticky; top: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 13px 40px;
+    background: rgba(8,14,18,0.88);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-brand { display: flex; align-items: center; gap: 11px; }
+  .nav-logo {
+    width: 30px; height: 30px; border-radius: 7px; background: var(--red);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .nav-logo img { height: 13px; filter: brightness(0) invert(1); }
+  .nav-product { font-size: 14px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+  .nav-pipe { width: 1px; height: 14px; background: var(--border2); }
+  .nav-subtitle { font-size: 13px; color: var(--muted); }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+
+  /* Language toggle */
+  .lang-toggle {
+    display: flex; align-items: center;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border2);
+    border-radius: 100px; padding: 3px; gap: 2px;
+    flex-shrink: 0;
+  }
+  .lang-btn {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+    padding: 4px 11px; border-radius: 100px; border: none;
+    cursor: pointer; transition: background 0.2s, color 0.2s;
+    background: transparent; color: var(--muted);
+    font-family: inherit;
+  }
+  .lang-btn.active { background: var(--red); color: white; }
+  .lang-btn:hover:not(.active) { color: var(--text); }
+
+  /* Theme toggle */
+  .theme-toggle {
+    display: flex; align-items: center;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border2);
+    border-radius: 100px; padding: 3px; gap: 2px;
+    flex-shrink: 0;
+  }
+  .theme-btn {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+    padding: 4px 11px; border-radius: 100px; border: none;
+    cursor: pointer; transition: background 0.2s, color 0.2s;
+    background: transparent; color: var(--muted);
+    font-family: inherit;
+  }
+  .theme-btn.active { background: var(--surface2); color: var(--text); border: 1px solid var(--border2); }
+  .theme-btn:hover:not(.active) { color: var(--text); }
+
+  /* View tabs */
+  .nav-view-tabs { display: flex; align-items: center; gap: 2px; }
+  .nav-vtab {
+    font-size: 11.5px; font-weight: 600; padding: 5px 11px; border-radius: 8px;
+    color: var(--muted); text-decoration: none; transition: all 0.15s;
+    border: 1px solid transparent; white-space: nowrap; cursor: pointer;
+  }
+  .nav-vtab:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+  .nav-vtab-active { color: var(--text); background: var(--surface2); border-color: var(--border2); }
+
+  /* ── HERO ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 72px;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 72px 40px 64px;
+    position: relative; z-index: 1;
+    align-items: start;
+  }
+  .hero-left { display: flex; flex-direction: column; gap: 40px; }
+
+  .hero-kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--blue-dim); border: 1px solid rgba(100,181,246,0.22);
+    border-radius: 100px; padding: 5px 14px 5px 10px;
+    font-size: 12px; font-weight: 700; color: #90CAF9;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    width: fit-content;
+  }
+  .hero-kicker-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--blue);
+    box-shadow: 0 0 6px rgba(100,181,246,0.7);
+    animation: pulse-blue 2s ease-in-out infinite;
+  }
+  @keyframes pulse-blue {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  .hero-title {
+    font-size: 52px; font-weight: 900; letter-spacing: -0.04em; line-height: 1.0;
+    margin-top: 8px;
+  }
+  .hero-title .accent  { color: var(--blue); }
+  .hero-title .accent2 { color: var(--purple); }
+
+  .hero-sub {
+    font-size: 16px; color: var(--muted2); line-height: 1.7; margin-top: 14px;
+    max-width: 480px;
+  }
+
+  /* Persona card */
+  .persona-card {
+    background: var(--surface); border: 1px solid var(--border2);
+    border-radius: 20px; padding: 20px 22px;
+  }
+  .persona-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .persona-av {
+    width: 50px; height: 50px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 900; color: white;
+  }
+  .persona-name { font-size: 15px; font-weight: 800; line-height: 1.2; }
+  .persona-meta { font-size: 12px; color: var(--muted); margin-top: 3px; }
+  .persona-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .ptag {
+    font-size: 11px; font-weight: 600; padding: 4px 11px; border-radius: 100px;
+    background: rgba(255,255,255,0.05); color: var(--muted2); border: 1px solid var(--border);
+  }
+
+  /* Principles */
+  .section-eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 14px;
+  }
+  .principles { display: flex; flex-direction: column; gap: 10px; }
+  .principle { display: flex; gap: 12px; }
+  .p-num {
+    width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0; margin-top: 1px;
+    background: var(--surface2); display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 900; color: var(--blue);
+  }
+  .p-text { font-size: 13px; color: var(--muted2); line-height: 1.55; padding-top: 2px; }
+  .p-text strong { color: var(--text); font-weight: 700; }
+
+  /* ── STICKY PHONE ── */
+  .hero-right {
+    position: sticky; top: 80px;
+    display: flex; flex-direction: column; align-items: center; gap: 16px;
+    animation: phoneEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.2s;
+  }
+  @keyframes phoneEntrance {
+    from { opacity: 0; transform: translateY(32px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Ambient brand glow behind phone */
+  .phone-glow {
+    position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
+    width: 340px; height: 500px; border-radius: 50%;
+    background: radial-gradient(ellipse at center,
+      rgba(215,25,32,0.06) 0%,
+      rgba(192,132,252,0.04) 40%,
+      transparent 70%);
+    filter: blur(40px);
+    pointer-events: none; z-index: -1;
+    animation: glowPulse 6s ease-in-out infinite;
+  }
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+    50%      { opacity: 1;   transform: translateX(-50%) scale(1.05); }
+  }
+
+  .phone-shell {
+    border-radius: 52px; overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.1),
+      0 0 0 4px rgba(255,255,255,0.02),
+      0 8px 24px rgba(0,0,0,0.3),
+      0 32px 64px rgba(0,0,0,0.4),
+      0 48px 120px rgba(0,0,0,0.5);
+    background: #0F1C24;
+    position: relative;
+    transform: scale(0.82);
+    transform-origin: top center;
+    margin-bottom: -152px;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .phone-shell:hover {
+    transform: scale(0.83);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.12),
+      0 0 0 4px rgba(255,255,255,0.03),
+      0 8px 24px rgba(0,0,0,0.3),
+      0 36px 72px rgba(0,0,0,0.45),
+      0 56px 140px rgba(0,0,0,0.55);
+  }
+  .phone-shell::before {
+    content: '';
+    position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+    width: 110px; height: 34px; background: #0F1C24;
+    border-radius: 0 0 22px 22px; z-index: 10;
+  }
+  .phone-shell::after {
+    content: '';
+    position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+    width: 98px; height: 28px; background: #111D25;
+    border-radius: 0 0 18px 18px; z-index: 11;
+  }
+  .phone-shell iframe {
+    display: block; width: 390px; height: 844px; border: none;
+  }
+
+  /* ── Screen Nav (v2 — grouped & modern) ── */
+  .screen-nav {
+    width: 100%; margin-top: 10px;
+    border: 1px solid var(--border2); border-radius: 16px;
+    overflow: hidden; background: var(--surface);
+    position: relative;
+    animation: navEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.5s;
+  }
+  @keyframes navEntrance {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .snav-instruction {
+    font-size: 10.5px; color: var(--muted); padding: 10px 14px;
+    border-bottom: 1px solid var(--border); line-height: 1.45;
+  }
+
+  /* Category group labels */
+  .snav-group-label {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
+    color: var(--muted); padding: 10px 14px 4px;
+    border-top: 1px solid var(--border);
+  }
+  .snav-group-label:first-of-type { border-top: none; }
+
+  .snav-item {
+    display: flex; align-items: center; gap: 9px;
+    padding: 9px 14px; width: 100%; text-align: left;
+    border: none; background: transparent; cursor: pointer;
+    font-family: inherit; color: var(--muted2);
+    transition: background 0.18s ease, color 0.18s ease,
+                transform 0.18s ease, padding-left 0.18s ease;
+    position: relative;
+  }
+  .snav-item + .snav-item { border-top: 1px solid var(--border); }
+  .snav-item:hover {
+    background: var(--surface2); color: var(--text);
+    padding-left: 18px;
+  }
+  .snav-item .snav-icon { font-size: 14px; flex-shrink: 0; width: 20px; text-align: center; }
+  .snav-item .snav-name { flex: 1; font-size: 12px; font-weight: 600; }
+  .snav-item .snav-num {
+    font-size: 9px; font-weight: 700; color: var(--muted);
+    background: rgba(255,255,255,0.06); border-radius: 5px; padding: 2px 6px;
+    flex-shrink: 0; transition: all 0.18s ease;
+  }
+
+  /* Alert badge on urgent screens */
+  .snav-badge {
+    font-size: 8px; font-weight: 800; padding: 1px 6px; border-radius: 100px;
+    letter-spacing: 0.3px; flex-shrink: 0; animation: badgePulse 2.5s ease-in-out infinite;
+  }
+  .snav-badge.alert { background: rgba(215,25,32,0.15); color: #FF7875; border: 1px solid rgba(215,25,32,0.25); }
+  .snav-badge.ai    { background: rgba(192,132,252,0.12); color: #D8B4FE; border: 1px solid rgba(192,132,252,0.2); }
+  @keyframes badgePulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.6; }
+  }
+
+  /* Active state — stronger, branded */
+  .snav-item.snav-active {
+    background: var(--blue-dim); color: var(--text);
+    border-left: 3px solid var(--blue);
+    padding-left: 11px;
+  }
+  .snav-item.snav-active .snav-name { color: var(--blue); font-weight: 700; }
+  .snav-item.snav-active .snav-num { background: var(--blue); color: #080E12; }
+
+  /* Scroll fade hint at bottom */
+  .screen-nav::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 40px; pointer-events: none;
+    background: linear-gradient(transparent, var(--surface));
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .screen-nav.has-scroll::after { opacity: 1; }
+
+  /* Nav items container for max-height scroll */
+  .snav-items-wrap {
+    max-height: 420px; overflow-y: auto;
+    scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.08) transparent;
+  }
+  .snav-items-wrap::-webkit-scrollbar { width: 3px; }
+  .snav-items-wrap::-webkit-scrollbar-track { background: transparent; }
+  .snav-items-wrap::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-right, .screen-nav, .phone-glow { animation: none; }
+    .phone-shell { transition: none; }
+    .snav-item { transition: none; }
+    .snav-badge { animation: none; }
+  }
+
+  /* ── SCREENS GRID ── */
+  .screens-section {
+    position: relative; z-index: 1;
+    max-width: 1300px; margin: 0 auto; padding: 0 40px 80px;
+  }
+  .section-header { margin-bottom: 28px; }
+  .section-title { font-size: 28px; font-weight: 900; letter-spacing: -0.02em; }
+  .section-sub { font-size: 14px; color: var(--muted); margin-top: 5px; }
+
+  .screen-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .sc {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .sc:hover { border-color: var(--border2); transform: translateY(-2px); }
+  .sc-head {
+    padding: 14px 16px 10px;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sc-num {
+    width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 900; color: white;
+  }
+  .sc-name { font-size: 13px; font-weight: 800; }
+  .sc-body { padding: 12px 16px 16px; }
+  .sc-desc { font-size: 12px; color: var(--muted2); line-height: 1.6; }
+  .sc-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+  .sc-tag {
+    font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 100px;
+    letter-spacing: 0.02em;
+  }
+  .tag-blue   { background: rgba(100,181,246,0.1); color: #90CAF9; border: 1px solid rgba(100,181,246,0.2); }
+  .tag-purple { background: rgba(192,132,252,0.1); color: #D8B4FE; border: 1px solid rgba(192,132,252,0.2); }
+  .tag-amber  { background: rgba(255,195,100,0.1); color: #FDE68A; border: 1px solid rgba(255,195,100,0.2); }
+  .tag-red    { background: rgba(255,120,120,0.1); color: #FCA5A5; border: 1px solid rgba(255,120,120,0.2); }
+  .tag-green  { background: rgba(74,222,128,0.1);  color: #86EFAC; border: 1px solid rgba(74,222,128,0.2); }
+  .tag-muted  { background: rgba(255,255,255,0.05); color: var(--muted2); border: 1px solid var(--border); }
+
+  /* ── DIVIDER / FOOTER ── */
+  .section-divider {
+    max-width: 1300px; margin: 0 auto 64px;
+    height: 1px; background: var(--border);
+  }
+  .footer {
+    position: relative; z-index: 1;
+    border-top: 1px solid var(--border);
+    max-width: 1300px; margin: 0 auto; padding: 22px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-left { font-size: 12px; color: var(--muted); }
+  .footer-right { display: flex; align-items: center; gap: 8px; }
+  .footer-logo {
+    width: 20px; height: 20px; border-radius: 5px; background: var(--red);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .footer-logo img { height: 9px; filter: brightness(0) invert(1); }
+  .footer-brand { font-size: 12px; font-weight: 700; color: var(--muted2); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1140px) {
+    .hero { grid-template-columns: 1fr; gap: 48px; padding: 48px 28px; }
+    .hero-right { position: static; }
+    .hero-title { font-size: 42px; }
+    .screen-cards { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 700px) {
+    .site-nav { padding: 12px 20px; }
+    .nav-view-tabs { display: none; }
+    .hero { padding: 32px 20px; }
+    .hero-title { font-size: 34px; }
+    .screen-cards { grid-template-columns: 1fr; }
+    .screens-section { padding: 0 20px 60px; }
+    .footer { padding: 20px; flex-direction: column; gap: 10px; align-items: flex-start; }
+  }
+
+  /* ── LIGHT MODE ── */
+  body.light {
+    --bg:      #F4F7FA;
+    --surface: #FFFFFF;
+    --surface2:#EEF2F6;
+    --border:  rgba(10,10,20,0.07);
+    --border2: rgba(10,10,20,0.12);
+    --text:    #0A0A14;
+    --muted:   #6B7280;
+    --muted2:  #4B5563;
+    --navy:    #EEF2F6;
+    --blue-dim:rgba(33,150,243,0.08);
+    --red-dim: rgba(215,25,32,0.08);
+  }
+  body.light .site-nav { background: rgba(244,247,250,0.92); }
+  body.light .hero-tag { background: rgba(215,25,32,0.07); }
+  body.light .hero-kicker { color: rgba(10,10,20,0.45); }
+  body.light .lang-toggle,
+  body.light .theme-toggle { background: rgba(10,10,20,0.05); }
+  body.light .ptag { background: rgba(10,10,20,0.06); color: rgba(10,10,20,0.5); }
+  body.light .ptag.red { background: rgba(215,25,32,0.08); color: #D71920; }
+  body.light .ptag.blue { background: rgba(33,150,243,0.09); color: #1976D2; }
+  body.light .sc { background: var(--surface); }
+  body.light .sc-name { color: rgba(10,10,20,0.75); }
+  body.light .sc-desc { color: rgba(10,10,20,0.48); }
+  body.light .sc-num  { color: rgba(10,10,20,0.22); }
+  body.light .section-label { color: rgba(10,10,20,0.35); }
+  body.light .section-label::after { background: rgba(10,10,20,0.1); }
+  body.light .section-title { color: rgba(10,10,20,0.85); }
+  body.light .principle { border-left-color: rgba(10,10,20,0.12); }
+  body.light .p-num { color: rgba(10,10,20,0.25); }
+  body.light .p-text { color: rgba(10,10,20,0.65); }
+  body.light .snav-item { color: rgba(10,10,20,0.45); }
+  body.light .snav-item:hover { background: rgba(10,10,20,0.04); color: rgba(10,10,20,0.8); }
+  body.light .snav-item.snav-active { background: rgba(33,150,243,0.06); color: rgba(10,10,20,0.85); border-left-color: #2196F3; }
+  body.light .snav-instruction { color: rgba(10,10,20,0.3); }
+  body.light .snav-group-label { color: rgba(10,10,20,0.35); border-top-color: rgba(10,10,20,0.07); }
+  body.light .snav-badge.alert { background: rgba(215,25,32,0.08); color: #D71920; border-color: rgba(215,25,32,0.18); }
+  body.light .snav-badge.ai { background: rgba(147,51,234,0.06); color: #9333EA; border-color: rgba(147,51,234,0.15); }
+  body.light .phone-glow { background: radial-gradient(ellipse at center, rgba(215,25,32,0.04) 0%, rgba(147,51,234,0.02) 40%, transparent 70%); }
+  body.light .phone-shell { background: #E8ECF0; box-shadow: 0 0 0 1px rgba(10,10,20,0.08), 0 8px 24px rgba(0,0,0,0.08), 0 32px 64px rgba(0,0,0,0.1), 0 48px 120px rgba(0,0,0,0.12); }
+  body.light .phone-shell:hover { box-shadow: 0 0 0 1px rgba(10,10,20,0.1), 0 8px 24px rgba(0,0,0,0.08), 0 36px 72px rgba(0,0,0,0.12), 0 56px 140px rgba(0,0,0,0.15); }
+  body.light .screen-nav { background: #FFFFFF; }
+  body.light .screen-nav::after { background: linear-gradient(transparent, #FFFFFF); }
+  body.light .snav-items-wrap { scrollbar-color: rgba(10,10,20,0.08) transparent; }
+  body.light .snav-items-wrap::-webkit-scrollbar-thumb { background: rgba(10,10,20,0.1); }
+  body.light .footer { border-top-color: rgba(10,10,20,0.07); color: rgba(10,10,20,0.35); }
+</style>
+</head>
+<body>
+
+<!-- ── STICKY NAV ── -->
+<nav class="site-nav">
+  <div class="nav-brand">
+    <div class="nav-logo">
+      <img src="../reference/logo-mark-only.png" alt="TrendLife">
+    </div>
+    <span class="nav-product" data-i18n="nav-product">TrendLife Kaleidoscope</span>
+    <div class="nav-pipe"></div>
+    <span class="nav-subtitle" data-i18n="nav-subtitle">Constellation Spec</span>
+  </div>
+  <div class="nav-right">
+    <nav class="nav-view-tabs">
+      <a class="nav-vtab nav-vtab-active" id="tab-btn-eva"
+         onclick="switchView('eva');return false;" href="#"
+         data-i18n="tab-eva">Mei's View</a>
+      <a class="nav-vtab" id="tab-btn-yuki"
+         onclick="switchView('yuki');return false;" href="#"
+         data-i18n="tab-yuki">Yuki's Creative Space</a>
+    </nav>
+    <div class="theme-toggle">
+      <button class="theme-btn active" id="btn-dark"  onclick="setTheme('dark')">Dark</button>
+      <button class="theme-btn"        id="btn-light" onclick="setTheme('light')">Light</button>
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn"        id="btn-zh" onclick="setLang('zh')">中</button>
+    </div>
+  </div>
+</nav>
+
+
+<div id="view-grace" style="display:none">
+
+<section class="hero">
+  <div class="hero-left">
+
+    <div>
+      <div class="hero-kicker">
+        <span class="hero-kicker-dot"></span>
+        <span data-i18n="hero-grace-kicker">Interactive Prototype</span>
+      </div>
+      <div class="hero-title" data-i18n-html="hero-grace-title">
+        Hana's<br><span class="accent">Constellation</span><br><span class="accent2" style="font-size:38px;">Member's View</span>
+      </div>
+      <p class="hero-sub" data-i18n="hero-grace-sub">
+        A personal digital space where every member sees herself at the heart of her family network. The AI Companion Arc stays close, quietly available; family nodes reflect connection and care. Tapping navigates to health data, voice, and relationship depth.
+      </p>
+    </div>
+
+    <!-- Persona -->
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-av" style="background: linear-gradient(135deg, #B45309, #78350F);">✦</div>
+        <div>
+          <div class="persona-name" data-i18n="persona-grace-name">Hana Chen · 68 years old</div>
+          <div class="persona-meta" data-i18n="persona-grace-meta">Retired homemaker · Taipei · Grandma in the Chen family</div>
+        </div>
+      </div>
+      <div class="persona-tags">
+        <span class="ptag" data-i18n="ptag-grace-1">Senior member</span>
+        <span class="ptag" data-i18n="ptag-grace-2">Tech-light</span>
+        <span class="ptag" data-i18n="ptag-grace-3">Health-conscious</span>
+        <span class="ptag" data-i18n="ptag-grace-4">Fraud-vulnerable</span>
+        <span class="ptag" data-i18n="ptag-grace-5">Family-connected</span>
+      </div>
+    </div>
+
+    <!-- Design Principles -->
+    <div>
+      <div class="section-eyebrow" data-i18n="principles-grace-eyebrow">Design Principles</div>
+      <div class="principles">
+        <div class="principle">
+          <div class="p-num">1</div>
+          <div class="p-text" data-i18n-html="p-grace-1"><strong>Self at center</strong> — Hana sees herself at the heart of her family network, surrounded by her loved ones. The design reinforces her agency and equal standing within the constellation.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">2</div>
+          <div class="p-text" data-i18n-html="p-grace-2"><strong>AI Companion Arc as ambient presence</strong> — The AI arc at the top conveys care without intruding. It's always present, quietly available — tapping reveals the AI's actions for the day.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">3</div>
+          <div class="p-text" data-i18n-html="p-grace-3"><strong>Relational depth on tap</strong> — Each family node is a doorway: voice messages, shared memories, or live health updates. Navigating is exploratory, not task-driven.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">4</div>
+          <div class="p-text" data-i18n-html="p-grace-4"><strong>Health as context, not alarm</strong> — The health report is accessible but presented calmly. Data is shown with context and AI recommendations, never as raw numbers without meaning.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">5</div>
+          <div class="p-text" data-i18n-html="p-grace-5"><strong>Voice as primary input</strong> — For seniors, voice is more natural than tapping. The Your Voice screen allows hands-free navigation and messaging.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /hero-left -->
+
+  <!-- Right: sticky phone iframe -->
+  <div class="hero-right">
+    <div class="phone-glow" aria-hidden="true"></div>
+    <div class="phone-shell">
+      <iframe
+        src="mockup-constellation-draft.html"
+        id="graceIframe"
+        title="Hana Constellation View"
+        scrolling="no">
+      </iframe>
+    </div>
+    <div class="screen-nav" id="screenNavGrace">
+      <div class="snav-instruction" data-i18n="snav-hint">Click screens to interact, or use the list to jump to a specific screen.</div>
+      <div class="snav-items-wrap">
+        <div class="snav-group-label" data-i18n="snav-group-core">CORE</div>
+        <button class="snav-item snav-active" onclick="graceGoTo(0)"><span class="snav-icon">✦</span><span class="snav-name" data-i18n="sc-grace-0-name">Constellation Home</span><span class="snav-num">0</span></button>
+        <button class="snav-item" onclick="graceGoTo(1)"><span class="snav-icon">◈</span><span class="snav-name" data-i18n="sc-grace-1-name">AI Ripple</span><span class="snav-badge ai">AI</span><span class="snav-num">1</span></button>
+
+        <div class="snav-group-label" data-i18n="snav-group-health">HEALTH</div>
+        <button class="snav-item" onclick="graceGoTo(2)"><span class="snav-icon">🏥</span><span class="snav-name" data-i18n="sc-grace-2-name">Health Report</span><span class="snav-num">2</span></button>
+
+        <div class="snav-group-label" data-i18n="snav-group-personal">PERSONAL</div>
+        <button class="snav-item" onclick="graceGoTo(3)"><span class="snav-icon">🎙</span><span class="snav-name" data-i18n="sc-grace-3-name">Your Voice</span><span class="snav-num">3</span></button>
+        <button class="snav-item" onclick="graceGoTo(4)"><span class="snav-icon">🌍</span><span class="snav-name" data-i18n="sc-grace-4-name">Your World</span><span class="snav-num">4</span></button>
+        <button class="snav-item" onclick="graceGoTo(5)"><span class="snav-icon">💬</span><span class="snav-name" data-i18n="sc-grace-5-name">Chat with Mei</span><span class="snav-num">5</span></button>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- Screens Grid -->
+<section class="screens-section">
+  <div class="section-divider" style="margin-bottom:48px;"></div>
+  <div class="section-header">
+    <div class="section-title" data-i18n="screens-grace-title">Screens &amp; Flows</div>
+    <div class="section-sub" data-i18n="screens-grace-sub">6 screens · Hana's personal constellation view</div>
+  </div>
+  <div class="screen-cards">
+
+    <div class="sc" onclick="graceGoTo(0);scrollToPhone('graceIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--blue)">0</div>
+        <div class="sc-name" data-i18n="sc-grace-0-name">Constellation Home</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-grace-0-desc">Hana at center, family nodes orbit around her. AI Companion Arc spans the top, always ready to assist. Each node pulses with live status. Tapping a node navigates to that relationship's depth screen.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-blue">Entry point</span>
+          <span class="sc-tag tag-amber">Family network</span>
+          <span class="sc-tag tag-muted">SVG animation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="graceGoTo(1);scrollToPhone('graceIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--blue)">1</div>
+        <div class="sc-name" data-i18n="sc-grace-1-name">AI Ripple</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-grace-1-desc">Triggered by tapping the AI Companion Arc. Shows the Kaleidoscope's recent activity across the family network as an animated ripple event chain — health checks, blocked calls, and family updates.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-blue">Kaleidoscope</span>
+          <span class="sc-tag tag-muted">Event chain</span>
+          <span class="sc-tag tag-muted">Animation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="graceGoTo(2);scrollToPhone('graceIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--amber)" style="color:#080E12">2</div>
+        <div class="sc-name" data-i18n="sc-grace-2-name">Health Report</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-grace-2-desc">Annual checkup results for Hana. AI summary at top; marker table below (Blood Pressure ⚠ Elevated, HbA1c Watch, ECG/Bone Density Normal). Three AI-recommended action buttons including cardiology follow-up.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-amber">Health data</span>
+          <span class="sc-tag tag-red">Alert marker</span>
+          <span class="sc-tag tag-blue">AI actions</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="graceGoTo(3);scrollToPhone('graceIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--purple)">3</div>
+        <div class="sc-name" data-i18n="sc-grace-3-name">Your Voice</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-grace-3-desc">Voice-first navigation screen for seniors. Large microphone interface with AI listening state. Hana can speak naturally to navigate the app, send messages, or ask the Kaleidoscope for help.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-purple">Voice input</span>
+          <span class="sc-tag tag-muted">Senior UX</span>
+          <span class="sc-tag tag-blue">Kaleidoscope</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="graceGoTo(4);scrollToPhone('graceIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--green)" style="color:#080E12">4</div>
+        <div class="sc-name" data-i18n="sc-grace-4-name">Your World</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-grace-4-desc">A curated life snapshot for Hana — upcoming appointments, family-shared memories, today's weather, and a gentle AI suggestion for the day. Designed to feel warm and personal, not utilitarian.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-green">Life context</span>
+          <span class="sc-tag tag-amber">Appointments</span>
+          <span class="sc-tag tag-muted">Memories</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="graceGoTo(5);scrollToPhone('graceIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--purple)">5</div>
+        <div class="sc-name" data-i18n="sc-grace-5-name">Chat with Mei</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-grace-5-desc">Messaging thread between Hana and Mei. Hana sees messages on the left; Mei on the right. A conversation about the recent health report — Hana asking about her results, Mei responding with care and next steps.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-amber">Family chat</span>
+          <span class="sc-tag tag-purple">Mei</span>
+          <span class="sc-tag tag-muted">Health context</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</div><!-- /view-grace -->
+
+
+<!-- ══════════════════════════════════════════════════
+     MEI'S VIEW
+     ══════════════════════════════════════════════════ -->
+<div id="view-eva">
+
+<section class="hero">
+  <div class="hero-left">
+
+    <div>
+      <div class="hero-kicker">
+        <span class="hero-kicker-dot"></span>
+        <span data-i18n="hero-eva-kicker">Interactive Prototype</span>
+      </div>
+      <div class="hero-title" data-i18n-html="hero-eva-title">
+        Mei's<br><span class="accent">Family Network</span><br><span class="accent2" style="font-size:38px;">Connected View</span>
+      </div>
+      <p class="hero-sub" data-i18n="hero-eva-sub">
+        A family hub where Mei stays connected with everyone in her network. Alerts surface proactively at the top right; each member node opens their wellbeing and security updates; the Kaleidoscope coordinates complex tasks through a dedicated chat.
+      </p>
+    </div>
+
+    <!-- Persona -->
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-av" style="background: linear-gradient(135deg, #7B3F9E, #4C1D95);">M</div>
+        <div>
+          <div class="persona-name" data-i18n="persona-eva-name">Mei Chen · 45 years old</div>
+          <div class="persona-meta" data-i18n="persona-eva-meta">Brand Manager · Taipei · Connected to Kenji, Yuki, Hiro &amp; Grandma</div>
+        </div>
+      </div>
+      <div class="persona-tags">
+        <span class="ptag" data-i18n="ptag-eva-1">Working mom</span>
+        <span class="ptag" data-i18n="ptag-eva-2">Family anchor</span>
+        <span class="ptag" data-i18n="ptag-eva-3">Health ally</span>
+        <span class="ptag" data-i18n="ptag-eva-4">Risk-aware</span>
+        <span class="ptag" data-i18n="ptag-eva-5">Delegates to AI</span>
+      </div>
+    </div>
+
+    <!-- Design Principles -->
+    <div>
+      <div class="section-eyebrow" data-i18n="principles-eva-eyebrow">Design Principles</div>
+      <div class="principles">
+        <div class="principle">
+          <div class="p-num">1</div>
+          <div class="p-text" data-i18n-html="p-eva-1"><strong>Mei at the center</strong> — Mei sees herself at the heart of her family network. Each node is a living connection — a relationship she stays close to, not just a contact list.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">2</div>
+          <div class="p-text" data-i18n-html="p-eva-2"><strong>Proactive alerts</strong> — Three stacked alert pills appear at the top right, surfacing urgent issues before Mei looks for them. Each is independently dismissible once reviewed.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">3</div>
+          <div class="p-text" data-i18n-html="p-eva-3"><strong>Per-member depth</strong> — Tapping any family node opens that person's wellbeing and security updates. No member's latest news is more than one tap away.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">4</div>
+          <div class="p-text" data-i18n-html="p-eva-4"><strong>AI Companion Arc as action gateway</strong> — The arc navigates directly to Kaleidoscope chat — the highest-frequency action for Mei as a coordinator. The arc is both a reassurance symbol and a shortcut.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">5</div>
+          <div class="p-text" data-i18n-html="p-eva-5"><strong>Events as shared family timeline</strong> — The middle tab shows a chronological family-wide activity log, giving everyone a single view of what happened across the network without opening each profile.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">6</div>
+          <div class="p-text" data-i18n-html="p-eva-6"><strong>Read-state lifecycle</strong> — Alert nodes have three states: unread (pulsing ring, circle clickable), read-active within 12h (circle dimmed, status chips become the entry point), and resolved (fully dimmed, ✓ badge). All past events collect in the Kaleidoscope History tab.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /hero-left -->
+
+  <!-- Right: sticky phone iframe -->
+  <div class="hero-right">
+    <div class="phone-glow" aria-hidden="true"></div>
+    <div class="phone-shell">
+      <iframe
+        src="mockup-eva-view.html"
+        id="evaIframe"
+        title="Mei's Connected View"
+        scrolling="no">
+      </iframe>
+    </div>
+    <div class="screen-nav" id="screenNavEva">
+      <div class="snav-instruction" data-i18n="snav-hint">Click screens to interact, or use the list to jump to a specific screen.</div>
+      <div class="snav-items-wrap">
+        <div class="snav-group-label" data-i18n="snav-group-core">CORE</div>
+        <button class="snav-item snav-active" onclick="evaGoTo(0)"><span class="snav-icon">✦</span><span class="snav-name" data-i18n="sc-eva-0-name">Constellation Home</span><span class="snav-num">0</span></button>
+        <button class="snav-item" onclick="evaGoTo(1)"><span class="snav-icon">🏥</span><span class="snav-name" data-i18n="sc-eva-1-name">Grandma's Health Report</span><span class="snav-badge alert">ALERT</span><span class="snav-num">1</span></button>
+        <button class="snav-item" onclick="evaGoTo(2)"><span class="snav-icon">📋</span><span class="snav-name" data-i18n="sc-eva-2-name">Family Events</span><span class="snav-num">2</span></button>
+        <button class="snav-item" onclick="evaGoTo(3)"><span class="snav-icon">💬</span><span class="snav-name" data-i18n="sc-eva-3-name">Chat with Grandma</span><span class="snav-num">3</span></button>
+
+        <div class="snav-group-label" data-i18n="snav-group-members">MEMBERS</div>
+        <button class="snav-item" onclick="evaGoTo(4)"><span class="snav-icon">🌸</span><span class="snav-name" data-i18n="sc-eva-4-name">Yuki — Bloom Report</span><span class="snav-num">4</span></button>
+        <button class="snav-item" onclick="evaGoTo(5)"><span class="snav-icon">🔒</span><span class="snav-name" data-i18n="sc-eva-5-name">Kenji — Protection</span><span class="snav-num">5</span></button>
+        <button class="snav-item" onclick="evaGoTo(6)"><span class="snav-icon">📱</span><span class="snav-name" data-i18n="sc-eva-6-name">Hiro — Protection</span><span class="snav-badge alert">ALERT</span><span class="snav-num">6</span></button>
+
+        <div class="snav-group-label" data-i18n="snav-group-ai">KALEIDOSCOPE</div>
+        <button class="snav-item" onclick="evaGoTo(7)"><span class="snav-icon">◈</span><span class="snav-name" data-i18n="sc-eva-7-name">Kaleidoscope</span><span class="snav-badge ai">AI</span><span class="snav-num">7</span></button>
+
+        <div class="snav-group-label" data-i18n="snav-group-incidents">INCIDENTS</div>
+        <button class="snav-item" onclick="evaGoTo(8)"><span class="snav-icon">📵</span><span class="snav-name" data-i18n="sc-eva-8-name">Scam Call — Grandma</span><span class="snav-badge alert">BLOCKED</span><span class="snav-num">8</span></button>
+        <button class="snav-item" onclick="evaGoTo(9)"><span class="snav-icon">🚫</span><span class="snav-name" data-i18n="sc-eva-9-name">Phishing Link — Yuki</span><span class="snav-badge alert">BLOCKED</span><span class="snav-num">9</span></button>
+        <button class="snav-item" onclick="evaGoTo(10)"><span class="snav-icon">◈</span><span class="snav-name" data-i18n="sc-eva-10-name">AI Booking Task</span><span class="snav-badge ai">AI</span><span class="snav-num">10</span></button>
+
+        <div class="snav-group-label" data-i18n="snav-group-creative">CREATIVE</div>
+        <button class="snav-item" onclick="evaGoTo(11)"><span class="snav-icon">🌸</span><span class="snav-name" data-i18n="sc-eva-11-name">Yuki — Showcase</span><span class="snav-num">11</span></button>
+        <button class="snav-item" onclick="evaGoTo(12)"><span class="snav-icon">↑</span><span class="snav-name" data-i18n="sc-eva-12-name">Yuki — Growth</span><span class="snav-num">12</span></button>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- Screens Grid -->
+<section class="screens-section">
+  <div class="section-divider" style="margin-bottom:48px;"></div>
+  <div class="section-header">
+    <div class="section-title" data-i18n="screens-eva-title">Screens &amp; Flows</div>
+    <div class="section-sub" data-i18n="screens-eva-sub">13 screens · Mei's family constellation view</div>
+  </div>
+  <div class="screen-cards">
+
+    <div class="sc" onclick="evaGoTo(0);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--purple)">0</div>
+        <div class="sc-name" data-i18n="sc-eva-0-name">Constellation Home</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-0-desc">Mei at center, Grandma above with ⚠ pulse ring. Notification panel in the top-right surfaces urgent updates — the Grandma health alert is highlighted in red and triggers a dismissible popup on load. Kaleidoscope FAB at bottom-right; tapping opens the action sheet. First sheet action links directly to Grandma's Health Report.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-purple">Entry point</span>
+          <span class="sc-tag tag-red">Health alert popup</span>
+          <span class="sc-tag tag-blue">Kaleidoscope FAB</span>
+          <span class="sc-tag tag-amber">Notification panel</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(1);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--amber)" style="color:#080E12">1</div>
+        <div class="sc-name" data-i18n="sc-eva-1-name">Grandma's Health Report</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-1-desc">Annual checkup results viewed from Mei's perspective. AI summary with cardiology follow-up recommendation; marker table (BP ⚠ 145/92, HbA1c Watch, others Normal). Three action buttons: book follow-up, review medication, export to family record.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-amber">Health data</span>
+          <span class="sc-tag tag-red">Alert marker</span>
+          <span class="sc-tag tag-blue">AI actions</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(2);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--blue)">2</div>
+        <div class="sc-name" data-i18n="sc-eva-2-name">Family Events</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-2-desc">Cross-member chronological activity feed. Four events: Grandma blood pressure alert, Yuki phishing link blocked, Hiro screen time alert, Kenji device login verified. Tab bar at bottom (Events tab active).</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-purple">Activity feed</span>
+          <span class="sc-tag tag-red">Health alert</span>
+          <span class="sc-tag tag-muted">Tab bar</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(3);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--amber)" style="color:#080E12">3</div>
+        <div class="sc-name" data-i18n="sc-eva-3-name">Chat with Grandma</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-3-desc">Direct messaging thread between Mei and Grandma. Five messages covering the health report results — Grandma asks about checkup, Mei confirms 145/92 concern, Mei recommends cardiologist, Grandma agrees to go.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-amber">Grandma</span>
+          <span class="sc-tag tag-purple">Mei</span>
+          <span class="sc-tag tag-muted">Health context</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(4);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--green)" style="color:#080E12">4</div>
+        <div class="sc-name" data-i18n="sc-eva-4-name">Yuki — Bloom Report</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-4-desc">Yuki's creative week as a Bloom co-creation record. Hero: photo + "Visual Storyteller · Week 12" + stats (1 Collab, 8h creating, +18% Creative Direction). Featured: 文化祭 2024 TikTok Bloom Collab (00:52) — clip timeline (Yuki Dir., Hana, Ren), "Bloom Guided" spark showing AI offered two directions vs Yuki's Director's Choice (chose intimate opening). Authorship bar Yuki 68% / Bloom 32%. Feed: 春祭り photo essay + Voice Loop #3 (private). Kaleidoscope Insight quote. Three action buttons: creative challenge, View Showcase (→s11), Growth Timeline (→s12).</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-green">Bloom co-creation</span>
+          <span class="sc-tag" style="color:rgba(192,132,252,0.85);background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.2)">Director's Choice</span>
+          <span class="sc-tag tag-green">68% Yuki voice</span>
+          <span class="sc-tag tag-amber">Kaleidoscope insight</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(5);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:#60A5FA">5</div>
+        <div class="sc-name" data-i18n="sc-eva-5-name">Kenji — Protection</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-5-desc">Kenji's device security report. Recent new device login verified via two-factor authentication; work device confirmed secure. No anomalies detected this week.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-blue">Device security</span>
+          <span class="sc-tag tag-green">Verified</span>
+          <span class="sc-tag tag-muted">2FA</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(6);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:#FB923C">6</div>
+        <div class="sc-name" data-i18n="sc-eva-6-name">Hiro — Protection</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-6-desc">Hiro's screen time and safety report. Usage alert: 3.5 hours of social media after midnight, exceeding the family's agreed limit. Kaleidoscope action taken: social media paused after 10 PM starting tonight per family setting.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-red">Usage alert</span>
+          <span class="sc-tag tag-blue">AI suggestion</span>
+          <span class="sc-tag tag-muted">Screen time</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(7);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--blue)">7</div>
+        <div class="sc-name" data-i18n="sc-eva-7-name">Kaleidoscope</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-7-desc">Two-tab screen: Chat and History. Chat: Mei converses with Kaleidoscope — books a cardiology appointment for Grandma, updates Hiro's screen time settings. History: chronological timeline of all alerts and AI actions across family members, grouped by day.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-blue">Kaleidoscope</span>
+          <span class="sc-tag tag-purple">Chat + History</span>
+          <span class="sc-tag tag-muted">Timeline</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(8);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:#FF7875" style="color:#080E12">8</div>
+        <div class="sc-name" data-i18n="sc-eva-8-name">Scam Call — Grandma</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-8-desc">Incident detail for the blocked scam call on Grandma's device. Caller: +886-900-123-456, 847 community scam reports, impersonating a bank representative. AI blocked with 0-second ring time. Three action buttons: notify Grandma, view call log, block permanently.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-red">Scam blocked</span>
+          <span class="sc-tag tag-amber">Grandma</span>
+          <span class="sc-tag tag-blue">Kaleidoscope</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(9);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--purple)">9</div>
+        <div class="sc-name" data-i18n="sc-eva-9-name">Phishing Link — Yuki</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-9-desc">Incident detail for the phishing link blocked on Yuki's device. Site: secure-bank-login.xyz, impersonates Cathay Bank, SSL mismatch, domain 3 days old. Page blocked before loading — no data exposed. Reported to safe-browsing network. Three action buttons: message Yuki, report site, adjust browsing settings.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-purple">Phishing blocked</span>
+          <span class="sc-tag tag-green">No data exposed</span>
+          <span class="sc-tag tag-blue">Kaleidoscope</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(10);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--blue)">10</div>
+        <div class="sc-name" data-i18n="sc-eva-10-name">AI Booking Task</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-10-desc">Kaleidoscope executes the cardiology booking autonomously. Step-by-step task tracker: hospital search → slot matching → appointment confirmed (Dr. Li Wei, Nov 14, 2:30 PM). Booking confirmation card with date, time and location. Grandma notified automatically via the family network.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-blue">Kaleidoscope</span>
+          <span class="sc-tag tag-green">Task complete</span>
+          <span class="sc-tag tag-amber">Auto-notify</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(11);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:rgba(192,132,252,0.7)">11</div>
+        <div class="sc-name" data-i18n="sc-eva-11-name">Yuki — Showcase</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-11-desc">Works Yuki chose to share with family via Bloom. Summary strip: "2 shared." Featured: 文化祭 2024 TikTok video with mock player (00:52), Director's Choice badge, Y68/AI32 ratio. Feed: 春祭り photo essay (shared, Y82/AI18) + Voice Loop #3 (private, locked). Reaction row: "Amazing work!" + "Leave a note". Privacy footer: Yuki controls what's shared.</div>
+        <div class="sc-tags">
+          <span class="sc-tag" style="color:rgba(192,132,252,0.85);background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.2)">Bloom</span>
+          <span class="sc-tag tag-green">Family share</span>
+          <span class="sc-tag tag-purple">Privacy control</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="evaGoTo(12);scrollToPhone('evaIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--green)">12</div>
+        <div class="sc-name" data-i18n="sc-eva-12-name">Yuki — Growth Timeline</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-eva-12-desc">Period selector (4 Weeks / 3 Months / All Time). KPI row: +18% creative direction, 8 own decisions, 3× redirected AI. SVG line chart: Creative Voice % over Wk9–12 (52%→55%→61%→68%), gradient area fill, Wk11 green "Dir ✓" dot, Wk12 labeled badge. Milestones: shared with family (Wk12), Director's Choice (Wk11), first AI refusal (Wk10), joined Bloom (Wk9). Skill bars: Creative Direction +18%, Collaboration +12%, Autonomous Choices +28%. Kaleidoscope Insight: "You're watching it happen."</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-green">Growth chart</span>
+          <span class="sc-tag tag-purple">Milestones</span>
+          <span class="sc-tag tag-blue">Skill progress</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</div><!-- /view-eva -->
+
+
+<!-- ══════════════════════════════════════════════════
+     YUKI'S VIEW
+     ══════════════════════════════════════════════════ -->
+<div id="view-yuki" style="display:none">
+
+<section class="hero">
+  <div class="hero-left">
+
+    <div>
+      <div class="hero-kicker">
+        <span class="hero-kicker-dot"></span>
+        <span data-i18n="hero-yuki-kicker">Interactive Prototype</span>
+      </div>
+      <div class="hero-title" data-i18n-html="hero-yuki-title">
+        Yuki's<br><span class="accent">Constellation</span><br><span class="accent2" style="font-size:38px;">Creator's View</span>
+      </div>
+      <p class="hero-sub" data-i18n="hero-yuki-sub">
+        A young creator's personal world — Yuki at center, family around her, and a gateway to Bloom built right into the constellation. TrendLife bridges Yuki's creative ambitions with the family's trust layer, making parental involvement feel natural rather than restrictive.
+      </p>
+    </div>
+
+    <!-- Persona -->
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-av" style="background: linear-gradient(135deg, #16A34A, #065F46);">Yv</div>
+        <div>
+          <div class="persona-name" data-i18n="persona-yuki-name">Yuki Chen · 16 years old</div>
+          <div class="persona-meta" data-i18n="persona-yuki-meta">High school student · Taipei · Mei &amp; Kenji's daughter, Hiro's sister</div>
+        </div>
+      </div>
+      <div class="persona-tags">
+        <span class="ptag" data-i18n="ptag-yuki-1">Teen creator</span>
+        <span class="ptag" data-i18n="ptag-yuki-2">Fashion &amp; Art</span>
+        <span class="ptag" data-i18n="ptag-yuki-3">Digitally native</span>
+        <span class="ptag" data-i18n="ptag-yuki-4">Values autonomy</span>
+        <span class="ptag" data-i18n="ptag-yuki-5">AI-friendly</span>
+      </div>
+    </div>
+
+    <!-- Design Principles -->
+    <div>
+      <div class="section-eyebrow" data-i18n="principles-yuki-eyebrow">Design Principles</div>
+      <div class="principles">
+        <div class="principle">
+          <div class="p-num">1</div>
+          <div class="p-text" data-i18n-html="p-yuki-1"><strong>Creator at center</strong> — Yuki sees herself as the main character of her own world. The constellation reflects her creative identity and her connections — not a view managed by parents.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">2</div>
+          <div class="p-text" data-i18n-html="p-yuki-2"><strong>Bloom as a constellation node</strong> — Bloom appears as a discoverable node below Yuki, connected by a dashed purple line. Tapping triggers a zoom launch transition into Bloom's onboarding flow. The Bloom icon uses a purple double-ring mandala — a sister icon to Kaleidoscope.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">3</div>
+          <div class="p-text" data-i18n-html="p-yuki-3"><strong>Parental approval without friction</strong> — When an under-18 gate is hit, TrendLife routes the consent request directly to Mei via Kaleidoscope — no email, no separate app. Yuki sees a waiting screen with real-time delivery confirmation.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">4</div>
+          <div class="p-text" data-i18n-html="p-yuki-4"><strong>Transparency, not surveillance</strong> — The consent screen tells Yuki exactly what parents can see (activity summary, time limits, safety alerts) and what they can't (full content detail). Trust is built through clarity.</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">5</div>
+          <div class="p-text" data-i18n-html="p-yuki-5"><strong>Kaleidoscope as Yuki's ally</strong> — The AI Companion Arc uses Yuki's color (green) and language. It's her helper, not a parental watchdog embedded in her view.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /hero-left -->
+
+  <!-- Right: sticky phone iframe -->
+  <div class="hero-right">
+    <div class="phone-glow" aria-hidden="true"></div>
+    <div class="phone-shell">
+      <iframe
+        src="mockup-yuki-view.html"
+        id="yukiIframe"
+        title="Yuki's Creator View"
+        scrolling="no">
+      </iframe>
+    </div>
+    <div class="screen-nav" id="screenNavYuki">
+      <div class="snav-instruction" data-i18n="snav-hint">Click screens to interact, or use the list to jump to a specific screen.</div>
+      <div class="snav-items-wrap">
+        <div class="snav-group-label" data-i18n="snav-group-core">CORE</div>
+        <button class="snav-item snav-active" onclick="yukiGoTo(0)"><span class="snav-icon">✦</span><span class="snav-name" data-i18n="sc-yuki-0-name">Constellation Home</span><span class="snav-num">0</span></button>
+
+        <div class="snav-group-label" data-i18n="snav-group-onboarding">BLOOM ONBOARDING</div>
+        <button class="snav-item" onclick="yukiGoTo(1)"><span class="snav-icon">🛡</span><span class="snav-name" data-i18n="sc-yuki-1-name">Bloom — Age Verify</span><span class="snav-num">1</span></button>
+        <button class="snav-item" onclick="yukiGoTo(2)"><span class="snav-icon">🎨</span><span class="snav-name" data-i18n="sc-yuki-2-name">Interests</span><span class="snav-num">2</span></button>
+        <button class="snav-item" onclick="yukiGoTo(3)"><span class="snav-icon">🎯</span><span class="snav-name" data-i18n="sc-yuki-3-name">Goals</span><span class="snav-num">3</span></button>
+        <button class="snav-item" onclick="yukiGoTo(4)"><span class="snav-icon">👨‍👩‍👧</span><span class="snav-name" data-i18n="sc-yuki-4-name">Parental Consent</span><span class="snav-num">4</span></button>
+        <button class="snav-item" onclick="yukiGoTo(5)"><span class="snav-icon">⏳</span><span class="snav-name" data-i18n="sc-yuki-5-name">Waiting for Approval</span><span class="snav-num">5</span></button>
+
+        <div class="snav-group-label" data-i18n="snav-group-ai">KALEIDOSCOPE</div>
+        <button class="snav-item" onclick="yukiGoTo(6)"><span class="snav-icon">◈</span><span class="snav-name" data-i18n="sc-yuki-6-name">AI Chat</span><span class="snav-badge ai">AI</span><span class="snav-num">6</span></button>
+
+        <div class="snav-group-label" data-i18n="snav-group-creative">CREATIVE</div>
+        <button class="snav-item" onclick="yukiGoTo(7)"><span class="snav-icon">🌸</span><span class="snav-name" data-i18n="sc-yuki-7-name">Joining Bloom</span><span class="snav-num">7</span></button>
+        <button class="snav-item" onclick="yukiGoTo(8)"><span class="snav-icon">🎬</span><span class="snav-name" data-i18n="sc-yuki-8-name">Bloom Workspace</span><span class="snav-num">8</span></button>
+        <button class="snav-item" onclick="yukiGoTo(9)"><span class="snav-icon">✨</span><span class="snav-name" data-i18n="sc-yuki-9-name">My Creative Space</span><span class="snav-num">9</span></button>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- Screens Grid -->
+<section class="screens-section">
+  <div class="section-divider" style="margin-bottom:48px;"></div>
+  <div class="section-header">
+    <div class="section-title" data-i18n="screens-yuki-title">Screens &amp; Flows</div>
+    <div class="section-sub" data-i18n="screens-yuki-sub">10 screens · Yuki's creator constellation view</div>
+  </div>
+  <div class="screen-cards">
+
+    <div class="sc" onclick="yukiGoTo(0);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--green)">0</div>
+        <div class="sc-name" data-i18n="sc-yuki-0-name">Constellation Home</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-0-desc">Yuki at center with a "creator" badge. Family members orbit around her. AI Companion Arc spans the top in green. A Bloom node glows below with a pulsing purple ring and "Join →" chip — tapping launches the onboarding flow with a zoom transition. The Bloom icon (purple double-ring mandala) renders inside the node circle via SVG image.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-green">Creator</span>
+          <span class="sc-tag tag-blue">Constellation</span>
+          <span class="sc-tag" style="color:rgba(192,132,252,0.85);background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.2)">Bloom</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="yukiGoTo(1);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:rgba(192,132,252,0.7)">1</div>
+        <div class="sc-name" data-i18n="sc-yuki-1-name">Bloom — Age Verify</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-1-desc">Welcome screen for Bloom. Teal shield icon, birth date fields (Yuki enters 2008), privacy notice. No progress bar — this is the gate step before onboarding begins. Teal CTA "繼續 →" proceeds to interest selection.</div>
+        <div class="sc-tags">
+          <span class="sc-tag" style="color:rgba(192,132,252,0.85);background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.2)">Bloom</span>
+          <span class="sc-tag tag-blue">Age gate</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="yukiGoTo(2);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:rgba(192,132,252,0.7)">2</div>
+        <div class="sc-name" data-i18n="sc-yuki-2-name">Interests</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-2-desc">Step 1 of 3. "你喜歡創作什麼內容？" — 6 category cards in a 2-column grid: Fashion &amp; Style and Art &amp; Design pre-selected (teal highlight). Pink sparkle icon as section header. "繼續 →" advances to goals.</div>
+        <div class="sc-tags">
+          <span class="sc-tag" style="color:rgba(192,132,252,0.85);background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.2)">Bloom</span>
+          <span class="sc-tag tag-amber">Onboarding 1/3</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="yukiGoTo(3);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:rgba(255,45,135,0.6)">3</div>
+        <div class="sc-name" data-i18n="sc-yuki-3-name">Goals</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-3-desc">Step 2 of 3. "你想達成什麼目標？" — 4 goal rows: Jump on trends faster (pre-selected, pink), Create content with friends, Get creative ideas, Grow my following. Back + Continue buttons at bottom.</div>
+        <div class="sc-tags">
+          <span class="sc-tag" style="color:rgba(255,45,135,0.85);background:rgba(255,45,135,0.1);border-color:rgba(255,45,135,0.2)">Goals</span>
+          <span class="sc-tag tag-amber">Onboarding 2/3</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="yukiGoTo(4);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--green)">4</div>
+        <div class="sc-name" data-i18n="sc-yuki-4-name">Parental Consent</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-4-desc">Step 3 of 3. Under-18 gate. TrendLife green banner explains the request goes via Kaleidoscope directly to Mom Mei — no email. Parent permissions listed (summary only, time limits, safety alerts). Checkbox consent + "開始創作 →" sends the request.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-green">TrendLife integration</span>
+          <span class="sc-tag tag-amber">Onboarding 3/3</span>
+          <span class="sc-tag tag-blue">Parental consent</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="yukiGoTo(5);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--purple)">5</div>
+        <div class="sc-name" data-i18n="sc-yuki-5-name">Waiting for Approval</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-5-desc">Mei's purple avatar with pulsing rings. Animated loading dots. "等待批准中..." with reassuring copy. A TrendLife notification card at the bottom confirms delivery — "Yuki 想加入 Bloom，需要你的批准 →" with a green "已送達" badge.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-purple">Waiting</span>
+          <span class="sc-tag tag-green">Delivered</span>
+          <span class="sc-tag tag-blue">Kaleidoscope</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="yukiGoTo(6);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:var(--purple)">6</div>
+        <div class="sc-name" data-i18n="sc-yuki-6-name">AI Chat</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-6-desc">Kaleidoscope chat in Yuki's context. Green AI avatar (Yuki's color). Messages include: Grandma voice message nudge, Bloom workspace guidance. AI acts as Yuki's ally — not a parental watchdog.</div>
+        <div class="sc-tags">
+          <span class="sc-tag tag-green">Yuki's AI</span>
+          <span class="sc-tag tag-blue">Kaleidoscope</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="yukiGoTo(7);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:rgba(192,132,252,0.7)">7</div>
+        <div class="sc-name" data-i18n="sc-yuki-7-name">Joining Bloom</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-7-desc">3-second auto-advance joining screen after Mei approves. Bloom icon (purple double-ring mandala), "Joining Bloom" title, animated progress. Transitions directly into the workspace.</div>
+        <div class="sc-tags">
+          <span class="sc-tag" style="color:rgba(192,132,252,0.85);background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.2)">Bloom</span>
+          <span class="sc-tag tag-green">Auto-advance</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="yukiGoTo(8);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:rgba(192,132,252,0.7)">8</div>
+        <div class="sc-name" data-i18n="sc-yuki-8-name">Bloom Workspace</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-8-desc">Active 文化祭 2024 Bloom collab workspace. Canvas preview with crew (Yuki + Hana + Ren). Authorship strip: 68% Yuki voice, 8 decisions / 3 redirections / 4 Q answered. Creative Direction Thread: 4-exchange AI dialogue with Director's Choice ✓ marked. Socratic AI panel with "Opening feeling?" question. Sharing card: family hasn't seen this yet → links to s9.</div>
+        <div class="sc-tags">
+          <span class="sc-tag" style="color:rgba(192,132,252,0.85);background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.2)">Bloom</span>
+          <span class="sc-tag tag-green">Director's Choice</span>
+          <span class="sc-tag tag-purple">Creative thread</span>
+          <span class="sc-tag tag-amber">Sharing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" onclick="yukiGoTo(9);scrollToPhone('yukiIframe')">
+      <div class="sc-head">
+        <div class="sc-num" style="background:rgba(192,132,252,0.7)">9</div>
+        <div class="sc-name" data-i18n="sc-yuki-9-name">My Creative Space</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-desc" data-i18n="sc-yuki-9-desc">Yuki's personal showcase page after sharing 文化祭. Family reaction feed: Grandma (Japanese text, nostalgic), Mom heart reaction, Dad reaction. Project privacy badge: "Bloom Collab · Shared with family." Social share CTA at bottom.</div>
+        <div class="sc-tags">
+          <span class="sc-tag" style="color:rgba(192,132,252,0.85);background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.2)">Bloom</span>
+          <span class="sc-tag tag-green">Family reactions</span>
+          <span class="sc-tag tag-amber">Showcase</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</div><!-- /view-yuki -->
+
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-left" data-i18n="footer-text">TrendLife Kaleidoscope · Constellation Design Spec · March 2026</div>
+  <div class="footer-right">
+    <div class="footer-logo">
+      <img src="../reference/logo-mark-only.png" alt="">
+    </div>
+    <span class="footer-brand" data-i18n="footer-brand">TrendLife</span>
+  </div>
+</footer>
+
+
+<script>
+/* ── i18n DICTIONARY ── */
+const dict = {
+  'nav-product':  { en: 'TrendLife Kaleidoscope', zh: 'TrendLife AI 管家' },
+  'nav-subtitle': { en: 'Constellation Spec',  zh: '星座圖規格' },
+  'tab-eva':      { en: "Mei's View",          zh: 'Mei 連結視角' },
+  'snav-hint':    { en: 'Click screens to interact, or use the list to jump to a specific screen.', zh: '點擊畫面互動，或點擊選單查看個別畫面' },
+
+  /* Mei hero */
+  'hero-eva-kicker':   { en: 'Interactive Prototype',      zh: '互動原型' },
+  'hero-eva-title':    {
+    en: "Mei's<br><span class='accent'>Family Network</span><br><span class='accent2' style='font-size:38px;'>Connected View</span>",
+    zh: "Mei 的<br><span class='accent'>家庭網絡</span><br><span class='accent2' style='font-size:38px;'>連結視角</span>"
+  },
+  'hero-eva-sub': {
+    en: "A family hub where Mei stays connected with everyone in her network. Alerts surface proactively at the top right; each member node opens their wellbeing and security updates; the Kaleidoscope coordinates complex tasks through a dedicated chat.",
+    zh: "以家庭為核心的連結中樞，Mei 與網絡中每位成員保持聯繫。右上角主動顯示提醒；每個成員節點通往其健康與安全動態；AI 管家透過專屬對話協調複雜任務。"
+  },
+  'persona-eva-name': { en: 'Mei Chen · 45 years old',                  zh: 'Mei 陳 · 45 歲' },
+  'persona-eva-meta': { en: 'Brand Manager · Taipei · Connected to Kenji, Yuki, Hiro & Grandma', zh: '品牌經理 · 台北 · 與 Kenji、Yuki、Hiro 和奶奶保持聯繫' },
+  'ptag-eva-1': { en: 'Working mom',    zh: '職業媽媽' },
+  'ptag-eva-2': { en: 'Family anchor',  zh: '家庭核心' },
+  'ptag-eva-3': { en: 'Health ally',    zh: '健康夥伴' },
+  'ptag-eva-4': { en: 'Risk-aware',        zh: '風險意識強' },
+  'ptag-eva-5': { en: 'Delegates to AI',   zh: '善用 AI 委派' },
+  'principles-eva-eyebrow': { en: 'Design Principles', zh: '設計原則' },
+  'p-eva-1': {
+    en: "<strong>Mei at the center</strong> — Mei sees herself at the heart of her family network. Each node is a living connection — a relationship she stays close to, not just a contact list.",
+    zh: "<strong>Mei 居中</strong> — Mei 看到自己處於家庭網絡的核心。每個節點都是一段活生生的關係——她與之保持聯繫，而非單純的聯絡人清單。"
+  },
+  'p-eva-2': {
+    en: "<strong>Proactive alerts</strong> — Three stacked alert pills appear at the top right, surfacing urgent issues before Mei looks for them. Each is independently dismissible once reviewed.",
+    zh: "<strong>主動警報</strong> — 三個堆疊警報標籤顯示在右上角，在 Mei 尋找之前就浮現緊急問題。每個標籤在查看後可單獨關閉。"
+  },
+  'p-eva-3': {
+    en: "<strong>Per-member depth</strong> — Tapping any family node opens that person's wellbeing and security updates. No member's latest news is more than one tap away.",
+    zh: "<strong>個別成員深度</strong> — 點擊任何家庭節點可查看該成員的健康與安全動態。任何成員的最新動態距離都不超過一次點擊。"
+  },
+  'p-eva-4': {
+    en: "<strong>AI Companion Arc as action gateway</strong> — The arc navigates directly to Kaleidoscope chat — the highest-frequency action for Mei as a coordinator. The arc is both a reassurance symbol and a shortcut.",
+    zh: "<strong>AI 陪伴穹頂作為行動入口</strong> — 穹頂直接導航到 AI 管家對話——這是 Mei 作為協調者最頻繁的操作。穹頂既是安心符號，也是快捷方式。"
+  },
+  'p-eva-5': {
+    en: "<strong>Events as shared family timeline</strong> — The middle tab shows a chronological family-wide activity log, giving everyone a single view of what happened across the network without opening each profile.",
+    zh: "<strong>事件作為家庭共同時間軸</strong> — 中間分頁顯示按時間排列的全家庭活動記錄，讓每位成員無需逐一開啟個人頁面即可一覽所有動態。"
+  },
+  'p-eva-6': {
+    en: "<strong>Read-state lifecycle</strong> — Alert nodes have three states: unread (pulsing ring, circle clickable), read-active within 12h (circle dimmed, status chips become the entry point), and resolved (fully dimmed, ✓ badge). All past events collect in the Kaleidoscope History tab.",
+    zh: "<strong>已讀狀態週期</strong> — 警報節點有三種狀態：未讀（脈衝環，圓圈可點擊）、12小時內已讀（圓圈淡化，狀態膠囊成為入口）、已解決（完全淡化，✓ 徽章）。所有過往事件收錄於 AI 管家的歷史分頁。"
+  },
+
+  /* Mei screen names */
+  'sc-eva-0-name': { en: 'Constellation Home',       zh: '星座圖首頁' },
+  'sc-eva-1-name': { en: "Grandma's Health Report",  zh: '奶奶的健康報告' },
+  'sc-eva-2-name': { en: 'Family Events',            zh: '家庭事件' },
+  'sc-eva-3-name': { en: 'Chat with Grandma',        zh: '與奶奶的對話' },
+  'sc-eva-4-name': { en: 'Yuki — Bloom Report', zh: 'Yuki — Bloom 成果報告' },
+  'sc-eva-5-name': { en: 'Kenji — Protection',         zh: 'Kenji — 保護報告' },
+  'sc-eva-6-name': { en: 'Hiro — Protection',       zh: 'Hiro — 保護報告' },
+  'sc-eva-7-name': { en: 'Kaleidoscope',                zh: 'Kaleidoscope' },
+  'sc-eva-8-name': { en: 'Scam Call — Grandma',      zh: '詐騙電話 — 奶奶' },
+  'sc-eva-9-name': { en: 'Phishing Link — Yuki',     zh: '釣魚連結 — Yuki' },
+
+  /* Mei screen descs */
+  'sc-eva-0-desc': {
+    en: "Mei at center, Grandma above with ⚠ pulse ring. Notification panel in the top-right surfaces urgent updates — the Grandma health alert row is highlighted in red. On page load, a dismissible health alert popup appears over the constellation with a pulsing red dot, message, and 'View Report →' CTA. Kaleidoscope FAB at bottom-right; first sheet action links directly to Grandma's Health Report.",
+    zh: "Mei 居中，奶奶在上方帶有 ⚠ 脈衝環。右上角通知面板顯示緊急更新——奶奶健康警報列以紅色 Highlight 標示。頁面載入時彈出可關閉的健康警報卡片，含脈動紅點、訊息與『查看報告→』按鈕。右下角 Kaleidoscope FAB；第一個快速操作直接連結奶奶健康報告。"
+  },
+  'sc-eva-1-desc': {
+    en: "Annual checkup results viewed from Mei's perspective. AI summary with cardiology follow-up recommendation; marker table (BP ⚠ 145/92, HbA1c Watch, others Normal). Three action buttons: book follow-up, review medication, export to family record.",
+    zh: "從 Mei 視角查看的年度健檢結果。AI 摘要附心臟科追蹤建議；指標表格（血壓 ⚠ 145/92、HbA1c 注意、其他正常）。三個操作按鈕：預約追蹤、檢視藥物、匯出家庭記錄。"
+  },
+  'sc-eva-2-desc': {
+    en: "Cross-member chronological activity feed. Four events: Grandma blood pressure alert, Yuki phishing link blocked, Hiro screen time alert, Kenji device login verified. Tab bar at bottom (Events tab active).",
+    zh: "跨成員按時間排列的活動記錄。四則事件：奶奶血壓警報、Yuki 釣魚連結攔截、Hiro 螢幕時間提醒、Kenji 設備登入已驗證。底部分頁列（事件分頁啟動中）。"
+  },
+  'sc-eva-3-desc': {
+    en: "Direct messaging thread between Mei and Grandma. Five messages covering the health report results — Grandma asks about checkup, Mei confirms 145/92 concern, Mei recommends cardiologist, Grandma agrees to go.",
+    zh: "Mei 與奶奶之間的直接訊息串。五則訊息涵蓋健康報告結果——奶奶詢問健檢，Mei 確認 145/92 的疑慮，Mei 建議心臟科，奶奶同意前往。"
+  },
+  'sc-eva-4-desc': {
+    en: "Yuki's creative week as a Bloom co-creation record. Hero: Yuki photo, 'Visual Storyteller · Week 12', stats (1 Collab, 8h creating, +18% Creative Direction). Featured: 文化祭 2024 TikTok Bloom Collab — clip timeline (Dir. Yuki, Hana, Ren), 'Bloom Guided' spark (AI offered two directions → Yuki's Director's Choice: chose intimate opening). Authorship bar Yuki 68% / Bloom 32%. Feed: 春祭り (Y82/AI18) + Voice Loop #3 (private). Kaleidoscope Insight. Three buttons: creative challenge, View Showcase (→s11), Growth Timeline (→s12).",
+    zh: "Yuki 這週的 Bloom 共創紀錄。英雄區：Yuki 照片、「視覺說故事者 · 第 12 週」、統計數據（1 次協作、8 小時創作、創意方向 +18%）。精選：文化祭 2024 TikTok Bloom 協作——剪輯時間軸（導演 Yuki、Hana、Ren），「Bloom 引導」對比（AI 提供兩個方向 → Yuki 導演選擇：選擇親密開場）。作者條 Yuki 68% / Bloom 32%。動態列：春祭り（Y82/AI18）+ 人聲循環 #3（私密）。Kaleidoscope 洞察。三個按鈕：創作挑戰、查看展示（→s11）、成長時間軸（→s12）。"
+  },
+  'sc-eva-5-desc': {
+    en: "Kenji's device security report. Recent new device login verified via two-factor authentication; work device confirmed secure. No anomalies detected this week.",
+    zh: "Kenji 的設備安全報告。近期新設備登入已透過雙重驗證確認；工作設備已確認安全。本週未檢測到異常。"
+  },
+  'sc-eva-6-desc': {
+    en: "Hiro's screen time and safety report. Usage alert: 3.5 hours of social media after midnight, exceeding the family's agreed limit. Kaleidoscope action taken: social media paused after 10 PM starting tonight per family setting.",
+    zh: "Hiro 的螢幕時間與安全報告。使用提醒：午夜後社群媒體使用 3.5 小時，超出家庭共識限制。AI 管家已採取行動：依家庭設定，從今晚起晚上 10 點後暫停社群媒體。"
+  },
+  'sc-eva-7-desc': {
+    en: "Two-tab screen: Chat and History. Chat: Mei converses with Kaleidoscope — books a cardiology appointment for Grandma, updates Hiro's screen time settings. History: chronological timeline of all alerts and AI actions across family members, grouped by day.",
+    zh: "雙分頁畫面：對話與歷史。對話：Mei 與 AI 管家互動——為奶奶預約心臟科門診、更新 Hiro 的螢幕時間設定。歷史：按時間排列的家庭成員警報與 AI 行動紀錄，依日期分組。"
+  },
+  'sc-eva-8-desc': {
+    en: "Incident detail for the blocked scam call on Grandma's device. Caller: +886-900-123-456, 847 community scam reports, impersonating a bank representative. AI blocked with 0-second ring time. Three action buttons: notify Grandma, view call log, block permanently.",
+    zh: "奶奶設備上被攔截詐騙電話的事件詳情。來電者：+886-900-123-456，847 筆社群詐騙回報，冒充銀行代表。AI 以 0 秒響鈴時間攔截。三個操作按鈕：通知奶奶、查看通話記錄、永久封鎖。"
+  },
+  'sc-eva-9-desc': {
+    en: "Incident detail for the phishing link blocked on Yuki's device. Site: secure-bank-login.xyz, impersonates Cathay Bank, SSL mismatch, domain 3 days old. Page blocked before loading — no data exposed. Reported to safe-browsing network.",
+    zh: "Yuki 設備上被攔截釣魚連結的事件詳情。網站：secure-bank-login.xyz，冒充國泰銀行，SSL 憑證不符，網域僅 3 天。頁面在載入前被封鎖——無資料外洩。已回報至安全瀏覽網絡。三個操作按鈕：傳訊給 Yuki、回報網站、調整瀏覽設定。"
+  },
+
+  'sc-eva-10-name': { en: 'AI Booking Task', zh: 'AI 預約任務' },
+  'sc-eva-10-desc': {
+    en: "Kaleidoscope executes the cardiology booking autonomously. Step-by-step task tracker shows: hospital search (NTU Hospital, 4 openings found) → slot matching (Nov 14 afternoon, no conflicts) → appointment confirmed (Dr. Li Wei, Nov 14, 2:30 PM). Booking confirmation card with location details. Grandma notified automatically.",
+    zh: "Kaleidoscope 自主執行心臟科門診預約。逐步任務追蹤器顯示：搜尋醫院（台大醫院，找到 4 個空缺）→ 配對時段（11 月 14 日下午，無衝突）→ 預約確認（李偉醫師，11 月 14 日下午 2:30）。含地點資訊的預約確認卡。奶奶自動收到通知。"
+  },
+
+  'sc-eva-11-name': { en: 'Yuki — Showcase', zh: 'Yuki — 作品展示' },
+  'sc-eva-11-desc': {
+    en: "Works Yuki chose to share with family via Bloom. Summary strip: 2 shared. Featured: 文化祭 2024 TikTok video with mock player, Director's Choice badge, Y68/AI32 ratio. Feed: 春祭り photo essay (Y82/AI18) + Voice Loop #3 (private, locked). Reaction row: Amazing work! + Leave a note. Privacy footer: Yuki controls what's shared.",
+    zh: "Yuki 透過 Bloom 選擇分享給家人的作品。摘要條：2 件已分享。精選：文化祭 2024 TikTok 影片含模擬播放器、導演選擇徽章、Y68/AI32 比例。動態列：春祭り 攝影短文（Y82/AI18）+ 人聲循環 #3（私密，已鎖定）。反應列：太棒了！+ 留言。隱私說明：Yuki 控制分享內容。"
+  },
+
+  'sc-eva-12-name': { en: 'Yuki — Growth Timeline', zh: 'Yuki — 成長時間軸' },
+  'sc-eva-12-desc': {
+    en: "Period selector (4 Weeks active). KPI row: +18% creative direction, 8 own decisions, 3× redirected AI. SVG line chart — Creative Voice % over Wk9–12 (52→55→61→68%), gradient fill, Wk11 green Director's Choice dot, Wk12 labeled badge. Milestone list: shared with family (Wk12), Director's Choice (Wk11), first AI refusal (Wk10), joined Bloom (Wk9). Skill bars: Creative Direction +18%, Collaboration +12%, Autonomous Choices +28%. Kaleidoscope Insight: 'You're watching it happen.'",
+    zh: "時間段選擇器（4 週啟用中）。KPI 列：創意方向 +18%、8 次自主決定、3 次引導 AI。SVG 折線圖——第 9-12 週創意聲音比例（52→55→61→68%），漸層填充，第 11 週綠色導演選擇圓點，第 12 週標籤徽章。里程碑列表：與家人分享（第 12 週）、導演選擇（第 11 週）、首次拒絕 AI（第 10 週）、加入 Bloom（第 9 週）。技能條：創意方向 +18%、協作 +12%、自主選擇 +28%。AI 洞察：「你正在見證這一切。」"
+  },
+
+  /* Mei screens section */
+  'screens-eva-title': { en: 'Screens & Flows',                        zh: '畫面與流程' },
+  'screens-eva-sub':   { en: "13 screens · Mei's family constellation view", zh: '13 個畫面 · Mei 家庭星座圖視角' },
+
+  /* Yuki nav tab */
+  'tab-yuki': { en: "Yuki's Creative Space", zh: 'Yuki 創作展示空間' },
+
+  /* Yuki hero */
+  'hero-yuki-kicker': { en: 'Interactive Prototype', zh: '互動原型' },
+  'hero-yuki-title': {
+    en: "Yuki's<br><span class='accent'>Constellation</span><br><span class='accent2' style='font-size:38px;'>Creator's View</span>",
+    zh: "Yuki 的<br><span class='accent'>星座圖</span><br><span class='accent2' style='font-size:38px;'>創作者視角</span>"
+  },
+  'hero-yuki-sub': {
+    en: "A young creator's personal world — Yuki at center, family around her, and a gateway to Bloom built right into the constellation. TrendLife bridges Yuki's creative ambitions with the family's trust layer, making parental involvement feel natural rather than restrictive.",
+    zh: "年輕創作者的個人世界——Yuki 居中，家人環繞，Bloom 入口直接整合在星座圖中。TrendLife 將 Yuki 的創作抱負與家庭信任層連結，讓家長的參與感覺自然而非限制。"
+  },
+  'persona-yuki-name': { en: 'Yuki Chen · 16 years old', zh: '陳 Yuki · 16 歲' },
+  'persona-yuki-meta': { en: 'High school student · Taipei · Mei & Kenji\'s daughter, Hiro\'s sister', zh: '高中生 · 台北 · Mei 與 Kenji 的女兒，Hiro 的姐姐' },
+  'ptag-yuki-1': { en: 'Teen creator',      zh: '青少年創作者' },
+  'ptag-yuki-2': { en: 'Fashion & Art',     zh: '時尚與藝術' },
+  'ptag-yuki-3': { en: 'Digitally native',  zh: '數位原住民' },
+  'ptag-yuki-4': { en: 'Values autonomy',   zh: '重視自主' },
+  'ptag-yuki-5': { en: 'AI-friendly',       zh: 'AI 親近' },
+  'principles-yuki-eyebrow': { en: 'Design Principles', zh: '設計原則' },
+  'p-yuki-1': {
+    en: "<strong>Creator at center</strong> — Yuki sees herself as the main character of her own world. The constellation reflects her creative identity and her connections — not a view managed by parents.",
+    zh: "<strong>創作者居中</strong> — Yuki 將自己視為自己世界的主角。星座圖反映她的創作身份與連結，而非由家長管理的視角。"
+  },
+  'p-yuki-2': {
+    en: "<strong>Bloom as a constellation node</strong> — Bloom appears as a discoverable node below Yuki, connected by a dashed purple line. Tapping triggers a zoom launch transition into Bloom's onboarding flow. The Bloom icon uses a purple double-ring mandala — a sister icon to Kaleidoscope.",
+    zh: "<strong>Bloom 作為星座節點</strong> — Bloom 以可探索節點形式顯示在 Yuki 下方，以紫色虛線相連。點擊觸發縮放過渡進入 Bloom 的引導流程。Bloom 圖示使用紫色雙環曼陀羅——Kaleidoscope 的姊妹圖示。"
+  },
+  'p-yuki-3': {
+    en: "<strong>Parental approval without friction</strong> — When an under-18 gate is hit, TrendLife routes the consent request directly to Mei via Kaleidoscope — no email, no separate app. Yuki sees a waiting screen with real-time delivery confirmation.",
+    zh: "<strong>無摩擦的家長批准</strong> — 當遇到未滿 18 歲的限制時，TrendLife 透過 Kaleidoscope 直接將同意請求傳送給 Mei，無需電子郵件或另開應用程式。Yuki 看到等待畫面，並即時確認送達。"
+  },
+  'p-yuki-4': {
+    en: "<strong>Transparency, not surveillance</strong> — The consent screen tells Yuki exactly what parents can see (activity summary, time limits, safety alerts) and what they can't (full content detail). Trust is built through clarity.",
+    zh: "<strong>透明，而非監控</strong> — 同意畫面明確告訴 Yuki 家長能看到什麼（活動摘要、時間限制、安全提醒）以及不能看到什麼（完整內容細節）。信任透過清晰建立。"
+  },
+  'p-yuki-5': {
+    en: "<strong>Kaleidoscope as Yuki's ally</strong> — The AI Companion Arc uses Yuki's color (green) and language. It's her helper, not a parental watchdog embedded in her view.",
+    zh: "<strong>Kaleidoscope 作為 Yuki 的夥伴</strong> — AI 陪伴穹頂使用 Yuki 的顏色（綠色）和語言。它是她的助手，而非嵌入她視角中的家長監控工具。"
+  },
+
+  /* Yuki screen names */
+  'sc-yuki-0-name': { en: 'Constellation Home',        zh: '星座圖首頁' },
+  'sc-yuki-1-name': { en: 'Bloom — Age Verify',   zh: 'Bloom · 年齡驗證' },
+  'sc-yuki-2-name': { en: 'Interests',                 zh: '創作興趣' },
+  'sc-yuki-3-name': { en: 'Goals',                     zh: '創作目標' },
+  'sc-yuki-4-name': { en: 'Parental Consent',          zh: '家長批准' },
+  'sc-yuki-5-name': { en: 'Waiting for Approval',      zh: '等待批准中' },
+
+  /* Yuki screen descs */
+  'sc-yuki-0-desc': {
+    en: "Yuki at center with a 'creator' badge. Family members orbit around her. AI Companion Arc spans the top in green. A Bloom node glows below with a pulsing teal ring and 'Join →' chip — tapping launches the onboarding flow with a zoom transition.",
+    zh: "Yuki 居中，帶有「creator」徽章。家庭成員在其周圍運行。AI 陪伴穹頂以綠色橫跨頂部。Bloom 節點在下方發光，帶有跳動的青藍色圓環和「Join →」標籤——點擊以縮放過渡啟動引導流程。"
+  },
+  'sc-yuki-1-desc': {
+    en: "Welcome screen for Bloom. Teal shield icon, birth date fields (Yuki enters 2008), privacy notice. No progress bar — this is the gate step before onboarding begins. Teal CTA '繼續 →' proceeds to interest selection.",
+    zh: "Bloom 歡迎畫面。青藍色盾牌圖示、出生日期欄位（Yuki 輸入 2008）、隱私聲明。無進度條——這是引導開始前的驗證步驟。青藍色 CTA「繼續 →」進入興趣選擇。"
+  },
+  'sc-yuki-2-desc': {
+    en: "Step 1 of 3. 你喜歡創作什麼內容？ — 6 category cards in a 2-column grid: Fashion & Style and Art & Design pre-selected (teal highlight). Pink sparkle icon as section header. 繼續 → advances to goals.",
+    zh: "第 1 步，共 3 步。你喜歡創作什麼內容？——6 個類別卡片以 2 欄顯示：時尚穿搭與藝術設計預先選取（青藍色高亮）。粉紅色閃光圖示作為標題。「繼續 →」進入目標設定。"
+  },
+  'sc-yuki-3-desc': {
+    en: "Step 2 of 3. 你想達成什麼目標？ — 4 goal rows: Jump on trends faster (pre-selected, pink), Create content with friends, Get creative ideas, Grow my following. Back + Continue buttons at bottom.",
+    zh: "第 2 步，共 3 步。你想達成什麼目標？——4 個目標列：Jump on trends faster（預先選取，粉紅色）、與朋友創作內容、獲得創意靈感、增加追蹤者。底部有返回與繼續按鈕。"
+  },
+  'sc-yuki-4-desc': {
+    en: "Step 3 of 3. Under-18 gate. TrendLife green banner explains the request goes via Kaleidoscope directly to Mom Mei — no email. Parent permissions listed (summary only, time limits, safety alerts). Checkbox consent + 開始創作 → sends the request.",
+    zh: "第 3 步，共 3 步。未滿 18 歲驗證。TrendLife 綠色橫幅說明請求透過 Kaleidoscope 直接傳送給媽媽 Mei，無需電子郵件。列出家長權限（僅摘要、時間限制、安全提醒）。勾選同意 + 「開始創作 →」傳送請求。"
+  },
+  'sc-yuki-5-desc': {
+    en: "Mei's purple avatar with pulsing rings. Animated loading dots. 等待批准中... with reassuring copy. A TrendLife notification card at the bottom confirms delivery — 'Yuki 想加入 Bloom，需要你的批准 →' with a green 已送達 badge.",
+    zh: "Mei 的紫色頭像帶有跳動圓環。動態載入圓點。「等待批准中...」附有安撫說明。底部 TrendLife 通知卡確認送達——「Yuki 想加入 Bloom，需要你的批准 →」附有綠色「已送達」徽章。"
+  },
+
+  'sc-yuki-6-name': { en: 'AI Chat', zh: 'AI 對話' },
+  'sc-yuki-6-desc': {
+    en: "Kaleidoscope chat in Yuki's context. Green AI avatar. Messages include Grandma voice message nudge and Bloom workspace guidance. Acts as Yuki's ally — not a parental watchdog.",
+    zh: "Yuki 語境下的 Kaleidoscope 對話。綠色 AI 頭像。訊息包含奶奶語音訊息提醒與 Bloom 工作空間引導。作為 Yuki 的夥伴，而非家長監控工具。"
+  },
+
+  'sc-yuki-7-name': { en: 'Joining Bloom', zh: '加入 Bloom' },
+  'sc-yuki-7-desc': {
+    en: "3-second auto-advance joining screen after approval. Bloom icon (purple double-ring mandala), 'Joining Bloom' title, animated progress. Transitions directly into the workspace.",
+    zh: "批准後 3 秒自動跳轉的加入畫面。Bloom 圖示（紫色雙環曼陀羅）、「加入 Bloom」標題、動態進度條。直接過渡至工作空間。"
+  },
+
+  'sc-yuki-8-name': { en: 'Bloom Workspace', zh: 'Bloom 工作空間' },
+  'sc-yuki-8-desc': {
+    en: "Active 文化祭 2024 Bloom collab workspace. Canvas preview with crew (Yuki + Hana + Ren). Authorship: 68% Yuki voice, 8 decisions / 3 redirections / 4 Q answered. Creative Direction Thread: 4-exchange AI dialogue with Director's Choice ✓. Socratic AI panel. Sharing card: family hasn't seen this yet → links to showcase.",
+    zh: "進行中的文化祭 2024 Bloom 協作工作空間。含小組成員（Yuki + Hana + Ren）的畫布預覽。作者比例：Yuki 聲音 68%，8 次決定 / 3 次引導 / 4 題已答。創作方向討論串：4 次 AI 對話，含導演選擇 ✓ 標記。蘇格拉底式 AI 面板。分享卡：家人尚未看到 → 連結至展示頁。"
+  },
+
+  'sc-yuki-9-name': { en: 'My Creative Space', zh: '我的創作空間' },
+  'sc-yuki-9-desc': {
+    en: "Yuki's personal showcase page after sharing 文化祭. Family reaction feed: Grandma (Japanese nostalgic text), Mom heart reaction, Dad reaction. Project badge: 'Bloom Collab · Shared with family.' Social share CTA at bottom.",
+    zh: "分享文化祭後的 Yuki 個人展示頁。家人反應動態：奶奶（日文懷念留言）、媽媽愛心反應、爸爸反應。專案徽章：「Bloom 協作 · 已與家人分享」。底部社群分享按鈕。"
+  },
+
+  /* Yuki screens section */
+  'screens-yuki-title': { en: 'Screens & Flows',                         zh: '畫面與流程' },
+  'screens-yuki-sub':   { en: "10 screens · Yuki's creator constellation view", zh: '10 個畫面 · Yuki 創作者星座圖視角' },
+
+  /* Screen nav group labels */
+  'snav-group-core':       { en: 'CORE',             zh: '核心' },
+  'snav-group-members':    { en: 'MEMBERS',          zh: '成員' },
+  'snav-group-ai':         { en: 'KALEIDOSCOPE',     zh: 'KALEIDOSCOPE' },
+  'snav-group-incidents':  { en: 'INCIDENTS',        zh: '事件' },
+  'snav-group-creative':   { en: 'CREATIVE',         zh: '創作' },
+  'snav-group-onboarding': { en: 'BLOOM ONBOARDING', zh: 'BLOOM 引導' },
+  'snav-group-health':     { en: 'HEALTH',           zh: '健康' },
+  'snav-group-personal':   { en: 'PERSONAL',         zh: '個人' },
+
+  /* Footer */
+  'footer-text':  { en: 'TrendLife Kaleidoscope · Constellation Design Spec · March 2026', zh: 'TrendLife AI 管家 · 星座圖設計規格 · 2026 年 3 月' },
+  'footer-brand': { en: 'TrendLife', zh: 'TrendLife' },
+};
+
+let currentLang = localStorage.getItem('tl-const-spec-lang') || 'en';
+
+function setLang(lang) {
+  document.body.classList.add('lang-switching');
+  setTimeout(() => {
+    currentLang = lang;
+    localStorage.setItem('tl-const-spec-lang', lang);
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+    document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (dict[key]?.[lang] !== undefined) el.textContent = dict[key][lang];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.dataset.i18nHtml;
+      if (dict[key]?.[lang] !== undefined) el.innerHTML = dict[key][lang];
+    });
+    document.body.classList.remove('lang-switching');
+  }, 160);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (currentLang !== 'en') setLang(currentLang);
+});
+
+/* ── VIEW SWITCHER ── */
+function switchView(view) {
+  document.getElementById('view-eva').style.display   = view === 'eva'   ? '' : 'none';
+  document.getElementById('view-yuki').style.display  = view === 'yuki'  ? '' : 'none';
+  document.getElementById('tab-btn-eva').classList.toggle('nav-vtab-active',   view === 'eva');
+  document.getElementById('tab-btn-yuki').classList.toggle('nav-vtab-active',  view === 'yuki');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ── EVA SCREEN NAVIGATOR ── */
+function evaGoTo(n) {
+  const iframe = document.getElementById('evaIframe');
+  if (iframe?.contentWindow) iframe.contentWindow.postMessage({type:'goTo', screen:n}, '*');
+  document.querySelectorAll('#screenNavEva .snav-item').forEach((b, i) => {
+    b.classList.toggle('snav-active', i === n);
+  });
+}
+
+/* ── YUKI SCREEN NAVIGATOR ── */
+function yukiGoTo(n) {
+  const iframe = document.getElementById('yukiIframe');
+  if (iframe?.contentWindow) iframe.contentWindow.postMessage({type:'goTo', screen:n}, '*');
+  document.querySelectorAll('#screenNavYuki .snav-item').forEach((b, i) => {
+    b.classList.toggle('snav-active', i === n);
+  });
+}
+
+/* ── SCROLL TO PHONE ── */
+function scrollToPhone(iframeId) {
+  document.getElementById(iframeId)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+/* ── SCROLL FADE DETECTION ── */
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.snav-items-wrap').forEach(wrap => {
+    const nav = wrap.closest('.screen-nav');
+    function checkScroll() {
+      const hasMore = wrap.scrollHeight - wrap.scrollTop - wrap.clientHeight > 8;
+      nav.classList.toggle('has-scroll', hasMore);
+    }
+    wrap.addEventListener('scroll', checkScroll, { passive: true });
+    setTimeout(checkScroll, 600);
+  });
+});
+
+/* ── THEME SWITCHER ── */
+function setTheme(t) {
+  document.body.classList.toggle('light', t === 'light');
+  ['evaIframe','yukiIframe'].forEach(id => {
+    const f = document.getElementById(id);
+    if (f?.contentWindow) f.contentWindow.postMessage({type:'setTheme', theme:t}, '*');
+  });
+  document.getElementById('btn-dark').classList.toggle('active', t === 'dark');
+  document.getElementById('btn-light').classList.toggle('active', t === 'light');
+}
+</script>
+</body>
+</html>
