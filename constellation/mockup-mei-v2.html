@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<title>TrendLife — Mei v2</title>
+<title>TrendLife — Mayumi v2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
 <style>
@@ -44,11 +44,12 @@
   --amber:#D97706;--amber-dim:rgba(217,119,6,0.08);
   --teal:#0D7D74;--teal-dim:rgba(13,125,116,0.08);
 }
-[data-theme="light"] .device{box-shadow:0 0 0 1px rgba(0,0,0,0.1),0 40px 120px rgba(0,0,0,0.18)}
+[data-theme="light"] .device{box-shadow:0 0 0 10px #ccc,0 0 0 11px rgba(0,0,0,0.06),0 30px 100px rgba(0,0,0,0.18)}
 [data-theme="light"] .bottom-nav-inner{background:rgba(255,255,255,0.72);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-color:rgba(0,0,0,0.1)}
-[data-theme="light"] .alert-banner{background:linear-gradient(135deg,rgba(190,18,60,0.1),rgba(147,51,234,0.06));border-color:rgba(190,18,60,0.2)}
-[data-theme="light"] .alert-text{color:#9F1239}
-[data-theme="light"] .alert-dot{background:#BE123C;box-shadow:0 0 6px rgba(190,18,60,0.35)}
+[data-theme="light"] .alert-banner{background:linear-gradient(135deg,rgba(159,18,57,0.1),rgba(249,115,22,0.06));border-color:rgba(159,18,57,0.25)}
+[data-theme="light"] .alert-text{color:#881337}
+[data-theme="light"] .alert-arrow{color:rgba(136,19,55,0.6)}
+[data-theme="light"] .alert-dot{background:#9F1239;box-shadow:0 0 6px rgba(159,18,57,0.4)}
 [data-theme="light"] .node-circle{fill:var(--surface)}
 [data-theme="light"] .conn-base{opacity:0.6}
 [data-theme="light"] .notif-wrap{background:rgba(236,236,248,0.9);border-color:rgba(0,0,0,0.08)}
@@ -62,7 +63,7 @@
 [data-theme="light"] .protect-card.warn{background:rgba(147,51,234,0.06);border-color:rgba(147,51,234,0.16)}
 
 html{font-size:16px;-webkit-tap-highlight-color:transparent}
-body{background:#2a2a2a;font-family:var(--font);color:var(--text);-webkit-font-smoothing:antialiased;overflow:hidden;height:100dvh;display:flex;justify-content:center;align-items:center}
+body{background:#2a2a2a;font-family:var(--font);color:var(--text);-webkit-font-smoothing:antialiased;overflow:hidden;height:100dvh;display:flex;justify-content:center;align-items:center;padding-bottom:52px}
 button{font-family:inherit;border:none;background:none;cursor:pointer;color:inherit}
 
 /* ═══ THEME TOGGLE ═══ */
@@ -70,16 +71,21 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .theme-toggle:hover{transform:scale(1.1)}
 
 /* ═══ DEVICE ═══ */
-.device{width:375px;height:100vh;background:var(--bg);border-radius:0;overflow:hidden;position:relative}
+.device{width:375px;height:812px;max-height:calc(100dvh - 56px);background:var(--bg);border-radius:44px;overflow:hidden;position:relative;box-shadow:0 0 0 10px #111,0 0 0 11px rgba(255,255,255,0.06),0 30px 100px rgba(0,0,0,0.6)}
 
 /* ═══ STATUS BAR ═══ */
-.status-bar{position:absolute;top:0;left:0;right:0;height:54px;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 24px 0}
+.status-bar{position:absolute;top:0;left:0;right:0;height:54px;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 28px 0;background:rgba(9,9,11,0.5);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%)}
+[data-theme="light"] .status-bar{background:rgba(231,235,240,0.6)}
 .status-time{font-size:15px;font-weight:600;color:var(--text);letter-spacing:-0.3px}
-.status-icons{font-size:11px;color:var(--text3);letter-spacing:2px}
-.profile-btn{width:34px;height:34px;border-radius:50%;overflow:hidden;padding:0;border:1.5px solid var(--border2);transition:all 0.25s var(--ease-out);flex-shrink:0}
-.profile-btn img{width:100%;height:100%;object-fit:cover;display:block}
-.profile-btn:active{transform:scale(0.9)}
-.profile-btn.active{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-dim)}
+.status-notch{width:120px;height:28px;background:transparent;border-radius:0 0 20px 20px;flex-shrink:0}
+.status-icons{display:flex;align-items:center;gap:5px;color:var(--text)}
+/* Profile avatar in home header (non-interactive) */
+.profile-avatar{width:36px;height:36px;border-radius:50%;overflow:hidden;border:1.5px solid var(--border2);flex-shrink:0}
+.profile-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+/* Settings button */
+.settings-btn{width:36px;height:36px;border-radius:50%;padding:0;flex-shrink:0;background:transparent;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text3);cursor:pointer;transition:all 0.25s var(--ease-out)}
+.settings-btn:hover{color:var(--text);background:var(--surface2)}
+.settings-btn:active{transform:scale(0.9)}
 
 /* ═══ VIEW SYSTEM ═══ */
 .view{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;transform:translateX(20px);pointer-events:none;transition:opacity 0.35s var(--ease-out),transform 0.35s var(--ease-out);padding-top:54px}
@@ -104,28 +110,47 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .nav-label{font-size:10px;font-weight:600;color:var(--text3);letter-spacing:0.3px;transition:color 0.2s}
 .nav-item.active .nav-label{color:var(--accent)}
 /* AI center button */
-.nav-ai{width:52px;height:52px;border-radius:50%;padding:0;background:rgba(0,188,212,0.18);justify-content:center;gap:0;position:relative;z-index:10;transition:transform 0.4s var(--ease-out),background 0.35s ease}
-.nav-ai.active{background:rgba(0,188,212,0.35)}
-.nav-ai .nav-label{display:none}
-.nav-ai:active{transform:scale(0.92)}
+.nav-ai{width:52px;height:52px;border-radius:50%;padding:0;background:rgba(139,92,246,0.25);justify-content:center;gap:0;position:relative;z-index:10;transition:transform 0.4s var(--ease-out),background 0.35s ease}
+.nav-ai.active{background:var(--violet)}
+.nav-ai .nav-icon,.nav-ai .nav-label{display:none}
+.nav-ai:active{transform:scale(0.92);transition-duration:0.1s}
+/* Breathing inner glow */
+.nav-ai::before{content:'';position:absolute;inset:-6px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,0.5) 0%,rgba(139,92,246,0.15) 50%,transparent 72%);opacity:0;z-index:-1;filter:blur(8px);animation:none}
+.nav-ai.active::before{animation:navAiBreathe 3.2s var(--ease-out) infinite}
+@keyframes navAiBreathe{0%,100%{opacity:0;transform:scale(0.85)}40%{opacity:0.7;transform:scale(1.05)}70%{opacity:0.3;transform:scale(1.12)}}
+/* Outer soft halo */
+.nav-ai::after{content:'';position:absolute;inset:-10px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,0.3) 0%,rgba(139,92,246,0.05) 60%,transparent 75%);filter:blur(5px);opacity:0;z-index:-2;animation:none}
+.nav-ai.active::after{animation:navAiHalo 3.2s var(--ease-out) infinite;animation-delay:0.4s}
+@keyframes navAiHalo{0%,100%{opacity:0;transform:scale(0.9)}50%{opacity:0.5;transform:scale(1.18)}}
+/* Ring SVG */
 .nav-ai__ring{position:absolute;inset:-8px;width:calc(100% + 16px);height:calc(100% + 16px);pointer-events:none;z-index:-1;opacity:0;animation:none}
 .nav-ai.active .nav-ai__ring{animation:navRingBreathe 3.2s var(--ease-out) infinite}
-@keyframes navRingBreathe{0%,100%{opacity:0;transform:scale(0.94)}40%{opacity:0.6;transform:scale(1)}70%{opacity:0.2;transform:scale(1.04)}}
-.nav-ai::before{content:'';position:absolute;inset:-6px;border-radius:50%;background:radial-gradient(circle,rgba(0,188,212,0.45) 0%,rgba(0,188,212,0.1) 50%,transparent 72%);opacity:0;z-index:-1;filter:blur(8px);animation:none}
-.nav-ai.active::before{animation:navAiBreathe 3.2s var(--ease-out) infinite}
-@keyframes navAiBreathe{0%,100%{opacity:0;transform:scale(0.85)}40%{opacity:0.6;transform:scale(1.05)}70%{opacity:0.2;transform:scale(1.12)}}
-.nav-ai.active{box-shadow:0 0 0 3px rgba(0,188,212,0.2),0 0 18px rgba(0,188,212,0.15)}
-.nav-ai-img{width:22px;height:22px;position:relative;z-index:2;opacity:0.75;filter:brightness(1.5) hue-rotate(0deg)}
-.nav-ai.active .nav-ai-img{opacity:1}
+@keyframes navRingBreathe{0%,100%{opacity:0;transform:scale(0.94) rotate(0deg)}40%{opacity:0.6;transform:scale(1) rotate(6deg)}70%{opacity:0.2;transform:scale(1.04) rotate(10deg)}}
+/* Orbiting particles */
+.nav-ai__orbit{position:absolute;inset:0;border-radius:50%;animation:none;pointer-events:none}
+.nav-ai__orbit::before,.nav-ai__orbit::after{content:'';position:absolute;width:3px;height:3px;border-radius:50%;background:var(--accent2);opacity:0}
+.nav-ai__orbit::before{top:-5px;left:50%;margin-left:-1.5px}
+.nav-ai__orbit::after{bottom:-4px;left:50%;margin-left:-1.5px}
+.nav-ai.active .nav-ai__orbit{animation:navOrbitSpin 8s linear infinite}
+.nav-ai.active .nav-ai__orbit::before{opacity:0.7;animation:navOrbitPulse 2s ease-in-out infinite}
+.nav-ai.active .nav-ai__orbit::after{opacity:0.4;animation:navOrbitPulse 2s ease-in-out 1s infinite}
+@keyframes navOrbitSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes navOrbitPulse{0%,100%{transform:scale(1);opacity:0.3}50%{transform:scale(1.6);opacity:0.8}}
+/* Active glow ring */
+.nav-ai.active{box-shadow:0 0 0 3px rgba(139,92,246,0.25),0 0 18px rgba(139,92,246,0.2)}
+/* Kaleidoscope icon */
+.nav-ai-img{width:22px;height:22px;position:relative;z-index:2;opacity:0.75;transition:opacity 0.35s ease,filter 0.35s ease}
+.nav-ai.active .nav-ai-img{opacity:1;filter:brightness(0) invert(1)}
 
 /* ═══ HOME — greeting ═══ */
 .home-header{padding:8px 20px 0}
-.home-greeting{font-size:13px;color:var(--text3);letter-spacing:0.2px}
-.home-title{font-size:26px;font-weight:800;letter-spacing:-0.7px;line-height:1.18;margin-top:4px}
+.home-greeting-row{display:flex;align-items:center;gap:10px}
+.home-greeting{font-size:13px;color:var(--text3);letter-spacing:0.2px;flex:1}
+.home-title{font-size:clamp(20px,6.5vw,26px);font-weight:800;letter-spacing:-0.7px;line-height:1.18;margin-top:4px;white-space:normal;word-break:keep-all;overflow-wrap:break-word}
 .home-title span{background:linear-gradient(135deg,var(--accent),var(--ai));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
 /* ═══ HOME — alert banner ═══ */
-.alert-banner{margin:0 20px;padding:14px 16px;border-radius:var(--radius);background:linear-gradient(135deg,rgba(244,63,94,0.16),rgba(192,132,252,0.1));border:1px solid rgba(244,63,94,0.26);border-left:3px solid var(--coral);display:flex;align-items:center;gap:12px;cursor:pointer;position:relative;overflow:hidden;transition:transform 0.2s var(--ease-out),box-shadow 0.3s}
+.alert-banner{margin:20px 20px 0;padding:14px 16px;border-radius:var(--radius);background:linear-gradient(135deg,rgba(244,63,94,0.18),rgba(249,115,22,0.12));border:1px solid rgba(244,63,94,0.28);border-left:3px solid var(--coral);display:flex;align-items:center;gap:12px;cursor:pointer;position:relative;overflow:hidden;transition:transform 0.2s var(--ease-out),box-shadow 0.3s}
 .alert-banner:hover{box-shadow:0 4px 20px rgba(244,63,94,0.15)}
 .alert-banner:active{transform:scale(0.98)}
 .alert-banner::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(244,63,94,0.06),transparent);animation:alertShimmer 4s ease-in-out 1.2s infinite;pointer-events:none}
@@ -135,21 +160,21 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .alert-exit{animation:alertSlideOut 0.5s var(--ease-out) forwards}
 @keyframes alertSlideOut{to{opacity:0;transform:translateX(-100%);max-height:0;margin:0;padding:0}}
 .alert-enter{animation:alertSlideIn 0.7s var(--ease-out) both}
-@keyframes alertSlideIn{from{opacity:0;transform:translateX(-100%);max-height:0;margin-top:0;padding:0}to{opacity:1;transform:translateX(0);max-height:80px;margin-top:16px;padding:14px 16px}}
+@keyframes alertSlideIn{from{opacity:0;transform:translateX(-100%);max-height:0;margin-top:0;padding:0}to{opacity:1;transform:translateX(0);max-height:80px;margin-top:20px;padding:14px 16px}}
 .alert-dot{width:8px;height:8px;border-radius:50%;background:var(--coral);flex-shrink:0;animation:dotPulse 2s ease-in-out infinite;box-shadow:0 0 6px rgba(244,63,94,0.4)}
 @keyframes dotPulse{0%,100%{box-shadow:0 0 4px rgba(244,63,94,0.4);transform:scale(1)}50%{box-shadow:0 0 12px rgba(244,63,94,0.6),0 0 0 4px rgba(244,63,94,0.12);transform:scale(1.2)}}
 .alert-body{flex:1}
 .alert-label{font-size:10px;font-weight:700;color:rgba(255,120,120,0.7);letter-spacing:0.6px;text-transform:uppercase;margin-bottom:2px}
-.alert-text{font-size:13px;font-weight:600;color:#FF8A9A;line-height:1.35}
-.alert-arrow{font-size:14px;color:rgba(255,138,154,0.6);flex-shrink:0;animation:arrowNudge 2s ease-in-out infinite}
-@keyframes arrowNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(3px)}}
+.alert-text{font-size:13px;font-weight:600;color:#FF8A9A;line-height:1.4}
+.alert-close{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid rgba(244,63,94,0.25);color:rgba(255,138,154,0.7);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:background 0.15s,color 0.15s;line-height:1;padding:0}
+.alert-close:hover{background:rgba(244,63,94,0.2);color:#FF8A9A}
 
 /* ═══ HOME — constellation ═══ */
-.constellation{position:relative;height:300px;margin:20px 0 6px;display:flex;align-items:center;justify-content:center}
+.constellation{position:relative;height:auto;margin:22px 0 0;display:flex;align-items:center;justify-content:center}
 .constellation svg{width:100%;height:100%}
 .node{cursor:pointer;transition:transform 0.3s var(--ease-spring);transform-origin:center center;transform-box:fill-box}
-.node:hover{transform:scale(1.1)}
-.node-ring{fill:none;stroke-width:1.5;opacity:0.25}
+.node:hover{transform:scale(1.12)}
+.node-ring{fill:none;stroke-width:1.5;opacity:0.3}
 .node-circle{stroke-width:1.5}
 .node-label{font-family:'DM Sans',sans-serif;font-weight:600;fill:var(--text2);font-size:10px}
 .center-ring{fill:none;stroke:var(--accent);stroke-width:1;opacity:0.15;animation:centerPulse 4s ease-in-out infinite}
@@ -164,7 +189,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .conn-base.conn-cross{stroke-width:1.2;opacity:0.3}
 
 /* ═══ HOME — section header & bento ═══ */
-.section-hdr{padding:0 20px;margin-top:20px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+.section-hdr{padding:0 20px;margin-top:8px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
 .section-label{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.5px;text-transform:uppercase}
 .section-more{font-size:12px;font-weight:600;color:var(--accent)}
 .bento{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 20px}
@@ -172,23 +197,23 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .bento-card:active{transform:scale(0.97)}
 .bento-card:hover{border-color:var(--border2)}
 .bento-card.wide{grid-column:span 2}
-.bento-icon{font-size:26px;margin-bottom:10px;display:block}
+.bento-icon{font-size:28px;margin-bottom:10px;display:block;color:var(--text2)}
 .bento-title{font-size:14px;font-weight:700;color:var(--text);letter-spacing:-0.2px;margin-bottom:3px}
 .bento-desc{font-size:11.5px;color:var(--text3);line-height:1.5}
 .bento-badge{position:absolute;top:12px;right:12px;font-size:9px;font-weight:700;padding:3px 8px;border-radius:100px;letter-spacing:0.3px}
-.badge-safe{background:var(--green-dim);color:var(--green);border:1px solid rgba(74,222,128,0.18)}
+.badge-safe{background:var(--green-dim);color:var(--green);border:1px solid rgba(34,197,94,0.18)}
 .badge-alert{background:var(--coral-dim);color:var(--coral);border:1px solid rgba(244,63,94,0.18)}
-.badge-ai{background:var(--ai-dim);color:var(--ai);border:1px solid rgba(0,188,212,0.18)}
-.badge-bloom{background:var(--accent-dim);color:var(--accent);border:1px solid rgba(192,132,252,0.18)}
-.bento-card::before{content:'';position:absolute;top:-30px;right:-30px;width:80px;height:80px;border-radius:50%;opacity:0.07;pointer-events:none}
+.badge-ai{background:var(--violet-dim);color:var(--violet);border:1px solid rgba(139,92,246,0.18)}
+.badge-bloom{background:var(--violet-dim);color:var(--violet);border:1px solid rgba(139,92,246,0.18)}
+.bento-card::before{content:'';position:absolute;top:-30px;right:-30px;width:80px;height:80px;border-radius:50%;opacity:0.06;pointer-events:none}
 .bento-card.health::before{background:var(--coral)}
-.bento-card.protect::before{background:var(--ai)}
-.bento-card.creative::before{background:var(--accent)}
+.bento-card.protect::before{background:var(--teal)}
+.bento-card.creative::before{background:var(--violet)}
 .bento-card.screen::before{background:var(--amber)}
 
 /* ═══ HOME — notification section ═══ */
 .notif-section{padding:0 20px;margin-top:20px}
-.notif-section-lbl{font-size:10px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;-webkit-user-select:none;transition:margin 0.25s var(--ease-out)}
+.notif-section-lbl{font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;-webkit-user-select:none;transition:margin 0.25s var(--ease-out)}
 .notif-section-lbl:active{opacity:0.7}
 .notif-lbl-left{display:flex;align-items:center;gap:7px}
 .notif-count-badge{font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:10px;background:var(--surface2);border:1px solid var(--border2);color:var(--text3);transition:background 0.2s,color 0.2s}
@@ -198,33 +223,39 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .notif-section.collapsed .notif-section-lbl{margin-bottom:0;border-bottom-color:transparent}
 .notif-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;transition:height 0.3s var(--ease-out),opacity 0.25s ease}
 .notif-section.collapsed .notif-wrap{opacity:0}
-.notif-row{display:flex;align-items:center;gap:9px;padding:10px 12px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;position:relative}
+.notif-row{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;position:relative}
 .notif-row:last-child{border-bottom:none}
 .notif-row:active{background:var(--surface2)}
 .notif-alert{background:rgba(244,63,94,0.07);border-bottom-color:rgba(244,63,94,0.12)}
 .notif-alert::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--coral);border-radius:0 2px 2px 0}
-.notif-icon{font-size:14px;width:20px;text-align:center;flex-shrink:0}
-.notif-body{flex:1;font-size:12px;font-weight:500;color:var(--text2);letter-spacing:-0.1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.notif-time{font-size:10px;color:var(--text3);flex-shrink:0}
+.notif-icon{font-size:16px;width:24px;text-align:center;flex-shrink:0}
+.notif-body{flex:1;font-size:13px;font-weight:500;color:var(--text2);letter-spacing:-0.1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.notif-time{font-size:11px;color:var(--text3);flex-shrink:0}
 .notif-dismiss{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid var(--border2);color:var(--text3);font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-left:2px}
 
 /* ═══ EVENTS ═══ */
 .events-header{padding:8px 20px 20px}
 .events-title{font-size:24px;font-weight:800;letter-spacing:-0.6px}
 .events-sub{font-size:13px;color:var(--text3);margin-top:4px}
-.date-sep{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.4px;padding:16px 20px 8px;text-transform:uppercase}
+.date-sep{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.4px;padding:20px 20px 8px;text-transform:uppercase}
 .event-list{padding:0 20px;display:flex;flex-direction:column;gap:2px}
 .event-item{display:flex;gap:14px;padding:14px;border-radius:var(--radius);transition:background 0.2s;cursor:pointer}
 .event-item:active{background:var(--surface)}
 .ev-timeline{display:flex;flex-direction:column;align-items:center;width:36px;flex-shrink:0}
-.ev-dot{width:36px;height:36px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid var(--border2);background:var(--surface);flex-shrink:0}
-.ev-line{width:1px;flex:1;background:var(--border);margin-top:4px}
+.ev-dot{width:40px;height:40px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:18px;border:1.5px solid var(--border2);background:var(--surface);flex-shrink:0;position:relative;transition:transform 0.3s var(--ease-spring),box-shadow 0.3s}
+.ev-dot.glow-red{border-color:rgba(244,63,94,0.4);background:var(--coral-dim);box-shadow:0 0 12px rgba(244,63,94,0.15)}
+.ev-dot.glow-violet{border-color:rgba(139,92,246,0.4);background:var(--violet-dim);box-shadow:0 0 12px rgba(139,92,246,0.15)}
+.ev-dot.glow-amber{border-color:rgba(249,115,22,0.4);background:var(--accent-dim);box-shadow:0 0 12px rgba(249,115,22,0.15)}
+.ev-dot.glow-green{border-color:rgba(34,197,94,0.4);background:var(--green-dim);box-shadow:0 0 12px rgba(34,197,94,0.15)}
+.ev-dot.live::after{content:'';position:absolute;top:10px;left:10px;width:8px;height:8px;border-radius:50%;background:var(--coral);animation:evPulse 2s ease-in-out infinite}
+@keyframes evPulse{0%,100%{opacity:0.8;box-shadow:0 0 0 0 rgba(244,63,94,0.4)}50%{opacity:1;box-shadow:0 0 0 6px rgba(244,63,94,0)}}
+.ev-line{width:2px;flex:1;background:linear-gradient(to bottom,var(--border2),transparent);margin-top:4px;border-radius:1px}
 .event-item:last-child .ev-line{display:none}
 .ev-content{flex:1;padding-top:2px}
 .ev-who{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:3px}
 .ev-msg{font-size:13.5px;font-weight:500;color:var(--text);line-height:1.5;letter-spacing:-0.1px}
 .ev-time{font-size:11px;color:var(--text3);margin-top:4px}
-.ev-tag{display:inline-block;font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:6px;margin-right:4px;margin-top:6px}
+.ev-tag{display:inline-block;font-size:9.5px;font-weight:700;padding:3px 8px;border-radius:6px;margin-right:4px;margin-top:6px}
 .ev-tag.red{background:var(--coral-dim);color:var(--coral)}
 .ev-tag.green{background:var(--green-dim);color:var(--green)}
 .ev-tag.bloom{background:var(--accent-dim);color:var(--accent)}
@@ -349,6 +380,31 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .expert-label{font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--ai);margin-bottom:8px;display:flex;align-items:center;gap:6px}
 .expert-text{font-size:12.5px;color:var(--text2);line-height:1.7}
 
+/* ═══ HEALTH VIEW (Apple Health–style) ═══ */
+.health-hero{text-align:center;padding:20px 0 4px}
+.health-av{width:72px;height:72px;border-radius:50%;margin:0 auto 12px;overflow:hidden;border:2px solid var(--border2)}
+.health-av img{width:100%;height:100%;object-fit:cover}
+.health-name{font-size:20px;font-weight:800;letter-spacing:-0.5px;color:var(--text)}
+.health-role{font-size:12px;color:var(--text3);margin-top:3px}
+.health-section-hdr{font-size:20px;font-weight:700;letter-spacing:-0.4px;color:var(--text);padding:20px 0 10px}
+.health-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:background 0.15s}
+.health-card:active{background:var(--surface2)}
+.health-card-alert{border-color:rgba(244,63,94,0.28);background:rgba(244,63,94,0.05)}
+.health-card-ai{border-color:rgba(0,188,212,0.2);background:rgba(0,188,212,0.04)}
+.health-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.health-cat{font-size:13px;font-weight:700;letter-spacing:-0.1px;display:flex;align-items:center;gap:6px}
+.health-time{font-size:11.5px;color:var(--text3)}
+.health-val{font-size:36px;font-weight:800;letter-spacing:-1.5px;line-height:1}
+.health-unit{font-size:15px;font-weight:500;letter-spacing:0;opacity:0.7}
+.health-badge{display:inline-flex;align-items:center;font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px;margin-top:10px}
+.health-badge.alert{background:var(--coral-dim);color:var(--coral);border:1px solid rgba(244,63,94,0.2)}
+.health-badge.warn{background:var(--amber-dim);color:var(--amber);border:1px solid rgba(249,115,22,0.2)}
+.health-badge.ok{background:var(--green-dim);color:var(--green);border:1px solid rgba(34,197,94,0.2)}
+.health-detail{font-size:13px;color:var(--text2);line-height:1.6;margin-top:8px}
+.health-sub{font-size:11.5px;color:var(--text3);line-height:1.5;margin-top:6px}
+.health-med-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.health-taken{font-size:12px;font-weight:700;color:var(--green);flex-shrink:0}
+
 /* ═══ DRILLDOWN — Yuki growth ═══ */
 .yuki-work-card{display:flex;border-radius:var(--radius-sm);overflow:hidden;margin-bottom:10px;border:1px solid var(--border);background:var(--surface)}
 .yuki-work-card.featured{flex-direction:column;border-color:rgba(192,132,252,0.2)}
@@ -376,8 +432,18 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:var(--radius-xs)}
 @media(prefers-reduced-motion:reduce){
   .view,.alert-banner,.msg{transition:none;animation:none}
-  .alert-banner::after,.alert-dot,.alert-arrow,.center-ring,.ai-arc,.nav-ai::before,.nav-ai__ring{animation:none}
+  .alert-banner::after,.alert-dot,.alert-arrow,.center-ring,.ai-arc,.nav-ai::before,.nav-ai::after,.nav-ai__ring,.nav-ai__orbit{animation:none}
 }
+
+/* ═══ AI CHAT INPUT — v1.3 approach ═══ */
+@property --input-border-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes inputBorderSpin{to{--input-border-angle:360deg}}
+#v-ai .chat-input-bar{position:absolute;bottom:88px;left:0;right:0;padding:0 12px;background:none;border-top:none;z-index:10;pointer-events:none}
+#v-ai .chat-msgs{padding-bottom:180px}
+.chat-input-bar-inner{pointer-events:auto;position:relative;display:flex;width:100%;gap:8px;align-items:center;background:rgba(24,24,27,0.75);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:none;border-radius:100px;padding:6px 6px 6px 18px;box-shadow:0 4px 24px rgba(0,0,0,0.3),0 0 0 1px rgba(255,255,255,0.06)}
+.chat-input-bar-inner::before{content:'';position:absolute;inset:-1.5px;border-radius:100px;background:conic-gradient(from var(--input-border-angle,0deg),rgba(139,92,246,0.6),rgba(0,188,212,0.6),rgba(192,132,252,0.5),rgba(139,92,246,0.6));z-index:-1;animation:inputBorderSpin 4s linear infinite}
+.chat-input-bar-inner::after{content:'';position:absolute;inset:0;border-radius:100px;background:rgba(24,24,27,0.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);z-index:-1}
+#v-ai .chat-input{border:none;background:transparent;padding:8px 0;flex:1}
 </style>
 </head>
 <body>
@@ -399,12 +465,12 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
   <!-- Status Bar -->
   <div class="status-bar">
     <span class="status-time">9:41</span>
+    <span class="status-notch"></span>
     <span class="status-icons">
-      <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><path d="M1 7c2.5-3.5 5-5 7-5s4.5 1.5 7 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="9" r="1.5"/></svg>
-      <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="1" y="2" width="2" height="8" rx="0.5" opacity="0.4"/><rect x="4.5" y="3.5" width="2" height="6.5" rx="0.5" opacity="0.6"/><rect x="8" y="1.5" width="2" height="8.5" rx="0.5" opacity="0.8"/><rect x="11.5" y="0" width="2" height="10" rx="0.5"/></svg>
-      <svg width="22" height="12" viewBox="0 0 22 12" fill="none"><rect x="0.5" y="1" width="18" height="10" rx="2" stroke="currentColor" stroke-width="1"/><rect x="2" y="2.5" width="12" height="7" rx="1" fill="currentColor"/><path d="M20 4.5v3a1.5 1.5 0 0 0 0-3z" fill="currentColor" opacity="0.4"/></svg>
+      <svg width="15" height="12" viewBox="0 0 15 12" fill="currentColor"><path d="M7.5 3.6C9.8 3.6 11.8 4.5 13.3 6l1.2-1.2C12.8 3 10.3 1.8 7.5 1.8S2.2 3 .5 4.8L1.7 6C3.2 4.5 5.2 3.6 7.5 3.6z" opacity="0.5"/><path d="M7.5 6.5c1.5 0 2.8.6 3.8 1.5l1.2-1.2c-1.3-1.2-3-2-5-2s-3.7.8-5 2L3.7 8c1-1 2.3-1.5 3.8-1.5z" opacity="0.7"/><circle cx="7.5" cy="10.5" r="1.5"/></svg>
+      <svg width="17" height="12" viewBox="0 0 17 12" fill="currentColor"><rect x="0" y="3" width="3" height="9" rx="1" opacity="0.4"/><rect x="4.5" y="2" width="3" height="10" rx="1" opacity="0.6"/><rect x="9" y="1" width="3" height="11" rx="1" opacity="0.8"/><rect x="13.5" y="0" width="3" height="12" rx="1"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="2.5" stroke="currentColor" stroke-width="1"/><rect x="1.5" y="2" width="15" height="8" rx="1.5" fill="currentColor"/><path d="M22.5 4v4a2 2 0 0 0 0-4z" fill="currentColor" opacity="0.4"/></svg>
     </span>
-    <button class="profile-btn" id="profileBtn" onclick="switchView(4)"><img src="faces/mei.png" alt="Mei"></button>
   </div>
 
   <!-- ═══ VIEW 0 — HOME ═══ -->
@@ -412,18 +478,22 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
     <div class="view-scroll">
 
       <div class="home-header fade-in">
-        <div class="home-greeting">Good morning, Mei</div>
-        <div class="home-title">Your <span>Family</span><br>at a Glance</div>
+        <div class="home-greeting-row">
+          <div class="profile-avatar"><img src="faces/mei.png" alt="Mayumi"></div>
+          <div class="home-greeting">Good morning, Mayumi</div>
+          <button class="settings-btn" onclick="switchView(4)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+        </div>
+        <div class="home-title">Your <span>Family</span> at a Glance</div>
       </div>
 
       <!-- Wearable BP Alert Banner -->
       <div class="alert-banner" id="alertBanner">
         <span class="alert-dot"></span>
         <div class="alert-body">
-          <div class="alert-label">⌚ Wearable Alert</div>
+          <div class="alert-label">⌚ from Grandma's smart device</div>
           <div class="alert-text">Grandma's BP 168/112 mmHg — Stage 2 Hypertension</div>
         </div>
-        <span class="alert-arrow">›</span>
+        <button class="alert-close" onclick="event.stopPropagation();dismissAlertBanner()" aria-label="Dismiss">✕</button>
       </div>
 
       <!-- Constellation -->
@@ -468,24 +538,24 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
       <div class="bento fade-in stagger-3">
         <div class="bento-card health" onclick="switchView(5)">
           <span class="bento-badge badge-alert">ALERT</span>
-          <span class="bento-icon">❤</span>
+          <span class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
           <div class="bento-title">Health Report</div>
-          <div class="bento-desc">Grandma — BP 168/112, wearable alert</div>
+          <div class="bento-desc">Grandma — BP 168/112, from smart device</div>
         </div>
         <div class="bento-card protect" onclick="switchView(7)">
           <span class="bento-badge badge-safe">SAFE</span>
-          <span class="bento-icon">🛡</span>
+          <span class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
           <div class="bento-title">Protection</div>
           <div class="bento-desc">2 threats blocked today</div>
         </div>
         <div class="bento-card creative" onclick="switchView(6)">
-          <span class="bento-badge badge-bloom">BLOOM</span>
-          <span class="bento-icon"><img src="bloom-icon.svg" style="width:26px;height:26px;vertical-align:middle"></span>
-          <div class="bento-title">Yuki — Bloom</div>
+          <span class="bento-badge badge-bloom">CREATIVE FOLDER</span>
+          <span class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 1 5 5c0 2-1.5 3.5-3 4.5L12 22l-2-10.5C8.5 10.5 7 9 7 7a5 5 0 0 1 5-5z"/><path d="M7 12.5C5 13.5 2 15 2 18c0 2 2 4 5 4"/><path d="M17 12.5c2 1 5 2.5 5 5.5 0 2-2 4-5 4"/></svg></span>
+          <div class="bento-title">Yuki — Creative Folder</div>
           <div class="bento-desc">Creative Direction +18% this week</div>
         </div>
         <div class="bento-card screen" onclick="showDetail('hiro')">
-          <span class="bento-icon">📱</span>
+          <span class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></span>
           <div class="bento-title">Hiro — Screen</div>
           <div class="bento-desc">3.5h social after midnight</div>
         </div>
@@ -506,7 +576,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 
         <div class="event-item" onclick="switchView(7)">
           <div class="ev-timeline">
-            <div class="ev-dot" style="border-color:rgba(74,222,128,0.3);background:rgba(74,222,128,0.08)">✦</div>
+            <div class="ev-dot glow-green">✦</div>
             <div class="ev-line"></div>
           </div>
           <div class="ev-content">
@@ -520,7 +590,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 
         <div class="event-item" onclick="switchView(6)">
           <div class="ev-timeline">
-            <div class="ev-dot" style="border-color:rgba(192,132,252,0.3);background:rgba(192,132,252,0.08)">✿</div>
+            <div class="ev-dot glow-violet">✿</div>
             <div class="ev-line"></div>
           </div>
           <div class="ev-content">
@@ -533,12 +603,12 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 
         <div class="event-item" onclick="switchView(5)">
           <div class="ev-timeline">
-            <div class="ev-dot" style="border-color:rgba(244,63,94,0.3);background:rgba(244,63,94,0.08)">🏥</div>
+            <div class="ev-dot glow-red live">🏥</div>
             <div class="ev-line"></div>
           </div>
           <div class="ev-content">
             <div class="ev-who">Grandma</div>
-            <div class="ev-msg">Blood pressure 168/112 — wearable alert. AI recommends immediate attention.</div>
+            <div class="ev-msg">Blood pressure 168/112 — from Grandma's smart device. AI recommends immediate attention.</div>
             <div class="ev-time">9:38 AM</div>
             <span class="ev-tag red">Health Alert</span>
             <span class="ev-tag ai">AI Action</span>
@@ -547,7 +617,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 
         <div class="event-item">
           <div class="ev-timeline">
-            <div class="ev-dot" style="border-color:rgba(244,63,94,0.3);background:rgba(244,63,94,0.08)">📵</div>
+            <div class="ev-dot glow-red">📵</div>
             <div class="ev-line"></div>
           </div>
           <div class="ev-content">
@@ -561,7 +631,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 
         <div class="event-item">
           <div class="ev-timeline">
-            <div class="ev-dot" style="border-color:rgba(192,132,252,0.3);background:rgba(192,132,252,0.08)">🚫</div>
+            <div class="ev-dot glow-violet">🚫</div>
             <div class="ev-line"></div>
           </div>
           <div class="ev-content">
@@ -575,7 +645,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 
         <div class="event-item">
           <div class="ev-timeline">
-            <div class="ev-dot" style="border-color:rgba(255,184,77,0.3);background:rgba(255,184,77,0.08)">📱</div>
+            <div class="ev-dot glow-amber">📱</div>
             <div class="ev-line"></div>
           </div>
           <div class="ev-content">
@@ -603,13 +673,13 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
       <div class="msg ai">
         <div class="msg-av ai-av"><img src="kaleidoscope-mandala.svg" alt=""></div>
         <div>
-          <div class="msg-bubble">Hi Mei. Grandma's wearable detected BP 168/112 mmHg at 9:38 AM — Stage 2 Hypertension. I'd recommend scheduling a cardiology appointment. Want me to book?
+          <div class="msg-bubble">Hi Mayumi. Grandma's wearable detected BP 168/112 mmHg at 9:38 AM — Stage 2 Hypertension. I'd recommend scheduling a cardiology appointment. Want me to book?
           </div>
           <div class="msg-time">9:38 AM</div>
         </div>
       </div>
       <div class="msg me">
-        <div class="msg-av"><img src="faces/mei.png" alt="Mei"></div>
+        <div class="msg-av"><img src="faces/mei.png" alt="Mayumi"></div>
         <div>
           <div class="msg-bubble">Yes — book the nearest available slot at NTU Hospital.</div>
           <div class="msg-time">9:39 AM</div>
@@ -632,8 +702,12 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
       </div>
     </div>
     <div class="chat-input-bar">
-      <input class="chat-input" placeholder="Ask Kaleidoscope..." readonly>
-      <button class="chat-send-btn">↑</button>
+      <div class="chat-input-bar-inner">
+        <input class="chat-input" placeholder="Ask Kaleidoscope..." readonly>
+        <button class="chat-send-btn" style="background:linear-gradient(135deg,var(--violet),var(--ai));border:none;flex-shrink:0;display:flex;align-items:center;justify-content:center">
+          <img src="kaleidoscope-mandala.svg" alt="" style="width:18px;height:18px;object-fit:contain;filter:brightness(0) invert(1)">
+        </button>
+      </div>
     </div>
   </div>
 
@@ -647,8 +721,8 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
   <div class="view" id="v-profile">
     <div class="view-scroll">
       <div class="profile-header fade-in">
-        <div class="profile-av"><img src="faces/mei.png" alt="Mei"></div>
-        <div class="profile-name">Mei Chen</div>
+        <div class="profile-av"><img src="faces/mei.png" alt="Mayumi"></div>
+        <div class="profile-name">Mayumi Chen</div>
         <div class="profile-meta">Brand Manager · Taipei</div>
       </div>
       <div class="summary-card fade-in stagger-1">
@@ -684,40 +758,84 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
     <div class="sub-header">
       <button class="back-btn" onclick="switchView(0)">‹</button>
       <span class="sub-title">Grandma's Health</span>
-      <img class="sub-logo" src="bloom-icon.svg" alt="Bloom">
+      <img class="sub-logo" src="kaleidoscope-mandala.svg" alt="Kaleidoscope">
     </div>
     <div class="protect-body">
-      <div class="protect-hero">
-        <div class="protect-av"><img src="faces/grandma.png" alt="Grandma"></div>
-        <div class="protect-name">Hana Chen · 68</div>
-        <div class="protect-role">Retired · Taipei</div>
-        <div class="protect-status-row">
-          <div class="pstat"><div class="pstat-val" style="color:var(--coral)">168/112</div><div class="pstat-lbl">Blood Pressure</div></div>
-          <div class="pstat"><div class="pstat-val" style="color:var(--amber)">5.9%</div><div class="pstat-lbl">HbA1c</div></div>
-          <div class="pstat"><div class="pstat-val" style="color:var(--green)">Normal</div><div class="pstat-lbl">ECG</div></div>
+
+      <!-- Profile -->
+      <div class="health-hero">
+        <div class="health-av"><img src="faces/grandma.png" alt="Hana"></div>
+        <div class="health-name">Grandma · 68</div>
+        <div class="health-role">Retired · Taipei</div>
+      </div>
+
+      <!-- Today's Readings -->
+      <div class="health-section-hdr">Today's Readings</div>
+
+      <!-- Blood Pressure -->
+      <div class="health-card health-card-alert" onclick="switchView(5)">
+        <div class="health-card-top">
+          <span class="health-cat" style="color:var(--coral)">❤ Blood Pressure</span>
+          <span class="health-time">9:38 AM ›</span>
+        </div>
+        <div class="health-val" style="color:var(--coral)">168/112 <span class="health-unit">mmHg</span></div>
+        <span class="health-badge alert">⚠ Stage 2 Hypertension</span>
+        <div class="health-detail">Smart device detected elevated reading at 9:38 AM. Immediate medical attention recommended.</div>
+        <div class="health-sub">Systolic 168 (threshold: 140+) · Diastolic 112 (threshold: 90+)</div>
+      </div>
+
+      <!-- HbA1c -->
+      <div class="health-card">
+        <div class="health-card-top">
+          <span class="health-cat" style="color:var(--amber)">🩸 HbA1c</span>
+          <span class="health-time">Monthly ›</span>
+        </div>
+        <div class="health-val" style="color:var(--amber)">5.9 <span class="health-unit">%</span></div>
+        <span class="health-badge warn">Borderline · Monitor</span>
+      </div>
+
+      <!-- ECG -->
+      <div class="health-card">
+        <div class="health-card-top">
+          <span class="health-cat" style="color:var(--green)">🫀 ECG</span>
+          <span class="health-time">Monthly ›</span>
+        </div>
+        <div class="health-val" style="color:var(--green)">Normal</div>
+        <span class="health-badge ok">Within range</span>
+      </div>
+
+      <!-- Medications -->
+      <div class="health-section-hdr">Medications</div>
+      <div class="health-card">
+        <div class="health-med-row">
+          <div>
+            <div class="health-cat">💊 Amlodipine 5mg · Daily</div>
+            <div class="health-detail">Last taken today at 8:00 AM</div>
+          </div>
+          <div class="health-taken">✓ On Track</div>
         </div>
       </div>
-      <div class="section-lbl">⌚ Wearable Alert</div>
-      <div class="protect-card red-card">
-        <div class="pc-eyebrow" style="color:var(--coral)">⚠ Stage 2 Hypertension</div>
-        <div class="pc-text">Apple Watch detected <strong style="color:#FF8A84">168/112 mmHg</strong> at 9:38 AM. Immediate medical attention recommended.</div>
-        <div class="pc-detail">Systolic 168 (Stage 2 threshold: 140+) · Diastolic 112 (Stage 2 threshold: 90+)</div>
+
+      <!-- Monthly Report -->
+      <div class="health-section-hdr">Monthly Report</div>
+      <div class="health-card">
+        <div class="health-card-top">
+          <span class="health-cat" style="color:var(--accent)">📋 Annual Checkup</span>
+          <span class="health-time">Dec 2024</span>
+        </div>
+        <div class="health-detail">BP elevated · HbA1c borderline watch · ECG and bone density normal.</div>
+        <div class="health-sub">Cardiology follow-up strongly recommended · Next check: Dec 2024</div>
       </div>
-      <div class="section-lbl">📋 Monthly Report</div>
-      <div class="protect-card warn">
-        <div class="pc-eyebrow" style="color:var(--accent)">Annual Checkup Results</div>
-        <div class="pc-text">BP elevated · HbA1c borderline watch · ECG and bone density normal.</div>
-        <div class="pc-detail">Cardiology follow-up strongly recommended · Next check: Dec 2024</div>
+
+      <!-- Kaleidoscope -->
+      <div class="health-section-hdr">Kaleidoscope</div>
+      <div class="health-card health-card-ai">
+        <div class="health-card-top">
+          <span class="health-cat"><img src="kaleidoscope-mandala.svg" style="width:14px;height:14px;vertical-align:middle;margin-right:2px"> Kaleidoscope</span>
+        </div>
+        <div class="health-detail">Grandma's BP spike is consistent with recent stress patterns. I've flagged this for Dr. Li Wei and pre-filled a referral. I can book a cardiology appointment — want me to proceed?</div>
       </div>
-      <div class="protect-card safe-card">
-        <div class="pc-eyebrow" style="color:var(--green)">✓ Medications On Track</div>
-        <div class="pc-text">Amlodipine 5mg daily — last taken 8:00 AM today.</div>
-      </div>
-      <div class="section-lbl">🤖 Kaleidoscope Summary</div>
-      <div class="expert-view">
-        <div class="expert-label"><img src="kaleidoscope-mandala.svg" style="width:14px;height:14px"> Kaleidoscope</div>
-        <div class="expert-text">Grandma's BP spike is consistent with recent stress patterns. I've flagged this for Dr. Li Wei and pre-filled a referral. I can book a cardiology appointment — want me to proceed?</div>
-      </div>
+
     </div>
   </div>
 
@@ -726,7 +844,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
     <div class="sub-header">
       <button class="back-btn" onclick="switchView(0)">‹</button>
       <span class="sub-title">Yuki's Growth</span>
-      <img class="sub-logo" src="bloom-icon.svg" alt="Bloom">
+      <img class="sub-logo" src="bloom-icon.svg" alt="Creative Folder">
     </div>
     <div class="protect-body">
 
@@ -746,7 +864,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
       <div class="section-lbl">🌱 This Week's Growth Story</div>
       <div style="background:linear-gradient(135deg,rgba(192,132,252,0.07),rgba(74,222,128,0.05));border:1px solid rgba(192,132,252,0.16);border-radius:var(--radius-sm);padding:16px;margin-bottom:10px">
         <div style="font-size:13px;color:var(--text);line-height:1.75">
-          Yuki completed her biggest independent creative project yet — a 3-part TikTok series for the school culture festival. <strong style="color:var(--accent)">She directed all the transitions and pacing herself</strong>, only asking Bloom for one reference image. This is a meaningful shift from 4 weeks ago, when she relied on AI for about half her decisions.
+          Yuki completed her biggest independent creative project yet — a 3-part TikTok series for the school culture festival. <strong style="color:var(--accent)">She directed all the transitions and pacing herself</strong>, only asking Creative Folder for one reference image. This is a meaningful shift from 4 weeks ago, when she relied on AI for about half her decisions.
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
           <span style="font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--green-dim);color:var(--green);border:1px solid rgba(74,222,128,0.2)">✓ Growing independence</span>
@@ -760,7 +878,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
       <div class="yuki-work-card featured">
         <div class="ywc-thumb"><span class="ywc-thumb-icon">🎨</span></div>
         <div class="ywc-info">
-          <div class="ywc-tag">Bloom · Week 12 · Director's Choice</div>
+          <div class="ywc-tag">Creative Folder · Week 12 · Director's Choice</div>
           <div class="ywc-title">文化祭 2024 — TikTok Series</div>
           <div class="ywc-meta">3 videos · 12k views · with Hana, Ren</div>
           <div class="ywc-feedback">"Yuki directed all transitions independently — her creative voice is clearly developing."</div>
@@ -788,7 +906,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
           <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">文化祭 TikTok — Opening Scene</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
             <div style="background:var(--ai-dim);border-radius:8px;padding:8px 10px">
-              <div style="font-size:9px;font-weight:700;color:var(--ai);letter-spacing:0.5px;margin-bottom:4px">BLOOM SUGGESTED</div>
+              <div style="font-size:9px;font-weight:700;color:var(--ai);letter-spacing:0.5px;margin-bottom:4px">CREATIVE FOLDER SUGGESTED</div>
               <div style="font-size:11.5px;color:var(--text2);line-height:1.5">Use a slow zoom-in with ambient music for the opening</div>
             </div>
             <div style="background:var(--accent-dim);border-radius:8px;padding:8px 10px">
@@ -806,7 +924,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
           <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Color Grading Style</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
             <div style="background:var(--ai-dim);border-radius:8px;padding:8px 10px">
-              <div style="font-size:9px;font-weight:700;color:var(--ai);letter-spacing:0.5px;margin-bottom:4px">BLOOM SUGGESTED</div>
+              <div style="font-size:9px;font-weight:700;color:var(--ai);letter-spacing:0.5px;margin-bottom:4px">CREATIVE FOLDER SUGGESTED</div>
               <div style="font-size:11.5px;color:var(--text2);line-height:1.5">Warm golden tones for a nostalgic festival feel</div>
             </div>
             <div style="background:var(--accent-dim);border-radius:8px;padding:8px 10px">
@@ -821,8 +939,8 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
             <span style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.4px;text-transform:uppercase">Session 3 · Fri</span>
             <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;background:var(--green-dim);color:var(--green)">Fully independent</span>
           </div>
-          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px">Final Edit — Didn't open Bloom</div>
-          <div style="font-size:12.5px;color:var(--text3);line-height:1.55">Yuki completed the full final cut without opening Bloom once. She referenced her own notes from earlier sessions instead.</div>
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px">Final Edit — Didn't open Creative Folder</div>
+          <div style="font-size:12.5px;color:var(--text3);line-height:1.55">Yuki completed the full final cut without opening Creative Folder once. She referenced her own notes from earlier sessions instead.</div>
         </div>
       </div>
 
@@ -868,7 +986,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
       <div class="section-lbl">🤖 Kaleidoscope Summary</div>
       <div class="expert-view">
         <div class="expert-label"><img src="kaleidoscope-mandala.svg" style="width:14px;height:14px"> Kaleidoscope · Parent View</div>
-        <div class="expert-text">Yuki's relationship with Bloom is maturing in a healthy direction. Her authorship score (68%) is above the age-16 peer benchmark of 54%. What's most notable this week: she used AI as a reference point to push <em>against</em>, not just to follow — which is a sign of genuine creative confidence. No parental intervention recommended. Consider celebrating her independent final cut on Friday.</div>
+        <div class="expert-text">Yuki's relationship with Creative Folder is maturing in a healthy direction. Her authorship score (68%) is above the age-16 peer benchmark of 54%. What's most notable this week: she used AI as a reference point to push <em>against</em>, not just to follow — which is a sign of genuine creative confidence. No parental intervention recommended. Consider celebrating her independent final cut on Friday.</div>
       </div>
 
     </div>
@@ -879,7 +997,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
     <div class="sub-header">
       <button class="back-btn" onclick="switchView(1)">‹</button>
       <span class="sub-title">Today's Safety Report</span>
-      <img class="sub-logo" src="bloom-icon.svg" alt="Bloom">
+      <img class="sub-logo" src="bloom-icon.svg" alt="Creative Folder">
     </div>
     <div class="protect-body">
       <div class="protect-hero">
@@ -965,15 +1083,16 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
         <span class="nav-icon">✦</span>
         <span class="nav-label">Family</span>
       </button>
-      <button class="nav-item nav-ai" id="nav-ai" onclick="switchView(2)">
+      <button class="nav-item nav-ai" id="nav-ai" onclick="switchView(2)" aria-label="Kaleidoscope">
         <svg class="nav-ai__ring" viewBox="0 0 100 100" fill="none">
-          <circle cx="50" cy="50" r="46" stroke="rgba(0,188,212,0.8)" stroke-width="0.8" fill="none">
+          <circle cx="50" cy="50" r="46" stroke="rgba(139,92,246,0.8)" stroke-width="0.8" fill="none">
             <animateTransform attributeName="transform" type="rotate" values="0 50 50;360 50 50" dur="12s" repeatCount="indefinite"/>
           </circle>
-          <circle cx="50" cy="50" r="46" stroke="rgba(0,188,212,0.35)" stroke-width="0.5" fill="none">
-            <animateTransform attributeName="transform" type="rotate" values="360 50 50;0 50 50" dur="18s" repeatCount="indefinite"/>
+          <circle cx="50" cy="50" r="46" stroke="rgba(192,132,252,0.4)" stroke-width="0.5" fill="none">
+            <animateTransform attributeName="transform" type="rotate" values="360 50 50;0 50 50" dur="15s" repeatCount="indefinite"/>
           </circle>
         </svg>
+        <div class="nav-ai__orbit"></div>
         <img class="nav-ai-img" src="kaleidoscope-mandala.svg" alt="Kaleidoscope">
       </button>
       <button class="nav-item" id="nav-1" onclick="switchView(1)">
@@ -1023,15 +1142,15 @@ function goBack() {
 /* ── MEMBER DETAIL ── */
 const members = {
   grandma: {
-    photo:'faces/grandma.png', name:'Hana Chen', age:'68',
-    role:'Retired · Taipei · Grandma', color:'var(--coral)', statusColor:'var(--coral)',
+    photo:'faces/grandma.png', name:'Grandma', age:'68',
+    role:'Retired · Taipei', color:'var(--coral)', statusColor:'var(--coral)',
     tags:['Senior member','Health-conscious','Tech-light','Fraud-vulnerable'],
     stats:[
       {val:'168/112',lbl:'Blood Pressure',color:'var(--coral)'},
       {val:'5.9%',lbl:'HbA1c',color:'var(--amber)'},
       {val:'Normal',lbl:'ECG',color:'var(--green)'}
     ],
-    report:{eyebrow:'Health Report — Wearable Alert',eyebrowColor:'var(--coral)',rows:[
+    report:{eyebrow:'Health Report — from Grandma\'s smart device',eyebrowColor:'var(--coral)',rows:[
       {marker:'Blood Pressure',val:'168/112 mmHg',cls:'val-alert'},
       {marker:'HbA1c',val:'5.9% — Watch',cls:'val-warn'},
       {marker:'ECG',val:'Normal',cls:'val-ok'},
@@ -1052,7 +1171,7 @@ const members = {
       {val:'8',lbl:'Own Decisions',color:'var(--accent)'},
       {val:'68%',lbl:'Yuki Voice',color:'var(--green)'}
     ],
-    report:{eyebrow:'Bloom — Creative Week 12',eyebrowColor:'var(--accent)',rows:[
+    report:{eyebrow:'Creative Folder — Week 12',eyebrowColor:'var(--accent)',rows:[
       {marker:'Featured Work',val:'文化祭 2024 TikTok',cls:'val-ok'},
       {marker:'Authorship',val:'Y 68% / AI 32%',cls:'val-ok'},
       {marker:"Director's Choice",val:'✓ Week 11',cls:'val-ok'},
@@ -1060,7 +1179,7 @@ const members = {
     ]},
     actions:[
       {icon:'✿',text:'View growth report',primary:true,onclick:"switchView(6)"},
-      {icon:'📊',text:'Bloom showcase',onclick:"switchView(6)"},
+      {icon:'📊',text:'Creative Folder showcase',onclick:"switchView(6)"},
     ]
   },
   hiro: {
@@ -1145,89 +1264,142 @@ function showDetail(id) {
   switchView(3);
 }
 
-/* ── CONSTELLATION ── */
+/* ── CONSTELLATION (auto-position by priority) ── */
 function buildConstellation() {
-  const MEI = { x:195, y:155, r:30 };
+  const MEI = { x:195, y:162, r:30 };
   const SLOTS = [
-    { x:195, y:62,  r:24, imgR:22, imgW:44 },
-    { x:98,  y:112, r:22, imgR:20, imgW:40 },
-    { x:292, y:112, r:22, imgR:20, imgW:40 },
-    { x:118, y:240, r:20, imgR:18, imgW:36 },
+    { x:195, y:32,  r:32, imgR:30, imgW:60 }, // Top — on orbit
+    { x:89,  y:87,  r:28, imgR:26, imgW:52 }, // Upper-left — on orbit
+    { x:302, y:87,  r:28, imgR:26, imgW:52 }, // Upper-right — on orbit
+    { x:89,  y:237, r:28, imgR:26, imgW:52 }, // Lower-left — on orbit
   ];
-  const CROSS = [[0,1],[0,2],[1,3]];
+
   const family = [
     { id:'grandma', name:'Grandma', photo:'faces/grandma.png', color:'--coral',  priority:10, hasAlert:true },
-    { id:'yuki',    name:'Yuki',    photo:'faces/yuki.png',    color:'--accent', priority:5 },
+    { id:'yuki',    name:'Yuki',    photo:'faces/yuki.png',    color:'--violet', priority:5 },
     { id:'kenji',   name:'Kenji',   photo:'faces/kanji.png',   color:'--sky',    priority:3 },
     { id:'hiro',    name:'Hiro',    photo:'faces/hiro.png',    color:'--teal',   priority:2 },
   ];
   family.sort((a,b) => b.priority - a.priority);
   family.forEach((m,i) => { m.slot = SLOTS[i]; });
 
-  function qPath(x1,y1,x2,y2,c){
-    c = c || 0.12;
-    const mx=(x1+x2)/2, my=(y1+y2)/2, dx=x2-x1, dy=y2-y1;
-    return 'M'+x1+' '+y1+' Q'+Math.round(mx+dy*c)+' '+Math.round(my-dx*c)+' '+x2+' '+y2;
-  }
-
+  // --- Build SVG ---
   let defs = '';
-  defs += '<radialGradient id="centerGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="var(--accent)" stop-opacity="0.1"/><stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/></radialGradient>';
-  defs += '<linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="var(--accent)" stop-opacity="0.5"/><stop offset="50%" stop-color="var(--ai)" stop-opacity="0.4"/><stop offset="100%" stop-color="var(--accent)" stop-opacity="0.5"/></linearGradient>';
+  defs += '<radialGradient id="centerGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="var(--accent)" stop-opacity="0.08"/><stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/></radialGradient>';
+  defs += '<linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="var(--violet)" stop-opacity="0.6"/><stop offset="50%" stop-color="var(--accent)" stop-opacity="0.4"/><stop offset="100%" stop-color="var(--teal)" stop-opacity="0.6"/></linearGradient>';
   defs += '<filter id="dotGlow"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>';
+
+  // Mei→member gradients
   family.forEach((m,i) => {
     const s = m.slot;
     defs += '<linearGradient id="gm'+i+'" gradientUnits="userSpaceOnUse" x1="'+MEI.x+'" y1="'+MEI.y+'" x2="'+s.x+'" y2="'+s.y+'"><stop offset="0%" stop-color="var(--accent)"/><stop offset="100%" stop-color="var('+m.color+')"/></linearGradient>';
   });
-  CROSS.forEach(([a,b],i) => {
-    const sa=family[a].slot, sb=family[b].slot;
-    defs += '<linearGradient id="gc'+i+'" gradientUnits="userSpaceOnUse" x1="'+sa.x+'" y1="'+sa.y+'" x2="'+sb.x+'" y2="'+sb.y+'"><stop offset="0%" stop-color="var('+family[a].color+')"/><stop offset="100%" stop-color="var('+family[b].color+')"/></linearGradient>';
-  });
+  // Orbit ring gradient
+  defs += '<linearGradient id="gc0" gradientUnits="userSpaceOnUse" x1="'+SLOTS[1].x+'" y1="'+SLOTS[1].y+'" x2="'+SLOTS[2].x+'" y2="'+SLOTS[2].y+'"><stop offset="0%" stop-color="var(--coral)"/><stop offset="100%" stop-color="var(--violet)"/></linearGradient>';
 
+  // Clip paths
   let clips = '<clipPath id="clip-mei"><circle cx="'+MEI.x+'" cy="'+MEI.y+'" r="28"/></clipPath>';
   family.forEach(m => {
     const s = m.slot;
     clips += '<clipPath id="clip-'+m.id+'"><circle cx="'+s.x+'" cy="'+s.y+'" r="'+s.imgR+'"/></clipPath>';
   });
 
+  // Connection lines (Mei → each member) — straight
   let conn = '';
   family.forEach((m,i) => {
     const s = m.slot;
-    const d = qPath(MEI.x, MEI.y-2, s.x, s.y+2);
-    const pid = 'pm'+i, dur = (3 + i*0.4).toFixed(1), durDot = (3.5 + i*0.4).toFixed(1);
+    const d = 'M'+MEI.x+' '+MEI.y+' L'+s.x+' '+s.y;
+    const pid = 'pm'+i;
+    const dur = (3 + i*0.4).toFixed(1);
+    const durDot = (3.5 + i*0.4).toFixed(1);
     conn += '<path id="'+pid+'" class="conn conn-base" d="'+d+'" stroke="url(#gm'+i+')"/>';
     conn += '<path class="conn conn-flow" d="'+d+'" stroke="url(#gm'+i+')"><animate attributeName="stroke-dashoffset" from="0" to="-40" dur="'+dur+'s" repeatCount="indefinite"/></path>';
-    conn += '<circle r="2.5" fill="var('+m.color+')" filter="url(#dotGlow)"><animateMotion dur="'+durDot+'s" repeatCount="indefinite"><mpath href="#'+pid+'"/></animateMotion><animate attributeName="opacity" values="0;0.9;0.9;0" dur="'+durDot+'s" repeatCount="indefinite"/></circle>';
-  });
-  CROSS.forEach(([a,b],i) => {
-    const sa=family[a].slot, sb=family[b].slot;
-    const d = qPath(sa.x, sa.y+2, sb.x, sb.y+2, 0.08);
-    const pid = 'pc'+i, dur = (4.8 + i*0.4).toFixed(1), durDot = (5.3 + i*0.4).toFixed(1);
-    conn += '<path id="'+pid+'" class="conn conn-base conn-cross" d="'+d+'" stroke="url(#gc'+i+')"/>';
-    conn += '<path class="conn conn-flow conn-cross" d="'+d+'" stroke="url(#gc'+i+')"><animate attributeName="stroke-dashoffset" from="0" to="-40" dur="'+dur+'s" repeatCount="indefinite"/></path>';
-    conn += '<circle r="1.8" fill="var('+family[b].color+')" filter="url(#dotGlow)"><animateMotion dur="'+durDot+'s" repeatCount="indefinite"><mpath href="#'+pid+'"/></animateMotion><animate attributeName="opacity" values="0;0.7;0.7;0" dur="'+durDot+'s" repeatCount="indefinite"/></circle>';
+    conn += '<circle r="2.5" fill="var('+m.color+')" filter="url(#dotGlow)" opacity="0"><animateMotion dur="'+durDot+'s" repeatCount="indefinite"><mpath href="#'+pid+'"/></animateMotion><animate attributeName="opacity" values="0;0.9;0.9;0" dur="'+durDot+'s" repeatCount="indefinite"/></circle>';
   });
 
+  // Outer orbit — wavy circle connecting family members
+  const orbitR = 130;
+  const steps = 120;
+  const wvN = 5, wvs = [];
+  for(let w = 0; w < wvN; w++) wvs.push({f:3+Math.random()*18, a:1+Math.random()*3, p:Math.random()*Math.PI*2});
+  let orbitPts = [];
+  for(let i = 0; i <= steps; i++){
+    const a = (i / steps) * Math.PI * 2;
+    let wR = 0; wvs.forEach(w => { wR += Math.sin(a * w.f + w.p) * w.a; });
+    const r = orbitR + wR * 0.4;
+    orbitPts.push([MEI.x + Math.cos(a) * r, MEI.y + Math.sin(a) * r]);
+  }
+  let orbitD = 'M'+orbitPts[0][0].toFixed(1)+' '+orbitPts[0][1].toFixed(1);
+  for(let i = 1; i < orbitPts.length; i++){
+    const p0 = orbitPts[i-1], p1 = orbitPts[i];
+    const cx = (p0[0]+p1[0])/2, cy = (p0[1]+p1[1])/2;
+    orbitD += ' Q'+p0[0].toFixed(1)+' '+p0[1].toFixed(1)+' '+cx.toFixed(1)+' '+cy.toFixed(1);
+  }
+  orbitD += ' Z';
+  conn += '<path id="orbitRing" class="conn conn-base conn-cross" d="'+orbitD+'" stroke="url(#gc0)"/>';
+  conn += '<path class="conn conn-flow conn-cross" d="'+orbitD+'" stroke="url(#gc0)"><animate attributeName="stroke-dashoffset" from="0" to="-820" dur="14s" repeatCount="indefinite"/></path>';
+  conn += '<circle r="1.8" fill="var(--violet)" filter="url(#dotGlow)" opacity="0"><animateMotion dur="10s" repeatCount="indefinite"><mpath href="#orbitRing"/></animateMotion><animate attributeName="opacity" values="0;0.7;0.7;0" dur="10s" repeatCount="indefinite"/></circle>';
+  conn += '<circle r="1.8" fill="var(--teal)" filter="url(#dotGlow)" opacity="0"><animateMotion dur="10s" begin="5s" repeatCount="indefinite"><mpath href="#orbitRing"/></animateMotion><animate attributeName="opacity" values="0;0.7;0.7;0" dur="10s" begin="5s" repeatCount="indefinite"/></circle>';
+
+  // Mei center node
   let nodes = '';
   nodes += '<circle class="center-ring" cx="'+MEI.x+'" cy="'+MEI.y+'" r="42" stroke="var(--accent)"/>';
   nodes += '<circle class="center-glow" cx="'+MEI.x+'" cy="'+MEI.y+'" r="38"/>';
-  nodes += '<g class="node" onclick="switchView(4)"><circle cx="'+MEI.x+'" cy="'+MEI.y+'" r="'+MEI.r+'" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/><image href="faces/mei.png" x="'+(MEI.x-28)+'" y="'+(MEI.y-28)+'" width="56" height="56" clip-path="url(#clip-mei)" preserveAspectRatio="xMidYMid slice"/><text class="node-label" x="'+MEI.x+'" y="'+(MEI.y+42)+'" text-anchor="middle">Mei</text></g>';
+  nodes += '<g class="node" onclick="switchView(4)"><circle cx="'+MEI.x+'" cy="'+MEI.y+'" r="'+MEI.r+'" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/><image href="faces/mei.png" x="'+(MEI.x-28)+'" y="'+(MEI.y-28)+'" width="56" height="56" clip-path="url(#clip-mei)" preserveAspectRatio="xMidYMid slice"/><text class="node-label" x="'+MEI.x+'" y="'+(MEI.y+40)+'" text-anchor="middle">Mayumi</text></g>';
+
+  // Family nodes
   family.forEach(m => {
     const s = m.slot, hw = s.imgW/2;
     nodes += '<g class="node" onclick="showDetail(\''+m.id+'\')">';
     nodes += '<circle cx="'+s.x+'" cy="'+s.y+'" r="'+s.r+'" fill="var(--surface)" class="node-circle" stroke="var('+m.color+')" stroke-width="1.5"/>';
-    if (m.hasAlert) {
-      nodes += '<circle cx="'+s.x+'" cy="'+s.y+'" r="'+(s.r+6)+'" class="node-ring" stroke="var('+m.color+')"><animate attributeName="r" values="'+(s.r+4)+';'+(s.r+10)+';'+(s.r+4)+'" dur="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.3;0.08;0.3" dur="2.5s" repeatCount="indefinite"/></circle>';
+    if(m.hasAlert){
+      // Ring 1 — tight pulse
+      nodes += '<circle cx="'+s.x+'" cy="'+s.y+'" r="'+(s.r+4)+'" class="node-ring" stroke="var('+m.color+')" stroke-width="2"><animate attributeName="r" values="'+(s.r+2)+';'+(s.r+8)+';'+(s.r+2)+'" dur="2.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.45;0.05;0.45" dur="2.2s" repeatCount="indefinite"/></circle>';
+      // Ring 2 — mid ripple (delayed)
+      nodes += '<circle cx="'+s.x+'" cy="'+s.y+'" r="'+(s.r+8)+'" class="node-ring" stroke="var('+m.color+')" stroke-width="1.2"><animate attributeName="r" values="'+(s.r+4)+';'+(s.r+14)+';'+(s.r+4)+'" dur="2.8s" begin="0.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.3;0;0.3" dur="2.8s" begin="0.5s" repeatCount="indefinite"/></circle>';
+      // Ring 3 — outer ripple
+      nodes += '<circle cx="'+s.x+'" cy="'+s.y+'" r="'+(s.r+12)+'" class="node-ring" stroke="var('+m.color+')" stroke-width="0.8"><animate attributeName="r" values="'+(s.r+6)+';'+(s.r+20)+';'+(s.r+6)+'" dur="3.4s" begin="1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.15;0;0.15" dur="3.4s" begin="1s" repeatCount="indefinite"/></circle>';
     }
     nodes += '<image href="'+m.photo+'" x="'+(s.x-hw)+'" y="'+(s.y-hw)+'" width="'+s.imgW+'" height="'+s.imgW+'" clip-path="url(#clip-'+m.id+')" preserveAspectRatio="xMidYMid slice"/>';
-    nodes += '<text class="node-label" x="'+s.x+'" y="'+(s.y+s.r+14)+'" text-anchor="middle">'+m.name+'</text>';
+    nodes += '<text class="node-label" x="'+s.x+'" y="'+(s.y+s.r+15)+'" text-anchor="middle">'+m.name+'</text>';
     nodes += '</g>';
   });
 
-  const arc = '<path class="ai-arc" d="M 78 48 Q 195 8 312 48"/>';
-  const aiLabel = '<text x="195" y="26" text-anchor="middle" font-size="8.5" font-weight="700" fill="var(--ai)" letter-spacing="1.8" font-family="DM Sans" opacity="0.55">KALEIDOSCOPE</text>';
+  const label = '<text x="195" y="-30" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text3)" letter-spacing="2" font-family="DM Sans">KALEIDOSCOPE</text>';
+  const arc = '<path class="ai-arc" d="M 80 0 Q 195 -33 310 0"/>';
 
   document.getElementById('constellationContainer').innerHTML =
-    '<svg viewBox="0 0 390 300" fill="none"><defs>'+defs+'</defs>'+clips+arc+aiLabel+'<g class="connections">'+conn+'</g>'+nodes+'</svg>';
+    '<svg viewBox="0 -40 390 360" fill="none"><defs>'+defs+'</defs>'+clips+arc+'<g class="connections">'+conn+'</g>'+nodes+label+'</svg>';
+
+  // Animate orbit wave — phase shifts over time for living, breathing effect
+  (function(){
+    let phase = 0;
+    function tick(){
+      phase += 0.006;
+      let pts = [];
+      for(let i = 0; i <= steps; i++){
+        const a = (i / steps) * Math.PI * 2;
+        let wR = 0; wvs.forEach(w => { wR += Math.sin(a * w.f + w.p + phase * w.f * 0.15) * w.a; });
+        const r = orbitR + wR * 0.4;
+        pts.push([MEI.x + Math.cos(a) * r, MEI.y + Math.sin(a) * r]);
+      }
+      let d = 'M'+pts[0][0].toFixed(1)+' '+pts[0][1].toFixed(1);
+      for(let i = 1; i < pts.length; i++){
+        const p0 = pts[i-1], p1 = pts[i];
+        const cx = (p0[0]+p1[0])/2, cy = (p0[1]+p1[1])/2;
+        d += ' Q'+p0[0].toFixed(1)+' '+p0[1].toFixed(1)+' '+cx.toFixed(1)+' '+cy.toFixed(1);
+      }
+      d += ' Z';
+      const ring = document.getElementById('orbitRing');
+      if(ring){
+        ring.setAttribute('d', d);
+        const flow = ring.nextElementSibling;
+        if(flow && flow.classList.contains('conn-flow')) flow.setAttribute('d', d);
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
 }
 buildConstellation();
 
@@ -1259,13 +1431,15 @@ buildConstellation();
       startCycle();
     });
   }
-  banner.addEventListener('click', () => {
+  function dismiss(navigate) {
     dismissed = true;
     clearTimeout(tid);
     banner.classList.remove('alert-shaking');
     banner.classList.add('alert-exit');
-    setTimeout(() => switchView(5), 500);
-  });
+    if (navigate) setTimeout(() => switchView(5), 500);
+  }
+  banner.addEventListener('click', () => dismiss(true));
+  window.dismissAlertBanner = () => dismiss(false);
   setTimeout(enter, 400);
 })();
 
