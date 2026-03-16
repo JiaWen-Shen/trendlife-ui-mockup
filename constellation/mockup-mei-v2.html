@@ -402,9 +402,9 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 @keyframes inputBorderSpin{to{--input-border-angle:360deg}}
 #v-ai .chat-input-bar{position:absolute;bottom:88px;left:0;right:0;padding:0;background:none;border-top:none;z-index:10;pointer-events:none}
 #v-ai .chat-msgs{padding-bottom:180px}
-.chat-input-bar-inner{pointer-events:auto;position:relative;display:flex;gap:8px;align-items:center;background:rgba(24,24,27,0.75);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:none;border-radius:0;padding:6px 6px 6px 18px;box-shadow:0 4px 24px rgba(0,0,0,0.3),0 0 0 1px rgba(255,255,255,0.06)}
-.chat-input-bar-inner::before{content:'';position:absolute;inset:-1.5px;border-radius:0;background:conic-gradient(from var(--input-border-angle,0deg),rgba(139,92,246,0.6),rgba(0,188,212,0.6),rgba(192,132,252,0.5),rgba(139,92,246,0.6));z-index:-1;animation:inputBorderSpin 4s linear infinite}
-.chat-input-bar-inner::after{content:'';position:absolute;inset:0;border-radius:0;background:rgba(24,24,27,0.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);z-index:-1}
+.chat-input-bar-inner{pointer-events:auto;position:relative;display:flex;gap:8px;align-items:center;background:rgba(24,24,27,0.75);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:none;border-radius:100px;padding:6px 6px 6px 18px;box-shadow:0 4px 24px rgba(0,0,0,0.3),0 0 0 1px rgba(255,255,255,0.06)}
+.chat-input-bar-inner::before{content:'';position:absolute;inset:-1.5px;border-radius:100px;background:conic-gradient(from var(--input-border-angle,0deg),rgba(139,92,246,0.6),rgba(0,188,212,0.6),rgba(192,132,252,0.5),rgba(139,92,246,0.6));z-index:-1;animation:inputBorderSpin 4s linear infinite}
+.chat-input-bar-inner::after{content:'';position:absolute;inset:0;border-radius:100px;background:rgba(24,24,27,0.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);z-index:-1}
 #v-ai .chat-input{border:none;background:transparent;padding:8px 0;flex:1}
 </style>
 </head>
