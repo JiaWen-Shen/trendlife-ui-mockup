@@ -9,7 +9,13 @@
 請 repo owner 幫你完成：
 
 1. 安裝 Claude Code
-2. Clone repo 到本機：`git clone <repo-url> trendlife-ui-mockup`（`trendlife-ui-mockup/` 資料夾會出現在你電腦上）
+2. Clone repo 到本機（`trendlife-ui-mockup/` 資料夾會出現在你電腦上）
+
+   ```bash
+   # 在 terminal 操作
+   git clone <repo-url> trendlife-ui-mockup
+   ```
+
 3. 建立工作 branch（repo owner 執行）
 
 完成後，repo owner 會給你：
@@ -21,6 +27,7 @@
 ## 開始工作前
 
 ```bash
+# 在 terminal 操作
 cd trendlife-ui-mockup
 claude
 ```
