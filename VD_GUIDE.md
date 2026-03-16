@@ -4,6 +4,20 @@
 
 ---
 
+## 第一次修改這個檔案
+
+請 repo owner 幫你完成：
+
+1. 安裝 Claude Code
+2. Clone repo 到本機：`git clone <repo-url> trendlife-ui-mockup`（`trendlife-ui-mockup/` 資料夾會出現在你電腦上）
+3. 建立工作 branch（repo owner 執行）
+
+你的資訊：
+- **Branch**：`vd/yukis-ipad`
+- **檔案**：`constellation/mockup-yuki-ipad.html`
+
+---
+
 ## 開始工作前
 
 ```bash
@@ -73,21 +87,7 @@ Claude 會自動 commit → push → 開 PR，repo owner 會收到通知。
 
 ---
 
-### C. 第一次使用（只做一次）
-
-請 repo owner 幫你完成：
-
-1. 安裝 Claude Code
-2. Clone repo 到本機：`git clone <repo-url> trendlife-ui-mockup`（`trendlife-ui-mockup/` 資料夾會出現在你電腦上）
-3. 建立工作 branch（repo owner 執行）
-
-你的資訊：
-- **Branch**：`vd/yukis-ipad`
-- **檔案**：`constellation/mockup-yuki-ipad.html`
-
----
-
-### D. 常見問題
+### C. 常見問題
 
 **Q：Claude 問了我看不懂的問題？**
 > 截圖傳給 repo owner。
