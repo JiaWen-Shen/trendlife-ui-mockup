@@ -490,8 +490,8 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
       <div class="alert-banner" id="alertBanner">
         <span class="alert-dot"></span>
         <div class="alert-body">
-          <div class="alert-label">⌚ from Grandma's smart device</div>
-          <div class="alert-text">Grandma's BP 168/112 mmHg — Stage 2 Hypertension</div>
+          <div class="alert-label">⌚ Grandma's BP is high</div>
+          <div class="alert-text">168/112 mmHg — Already asked her to rest</div>
         </div>
         <button class="alert-close" onclick="event.stopPropagation();dismissAlertBanner()" aria-label="Dismiss">✕</button>
       </div>
@@ -511,14 +511,14 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
         <div class="notif-wrap" id="mei-notif-wrap">
           <div class="notif-row notif-alert" id="notif-bp" onclick="switchView(5)">
             <span class="notif-icon" style="color:#FF3B30">⌚</span>
-            <span class="notif-body">BP 168/112 mmHg — Grandma's wearable · Stage 2</span>
-            <span class="notif-time">9:38 AM</span>
+            <span class="notif-body">High BP detected (168/112 mmHg) — Grandma asked to rest</span>
+            <span class="notif-time">Just now</span>
             <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-bp')">✕</div>
           </div>
           <div class="notif-row" id="notif-grandma" onclick="switchView(8)">
             <span class="notif-icon" style="color:#FFC364">🎂</span>
             <span class="notif-body">Grandma's resting — not feeling well · birthday cake is all set</span>
-            <span class="notif-time">Just now</span>
+            <span class="notif-time">9:45 AM</span>
             <div class="notif-dismiss" onclick="event.stopPropagation();dismissNotif('notif-grandma')">✕</div>
           </div>
           <div class="notif-row" id="notif-health" onclick="switchView(5)">
@@ -780,7 +780,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
         </div>
         <div class="health-val" style="color:var(--coral)">168/112 <span class="health-unit">mmHg</span></div>
         <span class="health-badge alert">⚠ Stage 2 Hypertension</span>
-        <div class="health-detail">Smart device detected elevated reading at 9:38 AM. Immediate medical attention recommended.</div>
+        <div class="health-detail">Smart device detected elevated reading at 9:38 AM. Grandma has been asked to rest and stay calm — medical follow-up recommended.</div>
         <div class="health-sub">Systolic 168 (threshold: 140+) · Diastolic 112 (threshold: 90+)</div>
       </div>
 
@@ -833,7 +833,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
         <div class="health-card-top">
           <span class="health-cat"><img src="kaleidoscope-mandala.svg" style="width:14px;height:14px;vertical-align:middle;margin-right:2px"> Kaleidoscope</span>
         </div>
-        <div class="health-detail">Grandma's BP spike is consistent with recent stress patterns. I've flagged this for Dr. Li Wei and pre-filled a referral. I can book a cardiology appointment — want me to proceed?</div>
+        <div class="health-detail">Grandma's BP spike is consistent with recent stress patterns. She's been asked to rest and stay calm. A referral has been pre-filled for Dr. Li Wei — cardiology appointment ready to book. Want to confirm?</div>
       </div>
 
     </div>
