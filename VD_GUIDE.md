@@ -4,31 +4,10 @@
 
 ---
 
-## 第一次使用（只做一次）
+## 開始工作前
 
-請 repo owner 幫你完成以下設定：
-
-1. 安裝 Claude Code（已完成 ✓）
-2. Clone repo 到本機
-3. 建立你的工作 branch
-
-設定完成後，repo owner 會告訴你：
-- **你的 branch 名稱**：`vd/yukis-ipad`
-- **你負責的檔案路徑**：`constellation/mockup-yuki-ipad.html`
-
----
-
-## 每次開工
-
-**1. 開啟 terminal，進入專案資料夾**
-
-```
+```bash
 cd trendlife-ui-mockup
-```
-
-**2. 告訴 Claude 你今天要做什麼**
-
-```
 claude
 ```
 
@@ -40,11 +19,23 @@ Claude 會自動切換 branch、拉最新版本，然後問你想改什麼。
 
 ---
 
-## 怎麼描述修改
+## 做完修改後
 
-直接用中文說就好，不需要寫程式碼。
+確認預覽沒問題，說：
 
-**範例：**
+> **「好，可以 commit」**
+
+Claude 會自動 commit → push → 開 PR，repo owner 會收到通知。
+**你不需要開瀏覽器或 GitHub。**
+
+---
+---
+
+## 附件
+
+### A. 怎麼描述修改
+
+直接用中文說就好。
 
 | 你說的話 | Claude 會做的事 |
 |--------|--------------|
@@ -53,57 +44,39 @@ Claude 會自動切換 branch、拉最新版本，然後問你想改什麼。
 | 「在右上角加一個設定 icon」 | 加入 icon 元素 |
 | 「S5 跟 S3 的間距看起來不一致，對齊一下」 | 比對兩個 screen 的 padding |
 
-**不確定時，先問：**
-> 「你覺得這樣的改動合理嗎？先跟我說想法，不要直接改」
+不確定時先說：「你覺得這樣合理嗎？先跟我說想法，不要直接改」
 
 ---
 
-## 確認修改結果
+### B. 確認修改 / 反悔
 
-每次修改後，你可以說：
-
-> 「在瀏覽器開給我看」
-
-Claude 會告訴你怎麼在本機預覽（直接用瀏覽器開 HTML 檔案）。
-
-確認沒問題後說：
-
-> 「好，可以 commit」
-
-Claude 會自動：
-1. commit 改動
-2. push 到你的 branch
-3. 開 PR 給 repo owner review
-
-你完全不需要開瀏覽器或 GitHub。
+| 你想做的事 | 說這句話 |
+|---------|--------|
+| 在瀏覽器看結果 | 「在瀏覽器開給我看」 |
+| 先不要 commit | 「先不要 commit，我想再看一下」 |
+| 改錯了，還原 | 「還原剛才的修改」 |
+| 看今天改了什麼 | 「顯示今天改了什麼」 |
 
 ---
 
-## 不確定改得對不對？
+### C. 第一次使用（只做一次）
 
-說：「先不要 commit，我想再看一下」
+請 repo owner 幫你完成：
 
-Claude 會等你確認。
+1. 安裝 Claude Code
+2. Clone repo 到本機：`git clone <repo-url> trendlife-ui-mockup`
+3. 建立工作 branch（repo owner 執行）
+
+你的資訊：
+- **Branch**：`vd/yukis-ipad`
+- **檔案**：`constellation/mockup-yuki-ipad.html`
 
 ---
 
-## 改完之後
-
-PR 開好後，repo owner 會收到通知並 review。如果有修改意見，會直接傳訊息告訴你，你再開 Claude 繼續改就好。
-
----
-
-## 常見問題
-
-**Q：我不小心說錯了，Claude 改錯怎麼辦？**
-> 說「還原剛才的修改」，Claude 會 undo。
-
-**Q：我想看目前改了哪些地方？**
-> 說「顯示今天改了什麼」
+### D. 常見問題
 
 **Q：Claude 問了我看不懂的問題？**
 > 截圖傳給 repo owner。
 
----
-
-*如有任何問題，聯絡 repo owner。*
+**Q：我不確定 Claude 的回答對不對？**
+> 說「先不要動，我先問一下」，再找 repo owner 確認。
