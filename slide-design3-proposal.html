@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>設計 3.0 — Demo v1.3 工作流程架構升級</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --bg:#07040F;
+  --surface:rgba(255,255,255,0.04);
+  --surface2:rgba(255,255,255,0.08);
+  --red:#D71920;
+  --blue:#64B5F6;
+  --purple:#C084FC;
+  --green:#4ADE80;
+  --amber:#FFC364;
+  --cyan:#22D3EE;
+  --text:#ECF1F6;
+  --muted:rgba(255,255,255,0.45);
+  --muted2:rgba(255,255,255,0.25);
+}
+
+html,body{height:100%;overflow:hidden;max-width:100vw;}
+
+body{
+  background:var(--bg);
+  font-family:'Inter',sans-serif;
+  color:var(--text);
+  position:relative;
+}
+
+/* ── Slide System ── */
+.slide-container{
+  width:1920px;height:1080px;
+  position:absolute;top:0;left:0;
+  transform-origin:0 0;
+}
+
+.slide{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  padding:48px 72px;
+  opacity:0;pointer-events:none;
+  transition:opacity 0.5s ease;
+  overflow:hidden;
+}
+.slide.active{opacity:1;pointer-events:all;}
+
+.slide::before{
+  content:'';position:absolute;inset:0;
+  pointer-events:none;z-index:0;
+}
+
+/* ── Navigation ── */
+.progress{
+  position:fixed;top:0;left:0;height:3px;
+  background:linear-gradient(90deg,var(--red),var(--purple),var(--blue));
+  transition:width 0.4s ease;z-index:200;
+}
+.nav{
+  position:absolute;bottom:40px;right:80px;z-index:100;
+  display:flex;gap:12px;align-items:center;
+}
+.nav button{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--surface2);border:1px solid rgba(255,255,255,0.08);
+  color:var(--text);font-size:22px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;
+}
+.nav button:hover{background:rgba(255,255,255,0.15);}
+.nav button:disabled{opacity:0.3;cursor:default;}
+.slide-indicator{
+  font-size:20px;color:var(--muted);min-width:60px;text-align:center;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ── Eyebrow / Title ── */
+.eyebrow{
+  font-size:24px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:8px;position:relative;z-index:1;
+}
+.slide-title{
+  font-size:88px;font-weight:800;letter-spacing:-3px;
+  margin-bottom:6px;line-height:1.1;position:relative;z-index:1;
+}
+.slide-title em{
+  font-style:normal;
+  background:linear-gradient(135deg,var(--red),var(--purple),var(--blue));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.slide-subtitle{
+  font-size:32px;color:var(--muted);margin-bottom:24px;
+  max-width:1400px;line-height:1.4;position:relative;z-index:1;
+}
+
+/* ── Grid & Cards ── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;position:relative;z-index:1;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;position:relative;z-index:1;}
+.grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;position:relative;z-index:1;}
+.card{
+  background:var(--surface);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:16px;padding:24px;
+}
+.card-title{
+  font-size:26px;font-weight:700;margin-bottom:14px;
+  display:flex;align-items:center;gap:14px;
+}
+.dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+
+/* ── Feature List ── */
+.feature-list{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.feature-list li{display:flex;align-items:flex-start;gap:14px;font-size:26px;line-height:1.35;}
+.icon{
+  width:44px;height:44px;border-radius:12px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-weight:800;
+}
+
+/* ── Tags ── */
+.tag{
+  display:inline-block;padding:8px 20px;border-radius:22px;
+  font-size:22px;font-weight:600;
+}
+.tag-red{background:rgba(215,25,32,0.15);color:var(--red);}
+.tag-blue{background:rgba(100,181,246,0.15);color:var(--blue);}
+.tag-purple{background:rgba(192,132,252,0.15);color:var(--purple);}
+.tag-green{background:rgba(74,222,128,0.15);color:var(--green);}
+.tag-amber{background:rgba(255,195,100,0.15);color:var(--amber);}
+.tag-cyan{background:rgba(34,211,238,0.15);color:var(--cyan);}
+
+/* ── Cover Layout ── */
+.cover-layout{
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  height:100%;text-align:center;position:relative;z-index:1;
+}
+.cover-logo{
+  font-size:28px;font-weight:600;letter-spacing:4px;
+  color:var(--muted);text-transform:uppercase;margin-bottom:40px;
+}
+.cover-title{
+  font-size:120px;font-weight:900;letter-spacing:-5px;
+  line-height:1.1;margin-bottom:32px;
+}
+.cover-title em{
+  font-style:normal;
+  background:linear-gradient(135deg,var(--red),var(--purple),var(--blue));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.cover-sub{
+  font-size:38px;color:var(--muted);font-weight:400;
+  margin-bottom:56px;line-height:1.5;
+}
+.cover-meta{
+  font-size:26px;color:var(--muted2);
+  display:flex;gap:40px;
+}
+
+/* ── Highlight Box ── */
+.highlight-box{
+  border-left:4px solid;
+  padding:14px 28px;
+  border-radius:0 14px 14px 0;
+  background:rgba(255,255,255,0.02);
+  margin:6px 0;
+  font-size:24px;
+}
+
+/* ── Evolution Steps ── */
+.evo-step{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding:32px 24px;border-radius:18px;
+  background:var(--surface);border:1px solid rgba(255,255,255,0.06);
+}
+.evo-version{
+  font-size:92px;font-weight:900;letter-spacing:-4px;
+  line-height:1;margin-bottom:12px;
+}
+.evo-label{font-size:34px;font-weight:700;margin-bottom:8px;}
+.evo-desc{font-size:24px;color:var(--muted);line-height:1.5;}
+.evo-arrow{
+  display:flex;align-items:center;justify-content:center;
+  font-size:52px;color:var(--muted2);
+}
+
+/* ── Quote ── */
+.quote-block{
+  border-left:4px solid var(--purple);
+  padding:18px 32px;
+  background:rgba(192,132,252,0.04);
+  border-radius:0 14px 14px 0;
+  font-size:28px;line-height:1.5;
+  color:rgba(255,255,255,0.75);
+  font-style:italic;
+  position:relative;z-index:1;
+}
+.quote-source{
+  margin-top:10px;font-style:normal;font-size:22px;
+  color:var(--muted);font-weight:600;
+}
+
+/* ── Slide Bottom Quote ── */
+.slide-quote{
+  margin-top:auto;
+  padding:20px 36px;
+  border-left:4px solid var(--purple);
+  border-radius:0 14px 14px 0;
+  background:rgba(192,132,252,0.04);
+  font-size:28px;line-height:1.5;
+  color:rgba(255,255,255,0.7);
+  font-style:italic;
+  position:relative;z-index:1;
+}
+
+/* ── Utility ── */
+.text-sm{font-size:22px;}
+.text-muted{color:var(--muted);}
+.font-bold{font-weight:700;}
+.mb-16{margin-bottom:16px;}
+.mb-24{margin-bottom:24px;}
+.mb-32{margin-bottom:32px;}
+
+/* ── Slide Backgrounds ── */
+.slide-cover::before{
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(215,25,32,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 20%, rgba(100,181,246,0.04) 0%, transparent 60%);
+}
+.slide-vision::before{
+  background:
+    radial-gradient(ellipse 50% 50% at 30% 70%, rgba(192,132,252,0.06) 0%, transparent 70%);
+}
+
+/* ── Flow Diagram ── */
+.flow-step{
+  display:flex;align-items:center;gap:16px;
+  padding:16px 20px;border-radius:14px;
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.06);
+}
+.flow-step-icon{
+  width:52px;height:52px;border-radius:12px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.flow-arrow{
+  display:flex;align-items:center;justify-content:center;
+  padding:4px 0;
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SLIDE 0: COVER -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="slide-container">
+<div class="slide slide-cover active" data-slide="0">
+  <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(192,132,252,0.08)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+    </defs>
+    <circle cx="320" cy="200" r="80" fill="url(#nodeGlow)"><animate attributeName="cy" values="200;220;200" dur="6s" repeatCount="indefinite"/></circle>
+    <circle cx="1600" cy="300" r="60" fill="url(#nodeGlow)"><animate attributeName="cy" values="300;280;300" dur="5s" repeatCount="indefinite"/></circle>
+    <circle cx="200" cy="800" r="50" fill="url(#nodeGlow)"><animate attributeName="cy" values="800;820;800" dur="7s" repeatCount="indefinite"/></circle>
+    <circle cx="1700" cy="850" r="70" fill="url(#nodeGlow)"><animate attributeName="cy" values="850;830;850" dur="4.5s" repeatCount="indefinite"/></circle>
+    <line x1="320" y1="200" x2="960" y2="400" stroke="rgba(192,132,252,0.04)" stroke-width="1"/>
+    <line x1="1600" y1="300" x2="960" y2="400" stroke="rgba(100,181,246,0.04)" stroke-width="1"/>
+    <line x1="200" y1="800" x2="960" y2="600" stroke="rgba(215,25,32,0.03)" stroke-width="1"/>
+    <line x1="1700" y1="850" x2="960" y2="600" stroke="rgba(74,222,128,0.03)" stroke-width="1"/>
+    <circle cx="960" cy="500" r="180" fill="rgba(192,132,252,0.02)" stroke="rgba(192,132,252,0.04)" stroke-width="1"/>
+    <circle cx="960" cy="500" r="120" fill="rgba(192,132,252,0.02)" stroke="rgba(192,132,252,0.06)" stroke-width="1"/>
+    <circle cx="960" cy="500" r="60" fill="rgba(192,132,252,0.03)" stroke="rgba(192,132,252,0.08)" stroke-width="1"/>
+  </svg>
+  <div class="cover-layout">
+    <div class="cover-logo">Trend Micro &middot; Design Team</div>
+    <h1 class="cover-title">
+      設計 <em>3.0</em>
+    </h1>
+    <p class="cover-sub">
+      工作流程架構升級<br>
+      從現有基礎到 AI 驅動的自動化產線
+    </p>
+    <div style="display:flex;gap:16px;margin-bottom:32px;">
+      <div class="tag tag-purple" style="font-size:24px;padding:10px 24px;">Demo v1.3</div>
+      <div class="tag tag-blue" style="font-size:24px;padding:10px 24px;">25 min</div>
+    </div>
+    <div class="cover-meta">
+      <span>2026.03.16</span>
+      <span>|</span>
+      <span>Staff VXD &middot; Stanley Tung</span>
+      <span>|</span>
+      <span>Design Team</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SLIDE 1: WHY — 速度差距 -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="slide slide-vision" data-slide="1">
+  <div class="eyebrow">Why Now</div>
+  <h2 class="slide-title">速度差距的<em>現實</em></h2>
+  <p class="slide-subtitle">工程端已進入 AI 加速時代，設計端若固守兩週迭代，將從品質把關者變成系統性瓶頸。</p>
+
+  <div class="grid-2" style="flex:1;">
+    <div class="card" style="display:flex;flex-direction:column;gap:20px;">
+      <div class="card-title"><span class="dot" style="background:var(--amber);"></span> 現狀</div>
+      <div class="highlight-box" style="border-color:var(--amber);">
+        <div style="font-size:28px;font-weight:700;margin-bottom:8px;">一名工程師 + 7 個 AI Agent</div>
+        <div class="text-sm text-muted">全天候產出與部署，開發速度已指數級提升</div>
+      </div>
+      <div class="highlight-box" style="border-color:var(--amber);">
+        <div style="font-size:28px;font-weight:700;margin-bottom:8px;">設計還在兩週 Sprint</div>
+        <div class="text-sm text-muted">Figma 手動產出 → 匯出圖檔 → 開發對照切版 → 來回校對</div>
+      </div>
+      <div class="highlight-box" style="border-color:var(--red);">
+        <div style="font-size:28px;font-weight:700;margin-bottom:8px;color:var(--red);">結果：設計成為瓶頸</div>
+        <div class="text-sm text-muted">不是能力問題，是工具與流程的代差</div>
+      </div>
+    </div>
+
+    <div class="card" style="display:flex;flex-direction:column;gap:20px;">
+      <div class="card-title"><span class="dot" style="background:var(--purple);"></span> 外部信號</div>
+      <div class="highlight-box" style="border-color:var(--purple);">
+        <div style="font-size:24px;font-weight:700;margin-bottom:8px;">Anthropic 設計團隊</div>
+        <div class="text-sm text-muted">「設計師的角色正從『產出圖稿』轉向『定義規則與決策標準』」— Jenny Wen, 2025</div>
+      </div>
+      <div class="highlight-box" style="border-color:var(--red);">
+        <div style="font-size:24px;font-weight:700;margin-bottom:8px;">Figma AI + Dev Mode</div>
+        <div class="text-sm text-muted">設計工具本身已整合 AI — 自動產出代碼與標注正成為標配</div>
+      </div>
+      <div class="highlight-box" style="border-color:var(--green);">
+        <div style="font-size:24px;font-weight:700;margin-bottom:8px;">Design Engineering 崛起</div>
+        <div class="text-sm text-muted">Vercel、Linear、Stripe 積極拓展設計工程師角色</div>
+      </div>
+      <div style="margin-top:auto;padding:16px 24px;border-radius:12px;background:rgba(100,181,246,0.06);border:1px solid rgba(100,181,246,0.12);">
+        <div class="text-sm" style="color:var(--blue);">2026/2/24 內部會議已通過 Claude Code + Skills 技術可行性驗證</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SLIDE 2: PARADIGM 1.0 → 2.0 → 3.0 -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="slide" data-slide="2">
+  <div class="eyebrow">Paradigm</div>
+  <h2 class="slide-title">設計<em> 1.0 → 2.0 → 3.0</em></h2>
+  <p class="slide-subtitle">從「像素」到「系統」，再到「意圖」— 每一步都是生產力的質變。</p>
+
+  <div style="display:flex;gap:20px;flex:1;align-items:center;position:relative;z-index:1;">
+    <div class="evo-step" style="flex:1;border-color:rgba(255,255,255,0.1);">
+      <div class="evo-version" style="color:var(--muted2);">1.0</div>
+      <div class="evo-label">Static</div>
+      <div style="margin:12px 0;">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <rect x="8" y="12" width="48" height="40" rx="4" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+          <rect x="16" y="20" width="16" height="12" rx="2" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <circle cx="44" cy="26" r="5" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="evo-desc">畫布上的像素<br>圖檔交付<br><br><span style="color:var(--muted2);">Photoshop / Sketch</span></div>
+    </div>
+
+    <div class="evo-arrow">
+      <svg width="80" height="48" viewBox="0 0 80 48">
+        <defs><linearGradient id="evoArrowG1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="rgba(255,255,255,0.08)"/><stop offset="100%" stop-color="rgba(255,255,255,0.25)"/></linearGradient></defs>
+        <line x1="4" y1="24" x2="56" y2="24" stroke="url(#evoArrowG1)" stroke-width="2" stroke-dasharray="6,5"><animate attributeName="stroke-dashoffset" from="22" to="0" dur="1.2s" repeatCount="indefinite"/></line>
+        <polygon points="54,16 74,24 54,32" fill="rgba(255,255,255,0.2)"/>
+      </svg>
+    </div>
+
+    <div class="evo-step" style="flex:1;border-color:rgba(100,181,246,0.2);">
+      <div class="evo-version" style="color:var(--blue);">2.0</div>
+      <div class="evo-label">Systemic</div>
+      <div style="margin:12px 0;">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <rect x="8" y="8" width="20" height="20" rx="4" fill="rgba(100,181,246,0.12)" stroke="rgba(100,181,246,0.35)" stroke-width="1.5"/>
+          <rect x="36" y="8" width="20" height="20" rx="4" fill="rgba(100,181,246,0.08)" stroke="rgba(100,181,246,0.25)" stroke-width="1.5"/>
+          <rect x="8" y="36" width="20" height="20" rx="4" fill="rgba(100,181,246,0.08)" stroke="rgba(100,181,246,0.25)" stroke-width="1.5"/>
+          <rect x="36" y="36" width="20" height="20" rx="4" fill="rgba(100,181,246,0.12)" stroke="rgba(100,181,246,0.35)" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="evo-desc">組件庫與規範<br>Design Tokens<br><br><span style="color:var(--blue);">Figma</span></div>
+    </div>
+
+    <div class="evo-arrow">
+      <svg width="80" height="48" viewBox="0 0 80 48">
+        <line x1="4" y1="24" x2="56" y2="24" stroke="url(#evoArrowG1)" stroke-width="2" stroke-dasharray="6,5"><animate attributeName="stroke-dashoffset" from="22" to="0" dur="1.2s" repeatCount="indefinite"/></line>
+        <polygon points="54,16 74,24 54,32" fill="rgba(255,255,255,0.2)"/>
+      </svg>
+    </div>
+
+    <div class="evo-step" style="flex:1.3;border-color:rgba(192,132,252,0.3);background:rgba(192,132,252,0.04);">
+      <div class="evo-version" style="background:linear-gradient(135deg,var(--red),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">3.0</div>
+      <div class="evo-label" style="background:linear-gradient(135deg,var(--purple),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Agentic</div>
+      <div style="margin:12px 0;">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <defs>
+            <linearGradient id="brainGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#C084FC"/>
+              <stop offset="100%" stop-color="#64B5F6"/>
+            </linearGradient>
+            <filter id="glow3"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <circle cx="32" cy="32" r="12" fill="rgba(192,132,252,0.15)" stroke="url(#brainGrad)" stroke-width="2" filter="url(#glow3)"/>
+          <circle cx="32" cy="10" r="4" fill="rgba(215,25,32,0.6)"/>
+          <circle cx="52" cy="24" r="4" fill="rgba(100,181,246,0.6)"/>
+          <circle cx="52" cy="44" r="4" fill="rgba(74,222,128,0.6)"/>
+          <circle cx="32" cy="54" r="4" fill="rgba(255,195,100,0.6)"/>
+          <circle cx="12" cy="44" r="4" fill="rgba(34,211,238,0.6)"/>
+          <circle cx="12" cy="24" r="4" fill="rgba(192,132,252,0.6)"/>
+          <text x="32" y="37" text-anchor="middle" fill="url(#brainGrad)" font-size="16" font-weight="800" font-family="Inter,sans-serif">AI</text>
+        </svg>
+      </div>
+      <div class="evo-desc">
+        <strong style="color:var(--text);">Skills + Git 協作</strong><br>
+        <strong style="color:var(--purple);">人定義方向</strong>，AI 規模化執行<br><br>
+        <span style="color:var(--purple);">Claude Code + Git</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-quote">
+    「設計 3.0 的核心：工作產出從『靜態零件』升級為『動態技能模組』— 專業經驗以更具規模化的方式影響產品。」
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SLIDE 3: 現有架構 — Skills 全景 -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="slide" data-slide="3">
+  <div class="eyebrow">Current Architecture</div>
+  <h2 class="slide-title">已建置的<em> Skills 架構</em></h2>
+  <p class="slide-subtitle">三層 12+ 個技能模組，各角色專業知識已沉澱為可重複調用的 SKILL.md</p>
+
+  <!-- Architecture Layer Diagram -->
+  <div style="position:relative;z-index:1;margin-bottom:16px;">
+    <svg width="100%" height="52" viewBox="0 0 1776 52" preserveAspectRatio="xMidYMid meet">
+      <rect x="0" y="4" width="560" height="44" rx="10" fill="rgba(215,25,32,0.08)" stroke="rgba(215,25,32,0.25)" stroke-width="1.5"/>
+      <text x="280" y="31" text-anchor="middle" fill="#D71920" font-size="16" font-weight="700" font-family="Inter,sans-serif">策略層 Strategy</text>
+      <polygon points="576,26 592,18 592,34" fill="rgba(255,255,255,0.15)"/>
+      <rect x="608" y="4" width="560" height="44" rx="10" fill="rgba(192,132,252,0.08)" stroke="rgba(192,132,252,0.25)" stroke-width="1.5"/>
+      <text x="888" y="31" text-anchor="middle" fill="#C084FC" font-size="16" font-weight="700" font-family="Inter,sans-serif">設計層 Design</text>
+      <polygon points="1184,26 1200,18 1200,34" fill="rgba(255,255,255,0.15)"/>
+      <rect x="1216" y="4" width="560" height="44" rx="10" fill="rgba(100,181,246,0.08)" stroke="rgba(100,181,246,0.25)" stroke-width="1.5"/>
+      <text x="1496" y="31" text-anchor="middle" fill="#64B5F6" font-size="16" font-weight="700" font-family="Inter,sans-serif">執行層 Execution</text>
+    </svg>
+  </div>
+
+  <div class="grid-3" style="flex:1;align-content:start;">
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--red);"></span> 策略層</div>
+      <ul class="feature-list">
+        <li><span class="icon" style="background:rgba(215,25,32,0.15);color:var(--red);">D</span>
+          <div><strong>/direction</strong><br><span class="text-sm text-muted">公司願景與策略對齊</span></div>
+        </li>
+        <li><span class="icon" style="background:rgba(215,25,32,0.15);color:var(--red);">P</span>
+          <div><strong>/pm</strong><br><span class="text-sm text-muted">PRD 審查、需求定義、功能優先序</span></div>
+        </li>
+        <li><span class="icon" style="background:rgba(215,25,32,0.15);color:var(--red);">M</span>
+          <div><strong>/marketing</strong><br><span class="text-sm text-muted">市場定位、品牌一致性</span></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--purple);"></span> 設計層</div>
+      <ul class="feature-list">
+        <li><span class="icon" style="background:rgba(192,132,252,0.15);color:var(--purple);">V</span>
+          <div><strong>/vxd</strong><br><span class="text-sm text-muted">視覺設計系統、排版、色彩</span></div>
+        </li>
+        <li><span class="icon" style="background:rgba(192,132,252,0.15);color:var(--purple);">U</span>
+          <div><strong>/uxd</strong><br><span class="text-sm text-muted">資訊架構、互動設計、無障礙</span></div>
+        </li>
+        <li><span class="icon" style="background:rgba(192,132,252,0.15);color:var(--purple);">W</span>
+          <div><strong>/writer</strong><br><span class="text-sm text-muted">UX 文案、品牌語調</span></div>
+        </li>
+        <li><span class="icon" style="background:rgba(192,132,252,0.15);color:var(--purple);">R</span>
+          <div><strong>/uxr</strong><br><span class="text-sm text-muted">用戶研究、可用性測試</span></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--blue);"></span> 執行層</div>
+      <ul class="feature-list">
+        <li><span class="icon" style="background:rgba(100,181,246,0.15);color:var(--blue);">F</span>
+          <div><strong>/figma-mcp</strong><br><span class="text-sm text-muted">Figma 雙向同步</span></div>
+        </li>
+        <li><span class="icon" style="background:rgba(100,181,246,0.15);color:var(--blue);">S</span>
+          <div><strong>/simplify</strong><br><span class="text-sm text-muted">代碼品質自動審查</span></div>
+        </li>
+        <li><span class="icon" style="background:rgba(100,181,246,0.15);color:var(--blue);">B</span>
+          <div><strong>/biz</strong><br><span class="text-sm text-muted">商業分析、財務模型</span></div>
+        </li>
+        <li><span class="icon" style="background:rgba(100,181,246,0.15);color:var(--blue);">H</span>
+          <div><strong>/team-hub</strong><br><span class="text-sm text-muted">團隊營運中心</span></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="slide-quote">
+    「每個 Skill 都是一份 SKILL.md，透過 Git 管理版本。專業經驗得以沉澱、重複調用與持續優化。」
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SLIDE 4: 工作流程的改變 — Before vs After -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="slide" data-slide="4">
+  <div class="eyebrow">Workflow Shift</div>
+  <h2 class="slide-title">工作流程的<em>質變</em></h2>
+  <p class="slide-subtitle">從「圖檔交付」到「意圖驅動」，設計師直接參與代碼層的體驗拋光。</p>
+
+  <div class="grid-2" style="flex:1;">
+    <!-- BEFORE -->
+    <div class="card" style="display:flex;flex-direction:column;gap:14px;border-color:rgba(255,255,255,0.1);">
+      <div class="card-title"><span class="dot" style="background:var(--muted2);"></span> Before — 傳統流程</div>
+
+      <div class="flow-step">
+        <div class="flow-step-icon" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);">
+          <svg width="24" height="24" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><rect x="7" y="7" width="4" height="4" rx="1" fill="rgba(255,255,255,0.2)"/></svg>
+        </div>
+        <div><strong>Figma 設計</strong><br><span class="text-sm text-muted">手動繪製所有畫面與狀態</span></div>
+      </div>
+      <div class="flow-arrow"><svg width="24" height="20" viewBox="0 0 24 20"><line x1="12" y1="0" x2="12" y2="14" stroke="rgba(255,255,255,0.15)" stroke-width="2"/><polygon points="6,12 12,20 18,12" fill="rgba(255,255,255,0.15)"/></svg></div>
+      <div class="flow-step">
+        <div class="flow-step-icon" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);">
+          <svg width="24" height="24" viewBox="0 0 24 24"><path d="M4 16 L4 4 L20 4 L20 16" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><line x1="12" y1="12" x2="12" y2="20" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><polygon points="8,18 12,22 16,18" fill="rgba(255,255,255,0.15)"/></svg>
+        </div>
+        <div><strong>匯出圖檔 + 標注</strong><br><span class="text-sm text-muted">整理 Spec、Redline、切圖</span></div>
+      </div>
+      <div class="flow-arrow"><svg width="24" height="20" viewBox="0 0 24 20"><line x1="12" y1="0" x2="12" y2="14" stroke="rgba(255,255,255,0.15)" stroke-width="2"/><polygon points="6,12 12,20 18,12" fill="rgba(255,255,255,0.15)"/></svg></div>
+      <div class="flow-step">
+        <div class="flow-step-icon" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);">
+          <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><path d="M8 12 L16 12 M12 8 L12 16" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/></svg>
+        </div>
+        <div><strong>開發切版 → 來回校對</strong><br><span class="text-sm text-muted">反覆確認間距、色值、互動細節</span></div>
+      </div>
+
+      <div style="margin-top:auto;padding:14px 20px;border-radius:12px;background:rgba(255,195,100,0.06);border:1px solid rgba(255,195,100,0.12);text-align:center;">
+        <div style="font-size:22px;color:var(--amber);">週期長、溝通成本高、切版落差難避免</div>
+      </div>
+    </div>
+
+    <!-- AFTER -->
+    <div class="card" style="display:flex;flex-direction:column;gap:14px;border-color:rgba(192,132,252,0.2);">
+      <div class="card-title"><span class="dot" style="background:var(--purple);"></span> After — Skills 驅動</div>
+
+      <div class="flow-step" style="border-color:rgba(100,181,246,0.15);">
+        <div class="flow-step-icon" style="background:rgba(100,181,246,0.1);border:1px solid rgba(100,181,246,0.2);">
+          <svg width="24" height="24" viewBox="0 0 24 24"><rect x="3" y="2" width="18" height="20" rx="3" fill="none" stroke="#64B5F6" stroke-width="1.5"/><line x1="8" y1="8" x2="16" y2="8" stroke="#64B5F6" stroke-width="1" opacity="0.6"/><line x1="8" y1="12" x2="14" y2="12" stroke="#64B5F6" stroke-width="1" opacity="0.4"/></svg>
+        </div>
+        <div><strong style="color:var(--blue);">定義設計意圖</strong><br><span class="text-sm text-muted">SKILL.md 規則 + CLAUDE.md 專案指令</span></div>
+      </div>
+      <div class="flow-arrow"><svg width="24" height="20" viewBox="0 0 24 20"><line x1="12" y1="0" x2="12" y2="14" stroke="rgba(192,132,252,0.3)" stroke-width="2"/><polygon points="6,12 12,20 18,12" fill="rgba(192,132,252,0.25)"/></svg></div>
+      <div class="flow-step" style="border-color:rgba(192,132,252,0.15);">
+        <div class="flow-step-icon" style="background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.2);">
+          <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="rgba(192,132,252,0.15)" stroke="#C084FC" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" fill="#C084FC" font-size="10" font-weight="800" font-family="Inter,sans-serif">AI</text></svg>
+        </div>
+        <div><strong style="color:var(--purple);">AI 自動產出</strong><br><span class="text-sm text-muted">Skills 審查 → 代碼生成 → Figma 同步</span></div>
+      </div>
+      <div class="flow-arrow"><svg width="24" height="20" viewBox="0 0 24 20"><line x1="12" y1="0" x2="12" y2="14" stroke="rgba(192,132,252,0.3)" stroke-width="2"/><polygon points="6,12 12,20 18,12" fill="rgba(192,132,252,0.25)"/></svg></div>
+      <div class="flow-step" style="border-color:rgba(74,222,128,0.15);">
+        <div class="flow-step-icon" style="background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.2);">
+          <svg width="24" height="24" viewBox="0 0 24 24"><path d="M7 12 L10 15 L17 8" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div><strong style="color:var(--green);">PR 審核 + 最後一英里拋光</strong><br><span class="text-sm text-muted">設計師在代碼層直接調整體驗細節</span></div>
+      </div>
+
+      <div style="margin-top:auto;padding:14px 20px;border-radius:12px;background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.12);text-align:center;">
+        <div style="font-size:22px;color:var(--green);">Token 一致、零切版落差、設計即規格</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SLIDE 5: DEMO v1.3 實證 -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="slide" data-slide="5">
+  <div class="eyebrow">Evidence</div>
+  <h2 class="slide-title">Demo v1.3 <em>實證</em></h2>
+  <p class="slide-subtitle">TrendLife Mockup 專案 — Skills 驅動產線的第一次端到端驗證。</p>
+
+  <div class="grid-2" style="flex:1;">
+    <div class="card" style="display:flex;flex-direction:column;gap:20px;">
+      <div class="card-title"><span class="dot" style="background:var(--amber);"></span> 產出數據</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div style="text-align:center;padding:20px;border-radius:12px;background:rgba(215,25,32,0.06);border:1px solid rgba(215,25,32,0.12);">
+          <div style="font-size:56px;font-weight:900;color:var(--red);letter-spacing:-2px;">37</div>
+          <div class="text-sm text-muted">Mockup 畫面</div>
+        </div>
+        <div style="text-align:center;padding:20px;border-radius:12px;background:rgba(192,132,252,0.06);border:1px solid rgba(192,132,252,0.12);">
+          <div style="font-size:56px;font-weight:900;color:var(--purple);letter-spacing:-2px;">5</div>
+          <div class="text-sm text-muted">場景完整覆蓋</div>
+        </div>
+        <div style="text-align:center;padding:20px;border-radius:12px;background:rgba(100,181,246,0.06);border:1px solid rgba(100,181,246,0.12);">
+          <div style="font-size:56px;font-weight:900;color:var(--blue);letter-spacing:-2px;">0</div>
+          <div class="text-sm text-muted">框架依賴</div>
+        </div>
+        <div style="text-align:center;padding:20px;border-radius:12px;background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.12);">
+          <div style="font-size:56px;font-weight:900;color:var(--green);letter-spacing:-2px;">Git</div>
+          <div class="text-sm text-muted">全程版控</div>
+        </div>
+      </div>
+
+      <div class="highlight-box" style="border-color:var(--purple);">
+        <div style="font-size:22px;line-height:1.6;">
+          <strong>Skills 驅動產出：</strong> /vxd 審查視覺 → /uxd 審查互動 → /pm 審查需求 → /writer 審查文案<br>
+          HTML/CSS 片段可直接移植至任何專案
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="display:flex;flex-direction:column;gap:20px;">
+      <div class="card-title"><span class="dot" style="background:var(--green);"></span> 效率對比（POC 估算）</div>
+
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <!-- Bar: 初稿產出 -->
+        <div>
+          <div style="font-size:24px;font-weight:700;margin-bottom:8px;">初稿產出時間</div>
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:6px;">
+            <div style="font-size:20px;color:var(--muted);width:60px;flex-shrink:0;">傳統</div>
+            <div style="flex:1;height:28px;border-radius:8px;background:rgba(255,255,255,0.04);overflow:hidden;">
+              <div style="width:100%;height:100%;border-radius:8px;background:rgba(255,255,255,0.12);display:flex;align-items:center;padding-left:12px;font-size:20px;font-weight:700;color:var(--muted);">100%</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div style="font-size:20px;color:var(--green);width:60px;flex-shrink:0;">AI</div>
+            <div style="flex:1;height:28px;border-radius:8px;background:rgba(255,255,255,0.04);overflow:hidden;">
+              <div style="width:30%;height:100%;border-radius:8px;background:rgba(74,222,128,0.3);display:flex;align-items:center;padding-left:12px;font-size:20px;font-weight:700;color:var(--green);">~30%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bar: 溝通時長 -->
+        <div>
+          <div style="font-size:24px;font-weight:700;margin-bottom:8px;">開發溝通時長</div>
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:6px;">
+            <div style="font-size:20px;color:var(--muted);width:60px;flex-shrink:0;">傳統</div>
+            <div style="flex:1;height:28px;border-radius:8px;background:rgba(255,255,255,0.04);overflow:hidden;">
+              <div style="width:100%;height:100%;border-radius:8px;background:rgba(255,255,255,0.12);display:flex;align-items:center;padding-left:12px;font-size:20px;font-weight:700;color:var(--muted);">100%</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div style="font-size:20px;color:var(--blue);width:60px;flex-shrink:0;">AI</div>
+            <div style="flex:1;height:28px;border-radius:8px;background:rgba(255,255,255,0.04);overflow:hidden;">
+              <div style="width:50%;height:100%;border-radius:8px;background:rgba(100,181,246,0.3);display:flex;align-items:center;padding-left:12px;font-size:20px;font-weight:700;color:var(--blue);">~50%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-size:18px;color:var(--muted2);text-align:center;">
+        * 基於 TrendLife Mockup 實測估算，正式數據將於 Pilot 後發布
+      </div>
+
+      <div style="margin-top:auto;">
+        <div class="card-title" style="margin-bottom:10px;"><span class="dot" style="background:var(--blue);"></span> 對開發端的價值</div>
+        <ul class="feature-list" style="gap:8px;">
+          <li style="font-size:22px;"><span class="icon" style="width:32px;height:32px;font-size:16px;background:rgba(100,181,246,0.15);color:var(--blue);">&#10003;</span>設計稿直接轉代碼，零切版落差</li>
+          <li style="font-size:22px;"><span class="icon" style="width:32px;height:32px;font-size:16px;background:rgba(100,181,246,0.15);color:var(--blue);">&#10003;</span>Token = CSS Variable = 代碼變數</li>
+          <li style="font-size:22px;"><span class="icon" style="width:32px;height:32px;font-size:16px;background:rgba(100,181,246,0.15);color:var(--blue);">&#10003;</span>設計師最後一英里拋光</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SLIDE 6: 未來方向 — Q2 藍圖 + 品質保證 -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="slide" data-slide="6">
+  <div class="eyebrow">Roadmap</div>
+  <h2 class="slide-title">未來方向<em> — Q2 藍圖</em></h2>
+  <p class="slide-subtitle">從小規模 Pilot 開始，用成果驗證方向。</p>
+
+  <div class="grid-2" style="flex:1;">
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--purple);"></span> 2026 Q2 四步驟</div>
+      <div style="display:flex;gap:0;position:relative;">
+        <div style="position:relative;width:44px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;">
+          <svg width="44" height="100%" viewBox="0 0 44 320" preserveAspectRatio="xMidYMin meet" style="position:absolute;top:0;left:0;width:44px;height:100%;">
+            <line x1="22" y1="18" x2="22" y2="302" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+            <line x1="22" y1="18" x2="22" y2="302" stroke="url(#timelineGrad)" stroke-width="2" stroke-dasharray="6,4">
+              <animate attributeName="stroke-dashoffset" from="20" to="0" dur="2s" repeatCount="indefinite"/>
+            </line>
+            <defs><linearGradient id="timelineGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#D71920"/><stop offset="33%" stop-color="#C084FC"/><stop offset="66%" stop-color="#64B5F6"/><stop offset="100%" stop-color="#4ADE80"/></linearGradient></defs>
+            <circle cx="22" cy="18" r="8" fill="rgba(215,25,32,0.2)" stroke="#D71920" stroke-width="2"/>
+            <text x="22" y="22" text-anchor="middle" fill="#D71920" font-size="11" font-weight="800" font-family="Inter,sans-serif">1</text>
+            <circle cx="22" cy="112" r="8" fill="rgba(192,132,252,0.2)" stroke="#C084FC" stroke-width="2"/>
+            <text x="22" y="116" text-anchor="middle" fill="#C084FC" font-size="11" font-weight="800" font-family="Inter,sans-serif">2</text>
+            <circle cx="22" cy="206" r="8" fill="rgba(100,181,246,0.2)" stroke="#64B5F6" stroke-width="2"/>
+            <text x="22" y="210" text-anchor="middle" fill="#64B5F6" font-size="11" font-weight="800" font-family="Inter,sans-serif">3</text>
+            <circle cx="22" cy="300" r="8" fill="rgba(74,222,128,0.2)" stroke="#4ADE80" stroke-width="2"/>
+            <text x="22" y="304" text-anchor="middle" fill="#4ADE80" font-size="11" font-weight="800" font-family="Inter,sans-serif">4</text>
+          </svg>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;flex:1;padding-left:12px;">
+          <div style="min-height:70px;">
+            <div style="font-size:24px;font-weight:700;margin-bottom:6px;">完善核心 Skill 庫</div>
+            <div class="text-sm text-muted">/vxd、/uxd、/pm、/writer 規則定義與 Golden Samples</div>
+          </div>
+          <div style="min-height:70px;">
+            <div style="font-size:24px;font-weight:700;margin-bottom:6px;">建立品質保證機制</div>
+            <div class="text-sm text-muted">Golden Samples（北極星）+ Negative Examples（紅線）+ Validator AI（自動關卡）</div>
+          </div>
+          <div style="min-height:70px;">
+            <div style="font-size:24px;font-weight:700;margin-bottom:6px;">Pilot Project 驗證</div>
+            <div class="text-sm text-muted">選定 1-2 個實際專案，端到端測試 Skills 產線效能</div>
+          </div>
+          <div style="min-height:70px;">
+            <div style="font-size:24px;font-weight:700;margin-bottom:6px;">成效量測與報告</div>
+            <div class="text-sm text-muted">對比 Pilot 前後效率數據，產出量化成果報告</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--cyan);"></span> 品質三道防線</div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="highlight-box" style="border-color:var(--green);">
+            <div style="font-size:22px;font-weight:700;margin-bottom:4px;color:var(--green);">Golden Samples — 北極星</div>
+            <div class="text-sm text-muted">定義標竿產品，AI 學習目標方向</div>
+          </div>
+          <div class="highlight-box" style="border-color:var(--red);">
+            <div style="font-size:22px;font-weight:700;margin-bottom:4px;color:var(--red);">Negative Examples — 紅線</div>
+            <div class="text-sm text-muted">列舉禁止行為，AI 稽核底線</div>
+          </div>
+          <div class="highlight-box" style="border-color:var(--cyan);">
+            <div style="font-size:22px;font-weight:700;margin-bottom:4px;color:var(--cyan);">Validator AI — 自動關卡</div>
+            <div class="text-sm text-muted">Token 規範、色彩對比度、品牌語調 — 毫秒級攔截</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;padding:12px 20px;border-radius:12px;background:rgba(255,195,100,0.06);border:1px solid rgba(255,195,100,0.12);text-align:center;">
+          <div style="font-size:20px;color:var(--amber);">AI 處理 80% 檢測，人專注 20% 決定性判斷</div>
+        </div>
+      </div>
+
+      <div class="card" style="flex:1;">
+        <div class="card-title"><span class="dot" style="background:var(--amber);"></span> 成功指標</div>
+        <ul class="feature-list" style="gap:10px;">
+          <li style="font-size:22px;"><span class="icon" style="width:36px;height:36px;font-size:16px;background:rgba(255,195,100,0.15);color:var(--amber);">&#10003;</span>設計稿 → 可用代碼交付時間縮短</li>
+          <li style="font-size:22px;"><span class="icon" style="width:36px;height:36px;font-size:16px;background:rgba(255,195,100,0.15);color:var(--amber);">&#10003;</span>「切版落差」回報次數顯著降低</li>
+          <li style="font-size:22px;"><span class="icon" style="width:36px;height:36px;font-size:16px;background:rgba(255,195,100,0.15);color:var(--amber);">&#10003;</span>品牌一致性稽核全自動化</li>
+          <li style="font-size:22px;"><span class="icon" style="width:36px;height:36px;font-size:16px;background:rgba(255,195,100,0.15);color:var(--amber);">&#10003;</span>設計師策略性工作時間佔比提升</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SLIDE 7: CLOSING -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="slide slide-cover" data-slide="7">
+  <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+    <g opacity="0.04">
+      <line x1="960" y1="540" x2="0" y2="0" stroke="#C084FC" stroke-width="1"/>
+      <line x1="960" y1="540" x2="1920" y2="0" stroke="#64B5F6" stroke-width="1"/>
+      <line x1="960" y1="540" x2="0" y2="1080" stroke="#D71920" stroke-width="1"/>
+      <line x1="960" y1="540" x2="1920" y2="1080" stroke="#4ADE80" stroke-width="1"/>
+      <line x1="960" y1="540" x2="960" y2="0" stroke="#C084FC" stroke-width="1"/>
+      <line x1="960" y1="540" x2="0" y2="540" stroke="#64B5F6" stroke-width="1"/>
+      <line x1="960" y1="540" x2="1920" y2="540" stroke="#D71920" stroke-width="1"/>
+      <line x1="960" y1="540" x2="960" y2="1080" stroke="#4ADE80" stroke-width="1"/>
+    </g>
+    <circle cx="960" cy="540" r="200" fill="none" stroke="rgba(192,132,252,0.04)" stroke-width="1"/>
+    <circle cx="960" cy="540" r="350" fill="none" stroke="rgba(192,132,252,0.03)" stroke-width="1"/>
+    <circle cx="960" cy="540" r="500" fill="none" stroke="rgba(192,132,252,0.02)" stroke-width="1"/>
+  </svg>
+  <div class="cover-layout">
+    <div class="cover-logo">Design 3.0 &middot; Demo v1.3</div>
+    <h1 class="cover-title" style="font-size:88px;">
+      人定義方向<br><em>AI 規模化執行</em>
+    </h1>
+    <p class="cover-sub" style="max-width:750px;">
+      工作流程已從「圖檔交付」轉向「意圖驅動」<br>
+      用成果驗證方向，從小處開始。
+    </p>
+
+    <div style="display:flex;gap:40px;margin-bottom:48px;">
+      <div style="text-align:center;">
+        <div style="font-size:48px;font-weight:900;color:var(--red);letter-spacing:-2px;">12+</div>
+        <div class="text-sm text-muted">Skills Built</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:48px;font-weight:900;color:var(--purple);letter-spacing:-2px;">37</div>
+        <div class="text-sm text-muted">Mockup Screens</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:48px;font-weight:900;color:var(--green);letter-spacing:-2px;">~70%</div>
+        <div class="text-sm text-muted">初稿時間縮減</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:48px;font-weight:900;color:var(--blue);letter-spacing:-2px;">Q2</div>
+        <div class="text-sm text-muted">Pilot Kickoff</div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:16px;margin-bottom:48px;">
+      <div class="tag tag-green" style="font-size:22px;padding:10px 24px;">歡迎參與 Pilot Project</div>
+      <div class="tag tag-purple" style="font-size:22px;padding:10px 24px;">下次分享：2026 Q2 Mid</div>
+    </div>
+
+    <div style="font-size:20px;color:var(--muted2);">
+      Stanley Tung &middot; Staff VXD &middot; Trend Micro &middot; 2026
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- NAVIGATION -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="nav">
+  <button id="prev" onclick="go(-1)">&#8249;</button>
+  <span class="slide-indicator" id="indicator">1 / 8</span>
+  <button id="next" onclick="go(1)">&#8250;</button>
+</div>
+
+</div><!-- end slide-container -->
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+let cur = 0;
+
+function show(n) {
+  slides.forEach(s => s.classList.remove('active'));
+  slides[n].classList.add('active');
+  document.getElementById('indicator').textContent = (n + 1) + ' / ' + total;
+  document.getElementById('prev').disabled = n === 0;
+  document.getElementById('next').disabled = n === total - 1;
+  document.getElementById('progress').style.width = ((n + 1) / total * 100) + '%';
+}
+
+function go(dir) {
+  const next = cur + dir;
+  if (next >= 0 && next < total) { cur = next; show(cur); }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+  if (e.key === 'Home') { cur = 0; show(cur); }
+  if (e.key === 'End') { cur = total - 1; show(cur); }
+});
+
+// Touch support
+let touchStart = 0;
+document.addEventListener('touchstart', e => { touchStart = e.changedTouches[0].screenX; });
+document.addEventListener('touchend', e => {
+  const diff = e.changedTouches[0].screenX - touchStart;
+  if (Math.abs(diff) > 50) go(diff < 0 ? 1 : -1);
+});
+
+// ── Responsive scaling ──
+function resize() {
+  const container = document.querySelector('.slide-container');
+  const sw = window.innerWidth;
+  const sh = window.innerHeight;
+  const scale = sw / 1920;
+  container.style.height = (sh / scale) + 'px';
+  container.style.transform = 'scale(' + scale + ')';
+}
+window.addEventListener('resize', resize);
+resize();
+
+show(0);
+</script>
+</body>
+</html>
