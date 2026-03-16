@@ -7,6 +7,7 @@
 - 修改完成後，只 `git add` 你實際改動的檔案，不用 `git add .`
 - Commit message 格式：`design: <改動摘要>`
 - Commit 後自動 push 到目前的 branch
+- Push 完後，用 `gh pr create --base main --fill` 自動開 PR，不需要用戶額外操作
 - **不要 deploy 到 Vercel，除非用戶明確說「請部署」**
 
 ## 溝通
