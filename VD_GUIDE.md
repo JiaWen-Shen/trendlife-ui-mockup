@@ -1,4 +1,4 @@
-# VD 使用說明：用 Claude Code 協作 UI Mockup
+# VD workflow：用 Claude Code 協作 UI Mockup
 
 > 你不需要懂 git。所有版本控制操作都由 Claude 代勞。
 
@@ -6,13 +6,13 @@
 
 ## 第一次使用（只做一次）
 
-請 Karen 幫你完成以下設定：
+請 repo owner 幫你完成以下設定：
 
 1. 安裝 Claude Code（已完成 ✓）
 2. Clone repo 到本機
 3. 建立你的工作 branch
 
-設定完成後，Karen 會告訴你：
+設定完成後，repo owner 會告訴你：
 - **你的 branch 名稱**（例如：`vd/yuki-view`）
 - **你負責的檔案路徑**（例如：`constellation/mockup-yuki-ipad.html`）
 
@@ -36,7 +36,7 @@ claude
 
 啟動後，第一句話說：
 
-> 「我今天要改 `constellation/mockup-yuki-ipad.html`，branch 是 `vd/yuki-view`，請先 pull 最新版本」
+> **「我今天要改 `constellation/mockup-yuki-ipad.html`，branch 是 `vd/yuki-view`，請先 pull 最新版本」**
 
 Claude 會自動切換 branch、拉最新版本，然後問你想改什麼。
 
@@ -86,9 +86,9 @@ Claude 會等你確認。
 
 ## 改完之後
 
-你不需要做任何事。Karen 會收到通知，review 後 merge 到主版本。
+你不需要做任何事。repo-owner 會收到通知，review 後 merge 到主版本。
 
-如果 Karen 在 GitHub 上留了修改意見，她會直接傳訊息告訴你，你再開 Claude 繼續改就好。
+如果 repo-owner 在 GitHub 上留了修改意見，她會直接傳訊息告訴你，你再開 Claude 繼續改就好。
 
 ---
 
@@ -101,8 +101,8 @@ Claude 會等你確認。
 > 說「顯示今天改了什麼」
 
 **Q：Claude 問了我看不懂的問題？**
-> 截圖傳給 Karen。
+> 截圖傳給 repo-owner。
 
 ---
 
-*如有任何問題，聯絡 Karen。*
+*如有任何問題，聯絡 repo-owner。*
