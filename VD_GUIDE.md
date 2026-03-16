@@ -38,7 +38,6 @@ Claude 會自動 commit → push → 開 PR，repo owner 會收到通知。
 | 項目 | 說明 | 確認了？ |
 |-----|------|--------|
 | **GitHub 帳號已加入 repo** | 沒有權限就無法 push | ☐ |
-| **Repo clone 到本機** | `trendlife-ui-mockup/` 資料夾存在 | ☐ |
 | **Claude Code 已安裝並登入** | 可以在 terminal 執行 `claude` | ☐ |
 | **你負責的 branch 名稱** | 本專案：`vd/yukis-ipad` | ☐ |
 | **你負責的檔案路徑** | 本專案：`constellation/mockup-yuki-ipad.html` | ☐ |
@@ -79,7 +78,7 @@ Claude 會自動 commit → push → 開 PR，repo owner 會收到通知。
 請 repo owner 幫你完成：
 
 1. 安裝 Claude Code
-2. Clone repo 到本機：`git clone <repo-url> trendlife-ui-mockup`
+2. Clone repo 到本機：`git clone <repo-url> trendlife-ui-mockup`（`trendlife-ui-mockup/` 資料夾會出現在你電腦上）
 3. 建立工作 branch（repo owner 執行）
 
 你的資訊：
