@@ -42,9 +42,6 @@ Claude 會自動 commit → push → 開 PR，repo owner 會收到通知。
 | **Claude Code 已安裝並登入** | 可以在 terminal 執行 `claude` | ☐ |
 | **你負責的 branch 名稱** | 本專案：`vd/yukis-ipad` | ☐ |
 | **你負責的檔案路徑** | 本專案：`constellation/mockup-yuki-ipad.html` | ☐ |
-| **設計規範 / 色票** | 有沒有需要遵守的顏色、字體、間距規則 | ☐ |
-| **哪些區域不能動** | 例如：其他人負責的 screen、shared components | ☐ |
-| **PR 後的溝通管道** | repo owner 會用什麼方式給你 feedback（訊息、留言等） | ☐ |
 | **預覽網址** | 如果需要對照線上版本 | ☐ |
 
 ---
