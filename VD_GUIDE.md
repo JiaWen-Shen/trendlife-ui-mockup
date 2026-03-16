@@ -12,9 +12,9 @@
 2. Clone repo 到本機：`git clone <repo-url> trendlife-ui-mockup`（`trendlife-ui-mockup/` 資料夾會出現在你電腦上）
 3. 建立工作 branch（repo owner 執行）
 
-你的資訊：
-- **Branch**：`vd/yukis-ipad`
-- **檔案**：`constellation/mockup-yuki-ipad.html`
+完成後，repo owner 會給你：
+- **Branch 名稱**（例如：`vd/yukis-ipad`）
+- **你負責的檔案路徑**（例如：`constellation/mockup-yuki-ipad.html`）
 
 ---
 
@@ -25,9 +25,9 @@ cd trendlife-ui-mockup
 claude
 ```
 
-啟動後，第一句話說：
+啟動後，第一句話說（替換成你自己的 branch 和檔案）：
 
-> **「我今天要改 `constellation/mockup-yuki-ipad.html`，branch 是 `vd/yukis-ipad`，請先 pull 最新版本」**
+> **「我今天要改 `<你的檔案路徑>`，branch 是 `<你的 branch>`，請先 pull 最新版本」**
 
 Claude 會自動切換 branch、拉最新版本，然後問你想改什麼。
 
@@ -53,8 +53,8 @@ Claude 會自動 commit → push → 開 PR，repo owner 會收到通知。
 |-----|------|--------|
 | **GitHub 帳號已加入 repo** | 沒有權限就無法 push | ☐ |
 | **Claude Code 已安裝並登入** | 可以在 terminal 執行 `claude` | ☐ |
-| **你負責的 branch 名稱** | 本專案：`vd/yukis-ipad` | ☐ |
-| **你負責的檔案路徑** | 本專案：`constellation/mockup-yuki-ipad.html` | ☐ |
+| **你負責的 branch 名稱** | repo owner 會告訴你 | ☐ |
+| **你負責的檔案路徑** | repo owner 會告訴你 | ☐ |
 | **預覽網址** | 如果需要對照線上版本 | ☐ |
 
 ---
