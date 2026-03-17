@@ -3,3 +3,7 @@
 *.pdf
 *_embedded.html
 .vercel
+
+# env
+.env
+.env.*
