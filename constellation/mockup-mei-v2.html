@@ -1253,7 +1253,6 @@ function showDetail(id) {
       </div>
       <div class="detail-name">${m.name}${m.age ? ' · ' + m.age : ''}</div>
       <div class="detail-role">${m.role}</div>
-      <div class="detail-tags">${m.tags.map(t => `<span class="dtag">${t}</span>`).join('')}</div>
     </div>
     <div class="stat-row">
       ${m.stats.map(s => `
