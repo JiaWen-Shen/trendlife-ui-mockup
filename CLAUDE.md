@@ -12,7 +12,8 @@
 
 ## UI 設計規則
 
-- **Icons 一律使用 Material Design 圖示**（Material Symbols Outlined font），不使用 emoji 在 UI 上
+@design-conventions.md
+
 - **每次修改完成後，自動在瀏覽器開啟修改的頁面**
 
 ## 溝通
