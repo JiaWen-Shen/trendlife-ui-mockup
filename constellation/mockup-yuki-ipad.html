@@ -1308,6 +1308,22 @@ body {
 .share-copy-btn .material-symbols-outlined { font-size:13px !important; }
 [data-theme="light"] .share-panel { box-shadow:0 12px 40px rgba(0,0,0,0.15); }
 
+/* ── Constellation shared ── */
+.node{cursor:pointer;transition:transform 0.3s var(--ease-spring);transform-origin:center center;transform-box:fill-box}
+.node:hover{transform:scale(1.12)}
+.node-ring{fill:none;stroke-width:1.5;opacity:0.3}
+.node-circle{stroke-width:1.5}
+.node-label{font-family:'DM Sans',sans-serif;font-weight:600;fill:var(--text2);font-size:10px}
+.center-ring{fill:none;stroke-width:1;opacity:0.15;animation:centerPulse 4s ease-in-out infinite}
+@keyframes centerPulse{0%,100%{r:42;opacity:0.15}50%{r:48;opacity:0.08}}
+.conn{fill:none;stroke-linecap:round}
+.conn-base{stroke-width:2;opacity:0.45}
+.conn-flow{stroke-width:2.5;opacity:0.15;stroke-dasharray:4 8}
+.conn-flow.conn-cross{stroke-width:1.5;opacity:0.1;stroke-dasharray:3 10}
+.conn-base.conn-cross{stroke-width:1.2;opacity:0.3}
+.fam-constellation{position:relative;height:auto;margin:16px 0 0;display:flex;align-items:center;justify-content:center}
+.fam-constellation svg{width:100%;height:100%}
+
 /* ── Family Screen (constellation style) ── */
 .fam-header { padding:8px 20px 0; flex-shrink:0; }
 .fam-greeting-row { display:flex; align-items:center; gap:10px; margin-bottom:4px; }
@@ -1955,24 +1971,8 @@ body {
 
     <div class="fam-scroll">
 
-      <!-- Family members bento grid -->
-      <div class="fam-section-hdr">
-        <span class="fam-section-label">Members</span>
-      </div>
-      <div class="fam-bento">
-        <div class="fam-bento-card mom">
-          <span class="fam-bento-badge fam-badge-green">ACTIVE</span>
-          <div class="fam-bento-av"><img src="faces/mei.png" alt="Mayumi"></div>
-          <div class="fam-bento-name">Mayumi</div>
-          <div class="fam-bento-role">Mom · views your shared work &amp; reports</div>
-        </div>
-        <div class="fam-bento-card hiro">
-          <span class="fam-bento-badge fam-badge-sky">2H AGO</span>
-          <div class="fam-bento-av"><img src="faces/hiro.png" alt="Hiro"></div>
-          <div class="fam-bento-name">Hiro</div>
-          <div class="fam-bento-role">Brother · collabs on Cultural Festival</div>
-        </div>
-      </div>
+      <!-- Constellation graph -->
+      <div class="fam-constellation" id="famConstellationContainer"></div>
 
       <!-- Shared with Mom -->
       <div class="fam-section-hdr">
@@ -2274,6 +2274,94 @@ function toggleOrientation() {
     : 'iPad Pro 11" · Landscape · Yuki Creative Folder';
   resizeDevices();
 }
+
+// ── Family Constellation ──
+(function(){
+  const YUKI = { x:195, y:162, r:30 };
+  const SLOTS = [
+    { x:195, y:32,  r:32, imgR:30, imgW:60 },
+    { x:89,  y:87,  r:28, imgR:26, imgW:52 },
+    { x:302, y:87,  r:28, imgR:26, imgW:52 },
+    { x:89,  y:237, r:28, imgR:26, imgW:52 },
+  ];
+  const family = [
+    { id:'mom',     name:'Mom',     photo:'faces/mei.png',     color:'--accent', priority:10 },
+    { id:'hiro',    name:'Hiro',    photo:'faces/hiro.png',    color:'--sky',    priority:5  },
+    { id:'kenji',   name:'Dad',     photo:'faces/kanji.png',   color:'--teal',   priority:3  },
+    { id:'grandma', name:'Grandma', photo:'faces/grandma.png', color:'--coral',  priority:2  },
+  ];
+  family.sort((a,b) => b.priority - a.priority);
+  family.forEach((m,i) => { m.slot = SLOTS[i]; });
+
+  let defs = '';
+  defs += '<radialGradient id="fCG" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="var(--accent)" stop-opacity="0.08"/><stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/></radialGradient>';
+  defs += '<linearGradient id="fAG" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="var(--violet)" stop-opacity="0.6"/><stop offset="50%" stop-color="var(--accent)" stop-opacity="0.4"/><stop offset="100%" stop-color="var(--teal)" stop-opacity="0.6"/></linearGradient>';
+  defs += '<filter id="fDG"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>';
+  family.forEach((m,i) => {
+    const s = m.slot;
+    defs += '<linearGradient id="fg'+i+'" gradientUnits="userSpaceOnUse" x1="'+YUKI.x+'" y1="'+YUKI.y+'" x2="'+s.x+'" y2="'+s.y+'"><stop offset="0%" stop-color="var(--accent)"/><stop offset="100%" stop-color="var('+m.color+')"/></linearGradient>';
+  });
+  defs += '<linearGradient id="fgo" gradientUnits="userSpaceOnUse" x1="'+SLOTS[1].x+'" y1="'+SLOTS[1].y+'" x2="'+SLOTS[2].x+'" y2="'+SLOTS[2].y+'"><stop offset="0%" stop-color="var(--coral)"/><stop offset="100%" stop-color="var(--violet)"/></linearGradient>';
+
+  let clips = '<clipPath id="fcy"><circle cx="'+YUKI.x+'" cy="'+YUKI.y+'" r="28"/></clipPath>';
+  family.forEach(m => {
+    clips += '<clipPath id="fc-'+m.id+'"><circle cx="'+m.slot.x+'" cy="'+m.slot.y+'" r="'+m.slot.imgR+'"/></clipPath>';
+  });
+
+  let conn = '';
+  family.forEach((m,i) => {
+    const s = m.slot, d = 'M'+YUKI.x+' '+YUKI.y+' L'+s.x+' '+s.y, pid = 'fp'+i;
+    const dur = (3+i*0.4).toFixed(1), durDot = (3.5+i*0.4).toFixed(1);
+    conn += '<path id="'+pid+'" class="conn conn-base" d="'+d+'" stroke="url(#fg'+i+')"/>';
+    conn += '<path class="conn conn-flow" d="'+d+'" stroke="url(#fg'+i+')"><animate attributeName="stroke-dashoffset" from="0" to="-40" dur="'+dur+'s" repeatCount="indefinite"/></path>';
+    conn += '<circle r="2.5" fill="var('+m.color+')" filter="url(#fDG)" opacity="0"><animateMotion dur="'+durDot+'s" repeatCount="indefinite"><mpath href="#'+pid+'"/></animateMotion><animate attributeName="opacity" values="0;0.9;0.9;0" dur="'+durDot+'s" repeatCount="indefinite"/></circle>';
+  });
+
+  const orbitR = 130, steps = 120;
+  const wvs = Array.from({length:5}, () => ({f:3+Math.random()*18, a:1+Math.random()*3, p:Math.random()*Math.PI*2}));
+  function orbitPath(phase){
+    let pts = [];
+    for(let i = 0; i <= steps; i++){
+      const a = (i/steps)*Math.PI*2;
+      let wR = 0; wvs.forEach(w => { wR += Math.sin(a*w.f + w.p + (phase||0)*w.f*0.15)*w.a; });
+      pts.push([YUKI.x + Math.cos(a)*(orbitR+wR*0.4), YUKI.y + Math.sin(a)*(orbitR+wR*0.4)]);
+    }
+    let d = 'M'+pts[0][0].toFixed(1)+' '+pts[0][1].toFixed(1);
+    for(let i = 1; i < pts.length; i++){
+      const p0=pts[i-1],p1=pts[i],cx=(p0[0]+p1[0])/2,cy=(p0[1]+p1[1])/2;
+      d += ' Q'+p0[0].toFixed(1)+' '+p0[1].toFixed(1)+' '+cx.toFixed(1)+' '+cy.toFixed(1);
+    }
+    return d+' Z';
+  }
+  const orbitD = orbitPath(0);
+  conn += '<path id="famOrbit" class="conn conn-base conn-cross" d="'+orbitD+'" stroke="url(#fgo)"/>';
+  conn += '<path class="conn conn-flow conn-cross" d="'+orbitD+'" stroke="url(#fgo)"><animate attributeName="stroke-dashoffset" from="0" to="-820" dur="14s" repeatCount="indefinite"/></path>';
+  conn += '<circle r="1.8" fill="var(--violet)" filter="url(#fDG)" opacity="0"><animateMotion dur="10s" repeatCount="indefinite"><mpath href="#famOrbit"/></animateMotion><animate attributeName="opacity" values="0;0.7;0.7;0" dur="10s" repeatCount="indefinite"/></circle>';
+  conn += '<circle r="1.8" fill="var(--teal)" filter="url(#fDG)" opacity="0"><animateMotion dur="10s" begin="5s" repeatCount="indefinite"><mpath href="#famOrbit"/></animateMotion><animate attributeName="opacity" values="0;0.7;0.7;0" dur="10s" begin="5s" repeatCount="indefinite"/></circle>';
+
+  let nodes = '';
+  nodes += '<circle class="center-ring" cx="'+YUKI.x+'" cy="'+YUKI.y+'" r="42" stroke="var(--accent)"/>';
+  nodes += '<circle cx="'+YUKI.x+'" cy="'+YUKI.y+'" r="38" fill="url(#fCG)"/>';
+  nodes += '<g class="node"><circle cx="'+YUKI.x+'" cy="'+YUKI.y+'" r="'+YUKI.r+'" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/><image href="faces/yuki.png" x="'+(YUKI.x-28)+'" y="'+(YUKI.y-28)+'" width="56" height="56" clip-path="url(#fcy)" preserveAspectRatio="xMidYMid slice"/><text class="node-label" x="'+YUKI.x+'" y="'+(YUKI.y+40)+'" text-anchor="middle">Yuki</text></g>';
+  family.forEach(m => {
+    const s=m.slot, hw=s.imgW/2;
+    nodes += '<g class="node"><circle cx="'+s.x+'" cy="'+s.y+'" r="'+s.r+'" fill="var(--surface)" class="node-circle" stroke="var('+m.color+')" stroke-width="1.5"/><image href="'+m.photo+'" x="'+(s.x-hw)+'" y="'+(s.y-hw)+'" width="'+s.imgW+'" height="'+s.imgW+'" clip-path="url(#fc-'+m.id+')" preserveAspectRatio="xMidYMid slice"/><text class="node-label" x="'+s.x+'" y="'+(s.y+s.r+15)+'" text-anchor="middle">'+m.name+'</text></g>';
+  });
+
+  const label = '<text x="195" y="-30" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text3)" letter-spacing="2" font-family="DM Sans">KALEIDOSCOPE</text>';
+  const arc = '<path fill="none" stroke="url(#fAG)" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 6" opacity="0.35" d="M 80 0 Q 195 -33 310 0"><animate attributeName="stroke-dashoffset" from="0" to="-200" dur="20s" repeatCount="indefinite"/></path>';
+  document.getElementById('famConstellationContainer').innerHTML =
+    '<svg viewBox="0 -40 390 360" fill="none"><defs>'+defs+'</defs>'+clips+arc+'<g class="connections">'+conn+'</g>'+nodes+label+'</svg>';
+
+  let phase = 0;
+  (function tick(){
+    phase += 0.006;
+    const d = orbitPath(phase);
+    const ring = document.getElementById('famOrbit');
+    if(ring){ ring.setAttribute('d',d); const f=ring.nextElementSibling; if(f&&f.classList.contains('conn-flow'))f.setAttribute('d',d); }
+    requestAnimationFrame(tick);
+  })();
+})();
 
 </script>
 </body>
