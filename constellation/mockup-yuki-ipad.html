@@ -546,6 +546,10 @@ body {
 }
 .et-tool-btn:hover { background: var(--surface3); color: var(--text); }
 .et-tool-btn.active-tool { background: var(--accent-dim); color: var(--accent); }
+.et-tool-group.genz { background: rgba(192,132,252,0.08); border-color: rgba(192,132,252,0.25); }
+.et-tool-group.genz .et-tool-btn { color: #a78bfa; }
+.et-tool-group.genz .et-tool-btn:hover { background: rgba(192,132,252,0.15); color: #c084fc; }
+.et-tool-group.genz .et-tool-btn .material-symbols-outlined { font-size: 13px !important; line-height:1; }
 .et-collab {
   display: flex; align-items: center;
   margin: 0 4px;
@@ -1087,6 +1091,68 @@ body {
   grid-template-columns: 200px 1fr 280px;
 }
 
+/* ─── ASSET PANEL ENHANCEMENTS ─── */
+.asset-search-bar {
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 6px;
+  flex-shrink: 0; background: var(--surface);
+}
+.asset-search-wrap { flex: 1; position: relative; }
+.asset-search-wrap .material-symbols-outlined {
+  position: absolute; left: 7px; top: 50%; transform: translateY(-50%);
+  font-size: 13px !important; color: var(--text3); pointer-events: none;
+}
+.asset-search-input {
+  width: 100%; background: var(--surface2);
+  border: 1px solid var(--border2); border-radius: 7px;
+  padding: 5px 8px 5px 25px;
+  font: 400 11px/1 var(--font); color: var(--text); outline: none;
+}
+.asset-search-input::placeholder { color: var(--text3); }
+.asset-search-input:focus { border-color: rgba(0,188,212,0.4); }
+.asset-ai-btn {
+  display: flex; align-items: center; gap: 3px;
+  background: var(--ai-dim); border: 1px solid rgba(0,188,212,0.2);
+  border-radius: 6px; padding: 4px 7px; cursor: pointer;
+  font: 600 9px/1 var(--font); color: var(--ai); white-space: nowrap;
+  flex-shrink: 0; transition: all .12s;
+}
+.asset-ai-btn:hover { background: rgba(0,188,212,0.14); border-color: rgba(0,188,212,0.4); }
+.asset-ai-btn .material-symbols-outlined { font-size: 11px !important; }
+.asset-section-hd {
+  display: flex; align-items: center; gap: 6px;
+  padding: 10px 0 5px;
+}
+.asset-section-hd:first-child { padding-top: 0; }
+.asset-section-title {
+  font: 500 9px/1 var(--font); color: var(--text3);
+  text-transform: uppercase; letter-spacing: .08em; flex: 1;
+}
+.asset-add-btn {
+  width: 20px; height: 20px; border-radius: 5px;
+  background: var(--surface2); border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text3); flex-shrink: 0; transition: all .12s;
+}
+.asset-add-btn .material-symbols-outlined { font-size: 13px !important; }
+.asset-add-btn:hover { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+.clip-row { position: relative; }
+.clip-actions {
+  position: absolute; right: 3px; top: 50%; transform: translateY(-50%);
+  display: flex; gap: 2px; opacity: 0; pointer-events: none; transition: opacity .12s;
+}
+.clip-row:hover .clip-actions { opacity: 1; pointer-events: auto; }
+.clip-act-btn {
+  width: 20px; height: 20px; border-radius: 4px;
+  background: var(--surface2); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text3); transition: all .1s;
+}
+.clip-act-btn .material-symbols-outlined { font-size: 11px !important; }
+.clip-act-btn:hover { background: var(--surface3); color: var(--text); }
+.clip-act-btn.del:hover { background: var(--coral-dim); color: var(--coral); border-color: var(--coral); }
+
 /* ─── STATIC (non-clickable) cards ─── */
 .proj-card.static { cursor: default; }
 .proj-card.static:hover { transform: none; border-color: var(--border); box-shadow: none; }
@@ -1402,6 +1468,15 @@ body {
         <button class="et-tool-btn" style="font-size:14px;">+</button>
       </div>
 
+      <!-- GenZ interactive tools -->
+      <div class="et-tool-group genz">
+        <button class="et-tool-btn" title="Stickers"><span class="material-symbols-outlined">add_reaction</span></button>
+        <button class="et-tool-btn" title="Beat Sync"><span class="material-symbols-outlined">queue_music</span></button>
+        <button class="et-tool-btn" title="Speed Ramp"><span class="material-symbols-outlined">speed</span></button>
+        <button class="et-tool-btn" title="Auto Caption"><span class="material-symbols-outlined">closed_caption</span></button>
+        <button class="et-tool-btn" title="AR Lens"><span class="material-symbols-outlined">filter</span></button>
+      </div>
+
       <div class="et-spacer"></div>
 
       <!-- Collaborator avatars -->
@@ -1428,15 +1503,35 @@ body {
           <button class="at-tab" role="tab" aria-selected="false">Effects</button>
         </div>
 
+        <!-- AI Search bar -->
+        <div class="asset-search-bar">
+          <div class="asset-search-wrap">
+            <span class="material-symbols-outlined">search</span>
+            <input type="text" class="asset-search-input" placeholder="Search clips…">
+          </div>
+          <div class="asset-ai-btn">
+            <span class="material-symbols-outlined">auto_awesome</span>
+            AI Search
+          </div>
+        </div>
+
         <div class="asset-scroll">
 
-          <div class="asset-section-label">Project Clips</div>
+          <!-- Project Clips section -->
+          <div class="asset-section-hd">
+            <span class="asset-section-title">Project Clips</span>
+            <button class="asset-add-btn" title="Upload clip"><span class="material-symbols-outlined">add</span></button>
+          </div>
 
           <div class="clip-row active-clip">
             <div class="clip-thumb-sm grad-video"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg><span class="clip-dur">0:12</span></div>
             <div class="clip-rinfo">
               <div class="clip-rname">Opening crowd</div>
               <div class="clip-rmeta">4K · 0:12</div>
+            </div>
+            <div class="clip-actions">
+              <button class="clip-act-btn" title="Rename"><span class="material-symbols-outlined">edit</span></button>
+              <button class="clip-act-btn del" title="Delete"><span class="material-symbols-outlined">delete</span></button>
             </div>
           </div>
 
@@ -1448,6 +1543,10 @@ body {
               <div class="clip-rname">Grandma watching</div>
               <div class="clip-rmeta">4K · 0:04 · Anchor</div>
             </div>
+            <div class="clip-actions">
+              <button class="clip-act-btn" title="Rename"><span class="material-symbols-outlined">edit</span></button>
+              <button class="clip-act-btn del" title="Delete"><span class="material-symbols-outlined">delete</span></button>
+            </div>
           </div>
 
           <div class="clip-row">
@@ -1457,6 +1556,10 @@ body {
             <div class="clip-rinfo">
               <div class="clip-rname">Lantern ceremony</div>
               <div class="clip-rmeta">4K · 0:08</div>
+            </div>
+            <div class="clip-actions">
+              <button class="clip-act-btn" title="Rename"><span class="material-symbols-outlined">edit</span></button>
+              <button class="clip-act-btn del" title="Delete"><span class="material-symbols-outlined">delete</span></button>
             </div>
           </div>
 
@@ -1468,6 +1571,10 @@ body {
               <div class="clip-rname">Drum performance</div>
               <div class="clip-rmeta">4K · 0:16</div>
             </div>
+            <div class="clip-actions">
+              <button class="clip-act-btn" title="Rename"><span class="material-symbols-outlined">edit</span></button>
+              <button class="clip-act-btn del" title="Delete"><span class="material-symbols-outlined">delete</span></button>
+            </div>
           </div>
 
           <div class="clip-row">
@@ -1478,29 +1585,56 @@ body {
               <div class="clip-rname">Traditional dance</div>
               <div class="clip-rmeta">4K · 0:07</div>
             </div>
+            <div class="clip-actions">
+              <button class="clip-act-btn" title="Rename"><span class="material-symbols-outlined">edit</span></button>
+              <button class="clip-act-btn del" title="Delete"><span class="material-symbols-outlined">delete</span></button>
+            </div>
           </div>
 
-          <div class="asset-section-label">AI Suggestions</div>
+          <!-- AI Suggestions section -->
+          <div class="asset-section-hd" style="margin-top:4px;">
+            <span class="asset-section-title" style="color:var(--ai);">Kaleidoscope Suggests</span>
+          </div>
 
-          <div class="clip-row" style="opacity:0.8;">
+          <div class="clip-row" style="opacity:0.85;">
             <div class="clip-thumb-sm" style="background:var(--ai-dim);border:1px dashed rgba(0,188,212,0.35);">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="var(--ai)" stroke="none"><polygon points="12,2 14.5,9 22,9.5 16,14.5 18,22 12,17.5 6,22 8,14.5 2,9.5 9.5,9"/></svg>
               <span class="clip-dur" style="background:rgba(0,188,212,0.55);">0:06</span>
             </div>
             <div class="clip-rinfo">
               <div class="clip-rname" style="color:var(--ai);">B-roll: crowd pan</div>
-              <div class="clip-rmeta">Kaleidoscope · Suggested</div>
+              <div class="clip-rmeta">Matches scene 01</div>
+            </div>
+            <div class="clip-actions">
+              <button class="clip-act-btn" title="Add to timeline" style="color:var(--ai);border-color:rgba(0,188,212,0.3);"><span class="material-symbols-outlined">add</span></button>
             </div>
           </div>
 
-          <div class="clip-row" style="opacity:0.8;">
+          <div class="clip-row" style="opacity:0.85;">
             <div class="clip-thumb-sm" style="background:var(--ai-dim);border:1px dashed rgba(0,188,212,0.35);">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="var(--ai)" stroke="none"><polygon points="12,2 14.5,9 22,9.5 16,14.5 18,22 12,17.5 6,22 8,14.5 2,9.5 9.5,9"/></svg>
               <span class="clip-dur" style="background:rgba(0,188,212,0.55);">0:03</span>
             </div>
             <div class="clip-rinfo">
               <div class="clip-rname" style="color:var(--ai);">Close-up: candles</div>
-              <div class="clip-rmeta">Kaleidoscope · Suggested</div>
+              <div class="clip-rmeta">Anchors grandma shot</div>
+            </div>
+            <div class="clip-actions">
+              <button class="clip-act-btn" title="Add to timeline" style="color:var(--ai);border-color:rgba(0,188,212,0.3);"><span class="material-symbols-outlined">add</span></button>
+            </div>
+          </div>
+
+          <div class="clip-row" style="opacity:0.85;">
+            <div class="clip-thumb-sm" style="background:var(--ai-dim);border:1px dashed rgba(0,188,212,0.35);">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="var(--ai)" stroke="none"><polygon points="12,2 14.5,9 22,9.5 16,14.5 18,22 12,17.5 6,22 8,14.5 2,9.5 9.5,9"/></svg>
+              <span class="clip-dur" style="background:rgba(0,188,212,0.55);">0:09</span>
+            </div>
+            <div class="clip-rinfo">
+              <div class="clip-rname" style="color:var(--ai);">Sky timelapse</div>
+              <div class="clip-rmeta">Strong opening hook</div>
+            </div>
+            <div class="clip-actions">
+              <button class="clip-act-btn" title="Add to timeline" style="color:var(--ai);border-color:rgba(0,188,212,0.3);"><span class="material-symbols-outlined">add</span></button>
             </div>
           </div>
 
