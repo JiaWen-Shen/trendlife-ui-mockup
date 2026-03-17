@@ -1308,40 +1308,58 @@ body {
 .share-copy-btn .material-symbols-outlined { font-size:13px !important; }
 [data-theme="light"] .share-panel { box-shadow:0 12px 40px rgba(0,0,0,0.15); }
 
-/* ── Family Screen ── */
-.fam-header { display:flex; align-items:center; gap:10px; padding:16px 20px 12px; border-bottom:1px solid var(--border); flex-shrink:0; }
-.fam-header-title { font:700 17px/1 var(--font); color:var(--text); flex:1; }
-.fam-body { flex:1; overflow-y:auto; padding:0 20px 24px; }
-.fam-section-hd { font:600 11px/1 var(--font); color:var(--text3); text-transform:uppercase; letter-spacing:.5px; margin:20px 0 10px; }
-.fam-member-card { display:flex; align-items:center; gap:12px; background:var(--surface2); border-radius:14px; padding:12px 14px; margin-bottom:8px; border:1px solid var(--border); }
-.fam-member-av { width:42px; height:42px; border-radius:50%; overflow:hidden; flex-shrink:0; }
-.fam-member-av img { width:100%; height:100%; object-fit:cover; display:block; }
-.fam-member-info { flex:1; }
-.fam-member-name { font:600 13px/1 var(--font); color:var(--text); margin-bottom:3px; }
-.fam-member-role { font:400 11px/1.3 var(--font); color:var(--text3); }
-.fam-member-status { display:flex; align-items:center; gap:4px; font:500 10px/1 var(--font); }
-.fam-dot { width:6px; height:6px; border-radius:50%; }
-.fam-dot.online { background:#34d399; }
-.fam-dot.away { background:#fbbf24; }
-.fam-shared-card { display:flex; align-items:center; gap:11px; background:var(--surface2); border-radius:12px; padding:11px 13px; margin-bottom:7px; border:1px solid var(--border); cursor:default; }
-.fam-shared-thumb { width:36px; height:36px; border-radius:8px; background:var(--surface3); flex-shrink:0; display:flex; align-items:center; justify-content:center; overflow:hidden; }
-.fam-shared-thumb .material-symbols-outlined { font-size:17px !important; color:var(--text3); }
-.fam-shared-info { flex:1; }
-.fam-shared-name { font:500 12px/1.3 var(--font); color:var(--text); }
-.fam-shared-meta { font:400 10px/1.3 var(--font); color:var(--text3); margin-top:2px; display:flex; align-items:center; gap:5px; }
-.fam-shared-vis { font:500 10px/1 var(--font); color:#a78bfa; background:rgba(167,139,250,0.1); padding:2px 7px; border-radius:100px; white-space:nowrap; }
-.fam-authorship { height:4px; border-radius:100px; background:var(--surface3); margin-top:6px; overflow:hidden; }
-.fam-authorship-fill { height:100%; border-radius:100px; background:linear-gradient(90deg,var(--accent),#38bdf8); }
-.fam-insight-card { background:rgba(167,139,250,0.07); border:1px solid rgba(167,139,250,0.2); border-radius:14px; padding:14px; margin-top:4px; }
-.fam-insight-hd { display:flex; align-items:center; gap:7px; margin-bottom:8px; }
-.fam-insight-icon { width:26px; height:26px; border-radius:8px; background:rgba(167,139,250,0.15); display:flex; align-items:center; justify-content:center; }
-.fam-insight-icon .material-symbols-outlined { font-size:13px !important; color:#a78bfa; }
-.fam-insight-label { font:600 11px/1 var(--font); color:#a78bfa; }
-.fam-insight-body { font:400 12px/1.6 var(--font); color:var(--text2); }
-.fam-insight-preview { margin-top:10px; padding-top:10px; border-top:1px solid rgba(167,139,250,0.15); display:flex; align-items:center; gap:6px; }
-.fam-insight-preview-label { font:400 11px/1 var(--font); color:var(--text3); flex:1; }
-.fam-preview-btn { padding:5px 12px; border-radius:100px; background:rgba(167,139,250,0.15); border:none; color:#a78bfa; font:600 11px/1 var(--font); cursor:pointer; }
-[data-theme="light"] .fam-member-card, [data-theme="light"] .fam-shared-card { border-color:rgba(0,0,0,0.07); }
+/* ── Family Screen (constellation style) ── */
+.fam-header { padding:8px 20px 0; flex-shrink:0; }
+.fam-greeting-row { display:flex; align-items:center; gap:10px; margin-bottom:4px; }
+.fam-greeting-sub { font:400 12px/1 var(--font); color:var(--text3); flex:1; }
+.fam-back-btn { width:32px; height:32px; border-radius:50%; background:var(--surface2); border:1px solid var(--border2); display:flex; align-items:center; justify-content:center; color:var(--text2); cursor:pointer; flex-shrink:0; transition:all .2s; }
+.fam-back-btn:active { transform:scale(0.9); }
+.fam-title { font:800 clamp(18px,5vw,22px)/1.1 var(--font); color:var(--text); letter-spacing:-0.5px; padding:0 20px; margin:6px 0 0; }
+.fam-title span { background:linear-gradient(135deg,var(--accent),var(--ai)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.fam-scroll { flex:1; overflow-y:auto; padding-bottom:32px; scrollbar-width:none; }
+.fam-scroll::-webkit-scrollbar { display:none; }
+.fam-section-hdr { padding:0 20px; margin:20px 0 12px; display:flex; align-items:center; justify-content:space-between; }
+.fam-section-label { font:700 11px/1 var(--font); color:var(--text3); letter-spacing:.5px; text-transform:uppercase; }
+.fam-section-more { font:600 12px/1 var(--font); color:var(--accent); background:none; border:none; cursor:pointer; }
+/* Bento member cards */
+.fam-bento { display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:0 20px; }
+.fam-bento-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:15px; position:relative; overflow:hidden; }
+.fam-bento-card::before { content:''; position:absolute; top:-30px; right:-30px; width:80px; height:80px; border-radius:50%; opacity:.06; }
+.fam-bento-card.mom::before { background:var(--accent); }
+.fam-bento-card.hiro::before { background:var(--sky); }
+.fam-bento-av { width:38px; height:38px; border-radius:50%; overflow:hidden; border:2px solid var(--border2); margin-bottom:9px; }
+.fam-bento-av img { width:100%; height:100%; object-fit:cover; display:block; }
+.fam-bento-name { font:700 13px/1 var(--font); color:var(--text); margin-bottom:3px; }
+.fam-bento-role { font:400 10.5px/1.5 var(--font); color:var(--text3); }
+.fam-bento-badge { position:absolute; top:11px; right:11px; font:700 9px/1 var(--font); padding:3px 7px; border-radius:100px; }
+.fam-badge-green { background:var(--green-dim); color:var(--green); border:1px solid rgba(34,197,94,0.2); }
+.fam-badge-sky { background:var(--sky-dim); color:var(--sky); border:1px solid rgba(56,189,248,0.2); }
+/* Notif-wrap style rows (shared projects) */
+.fam-notif-wrap { margin:0 20px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); overflow:hidden; }
+.fam-notif-row { display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid var(--border); }
+.fam-notif-row:last-child { border-bottom:none; }
+.fam-notif-ico { width:32px; height:32px; border-radius:var(--radius-xs); flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+.fam-notif-ico .material-symbols-outlined { font-size:15px !important; }
+.fam-notif-body { flex:1; min-width:0; }
+.fam-notif-title { font:500 12px/1.3 var(--font); color:var(--text); }
+.fam-notif-meta { font:400 10px/1.3 var(--font); color:var(--text3); margin-top:2px; display:flex; align-items:center; gap:5px; flex-wrap:wrap; }
+.fam-vis-tag { font:500 10px/1 var(--font); color:#a78bfa; background:rgba(167,139,250,0.1); padding:2px 6px; border-radius:100px; }
+.fam-authbar { height:3px; border-radius:100px; background:var(--surface3); margin-top:5px; overflow:hidden; }
+.fam-authbar-fill { height:100%; border-radius:100px; background:linear-gradient(90deg,var(--accent),var(--ai)); }
+.fam-notif-pct { font:600 10px/1 var(--font); color:var(--text3); flex-shrink:0; }
+/* Kaleidoscope insight full-width bento */
+.fam-insight-bento { margin:0 20px; background:var(--surface); border:1px solid rgba(192,132,252,0.2); border-radius:var(--radius); padding:16px; position:relative; overflow:hidden; }
+.fam-insight-bento::before { content:''; position:absolute; top:-40px; right:-40px; width:100px; height:100px; border-radius:50%; background:var(--accent); opacity:.04; }
+.fam-insight-bento-hd { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+.fam-insight-bento-ico { width:28px; height:28px; border-radius:var(--radius-xs); background:rgba(192,132,252,0.12); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.fam-insight-bento-ico .material-symbols-outlined { font-size:14px !important; color:var(--accent); }
+.fam-insight-bento-label { font:700 11px/1 var(--font); color:var(--accent); text-transform:uppercase; letter-spacing:.5px; flex:1; }
+.fam-insight-bento-badge { position:absolute; top:12px; right:12px; font:700 9px/1 var(--font); padding:3px 8px; border-radius:100px; background:var(--accent-dim); color:var(--accent); border:1px solid rgba(192,132,252,0.2); }
+.fam-insight-bento-text { font:400 12px/1.6 var(--font); color:var(--text2); }
+.fam-insight-bento-foot { margin-top:12px; padding-top:10px; border-top:1px solid rgba(192,132,252,0.12); display:flex; align-items:center; gap:8px; }
+.fam-insight-foot-label { flex:1; font:400 10px/1 var(--font); color:var(--text3); display:flex; align-items:center; gap:3px; }
+.fam-insight-foot-label .material-symbols-outlined { font-size:11px !important; }
+.fam-insight-preview-btn { padding:5px 12px; border-radius:100px; background:var(--accent-dim); border:none; color:var(--accent); font:600 11px/1 var(--font); cursor:pointer; white-space:nowrap; }
 
 /* ─── FOCUS VISIBLE (WCAG 2.4.7 / 2.4.13) ─── */
 :focus { outline: none; }
@@ -1925,89 +1943,95 @@ body {
   <!-- ════════ PAGE 3: FAMILY ════════ -->
   <div class="page" id="page-family">
 
+    <!-- Header -->
     <div class="fam-header">
-      <button class="et-back" onclick="goHomeFromFamily()" style="cursor:pointer;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
-      <span class="fam-header-title">Family</span>
-      <div class="header-avatar" style="width:30px;height:30px;"><img src="faces/yuki.png" alt="Yuki"></div>
+      <div class="fam-greeting-row">
+        <button class="fam-back-btn" onclick="goHomeFromFamily()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <span class="fam-greeting-sub">Your people</span>
+        <div class="header-avatar" style="width:30px;height:30px;margin-left:auto;"><img src="faces/yuki.png" alt="Yuki"></div>
+      </div>
     </div>
+    <div class="fam-title">Your <span>Family</span> Space</div>
 
-    <div class="fam-body">
+    <div class="fam-scroll">
 
-      <div class="fam-section-hd">Members</div>
-
-      <div class="fam-member-card">
-        <div class="fam-member-av"><img src="faces/mei.png" alt="Mom"></div>
-        <div class="fam-member-info">
-          <div class="fam-member-name">Mayumi <span style="font:400 10px/1 var(--font);color:var(--text3);">Mom</span></div>
-          <div class="fam-member-role">Can view your shared work &amp; progress reports</div>
+      <!-- Family members bento grid -->
+      <div class="fam-section-hdr">
+        <span class="fam-section-label">Members</span>
+      </div>
+      <div class="fam-bento">
+        <div class="fam-bento-card mom">
+          <span class="fam-bento-badge fam-badge-green">ACTIVE</span>
+          <div class="fam-bento-av"><img src="faces/mei.png" alt="Mayumi"></div>
+          <div class="fam-bento-name">Mayumi</div>
+          <div class="fam-bento-role">Mom · views your shared work &amp; reports</div>
         </div>
-        <div class="fam-member-status">
-          <div class="fam-dot online"></div>
-          <span style="color:var(--text3);">Active now</span>
+        <div class="fam-bento-card hiro">
+          <span class="fam-bento-badge fam-badge-sky">2H AGO</span>
+          <div class="fam-bento-av"><img src="faces/hiro.png" alt="Hiro"></div>
+          <div class="fam-bento-name">Hiro</div>
+          <div class="fam-bento-role">Brother · collabs on Cultural Festival</div>
         </div>
       </div>
 
-      <div class="fam-member-card">
-        <div class="fam-member-av"><img src="faces/hiro.png" alt="Hiro"></div>
-        <div class="fam-member-info">
-          <div class="fam-member-name">Hiro <span style="font:400 10px/1 var(--font);color:var(--text3);">Brother · 16y</span></div>
-          <div class="fam-member-role">Collaborator on Cultural Festival 2024</div>
-        </div>
-        <div class="fam-member-status">
-          <div class="fam-dot away"></div>
-          <span style="color:var(--text3);">2h ago</span>
-        </div>
+      <!-- Shared with Mom -->
+      <div class="fam-section-hdr">
+        <span class="fam-section-label">Shared with Mom</span>
+        <button class="fam-section-more">Edit ›</button>
       </div>
-
-      <div class="fam-section-hd">Shared with Family</div>
-
-      <div class="fam-shared-card">
-        <div class="fam-shared-thumb" style="background:rgba(192,132,252,0.1);">
-          <span class="material-symbols-outlined">edit_note</span>
-        </div>
-        <div class="fam-shared-info">
-          <div class="fam-shared-name">Cultural Festival 2024</div>
-          <div class="fam-shared-meta">
-            <span class="fam-shared-vis"><span class="material-symbols-outlined" style="font-size:10px !important;vertical-align:-1px;">family_restroom</span> Mom can view</span>
-            <span>WIP</span>
+      <div class="fam-notif-wrap">
+        <div class="fam-notif-row">
+          <div class="fam-notif-ico" style="background:rgba(192,132,252,0.1);">
+            <span class="material-symbols-outlined" style="color:var(--accent);">edit_note</span>
           </div>
-          <div class="fam-authorship"><div class="fam-authorship-fill" style="width:68%;"></div></div>
-        </div>
-        <span style="font:600 11px/1 var(--font);color:var(--text3);">68% you</span>
-      </div>
-
-      <div class="fam-shared-card">
-        <div class="fam-shared-thumb" style="background:rgba(56,189,248,0.08);">
-          <span class="material-symbols-outlined" style="color:#38bdf8;">check_circle</span>
-        </div>
-        <div class="fam-shared-info">
-          <div class="fam-shared-name">Spring Festival Performance</div>
-          <div class="fam-shared-meta">
-            <span class="fam-shared-vis"><span class="material-symbols-outlined" style="font-size:10px !important;vertical-align:-1px;">family_restroom</span> Mom can view</span>
-            <span>Published · TikTok</span>
+          <div class="fam-notif-body">
+            <div class="fam-notif-title">Cultural Festival 2024</div>
+            <div class="fam-notif-meta">
+              <span class="fam-vis-tag"><span class="material-symbols-outlined" style="font-size:9px !important;vertical-align:0;">family_restroom</span> Mom can view</span>
+              <span>WIP</span>
+            </div>
+            <div class="fam-authbar"><div class="fam-authbar-fill" style="width:68%;"></div></div>
           </div>
-          <div class="fam-authorship"><div class="fam-authorship-fill" style="width:82%;"></div></div>
+          <span class="fam-notif-pct">68% you</span>
         </div>
-        <span style="font:600 11px/1 var(--font);color:var(--text3);">82% you</span>
-      </div>
-
-      <div class="fam-section-hd">Kaleidoscope's Report to Mom</div>
-
-      <div class="fam-insight-card">
-        <div class="fam-insight-hd">
-          <div class="fam-insight-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
-          <span class="fam-insight-label">This week's growth signal</span>
-        </div>
-        <div class="fam-insight-body">
-          Yuki is developing a stronger creative voice — she chose her own visual style over Kaleidoscope's suggestion for the opening sequence, showing independent judgment.
-        </div>
-        <div class="fam-insight-preview">
-          <span class="fam-insight-preview-label">Private details not included</span>
-          <button class="fam-preview-btn">Preview report</button>
+        <div class="fam-notif-row">
+          <div class="fam-notif-ico" style="background:var(--sky-dim);">
+            <span class="material-symbols-outlined" style="color:var(--sky);">check_circle</span>
+          </div>
+          <div class="fam-notif-body">
+            <div class="fam-notif-title">Spring Festival Performance</div>
+            <div class="fam-notif-meta">
+              <span class="fam-vis-tag"><span class="material-symbols-outlined" style="font-size:9px !important;vertical-align:0;">family_restroom</span> Mom can view</span>
+              <span>Published · TikTok</span>
+            </div>
+            <div class="fam-authbar"><div class="fam-authbar-fill" style="width:82%;"></div></div>
+          </div>
+          <span class="fam-notif-pct">82% you</span>
         </div>
       </div>
 
-    </div><!-- /fam-body -->
+      <!-- Kaleidoscope report bento -->
+      <div class="fam-section-hdr">
+        <span class="fam-section-label">Kaleidoscope's Report to Mom</span>
+      </div>
+      <div class="fam-insight-bento">
+        <span class="fam-insight-bento-badge">THIS WEEK</span>
+        <div class="fam-insight-bento-hd">
+          <div class="fam-insight-bento-ico"><span class="material-symbols-outlined">auto_awesome</span></div>
+          <span class="fam-insight-bento-label">Growth Signal</span>
+        </div>
+        <div class="fam-insight-bento-text">
+          Yuki chose her own visual style over Kaleidoscope's suggestion for the opening sequence — showing stronger creative direction and independent judgment.
+        </div>
+        <div class="fam-insight-bento-foot">
+          <span class="fam-insight-foot-label">
+            <span class="material-symbols-outlined">lock</span> Private details not included
+          </span>
+          <button class="fam-insight-preview-btn">Preview ›</button>
+        </div>
+      </div>
+
+    </div><!-- /fam-scroll -->
 
   </div><!-- /page-family -->
 
