@@ -1,5 +1,10 @@
 # TrendLife UI Mockup — Design Conventions
 
+## 互動狀態
+
+- **沒有連結的元素不顯示可點選狀態** — 無 onclick 或導頁行為的卡片/按鈕，必須加 `cursor: default`，並移除 hover/active 的視覺回饋（transform、border highlight 等）
+- 實作方式：加 `.static` class，覆蓋 hover/active 樣式
+
 ## Icons
 
 - 一律使用 **Material Symbols Outlined** font，不使用 emoji 在 UI 上
