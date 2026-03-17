@@ -2597,6 +2597,8 @@ body {
 
 <script>
 // ── Page navigation ──
+var ALL_PAGES = ['page-home','page-detail','page-family','page-chat'];
+
 function setNavActive(id) {
   ['nav-home','nav-ai','nav-family'].forEach(function(nid) {
     var el = document.getElementById(nid);
@@ -2606,40 +2608,32 @@ function setNavActive(id) {
     else el.removeAttribute('aria-current');
   });
 }
-function goDetail() {
-  document.getElementById('page-home').classList.remove('active');
-  document.getElementById('page-home').classList.add('exit-left');
-  document.getElementById('page-detail').classList.add('active');
-  setNavActive(null);
-}
-function goHome() {
-  ['page-detail','page-family','page-chat'].forEach(function(pid) {
+
+// Clear ALL pages, then activate target. Home gets exit-left when leaving it.
+function showPage(targetId, navId) {
+  ALL_PAGES.forEach(function(pid) {
     var el = document.getElementById(pid);
-    if (el) el.classList.remove('active');
+    if (!el) return;
+    if (pid === targetId) {
+      el.classList.add('active');
+      el.classList.remove('exit-left');
+    } else {
+      el.classList.remove('active');
+      if (pid === 'page-home' && targetId !== 'page-home') {
+        el.classList.add('exit-left');
+      } else {
+        el.classList.remove('exit-left');
+      }
+    }
   });
-  var homeEl = document.getElementById('page-home');
-  homeEl.classList.remove('exit-left');
-  homeEl.classList.add('active');
-  setNavActive('nav-home');
+  setNavActive(navId);
 }
-function goFamily() {
-  document.getElementById('page-home').classList.remove('active');
-  document.getElementById('page-home').classList.add('exit-left');
-  document.getElementById('page-family').classList.add('active');
-  setNavActive('nav-family');
-}
-function goHomeFromFamily() {
-  document.getElementById('page-family').classList.remove('active');
-  document.getElementById('page-home').classList.remove('exit-left');
-  document.getElementById('page-home').classList.add('active');
-  setNavActive('nav-home');
-}
-function goChat() {
-  document.getElementById('page-home').classList.remove('active');
-  document.getElementById('page-home').classList.add('exit-left');
-  document.getElementById('page-chat').classList.add('active');
-  setNavActive('nav-ai');
-}
+
+function goDetail()        { showPage('page-detail', null); }
+function goHome()          { showPage('page-home',   'nav-home'); }
+function goFamily()        { showPage('page-family', 'nav-family'); }
+function goHomeFromFamily(){ showPage('page-home',   'nav-home'); }
+function goChat()          { showPage('page-chat',   'nav-ai'); }
 function toggleShare() {
   document.getElementById('shareOverlay').classList.toggle('open');
 }
