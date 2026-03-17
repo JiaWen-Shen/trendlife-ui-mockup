@@ -356,7 +356,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .summary-lbl{font-size:10px;color:var(--text3);margin-top:2px}
 
 /* ═══ DRILLDOWN — shared protect styles ═══ */
-.protect-body{flex:1;overflow-y:auto;padding:0 20px 24px}
+.protect-body{flex:1;overflow-y:scroll;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:0 20px 96px;scrollbar-width:none}
 .protect-hero{text-align:center;padding:14px 0 18px}
 .protect-av{width:64px;height:64px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;border:2px solid var(--border2);background:var(--surface);overflow:hidden}
 .protect-av img{width:100%;height:100%;object-fit:cover}
@@ -391,6 +391,14 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .health-card:active{background:var(--surface2)}
 .health-card-alert{border-color:rgba(244,63,94,0.28);background:rgba(244,63,94,0.05)}
 .health-card-ai{border-color:rgba(0,188,212,0.2);background:rgba(0,188,212,0.04)}
+.health-book-btn{width:100%;margin-top:12px;padding:12px 14px;border-radius:var(--radius-sm);background:linear-gradient(135deg,rgba(139,92,246,0.1),rgba(0,188,212,0.06));border:1px solid rgba(139,92,246,0.25);display:flex;align-items:center;gap:10px;cursor:pointer;transition:all 0.18s;text-align:left}
+.health-book-btn:hover{border-color:rgba(139,92,246,0.4);background:linear-gradient(135deg,rgba(139,92,246,0.18),rgba(0,188,212,0.1))}
+.health-book-btn:active{transform:scale(0.98)}
+.hbb-icon{width:34px;height:34px;border-radius:8px;background:rgba(139,92,246,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent)}
+.hbb-body{flex:1;min-width:0}
+.hbb-title{font:600 13px/1 var(--font);color:var(--accent);margin-bottom:3px}
+.hbb-sub{font:400 11.5px/1 var(--font);color:var(--text2)}
+.hbb-arrow{font-size:18px;color:var(--text3);flex-shrink:0}
 .health-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .health-cat{font-size:13px;font-weight:700;letter-spacing:-0.1px;display:flex;align-items:center;gap:6px}
 .health-time{font-size:11.5px;color:var(--text3)}
@@ -705,7 +713,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
       <div class="chat-input-bar-inner">
         <input class="chat-input" placeholder="Ask Kaleidoscope..." readonly>
         <button class="chat-send-btn" style="background:linear-gradient(135deg,var(--violet),var(--ai));border:none;flex-shrink:0;display:flex;align-items:center;justify-content:center">
-          <img src="kaleidoscope-mandala.svg" alt="" style="width:18px;height:18px;object-fit:contain;filter:brightness(0) invert(1)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
         </button>
       </div>
     </div>
@@ -723,7 +731,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
       <div class="profile-header fade-in">
         <div class="profile-av"><img src="faces/mei.png" alt="Mayumi"></div>
         <div class="profile-name">Mayumi Sato</div>
-        <div class="profile-meta">Brand Manager · Fukuoka</div>
+        <div class="profile-meta">Fukuoka</div>
       </div>
       <div class="summary-card fade-in stagger-1">
         <div class="summary-title">This Week</div>
@@ -766,7 +774,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
       <div class="health-hero">
         <div class="health-av"><img src="faces/grandma.png" alt="Hana"></div>
         <div class="health-name">Grandma · 68</div>
-        <div class="health-role">Retired · Fukuoka</div>
+        <div class="health-role">Fukuoka</div>
       </div>
 
       <!-- Today's Readings -->
@@ -834,6 +842,16 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
           <span class="health-cat"><img src="kaleidoscope-mandala.svg" style="width:14px;height:14px;vertical-align:middle;margin-right:2px"> Kaleidoscope</span>
         </div>
         <div class="health-detail">Grandma's BP spike is consistent with recent stress patterns. She's been asked to rest and stay calm. A referral has been pre-filled for Dr. Tanaka Hiroshi — cardiology appointment ready to book. Want to confirm?</div>
+        <button class="health-book-btn" onclick="switchView(2)">
+          <div class="hbb-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="12" y1="14" x2="16" y2="14"/><line x1="12" y1="17" x2="16" y2="17"/></svg>
+          </div>
+          <div class="hbb-body">
+            <div class="hbb-title">Confirm Appointment</div>
+            <div class="hbb-sub">Dr. Tanaka Hiroshi · Kyushu University Hospital · Nov 14, 2:30 PM</div>
+          </div>
+          <span class="hbb-arrow">›</span>
+        </button>
       </div>
 
     </div>
@@ -852,7 +870,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
       <div class="protect-hero">
         <div class="protect-av"><img src="faces/yuki.png" alt="Yuki"></div>
         <div class="protect-name">Yuki Sato · 12</div>
-        <div class="protect-role">Student · Creator · Fukuoka · Week 12</div>
+        <div class="protect-role">Fukuoka · Week 12</div>
         <div class="protect-status-row">
           <div class="pstat"><div class="pstat-val" style="color:var(--green)">+18%</div><div class="pstat-lbl">Creative Dir.</div></div>
           <div class="pstat"><div class="pstat-val" style="color:var(--accent)">68%</div><div class="pstat-lbl">Yuki Voice</div></div>
@@ -1143,8 +1161,8 @@ function goBack() {
 const members = {
   grandma: {
     photo:'faces/grandma.png', name:'Grandma', age:'68',
-    role:'Retired · Fukuoka', color:'var(--coral)', statusColor:'var(--coral)',
-    tags:['Senior member','Health-conscious','Tech-light','Fraud-vulnerable'],
+    role:'Fukuoka', color:'var(--coral)', statusColor:'var(--coral)',
+    tags:['Health-conscious','Tech-light','Fraud-vulnerable'],
     stats:[
       {val:'168/112',lbl:'Blood Pressure',color:'var(--coral)'},
       {val:'5.9%',lbl:'HbA1c',color:'var(--amber)'},
@@ -1164,8 +1182,8 @@ const members = {
   },
   yuki: {
     photo:'faces/yuki.png', name:'Yuki Sato', age:'12',
-    role:'Student · Fukuoka · Creator', color:'var(--accent)', statusColor:'var(--green)',
-    tags:['Teen creator','Fashion & Art','Digitally native','AI-friendly'],
+    role:'Fukuoka', color:'var(--accent)', statusColor:'var(--green)',
+    tags:['Fashion & Art','Digitally native','AI-friendly'],
     stats:[
       {val:'+18%',lbl:'Creative Dir.',color:'var(--green)'},
       {val:'8',lbl:'Own Decisions',color:'var(--accent)'},
@@ -1184,8 +1202,8 @@ const members = {
   },
   hiro: {
     photo:'faces/hiro.png', name:'Hiro Sato', age:'16',
-    role:'Student · Fukuoka · Gamer', color:'var(--teal)', statusColor:'var(--amber)',
-    tags:['Sports fan','Gamer','Social media','Growing up'],
+    role:'Fukuoka', color:'var(--teal)', statusColor:'var(--amber)',
+    tags:['Social media','Growing up'],
     stats:[
       {val:'3.5h',lbl:'Social After 12AM',color:'var(--coral)'},
       {val:'10 PM',lbl:'New Cutoff',color:'var(--amber)'},
@@ -1204,8 +1222,8 @@ const members = {
   },
   kenji: {
     photo:'faces/kanji.png', name:'Kenji Sato', age:'45',
-    role:'Engineer · Fukuoka · Dad', color:'var(--sky)', statusColor:'var(--green)',
-    tags:['Remote work','Tech-savvy','Privacy-aware','Secure'],
+    role:'Fukuoka', color:'var(--sky)', statusColor:'var(--green)',
+    tags:['Privacy-aware','Secure'],
     stats:[
       {val:'✓',lbl:'2FA Active',color:'var(--green)'},
       {val:'0',lbl:'Threats',color:'var(--green)'},
