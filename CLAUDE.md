@@ -22,6 +22,8 @@
 ## UI 設計規則
 
 @design-conventions.md
+@constellation/style.md
+@constellation/design-conventions.md
 
 ## 工作流程
 
