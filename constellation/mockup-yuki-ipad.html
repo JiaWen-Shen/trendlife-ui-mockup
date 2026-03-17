@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,34 +7,97 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
 <style>
-/* ─── TOKENS ─── */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+  font-size: 18px; line-height: 1; vertical-align: middle;
+  display: inline-flex; align-items: center; user-select: none;
+}
+.ms-sm { font-size: 13px; }
+.ms-md { font-size: 20px; }
+
+/* ─── TOKENS (aligned with v1.3) ─── */
 :root {
   --bg:#09090B; --surface:#18181B; --surface2:#27272A; --surface3:#3F3F46;
   --border:rgba(255,255,255,0.06); --border2:rgba(255,255,255,0.1);
   --text:#FAFAFA; --text2:#A1A1AA; --text3:#8A8A93;
-  --accent:#C084FC; --accent2:#D8B4FE; --accent-dim:rgba(192,132,252,0.1);
-  --ai:#00BCD4; --ai-dim:rgba(0,188,212,0.1);
-  --green:#4ADE80; --green-dim:rgba(74,222,128,0.08);
-  --coral:#F43F5E; --sky:#38BDF8; --amber:#FFB84D;
-  --radius:20px; --radius-sm:12px;
+  --accent:#C084FC; --accent2:#D8B4FE; --accent-dim:rgba(192,132,252,0.06);
+  --ai:#22D3EE; --ai-dim:rgba(0,188,212,0.08);
+  --coral:#F43F5E; --coral-dim:rgba(244,63,94,0.1);
+  --teal:#14B8A6; --teal-dim:rgba(20,184,166,0.08);
+  --violet:#8B5CF6; --violet-dim:rgba(139,92,246,0.1);
+  --sky:#38BDF8; --sky-dim:rgba(56,189,248,0.08);
+  --green:#22C55E; --green-dim:rgba(34,197,94,0.08);
+  --amber:#FFB84D;
+  --radius:20px; --radius-sm:12px; --radius-xs:8px;
   --font:'DM Sans',system-ui,-apple-system,sans-serif;
   --ease-out:cubic-bezier(0.16,1,0.3,1);
+  --ease-spring:cubic-bezier(0.34,1.56,0.64,1);
 }
 [data-theme="light"] {
-  --bg:#F4F4F5; --surface:#FFFFFF; --surface2:#F4F4F5; --surface3:#E4E4E7;
-  --border:rgba(0,0,0,0.07); --border2:rgba(0,0,0,0.12);
-  --text:#09090B; --text2:#52525B; --text3:#71717A;
+  --bg:#E7EBF0; --surface:#FFFFFF; --surface2:#D8DEE6; --surface3:#BFC8D2;
+  --border:rgba(0,0,0,0.16); --border2:rgba(0,0,0,0.25);
+  --text:#0F172A; --text2:#1E293B; --text3:#374151;
   --accent-dim:rgba(192,132,252,0.12);
+  --coral:#9F1239; --coral-dim:rgba(159,18,57,0.12);
+  --teal:#0D6355; --teal-dim:rgba(13,99,85,0.1);
+  --violet:#5B21B6; --violet-dim:rgba(91,33,182,0.12);
+  --sky:#075985; --sky-dim:rgba(7,89,133,0.1);
+  --green:#15803D; --green-dim:rgba(21,128,61,0.1);
   --ai-dim:rgba(0,188,212,0.1);
-  --green-dim:rgba(74,222,128,0.1);
 }
+/* ─── Light mode component overrides (aligned with v1.3) ─── */
+[data-theme="light"] .device {
+  box-shadow:0 0 0 10px #e0e0e0,0 0 0 11px rgba(0,0,0,0.12),0 30px 100px rgba(0,0,0,0.18);
+}
+[data-theme="light"] .scene-label { color: rgba(0,0,0,0.4); }
+[data-theme="light"] .header-search { border-color:var(--border2); }
+[data-theme="light"] .editor-toolbar { border-color:var(--border2); background: var(--surface); }
+[data-theme="light"] .et-tool-group { border-color:var(--border2); }
+[data-theme="light"] .et-tool-btn { color: var(--text2); }
+[data-theme="light"] .et-tool-btn.active-tool { background: var(--accent-dim); color: var(--accent); }
+[data-theme="light"] .et-btn-share { color: var(--text2); border-color: var(--border2); }
+[data-theme="light"] .et-btn-export { background: var(--accent); color: #fff; }
+[data-theme="light"] .asset-panel { border-color:var(--border2); }
+[data-theme="light"] .chat-panel { border-color:var(--border2); }
+[data-theme="light"] .clip-row.active-clip { background:rgba(91,33,182,0.08); border-color:rgba(91,33,182,0.2); }
+[data-theme="light"] .canvas-panel { background:#E2E6EC; }
+[data-theme="light"] .canvas-area { background:#D8DEE6; background-image:radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px); }
+[data-theme="light"] .canvas-rulers-h { background:rgba(0,0,0,0.05); color: var(--text3); }
+[data-theme="light"] .canvas-rulers-v { background:rgba(0,0,0,0.05); color: var(--text3); }
+[data-theme="light"] .video-frame { background:#f5f5f5; }
+[data-theme="light"] .vf-handle { background: var(--surface); border-color: var(--accent); box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+[data-theme="light"] .pb-head { background: var(--surface); box-shadow: 0 0 0 2px var(--accent), 0 1px 3px rgba(0,0,0,0.15); }
+[data-theme="light"] .pb-btn.ghost { border-color: var(--border2); color: var(--text3); }
+[data-theme="light"] .playback-bar { border-top-color:var(--border2); }
+[data-theme="light"] .timeline { border-top-color:var(--border2); }
+[data-theme="light"] .timeline-header { background:var(--surface2); }
+[data-theme="light"] .tl-clip { color: rgba(255,255,255,0.95); }
+[data-theme="light"] .tl-clip.sel { box-shadow: 0 0 0 1.5px rgba(0,0,0,0.3); }
+[data-theme="light"] .tl-clip::after { background: rgba(0,0,0,0.15); }
+[data-theme="light"] .collab-orb { background:rgba(0,188,212,0.1); border-color:rgba(0,188,212,0.25); }
+[data-theme="light"] .chat-panel-orb { background:rgba(0,188,212,0.1); border-color:rgba(0,188,212,0.25); }
+[data-theme="light"] .ai-notice-orb { background:rgba(0,188,212,0.1); border-color:rgba(0,188,212,0.25); }
+[data-theme="light"] .chat-send-btn { background: var(--accent); color: #fff; }
+[data-theme="light"] .ai-notice { background: rgba(0,188,212,0.06); border-color: rgba(0,188,212,0.2); }
+[data-theme="light"] .ai-notice-chip { background: var(--surface); border-color: var(--border); color: var(--text2); }
+[data-theme="light"] .nav-label { color:var(--text2); }
+[data-theme="light"] .nav-item.active .nav-label { color:var(--accent); }
+[data-theme="light"] .proj-card { border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .proj-card:hover { border-color: rgba(0,0,0,0.16); }
+[data-theme="light"] .proj-card::before { background: radial-gradient(ellipse at 50% 0%, rgba(192,132,252,0.08), transparent 70%); }
+[data-theme="light"] .proj-card-new { border-color: var(--border2); }
+[data-theme="light"] .proj-card-new:hover { border-color: var(--accent); background: var(--accent-dim); }
+[data-theme="light"] .new-plus { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+[data-theme="light"] .clip-dur { background: rgba(0,0,0,0.75); }
 
 /* ─── GLOBAL RESET ─── */
 *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
 body {
   font-family: var(--font);
-  background: #000;
+  background: #2a2a2a;
+  -webkit-font-smoothing: antialiased;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -43,43 +106,256 @@ body {
   gap: 40px;
 }
 
-/* ─── VIEW SWITCHER ─── */
-.switcher {
-  display: flex;
-  gap: 8px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 100px;
-  padding: 4px;
-  position: sticky;
-  top: 20px;
-  z-index: 100;
+
+/* ─── PAGE VIEW SYSTEM ─── */
+.page {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+  transform: translateX(40px);
 }
-.sw-btn {
-  padding: 8px 20px;
-  border-radius: 100px;
-  border: none;
-  background: transparent;
-  color: rgba(255,255,255,0.5);
-  font: 500 14px/1 var(--font);
-  cursor: pointer;
-  transition: all .2s var(--ease-out);
+.page.active {
+  opacity: 1; pointer-events: auto;
+  transform: translateX(0);
 }
-.sw-btn.active {
-  background: var(--accent);
-  color: #fff;
+.page.exit-left {
+  opacity: 0; transform: translateX(-40px);
 }
 
-/* ─── SCENE / DEVICE ─── */
-.scene {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  width: 100%;
+/* ─── HOME PAGE STYLES ─── */
+.app-header {
+  height: 60px; padding: 0 24px;
+  display: flex; align-items: center; gap: 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
 }
-.scene.visible { display: flex; }
+.bloom-logo-wrap { display: flex; align-items: center; gap: 8px; }
+.bloom-logo-icon {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: linear-gradient(135deg, #9333EA, #C084FC);
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+}
+.bloom-logo-text { font: 700 18px/1 var(--font); color: var(--text); letter-spacing: -0.5px; }
+.header-spacer { flex: 1; }
+.header-search {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: 12px; padding: 8px 14px; width: 260px;
+}
+.header-search span { font-size: 14px; color: var(--text3); }
+.header-search input {
+  background: none; border: none; outline: none;
+  color: var(--text); font: 400 14px/1 var(--font); width: 100%;
+}
+.header-search input::placeholder { color: var(--text3); }
+.header-icon-btn {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--surface2); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; cursor: pointer; flex-shrink: 0;
+  transition: transform .12s var(--ease-out);
+}
+.header-icon-btn:active { transform: scale(0.9); }
+.header-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  overflow: hidden; flex-shrink: 0;
+}
+.header-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.app-body { flex: 1; overflow-y: auto; overflow-x: hidden; background: var(--bg); scrollbar-width: none; padding-bottom: 72px; }
+.app-body::-webkit-scrollbar { display: none; }
 
+.section-hd { padding: 20px 20px 10px; display: flex; align-items: center; gap: 12px; }
+.section-hd h2 { font: 700 12px/1 var(--font); color: var(--text2); letter-spacing: .06em; text-transform: uppercase; }
+.section-hd .badge {
+  background: var(--accent-dim); color: var(--accent2);
+  font: 600 11px/1 var(--font); padding: 3px 8px; border-radius: 100px;
+}
+.section-hd-spacer { flex: 1; }
+.see-all { font: 500 12px/1 var(--font); color: var(--accent); cursor: pointer; letter-spacing: -0.2px; }
+
+.projects-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 16px; padding: 0 20px 16px;
+}
+.proj-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; cursor: pointer;
+  transition: transform .2s var(--ease-out), border-color .2s, box-shadow .2s var(--ease-out);
+  position: relative;
+}
+.proj-card::before {
+  content: ''; position: absolute; inset: 0; border-radius: var(--radius);
+  background: radial-gradient(ellipse at 50% 0%, var(--accent-dim), transparent 70%);
+  opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 1;
+}
+.proj-card:hover { transform: scale(0.97); border-color: var(--border2); }
+.proj-card:hover::before { opacity: 1; }
+.proj-card:active { transform: scale(0.95); }
+.proj-thumb {
+  height: 110px; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.proj-thumb img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: 0;
+}
+.proj-thumb-icon { font-size: 36px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); position: relative; z-index: 1; }
+.proj-thumb-badge {
+  position: absolute; top: 10px; right: 10px;
+  background: rgba(0,0,0,0.45); backdrop-filter: blur(8px);
+  border-radius: 100px; padding: 3px 8px; font: 600 10px/1 var(--font); color: #fff;
+}
+.grad-music { background: linear-gradient(135deg, #312e81, #7c3aed, #c026d3); }
+.grad-art   { background: linear-gradient(135deg, #0c4a6e, #0284c7, #06b6d4); }
+.grad-story { background: linear-gradient(135deg, #7c2d12, #dc2626, #ea580c); }
+.grad-3d    { background: linear-gradient(135deg, #1e1b4b, #4338ca, #7c3aed); }
+.proj-body { padding: 12px 14px 14px; }
+.proj-type { font: 500 10px/1 var(--font); color: var(--text3); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+.proj-title { font: 600 14px/1.3 var(--font); color: var(--text); letter-spacing: -0.4px; margin-bottom: 10px; }
+.proj-auth-row { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+.auth-bar { flex: 1; height: 4px; background: var(--surface3); border-radius: 100px; overflow: hidden; }
+.auth-human { height: 100%; background: var(--green); border-radius: 100px; }
+.auth-label { font: 500 11px/1 var(--font); color: var(--text3); white-space: nowrap; }
+.proj-status { display: inline-flex; align-items: center; gap: 4px; font: 500 11px/1 var(--font); padding: 3px 8px; border-radius: 100px; }
+.status-active  { background: var(--green-dim); color: var(--green); }
+.status-draft   { background: rgba(251,191,36,0.08); color: #FCD34D; }
+
+.proj-card-new {
+  background: var(--surface); border: 2px dashed var(--border2);
+  border-radius: var(--radius); display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px; min-height: 180px;
+  cursor: pointer; transition: background .2s, border-color .2s;
+}
+.proj-card-new:hover { background: var(--accent-dim); border-color: var(--accent); }
+.new-plus {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--accent-dim); border: 1.5px solid var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; color: var(--accent);
+}
+.new-label { font: 600 14px/1.2 var(--font); color: var(--accent); }
+.new-sub { font: 400 12px/1.4 var(--font); color: var(--text3); text-align: center; max-width: 120px; }
+
+.collab-banner {
+  margin: 0; background: linear-gradient(135deg, rgba(192,132,252,0.15), rgba(0,188,212,0.1));
+  border: 1px solid rgba(192,132,252,0.2); border-radius: var(--radius);
+  padding: 14px 18px; display: flex; align-items: center; gap: 12px; cursor: pointer;
+  transition: transform .2s var(--ease-out), box-shadow .2s;
+}
+.collab-banner:hover { box-shadow: 0 4px 16px rgba(192,132,252,0.15); transform: scale(0.99); }
+.collab-banner:active { transform: scale(0.97); }
+.collab-orb {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(0,188,212,0.15);
+  border: 1.5px solid rgba(0,188,212,0.35); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.collab-orb svg { width: 18px; height: 18px; }
+.collab-orb path { fill: var(--ai); }
+.collab-text { flex: 1; }
+.collab-title { font: 600 13px/1 var(--font); color: var(--text); letter-spacing: -0.3px; margin-bottom: 3px; }
+.collab-sub { font: 400 12px/1.4 var(--font); color: var(--text2); }
+.collab-sub strong { color: var(--ai); }
+.collab-action {
+  padding: 8px 16px; border-radius: 100px;
+  background: var(--ai-dim); border: 1px solid rgba(0,188,212,0.3);
+  color: var(--ai); font: 600 12px/1 var(--font); white-space: nowrap;
+}
+
+.bottom-nav {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 100;
+  padding: 0 8px 8px;
+}
+.bottom-nav-inner {
+  display: flex; align-items: center; justify-content: space-around;
+  background: rgba(24,24,27,0.78); backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.15); border-radius: 100px;
+  padding: 8px 6px; overflow: hidden;
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.15);
+}
+.nav-item {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 6px 18px; border-radius: 100px; position: relative;
+  cursor: pointer; transition: all .25s var(--ease-out);
+  /* button reset */
+  border: none; background: none; font: inherit; color: var(--text2);
+  -webkit-appearance: none; appearance: none;
+}
+.nav-item:active { transform: scale(0.9); }
+.nav-item.active { background: var(--accent-dim); }
+.nav-item:hover:not(.active):not(.nav-ai) { background: rgba(255,255,255,0.04); }
+.nav-icon { font-size: 20px; transition: transform .25s var(--ease-spring); color: inherit; }
+.nav-item.active .nav-icon { transform: scale(1.12); }
+.nav-label { font: 600 10px/1 var(--font); color: var(--text2); letter-spacing: .3px; transition: color .2s; }
+.nav-item.active .nav-label { color: var(--accent); }
+/* ─── Center AI button (Kaleidoscope) ─── */
+.nav-ai {
+  width: 48px; height: 48px; border-radius: 50%; padding: 0;
+  background: rgba(192,132,252,0.28);
+  justify-content: center; gap: 0; position: relative; z-index: 10;
+  transition: transform .4s var(--ease-out), background .35s ease, box-shadow .35s ease;
+  /* button reset */
+  border: none; -webkit-appearance: none; appearance: none;
+  color: var(--accent);
+}
+.nav-ai.active { background: var(--accent); box-shadow: 0 0 0 3px rgba(192,132,252,0.25), 0 0 18px rgba(192,132,252,0.2); }
+.nav-ai .nav-label { display: none; }
+.nav-ai:active { transform: scale(0.92); transition-duration: .1s; }
+.nav-ai::before {
+  content: ''; position: absolute; inset: -6px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(192,132,252,0.5) 0%, rgba(192,132,252,0.15) 50%, transparent 72%);
+  opacity: 0; z-index: -1; filter: blur(8px);
+}
+.nav-ai.active::before { animation: navAiBreathe 3.2s cubic-bezier(0.65,0,0.35,1) infinite; }
+@keyframes navAiBreathe {
+  0%,100% { opacity: 0; transform: scale(0.85); }
+  40% { opacity: 0.7; transform: scale(1.05); }
+  70% { opacity: 0.3; transform: scale(1.12); }
+}
+.nav-ai__icon {
+  width: 20px; height: 20px; position: relative; z-index: 2;
+  transition: filter .35s ease;
+}
+.nav-ai__icon path { fill: var(--accent); transition: fill .35s ease; }
+.nav-ai.active .nav-ai__icon path { fill: #fff; }
+.nav-ai.active .nav-ai__icon { animation: navAiFloat 4s ease-in-out infinite; }
+@keyframes navAiFloat {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-1px); }
+}
+.nav-ai__orbit {
+  position: absolute; inset: 0; border-radius: 50%;
+  pointer-events: none;
+}
+.nav-ai__orbit::before, .nav-ai__orbit::after {
+  content: ''; position: absolute; width: 3px; height: 3px;
+  border-radius: 50%; background: var(--accent); opacity: 0;
+}
+.nav-ai__orbit::before { top: -5px; left: 50%; margin-left: -1.5px; }
+.nav-ai__orbit::after { bottom: -4px; left: 50%; margin-left: -1.5px; }
+.nav-ai.active .nav-ai__orbit { animation: navAiOrbitSpin 8s linear infinite; }
+.nav-ai.active .nav-ai__orbit::before { opacity: 0.7; animation: navAiPulse 2s ease-in-out infinite; }
+.nav-ai.active .nav-ai__orbit::after { opacity: 0.4; animation: navAiPulse 2s ease-in-out 1s infinite; }
+@keyframes navAiOrbitSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes navAiPulse {
+  0%,100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.6); opacity: 0.8; }
+}
+[data-theme="light"] .bottom-nav-inner {
+  background: rgba(255,255,255,0.82);
+  border-color: rgba(0,0,0,0.1);
+}
+[data-theme="light"] .nav-item { color: var(--text2); }
+[data-theme="light"] .nav-ai {
+  box-shadow: 0 0 0 3px rgba(192,132,252,0.16), 0 0 12px rgba(192,132,252,0.12);
+}
+[data-theme="light"] .nav-item:hover:not(.active):not(.nav-ai) { background: rgba(0,0,0,0.05); }
+
+/* ─── SCENE LABEL ─── */
 .scene-label {
   color: rgba(255,255,255,0.4);
   font: 400 12px/1 var(--font);
@@ -98,11 +374,11 @@ body {
   display: flex;
   flex-direction: column;
   box-shadow:
-    0 0 0 1px rgba(255,255,255,0.12),
-    0 0 0 3px #1a1a1f,
-    0 0 0 4px rgba(255,255,255,0.06),
-    0 32px 80px rgba(0,0,0,0.7),
-    0 8px 24px rgba(0,0,0,0.5);
+    0 0 0 10px #111,
+    0 0 0 11px rgba(255,255,255,0.06),
+    0 30px 100px rgba(0,0,0,0.6);
+  transform-origin: top center;
+  flex-shrink: 0;
 }
 
 /* ─── STATUS BAR ─── */
@@ -158,7 +434,7 @@ body {
 .bloom-logo-text {
   font: 700 18px/1 var(--font);
   color: var(--text);
-  letter-spacing: -.02em;
+  letter-spacing: -0.5px;
 }
 .header-spacer { flex: 1; }
 .header-search {
@@ -182,21 +458,17 @@ body {
 }
 .header-search input::placeholder { color: var(--text3); }
 .header-avatar {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--green), #22C55E);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font: 600 13px/1 var(--font);
-  color: #000;
+  overflow: hidden;
   flex-shrink: 0;
 }
+.header-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .header-icon-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   background: var(--surface2);
   border: 1px solid var(--border);
   display: flex;
@@ -213,270 +485,13 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
   background: var(--bg);
+  scrollbar-width: none;
 }
-.app-body::-webkit-scrollbar { width: 4px; }
-.app-body::-webkit-scrollbar-track { background: transparent; }
-.app-body::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 4px; }
+.app-body::-webkit-scrollbar { display: none; }
 
-/* ─── HOME SECTION HEADERS ─── */
-.section-hd {
-  padding: 24px 24px 12px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.section-hd h2 {
-  font: 600 18px/1.2 var(--font);
-  color: var(--text);
-  letter-spacing: -.02em;
-}
-.section-hd .badge {
-  background: var(--accent-dim);
-  color: var(--accent);
-  font: 600 11px/1 var(--font);
-  padding: 3px 8px;
-  border-radius: 100px;
-}
-.section-hd-spacer { flex: 1; }
-.see-all {
-  font: 500 13px/1 var(--font);
-  color: var(--accent);
-  cursor: pointer;
-}
+.grad-video { background: linear-gradient(135deg, #14532d, #16a34a, #65a30d); }
 
-/* ─── PROJECT GRID ─── */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  padding: 0 24px 16px;
-}
-
-.proj-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out);
-}
-.proj-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-}
-
-/* Gradient thumbnails */
-.proj-thumb {
-  height: 110px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.proj-thumb-icon {
-  font-size: 36px;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
-  position: relative;
-  z-index: 1;
-}
-.proj-thumb-badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(0,0,0,0.45);
-  backdrop-filter: blur(8px);
-  border-radius: 100px;
-  padding: 3px 8px;
-  font: 600 10px/1 var(--font);
-  color: #fff;
-}
-.grad-music  { background: linear-gradient(135deg, #312e81, #7c3aed, #c026d3); }
-.grad-art    { background: linear-gradient(135deg, #0c4a6e, #0284c7, #06b6d4); }
-.grad-story  { background: linear-gradient(135deg, #7c2d12, #dc2626, #ea580c); }
-.grad-video  { background: linear-gradient(135deg, #14532d, #16a34a, #65a30d); }
-.grad-3d     { background: linear-gradient(135deg, #1e1b4b, #4338ca, #7c3aed); }
-.grad-new    { background: var(--surface2); border: 2px dashed var(--border2); }
-
-.proj-body {
-  padding: 12px 14px 14px;
-}
-.proj-type {
-  font: 500 10px/1 var(--font);
-  color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  margin-bottom: 4px;
-}
-.proj-title {
-  font: 600 14px/1.3 var(--font);
-  color: var(--text);
-  letter-spacing: -.01em;
-  margin-bottom: 10px;
-}
-.proj-auth-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 8px;
-}
-.auth-bar {
-  flex: 1;
-  height: 4px;
-  background: var(--surface3);
-  border-radius: 100px;
-  overflow: hidden;
-}
-.auth-human {
-  height: 100%;
-  background: var(--green);
-  border-radius: 100px;
-}
-.auth-label {
-  font: 500 11px/1 var(--font);
-  color: var(--text3);
-  white-space: nowrap;
-}
-.proj-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font: 500 11px/1 var(--font);
-  padding: 3px 8px;
-  border-radius: 100px;
-}
-.status-active   { background: var(--green-dim); color: var(--green); }
-.status-draft    { background: rgba(251,191,36,0.1); color: #FBBF24; }
-.status-complete { background: var(--accent-dim); color: var(--accent); }
-
-/* New Project card */
-.proj-card-new {
-  background: var(--surface);
-  border: 2px dashed var(--border2);
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 180px;
-  cursor: pointer;
-  transition: background .2s, border-color .2s;
-}
-.proj-card-new:hover {
-  background: var(--accent-dim);
-  border-color: var(--accent);
-}
-.new-plus {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--accent-dim);
-  border: 1.5px solid var(--accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  color: var(--accent);
-  line-height: 1;
-}
-.new-label {
-  font: 600 14px/1.2 var(--font);
-  color: var(--accent);
-  letter-spacing: -.01em;
-}
-.new-sub {
-  font: 400 12px/1.4 var(--font);
-  color: var(--text3);
-  text-align: center;
-  max-width: 120px;
-}
-
-/* ─── COLLAB BANNER ─── */
-.collab-banner {
-  margin: 0 24px 20px;
-  background: linear-gradient(135deg, rgba(192,132,252,0.15), rgba(0,188,212,0.1));
-  border: 1px solid rgba(192,132,252,0.2);
-  border-radius: 16px;
-  padding: 14px 18px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.collab-orb {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, rgba(0,188,212,0.9), rgba(0,188,212,0.3));
-  border: 1.5px solid rgba(0,188,212,0.5);
-  flex-shrink: 0;
-  position: relative;
-}
-.collab-orb::after {
-  content: '';
-  position: absolute;
-  inset: 3px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), transparent);
-}
-.collab-text { flex: 1; }
-.collab-title {
-  font: 600 13px/1 var(--font);
-  color: var(--text);
-  margin-bottom: 3px;
-}
-.collab-sub {
-  font: 400 12px/1.4 var(--font);
-  color: var(--text2);
-}
-.collab-sub strong { color: var(--ai); }
-.collab-action {
-  padding: 8px 16px;
-  border-radius: 100px;
-  background: var(--ai-dim);
-  border: 1px solid rgba(0,188,212,0.3);
-  color: var(--ai);
-  font: 600 12px/1 var(--font);
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-/* ─── BOTTOM NAV (home view) ─── */
-.bottom-nav {
-  height: 60px;
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  display: flex;
-  align-items: stretch;
-  flex-shrink: 0;
-}
-.nav-item {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  cursor: pointer;
-  position: relative;
-}
-.nav-icon { font-size: 20px; }
-.nav-label {
-  font: 500 10px/1 var(--font);
-  color: var(--text3);
-  letter-spacing: .02em;
-}
-.nav-item.active .nav-label { color: var(--accent); }
-.nav-item.active .nav-icon { filter: none; }
-.nav-active-dot {
-  position: absolute;
-  bottom: 6px;
-  width: 4px;
-  height: 4px;
-  background: var(--accent);
-  border-radius: 50%;
-}
-
-/* ─── EDITOR TOOLBAR (V1) ─── */
+/* ─── EDITOR TOOLBAR ─── */
 .editor-toolbar {
   height: 52px;
   background: var(--surface);
@@ -558,8 +573,9 @@ body {
   color: var(--text2);
 }
 .et-btn-share:hover { background: var(--surface3); }
-.et-btn-export { background: var(--accent); color: #fff; }
+.et-btn-export { background: var(--accent); color: #fff; transition: transform .12s var(--ease-out), background .15s; }
 .et-btn-export:hover { background: #a855f7; }
+.et-btn-export:active { transform: scale(0.93); }
 
 /* ─── EDITOR BODY (3-col) ─── */
 .editor-body {
@@ -603,9 +619,9 @@ body {
   flex: 1;
   overflow-y: auto;
   padding: 10px;
+  scrollbar-width: none;
 }
-.asset-scroll::-webkit-scrollbar { width: 3px; }
-.asset-scroll::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
+.asset-scroll::-webkit-scrollbar { display: none; }
 .asset-section-label {
   font: 500 9px/1 var(--font);
   color: var(--text3);
@@ -713,23 +729,27 @@ body {
 }
 .vf-scene {
   width: 100%; height: 100%;
-  background: linear-gradient(160deg, #0f2412 0%, #1a4d24 45%, #0a2010 100%);
   position: relative;
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
+}
+.vf-scene-img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: 0;
 }
 .vf-lights {
   position: absolute;
   top: 0; left: 0; right: 0; height: 60%;
   background:
-    radial-gradient(ellipse 55% 55% at 25% 40%, rgba(255,200,80,0.28), transparent),
-    radial-gradient(ellipse 40% 40% at 72% 35%, rgba(200,80,255,0.22), transparent),
-    radial-gradient(ellipse 50% 45% at 50% 20%, rgba(80,200,255,0.15), transparent);
+    radial-gradient(ellipse 55% 55% at 25% 40%, rgba(255,200,80,0.18), transparent),
+    radial-gradient(ellipse 40% 40% at 72% 35%, rgba(200,80,255,0.14), transparent);
+  z-index: 1;
 }
 .vf-crowd {
   position: absolute;
   bottom: 0; left: 0; right: 0; height: 50%;
-  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.55));
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.45));
+  z-index: 1;
 }
 .vf-center-text {
   position: relative; z-index: 2; text-align: center;
@@ -804,13 +824,19 @@ body {
   flex-shrink: 0;
 }
 .pb-btn {
-  width: 28px; height: 28px;
+  width: 36px; height: 36px;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 11px; cursor: pointer; flex-shrink: 0;
   transition: all .12s;
+  position: relative;
 }
-.pb-btn.primary { background: var(--accent); border: none; color: #fff; font-size: 12px; }
+/* expand touch area to ≥44px */
+.pb-btn::after {
+  content: ''; position: absolute; inset: -4px;
+}
+.pb-btn.primary { background: var(--accent); border: none; color: #fff; font-size: 12px; transition: transform .12s var(--ease-out); }
+.pb-btn.primary:active { transform: scale(0.85); }
 .pb-btn.ghost { background: transparent; border: 1px solid var(--border2); color: var(--text3); }
 .pb-btn.ghost:hover { background: var(--surface2); color: var(--text); }
 .pb-time { font: 500 11px/1 var(--font); color: var(--text2); white-space: nowrap; font-variant-numeric: tabular-nums; }
@@ -928,10 +954,13 @@ body {
 }
 .chat-panel-orb {
   width: 20px; height: 20px; border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, rgba(0,188,212,0.9), rgba(0,188,212,0.3));
-  border: 1px solid rgba(0,188,212,0.4); flex-shrink: 0;
+  background: rgba(0,188,212,0.15);
+  border: 1px solid rgba(0,188,212,0.35); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
 }
-.chat-panel-title { font: 700 14px/1 var(--font); color: var(--text); }
+.chat-panel-orb svg { width: 11px; height: 11px; }
+.chat-panel-orb path { fill: var(--ai); }
+.chat-panel-title { font: 700 14px/1 var(--font); color: var(--text); letter-spacing: -0.4px; }
 .chat-panel-sub { font: 400 11px/1.4 var(--font); color: var(--text3); }
 .chat-panel-ctx {
   display: inline-flex; align-items: center; gap: 5px;
@@ -946,8 +975,8 @@ body {
   padding: 12px 14px;
   display: flex; flex-direction: column; gap: 10px;
 }
-.chat-msgs::-webkit-scrollbar { width: 3px; }
-.chat-msgs::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
+.chat-msgs { scrollbar-width: none; }
+.chat-msgs::-webkit-scrollbar { display: none; }
 .cm-msg { display: flex; flex-direction: column; gap: 3px; }
 .cm-sender { font: 600 10px/1 var(--font); color: var(--text3); text-transform: uppercase; letter-spacing: .04em; }
 .cm-bubble {
@@ -970,9 +999,12 @@ body {
 .ai-notice-hd { display: flex; align-items: center; gap: 7px; margin-bottom: 7px; }
 .ai-notice-orb {
   width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0;
-  background: radial-gradient(circle at 35% 35%, rgba(0,188,212,0.9), rgba(0,188,212,0.3));
-  border: 1px solid rgba(0,188,212,0.4);
+  background: rgba(0,188,212,0.15);
+  border: 1px solid rgba(0,188,212,0.35);
+  display: flex; align-items: center; justify-content: center;
 }
+.ai-notice-orb svg { width: 9px; height: 9px; }
+.ai-notice-orb path { fill: var(--ai); }
 .ai-notice-title { font: 600 11px/1 var(--font); color: var(--ai); }
 .ai-notice-body { font: 400 12px/1.5 var(--font); color: var(--text); margin-bottom: 9px; }
 .ai-notice-body strong { color: var(--ai); }
@@ -987,6 +1019,7 @@ body {
   cursor: pointer; transition: all .12s;
 }
 .ai-notice-chip:hover { background: var(--ai-dim); color: var(--ai); border-color: rgba(0,188,212,0.4); }
+.ai-notice-chip:active { transform: scale(0.96); }
 .ai-notice-chip::before { content: '→ '; color: var(--ai); font-weight: 600; }
 
 /* Chat input */
@@ -1008,254 +1041,358 @@ body {
 }
 .chat-input-box::placeholder { color: var(--text3); }
 .chat-send-btn {
-  width: 34px; height: 34px; border-radius: 9px;
+  width: 44px; height: 44px; border-radius: 12px;
   background: var(--accent); border: none;
   display: flex; align-items: center; justify-content: center;
   font-size: 14px; cursor: pointer; flex-shrink: 0;
   transition: background .15s;
 }
 .chat-send-btn:hover { background: #a855f7; }
+.chat-send-btn:active { transform: scale(0.88); }
 
 /* ─── THEME TOGGLE ─── */
-.theme-toggle {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
-  backdrop-filter: blur(12px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  cursor: pointer;
-  z-index: 200;
-  transition: background .2s;
+.theme-toggle, .orient-toggle {
+  position: fixed; top: 20px;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 1000;
+  transition: all 0.3s var(--ease-out);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  color: rgba(255,255,255,0.7);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  -webkit-appearance: none; appearance: none; font-size: 20px;
 }
-.theme-toggle:hover { background: rgba(255,255,255,0.18); }
+.theme-toggle { right: 20px; }
+.orient-toggle { right: 72px; }
+.theme-toggle:hover, .orient-toggle:hover { transform: scale(1.1); background: rgba(255,255,255,0.2); color: #fff; }
+.theme-toggle:active, .orient-toggle:active { transform: scale(0.95); }
+[data-theme="light"] .theme-toggle,
+[data-theme="light"] .orient-toggle {
+  background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.12);
+  color: rgba(0,0,0,0.55); box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+[data-theme="light"] .theme-toggle:hover,
+[data-theme="light"] .orient-toggle:hover { background: rgba(0,0,0,0.1); color: rgba(0,0,0,0.8); }
+.orient-toggle svg { transition: transform .4s var(--ease-out); }
+.orient-toggle.portrait svg { transform: rotate(90deg); }
+/* Portrait mode */
+.device.portrait {
+  width: 834px; height: 1194px;
+}
+.device.portrait .projects-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+.device.portrait .editor-body {
+  grid-template-columns: 200px 1fr 280px;
+}
+
+/* ─── STATIC (non-clickable) cards ─── */
+.proj-card.static { cursor: default; }
+.proj-card.static:hover { transform: none; border-color: var(--border); box-shadow: none; }
+.proj-card.static:hover::before { opacity: 0; }
+.proj-card.static:active { transform: none; }
+
+/* ─── Published status ─── */
+.status-published { background: rgba(34,197,94,0.08); color: var(--green); }
+.status-wip { background: rgba(251,191,36,0.1); color: #FCD34D; }
+
+/* ─── Card meta row: platforms, collabs, stats, timestamp ─── */
+.proj-meta-row {
+  display: flex; align-items: center; gap: 5px;
+  margin-top: 7px; padding-top: 7px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.proj-platform-badge {
+  display: inline-flex; align-items: center; gap: 3px;
+  font: 600 9px/1 var(--font); padding: 2px 6px;
+  border-radius: 100px; white-space: nowrap;
+}
+.platform-tiktok { background: rgba(255,255,255,0.06); color: var(--text2); border: 1px solid var(--border2); }
+.platform-insta { background: rgba(225,48,108,0.1); color: #E1306C; border: 1px solid rgba(225,48,108,0.2); }
+.proj-stats { display: flex; align-items: center; gap: 5px; margin-left: auto; }
+.proj-stat { display: flex; align-items: center; gap: 2px; font: 500 10px/1 var(--font); color: var(--text3); }
+.proj-collabs { display: flex; align-items: center; }
+.proj-collab-av {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 1.5px solid var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  font: 700 7px/1 var(--font); overflow: hidden;
+  margin-left: -5px; flex-shrink: 0;
+}
+.proj-collab-av:first-child { margin-left: 0; }
+.proj-timestamp { font: 400 10px/1 var(--font); color: var(--text3); width: 100%; margin-top: 2px; }
+
+/* ─── NOTIFICATION PANEL ─── */
+.notif-badge {
+  position: absolute; top: 7px; right: 7px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--coral); border: 1.5px solid var(--surface);
+  pointer-events: none;
+}
+.notif-overlay {
+  position: absolute; inset: 0; z-index: 200;
+  pointer-events: none; opacity: 0;
+  transition: opacity 0.25s var(--ease-out);
+}
+.notif-overlay.open { pointer-events: auto; opacity: 1; }
+.notif-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.notif-panel {
+  position: absolute; top: 88px; right: 16px;
+  width: 356px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+  display: flex; flex-direction: column; overflow: hidden;
+  transform: translateY(-10px) scale(0.97);
+  transition: transform 0.25s var(--ease-out);
+  max-height: 680px;
+}
+.notif-overlay.open .notif-panel { transform: translateY(0) scale(1); }
+.notif-panel-hd {
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 8px;
+  flex-shrink: 0;
+}
+.notif-panel-title { font: 700 15px/1 var(--font); color: var(--text); flex: 1; letter-spacing: -0.4px; }
+.notif-clear { font: 500 12px/1 var(--font); color: var(--accent); cursor: pointer; }
+.notif-clear:hover { opacity: 0.7; }
+.notif-list { overflow-y: auto; scrollbar-width: none; }
+.notif-list::-webkit-scrollbar { display: none; }
+.notif-item {
+  display: flex; align-items: flex-start; gap: 11px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer; transition: background .12s;
+}
+.notif-item:last-child { border-bottom: none; }
+.notif-item:hover { background: var(--surface2); }
+.notif-item.unread { background: var(--accent-dim); }
+.notif-item.unread:hover { background: rgba(192,132,252,0.1); }
+.notif-icon-wrap {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; flex-shrink: 0;
+}
+.notif-body { flex: 1; }
+.notif-text { font: 400 13px/1.45 var(--font); color: var(--text); }
+.notif-text strong { font-weight: 600; }
+.notif-time { font: 400 11px/1 var(--font); color: var(--text3); margin-top: 4px; }
+.notif-unread-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent); flex-shrink: 0; margin-top: 6px;
+}
+[data-theme="light"] .notif-panel { box-shadow: 0 16px 48px rgba(0,0,0,0.15); }
+[data-theme="light"] .notif-badge { border-color: var(--surface); }
+
+/* ─── FOCUS VISIBLE (WCAG 2.4.7 / 2.4.13) ─── */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.nav-item:focus-visible { outline-offset: -2px; border-radius: 100px; }
+.nav-ai:focus-visible { outline-offset: 3px; }
+.proj-card:focus-visible { outline-offset: -2px; border-radius: var(--radius); }
+.et-tool-btn:focus-visible { outline-offset: 0; }
+.theme-toggle:focus-visible, .orient-toggle:focus-visible { outline-offset: 3px; border-radius: 50%; }
+
+/* ─── REDUCED MOTION (WCAG 2.3.1) ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.15s !important;
+  }
+  .page { transition: opacity 0.15s ease !important; transform: none !important; }
+  .page.exit-left { transform: none !important; }
+}
 </style>
 </head>
 <body>
 
+
 <!-- View Switcher -->
-<div class="switcher">
-  <button class="sw-btn active" onclick="switchScene('v0',this)">Home — Projects Grid</button>
-  <button class="sw-btn" onclick="switchScene('v1',this)">Workspace — Three Panel</button>
-</div>
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="scene-label">iPad Pro 11" · Landscape · Yuki Creative Folder</div>
+<div class="device" id="device-v1">
 
-<!-- ═══════════════════════════════════════════════════════════
-     V0: PROJECT GRID HOME
-═══════════════════════════════════════════════════════════ -->
-<div class="scene visible" id="scene-v0">
-  <div class="scene-label">iPad Pro 11" · Landscape · Home</div>
-  <div class="device" id="device-v0">
-
-    <!-- Status bar -->
+    <!-- Shared status bar -->
     <div class="status-bar">
       <span class="status-time">9:41</span>
       <div class="status-icons">
-        <span>●●●●</span>
-        <span>WiFi</span>
-        <span>🔋</span>
+        <span><svg width="17" height="12" viewBox="0 0 17 12" fill="currentColor"><rect x="0" y="3" width="3" height="9" rx="1" opacity="0.4"/><rect x="4.5" y="2" width="3" height="10" rx="1" opacity="0.6"/><rect x="9" y="1" width="3" height="11" rx="1" opacity="0.8"/><rect x="13.5" y="0" width="3" height="12" rx="1"/></svg></span>
+        <span><svg width="15" height="12" viewBox="0 0 15 12" fill="currentColor"><path d="M7.5 3.6C9.8 3.6 11.8 4.5 13.3 6l1.2-1.2C12.8 3 10.3 1.8 7.5 1.8S2.2 3 .5 4.8L1.7 6C3.2 4.5 5.2 3.6 7.5 3.6z" opacity="0.5"/><path d="M7.5 6.5c1.5 0 2.8.6 3.8 1.5l1.2-1.2c-1.3-1.2-3-2-5-2s-3.7.8-5 2L3.7 8c1-1 2.3-1.5 3.8-1.5z" opacity="0.7"/><circle cx="7.5" cy="10.5" r="1.5"/></svg></span>
+        <span><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0" y="0.5" width="21" height="11" rx="2.5" stroke="currentColor" stroke-width="1"/><rect x="1.5" y="2" width="15" height="8" rx="1.5" fill="currentColor"/><path d="M22.5 4v4a2 2 0 0 0 0-4z" fill="currentColor" opacity="0.4"/></svg></span>
       </div>
     </div>
 
-    <!-- App header -->
-    <div class="app-header">
-      <div class="bloom-logo-wrap">
-        <div class="bloom-logo-icon">🌸</div>
-        <span class="bloom-logo-text">Creative Folder</span>
-      </div>
-      <div class="header-spacer"></div>
-      <div class="header-search">
-        <span>🔍</span>
-        <input type="text" placeholder="Search projects…">
-      </div>
-      <div class="header-icon-btn">🔔</div>
-      <div class="header-avatar">Y</div>
-    </div>
+    <!-- ════════ PAGE 1: HOME ════════ -->
+    <div class="page active" id="page-home">
 
-    <!-- Scrollable body -->
-    <div class="app-body">
-
-      <!-- Collab banner -->
-      <div style="padding:16px 24px 0;">
-        <div class="collab-banner">
-          <div class="collab-orb"></div>
-          <div class="collab-text">
-            <div class="collab-title">Kaleidoscope noticed something ✨</div>
-            <div class="collab-sub">Your <strong>Cultural Festival 2024</strong> video has strong visual flow — want to explore the opening sequence together?</div>
-          </div>
-          <div class="collab-action">Explore</div>
+      <div class="app-header">
+        <div class="bloom-logo-wrap">
+          <div class="bloom-logo-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 1 5 5c0 2-1.5 3.5-3 4.5L12 22l-2-10.5C8.5 10.5 7 9 7 7a5 5 0 0 1 5-5z"/><path d="M7 12.5C5 13.5 2 15 2 18c0 2 2 4 5 4"/><path d="M17 12.5c2 1 5 2.5 5 5.5 0 2-2 4-5 4"/></svg></div>
+          <span class="bloom-logo-text">Creative Folder</span>
         </div>
+        <div class="header-spacer"></div>
+        <div class="header-search">
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+          <input type="text" placeholder="Search projects…" aria-label="Search projects">
+        </div>
+        <button class="header-icon-btn" aria-label="Notifications" onclick="toggleNotifs()" style="position:relative;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="notif-badge" id="notifBadge"></span></button>
+        <div class="header-avatar"><img src="faces/yuki.png" alt="Yuki"></div>
       </div>
 
-      <!-- Projects section -->
-      <div class="section-hd">
-        <h2>My Projects</h2>
-        <span class="badge">5 active</span>
-        <div class="section-hd-spacer"></div>
-        <span class="see-all">See all</span>
-      </div>
+      <div class="app-body">
 
-      <div class="projects-grid">
-
-        <!-- Card 1: Sound Waves -->
-        <div class="proj-card">
-          <div class="proj-thumb grad-music">
-            <span class="proj-thumb-icon">🎵</span>
-            <span class="proj-thumb-badge">In Progress</span>
-          </div>
-          <div class="proj-body">
-            <div class="proj-type">Music</div>
-            <div class="proj-title">Sound Waves</div>
-            <div class="proj-auth-row">
-              <div class="auth-bar"><div class="auth-human" style="width:72%"></div></div>
-              <span class="auth-label" style="color:var(--green)">H 72%</span>
+        <div style="padding:16px 20px 0;">
+          <div class="collab-banner" onclick="goDetail()">
+            <div class="collab-orb"><svg viewBox="0 0 44 40" fill="none"><path d="M43.075 10.005C42.475 7.428 41.282 5.008 39.432 3.116C31.066-5.452 19.837 5.26 17.055 15.788C15.375 21.535 14.745 28.371 18.395 33.593C13.248 33.563 6.161 32.311 4.142 26.939C2.792 21.296 9.4 17.412 14.178 16.303C14.374 15.543 14.599 14.76 14.866 14.02C-8.366 18.107-2.261 39.894 18.659 39.989C37.795 40.55 46.073 22.849 43.075 10.008V10.005ZM36.631 15.553C36.171 19.884 32.753 31.058 25.76 32.438C24.915 32.604 24.041 32.572 23.222 32.308C17.371 30.406 17.332 20.586 19.246 15.667C29.021 15.628 32.616 20.928 32.616 20.928C33.056 19.757 33.411 18.534 33.672 17.282C28.284 13.342 20.085 13.602 20.085 13.602C25.094 2.37 38.353 0.038 36.631 15.553Z"/></svg></div>
+            <div class="collab-text">
+              <div class="collab-title">Kaleidoscope noticed something <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--accent)" stroke="none" style="vertical-align:-1px;"><polygon points="12,2 14.5,9 22,9.5 16,14.5 18,22 12,17.5 6,22 8,14.5 2,9.5 9.5,9"/></svg></div>
+              <div class="collab-sub">Your <strong>Cultural Festival 2024</strong> video has strong visual flow — want to explore the opening sequence together?</div>
             </div>
-            <span class="proj-status status-active">● Active</span>
+            <div class="collab-action">Explore</div>
           </div>
         </div>
 
-        <!-- Card 2: Sky Canvas -->
-        <div class="proj-card">
-          <div class="proj-thumb grad-art">
-            <span class="proj-thumb-icon">🎨</span>
-            <span class="proj-thumb-badge">Draft</span>
-          </div>
-          <div class="proj-body">
-            <div class="proj-type">Digital Art</div>
-            <div class="proj-title">Sky Canvas</div>
-            <div class="proj-auth-row">
-              <div class="auth-bar"><div class="auth-human" style="width:65%"></div></div>
-              <span class="auth-label" style="color:var(--green)">H 65%</span>
+        <div class="section-hd">
+          <h2>My Projects</h2>
+          <span class="badge">5 active</span>
+          <div class="section-hd-spacer"></div>
+          <span class="see-all">See all</span>
+        </div>
+
+        <div class="projects-grid">
+          <article class="proj-card static">
+            <div class="proj-thumb"><img src="image/Rectangle 1.png" alt="Sound Waves banner"><span class="proj-thumb-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span><span class="proj-thumb-badge" style="background:rgba(34,197,94,0.7)">Published</span></div>
+            <div class="proj-body">
+              <div class="proj-type">Music</div>
+              <div class="proj-title">Sound Waves</div>
+              <div class="proj-auth-row"><div class="auth-bar"><div class="auth-human" style="width:72%"></div></div><span class="auth-label" style="color:var(--green)">H 72%</span></div>
+              <span class="proj-status status-published"><span class="material-symbols-outlined ms-sm">check_circle</span> Published</span>
+              <div class="proj-meta-row">
+                <span class="proj-platform-badge platform-tiktok">TikTok</span>
+                <div class="proj-stats">
+                  <span class="proj-stat"><span class="material-symbols-outlined ms-sm">visibility</span> 3.2K</span>
+                  <span class="proj-stat"><span class="material-symbols-outlined ms-sm" style="color:var(--coral)">favorite</span> 214</span>
+                </div>
+                <span class="proj-timestamp">1 week ago</span>
+              </div>
             </div>
-            <span class="proj-status status-draft">● Draft</span>
-          </div>
-        </div>
+          </article>
 
-        <!-- Card 3: Tales of Valor -->
-        <div class="proj-card">
-          <div class="proj-thumb grad-story">
-            <span class="proj-thumb-icon">📖</span>
-            <span class="proj-thumb-badge">Active</span>
-          </div>
-          <div class="proj-body">
-            <div class="proj-type">Story</div>
-            <div class="proj-title">Tales of Valor</div>
-            <div class="proj-auth-row">
-              <div class="auth-bar"><div class="auth-human" style="width:80%"></div></div>
-              <span class="auth-label" style="color:var(--green)">H 80%</span>
+          <article class="proj-card static">
+            <div class="proj-thumb"><img src="image/Rectangle 2.png" alt="Sky Canvas banner"><span class="proj-thumb-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span><span class="proj-thumb-badge">Draft</span></div>
+            <div class="proj-body">
+              <div class="proj-type">Digital Art</div>
+              <div class="proj-title">Sky Canvas</div>
+              <div class="proj-auth-row"><div class="auth-bar"><div class="auth-human" style="width:65%"></div></div><span class="auth-label" style="color:var(--green)">H 65%</span></div>
+              <span class="proj-status status-draft">● Draft</span>
             </div>
-            <span class="proj-status status-active">● Active</span>
-          </div>
-        </div>
+          </article>
 
-        <!-- Card 4: Cultural Festival 2024 (highlighted active) -->
-        <div class="proj-card" style="border-color:rgba(192,132,252,0.3);">
-          <div class="proj-thumb grad-video">
-            <span class="proj-thumb-icon">🎬</span>
-            <span class="proj-thumb-badge" style="background:rgba(192,132,252,0.7)">AI Active</span>
-          </div>
-          <div class="proj-body">
-            <div class="proj-type">Video</div>
-            <div class="proj-title">Cultural Festival 2024</div>
-            <div class="proj-auth-row">
-              <div class="auth-bar"><div class="auth-human" style="width:68%"></div></div>
-              <span class="auth-label" style="color:var(--green)">H 68%</span>
+          <article class="proj-card static">
+            <div class="proj-thumb"><img src="image/Rectangle 3.png" alt="Tales of Valor banner"><span class="proj-thumb-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><span class="proj-thumb-badge" style="background:rgba(34,197,94,0.7)">Published</span></div>
+            <div class="proj-body">
+              <div class="proj-type">Story</div>
+              <div class="proj-title">Tales of Valor</div>
+              <div class="proj-auth-row"><div class="auth-bar"><div class="auth-human" style="width:80%"></div></div><span class="auth-label" style="color:var(--green)">H 80%</span></div>
+              <span class="proj-status status-published"><span class="material-symbols-outlined ms-sm">check_circle</span> Published</span>
+              <div class="proj-meta-row">
+                <span class="proj-platform-badge platform-insta">Instagram</span>
+                <div class="proj-collabs">
+                  <div class="proj-collab-av" style="background:linear-gradient(135deg,#e879f9,#a855f7);color:#fff;">M</div>
+                </div>
+                <div class="proj-stats">
+                  <span class="proj-stat"><span class="material-symbols-outlined ms-sm">visibility</span> 876</span>
+                  <span class="proj-stat"><span class="material-symbols-outlined ms-sm" style="color:var(--coral)">favorite</span> 67</span>
+                </div>
+                <span class="proj-timestamp">2 weeks ago</span>
+              </div>
             </div>
-            <span class="proj-status status-active">● Active</span>
-          </div>
-        </div>
+          </article>
 
-        <!-- Card 5: Garden Dreams -->
-        <div class="proj-card">
-          <div class="proj-thumb grad-3d">
-            <span class="proj-thumb-icon">🌿</span>
-            <span class="proj-thumb-badge">Draft</span>
-          </div>
-          <div class="proj-body">
-            <div class="proj-type">3D / Animation</div>
-            <div class="proj-title">Garden Dreams</div>
-            <div class="proj-auth-row">
-              <div class="auth-bar"><div class="auth-human" style="width:55%"></div></div>
-              <span class="auth-label" style="color:var(--green)">H 55%</span>
+          <!-- Video card — clickable to detail -->
+          <article class="proj-card" style="border-color:rgba(192,132,252,0.3);cursor:pointer;" onclick="goDetail()" role="button" tabindex="0" aria-label="Open Cultural Festival 2024">
+            <div class="proj-thumb"><img src="image/Rectangle 4.png" alt="Cultural Festival 2024 banner"><span class="proj-thumb-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/><line x1="17" y1="17" x2="22" y2="17"/></svg></span><span class="proj-thumb-badge" style="background:rgba(192,132,252,0.7)">AI Active</span></div>
+            <div class="proj-body">
+              <div class="proj-type">Video</div>
+              <div class="proj-title">Cultural Festival 2024</div>
+              <div class="proj-auth-row"><div class="auth-bar"><div class="auth-human" style="width:68%"></div></div><span class="auth-label" style="color:var(--green)">H 68%</span></div>
+              <span class="proj-status status-wip"><span class="material-symbols-outlined ms-sm">edit_note</span> WIP</span>
+              <div class="proj-meta-row">
+                <div class="proj-collabs">
+                  <div class="proj-collab-av" style="overflow:hidden;padding:0;"><img src="faces/hiro.png" alt="Hiro" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+                  <div class="proj-collab-av" style="background:linear-gradient(135deg,#0EA5E9,#38BDF8);color:#fff;">R</div>
+                </div>
+                <span class="proj-timestamp" style="width:auto;margin-top:0;margin-left:auto;">In progress</span>
+              </div>
             </div>
-            <span class="proj-status status-draft">● Draft</span>
+          </article>
+
+          <article class="proj-card static">
+            <div class="proj-thumb"><img src="image/Rectangle 5.png" alt="Garden Dreams banner"><span class="proj-thumb-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg></span><span class="proj-thumb-badge">Draft</span></div>
+            <div class="proj-body">
+              <div class="proj-type">3D / Animation</div>
+              <div class="proj-title">Garden Dreams</div>
+              <div class="proj-auth-row"><div class="auth-bar"><div class="auth-human" style="width:55%"></div></div><span class="auth-label" style="color:var(--green)">H 55%</span></div>
+              <span class="proj-status status-draft">● Draft</span>
+            </div>
+          </article>
+
+          <div class="proj-card-new">
+            <div class="new-plus">+</div>
+            <div class="new-label">New Project</div>
+            <div class="new-sub">Start something creative with Creative Folder</div>
           </div>
         </div>
 
-        <!-- New Project card -->
-        <div class="proj-card-new">
-          <div class="new-plus">+</div>
-          <div class="new-label">New Project</div>
-          <div class="new-sub">Start something creative with Creative Folder</div>
+      </div><!-- /app-body -->
+
+      <nav class="bottom-nav" aria-label="Main navigation">
+        <div class="bottom-nav-inner">
+          <button class="nav-item active" aria-current="page"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span class="nav-label">Home</span></button>
+          <button class="nav-item nav-ai active" aria-label="Kaleidoscope AI"><div class="nav-ai__orbit"></div><svg class="nav-ai__icon" viewBox="0 0 44 40" fill="none"><path d="M43.075 10.005C42.475 7.428 41.282 5.008 39.432 3.116C31.066-5.452 19.837 5.26 17.055 15.788C15.375 21.535 14.745 28.371 18.395 33.593C13.248 33.563 6.161 32.311 4.142 26.939C2.792 21.296 9.4 17.412 14.178 16.303C14.374 15.543 14.599 14.76 14.866 14.02C-8.366 18.107-2.261 39.894 18.659 39.989C37.795 40.55 46.073 22.849 43.075 10.008V10.005ZM36.631 15.553C36.171 19.884 32.753 31.058 25.76 32.438C24.915 32.604 24.041 32.572 23.222 32.308C17.371 30.406 17.332 20.586 19.246 15.667C29.021 15.628 32.616 20.928 32.616 20.928C33.056 19.757 33.411 18.534 33.672 17.282C28.284 13.342 20.085 13.602 20.085 13.602C25.094 2.37 38.353 0.038 36.631 15.553Z" fill="currentColor"/></svg></button>
+          <button class="nav-item" aria-label="Family"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="nav-label">Family</span></button>
         </div>
+      </nav>
 
-      </div><!-- /projects-grid -->
+    </div><!-- /page-home -->
 
-    </div><!-- /app-body -->
+    <!-- ════════ PAGE 2: VIDEO DETAIL / WORKSPACE ════════ -->
+    <div class="page" id="page-detail">
 
-    <!-- Bottom Nav -->
-    <div class="bottom-nav">
-      <div class="nav-item active">
-        <span class="nav-icon">🏠</span>
-        <span class="nav-label">Home</span>
-        <div class="nav-active-dot"></div>
-      </div>
-      <div class="nav-item">
-        <span class="nav-icon">✨</span>
-        <span class="nav-label">Create</span>
-      </div>
-      <div class="nav-item">
-        <span class="nav-icon">👨‍👩‍👧</span>
-        <span class="nav-label">Family</span>
-      </div>
-    </div>
-
-  </div><!-- /device -->
-</div><!-- /scene-v0 -->
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     V1: EDITOR WORKSPACE (Canva / NotebookLM style)
-═══════════════════════════════════════════════════════════ -->
-<div class="scene" id="scene-v1">
-  <div class="scene-label">iPad Pro 11" · Landscape · Editor Workspace</div>
-  <div class="device" id="device-v1">
-
-    <!-- Status bar -->
-    <div class="status-bar">
-      <span class="status-time">9:41</span>
-      <div class="status-icons">
-        <span>●●●●</span>
-        <span>WiFi</span>
-        <span>🔋</span>
-      </div>
-    </div>
-
-    <!-- Editor toolbar (Canva-style) -->
+    <!-- Editor toolbar — detail page of Video card -->
     <div class="editor-toolbar">
-      <div class="et-back">←</div>
-      <div class="bloom-logo-icon" style="width:24px;height:24px;border-radius:6px;font-size:12px;flex-shrink:0;">🌸</div>
+      <div class="et-back" title="Back to Projects" onclick="goHome()" style="cursor:pointer;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div>
+      <div class="bloom-logo-icon" style="width:24px;height:24px;border-radius:6px;flex-shrink:0;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 1 5 5c0 2-1.5 3.5-3 4.5L12 22l-2-10.5C8.5 10.5 7 9 7 7a5 5 0 0 1 5-5z"/><path d="M7 12.5C5 13.5 2 15 2 18c0 2 2 4 5 4"/><path d="M17 12.5c2 1 5 2.5 5 5.5 0 2-2 4-5 4"/></svg></div>
+      <span style="font:500 12px/1 var(--font);color:var(--text3);margin-right:4px;">Projects ›</span>
       <span class="et-fname">Cultural Festival 2024</span>
+      <span style="font:600 10px/1 var(--font);color:var(--green);background:var(--green-dim);padding:3px 8px;border-radius:100px;margin-left:2px;display:inline-flex;align-items:center;gap:3px;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg> Video</span>
       <div class="et-divider"></div>
 
       <!-- Undo / Redo -->
       <div class="et-tool-group">
-        <button class="et-tool-btn" title="Undo">↩</button>
-        <button class="et-tool-btn" title="Redo">↪</button>
+        <button class="et-tool-btn" title="Undo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
+        <button class="et-tool-btn" title="Redo"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.13-9.36L23 10"/></svg></button>
       </div>
 
       <!-- Edit tools -->
       <div class="et-tool-group">
-        <button class="et-tool-btn active-tool" title="Select">▲</button>
-        <button class="et-tool-btn" title="Razor / Cut">✂</button>
-        <button class="et-tool-btn" title="Text overlay">T</button>
-        <button class="et-tool-btn" title="Transitions" style="font-size:10px;">⟿</button>
+        <button class="et-tool-btn active-tool" title="Select"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l5 12 2-5 5-2z"/></svg></button>
+        <button class="et-tool-btn" title="Razor / Cut"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></button>
+        <button class="et-tool-btn" title="Text overlay"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg></button>
+        <button class="et-tool-btn" title="Transitions"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="8" height="12" rx="1"/><rect x="14" y="6" width="8" height="12" rx="1"/><path d="M12 2v20"/></svg></button>
       </div>
 
       <!-- Zoom -->
@@ -1269,10 +1406,10 @@ body {
 
       <!-- Collaborator avatars -->
       <div class="et-collab">
-        <div class="et-cav" style="background:linear-gradient(135deg,var(--green),#22C55E);color:#000;">Y</div>
-        <div class="et-cav" style="background:linear-gradient(135deg,#F59E0B,#FCD34D);color:#000;">H</div>
+        <div class="et-cav" style="overflow:hidden;padding:0;"><img src="faces/yuki.png" alt="Yuki" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+        <div class="et-cav" style="overflow:hidden;padding:0;"><img src="faces/hiro.png" alt="Hiro" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
         <div class="et-cav" style="background:linear-gradient(135deg,#0EA5E9,#38BDF8);color:#fff;">R</div>
-        <div class="et-cav" style="background:var(--ai-dim);border:1px solid rgba(0,188,212,0.4);color:var(--ai);font-size:9px;">✦</div>
+        <div class="et-cav" style="background:var(--ai-dim);border:1px solid rgba(0,188,212,0.4);color:var(--ai);"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12,2 14.5,9 22,9.5 16,14.5 18,22 12,17.5 6,22 8,14.5 2,9.5 9.5,9"/></svg></div>
       </div>
 
       <button class="et-btn et-btn-share">Share</button>
@@ -1284,11 +1421,11 @@ body {
 
       <!-- ── LEFT: Asset browser ── -->
       <div class="asset-panel">
-        <div class="asset-tabs">
-          <div class="at-tab active">Media</div>
-          <div class="at-tab">Audio</div>
-          <div class="at-tab">Text</div>
-          <div class="at-tab">Effects</div>
+        <div class="asset-tabs" role="tablist" aria-label="Asset types">
+          <button class="at-tab active" role="tab" aria-selected="true">Media</button>
+          <button class="at-tab" role="tab" aria-selected="false">Audio</button>
+          <button class="at-tab" role="tab" aria-selected="false">Text</button>
+          <button class="at-tab" role="tab" aria-selected="false">Effects</button>
         </div>
 
         <div class="asset-scroll">
@@ -1296,7 +1433,7 @@ body {
           <div class="asset-section-label">Project Clips</div>
 
           <div class="clip-row active-clip">
-            <div class="clip-thumb-sm grad-video">🎬<span class="clip-dur">0:12</span></div>
+            <div class="clip-thumb-sm grad-video"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg><span class="clip-dur">0:12</span></div>
             <div class="clip-rinfo">
               <div class="clip-rname">Opening crowd</div>
               <div class="clip-rmeta">4K · 0:12</div>
@@ -1305,7 +1442,7 @@ body {
 
           <div class="clip-row">
             <div class="clip-thumb-sm" style="background:linear-gradient(135deg,#1a3a2a,#2d6b44);">
-              👵<span class="clip-dur">0:04</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="clip-dur">0:04</span>
             </div>
             <div class="clip-rinfo">
               <div class="clip-rname">Grandma watching</div>
@@ -1315,7 +1452,7 @@ body {
 
           <div class="clip-row">
             <div class="clip-thumb-sm" style="background:linear-gradient(135deg,#1a2040,#2d4490);">
-              🏮<span class="clip-dur">0:08</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/></svg><span class="clip-dur">0:08</span>
             </div>
             <div class="clip-rinfo">
               <div class="clip-rname">Lantern ceremony</div>
@@ -1325,7 +1462,7 @@ body {
 
           <div class="clip-row">
             <div class="clip-thumb-sm" style="background:linear-gradient(135deg,#3a1a10,#7a3020);">
-              🥁<span class="clip-dur">0:16</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="10" rx="9" ry="5"/><path d="M3 10v4c0 2.76 4.03 5 9 5s9-2.24 9-5v-4"/><line x1="12" y1="5" x2="12" y2="1"/><line x1="7" y1="6" x2="5" y2="2"/><line x1="17" y1="6" x2="19" y2="2"/></svg><span class="clip-dur">0:16</span>
             </div>
             <div class="clip-rinfo">
               <div class="clip-rname">Drum performance</div>
@@ -1335,7 +1472,7 @@ body {
 
           <div class="clip-row">
             <div class="clip-thumb-sm" style="background:linear-gradient(135deg,#1a3a10,#3a7020);">
-              🎎<span class="clip-dur">0:07</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span class="clip-dur">0:07</span>
             </div>
             <div class="clip-rinfo">
               <div class="clip-rname">Traditional dance</div>
@@ -1347,7 +1484,7 @@ body {
 
           <div class="clip-row" style="opacity:0.8;">
             <div class="clip-thumb-sm" style="background:var(--ai-dim);border:1px dashed rgba(0,188,212,0.35);">
-              <span style="font-size:11px;color:var(--ai);">✦</span>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="var(--ai)" stroke="none"><polygon points="12,2 14.5,9 22,9.5 16,14.5 18,22 12,17.5 6,22 8,14.5 2,9.5 9.5,9"/></svg>
               <span class="clip-dur" style="background:rgba(0,188,212,0.55);">0:06</span>
             </div>
             <div class="clip-rinfo">
@@ -1358,7 +1495,7 @@ body {
 
           <div class="clip-row" style="opacity:0.8;">
             <div class="clip-thumb-sm" style="background:var(--ai-dim);border:1px dashed rgba(0,188,212,0.35);">
-              <span style="font-size:11px;color:var(--ai);">✦</span>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="var(--ai)" stroke="none"><polygon points="12,2 14.5,9 22,9.5 16,14.5 18,22 12,17.5 6,22 8,14.5 2,9.5 9.5,9"/></svg>
               <span class="clip-dur" style="background:rgba(0,188,212,0.55);">0:03</span>
             </div>
             <div class="clip-rinfo">
@@ -1392,6 +1529,7 @@ body {
           <!-- Video frame (the canvas itself) -->
           <div class="video-frame selected">
             <div class="vf-scene">
+              <img class="vf-scene-img" src="image/Rectangle 4.png" alt="Cultural Festival 2024">
               <div class="vf-lights"></div>
               <div class="vf-crowd"></div>
               <div class="vf-center-text">
@@ -1422,16 +1560,16 @@ body {
 
         <!-- Playback controls -->
         <div class="playback-bar">
-          <button class="pb-btn ghost" title="Skip to start">⏮</button>
-          <button class="pb-btn ghost" title="Step back">◂</button>
-          <button class="pb-btn primary" title="Play">▶</button>
-          <button class="pb-btn ghost" title="Step forward">▸</button>
+          <button class="pb-btn ghost" title="Skip to start"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg></button>
+          <button class="pb-btn ghost" title="Step back"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button class="pb-btn primary" title="Play"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+          <button class="pb-btn ghost" title="Step forward"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
           <span class="pb-time">1:24 / 3:24</span>
           <div class="pb-scrubber">
             <div class="pb-progress"></div>
             <div class="pb-head"></div>
           </div>
-          <span class="pb-vol">🔊</span>
+          <span class="pb-vol"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></span>
         </div>
 
         <!-- Timeline -->
@@ -1496,12 +1634,12 @@ body {
 
         <div class="chat-panel-hd">
           <div class="chat-panel-hd-row">
-            <div class="chat-panel-orb"></div>
+            <div class="chat-panel-orb"><svg viewBox="0 0 44 40" fill="none"><path d="M43.075 10.005C42.475 7.428 41.282 5.008 39.432 3.116C31.066-5.452 19.837 5.26 17.055 15.788C15.375 21.535 14.745 28.371 18.395 33.593C13.248 33.563 6.161 32.311 4.142 26.939C2.792 21.296 9.4 17.412 14.178 16.303C14.374 15.543 14.599 14.76 14.866 14.02C-8.366 18.107-2.261 39.894 18.659 39.989C37.795 40.55 46.073 22.849 43.075 10.008V10.005ZM36.631 15.553C36.171 19.884 32.753 31.058 25.76 32.438C24.915 32.604 24.041 32.572 23.222 32.308C17.371 30.406 17.332 20.586 19.246 15.667C29.021 15.628 32.616 20.928 32.616 20.928C33.056 19.757 33.411 18.534 33.672 17.282C28.284 13.342 20.085 13.602 20.085 13.602C25.094 2.37 38.353 0.038 36.631 15.553Z"/></svg></div>
             <span class="chat-panel-title">Creative Direction</span>
           </div>
           <div class="chat-panel-sub">Kaleidoscope · guides your creative choices</div>
           <div class="chat-panel-ctx">
-            <span>🎬</span>
+            <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg></span>
             <span>Opening crowd — selected</span>
           </div>
         </div>
@@ -1539,7 +1677,7 @@ body {
           <!-- AI notice card (Socratic) -->
           <div class="ai-notice-card">
             <div class="ai-notice-hd">
-              <div class="ai-notice-orb"></div>
+              <div class="ai-notice-orb"><svg viewBox="0 0 44 40" fill="none"><path d="M43.075 10.005C42.475 7.428 41.282 5.008 39.432 3.116C31.066-5.452 19.837 5.26 17.055 15.788C15.375 21.535 14.745 28.371 18.395 33.593C13.248 33.563 6.161 32.311 4.142 26.939C2.792 21.296 9.4 17.412 14.178 16.303C14.374 15.543 14.599 14.76 14.866 14.02C-8.366 18.107-2.261 39.894 18.659 39.989C37.795 40.55 46.073 22.849 43.075 10.008V10.005ZM36.631 15.553C36.171 19.884 32.753 31.058 25.76 32.438C24.915 32.604 24.041 32.572 23.222 32.308C17.371 30.406 17.332 20.586 19.246 15.667C29.021 15.628 32.616 20.928 32.616 20.928C33.056 19.757 33.411 18.534 33.672 17.282C28.284 13.342 20.085 13.602 20.085 13.602C25.094 2.37 38.353 0.038 36.631 15.553Z"/></svg></div>
               <span class="ai-notice-title">Kaleidoscope noticed something</span>
             </div>
             <div class="ai-notice-body">
@@ -1563,35 +1701,151 @@ body {
 
     </div><!-- /editor-body -->
 
+    </div><!-- /page-detail -->
+
+  <!-- ════════ NOTIFICATION OVERLAY ════════ -->
+  <div class="notif-overlay" id="notifOverlay">
+    <div class="notif-backdrop" onclick="toggleNotifs()"></div>
+    <div class="notif-panel">
+      <div class="notif-panel-hd">
+        <span class="notif-panel-title">Notifications</span>
+        <span class="notif-clear" onclick="clearNotifs()">Mark all read</span>
+      </div>
+      <div class="notif-list" id="notifList">
+
+        <div class="notif-item unread">
+          <div class="notif-icon-wrap" style="background:rgba(192,132,252,0.12);"><span class="material-symbols-outlined ms-md" style="color:var(--accent)">visibility</span></div>
+          <div class="notif-body">
+            <div class="notif-text"><strong>Mom</strong> viewed your Cultural Festival 2024 progress report</div>
+            <div class="notif-time">Just now</div>
+          </div>
+          <div class="notif-unread-dot"></div>
+        </div>
+
+        <div class="notif-item unread">
+          <div class="notif-icon-wrap" style="background:rgba(0,188,212,0.1);"><span class="material-symbols-outlined ms-md" style="color:var(--ai)">auto_awesome</span></div>
+          <div class="notif-body">
+            <div class="notif-text"><strong>Kaleidoscope:</strong> Sound Waves authorship hit 72% — your strongest yet</div>
+            <div class="notif-time">2h ago</div>
+          </div>
+          <div class="notif-unread-dot"></div>
+        </div>
+
+        <div class="notif-item unread">
+          <div class="notif-icon-wrap" style="background:rgba(34,197,94,0.1);"><span class="material-symbols-outlined ms-md" style="color:var(--green)">chat_bubble</span></div>
+          <div class="notif-body">
+            <div class="notif-text"><strong>Hiro:</strong> "The grandma shot gave me chills — this is your best work"</div>
+            <div class="notif-time">3h ago</div>
+          </div>
+          <div class="notif-unread-dot"></div>
+        </div>
+
+        <div class="notif-item">
+          <div class="notif-icon-wrap" style="background:rgba(251,191,36,0.1);"><span class="material-symbols-outlined ms-md" style="color:var(--amber)">trending_up</span></div>
+          <div class="notif-body">
+            <div class="notif-text"><strong>Cultural Festival 2024</strong> hit 12K views on TikTok</div>
+            <div class="notif-time">5h ago</div>
+          </div>
+        </div>
+
+        <div class="notif-item">
+          <div class="notif-icon-wrap" style="background:rgba(56,189,248,0.1);"><span class="material-symbols-outlined ms-md" style="color:var(--sky)">group_add</span></div>
+          <div class="notif-body">
+            <div class="notif-text"><strong>Ren</strong> joined your Cultural Festival 2024 project</div>
+            <div class="notif-time">Yesterday</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   </div><!-- /device -->
-</div><!-- /scene-v1 -->
 
 
 <!-- Theme toggle -->
-<button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark">☀️</button>
+<button class="orient-toggle" onclick="toggleOrientation()" title="Toggle portrait/landscape"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg></button>
+<button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
 
 <script>
-function switchScene(id, btn) {
-  document.querySelectorAll('.scene').forEach(s => s.classList.remove('visible'));
-  document.querySelectorAll('.sw-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('scene-' + id).classList.add('visible');
-  btn.classList.add('active');
+// ── Page navigation ──
+function goDetail() {
+  document.getElementById('page-home').classList.remove('active');
+  document.getElementById('page-home').classList.add('exit-left');
+  document.getElementById('page-detail').classList.add('active');
+}
+function goHome() {
+  document.getElementById('page-detail').classList.remove('active');
+  document.getElementById('page-home').classList.remove('exit-left');
+  document.getElementById('page-home').classList.add('active');
 }
 
 function toggleTheme() {
   const devices = document.querySelectorAll('.device');
   const btn = document.querySelector('.theme-toggle');
   const isLight = document.body.getAttribute('data-theme') === 'light';
+  var sunSVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+  var moonSVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
   if (isLight) {
     document.body.removeAttribute('data-theme');
     devices.forEach(d => d.removeAttribute('data-theme'));
-    btn.textContent = '☀️';
+    btn.innerHTML = sunSVG;
   } else {
     document.body.setAttribute('data-theme', 'light');
     devices.forEach(d => d.setAttribute('data-theme', 'light'));
-    btn.textContent = '🌙';
+    btn.innerHTML = moonSVG;
   }
 }
+
+// ── Responsive scaling ──
+var isPortrait = false;
+function resizeDevices() {
+  const devices = document.querySelectorAll('.device');
+  const padX = 48;
+  const padY = 100;
+  const devW = isPortrait ? 834 : 1194;
+  const devH = isPortrait ? 1194 : 834;
+  const availW = window.innerWidth - padX * 2;
+  const availH = window.innerHeight - padY;
+  const scale = Math.min(availW / devW, availH / devH, 1);
+  devices.forEach(d => {
+    d.style.transform = 'scale(' + scale + ')';
+    d.style.marginBottom = ((devH * scale) - devH) + 'px';
+  });
+}
+window.addEventListener('resize', resizeDevices);
+resizeDevices();
+
+// ── Notification panel ──
+function toggleNotifs() {
+  document.getElementById('notifOverlay').classList.toggle('open');
+}
+function clearNotifs() {
+  document.querySelectorAll('.notif-item.unread').forEach(function(el) {
+    el.classList.remove('unread');
+    var dot = el.querySelector('.notif-unread-dot');
+    if (dot) dot.remove();
+  });
+  var badge = document.getElementById('notifBadge');
+  if (badge) badge.style.display = 'none';
+}
+
+// ── Orientation toggle ──
+function toggleOrientation() {
+  isPortrait = !isPortrait;
+  const devices = document.querySelectorAll('.device');
+  const btn = document.querySelector('.orient-toggle');
+  const label = document.querySelector('.scene-label');
+  devices.forEach(d => {
+    d.classList.toggle('portrait', isPortrait);
+  });
+  btn.classList.toggle('portrait', isPortrait);
+  label.textContent = isPortrait
+    ? 'iPad Pro 11" · Portrait · Yuki Creative Folder'
+    : 'iPad Pro 11" · Landscape · Yuki Creative Folder';
+  resizeDevices();
+}
+
 </script>
 </body>
 </html>

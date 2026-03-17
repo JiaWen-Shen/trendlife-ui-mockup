@@ -10,6 +10,11 @@
 - Push 完後，用 `gh pr create --base main --fill` 自動開 PR，不需要用戶額外操作
 - **不要 deploy 到 Vercel，除非用戶明確說「請部署」**
 
+## UI 設計規則
+
+- **Icons 一律使用 Material Design 圖示**（Material Symbols Outlined font），不使用 emoji 在 UI 上
+- **每次修改完成後，自動在瀏覽器開啟修改的頁面**
+
 ## 溝通
 
 - 用中文回應
