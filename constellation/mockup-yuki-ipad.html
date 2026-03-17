@@ -1258,6 +1258,91 @@ body {
 [data-theme="light"] .notif-panel { box-shadow: 0 16px 48px rgba(0,0,0,0.15); }
 [data-theme="light"] .notif-badge { border-color: var(--surface); }
 
+/* ── Share Panel ── */
+.share-overlay { position:absolute; inset:0; z-index:210; pointer-events:none; opacity:0; transition:opacity .2s; }
+.share-overlay.open { pointer-events:auto; opacity:1; }
+.share-backdrop { position:absolute; inset:0; }
+.share-panel {
+  position:absolute; top:48px; right:8px; width:272px;
+  background:var(--surface); border:1px solid var(--border); border-radius:16px;
+  overflow:hidden; box-shadow:0 12px 40px rgba(0,0,0,0.45);
+  transform:translateY(-6px) scale(0.97); transition:transform .2s var(--ease-out);
+}
+.share-overlay.open .share-panel { transform:translateY(0) scale(1); }
+.share-panel-hd { padding:13px 14px 10px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; }
+.share-panel-title { font:600 13px/1 var(--font); color:var(--text); flex:1; }
+.share-close-btn { width:22px; height:22px; border-radius:6px; background:var(--surface2); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--text2); }
+.share-section { padding:10px 14px; border-bottom:1px solid var(--border); }
+.share-section:last-of-type { border-bottom:none; }
+.share-sec-label { font:600 10px/1 var(--font); color:var(--text3); text-transform:uppercase; letter-spacing:.5px; margin-bottom:9px; }
+.share-collab-row { display:flex; align-items:center; gap:8px; margin-bottom:7px; }
+.share-collab-av { width:26px; height:26px; border-radius:50%; overflow:hidden; flex-shrink:0; background:var(--surface2); display:flex; align-items:center; justify-content:center; font:600 10px/1 var(--font); }
+.share-collab-name { font:500 12px/1 var(--font); color:var(--text); flex:1; }
+.share-collab-role { font:400 11px/1 var(--font); color:var(--text3); }
+.share-add-row { display:flex; gap:6px; margin-top:6px; }
+.share-add-input { flex:1; background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:5px 9px; font:400 11px/1 var(--font); color:var(--text); outline:none; }
+.share-add-input::placeholder { color:var(--text3); }
+.share-add-btn { padding:5px 10px; border-radius:8px; background:var(--accent-dim); border:none; color:var(--accent); font:600 11px/1 var(--font); cursor:pointer; }
+.share-vis-opt { display:flex; align-items:center; gap:9px; padding:6px 0; cursor:pointer; }
+.share-vis-ico { width:28px; height:28px; border-radius:8px; background:var(--surface2); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.share-vis-ico .material-symbols-outlined { font-size:14px !important; }
+.share-vis-body { flex:1; }
+.share-vis-title { font:500 12px/1.3 var(--font); color:var(--text); }
+.share-vis-sub { font:400 10px/1.3 var(--font); color:var(--text3); margin-top:1px; }
+.share-radio { width:15px; height:15px; border-radius:50%; border:2px solid var(--border); flex-shrink:0; display:flex; align-items:center; justify-content:center; transition:border-color .15s,background .15s; }
+.share-radio.on { border-color:var(--accent); background:var(--accent); }
+.share-radio.on::after { content:''; width:5px; height:5px; border-radius:50%; background:#fff; }
+.share-toggle-row { display:flex; align-items:center; gap:9px; }
+.share-toggle-ico { width:28px; height:28px; border-radius:8px; background:rgba(167,139,250,0.1); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.share-toggle-ico .material-symbols-outlined { font-size:14px !important; color:#a78bfa; }
+.share-toggle-body { flex:1; }
+.share-toggle-title { font:500 12px/1.3 var(--font); color:var(--text); }
+.share-toggle-sub { font:400 10px/1.3 var(--font); color:var(--text3); margin-top:1px; }
+.share-pill { width:34px; height:19px; border-radius:100px; background:var(--surface3); border:none; cursor:pointer; position:relative; transition:background .2s; flex-shrink:0; }
+.share-pill.on { background:var(--accent); }
+.share-pill::after { content:''; position:absolute; top:2px; left:2px; width:15px; height:15px; border-radius:50%; background:#fff; transition:left .18s; }
+.share-pill.on::after { left:17px; }
+.share-panel-foot { padding:10px 14px; }
+.share-copy-btn { width:100%; padding:8px; border-radius:10px; background:var(--surface2); border:1px solid var(--border); color:var(--text2); font:500 12px/1 var(--font); cursor:pointer; display:flex; align-items:center; justify-content:center; gap:5px; }
+.share-copy-btn:hover { background:var(--surface3); }
+.share-copy-btn .material-symbols-outlined { font-size:13px !important; }
+[data-theme="light"] .share-panel { box-shadow:0 12px 40px rgba(0,0,0,0.15); }
+
+/* ── Family Screen ── */
+.fam-header { display:flex; align-items:center; gap:10px; padding:16px 20px 12px; border-bottom:1px solid var(--border); flex-shrink:0; }
+.fam-header-title { font:700 17px/1 var(--font); color:var(--text); flex:1; }
+.fam-body { flex:1; overflow-y:auto; padding:0 20px 24px; }
+.fam-section-hd { font:600 11px/1 var(--font); color:var(--text3); text-transform:uppercase; letter-spacing:.5px; margin:20px 0 10px; }
+.fam-member-card { display:flex; align-items:center; gap:12px; background:var(--surface2); border-radius:14px; padding:12px 14px; margin-bottom:8px; border:1px solid var(--border); }
+.fam-member-av { width:42px; height:42px; border-radius:50%; overflow:hidden; flex-shrink:0; }
+.fam-member-av img { width:100%; height:100%; object-fit:cover; display:block; }
+.fam-member-info { flex:1; }
+.fam-member-name { font:600 13px/1 var(--font); color:var(--text); margin-bottom:3px; }
+.fam-member-role { font:400 11px/1.3 var(--font); color:var(--text3); }
+.fam-member-status { display:flex; align-items:center; gap:4px; font:500 10px/1 var(--font); }
+.fam-dot { width:6px; height:6px; border-radius:50%; }
+.fam-dot.online { background:#34d399; }
+.fam-dot.away { background:#fbbf24; }
+.fam-shared-card { display:flex; align-items:center; gap:11px; background:var(--surface2); border-radius:12px; padding:11px 13px; margin-bottom:7px; border:1px solid var(--border); cursor:default; }
+.fam-shared-thumb { width:36px; height:36px; border-radius:8px; background:var(--surface3); flex-shrink:0; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.fam-shared-thumb .material-symbols-outlined { font-size:17px !important; color:var(--text3); }
+.fam-shared-info { flex:1; }
+.fam-shared-name { font:500 12px/1.3 var(--font); color:var(--text); }
+.fam-shared-meta { font:400 10px/1.3 var(--font); color:var(--text3); margin-top:2px; display:flex; align-items:center; gap:5px; }
+.fam-shared-vis { font:500 10px/1 var(--font); color:#a78bfa; background:rgba(167,139,250,0.1); padding:2px 7px; border-radius:100px; white-space:nowrap; }
+.fam-authorship { height:4px; border-radius:100px; background:var(--surface3); margin-top:6px; overflow:hidden; }
+.fam-authorship-fill { height:100%; border-radius:100px; background:linear-gradient(90deg,var(--accent),#38bdf8); }
+.fam-insight-card { background:rgba(167,139,250,0.07); border:1px solid rgba(167,139,250,0.2); border-radius:14px; padding:14px; margin-top:4px; }
+.fam-insight-hd { display:flex; align-items:center; gap:7px; margin-bottom:8px; }
+.fam-insight-icon { width:26px; height:26px; border-radius:8px; background:rgba(167,139,250,0.15); display:flex; align-items:center; justify-content:center; }
+.fam-insight-icon .material-symbols-outlined { font-size:13px !important; color:#a78bfa; }
+.fam-insight-label { font:600 11px/1 var(--font); color:#a78bfa; }
+.fam-insight-body { font:400 12px/1.6 var(--font); color:var(--text2); }
+.fam-insight-preview { margin-top:10px; padding-top:10px; border-top:1px solid rgba(167,139,250,0.15); display:flex; align-items:center; gap:6px; }
+.fam-insight-preview-label { font:400 11px/1 var(--font); color:var(--text3); flex:1; }
+.fam-preview-btn { padding:5px 12px; border-radius:100px; background:rgba(167,139,250,0.15); border:none; color:#a78bfa; font:600 11px/1 var(--font); cursor:pointer; }
+[data-theme="light"] .fam-member-card, [data-theme="light"] .fam-shared-card { border-color:rgba(0,0,0,0.07); }
+
 /* ─── FOCUS VISIBLE (WCAG 2.4.7 / 2.4.13) ─── */
 :focus { outline: none; }
 :focus-visible {
@@ -1429,7 +1514,7 @@ body {
         <div class="bottom-nav-inner">
           <button class="nav-item active" aria-current="page"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span class="nav-label">Home</span></button>
           <button class="nav-item nav-ai active" aria-label="Kaleidoscope AI"><div class="nav-ai__orbit"></div><svg class="nav-ai__icon" viewBox="0 0 44 40" fill="none"><path d="M43.075 10.005C42.475 7.428 41.282 5.008 39.432 3.116C31.066-5.452 19.837 5.26 17.055 15.788C15.375 21.535 14.745 28.371 18.395 33.593C13.248 33.563 6.161 32.311 4.142 26.939C2.792 21.296 9.4 17.412 14.178 16.303C14.374 15.543 14.599 14.76 14.866 14.02C-8.366 18.107-2.261 39.894 18.659 39.989C37.795 40.55 46.073 22.849 43.075 10.008V10.005ZM36.631 15.553C36.171 19.884 32.753 31.058 25.76 32.438C24.915 32.604 24.041 32.572 23.222 32.308C17.371 30.406 17.332 20.586 19.246 15.667C29.021 15.628 32.616 20.928 32.616 20.928C33.056 19.757 33.411 18.534 33.672 17.282C28.284 13.342 20.085 13.602 20.085 13.602C25.094 2.37 38.353 0.038 36.631 15.553Z" fill="currentColor"/></svg></button>
-          <button class="nav-item" aria-label="Family"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="nav-label">Family</span></button>
+          <button class="nav-item" aria-label="Family" onclick="goFamily()"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="nav-label">Family</span></button>
         </div>
       </nav>
 
@@ -1487,7 +1572,7 @@ body {
         <div class="et-cav" style="background:var(--ai-dim);border:1px solid rgba(0,188,212,0.4);color:var(--ai);"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12,2 14.5,9 22,9.5 16,14.5 18,22 12,17.5 6,22 8,14.5 2,9.5 9.5,9"/></svg></div>
       </div>
 
-      <button class="et-btn et-btn-share">Share</button>
+      <button class="et-btn et-btn-share" onclick="toggleShare()">Share</button>
       <button class="et-btn et-btn-export">Export</button>
     </div>
 
@@ -1837,6 +1922,175 @@ body {
 
     </div><!-- /page-detail -->
 
+  <!-- ════════ PAGE 3: FAMILY ════════ -->
+  <div class="page" id="page-family">
+
+    <div class="fam-header">
+      <button class="et-back" onclick="goHomeFromFamily()" style="cursor:pointer;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <span class="fam-header-title">Family</span>
+      <div class="header-avatar" style="width:30px;height:30px;"><img src="faces/yuki.png" alt="Yuki"></div>
+    </div>
+
+    <div class="fam-body">
+
+      <div class="fam-section-hd">Members</div>
+
+      <div class="fam-member-card">
+        <div class="fam-member-av"><img src="faces/mei.png" alt="Mom"></div>
+        <div class="fam-member-info">
+          <div class="fam-member-name">Mayumi <span style="font:400 10px/1 var(--font);color:var(--text3);">Mom</span></div>
+          <div class="fam-member-role">Can view your shared work &amp; progress reports</div>
+        </div>
+        <div class="fam-member-status">
+          <div class="fam-dot online"></div>
+          <span style="color:var(--text3);">Active now</span>
+        </div>
+      </div>
+
+      <div class="fam-member-card">
+        <div class="fam-member-av"><img src="faces/hiro.png" alt="Hiro"></div>
+        <div class="fam-member-info">
+          <div class="fam-member-name">Hiro <span style="font:400 10px/1 var(--font);color:var(--text3);">Brother · 16y</span></div>
+          <div class="fam-member-role">Collaborator on Cultural Festival 2024</div>
+        </div>
+        <div class="fam-member-status">
+          <div class="fam-dot away"></div>
+          <span style="color:var(--text3);">2h ago</span>
+        </div>
+      </div>
+
+      <div class="fam-section-hd">Shared with Family</div>
+
+      <div class="fam-shared-card">
+        <div class="fam-shared-thumb" style="background:rgba(192,132,252,0.1);">
+          <span class="material-symbols-outlined">edit_note</span>
+        </div>
+        <div class="fam-shared-info">
+          <div class="fam-shared-name">Cultural Festival 2024</div>
+          <div class="fam-shared-meta">
+            <span class="fam-shared-vis"><span class="material-symbols-outlined" style="font-size:10px !important;vertical-align:-1px;">family_restroom</span> Mom can view</span>
+            <span>WIP</span>
+          </div>
+          <div class="fam-authorship"><div class="fam-authorship-fill" style="width:68%;"></div></div>
+        </div>
+        <span style="font:600 11px/1 var(--font);color:var(--text3);">68% you</span>
+      </div>
+
+      <div class="fam-shared-card">
+        <div class="fam-shared-thumb" style="background:rgba(56,189,248,0.08);">
+          <span class="material-symbols-outlined" style="color:#38bdf8;">check_circle</span>
+        </div>
+        <div class="fam-shared-info">
+          <div class="fam-shared-name">Spring Festival Performance</div>
+          <div class="fam-shared-meta">
+            <span class="fam-shared-vis"><span class="material-symbols-outlined" style="font-size:10px !important;vertical-align:-1px;">family_restroom</span> Mom can view</span>
+            <span>Published · TikTok</span>
+          </div>
+          <div class="fam-authorship"><div class="fam-authorship-fill" style="width:82%;"></div></div>
+        </div>
+        <span style="font:600 11px/1 var(--font);color:var(--text3);">82% you</span>
+      </div>
+
+      <div class="fam-section-hd">Kaleidoscope's Report to Mom</div>
+
+      <div class="fam-insight-card">
+        <div class="fam-insight-hd">
+          <div class="fam-insight-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
+          <span class="fam-insight-label">This week's growth signal</span>
+        </div>
+        <div class="fam-insight-body">
+          Yuki is developing a stronger creative voice — she chose her own visual style over Kaleidoscope's suggestion for the opening sequence, showing independent judgment.
+        </div>
+        <div class="fam-insight-preview">
+          <span class="fam-insight-preview-label">Private details not included</span>
+          <button class="fam-preview-btn">Preview report</button>
+        </div>
+      </div>
+
+    </div><!-- /fam-body -->
+
+  </div><!-- /page-family -->
+
+  <!-- ════════ SHARE PANEL ════════ -->
+  <div class="share-overlay" id="shareOverlay">
+    <div class="share-backdrop" onclick="toggleShare()"></div>
+    <div class="share-panel">
+      <div class="share-panel-hd">
+        <span class="share-panel-title">Share · Cultural Festival 2024</span>
+        <button class="share-close-btn" onclick="toggleShare()"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+
+      <!-- Collaborators -->
+      <div class="share-section">
+        <div class="share-sec-label">Collaborators</div>
+        <div class="share-collab-row">
+          <div class="share-collab-av"><img src="faces/yuki.png" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          <span class="share-collab-name">Yuki</span>
+          <span class="share-collab-role">Owner</span>
+        </div>
+        <div class="share-collab-row">
+          <div class="share-collab-av"><img src="faces/hiro.png" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          <span class="share-collab-name">Hiro</span>
+          <span class="share-collab-role">Can edit</span>
+        </div>
+        <div class="share-collab-row">
+          <div class="share-collab-av" style="background:linear-gradient(135deg,#0EA5E9,#38BDF8);color:#fff;font:600 10px/1 var(--font);">R</div>
+          <span class="share-collab-name">Ren</span>
+          <span class="share-collab-role">Can edit</span>
+        </div>
+        <div class="share-add-row">
+          <input type="text" class="share-add-input" placeholder="Add by name or email…">
+          <button class="share-add-btn">Invite</button>
+        </div>
+      </div>
+
+      <!-- Visibility -->
+      <div class="share-section">
+        <div class="share-sec-label">Visibility</div>
+        <div class="share-vis-opt" onclick="selectVis(this)">
+          <div class="share-vis-ico"><span class="material-symbols-outlined" style="color:var(--text2);">lock</span></div>
+          <div class="share-vis-body">
+            <div class="share-vis-title">Private</div>
+            <div class="share-vis-sub">Only collaborators can access</div>
+          </div>
+          <div class="share-radio"></div>
+        </div>
+        <div class="share-vis-opt" onclick="selectVis(this)">
+          <div class="share-vis-ico" style="background:rgba(167,139,250,0.1);"><span class="material-symbols-outlined" style="color:#a78bfa;">family_restroom</span></div>
+          <div class="share-vis-body">
+            <div class="share-vis-title">Family can view</div>
+            <div class="share-vis-sub">Mom sees progress, not private content</div>
+          </div>
+          <div class="share-radio on"></div>
+        </div>
+        <div class="share-vis-opt" onclick="selectVis(this)">
+          <div class="share-vis-ico"><span class="material-symbols-outlined" style="color:var(--text2);">public</span></div>
+          <div class="share-vis-body">
+            <div class="share-vis-title">Public</div>
+            <div class="share-vis-sub">Anyone with the link can view</div>
+          </div>
+          <div class="share-radio"></div>
+        </div>
+      </div>
+
+      <!-- Family report toggle -->
+      <div class="share-section">
+        <div class="share-toggle-row">
+          <div class="share-toggle-ico"><span class="material-symbols-outlined">summarize</span></div>
+          <div class="share-toggle-body">
+            <div class="share-toggle-title">Include in Mom's report</div>
+            <div class="share-toggle-sub">Kaleidoscope shows growth signals only</div>
+          </div>
+          <button class="share-pill on" id="sharePill" onclick="this.classList.toggle('on')"></button>
+        </div>
+      </div>
+
+      <div class="share-panel-foot">
+        <button class="share-copy-btn"><span class="material-symbols-outlined">link</span> Copy link</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ════════ NOTIFICATION OVERLAY ════════ -->
   <div class="notif-overlay" id="notifOverlay">
     <div class="notif-backdrop" onclick="toggleNotifs()"></div>
@@ -1912,6 +2166,23 @@ function goHome() {
   document.getElementById('page-detail').classList.remove('active');
   document.getElementById('page-home').classList.remove('exit-left');
   document.getElementById('page-home').classList.add('active');
+}
+function goFamily() {
+  document.getElementById('page-home').classList.remove('active');
+  document.getElementById('page-home').classList.add('exit-left');
+  document.getElementById('page-family').classList.add('active');
+}
+function goHomeFromFamily() {
+  document.getElementById('page-family').classList.remove('active');
+  document.getElementById('page-home').classList.remove('exit-left');
+  document.getElementById('page-home').classList.add('active');
+}
+function toggleShare() {
+  document.getElementById('shareOverlay').classList.toggle('open');
+}
+function selectVis(opt) {
+  opt.closest('.share-section').querySelectorAll('.share-radio').forEach(function(r) { r.classList.remove('on'); });
+  opt.querySelector('.share-radio').classList.add('on');
 }
 
 function toggleTheme() {
