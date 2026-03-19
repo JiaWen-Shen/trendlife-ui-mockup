@@ -789,6 +789,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 
   <!-- ═══ VIEW 4 — PROFILE ═══ -->
   <div class="view" id="v-profile">
+    <button class="detail-back" onclick="goBack()">‹</button>
     <div class="view-scroll">
       <div class="profile-header fade-in">
         <div class="profile-av"><img src="faces/mei.png" alt="Mayumi"></div>
@@ -1496,7 +1497,7 @@ function switchView(idx) {
     currentView = idx;
   }, 50);
   // Nav highlight: 0=Family, 1=Events, 2=AI
-  const navMap = {0:0, 1:2, 2:1};
+  const navMap = {0:0, 1:1};
   const navIdx = navMap[idx];
   document.querySelectorAll('.nav-item:not(.nav-ai)').forEach((n, i) => {
     n.classList.toggle('active', i === navIdx);
