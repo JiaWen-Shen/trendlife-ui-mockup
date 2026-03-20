@@ -356,7 +356,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .summary-lbl{font-size:10px;color:var(--text3);margin-top:2px}
 
 /* ═══ DRILLDOWN — shared protect styles ═══ */
-.protect-body{flex:1;overflow-y:auto;padding:0 20px 24px}
+.protect-body{flex:1;overflow-y:scroll;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:0 20px 96px;scrollbar-width:none}
 .protect-hero{text-align:center;padding:14px 0 18px}
 .protect-av{width:64px;height:64px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;border:2px solid var(--border2);background:var(--surface);overflow:hidden}
 .protect-av img{width:100%;height:100%;object-fit:cover}
@@ -376,6 +376,68 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .pc-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:6px}
 .pc-text{font-size:13px;color:var(--text2);line-height:1.6}
 .pc-detail{font-size:11.5px;color:var(--text3);margin-top:5px;line-height:1.5}
+/* ── Yuki Growth Refactor ── */
+.trend-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;margin-bottom:10px}
+.trend-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+.trend-hdr-lbl{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:0.4px;text-transform:uppercase;margin-bottom:2px}
+.trend-hdr-sub{font-size:10.5px;color:var(--text3)}
+.trend-big-val{font-size:22px;font-weight:800;color:var(--green);line-height:1;text-align:right}
+.trend-big-sub{font-size:10px;color:var(--text3);text-align:right;margin-top:2px}
+.auth-split-row{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.auth-split-bar{flex:1;height:7px;border-radius:100px;overflow:hidden}
+.auth-split-lbl{font-size:10px;font-weight:700;min-width:30px}
+.spark-week-row{display:flex;justify-content:space-around;margin-top:5px}
+.spark-wk{text-align:center}
+.spark-wk-lbl{font-size:9px;color:var(--text3)}
+.spark-wk-val{font-size:10px;font-weight:600}
+.trend-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;padding-top:10px;border-top:1px solid var(--border)}
+.trend-tag{font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;border:1px solid}
+/* Work card stat chips */
+.ywc-stats{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.ywc-chip{font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:100px;letter-spacing:0.2px}
+/* Decision Log */
+.decision-log{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;margin-bottom:4px}
+.dl-row{padding:12px 14px;border-bottom:1px solid var(--border)}
+.dl-row:last-child{border-bottom:none}
+.dl-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.dl-session{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:0.4px;text-transform:uppercase}
+.dl-title{font-size:12.5px;font-weight:600;color:var(--text);margin-bottom:6px}
+.dl-compare{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.dl-ai{background:var(--ai-dim);border-radius:7px;padding:7px 9px}
+.dl-user{background:rgba(249,115,22,0.06);border-radius:7px;padding:7px 9px}
+.dl-lbl{font-size:8px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:3px}
+.dl-val{font-size:11px;color:var(--text2);line-height:1.4}
+.dl-badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:6px}
+.dl-badge.self{background:var(--green-dim);color:var(--green)}
+.dl-badge.adapted{background:rgba(249,115,22,0.08);color:var(--accent)}
+.dl-badge.star{background:var(--green-dim);color:var(--green)}
+.dl-solo-note{font-size:11.5px;color:var(--text3);line-height:1.5;font-style:italic}
+/* Expert collapsible */
+.expert-toggle{cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+.et-chevron{font-size:12px;opacity:0.5;transition:transform 0.2s}
+.expert-body{overflow:hidden}
+/* ── Protection Chart ── */
+.protection-chart-card{display:flex;align-items:center;gap:18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 18px;margin-bottom:16px}
+.donut-wrap{position:relative;width:86px;height:86px;flex-shrink:0}
+.donut-svg{width:86px;height:86px;display:block;transform:rotate(-90deg)}
+.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
+.donut-num{font-size:21px;font-weight:800;color:var(--text);line-height:1}
+.donut-sub{font-size:9px;color:var(--text3);letter-spacing:0.4px;text-transform:uppercase;margin-top:2px}
+.donut-legend{flex:1;display:flex;flex-direction:column;gap:9px}
+.donut-leg-item{display:flex;align-items:center;gap:9px}
+.donut-leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.donut-leg-val{font-size:16px;font-weight:800;color:var(--text);line-height:1}
+.donut-leg-lbl{font-size:10.5px;color:var(--text3);margin-top:1px}
+/* ── Scam call expandable list ── */
+.scam-badge{display:inline-flex;align-items:center;justify-content:center;background:rgba(249,115,22,0.18);color:var(--accent);border:1px solid rgba(249,115,22,0.3);border-radius:100px;font-size:9px;font-weight:700;padding:1px 6px;margin-left:6px;vertical-align:middle}
+.scam-list{margin-bottom:10px;overflow:hidden}
+.scam-call-item{display:flex;gap:10px;padding:9px 12px;background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:6px}
+.scam-call-item:last-child{margin-bottom:0}
+.scam-call-time{font-size:10px;color:var(--text3);white-space:nowrap;padding-top:3px;min-width:42px}
+.scam-call-num{font-size:12px;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums}
+.scam-call-type{font-size:11px;color:var(--text3);margin-top:2px;line-height:1.4}
+.scam-call-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.4px;text-transform:uppercase;background:rgba(244,63,94,0.08);color:var(--coral);border-radius:4px;padding:1px 5px;margin-top:3px}
+.scam-list-footer{text-align:center;padding:7px 0 2px;font-size:11px;color:var(--text3)}
 .expert-view{background:var(--ai-dim);border:1px solid rgba(0,188,212,0.18);border-radius:var(--radius-sm);padding:14px 16px;margin-top:4px}
 .expert-label{font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--ai);margin-bottom:8px;display:flex;align-items:center;gap:6px}
 .expert-text{font-size:12.5px;color:var(--text2);line-height:1.7}
@@ -391,6 +453,14 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 .health-card:active{background:var(--surface2)}
 .health-card-alert{border-color:rgba(244,63,94,0.28);background:rgba(244,63,94,0.05)}
 .health-card-ai{border-color:rgba(0,188,212,0.2);background:rgba(0,188,212,0.04)}
+.health-book-btn{width:100%;margin-top:12px;padding:12px 14px;border-radius:var(--radius-sm);background:linear-gradient(135deg,rgba(139,92,246,0.1),rgba(0,188,212,0.06));border:1px solid rgba(139,92,246,0.25);display:flex;align-items:center;gap:10px;cursor:pointer;transition:all 0.18s;text-align:left}
+.health-book-btn:hover{border-color:rgba(139,92,246,0.4);background:linear-gradient(135deg,rgba(139,92,246,0.18),rgba(0,188,212,0.1))}
+.health-book-btn:active{transform:scale(0.98)}
+.hbb-icon{width:34px;height:34px;border-radius:8px;background:rgba(139,92,246,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent)}
+.hbb-body{flex:1;min-width:0}
+.hbb-title{font:600 13px/1 var(--font);color:var(--accent);margin-bottom:3px}
+.hbb-sub{font:400 11.5px/1 var(--font);color:var(--text2)}
+.hbb-arrow{font-size:18px;color:var(--text3);flex-shrink:0}
 .health-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .health-cat{font-size:13px;font-weight:700;letter-spacing:-0.1px;display:flex;align-items:center;gap:6px}
 .health-time{font-size:11.5px;color:var(--text3)}
@@ -622,7 +692,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
           </div>
           <div class="ev-content">
             <div class="ev-who">Grandma</div>
-            <div class="ev-msg">Scam call blocked — +886-900-123-456, impersonating bank representative.</div>
+            <div class="ev-msg">Scam call blocked — +81-90-1234-5678, impersonating bank representative.</div>
             <div class="ev-time">3 hours ago</div>
             <span class="ev-tag red">Blocked</span>
             <span class="ev-tag green">Protected</span>
@@ -681,7 +751,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
       <div class="msg me">
         <div class="msg-av"><img src="faces/mei.png" alt="Mayumi"></div>
         <div>
-          <div class="msg-bubble">Yes — book the nearest available slot at NTU Hospital.</div>
+          <div class="msg-bubble">Yes — book the nearest available slot at Kyushu University Hospital.</div>
           <div class="msg-time">9:39 AM</div>
         </div>
       </div>
@@ -691,9 +761,9 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
           <div class="msg-bubble">On it.
             <div class="ai-action-card">
               <div class="ai-action-title">Booking Task</div>
-              <div class="ai-action-row"><span class="ai-action-dot done"></span><span class="ai-action-text">Searched NTU Hospital — 4 openings</span></div>
+              <div class="ai-action-row"><span class="ai-action-dot done"></span><span class="ai-action-text">Searched Kyushu University Hospital — 4 openings</span></div>
               <div class="ai-action-row"><span class="ai-action-dot done"></span><span class="ai-action-text">Matched slot — Nov 14, no conflicts</span></div>
-              <div class="ai-action-row"><span class="ai-action-dot done"></span><span class="ai-action-text">Confirmed — Dr. Li Wei, 2:30 PM</span></div>
+              <div class="ai-action-row"><span class="ai-action-dot done"></span><span class="ai-action-text">Confirmed — Dr. Tanaka Hiroshi, 2:30 PM</span></div>
             </div>
             Appointment confirmed. Grandma has been notified automatically.
           </div>
@@ -719,15 +789,12 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 
   <!-- ═══ VIEW 4 — PROFILE ═══ -->
   <div class="view" id="v-profile">
-    <div class="sub-header">
-      <button class="back-btn" onclick="goBack()">‹</button>
-      <span class="sub-title">Profile</span>
-    </div>
+    <button class="detail-back" onclick="goBack()">‹</button>
     <div class="view-scroll">
       <div class="profile-header fade-in">
         <div class="profile-av"><img src="faces/mei.png" alt="Mayumi"></div>
-        <div class="profile-name">Mayumi Chen</div>
-        <div class="profile-meta">Brand Manager · Taipei</div>
+        <div class="profile-name">Mayumi Sato</div>
+        <div class="profile-meta">Fukuoka</div>
       </div>
       <div class="summary-card fade-in stagger-1">
         <div class="summary-title">This Week</div>
@@ -770,7 +837,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
       <div class="health-hero">
         <div class="health-av"><img src="faces/grandma.png" alt="Hana"></div>
         <div class="health-name">Grandma · 68</div>
-        <div class="health-role">Retired · Taipei</div>
+        <div class="health-role">Fukuoka</div>
       </div>
 
       <!-- Today's Readings -->
@@ -837,7 +904,17 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
         <div class="health-card-top">
           <span class="health-cat"><img src="kaleidoscope-mandala.svg" style="width:14px;height:14px;vertical-align:middle;margin-right:2px"> Kaleidoscope</span>
         </div>
-        <div class="health-detail">Grandma's BP spike is consistent with recent stress patterns. She's been asked to rest and stay calm. A referral has been pre-filled for Dr. Li Wei — cardiology appointment ready to book. Want to confirm?</div>
+        <div class="health-detail">Grandma's BP spike is consistent with recent stress patterns. She's been asked to rest and stay calm. A referral has been pre-filled for Dr. Tanaka Hiroshi — cardiology appointment ready to book. Want to confirm?</div>
+        <button class="health-book-btn" onclick="switchView(2)">
+          <div class="hbb-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="12" y1="14" x2="16" y2="14"/><line x1="12" y1="17" x2="16" y2="17"/></svg>
+          </div>
+          <div class="hbb-body">
+            <div class="hbb-title">Confirm Appointment</div>
+            <div class="hbb-sub">Dr. Tanaka Hiroshi · Kyushu University Hospital · Nov 14, 2:30 PM</div>
+          </div>
+          <span class="hbb-arrow">›</span>
+        </button>
       </div>
 
     </div>
@@ -846,7 +923,7 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
   <!-- ═══ VIEW 6 — YUKI GROWTH REPORT ═══ -->
   <div class="view" id="v-yuki">
     <div class="sub-header">
-      <button class="back-btn" onclick="switchView(0)">‹</button>
+      <button class="back-btn" onclick="goBack()">‹</button>
       <span class="sub-title">Yuki's Growth</span>
       <img class="sub-logo" src="bloom-icon.svg" alt="Creative Folder">
     </div>
@@ -855,8 +932,8 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
       <!-- Hero -->
       <div class="protect-hero">
         <div class="protect-av"><img src="faces/yuki.png" alt="Yuki"></div>
-        <div class="protect-name">Yuki Chen · 12</div>
-        <div class="protect-role">Student · Creator · Taipei · Week 12</div>
+        <div class="protect-name">Yuki Sato · 12</div>
+        <div class="protect-role">Fukuoka · Week 12</div>
         <div class="protect-status-row">
           <div class="pstat"><div class="pstat-val" style="color:var(--green)">+18%</div><div class="pstat-lbl">Creative Dir.</div></div>
           <div class="pstat"><div class="pstat-val" style="color:var(--accent)">68%</div><div class="pstat-lbl">Yuki Voice</div></div>
@@ -864,16 +941,47 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
         </div>
       </div>
 
-      <!-- Parent highlight narrative -->
-      <div class="section-lbl">🌱 This Week's Growth Story</div>
-      <div style="background:linear-gradient(135deg,rgba(192,132,252,0.07),rgba(74,222,128,0.05));border:1px solid rgba(192,132,252,0.16);border-radius:var(--radius-sm);padding:16px;margin-bottom:10px">
-        <div style="font-size:13px;color:var(--text);line-height:1.75">
-          Yuki completed her biggest independent creative project yet — a 3-part TikTok series for the school culture festival. <strong style="color:var(--accent)">She directed all the transitions and pacing herself</strong>, only asking Creative Folder for one reference image. This is a meaningful shift from 4 weeks ago, when she relied on AI for about half her decisions.
+      <!-- Independence Trend -->
+      <div class="section-lbl">🌱 Independence Trend</div>
+      <div class="trend-card">
+        <div class="trend-hdr">
+          <div>
+            <div class="trend-hdr-lbl">AI Dependency · 4-Week</div>
+            <div class="trend-hdr-sub">Lower = more independent</div>
+          </div>
+          <div>
+            <div class="trend-big-val">↓63%</div>
+            <div class="trend-big-sub">vs. Week 9</div>
+          </div>
         </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
-          <span style="font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--green-dim);color:var(--green);border:1px solid rgba(74,222,128,0.2)">✓ Growing independence</span>
-          <span style="font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(192,132,252,0.2)">✦ Strong own voice</span>
-          <span style="font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--ai-dim);color:var(--ai);border:1px solid rgba(0,188,212,0.2)">AI used as tool, not crutch</span>
+        <!-- Authorship bar this week -->
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+          <span style="font-size:9px;font-weight:700;color:var(--green)">Yuki Voice · 68%</span>
+          <span style="font-size:9px;font-weight:700;color:var(--ai)">AI Assist · 32%</span>
+        </div>
+        <div style="height:7px;background:linear-gradient(90deg,var(--green) 68%,var(--ai) 68%);border-radius:100px;margin-bottom:14px"></div>
+        <!-- Sparkline: AI dependency W9→W12 (48%→38%→29%→18%) -->
+        <svg viewBox="0 0 280 54" style="width:100%;height:54px;display:block;overflow:visible">
+          <line x1="0" y1="10" x2="280" y2="10" stroke="var(--border)" stroke-width="0.5"/>
+          <line x1="0" y1="32" x2="280" y2="32" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="4 3"/>
+          <line x1="0" y1="54" x2="280" y2="54" stroke="var(--border)" stroke-width="0.5"/>
+          <path d="M14,44 L104,33 L194,22 L266,10 L266,54 L14,54 Z" fill="rgba(34,197,94,0.07)"/>
+          <path d="M14,44 L104,33 L194,22 L266,10" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="14"  cy="44" r="3.5" fill="var(--surface2)" stroke="var(--green)" stroke-width="1.5"/>
+          <circle cx="104" cy="33" r="3.5" fill="var(--surface2)" stroke="var(--green)" stroke-width="1.5"/>
+          <circle cx="194" cy="22" r="3.5" fill="var(--surface2)" stroke="var(--green)" stroke-width="1.5"/>
+          <circle cx="266" cy="10" r="4"   fill="var(--green)"/>
+        </svg>
+        <div class="spark-week-row">
+          <div class="spark-wk"><div class="spark-wk-lbl">W9</div><div class="spark-wk-val" style="color:var(--text3)">48%</div></div>
+          <div class="spark-wk"><div class="spark-wk-lbl">W10</div><div class="spark-wk-val" style="color:var(--text3)">38%</div></div>
+          <div class="spark-wk"><div class="spark-wk-lbl">W11</div><div class="spark-wk-val" style="color:var(--text3)">29%</div></div>
+          <div class="spark-wk"><div class="spark-wk-lbl">W12</div><div class="spark-wk-val" style="color:var(--green)">18%</div></div>
+        </div>
+        <div class="trend-tags">
+          <span class="trend-tag" style="background:var(--green-dim);color:var(--green);border-color:rgba(74,222,128,0.2)">✓ Growing independence</span>
+          <span class="trend-tag" style="background:rgba(192,132,252,0.08);color:#C084FC;border-color:rgba(192,132,252,0.2)">✦ Strong own voice</span>
+          <span class="trend-tag" style="background:var(--ai-dim);color:var(--ai);border-color:rgba(0,188,212,0.2)">AI as tool, not crutch</span>
         </div>
       </div>
 
@@ -882,10 +990,13 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
       <div class="yuki-work-card featured">
         <div class="ywc-thumb"><img src="image/Rectangle 4.png" alt="文化祭 2024" style="width:100%;height:100%;object-fit:cover"></div>
         <div class="ywc-info">
-          <div class="ywc-tag">Creative Folder · Week 12 · Director's Choice</div>
+          <div class="ywc-tag">Creative Folder · Week 12</div>
           <div class="ywc-title">文化祭 2024 — TikTok Series</div>
           <div class="ywc-meta">3 videos · 12k views · with Hana, Ren</div>
-          <div class="ywc-feedback">"Yuki directed all transitions independently — her creative voice is clearly developing."</div>
+          <div class="ywc-stats">
+            <span class="ywc-chip" style="background:var(--green-dim);color:var(--green)">★ Director's Choice</span>
+            <span class="ywc-chip" style="background:rgba(192,132,252,0.08);color:#C084FC">100% Yuki Directed</span>
+          </div>
         </div>
       </div>
       <div class="yuki-work-card">
@@ -894,58 +1005,65 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
           <div class="ywc-tag">Visual Essay · Week 11</div>
           <div class="ywc-title">Spring Memory — Photo Zine</div>
           <div class="ywc-meta">12 pages · solo project</div>
-          <div class="ywc-feedback">AI provided 2 layout suggestions; Yuki used neither — designed entirely from scratch.</div>
+          <div class="ywc-stats">
+            <span class="ywc-chip" style="background:var(--green-dim);color:var(--green)">0 / 2 AI suggestions used</span>
+            <span class="ywc-chip" style="background:var(--ai-dim);color:var(--ai)">From scratch</span>
+          </div>
         </div>
       </div>
 
-      <!-- AI-guided sessions -->
-      <div class="section-lbl">💡 AI-Guided Sessions This Week</div>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:4px">
+      <!-- Decision Log -->
+      <div class="section-lbl">💡 AI Decision Log · This Week</div>
+      <div class="decision-log">
 
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:13px 14px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-            <span style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.4px;text-transform:uppercase">Session 1 · Mon</span>
-            <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;background:var(--green-dim);color:var(--green)">Self-directed</span>
+        <!-- Mon: Self-directed -->
+        <div class="dl-row">
+          <div class="dl-top">
+            <span class="dl-session">Mon · S1</span>
+            <span class="dl-badge self">Self-directed</span>
           </div>
-          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">文化祭 TikTok — Opening Scene</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-            <div style="background:var(--ai-dim);border-radius:8px;padding:8px 10px">
-              <div style="font-size:9px;font-weight:700;color:var(--ai);letter-spacing:0.5px;margin-bottom:4px">CREATIVE FOLDER SUGGESTED</div>
-              <div style="font-size:11.5px;color:var(--text2);line-height:1.5">Use a slow zoom-in with ambient music for the opening</div>
+          <div class="dl-title">文化祭 TikTok — Opening Scene</div>
+          <div class="dl-compare">
+            <div class="dl-ai">
+              <div class="dl-lbl" style="color:var(--ai)">AI Suggested</div>
+              <div class="dl-val">Slow zoom + ambient music</div>
             </div>
-            <div style="background:var(--accent-dim);border-radius:8px;padding:8px 10px">
-              <div style="font-size:9px;font-weight:700;color:var(--accent);letter-spacing:0.5px;margin-bottom:4px">YUKI CHOSE</div>
-              <div style="font-size:11.5px;color:var(--text2);line-height:1.5">Jump-cut montage with her own soundtrack — more energetic</div>
+            <div class="dl-user">
+              <div class="dl-lbl" style="color:var(--accent)">Yuki Chose</div>
+              <div class="dl-val">Jump-cut + own soundtrack</div>
             </div>
           </div>
         </div>
 
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:13px 14px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-            <span style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.4px;text-transform:uppercase">Session 2 · Wed</span>
-            <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;background:var(--accent-dim);color:var(--accent)">Adapted AI idea</span>
+        <!-- Wed: Adapted -->
+        <div class="dl-row">
+          <div class="dl-top">
+            <span class="dl-session">Wed · S2</span>
+            <span class="dl-badge adapted">Adapted ↑</span>
           </div>
-          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Color Grading Style</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-            <div style="background:var(--ai-dim);border-radius:8px;padding:8px 10px">
-              <div style="font-size:9px;font-weight:700;color:var(--ai);letter-spacing:0.5px;margin-bottom:4px">CREATIVE FOLDER SUGGESTED</div>
-              <div style="font-size:11.5px;color:var(--text2);line-height:1.5">Warm golden tones for a nostalgic festival feel</div>
+          <div class="dl-title">Color Grading Style</div>
+          <div class="dl-compare">
+            <div class="dl-ai">
+              <div class="dl-lbl" style="color:var(--ai)">AI Suggested</div>
+              <div class="dl-val">Warm golden tones</div>
             </div>
-            <div style="background:var(--accent-dim);border-radius:8px;padding:8px 10px">
-              <div style="font-size:9px;font-weight:700;color:var(--accent);letter-spacing:0.5px;margin-bottom:4px">YUKI CHOSE</div>
-              <div style="font-size:11.5px;color:var(--text2);line-height:1.5">Kept warm tones but added a film grain filter she found independently</div>
+            <div class="dl-user">
+              <div class="dl-lbl" style="color:var(--accent)">Yuki Chose</div>
+              <div class="dl-val">Warm tones + own film grain</div>
             </div>
           </div>
         </div>
 
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:13px 14px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-            <span style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.4px;text-transform:uppercase">Session 3 · Fri</span>
-            <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;background:var(--green-dim);color:var(--green)">Fully independent</span>
+        <!-- Fri: Fully independent -->
+        <div class="dl-row">
+          <div class="dl-top">
+            <span class="dl-session">Fri · S3</span>
+            <span class="dl-badge star">★ Independent</span>
           </div>
-          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px">Final Edit — Didn't open Creative Folder</div>
-          <div style="font-size:12.5px;color:var(--text3);line-height:1.55">Yuki completed the full final cut without opening Creative Folder once. She referenced her own notes from earlier sessions instead.</div>
+          <div class="dl-title">Final Edit</div>
+          <div class="dl-solo-note">Completed full cut without opening Creative Folder once.</div>
         </div>
+
       </div>
 
       <!-- Skill bars -->
@@ -978,19 +1096,142 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
         </div>
       </div>
 
-      <!-- Safety -->
-      <div class="section-lbl">🛡 Safety</div>
-      <div class="protect-card safe-card">
-        <div class="pc-eyebrow" style="color:var(--green)">✓ Protection Active</div>
-        <div class="pc-text">1 phishing link blocked today. All shared content reviewed. Privacy settings intact.</div>
-        <div class="pc-detail">Yuki was notified and chose not to open the link — good judgment.</div>
-      </div>
-
-      <!-- Kaleidoscope summary -->
+      <!-- Kaleidoscope summary (collapsible) -->
       <div class="section-lbl">🤖 Kaleidoscope Summary</div>
       <div class="expert-view">
-        <div class="expert-label"><img src="kaleidoscope-mandala.svg" style="width:14px;height:14px"> Kaleidoscope · Parent View</div>
-        <div class="expert-text">Yuki's relationship with Creative Folder is maturing in a healthy direction. Her authorship score (68%) is above the age-12 peer benchmark of 54%. What's most notable this week: she used AI as a reference point to push <em>against</em>, not just to follow — which is a sign of genuine creative confidence. No parental intervention recommended. Consider celebrating her independent final cut on Friday.</div>
+        <div class="expert-label expert-toggle" onclick="toggleYukiAI()" style="margin-bottom:0">
+          <span style="display:flex;align-items:center;gap:6px">
+            <img src="kaleidoscope-mandala.svg" style="width:14px;height:14px"> Kaleidoscope · Parent View
+          </span>
+          <span class="et-chevron" id="yuki-ai-chevron">▾</span>
+        </div>
+        <div class="expert-body" id="yuki-ai-body" style="display:none;margin-top:8px">
+          <div class="expert-text">Yuki's relationship with Creative Folder is maturing in a healthy direction. Her authorship score (68%) is above the age-12 peer benchmark of 54%. What's most notable this week: she used AI as a reference point to push <em>against</em>, not just to follow — which is a sign of genuine creative confidence. No parental intervention recommended. Consider celebrating her independent final cut on Friday.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ VIEW 9 — YUKI SAFETY REPORT ═══ -->
+  <div class="view" id="v-yuki-safety">
+    <div class="sub-header">
+      <button class="back-btn" onclick="goBack()">‹</button>
+      <span class="sub-title">Yuki's Safety</span>
+      <img class="sub-logo" src="bloom-icon.svg" alt="">
+    </div>
+    <div class="protect-body">
+
+      <!-- Hero -->
+      <div class="protect-hero">
+        <div class="protect-av"><img src="faces/yuki.png" alt="Yuki"></div>
+        <div class="protect-name">Yuki Sato · 12</div>
+        <div class="protect-role">24h Protection Summary · March 14</div>
+        <div class="protect-status-row">
+          <div class="pstat"><div class="pstat-val" style="color:var(--green)">9</div><div class="pstat-lbl">Threats Blocked</div></div>
+          <div class="pstat"><div class="pstat-val" style="color:var(--green)">0</div><div class="pstat-lbl">Data Exposed</div></div>
+          <div class="pstat"><div class="pstat-val" style="color:var(--green)">✓</div><div class="pstat-lbl">Protection On</div></div>
+        </div>
+      </div>
+
+      <!-- 24h Chart -->
+      <div class="section-lbl">📊 24h Breakdown</div>
+      <div class="protection-chart-card">
+        <div class="donut-wrap">
+          <svg viewBox="0 0 100 100" class="donut-svg">
+            <circle cx="50" cy="50" r="38" fill="none" stroke="var(--surface2)" stroke-width="15"/>
+            <circle cx="50" cy="50" r="38" fill="none" stroke="var(--coral)" stroke-width="15"
+              stroke-dasharray="105.9 238.76" stroke-dashoffset="0"/>
+            <circle cx="50" cy="50" r="38" fill="none" stroke="var(--amber)" stroke-width="15"
+              stroke-dasharray="79.6 238.76" stroke-dashoffset="-105.9"/>
+            <circle cx="50" cy="50" r="38" fill="none" stroke="var(--violet)" stroke-width="15"
+              stroke-dasharray="53.1 238.76" stroke-dashoffset="-185.5"/>
+          </svg>
+          <div class="donut-center">
+            <div class="donut-num">9</div>
+            <div class="donut-sub">blocked</div>
+          </div>
+        </div>
+        <div class="donut-legend">
+          <div class="donut-leg-item">
+            <div class="donut-leg-dot" style="background:var(--coral)"></div>
+            <div><div class="donut-leg-val">4</div><div class="donut-leg-lbl">Phishing Links</div></div>
+          </div>
+          <div class="donut-leg-item">
+            <div class="donut-leg-dot" style="background:var(--amber)"></div>
+            <div><div class="donut-leg-val">3</div><div class="donut-leg-lbl">Harmful Content</div></div>
+          </div>
+          <div class="donut-leg-item">
+            <div class="donut-leg-dot" style="background:var(--violet)"></div>
+            <div><div class="donut-leg-val">2</div><div class="donut-leg-lbl">Scam DMs</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Expandable Phishing Links -->
+      <div class="section-lbl">🛡 Threats Blocked</div>
+      <div class="protect-card warn" style="cursor:pointer;background:rgba(244,63,94,0.05);border-color:rgba(244,63,94,0.15)" onclick="toggleYukiPhish(event)">
+        <div class="pc-eyebrow" style="color:var(--coral);display:flex;align-items:center;justify-content:space-between">
+          <span>Phishing Links → Yuki <span class="scam-badge" style="background:rgba(244,63,94,0.12);color:var(--coral);border-color:rgba(244,63,94,0.28)">4</span></span>
+          <span id="yuki-phish-chevron" style="font-size:13px;opacity:0.55;transition:transform 0.2s">▾</span>
+        </div>
+        <div class="pc-text">4 links blocked · Creative tool impersonation most common</div>
+        <div class="pc-detail">All blocked before page load · 0s exposure · Yuki chose not to bypass</div>
+      </div>
+      <div class="scam-list" id="yuki-phish-list" style="display:none">
+        <div class="scam-call-item">
+          <div class="scam-call-time">7:22 AM</div>
+          <div>
+            <div class="scam-call-num">secure-bank-login.xyz</div>
+            <div class="scam-call-type">Bank login impersonation · SSL mismatch · Domain 3 days old</div>
+            <div class="scam-call-tag" style="background:rgba(244,63,94,0.08);color:var(--coral)">Financial</div>
+          </div>
+        </div>
+        <div class="scam-call-item">
+          <div class="scam-call-time">9:48 AM</div>
+          <div>
+            <div class="scam-call-num">free-music-tools-pro.top</div>
+            <div class="scam-call-type">Fake music production tool · Malware payload detected</div>
+            <div class="scam-call-tag" style="background:rgba(244,63,94,0.08);color:var(--coral)">Malware</div>
+          </div>
+        </div>
+        <div class="scam-call-item">
+          <div class="scam-call-time">1:15 PM</div>
+          <div>
+            <div class="scam-call-num">art-assets-free-2024.net</div>
+            <div class="scam-call-type">Fake free art assets · Credential harvesting form</div>
+            <div class="scam-call-tag" style="background:rgba(244,63,94,0.08);color:var(--coral)">Phishing</div>
+          </div>
+        </div>
+        <div class="scam-call-item">
+          <div class="scam-call-time">4:30 PM</div>
+          <div>
+            <div class="scam-call-num">collab-invite-yuki12.xyz</div>
+            <div class="scam-call-type">Fake collaboration offer · Targeted by username · Data collection</div>
+            <div class="scam-call-tag" style="background:rgba(244,63,94,0.08);color:var(--coral)">Targeted</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Harmful Content -->
+      <div class="protect-card warn" style="cursor:default;background:rgba(255,184,77,0.05);border-color:rgba(255,184,77,0.15)">
+        <div class="pc-eyebrow" style="color:var(--amber)">Harmful Content Filtered <span class="scam-badge" style="background:rgba(255,184,77,0.12);color:var(--amber);border-color:rgba(255,184,77,0.3)">3</span></div>
+        <div class="pc-text">Graphic violence, adult ads, and hate speech filtered from social feeds</div>
+        <div class="pc-detail">Auto-filtered before display · Content policy active</div>
+      </div>
+
+      <!-- Scam DMs -->
+      <div class="protect-card warn" style="cursor:default;background:rgba(139,92,246,0.05);border-color:rgba(139,92,246,0.16)">
+        <div class="pc-eyebrow" style="color:var(--violet)">Scam DMs Blocked <span class="scam-badge" style="background:rgba(139,92,246,0.12);color:var(--violet);border-color:rgba(139,92,246,0.25)">2</span></div>
+        <div class="pc-text">Fake prize DM + unsolicited "collab offer" from unverified accounts</div>
+        <div class="pc-detail">Both from accounts &lt;3 days old · Blocked before delivery</div>
+      </div>
+
+      <!-- Kaleidoscope safety note -->
+      <div class="section-lbl">🤖 Kaleidoscope</div>
+      <div class="expert-view">
+        <div class="expert-label"><img src="kaleidoscope-mandala.svg" style="width:14px;height:14px"> Safety Assessment</div>
+        <div class="expert-text">Yuki encountered 9 threats today — all blocked before any impact. The phishing attempts targeting creative tools suggest her online presence as a young creator is drawing attention from bad actors. No action needed now, but consider a brief conversation about spotting fake download sites.</div>
       </div>
 
     </div>
@@ -1009,21 +1250,122 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
         <div class="protect-name" style="color:var(--green)">Family Safe</div>
         <div class="protect-role">All members accounted for · March 14</div>
         <div class="protect-status-row">
-          <div class="pstat"><div class="pstat-val" style="color:var(--green)">2</div><div class="pstat-lbl">Blocked</div></div>
+          <div class="pstat"><div class="pstat-val" style="color:var(--green)">23</div><div class="pstat-lbl">Blocked</div></div>
           <div class="pstat"><div class="pstat-val" style="color:var(--coral)">1</div><div class="pstat-lbl">Health Alert</div></div>
           <div class="pstat"><div class="pstat-val" style="color:var(--amber)">1</div><div class="pstat-lbl">Usage Warning</div></div>
         </div>
       </div>
-      <div class="section-lbl">🛡 Threats Blocked</div>
-      <div class="protect-card warn" style="cursor:pointer" onclick="switchView(0)">
-        <div class="pc-eyebrow" style="color:var(--accent)">Scam Call → Grandma</div>
-        <div class="pc-text">+886-900-123-456 impersonating bank. Blocked before ring. 0s exposure.</div>
-        <div class="pc-detail">9:05 AM · Grandma notified · Call blocked by Kaleidoscope</div>
+      <!-- 24h Protection Chart -->
+      <div class="section-lbl">📊 24h Protection Activity</div>
+      <div class="protection-chart-card">
+        <div class="donut-wrap">
+          <svg viewBox="0 0 100 100" class="donut-svg">
+            <!-- track -->
+            <circle cx="50" cy="50" r="38" fill="none" stroke="var(--surface2)" stroke-width="15"/>
+            <!-- Scam calls: 15/23 = 65.2% of 238.76 = 155.7 -->
+            <circle cx="50" cy="50" r="38" fill="none" stroke="var(--accent)" stroke-width="15"
+              stroke-dasharray="155.7 238.76" stroke-dashoffset="0"/>
+            <!-- Phishing: 8/23 = 34.8% = 83.1, offset by -155.7 -->
+            <circle cx="50" cy="50" r="38" fill="none" stroke="var(--coral)" stroke-width="15"
+              stroke-dasharray="83.1 238.76" stroke-dashoffset="-155.7"/>
+          </svg>
+          <div class="donut-center">
+            <div class="donut-num">23</div>
+            <div class="donut-sub">blocked</div>
+          </div>
+        </div>
+        <div class="donut-legend">
+          <div class="donut-leg-item">
+            <div class="donut-leg-dot" style="background:var(--accent)"></div>
+            <div>
+              <div class="donut-leg-val">15</div>
+              <div class="donut-leg-lbl">Scam Calls</div>
+            </div>
+          </div>
+          <div class="donut-leg-item">
+            <div class="donut-leg-dot" style="background:var(--coral)"></div>
+            <div>
+              <div class="donut-leg-val">8</div>
+              <div class="donut-leg-lbl">Phishing Links</div>
+            </div>
+          </div>
+          <div class="donut-leg-item">
+            <div class="donut-leg-dot" style="background:var(--green)"></div>
+            <div>
+              <div class="donut-leg-val">0</div>
+              <div class="donut-leg-lbl">Data Exposed</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="protect-card warn" style="cursor:pointer" onclick="switchView(0)">
-        <div class="pc-eyebrow" style="color:var(--accent)">Phishing Link → Yuki</div>
-        <div class="pc-text">secure-bank-login.xyz · SSL mismatch · Domain 3 days old. No data exposed.</div>
-        <div class="pc-detail">7:22 AM · Yuki notified · Link blocked automatically</div>
+
+      <div class="section-lbl">🛡 Threats Blocked</div>
+
+      <!-- Expandable Scam Call Section -->
+      <div class="protect-card warn" style="cursor:pointer" onclick="toggleScamList(event)">
+        <div class="pc-eyebrow" style="color:var(--accent);display:flex;align-items:center;justify-content:space-between">
+          <span>Scam Calls → Grandma <span class="scam-badge">15</span></span>
+          <span id="scam-chevron" style="font-size:13px;opacity:0.55;transition:transform 0.2s">▾</span>
+        </div>
+        <div class="pc-text">15 calls blocked in 24h · All medical service impersonation</div>
+        <div class="pc-detail">All blocked before ring · 0s exposure · Grandma unaware throughout</div>
+      </div>
+      <div class="scam-list" id="scam-list" style="display:none">
+        <div class="scam-call-item">
+          <div class="scam-call-time">6:47 AM</div>
+          <div>
+            <div class="scam-call-num">+81-120-500-033</div>
+            <div class="scam-call-type">Medical equipment sales · Hospital supply impersonation</div>
+            <div class="scam-call-tag">Medical</div>
+          </div>
+        </div>
+        <div class="scam-call-item">
+          <div class="scam-call-time">7:55 AM</div>
+          <div>
+            <div class="scam-call-num">+81-120-500-111</div>
+            <div class="scam-call-type">Fake cardiology follow-up · Claimed referral from her physician</div>
+            <div class="scam-call-tag">Medical</div>
+          </div>
+        </div>
+        <div class="scam-call-item">
+          <div class="scam-call-time">8:35 AM</div>
+          <div>
+            <div class="scam-call-num">+81-120-500-222</div>
+            <div class="scam-call-type">Pharmacy drug discount · Osteoporosis medication offer</div>
+            <div class="scam-call-tag">Medical</div>
+          </div>
+        </div>
+        <div class="scam-call-item" style="border-color:rgba(249,115,22,0.22)">
+          <div class="scam-call-time">9:05 AM</div>
+          <div>
+            <div class="scam-call-num">+81-90-1234-5678</div>
+            <div class="scam-call-type">Bank impersonation · Fake security alert on her account</div>
+            <div class="scam-call-tag" style="background:rgba(249,115,22,0.14);color:var(--accent)">Financial</div>
+          </div>
+        </div>
+        <div class="scam-call-item">
+          <div class="scam-call-time">10:17 AM</div>
+          <div>
+            <div class="scam-call-num">+81-120-500-333</div>
+            <div class="scam-call-type">Health insurance refund claim · Government impersonation</div>
+            <div class="scam-call-tag">Medical</div>
+          </div>
+        </div>
+        <div class="scam-call-item">
+          <div class="scam-call-time">11:42 AM</div>
+          <div>
+            <div class="scam-call-num">+81-120-500-444</div>
+            <div class="scam-call-type">Emergency ambulance subscription · Fake renewal notice</div>
+            <div class="scam-call-tag">Medical</div>
+          </div>
+        </div>
+        <div class="scam-list-footer">+ 9 more blocked silently between 12:00 PM – 8:30 PM</div>
+      </div>
+
+      <div class="protect-card warn" style="cursor:default">
+        <div class="pc-eyebrow" style="color:var(--coral)">Phishing Links → Family <span class="scam-badge" style="background:rgba(244,63,94,0.12);color:var(--coral);border-color:rgba(244,63,94,0.28)">8</span></div>
+        <div class="pc-text">8 dangerous links auto-blocked · secure-bank-login.xyz was most recent</div>
+        <div class="pc-detail">SSL mismatch · Domains avg 4 days old · No data exposed</div>
       </div>
       <div class="section-lbl">❤ Health</div>
       <div class="protect-card red-card" style="cursor:pointer" onclick="switchView(5)">
@@ -1114,9 +1456,35 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;color:inhe
 <script>
 /* ── VIEW SYSTEM ── */
 const VIEWS = ['v-home','v-events','v-ai','v-detail','v-profile',
-               'v-health','v-yuki','v-safety','v-grandma-chat'];
+               'v-health','v-yuki','v-safety','v-grandma-chat','v-yuki-safety'];
 let currentView = 0;
 let prevView = 0;
+
+function toggleScamList(e) {
+  e.stopPropagation();
+  const list = document.getElementById('scam-list');
+  const chevron = document.getElementById('scam-chevron');
+  const open = list.style.display !== 'none';
+  list.style.display = open ? 'none' : 'block';
+  chevron.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
+}
+
+function toggleYukiPhish(e) {
+  e.stopPropagation();
+  const list = document.getElementById('yuki-phish-list');
+  const chevron = document.getElementById('yuki-phish-chevron');
+  const open = list.style.display !== 'none';
+  list.style.display = open ? 'none' : 'block';
+  chevron.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
+}
+
+function toggleYukiAI() {
+  const body = document.getElementById('yuki-ai-body');
+  const chevron = document.getElementById('yuki-ai-chevron');
+  const open = body.style.display !== 'none';
+  body.style.display = open ? 'none' : 'block';
+  chevron.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
+}
 
 function switchView(idx) {
   const prev = document.querySelector('.view.active');
@@ -1129,7 +1497,7 @@ function switchView(idx) {
     currentView = idx;
   }, 50);
   // Nav highlight: 0=Family, 1=Events, 2=AI
-  const navMap = {0:0, 1:2, 2:1};
+  const navMap = {0:0, 1:1};
   const navIdx = navMap[idx];
   document.querySelectorAll('.nav-item:not(.nav-ai)').forEach((n, i) => {
     n.classList.toggle('active', i === navIdx);
@@ -1147,8 +1515,8 @@ function goBack() {
 const members = {
   grandma: {
     photo:'faces/grandma.png', name:'Grandma', age:'68',
-    role:'Retired · Taipei', color:'var(--coral)', statusColor:'var(--coral)',
-    tags:['Senior member','Health-conscious','Tech-light','Fraud-vulnerable'],
+    role:'Fukuoka', color:'var(--coral)', statusColor:'var(--coral)',
+    tags:['Health-conscious','Tech-light','Fraud-vulnerable'],
     stats:[
       {val:'168/112',lbl:'Blood Pressure',color:'var(--coral)'},
       {val:'5.9%',lbl:'HbA1c',color:'var(--amber)'},
@@ -1167,29 +1535,37 @@ const members = {
     ]
   },
   yuki: {
-    photo:'faces/yuki.png', name:'Yuki Chen', age:'12',
-    role:'Student · Taipei · Creator', color:'var(--accent)', statusColor:'var(--green)',
-    tags:['Teen creator','Fashion & Art','Digitally native','AI-friendly'],
+    photo:'faces/yuki.png', name:'Yuki Sato', age:'12',
+    role:'Fukuoka', color:'var(--accent)', statusColor:'var(--green)',
+    tags:['Fashion & Art','Digitally native','AI-friendly'],
     stats:[
       {val:'+18%',lbl:'Creative Dir.',color:'var(--green)'},
       {val:'8',lbl:'Own Decisions',color:'var(--accent)'},
       {val:'68%',lbl:'Yuki Voice',color:'var(--green)'}
     ],
-    report:{eyebrow:'Creative Folder — Week 12',eyebrowColor:'var(--accent)',rows:[
-      {marker:'Featured Work',val:'文化祭 2024 TikTok',cls:'val-ok'},
-      {marker:'Authorship',val:'Y 68% / AI 32%',cls:'val-ok'},
-      {marker:"Director's Choice",val:'✓ Week 11',cls:'val-ok'},
-      {marker:'Phishing blocked',val:'Today',cls:'val-ok'},
-    ]},
+    reports:[
+      {eyebrow:'Creative Folder — Week 12',eyebrowColor:'#C084FC',rows:[
+        {marker:'Featured Work',val:'文化祭 2024 TikTok',cls:'val-ok'},
+        {marker:'Authorship',val:'Y 68% / AI 32%',cls:'val-ok'},
+        {marker:"Director's Choice",val:'✓ Week 11',cls:'val-ok'},
+        {marker:'AI dependency',val:'18% ↓ (was 48%)',cls:'val-ok'},
+      ]},
+      {eyebrow:'24h Safety',eyebrowColor:'var(--coral)',rows:[
+        {marker:'Threats blocked',val:'9 today',cls:'val-ok'},
+        {marker:'Phishing links',val:'4 blocked',cls:'val-ok'},
+        {marker:'Scam DMs',val:'2 filtered',cls:'val-ok'},
+        {marker:'Data exposed',val:'None',cls:'val-ok'},
+      ]},
+    ],
     actions:[
       {icon:'✿',text:'View growth report',primary:true,onclick:"switchView(6)"},
-      {icon:'📊',text:'Creative Folder showcase',onclick:"switchView(6)"},
+      {icon:'🛡',text:'View safety report',onclick:"switchView(9)"},
     ]
   },
   hiro: {
-    photo:'faces/hiro.png', name:'Hiro Chen', age:'16',
-    role:'Student · Taipei · Gamer', color:'var(--teal)', statusColor:'var(--amber)',
-    tags:['Sports fan','Gamer','Social media','Growing up'],
+    photo:'faces/hiro.png', name:'Hiro Sato', age:'16',
+    role:'Fukuoka', color:'var(--teal)', statusColor:'var(--amber)',
+    tags:['Social media','Growing up'],
     stats:[
       {val:'3.5h',lbl:'Social After 12AM',color:'var(--coral)'},
       {val:'10 PM',lbl:'New Cutoff',color:'var(--amber)'},
@@ -1207,9 +1583,9 @@ const members = {
     ]
   },
   kenji: {
-    photo:'faces/kanji.png', name:'Kenji Chen', age:'45',
-    role:'Engineer · Taipei · Dad', color:'var(--sky)', statusColor:'var(--green)',
-    tags:['Remote work','Tech-savvy','Privacy-aware','Secure'],
+    photo:'faces/kanji.png', name:'Kenji Sato', age:'45',
+    role:'Fukuoka', color:'var(--sky)', statusColor:'var(--green)',
+    tags:['Privacy-aware','Secure'],
     stats:[
       {val:'✓',lbl:'2FA Active',color:'var(--green)'},
       {val:'0',lbl:'Threats',color:'var(--green)'},
@@ -1239,7 +1615,6 @@ function showDetail(id) {
       </div>
       <div class="detail-name">${m.name}${m.age ? ' · ' + m.age : ''}</div>
       <div class="detail-role">${m.role}</div>
-      <div class="detail-tags">${m.tags.map(t => `<span class="dtag">${t}</span>`).join('')}</div>
     </div>
     <div class="stat-row">
       ${m.stats.map(s => `
@@ -1248,14 +1623,15 @@ function showDetail(id) {
           <div class="stat-lbl">${s.lbl}</div>
         </div>`).join('')}
     </div>
-    <div class="report-card" style="margin-top:20px">
-      <div class="report-eyebrow" style="color:${m.report.eyebrowColor}">${m.report.eyebrow}</div>
-      ${m.report.rows.map(r => `
+    ${(m.reports || [m.report]).map(rep => `
+    <div class="report-card" style="margin-top:12px">
+      <div class="report-eyebrow" style="color:${rep.eyebrowColor}">${rep.eyebrow}</div>
+      ${rep.rows.map(r => `
         <div class="report-row">
           <span class="report-marker">${r.marker}</span>
           <span class="report-val ${r.cls}">${r.val}</span>
         </div>`).join('')}
-    </div>
+    </div>`).join('')}
     <div class="action-list">
       ${m.actions.map(a => `
         <button class="action-btn${a.primary ? ' primary' : ''}" ${a.onclick ? `onclick="${a.onclick}"` : ''}>
