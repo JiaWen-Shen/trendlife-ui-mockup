@@ -92,3 +92,53 @@ main
 - 同一個檔案不要同時修改（改之前先 pull，確認沒有 in-progress PR）
 - 有疑問先在 PR comment 留言，不要直接 force push
 - 設計方向有分歧 → 截圖 + 說明，讓 Karen 決定
+
+---
+
+## 實作摘要（簡報素材）
+
+### 核心機制
+
+兩位協作者（Karen + VD）各自使用 Claude Code，但共用同一份 repo 裡的 context 文件。**Claude Code 啟動時會自動載入這些文件**，不需要手動設定，確保兩個 Claude 的行為一致。
+
+### 自動載入的 Context（pull repo 即生效）
+
+```
+CLAUDE.md              ← Claude Code 的工作指示（主入口）
+  @story.md            ← 產品故事線，設計決策的依據
+  @design-conventions.md         ← 圖表規範、互動狀態、icon 規則
+  @constellation/style.md        ← 色彩 token、字型、元件樣式
+  @constellation/design-conventions.md  ← Kaleidoscope icon 專屬規則
+```
+
+VD `git clone` 後直接執行 `claude`，以上全部自動生效。
+
+### 角色識別
+
+CLAUDE.md 裡設定了 branch 判斷邏輯：
+
+| Branch | 身份 | Claude 行為 |
+|--------|------|------------|
+| `vd/xxx` | VD | commit 後自動開 PR，不可部署 |
+| `main` / 其他 | Karen | 可直接 push，可部署 Vercel |
+
+### VD 工作流程
+
+```
+1. git checkout -b vd/<任務名稱>
+2. 執行 claude，說明今天要改什麼
+3. Claude 修改 → 本機 preview → 確認
+4. 說「好，可以 commit」
+5. Claude 自動 commit → push → 開 PR
+6. Karen review → merge → 決定是否部署
+```
+
+### 文件清單
+
+| 文件 | 對象 | 用途 |
+|-----|------|------|
+| `CLAUDE.md` | Claude | 工作指示、角色識別、部署規則 |
+| `COLLAB.md` | 人 | 分工、branch 策略、衝突處理 |
+| `VD_GUIDE.md` | VD | Claude Code 操作指南、常用句型 |
+| `story.md` | Claude | 產品故事線（設計背景 context） |
+| `constellation/style.md` | Claude | 設計系統 |
