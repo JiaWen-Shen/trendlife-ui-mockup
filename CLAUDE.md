@@ -33,6 +33,7 @@
 
 ## UI 設計規則
 
+@story.md
 @design-conventions.md
 @constellation/style.md
 @constellation/design-conventions.md
