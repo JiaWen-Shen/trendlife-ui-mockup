@@ -1,6 +1,13 @@
 # TrendLife UI Mockup — Claude Code 工作指示
 
 這個 repo 是 TrendLife Kaleidoscope 的 UI mockup 專案。
+協作規則詳見 `COLLAB.md`。
+
+## 協作成員識別
+
+根據目前所在 branch 判斷用戶身份：
+- Branch 開頭為 `vd/` → 用戶是 **[VD]**（Visual Designer）
+- 其他 branch（`main`、`feature/` 等）→ 用戶是 **Karen**（Owner）
 
 ## Git 工作規則
 
@@ -8,6 +15,11 @@
 - Commit message 格式：`design: <改動摘要>`
 - **用戶說「好」或「可以」後才 commit & push**；未確認前只做本機修改
 - Commit 後自動 push 到目前的 branch
+
+### [VD] 專屬規則（branch 開頭為 `vd/` 時）
+- Push 完成後，**自動開 PR 到 main**：`gh pr create --base main --title "design: <摘要>" --body "改動說明"`
+- **不可部署到 Vercel**，部署由 Karen 執行
+- 不可直接修改 `CLAUDE.md`、`story.md`、`demo-scripts/`
 
 ## 部署規則
 
