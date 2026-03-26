@@ -68,15 +68,16 @@ Claude 會自動 commit → push → 開 PR，repo owner 會收到通知。
 
 ## 設計規範文件
 
-Claude 在這個 repo 裡工作時，會**自動載入**以下三份設計文件，不需要每次提醒它遵守規範：
+Claude 在這個 repo 裡工作時，會**自動載入**以下設計文件，不需要每次提醒它遵守規範：
 
 | 檔案 | 內容 | 連結 |
 |------|------|------|
+| `story.md` | 產品故事線，設計決策的背景依據 | [開啟](story.md) |
 | `design-conventions.md` | 互動狀態規則、Material Symbols icon 規範與常用 icon 對照表 | [開啟](design-conventions.md) |
 | `constellation/style.md` | 完整設計系統（色彩 token、字型、間距、元件樣式、動畫） | [開啟](constellation/style.md) |
 | `constellation/design-conventions.md` | Kaleidoscope icon 專屬規範（asset、HTML 結構、動畫狀態） | [開啟](constellation/design-conventions.md) |
 
-> **這是怎麼運作的**：`CLAUDE.md` 裡用 `@檔案路徑` 語法索引了這三份文件。
+> **這是怎麼運作的**：`CLAUDE.md` 裡用 `@檔案路徑` 語法索引了這些文件。
 > 每次在 repo 裡啟動 Claude，這些規範就會自動成為它的 context。
 > 如果規範需要更新，直接修改對應的 `.md` 檔案並 commit 即可。
 
