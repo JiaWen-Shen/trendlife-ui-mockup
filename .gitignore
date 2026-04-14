@@ -7,3 +7,6 @@
 # env
 .env
 .env.*
+
+# dependencies in subdirs
+node_modules/
